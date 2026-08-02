@@ -1,0 +1,15 @@
+# Source of truth for automated datapack installs -- install.sh reads this
+# file directly. MANIFEST.md is the human-readable summary; keep both in
+# sync when changing entries.
+minecraft_version: "26.2"
+
+datapacks:
+  - name: "Matcha Flavoured"
+    file: "Matcha_Flavoured.zip"
+    url: "https://cdn.modrinth.com/data/QI0EmgZ1/versions/RVX0a6It/Matcha_Flavoured.zip"
+    sha512: "12dc5a600d473f06a44a4370c02b404a0260adf696a591a3fbb0f135bca613ffba4f9990f625746375fa9181bbb300eeffd9cc420e6a50f91a48c21314c81505"
+
+  - name: "Path Generator Datapack"
+    file: "Path-Generator-Datapack262.zip"
+    url: "https://cdn.modrinth.com/data/a1wqmF96/versions/kV3ba4GV/Path-Generator-Datapack262.zip"
+    sha512: "5b66b37dee927b359dfe91114a20c1980c4d3bf5a96e67ea0313d1c87692ca206a9a0f28a32f554540207e9668bef555ad0391b6e8a1199bd25121dee0f0ac36"
