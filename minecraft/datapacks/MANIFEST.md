@@ -8,6 +8,11 @@
 Both are pure vanilla-mechanic datapacks with no mod dependencies.
 
 Pinned versions, download URLs, and checksums: `datapacks.yaml`.
-Install: `./install.sh` (automated, requires the server to already exist
-in the Panel), or manually via SFTP/Panel file manager into
-`world/datapacks/`.
+
+Install: `install.sh` is a Pterodactyl egg install script, not a script
+you run directly. Paste its contents into the egg's Install Script field
+(Panel Admin -> Nests -> Eggs -> Configuration) and it runs automatically,
+inside the container, on every server install/reinstall -- see the
+header comment in `install.sh` for details. Manual fallback: download
+each `url` from `datapacks.yaml` and place it in `world/datapacks/` via
+the Panel's file manager.

@@ -1,71 +1,47 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-# Reads datapacks.yaml, downloads each file, verifies it against the
-# pinned sha512, and pushes it into a Wings-managed server's
-# world/datapacks/ directory over SFTP.
+#!/bin/ash
+# Pterodactyl egg install script -- NOT run locally or over SFTP.
 #
-# Requires: yq (https://github.com/mikefarah/yq) -- brew install yq
-#           curl, sftp, sha512sum (all standard on Ubuntu; on macOS use
-#           `shasum -a 512` instead if running this locally)
+# Paste this into the egg's Install Script field: Panel Admin ->
+# Nests -> (nest) -> Eggs -> (egg) -> Configuration -> Install Script.
+# Base image for that field: ghcr.io/pterodactyl/installers:alpine
 #
-# The server has to already exist in the Panel before this is useful --
-# SFTP access is per-server, not per-node. Get the connection details from
-# the Panel: open the server, go to the file manager, and the SFTP
-# username shown there is what WINGS_SFTP_USER needs.
-#
-# Usage:
-#   WINGS_SFTP_HOST=mc-server \
-#   WINGS_SFTP_USER='yourpanelusername.<8-char-server-id>' \
-#   ./install.sh
+# Wings runs this in a throwaway container with the server's own volume
+# mounted at /mnt/server whenever the server is (re)installed -- before
+# it ever boots. No SFTP, no credentials, no external machine involved.
+# Re-running a server's install (Panel -> server -> Settings -> Reinstall)
+# re-fetches and re-applies datapacks from the pinned manifest.
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MANIFEST="$SCRIPT_DIR/datapacks.yaml"
-CACHE_DIR="$SCRIPT_DIR/.cache"
-mkdir -p "$CACHE_DIR"
+set -e
 
-: "${WINGS_SFTP_HOST:?set WINGS_SFTP_HOST, e.g. the mc-server SSH alias}"
-: "${WINGS_SFTP_PORT:=2022}"
-: "${WINGS_SFTP_USER:?set WINGS_SFTP_USER -- panelusername.serverid, from the Panel's file manager page}"
+apk add --no-cache curl yq coreutils
 
-if ! command -v yq >/dev/null 2>&1; then
-  echo "yq is required (brew install yq) -- aborting" >&2
-  exit 1
-fi
+MANIFEST_URL="https://raw.githubusercontent.com/<github-user>/<repo>/main/minecraft/datapacks/datapacks.yaml"
 
-mc_version=$(yq -r '.minecraft_version' "$MANIFEST")
-echo "Manifest targets Minecraft $mc_version"
+mkdir -p /mnt/server/world/datapacks
+cd /tmp
+curl -fsSL "$MANIFEST_URL" -o datapacks.yaml
 
-count=$(yq '.datapacks | length' "$MANIFEST")
+count=$(yq '.datapacks | length' datapacks.yaml)
 
-for i in $(seq 0 $((count - 1))); do
-  name=$(yq -r ".datapacks[$i].name" "$MANIFEST")
-  file=$(yq -r ".datapacks[$i].file" "$MANIFEST")
-  url=$(yq -r ".datapacks[$i].url" "$MANIFEST")
-  expected_sha512=$(yq -r ".datapacks[$i].sha512" "$MANIFEST")
-  dest="$CACHE_DIR/$file"
+i=0
+while [ "$i" -lt "$count" ]; do
+  name=$(yq -r ".datapacks[$i].name" datapacks.yaml)
+  file=$(yq -r ".datapacks[$i].file" datapacks.yaml)
+  url=$(yq -r ".datapacks[$i].url" datapacks.yaml)
+  expected_sha512=$(yq -r ".datapacks[$i].sha512" datapacks.yaml)
 
   echo "==> $name"
+  curl -fsSL "$url" -o "$file"
 
-  if [[ -f "$dest" ]] && echo "$expected_sha512  $dest" | sha512sum -c - >/dev/null 2>&1; then
-    echo "    already downloaded and verified, skipping fetch"
-  else
-    echo "    downloading..."
-    curl -fsSL "$url" -o "$dest"
-    echo "$expected_sha512  $dest" | sha512sum -c -
-    echo "    checksum OK"
+  actual_sha512=$(sha512sum "$file" | awk '{print $1}')
+  if [ "$actual_sha512" != "$expected_sha512" ]; then
+    echo "checksum mismatch for $file -- aborting" >&2
+    exit 1
   fi
 
-  echo "    uploading to world/datapacks/ over SFTP..."
-  sftp -P "$WINGS_SFTP_PORT" "$WINGS_SFTP_USER@$WINGS_SFTP_HOST" <<EOF
-cd world/datapacks
-put $dest
-EOF
-
-  echo "    done"
+  cp "$file" /mnt/server/world/datapacks/
+  echo "    installed"
+  i=$((i + 1))
 done
 
-echo ""
-echo "All datapacks installed. Run '/reload' in the server console (or"
-echo "restart the server) for them to take effect -- datapacks are only"
-echo "picked up on world load or an explicit reload, not automatically."
+echo "Datapacks installed -- will be picked up when the world generates on first boot."

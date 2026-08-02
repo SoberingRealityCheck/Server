@@ -11,8 +11,10 @@
 ## Datapacks
 
 See `datapacks/`. `datapacks.yaml` is the source of truth (pinned URLs +
-checksums); `datapacks/install.sh` installs them onto a running server
-over SFTP. `MANIFEST.md` describes what each one does.
+checksums). `datapacks/install.sh` is a Pterodactyl egg install script --
+paste it into the egg's Install Script field and it runs automatically
+inside the container on every install/reinstall. `MANIFEST.md` describes
+what each datapack does.
 
 ## Modded profile (not currently deployed)
 
