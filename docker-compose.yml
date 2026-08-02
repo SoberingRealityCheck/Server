@@ -36,10 +36,14 @@ services:
       - database
       - cache
     volumes:
-      - ./data/panel/var:/app/var
-      - ./data/panel/nginx:/etc/nginx/http.d
-      - ./data/panel/certs:/etc/letsencrypt
-      - ./data/panel/logs:/app/storage/logs
+      - ./wings/var:/app/var
+      - ./wings/nginx:/etc/nginx/http.d
+      - ./wings/certs:/etc/letsencrypt
+      - ./wings/logs:/app/storage/logs
+      # Forces the mysql CLI client to skip SSL regardless of how it's
+      # invoked -- DB_SSLMODE alone doesn't cover the raw shell-out used
+      # for schema loading. https://github.com/pterodactyl/panel/issues/5521
+      - ./mysql-client-no-ssl.cnf:/etc/my.cnf:ro
     environment:
       APP_URL: ${APP_URL}
       APP_TIMEZONE: ${APP_TIMEZONE}
@@ -51,6 +55,12 @@ services:
       DB_DATABASE: panel
       DB_USERNAME: pterodactyl
       DB_PASSWORD: ${DB_PASSWORD}
+      # Known regression in the Panel's v1.12.0+ Docker image: the mysql
+      # client it now ships defaults to requiring SSL, which this
+      # single-host MariaDB container was never configured for (and
+      # doesn't need to be -- internal Docker-network-only connection).
+      # https://github.com/pterodactyl/panel/issues/5521
+      DB_SSLMODE: DISABLED
       REDIS_HOST: cache
       CACHE_DRIVER: redis
       SESSION_DRIVER: redis
@@ -66,9 +76,22 @@ services:
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./data/wings/etc:/etc/pterodactyl
-      - ./data/wings/lib:/var/lib/pterodactyl
-      - ./data/wings/logs:/var/log/pterodactyl
-      - ./data/wings/tmp:/tmp/pterodactyl
+      # config.yml is not in git (it holds node tokens) -- copy
+      # wings/config.example.yml here and fill it in. See wings/README.md.
+      - ./wings/etc:/etc/pterodactyl
+      - ./wings/lib:/var/lib/pterodactyl
+      - ./wings/logs:/var/log/pterodactyl
+      - ./wings/tmp:/tmp/pterodactyl
     depends_on:
       - panel
+
+# Pinned so Docker's automatic allocation can't collide with the bridge
+# network Wings builds for game servers. Docker hands out 172.17/172.18
+# first, and Wings defaults to 172.18.0.0/16 -- an unpinned compose network
+# takes it first and Wings then dies with "Pool overlaps with other one on
+# this address space". Wings is pinned to 172.21.0.0/16 in its own config.
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16

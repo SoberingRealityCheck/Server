@@ -1,0 +1,76 @@
+{
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-08-02T00:00:00+00:00",
+    "name": "Fabric (26.2 modded)",
+    "author": "accounts@bofanodes.io",
+    "description": "Fabric loader for Minecraft 26.2, with this repo's server-side mods and datapacks (minecraft/mods/server/, minecraft/datapacks/) installed automatically. Based on the pelican-eggs Fabric egg.",
+    "features": [
+        "eula",
+        "java_version",
+        "pid_limit"
+    ],
+    "docker_images": {
+        "Java 25": "ghcr.io\/pterodactyl\/yolks:java_25",
+        "Java 21": "ghcr.io\/pterodactyl\/yolks:java_21"
+    },
+    "file_denylist": [],
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Fabric MC Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl jq unzip dos2unix wget\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ -z \"$MC_VERSION\" ] || [ \"$MC_VERSION\" == \"latest\" ]; then\r\n  MC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/game | jq -r '.[] | select(.stable== true )|.version' | head -n1)\r\nelif [ \"$MC_VERSION\" == \"snapshot\" ]; then\r\n  MC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/game | jq -r '.[] | select(.stable== false )|.version' | head -n1)\r\nfi\r\n\r\nif [ -z \"$FABRIC_VERSION\" ] || [ \"$FABRIC_VERSION\" == \"latest\" ]; then\r\n  FABRIC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/installer | jq -r '.[0].version')\r\nfi\r\n\r\nif [ -z \"$LOADER_VERSION\" ] || [ \"$LOADER_VERSION\" == \"latest\" ]; then\r\n  LOADER_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/loader | jq -r '.[] | select(.stable== true )|.version' | head -n1)\r\nelif [ \"$LOADER_VERSION\" == \"snapshot\" ]; then\r\n  LOADER_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/loader | jq -r '.[] | select(.stable== false )|.version' | head -n1)\r\nfi\r\n\r\nwget -O fabric-installer.jar https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\njava -jar fabric-installer.jar server -mcversion $MC_VERSION -loader $LOADER_VERSION -downloadMinecraft\r\nmv server.jar minecraft-server.jar\r\nmv fabric-server-launch.jar server.jar\r\necho \"serverJar=minecraft-server.jar\" > fabric-server-launcher.properties\r\necho \"Fabric install complete: MC $MC_VERSION, loader $LOADER_VERSION\"\r\n\r\n# --- this repo's server-side mods and datapacks ---\r\ncurl -fsSL https:\/\/raw.githubusercontent.com\/SoberingRealityCheck\/Server\/main\/minecraft\/mods\/server\/install.sh | bash\r\ncurl -fsSL https:\/\/raw.githubusercontent.com\/SoberingRealityCheck\/Server\/main\/minecraft\/datapacks\/install.sh | bash\r\n\r\necho \"All installs complete.\"",
+            "container": "openjdk:11-jdk-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "Minecraft Version",
+            "description": "Pinned to 26.2 to match this repo's mods and datapacks. Change only if you also re-pin those.",
+            "env_variable": "MC_VERSION",
+            "default_value": "26.2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|between:3,15",
+            "field_type": "text"
+        },
+        {
+            "name": "Fabric Version",
+            "description": "The version of the Fabric installer to use.",
+            "env_variable": "FABRIC_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|between:3,15",
+            "field_type": "text"
+        },
+        {
+            "name": "Fabric Loader Version",
+            "description": "The version of Fabric Loader to install.",
+            "env_variable": "LOADER_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|between:3,15",
+            "field_type": "text"
+        }
+    ]
+}

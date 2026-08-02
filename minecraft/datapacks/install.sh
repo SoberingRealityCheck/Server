@@ -1,9 +1,10 @@
-#!/bin/ash
+#!/bin/sh
 # Pterodactyl egg install script -- NOT run locally or over SFTP.
 #
-# Paste this into the egg's Install Script field: Panel Admin ->
-# Nests -> (nest) -> Eggs -> (egg) -> Configuration -> Install Script.
-# Base image for that field: ghcr.io/pterodactyl/installers:alpine
+# Paste this into the egg's Install Script field, or curl+run it from
+# within a combined install script. No assumptions about the installer
+# container's package manager -- works under Alpine or Debian-based
+# images.
 #
 # Wings runs this in a throwaway container with the server's own volume
 # mounted at /mnt/server whenever the server is (re)installed -- before
@@ -13,7 +14,12 @@
 
 set -e
 
-apk add --no-cache curl yq coreutils
+command -v apk >/dev/null 2>&1 && apk add --no-cache curl coreutils
+command -v apt-get >/dev/null 2>&1 && apt-get update && apt-get install -y curl coreutils
+command -v yq >/dev/null 2>&1 || {
+  curl -fsSL -o /usr/local/bin/yq "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64"
+  chmod +x /usr/local/bin/yq
+}
 
 MANIFEST_URL="https://raw.githubusercontent.com/<github-user>/<repo>/main/minecraft/datapacks/datapacks.yaml"
 

@@ -1,0 +1,41 @@
+# Wings node configuration. Copy to ../data/wings/etc/config.yml on the
+# host and fill in the placeholders. Not committed -- it holds node
+# credentials. See README.md in this directory.
+#
+# Panel generates most of this at Admin -> Nodes -> (node) -> Configuration.
+# The `remote` and `docker.network` values below deliberately differ from
+# what Panel emits; see README.md for why.
+
+debug: false
+uuid: <node-uuid-from-panel>
+token_id: <16-char-token-id>
+token: <64-char-token>
+
+api:
+  host: 0.0.0.0
+  port: 8080
+  ssl:
+    enabled: false
+    cert: ""
+    key: ""
+  upload_limit: 100
+
+system:
+  data: /var/lib/pterodactyl/volumes
+  sftp:
+    bind_port: 2022
+
+docker:
+  network:
+    name: pterodactyl_nw
+    interface: 172.21.0.1
+    interfaces:
+      v4:
+        subnet: 172.21.0.0/16
+        gateway: 172.21.0.1
+
+allowed_mounts: []
+
+# Panel's public URL is proxied by Cloudflare, which 403s non-browser
+# clients on /api routes. Wings reaches Panel over the loopback instead.
+remote: http://127.0.0.1

@@ -11,12 +11,24 @@ Server/
 ├── .env.example          # copy to .env and fill in secrets
 ├── aws/
 │   └── NOTES.md          # instance spec, security group, DNS
+├── wings/
+│   ├── config.example.yml # node config template
+│   └── README.md          # Wings setup and known gotchas
 └── minecraft/
     ├── README.md          # game-specific config
-    └── datapacks/
-        ├── datapacks.yaml # pinned datapack sources
-        ├── install.sh     # automated datapack installer
-        └── MANIFEST.md    # datapack descriptions
+    ├── egg-fabric.json    # importable Pterodactyl egg
+    ├── datapacks/
+    │   ├── datapacks.yaml # pinned datapack sources
+    │   ├── install.sh     # automated datapack installer
+    │   └── MANIFEST.md    # datapack descriptions
+    └── mods/
+        ├── server/        # egg-installed automatically
+        │   ├── mods.yaml
+        │   ├── install.sh
+        │   └── MODLIST.md
+        └── client/        # manual install, docs only
+            ├── mods.yaml
+            └── MODLIST.md
 ```
 
 Each game gets its own top-level directory alongside `minecraft/`; the
@@ -44,7 +56,10 @@ manually per `aws/NOTES.md`.
 5. `docker compose up -d`
 6. Complete Panel's first-run setup and register a Node pointing Wings at
    `localhost`.
-7. Create game servers through the Panel -- see per-game docs (e.g.
+7. Configure Wings: copy `wings/config.example.yml` to
+   `data/wings/etc/config.yml` and fill in the node credentials from
+   Panel -- see `wings/README.md`.
+8. Create game servers through the Panel -- see per-game docs (e.g.
    `minecraft/README.md`).
 
 ## Backups and whitelist
