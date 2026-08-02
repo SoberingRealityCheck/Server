@@ -1,5 +1,3 @@
-version: '3.8'
-
 # Single-box Pterodactyl deployment: Panel + its DB/cache, and Wings, all on
 # one AWS EC2 host. Wings talks to Panel over localhost, so its management
 # API never needs to be exposed publicly -- only Panel's web ports and each
