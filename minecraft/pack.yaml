@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium Realistic Terrain"
-version: "1.0.1"
+version: "1.0.2"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -95,13 +95,19 @@ mods:
     reason: "Continent-scale landform shaping, compatible with Terralith"
 
   - name: "Distant Horizons"
-    file: "DistantHorizons-3.1.0-b-26.2-fabric-neoforge.jar"
-    url: "https://cdn.modrinth.com/data/uCdwusMi/versions/69qJktf2/DistantHorizons-3.1.0-b-26.2-fabric-neoforge.jar"
-    sha512: "9e81acfba4ad10775f81eb267184e272f9be3fdcbe40fa163691066f4498791c94e72cfb736a08144d683b592e4cb12aa962ca0c9ffe29242698e467d9274189"
+    file: "DistantHorizons-3.2.0-b-26.2-fabric-neoforge.jar"
+    url: "https://cdn.modrinth.com/data/uCdwusMi/versions/gBf0SaV1/DistantHorizons-3.2.0-b-26.2-fabric-neoforge.jar"
+    sha512: "c1b8857776a002c2232887d891bd49195f3c3127a7abe1242376ad20371e31554d8ba6c7c92a195b70782cad94fe970941487f2af530988d9b8819455c859e72"
     env: both
     reason: >-
       Long-distance LOD terrain. Server copy generates and syncs LODs;
       client copy renders them. Needs both halves to work.
+      Do NOT downgrade below 3.1.1-b: 3.1.0-b crashes dedicated servers
+      during init (LWJGL check dereferences the client wrapper, which is
+      null server-side), and that fault is invisible to --check-deps
+      because it is a runtime NPE, not a declared dependency. Every 26.2
+      build of this mod is marked beta upstream; there is no stable
+      release for this Minecraft version yet.
 
   # --- Server performance ---------------------------------------------
   - name: "Lithium"
