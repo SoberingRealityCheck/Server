@@ -102,7 +102,19 @@ recipes, and supplies block metadata; the client renders it.
 ## Changing the pack
 
 1. Edit `pack.yaml` -- add, remove, or bump an entry. Get the URL and
-   sha512 from the file's Modrinth version page.
+   sha512 from the file's Modrinth version page, or have `build.py`
+   fetch them:
+
+   ```bash
+   ./build.py --resolve fabric-api
+   ```
+
+   That prints a paste-ready block for the newest build matching the
+   pack's Minecraft version and loader, and lists the project's required
+   dependencies on stderr so you can check the pack still satisfies
+   them. It prints rather than editing `pack.yaml` in place -- PyYAML
+   cannot round-trip a file without discarding comments, and the
+   reasoning in those comments is worth more than the typing saved.
 2. Bump `version` in `pack.yaml`.
 3. `./build.py` -- this also regenerates `MODLIST.md`.
 4. Commit both `pack.yaml` and `MODLIST.md`. CI fails if `MODLIST.md`

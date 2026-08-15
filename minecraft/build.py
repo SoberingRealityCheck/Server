@@ -37,6 +37,7 @@ import json
 import shutil
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -52,6 +53,7 @@ OUTPUT = DIST_DIR / "pack.mrpack"
 MODLIST = HERE / "MODLIST.md"
 
 FABRIC_META_LOADER = "https://meta.fabricmc.net/v2/versions/loader"
+MODRINTH_API = "https://api.modrinth.com/v2"
 
 # pack.yaml's `env` shorthand -> the modrinth.index.json env object.
 # "unsupported" tells an installer to skip the file entirely on that
@@ -253,6 +255,61 @@ def write_modlist(pack: dict, index: dict) -> None:
     MODLIST.write_text("\n".join(lines))
 
 
+def resolve_project(slug: str, mc_version: str, loader: str) -> str:
+    """Print a ready-to-paste pack.yaml block for a Modrinth project.
+
+    Prints rather than editing pack.yaml in place: PyYAML cannot
+    round-trip a file without discarding its comments, and the reasoning
+    recorded in those comments is worth more than the typing saved.
+    """
+    # Modrinth expects these filters as JSON arrays, percent-encoded.
+    # Interpolating `["fabric"]` straight into the URL leaves the
+    # brackets and quotes raw and the API answers 400.
+    query = urllib.parse.urlencode({
+        "loaders": json.dumps([loader]),
+        "game_versions": json.dumps([mc_version]),
+    })
+    versions = json.loads(fetch(f"{MODRINTH_API}/project/{slug}/version?{query}"))
+    if not versions:
+        raise BuildError(
+            f"no {loader} build of '{slug}' for Minecraft {mc_version}"
+        )
+
+    # The API returns newest first, but only among versions matching the
+    # filters above -- so this is the newest compatible build, not merely
+    # the newest build.
+    v = versions[0]
+    primary = next((f for f in v["files"] if f.get("primary")), v["files"][0])
+
+    print(f"  - name: \"{v.get('name', slug)}\"")
+    print(f"    file: \"{primary['filename']}\"")
+    print(f"    url: \"{primary['url']}\"")
+    print(f"    sha512: \"{primary['hashes']['sha512']}\"")
+    print("    env: server        # both | client | server")
+    print(f"    reason: \"\"")
+    print()
+    print(f"# version {v['version_number']} ({v['version_type']}), "
+          f"published {v['date_published'][:10]}", file=sys.stderr)
+
+    required = [d for d in v.get("dependencies", [])
+                if d.get("dependency_type") == "required"]
+    if required:
+        print("# required dependencies -- make sure pack.yaml satisfies these:",
+              file=sys.stderr)
+        for dep in required:
+            pid = dep.get("project_id")
+            try:
+                proj = json.loads(fetch(f"{MODRINTH_API}/project/{pid}"))
+                label = f"{proj.get('title', pid)} ({proj.get('slug', pid)})"
+            except (BuildError, ValueError, KeyError, TypeError):
+                # Purely an annotation -- a failed or malformed lookup
+                # should degrade to the bare ID, never abort a resolve
+                # that already produced a usable block.
+                label = str(pid)
+            print(f"#   - {label}", file=sys.stderr)
+    return "ok"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true",
@@ -261,11 +318,23 @@ def main() -> int:
                         help="use only cached artifacts; never download")
     parser.add_argument("--clean", action="store_true",
                         help="delete the download cache and exit")
+    parser.add_argument("--resolve", metavar="SLUG",
+                        help="print an up-to-date pack.yaml block for a "
+                             "Modrinth project (e.g. --resolve fabric-api)")
     args = parser.parse_args()
 
     if args.clean:
         shutil.rmtree(CACHE_DIR, ignore_errors=True)
         print(f"removed {CACHE_DIR}")
+        return 0
+
+    if args.resolve:
+        try:
+            pack = yaml.safe_load(PACK_FILE.read_text())
+            resolve_project(args.resolve, pack["minecraft"], pack["loader"])
+        except BuildError as exc:
+            print(f"\nerror: {exc}", file=sys.stderr)
+            return 1
         return 0
 
     try:
