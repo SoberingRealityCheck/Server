@@ -1,0 +1,144 @@
+# Builds the modpack and publishes it as a GitHub release asset.
+#
+# Two jobs, deliberately split:
+#
+#   check    -- runs on every push and PR touching the pack. Verifies the
+#               manifest and every pinned sha512 without writing anything,
+#               so a bad hash or malformed entry is caught at review time
+#               rather than when someone tries to cut a release.
+#
+#   release  -- runs only on a v* tag. Builds the pack and attaches it to
+#               a GitHub release for players to download.
+#
+# Cutting a release:
+#   1. bump `version` in minecraft/pack.yaml
+#   2. commit
+#   3. git tag v1.1.0 && git push --tags
+#
+# The tag must match pack.yaml's version -- the release job enforces it,
+# because a pack whose internal version disagrees with its download URL
+# makes "which version am I running?" unanswerable for players.
+
+name: pack
+
+# Note on the filters below: GitHub does not evaluate `paths` for tag
+# pushes -- only for branch pushes. That is what makes this work. The
+# path list keeps ordinary commits from running CI unnecessarily, while a
+# v* tag still triggers a release even though the tag commit itself
+# touches none of those files. Do not "fix" this by moving the paths
+# list; it is load-bearing as written.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "minecraft/pack.yaml"
+      - "minecraft/build.py"
+      - "minecraft/overrides/**"
+      - ".github/workflows/pack.yml"
+    tags:
+      - "v*"
+  pull_request:
+    paths:
+      - "minecraft/pack.yaml"
+      - "minecraft/build.py"
+      - "minecraft/overrides/**"
+      - ".github/workflows/pack.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    # Skip on tags -- the release job builds for real, so verifying twice
+    # would just download every artifact a second time.
+    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      # Cache downloaded jars across runs, keyed by pack.yaml's contents.
+      # Change a pinned hash and the key changes, so a stale artifact can
+      # never be reused for a new pin.
+      - name: Restore artifact cache
+        uses: actions/cache@v4
+        with:
+          path: minecraft/.cache
+          key: mods-${{ hashFiles('minecraft/pack.yaml') }}
+
+      # A full build rather than --check: both download every artifact to
+      # verify hashes, so the build costs nothing extra and additionally
+      # regenerates MODLIST.md, letting us catch a stale committed copy.
+      - name: Build pack
+        working-directory: minecraft
+        run: python3 build.py
+
+      - name: Check MODLIST.md is up to date
+        run: |
+          if ! git diff --quiet -- minecraft/MODLIST.md; then
+            echo "::error::MODLIST.md is out of date with pack.yaml"
+            echo "Run 'python3 build.py' in minecraft/ and commit the result."
+            git --no-pager diff -- minecraft/MODLIST.md
+            exit 1
+          fi
+          echo "MODLIST.md matches pack.yaml"
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # required to create the release
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Check tag matches pack version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pack=$(python3 -c \
+            "import yaml; print(yaml.safe_load(open('minecraft/pack.yaml'))['version'])")
+          if [ "$tag" != "$pack" ]; then
+            echo "::error::tag v$tag does not match pack.yaml version $pack"
+            echo "Bump 'version' in minecraft/pack.yaml, or retag to v$pack."
+            exit 1
+          fi
+          echo "version=$pack" >> "$GITHUB_ENV"
+
+      - name: Restore artifact cache
+        uses: actions/cache@v4
+        with:
+          path: minecraft/.cache
+          key: mods-${{ hashFiles('minecraft/pack.yaml') }}
+
+      - name: Build pack
+        working-directory: minecraft
+        run: python3 build.py
+
+      - name: Stage release assets
+        run: |
+          # Version the filename so players can tell downloads apart, and
+          # ship the freshly generated MODLIST alongside it rather than
+          # linking the committed copy, which could be stale.
+          cp minecraft/dist/pack.mrpack \
+             "minecraft/dist/elysium-${{ env.version }}.mrpack"
+          cp minecraft/MODLIST.md minecraft/dist/MODLIST.md
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            minecraft/dist/elysium-${{ env.version }}.mrpack
+            minecraft/dist/MODLIST.md
+          generate_release_notes: true
+          body: |
+            Minecraft modpack for the Elysium server.
+
+            **Install:** download the `.mrpack` below, then
+
+            - **Modrinth App** — Add Instance → From File
+            - **Prism Launcher** — Add Instance → Import
+
+            Your launcher installs Fabric and every client-side mod
+            automatically. `MODLIST.md` below lists everything included.

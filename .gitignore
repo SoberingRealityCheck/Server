@@ -1,4 +1,14 @@
 .env
+
+# Server runtime state: world, mods, logs, configs. Backed up separately
+# (see README.md), never committed.
 data/
+
+
+# Build artifacts. dist/pack.mrpack is reproducible from pack.yaml via
+# build.py, and .cache/ is just downloaded jars keyed by hash.
+minecraft/dist/
+minecraft/.cache/
+minecraft/__pycache__/
+
 *.pem
-wings/config.yml

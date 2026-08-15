@@ -1,97 +1,90 @@
-# Single-box Pterodactyl deployment: Panel + its DB/cache, and Wings, all on
-# one AWS EC2 host. Wings talks to Panel over localhost, so its management
-# API never needs to be exposed publicly -- only Panel's web ports and each
-# game server's own port need inbound rules in the AWS security group.
+# One container. That is the whole stack.
 #
-# See aws/NOTES.md for instance sizing and the security group table, and
-# minecraft/README.md for the first game server that will run under this.
+# itzg/minecraft-server reads minecraft/dist/pack.mrpack at startup,
+# installs the Fabric loader and every server-side mod and datapack the
+# pack declares, and runs the server. There is no panel, no database, no
+# cache, no daemon -- and so no inter-container networking to go wrong.
+#
+# Build the pack before the first run:
+#   cd minecraft && ./build.py
+#
+# Then:
+#   docker compose up -d
+#
+# See README.md for the full deploy sequence and aws/NOTES.md for the
+# instance and DNS setup this expects.
 
 services:
-  database:
-    image: mariadb:10.11
-    restart: unless-stopped
-    # Panel's PHP MySQL driver expects the older auth plugin; newer
-    # MariaDB/MySQL defaults (caching_sha2_password) will make Panel fail
-    # to connect on first boot without this override.
-    command: --default-authentication-plugin=mysql_native_password
-    volumes:
-      - ./data/database:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: panel
-      MYSQL_USER: pterodactyl
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-
-  cache:
-    image: redis:7-alpine
+  minecraft:
+    image: itzg/minecraft-server:java25
     restart: unless-stopped
 
-  panel:
-    image: ghcr.io/pterodactyl/panel:latest
-    restart: unless-stopped
+    # Both needed for `docker attach` to give a working server console.
+    # Without them you can still read logs, but not type commands.
+    stdin_open: true
+    tty: true
+
     ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - database
-      - cache
+      - "25565:25565"
+
     volumes:
-      - ./wings/var:/app/var
-      - ./wings/nginx:/etc/nginx/http.d
-      - ./wings/certs:/etc/letsencrypt
-      - ./wings/logs:/app/storage/logs
-      # Forces the mysql CLI client to skip SSL regardless of how it's
-      # invoked -- DB_SSLMODE alone doesn't cover the raw shell-out used
-      # for schema loading. https://github.com/pterodactyl/panel/issues/5521
-      - ./mysql-client-no-ssl.cnf:/etc/my.cnf:ro
+      # World, mods, configs, logs -- everything the server writes.
+      # Bind-mounted rather than a named volume so backups are a plain
+      # tar of a directory you can see.
+      - ./data:/data
+      # The built pack, read-only. MODRINTH_MODPACK points here.
+      - ./minecraft/dist:/modpack:ro
+
     environment:
-      APP_URL: ${APP_URL}
-      APP_TIMEZONE: ${APP_TIMEZONE}
-      APP_SERVICE_AUTHOR: ${LETSENCRYPT_EMAIL}
-      APP_ENV: production
-      TRUSTED_PROXIES: "*"
-      DB_HOST: database
-      DB_PORT: 3306
-      DB_DATABASE: panel
-      DB_USERNAME: pterodactyl
-      DB_PASSWORD: ${DB_PASSWORD}
-      # Known regression in the Panel's v1.12.0+ Docker image: the mysql
-      # client it now ships defaults to requiring SSL, which this
-      # single-host MariaDB container was never configured for (and
-      # doesn't need to be -- internal Docker-network-only connection).
-      # https://github.com/pterodactyl/panel/issues/5521
-      DB_SSLMODE: DISABLED
-      REDIS_HOST: cache
-      CACHE_DRIVER: redis
-      SESSION_DRIVER: redis
-      QUEUE_DRIVER: redis
+      EULA: "TRUE"
+      TZ: ${TZ:-UTC}
 
-  wings:
-    image: ghcr.io/pterodactyl/wings:latest
-    restart: unless-stopped
-    privileged: true
-    # host networking so every dynamically-allocated game server port
-    # (e.g. Minecraft's 25565, or whatever future games use) is reachable
-    # without hand-publishing each one in this compose file.
-    network_mode: host
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      # config.yml is not in git (it holds node tokens) -- copy
-      # wings/config.example.yml here and fill it in. See wings/README.md.
-      - ./wings/etc:/etc/pterodactyl
-      - ./wings/lib:/var/lib/pterodactyl
-      - ./wings/logs:/var/log/pterodactyl
-      - ./wings/tmp:/tmp/pterodactyl
-    depends_on:
-      - panel
+      # Install from the local .mrpack rather than a published Modrinth
+      # project. The .mrpack extension is what makes the image treat this
+      # as a file path instead of a project slug.
+      TYPE: MODRINTH
+      MODRINTH_MODPACK: /modpack/pack.mrpack
 
-# Pinned so Docker's automatic allocation can't collide with the bridge
-# network Wings builds for game servers. Docker hands out 172.17/172.18
-# first, and Wings defaults to 172.18.0.0/16 -- an unpinned compose network
-# takes it first and Wings then dies with "Pool overlaps with other one on
-# this address space". Wings is pinned to 172.21.0.0/16 in its own config.
-networks:
-  default:
-    ipam:
-      config:
-        - subnet: 172.30.0.0/16
+      # The image ships a default exclude list that drops mods it thinks
+      # are client-only. Our pack already marks sides explicitly via each
+      # file's `env`, so let the manifest be authoritative.
+      MODRINTH_DEFAULT_EXCLUDE_INCLUDES: ""
+
+      # Heap size. NOT the container's total footprint -- the JVM needs
+      # roughly another 1 GB beyond this for metaspace, GC structures and
+      # off-heap buffers, so leave headroom under the instance's RAM.
+      # See aws/NOTES.md: 4 GB instances are tight for this modpack.
+      MEMORY: ${MC_MEMORY:-3G}
+
+      # Aikar's flags: GC tuning widely used for Minecraft servers to
+      # avoid long pauses on heaps this size.
+      USE_AIKAR_FLAGS: "true"
+
+      MOTD: ${MC_MOTD:-Elysium}
+      DIFFICULTY: ${MC_DIFFICULTY:-normal}
+      MAX_PLAYERS: ${MC_MAX_PLAYERS:-8}
+      VIEW_DISTANCE: ${MC_VIEW_DISTANCE:-10}
+      # Distant Horizons renders far terrain client-side from LOD data,
+      # so the server does not need a large view distance to make the
+      # world look big -- keep this modest to save CPU and RAM.
+
+      OPS: ${MC_OPS:-}
+      ENABLE_WHITELIST: ${MC_ENABLE_WHITELIST:-true}
+      WHITELIST: ${MC_WHITELIST:-}
+      # Whitelist is enforced from this list on every start; edits made
+      # in-game via /whitelist are overwritten. Set
+      # MC_ENABLE_WHITELIST=false to run open.
+
+      # RCON stays on the container's internal port only -- not published
+      # above, so it is unreachable from the network. Use
+      # `docker compose exec minecraft rcon-cli` for a console.
+      ENABLE_RCON: "true"
+
+    healthcheck:
+      # Provided by the image; reports healthy once the server answers
+      # status pings. `docker compose ps` then tells you whether the
+      # server is actually up, not merely whether the process exists.
+      test: ["CMD", "mc-health"]
+      start_period: 5m
+      interval: 30s
+      retries: 3
