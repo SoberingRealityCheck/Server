@@ -72,13 +72,16 @@ jobs:
       # regenerates MODLIST.md, letting us catch a stale committed copy.
       - name: Build pack
         working-directory: minecraft
-        run: python3 build.py
+        # build.py is a uv script -- its dependencies are declared inline
+        # in the file header, so uv provisions them. Plain `python3` would
+        # run without PyYAML and fail on import.
+        run: uv run --script build.py
 
       - name: Check MODLIST.md is up to date
         run: |
           if ! git diff --quiet -- minecraft/MODLIST.md; then
             echo "::error::MODLIST.md is out of date with pack.yaml"
-            echo "Run 'python3 build.py' in minecraft/ and commit the result."
+            echo "Run './build.py' in minecraft/ and commit the result."
             git --no-pager diff -- minecraft/MODLIST.md
             exit 1
           fi
@@ -97,7 +100,9 @@ jobs:
       - name: Check tag matches pack version
         run: |
           tag="${GITHUB_REF_NAME#v}"
-          pack=$(python3 -c \
+          # --with pyyaml rather than plain python3: the runner's system
+          # Python has no PyYAML, and this step runs before any build.
+          pack=$(uv run --with pyyaml python -c \
             "import yaml; print(yaml.safe_load(open('minecraft/pack.yaml'))['version'])")
           if [ "$tag" != "$pack" ]; then
             echo "::error::tag v$tag does not match pack.yaml version $pack"
@@ -114,7 +119,10 @@ jobs:
 
       - name: Build pack
         working-directory: minecraft
-        run: python3 build.py
+        # build.py is a uv script -- its dependencies are declared inline
+        # in the file header, so uv provisions them. Plain `python3` would
+        # run without PyYAML and fail on import.
+        run: uv run --script build.py
 
       - name: Stage release assets
         run: |
