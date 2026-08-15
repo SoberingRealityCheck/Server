@@ -27,6 +27,13 @@ summary: >-
 minecraft: "26.2"
 loader: fabric
 
+# Java version the server runs under. Mods declare `java` dependencies
+# in their fabric.mod.json, and --check-deps resolves them against this.
+# Keep it in step with the itzg image tag in ../docker-compose.yml
+# (`itzg/minecraft-server:java25`) -- if they drift, the check is
+# validating a runtime that does not exist.
+java: "25"
+
 # Pin an exact Fabric Loader version for reproducible builds. Set to
 # "latest" to have build.py resolve the newest stable release from
 # meta.fabricmc.net -- it prints what it resolved so you can pin it here.

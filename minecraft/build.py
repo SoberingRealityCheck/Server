@@ -35,6 +35,7 @@ import argparse
 import hashlib
 import io
 import json
+import re
 import shutil
 import sys
 import urllib.error
@@ -343,6 +344,24 @@ def satisfies(version: str, spec) -> bool | None:
     return None if any(r is None for r in results) else True
 
 
+def record_version(out: dict, mod_id: str, version: str) -> None:
+    """Keep the highest version when an id appears more than once.
+
+    Mods bundle their dependencies as nested jars, so the same id -- most
+    often fabric-api -- shows up several times at different versions.
+    Fabric resolves that by loading the highest one, so recording the
+    last one seen would invent conflicts against a version that never
+    actually loads.
+    """
+    have = out.get(mod_id)
+    if have is None:
+        out[mod_id] = version
+        return
+    a, b = parse_semver(have), parse_semver(version)
+    if a is not None and b is not None and b > a:
+        out[mod_id] = version
+
+
 def read_fabric_metadata(blob: bytes, out: dict, depends: dict) -> None:
     """Collect ids/versions and declared dependencies from a mod jar.
 
@@ -363,16 +382,41 @@ def read_fabric_metadata(blob: bytes, out: dict, depends: dict) -> None:
 
     mod_id, version = meta.get("id"), str(meta.get("version", ""))
     if mod_id:
-        out[mod_id] = version
+        record_version(out, mod_id, version)
         for provided in meta.get("provides", []):
-            out[provided] = version
-        if meta.get("depends"):
+            record_version(out, provided, version)
+        # Only top-level mods' dependencies are checked. A nested jar's
+        # requirements are the bundling mod's problem to have satisfied,
+        # and its own bundled copy is right there beside it.
+        if meta.get("depends") and depends is not None:
             depends[mod_id] = meta["depends"]
 
     for nested in meta.get("jars", []):
         path = nested.get("file")
         if path and path in zf.namelist():
             read_fabric_metadata(zf.read(path), out, depends)
+
+
+def warn_java_drift(pack: dict) -> None:
+    """Warn if pack.yaml's java version disagrees with the compose image.
+
+    These are two declarations of the same fact in two files, which is a
+    standing invitation to drift. Checking is cheap; a check run against
+    the wrong Java version is worse than no check at all, because it
+    looks authoritative.
+    """
+    compose = HERE.parent / "docker-compose.yml"
+    if not compose.is_file():
+        return
+    match = re.search(r"itzg/minecraft-server:java(\d+)", compose.read_text())
+    if not match:
+        return
+    image_java, pack_java = match.group(1), str(pack.get("java", ""))
+    if pack_java and image_java != pack_java:
+        print(f"\n  warning: pack.yaml says java {pack_java}, but "
+              f"docker-compose.yml runs itzg/minecraft-server:java{image_java}."
+              f"\n           Dependency results below assume java "
+              f"{pack_java} and may be wrong.")
 
 
 def check_dependencies(pack: dict, offline: bool) -> int:
@@ -383,14 +427,19 @@ def check_dependencies(pack: dict, offline: bool) -> int:
     where a `both` mod is marked `server` and clients crash at launch.
     """
     print("\nChecking Fabric dependencies against each jar's fabric.mod.json")
+    warn_java_drift(pack)
     problems = 0
 
     for side in ("server", "client"):
         wanted = [m for m in pack["mods"] if m["env"] in (side, "both")]
+        # The runtime environment mods can depend on but that no jar
+        # provides. `java` must match the JRE actually running the server
+        # -- the tag on the itzg image in docker-compose.yml -- or this
+        # check reports conflicts against a Java version nothing uses.
         available: dict[str, str] = {
             "minecraft": pack["minecraft"],
             "fabricloader": pack["loader_version"],
-            "java": "21",
+            "java": str(pack.get("java", 21)),
         }
         declared: dict[str, dict] = {}
 
