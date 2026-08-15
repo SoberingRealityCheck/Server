@@ -1,88 +1,72 @@
-# Builds the modpack and publishes it as a GitHub release asset.
+# Builds the modpack, keeps MODLIST.md current, and publishes a release
+# whenever pack.yaml's version changes.
 #
-# Two jobs, deliberately split:
+# The whole workflow is driven by one field: `version` in
+# minecraft/pack.yaml.
 #
-#   check    -- runs on every push and PR touching the pack. Verifies the
-#               manifest and every pinned sha512 without writing anything,
-#               so a bad hash or malformed entry is caught at review time
-#               rather than when someone tries to cut a release.
+#   Change mods, same version   -> builds, verifies, updates MODLIST.md
+#   Change mods, bump version   -> all of the above, then cuts a release
 #
-#   release  -- runs only on a v* tag. Builds the pack and attaches it to
-#               a GitHub release for players to download.
+# There is no separate tagging step. Tagging by hand was the old design
+# and it was the wrong one: the tag could disagree with pack.yaml, and
+# forgetting it meant no release ever appeared. Here the tag is derived
+# from the manifest, so the two cannot drift.
 #
 # Cutting a release:
 #   1. bump `version` in minecraft/pack.yaml
-#   2. commit
-#   3. git tag v1.1.0 && git push --tags
+#   2. commit and push to the default branch
 #
-# The tag must match pack.yaml's version -- the release job enforces it,
-# because a pack whose internal version disagrees with its download URL
-# makes "which version am I running?" unanswerable for players.
+# That is the entire procedure.
 
 name: pack
 
-# Note on the filters below: GitHub does not evaluate `paths` for tag
-# pushes -- only for branch pushes. That is what makes this work. The
-# path list keeps ordinary commits from running CI unnecessarily, while a
-# v* tag still triggers a release even though the tag commit itself
-# touches none of those files. Do not "fix" this by moving the paths
-# list; it is load-bearing as written.
+# No `paths` filter. It saved a little CI time and cost a lot of
+# comprehensibility -- path filters are silently ignored for tag pushes,
+# which made the old trigger logic subtle enough to need a paragraph of
+# explanation. A cached build is fast; predictable is worth more.
 on:
   push:
     branches: [master, main]
-    paths:
-      - "minecraft/pack.yaml"
-      - "minecraft/build.py"
-      - "minecraft/overrides/**"
-      - ".github/workflows/pack.yml"
-    tags:
-      - "v*"
   pull_request:
-    paths:
-      - "minecraft/pack.yaml"
-      - "minecraft/build.py"
-      - "minecraft/overrides/**"
-      - ".github/workflows/pack.yml"
-  # Adds the "Run workflow" button under Actions -> pack. Builds the pack
-  # and uploads it as a run artifact without cutting a release, which is
-  # what you want for a one-off build or to test a pack.yaml change
-  # before tagging.
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # commit MODLIST.md, create releases
+
+concurrency:
+  # Two pushes in quick succession would otherwise race to commit
+  # MODLIST.md and to create the same tag.
+  group: pack-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  check:
-    # Skip on tags -- the release job builds for real, so verifying twice
-    # would just download every artifact a second time.
-    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+  pack:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history and tags: the release step needs to know whether
+          # this version has already been published.
+          fetch-depth: 0
 
       - uses: astral-sh/setup-uv@v5
 
-      # Cache downloaded jars across runs, keyed by pack.yaml's contents.
-      # Change a pinned hash and the key changes, so a stale artifact can
-      # never be reused for a new pin.
+      # Cache downloaded jars, keyed by pack.yaml's contents. Change a
+      # pinned hash and the key changes with it, so a stale jar can never
+      # be reused for a new pin.
       - name: Restore artifact cache
         uses: actions/cache@v4
         with:
           path: minecraft/.cache
           key: mods-${{ hashFiles('minecraft/pack.yaml') }}
 
-      # A full build rather than --check: both download every artifact to
-      # verify hashes, so the build costs nothing extra and additionally
-      # regenerates MODLIST.md, letting us catch a stale committed copy.
+      # build.py is a uv script -- dependencies are declared inline in its
+      # header, so uv provisions them. Plain `python3` would lack PyYAML.
       - name: Build pack
         working-directory: minecraft
-        # build.py is a uv script -- its dependencies are declared inline
-        # in the file header, so uv provisions them. Plain `python3` would
-        # run without PyYAML and fail on import.
         run: uv run --script build.py
 
-      # Reads each jar's fabric.mod.json and resolves the same
+      # Reads each jar's real fabric.mod.json and resolves the same
       # constraints Fabric checks at launch, per side. Catches version
       # conflicts and env mistakes here rather than in a restart loop on
       # the server.
@@ -90,20 +74,32 @@ jobs:
         working-directory: minecraft
         run: uv run --script build.py --check-deps
 
-      - name: Check MODLIST.md is up to date
+      # MODLIST.md is generated from pack.yaml, so CI regenerates and
+      # commits it rather than failing and asking a human to do it. Only
+      # on the default branch: pull_request runs check out a merge commit
+      # and forks cannot push.
+      - name: Sync MODLIST.md
+        id: modlist
+        if: >-
+          github.event_name == 'push' &&
+          github.ref_name == github.event.repository.default_branch
         run: |
-          if ! git diff --quiet -- minecraft/MODLIST.md; then
-            echo "::error::MODLIST.md is out of date with pack.yaml"
-            echo "Run './build.py' in minecraft/ and commit the result."
-            git --no-pager diff -- minecraft/MODLIST.md
-            exit 1
+          if git diff --quiet -- minecraft/MODLIST.md; then
+            echo "MODLIST.md already current"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add minecraft/MODLIST.md
+            # [skip ci] stops this commit from triggering another run.
+            # The release below happens in *this* run, so nothing is lost.
+            git commit -m "chore: regenerate MODLIST.md [skip ci]"
+            git push
+            echo "MODLIST.md updated and pushed"
           fi
-          echo "MODLIST.md matches pack.yaml"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      # Downloadable from the run's summary page. This is what makes a
-      # manual "Run workflow" useful: you get the built pack without
-      # tagging a release. Runs even if the MODLIST check above failed,
-      # since the pack itself is still worth inspecting.
+      # Downloadable from the run summary. Makes a manual "Run workflow"
+      # or a PR build useful without cutting a release.
       - name: Upload pack as run artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -113,57 +109,51 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
 
-  release:
-    if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write # required to create the release
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: astral-sh/setup-uv@v5
-
-      - name: Check tag matches pack version
+      # A release is cut when pack.yaml names a version that has no tag
+      # yet. Re-running on an already-released version is a no-op rather
+      # than an error, which keeps re-runs safe.
+      - name: Determine release need
+        id: ver
         run: |
-          tag="${GITHUB_REF_NAME#v}"
-          # --with pyyaml rather than plain python3: the runner's system
-          # Python has no PyYAML, and this step runs before any build.
-          pack=$(uv run --with pyyaml python -c \
+          version=$(uv run --with pyyaml python -c \
             "import yaml; print(yaml.safe_load(open('minecraft/pack.yaml'))['version'])")
-          if [ "$tag" != "$pack" ]; then
-            echo "::error::tag v$tag does not match pack.yaml version $pack"
-            echo "Bump 'version' in minecraft/pack.yaml, or retag to v$pack."
-            exit 1
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+          if git rev-parse -q --verify "refs/tags/v$version" >/dev/null; then
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+            echo "v$version is already released -- nothing to do."
+          else
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+            echo "v$version has no tag yet -- a release will be created."
           fi
-          echo "version=$pack" >> "$GITHUB_ENV"
-
-      - name: Restore artifact cache
-        uses: actions/cache@v4
-        with:
-          path: minecraft/.cache
-          key: mods-${{ hashFiles('minecraft/pack.yaml') }}
-
-      - name: Build pack
-        working-directory: minecraft
-        # build.py is a uv script -- its dependencies are declared inline
-        # in the file header, so uv provisions them. Plain `python3` would
-        # run without PyYAML and fail on import.
-        run: uv run --script build.py
 
       - name: Stage release assets
+        if: >-
+          steps.ver.outputs.needed == 'true' &&
+          github.event_name == 'push' &&
+          github.ref_name == github.event.repository.default_branch
         run: |
           # Version the filename so players can tell downloads apart, and
-          # ship the freshly generated MODLIST alongside it rather than
-          # linking the committed copy, which could be stale.
+          # ship the freshly generated MODLIST rather than the committed
+          # copy, which is guaranteed current here but need not be.
           cp minecraft/dist/pack.mrpack \
-             "minecraft/dist/elysium-${{ env.version }}.mrpack"
+             "minecraft/dist/elysium-${{ steps.ver.outputs.version }}.mrpack"
           cp minecraft/MODLIST.md minecraft/dist/MODLIST.md
 
       - name: Publish release
+        if: >-
+          steps.ver.outputs.needed == 'true' &&
+          github.event_name == 'push' &&
+          github.ref_name == github.event.repository.default_branch
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: v${{ steps.ver.outputs.version }}
+          name: v${{ steps.ver.outputs.version }}
+          # Point the tag at the MODLIST commit when there was one, so the
+          # tagged tree matches the published assets.
+          target_commitish: ${{ steps.modlist.outputs.sha || github.sha }}
           files: |
-            minecraft/dist/elysium-${{ env.version }}.mrpack
+            minecraft/dist/elysium-${{ steps.ver.outputs.version }}.mrpack
             minecraft/dist/MODLIST.md
           generate_release_notes: true
           body: |

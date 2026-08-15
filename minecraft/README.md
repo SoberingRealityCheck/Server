@@ -136,34 +136,46 @@ recipes, and supplies block metadata; the client renders it.
    cannot round-trip a file without discarding comments, and the
    reasoning in those comments is worth more than the typing saved.
 2. Bump `version` in `pack.yaml`.
-3. `./build.py` -- this also regenerates `MODLIST.md`.
-4. Commit both `pack.yaml` and `MODLIST.md`. CI fails if `MODLIST.md`
-   is stale, so they stay in step.
-5. Deploy: `docker compose up -d --force-recreate minecraft` from the
+3. `./build.py` to check it locally, then commit and push `pack.yaml`.
+   You do not need to commit `MODLIST.md` -- CI regenerates and commits
+   it for you.
+4. Deploy: `docker compose up -d --force-recreate minecraft` from the
    repo root.
-6. Release for players: `git tag v<version> && git push --tags`.
+
+Pushing the version bump is what publishes the release. There is no
+separate tagging step.
 
 ## Releases
 
-`.github/workflows/pack.yml` builds the pack and attaches it to a GitHub
-release whenever you push a `v*` tag. The tag must match `version` in
-`pack.yaml` -- the workflow refuses otherwise, since a pack whose
-internal version disagrees with its download URL makes "which version am
-I running?" unanswerable.
+`.github/workflows/pack.yml` is driven entirely by `version` in
+`pack.yaml`:
 
-On ordinary pushes and PRs the same workflow verifies every pinned
-sha512 and checks that `MODLIST.md` is current, without publishing
-anything. Downloaded artifacts are cached between runs, keyed by
-`pack.yaml`'s contents -- change a pinned hash and the cache key changes
-with it, so a stale jar can never be reused for a new pin.
+| You push | CI does |
+|---|---|
+| Mod changes, same version | Builds, verifies hashes and dependencies, updates `MODLIST.md` |
+| Mod changes, bumped version | All of the above, then tags `v<version>` and publishes a release |
+| A pull request | Builds and verifies only; nothing is written or published |
+
+The tag is derived from the manifest rather than typed by hand, so the
+two cannot disagree. Re-running on an already-released version is a
+no-op, not an error, which keeps re-runs safe.
+
+`MODLIST.md` is generated from `pack.yaml`, so CI regenerates and
+commits it rather than failing and asking you to. That commit carries
+`[skip ci]` so it does not trigger another run, and the release tag
+points at it, meaning the tagged tree matches the published assets.
+
+Downloaded jars are cached between runs, keyed by `pack.yaml`'s contents
+-- change a pinned hash and the cache key changes with it, so a stale jar
+can never be reused for a new pin.
 
 ### Building without a release
 
-To build the pack on demand -- to sanity-check a `pack.yaml` edit, or
-just to get a `.mrpack` without tagging -- use **Actions → pack → Run
-workflow** on GitHub. The built pack is attached to the run as an
-artifact named `pack.mrpack`, downloadable from the run summary page for
-14 days.
+To build on demand -- to sanity-check a `pack.yaml` edit, or just to get
+a `.mrpack` -- use **Actions → pack → Run workflow**. The built pack is
+attached to the run as an artifact named `pack.mrpack`, downloadable
+from the run summary for 14 days. Manual runs and PR builds never
+publish a release.
 
 Run artifacts are not releases: they expire, and they are only visible
 to people with repo access. Use a tag when you want something players
