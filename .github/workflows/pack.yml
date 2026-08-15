@@ -82,6 +82,14 @@ jobs:
         # run without PyYAML and fail on import.
         run: uv run --script build.py
 
+      # Reads each jar's fabric.mod.json and resolves the same
+      # constraints Fabric checks at launch, per side. Catches version
+      # conflicts and env mistakes here rather than in a restart loop on
+      # the server.
+      - name: Check Fabric dependencies
+        working-directory: minecraft
+        run: uv run --script build.py --check-deps
+
       - name: Check MODLIST.md is up to date
         run: |
           if ! git diff --quiet -- minecraft/MODLIST.md; then

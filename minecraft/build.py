@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import shutil
 import sys
@@ -255,6 +256,176 @@ def write_modlist(pack: dict, index: dict) -> None:
     MODLIST.write_text("\n".join(lines))
 
 
+# --- Fabric dependency checking --------------------------------------
+#
+# Fabric resolves mod dependencies at launch and refuses to start if any
+# are unsatisfiable. That check happens on the server, minutes after a
+# build, and reports one failure at a time. Doing the same check here --
+# against the real `fabric.mod.json` inside each jar, not a guess about
+# what a version probably requires -- surfaces every conflict at once,
+# before anything is deployed.
+
+def parse_semver(v: str) -> tuple[int, ...] | None:
+    """(major, minor, patch) or None if not parseable.
+
+    Build metadata (`+26.2`) and prerelease tags (`-beta.1`) are dropped:
+    semver orders on the numeric core, and mod versions here carry the
+    Minecraft version as build metadata.
+    """
+    core = v.split("+", 1)[0].split("-", 1)[0].strip()
+    parts = core.split(".")
+    out = []
+    for p in parts[:3]:
+        if not p.isdigit():
+            return None
+        out.append(int(p))
+    while len(out) < 3:
+        out.append(0)
+    return tuple(out)
+
+
+def satisfies_predicate(version: str, pred: str) -> bool | None:
+    """Does `version` satisfy one Fabric predicate? None = unparseable."""
+    pred = pred.strip()
+    if pred in ("*", ""):
+        return True
+
+    for op in (">=", "<=", "!=", "==", ">", "<", "=", "^", "~"):
+        if pred.startswith(op):
+            target_raw = pred[len(op):].strip()
+            break
+    else:
+        op, target_raw = "=", pred
+
+    # x-ranges: 1.2.x / 1.2.* match any patch within 1.2
+    if any(c in target_raw for c in "xX*"):
+        prefix = target_raw.replace("*", "x").replace("X", "x").split(".x")[0]
+        return version.split("+")[0].startswith(prefix)
+
+    a, b = parse_semver(version), parse_semver(target_raw)
+    if a is None or b is None:
+        return None
+
+    if op == ">=":
+        return a >= b
+    if op == "<=":
+        return a <= b
+    if op in (">",):
+        return a > b
+    if op in ("<",):
+        return a < b
+    if op == "!=":
+        return a != b
+    if op in ("=", "=="):
+        return a == b
+    if op == "^":
+        # compatible-with: same major, at least the given version
+        return a >= b and a[0] == b[0]
+    if op == "~":
+        # approximately: same major.minor, at least the given version
+        return a >= b and a[:2] == b[:2]
+    return None
+
+
+def satisfies(version: str, spec) -> bool | None:
+    """Fabric allows a string or a list (any-of). Space-separated
+    predicates within one string are all-of."""
+    if isinstance(spec, list):
+        results = [satisfies(version, s) for s in spec]
+        if any(r is True for r in results):
+            return True
+        return None if any(r is None for r in results) else False
+
+    parts = str(spec).split()
+    results = [satisfies_predicate(version, p) for p in parts]
+    if any(r is False for r in results):
+        return False
+    return None if any(r is None for r in results) else True
+
+
+def read_fabric_metadata(blob: bytes, out: dict, depends: dict) -> None:
+    """Collect ids/versions and declared dependencies from a mod jar.
+
+    Recurses into nested jars: Fabric API ships its modules as jars
+    inside the outer jar, and mods routinely depend on those module ids
+    directly. Skipping them would report a pile of false conflicts.
+    """
+    try:
+        zf = zipfile.ZipFile(io.BytesIO(blob))
+    except zipfile.BadZipFile:
+        return
+    if "fabric.mod.json" not in zf.namelist():
+        return
+    try:
+        meta = json.loads(zf.read("fabric.mod.json").decode("utf-8", "replace"))
+    except (ValueError, KeyError):
+        return
+
+    mod_id, version = meta.get("id"), str(meta.get("version", ""))
+    if mod_id:
+        out[mod_id] = version
+        for provided in meta.get("provides", []):
+            out[provided] = version
+        if meta.get("depends"):
+            depends[mod_id] = meta["depends"]
+
+    for nested in meta.get("jars", []):
+        path = nested.get("file")
+        if path and path in zf.namelist():
+            read_fabric_metadata(zf.read(path), out, depends)
+
+
+def check_dependencies(pack: dict, offline: bool) -> int:
+    """Verify each side's mod set independently. Returns problem count.
+
+    Client and server get different subsets, so a dependency satisfied on
+    one side can be missing on the other -- exactly the failure mode
+    where a `both` mod is marked `server` and clients crash at launch.
+    """
+    print("\nChecking Fabric dependencies against each jar's fabric.mod.json")
+    problems = 0
+
+    for side in ("server", "client"):
+        wanted = [m for m in pack["mods"] if m["env"] in (side, "both")]
+        available: dict[str, str] = {
+            "minecraft": pack["minecraft"],
+            "fabricloader": pack["loader_version"],
+            "java": "21",
+        }
+        declared: dict[str, dict] = {}
+
+        for entry in wanted:
+            read_fabric_metadata(
+                cached_bytes(entry, offline), available, declared
+            )
+
+        print(f"\n  [{side}] {len(wanted)} mods, "
+              f"{len(available)} resolvable ids")
+
+        for mod_id, deps in sorted(declared.items()):
+            for dep_id, spec in deps.items():
+                have = available.get(dep_id)
+                if have is None:
+                    print(f"    MISSING  {mod_id} needs {dep_id} {spec}")
+                    problems += 1
+                    continue
+                ok = satisfies(have, spec)
+                if ok is False:
+                    print(f"    CONFLICT {mod_id} needs {dep_id} {spec}, "
+                          f"have {have}")
+                    problems += 1
+                elif ok is None:
+                    print(f"    unchecked {mod_id} needs {dep_id} {spec} "
+                          f"(have {have}) -- could not parse range")
+
+    if problems:
+        print(f"\n{problems} dependency problem(s). Fabric will refuse to "
+              f"start. Use --resolve <slug> to find newer builds.")
+    else:
+        print("\nAll declared dependencies satisfied on both sides.")
+    return problems
+
+
 def resolve_project(slug: str, mc_version: str, loader: str) -> str:
     """Print a ready-to-paste pack.yaml block for a Modrinth project.
 
@@ -281,13 +452,38 @@ def resolve_project(slug: str, mc_version: str, loader: str) -> str:
     v = versions[0]
     primary = next((f for f in v["files"] if f.get("primary")), v["files"][0])
 
-    print(f"  - name: \"{v.get('name', slug)}\"")
+    # Carry over name/env/reason from the entry already in pack.yaml, if
+    # this project is one we track. Printing a default `env: server` and
+    # trusting the reader to correct it is how a `both` mod silently
+    # becomes server-only -- which breaks clients at launch, far from the
+    # edit that caused it.
+    existing = None
+    project_id = v.get("project_id", "")
+    if project_id:
+        pack = yaml.safe_load(PACK_FILE.read_text())
+        for entry in pack.get("mods", []):
+            if f"/data/{project_id}/" in entry.get("url", ""):
+                existing = entry
+                break
+
+    name = existing["name"] if existing else v.get("name", slug)
+    env = existing["env"] if existing else "server"
+    reason = " ".join(existing.get("reason", "").split()) if existing else ""
+
+    print(f"  - name: \"{name}\"")
     print(f"    file: \"{primary['filename']}\"")
     print(f"    url: \"{primary['url']}\"")
     print(f"    sha512: \"{primary['hashes']['sha512']}\"")
-    print("    env: server        # both | client | server")
-    print(f"    reason: \"\"")
+    if existing:
+        print(f"    env: {env}")
+        print(f"    reason: \"{reason}\"" if reason else "    reason: \"\"")
+    else:
+        print("    env: server        # CHANGE ME: both | client | server")
+        print("    reason: \"\"")
     print()
+    if existing:
+        print(f"# carried over env and reason from the existing "
+              f"'{existing['name']}' entry", file=sys.stderr)
     print(f"# version {v['version_number']} ({v['version_type']}), "
           f"published {v['date_published'][:10]}", file=sys.stderr)
 
@@ -321,6 +517,10 @@ def main() -> int:
     parser.add_argument("--resolve", metavar="SLUG",
                         help="print an up-to-date pack.yaml block for a "
                              "Modrinth project (e.g. --resolve fabric-api)")
+    parser.add_argument("--check-deps", action="store_true",
+                        help="verify Fabric mod dependencies per side and "
+                             "exit; catches what Fabric would reject at "
+                             "launch")
     args = parser.parse_args()
 
     if args.clean:
@@ -345,6 +545,9 @@ def main() -> int:
         pack["loader_version"] = resolve_loader_version(
             pack["loader_version"], args.offline
         )
+
+        if args.check_deps:
+            return 1 if check_dependencies(pack, args.offline) else 0
 
         index = build_index(pack, args.offline)
 

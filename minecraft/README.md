@@ -38,11 +38,31 @@ and client mods were documented-but-manual.
 ### Building
 
 ```bash
-./build.py            # writes dist/pack.mrpack and MODLIST.md
-./build.py --check    # verify hashes, write nothing
-./build.py --offline  # build from cache, no network
-./build.py --clean    # drop the download cache
+./build.py               # writes dist/pack.mrpack and MODLIST.md
+./build.py --check       # verify hashes, write nothing
+./build.py --check-deps  # verify mod dependencies per side
+./build.py --offline     # build from cache, no network
+./build.py --clean       # drop the download cache
+./build.py --resolve SLUG  # print an updated block for a Modrinth project
 ```
+
+### Dependency checking
+
+`--check-deps` opens every jar, reads its real `fabric.mod.json`, and
+resolves the same constraints Fabric evaluates at launch -- including
+the modules nested inside Fabric API, which mods commonly depend on
+directly.
+
+It checks the client and server sets **separately**, because they get
+different subsets. A mod marked `server` that should be `both` leaves
+its dependents unsatisfied on the client, and that only surfaces when a
+player launches the game. This catches it at build time.
+
+Output is one of `CONFLICT` (present but wrong version), `MISSING` (not
+in that side's set), or `unchecked` (a version range in a syntax the
+checker does not parse -- reported rather than silently passed).
+
+CI runs this on every push and PR.
 
 Requires [uv](https://docs.astral.sh/uv/). `build.py` is a uv script (PEP
 723 inline metadata) -- uv installs PyYAML into an isolated env on first

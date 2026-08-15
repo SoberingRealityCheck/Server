@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium Realistic Terrain"
-version: "1.0.0"
+version: "1.0.1"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -34,11 +34,11 @@ loader_version: "latest"
 
 mods:
   # --- Core / libraries -----------------------------------------------
-  - name: "[26.2] Fabric API 0.157.0+26.2"
+  - name: "Fabric API"
     file: "fabric-api-0.157.0+26.2.jar"
     url: "https://cdn.modrinth.com/data/P7dR8mSH/versions/vmQp7ixA/fabric-api-0.157.0%2B26.2.jar"
     sha512: "4ebec489f2b2ce621ebebb2d1b7e9714b6fd288ebdb4e287d767cde57612cf1d3d1d4f51daf7e7ec9541fa146df6bde4978ab98a29637ced6d9bc2f3c4217650"
-    env: server        # both | client | server
+    env: both
     reason: >-
       Required by nearly every other mod here. Marked `both` rather than
       server-only: the old client list omitted it, but JEI and Jade both
@@ -145,7 +145,7 @@ mods:
     file: "jei-26.2-fabric-30.24.0.165.jar"
     url: "https://cdn.modrinth.com/data/u6dRKJwZ/versions/Ax8OeQM7/jei-26.2-fabric-30.24.0.165.jar"
     sha512: "dbaeec56ccdf6ee9ac0d5f39cf2872515079c7ebdfb065ebe3525c95718c80f319a4cc9eb9f8531fbaff738b8032b4911d302ed6fa45035629724d1a312c641b"
-    env: server        # both | client | server
+    env: both
     reason: "Recipe/item viewer; recipes are server-stored since 1.21.2"
 
   - name: "Jade"

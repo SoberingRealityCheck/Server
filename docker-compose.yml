@@ -74,6 +74,17 @@ services:
       # Whitelist is enforced from this list on every start; edits made
       # in-game via /whitelist are overwritten. Set
       # MC_ENABLE_WHITELIST=false to run open.
+      #
+      # These must be Minecraft: Java Edition PROFILE NAMES, not Xbox
+      # gamertags -- they differ even on the same Microsoft account. A
+      # name that cannot be resolved to a UUID aborts startup with
+      # "Could not resolve user from Playerdb: <name>" and the container
+      # restart-loops. UUIDs are accepted here too, and are immune to
+      # both the gamertag confusion and later name changes.
+      #
+      # Switch to "mojang" if PlayerDB is down or rate-limiting; the two
+      # services answer the same question and either can be flaky.
+      USER_API_PROVIDER: ${MC_USER_API_PROVIDER:-playerdb}
 
       # RCON stays on the container's internal port only -- not published
       # above, so it is unreachable from the network. Use
