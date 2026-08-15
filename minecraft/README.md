@@ -125,6 +125,18 @@ anything. Downloaded artifacts are cached between runs, keyed by
 `pack.yaml`'s contents -- change a pinned hash and the cache key changes
 with it, so a stale jar can never be reused for a new pin.
 
+### Building without a release
+
+To build the pack on demand -- to sanity-check a `pack.yaml` edit, or
+just to get a `.mrpack` without tagging -- use **Actions → pack → Run
+workflow** on GitHub. The built pack is attached to the run as an
+artifact named `pack.mrpack`, downloadable from the run summary page for
+14 days.
+
+Run artifacts are not releases: they expire, and they are only visible
+to people with repo access. Use a tag when you want something players
+can download.
+
 Releases and the server deploy are independent: the server builds from
 its own clone and does not consume release assets. Tagging is purely how
 players get the file.

@@ -29,7 +29,7 @@ name: pack
 # list; it is load-bearing as written.
 on:
   push:
-    branches: [main]
+    branches: [master, main]
     paths:
       - "minecraft/pack.yaml"
       - "minecraft/build.py"
@@ -43,6 +43,11 @@ on:
       - "minecraft/build.py"
       - "minecraft/overrides/**"
       - ".github/workflows/pack.yml"
+  # Adds the "Run workflow" button under Actions -> pack. Builds the pack
+  # and uploads it as a run artifact without cutting a release, which is
+  # what you want for a one-off build or to test a pack.yaml change
+  # before tagging.
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -86,6 +91,19 @@ jobs:
             exit 1
           fi
           echo "MODLIST.md matches pack.yaml"
+
+      # Downloadable from the run's summary page. This is what makes a
+      # manual "Run workflow" useful: you get the built pack without
+      # tagging a release. Runs even if the MODLIST check above failed,
+      # since the pack itself is still worth inspecting.
+      - name: Upload pack as run artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pack.mrpack
+          path: minecraft/dist/pack.mrpack
+          if-no-files-found: warn
+          retention-days: 14
 
   release:
     if: startsWith(github.ref, 'refs/tags/v')
