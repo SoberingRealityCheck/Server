@@ -9,7 +9,7 @@ Pack version 1.0.0
 
 | Mod | Side | Why |
 |---|---|---|
-| Fabric API | client + server | Required by nearly every other mod here. Marked `both` rather than server-only: the old client list omitted it, but JEI and Jade both need it client-side. |
+| [26.2] Fabric API 0.157.0+26.2 | server only | Required by nearly every other mod here. Marked `both` rather than server-only: the old client list omitted it, but JEI and Jade both need it client-side. |
 | Lithostitched | server only | Worldgen library required by Terralith and Tectonic |
 | Forge Config API Port | server only | Required by Puzzles Lib |
 | Puzzles Lib | server only | Required by Easy Shulker Boxes and Bundle Upgrade |
@@ -23,7 +23,7 @@ Pack version 1.0.0
 | FerriteCore | server only | Reduces memory footprint of loaded chunks/block states |
 | Sodium | client only | Rendering engine replacement |
 | Better Clouds | client only | Replaces vanilla cloud rendering |
-| JEI | client + server | Recipe/item viewer; recipes are server-stored since 1.21.2 |
+| JEI | server only | Recipe/item viewer; recipes are server-stored since 1.21.2 |
 | Jade | client + server | Hover-to-inspect HUD; server copy adds item storage/brewing data |
 | Easy Shulker Boxes | server only | View/edit shulker box contents without placing them |
 | Bundle Upgrade | server only | Larger/tiered bundles |
@@ -40,4 +40,4 @@ Pack version 1.0.0
 | Matcha Flavoured | server only |
 | Path Generator Datapack | server only |
 
-25 files, 141.2 MiB total download.
+25 files, 141.3 MiB total download.
