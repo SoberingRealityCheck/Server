@@ -74,6 +74,20 @@ jobs:
         working-directory: minecraft
         run: uv run --script build.py --check-deps
 
+      # Compares each mod's `env` against Modrinth's declared
+      # client_side/server_side. --check-deps cannot catch a mod missing
+      # from a side it belongs on: an absent mod declares nothing and so
+      # violates nothing. This can, and it is how Easy Shulker Boxes and
+      # Bundle Upgrade sat server-only for weeks without erroring.
+      #
+      # Hits the Modrinth API, so an upstream outage fails the run. That
+      # is the accepted trade: a silently client-less mod reaches players
+      # as a feature that just does not work, which costs far more to
+      # notice than a red CI run costs to re-run.
+      - name: Check mod sides
+        working-directory: minecraft
+        run: uv run --script build.py --check-env
+
       # MODLIST.md is generated from pack.yaml, so CI regenerates and
       # commits it rather than failing and asking a human to do it. Only
       # on the default branch: pull_request runs check out a merge commit

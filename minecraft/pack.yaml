@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium Realistic Terrain"
-version: "1.1.1"
+version: "1.2.1"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -77,6 +77,46 @@ mods:
       Required by Easy Shulker Boxes and Bundle Upgrade, both of which
       run on both sides -- so this must too.
 
+  - name: "Fabric Language Kotlin"
+    file: "fabric-language-kotlin-1.13.12+kotlin.2.4.0.jar"
+    url: "https://cdn.modrinth.com/data/Ha28R6CL/versions/Pd0xrHCw/fabric-language-kotlin-1.13.12%2Bkotlin.2.4.0.jar"
+    sha512: "ca238ee480dfb237062200fd300be493d022e0837b6998c15807e01488b2a30d5ba4731e5c6d05a5333719c8923a1cb84c06fd6fa45aa88ced492ddb5b40906f"
+    env: both
+    reason: >-
+      Kotlin runtime, required by Xaero's Maps: Multiplayer+. 8 MB, the
+      largest single file in the pack -- it bundles the whole Kotlin
+      standard library. Only here because Multiplayer+ needs it.
+
+  - name: "Balm"
+    file: "balm-fabric-26.2-26.2.0.2.jar"
+    url: "https://cdn.modrinth.com/data/MBAkmtvl/versions/Gl7L60Mm/balm-fabric-26.2-26.2.0.2.jar"
+    sha512: "b5cc5882f2e2591acf8d5d5c1250e408015663140f564deaddf7393a32d21f4cc571f95acce87ceb37987ad2abd9dc93b12b7484a73e319eb86d586114c8a3e2"
+    env: both
+    reason: >-
+      Multi-loader abstraction layer required by Waystones. Same author;
+      versioned in lockstep with it.
+
+  - name: "Shogi"
+    file: "shogi-fabric-26.2-26.2.0.3.jar"
+    url: "https://cdn.modrinth.com/data/bi4iCmsw/versions/tlaGyX0N/shogi-fabric-26.2-26.2.0.3.jar"
+    sha512: "7e66a0b9e95e9a435e2538775b420753480dfe386fc41471006e14bfa4d86962898c29eec71518695a2ffb58742d8d75337ce3a279b1da80e69b3399ccf882b3"
+    env: both
+    reason: >-
+      Rules/effects expression library required by Waystones -- it backs
+      the warp-requirement system (xp costs, cooldowns). Same author.
+
+  - name: "GeckoLib"
+    file: "geckolib-fabric-26.2-5.5.3.jar"
+    url: "https://cdn.modrinth.com/data/8BmcQJ2H/versions/L6bn4TS8/geckolib-fabric-26.2-5.5.3.jar"
+    sha512: "44ef7180919f90bddb4cd0dcb5752227de1dc9f30c7bfc1aa17c294af1172f9e25260505e8ffb97b57ae03da6d212da82de55b932f4c92aca12908bd32bb6571"
+    env: both
+    reason: >-
+      Animation library required by Critters and Companions. 5.5.3 is
+      the exact version that port states it was built against -- worth
+      keeping in step rather than tracking GeckoLib's latest
+      independently, since it ships breaking API changes in point
+      releases.
+
   - name: "CreativeCore"
     file: "CreativeCore_FABRIC_v2.14.16_mc26.2.jar"
     url: "https://cdn.modrinth.com/data/OsZiaDHq/versions/SI6rsPDj/CreativeCore_FABRIC_v2.14.16_mc26.2.jar"
@@ -88,8 +128,14 @@ mods:
     file: "yet_another_config_lib_v3-3.9.5+26.2-fabric.jar"
     url: "https://cdn.modrinth.com/data/1eAoo2KR/versions/LlSShNCR/yet_another_config_lib_v3-3.9.5%2B26.2-fabric.jar"
     sha512: "bf709e5d1db2f104abb1e45d27dec39f10e0e2d546ec1e5df3a49b464c6f2b2daf39633e26e94e7869ae2a555258e5c4ee2d796c7d6d0e26300052a8de15052a"
-    env: client
-    reason: "Required by Better Clouds"
+    env: both
+    reason: >-
+      Config library. Required client-side by Better Clouds, and
+      server-side too because Xaero's Maps: Multiplayer+ runs on both
+      sides and hard-depends on it -- caught by --check-deps, which
+      reads the real fabric.mod.json rather than Modrinth's
+      project-level metadata. Upstream marks both sides optional, so
+      shipping it to the server is harmless.
 
   # --- Worldgen -------------------------------------------------------
   - name: "Terralith"
@@ -215,6 +261,64 @@ mods:
       Bundle inventory interactions. Same as Easy Shulker Boxes: real
       interactions rather than tooltips, required on both sides per
       upstream.
+
+  - name: "Waystones"
+    file: "waystones-fabric-26.2-26.2.0.9.jar"
+    url: "https://cdn.modrinth.com/data/LOpKHB2A/versions/5lrxhmSm/waystones-fabric-26.2-26.2.0.9.jar"
+    sha512: "09b39fea07b175f557a8c3c8ea6734355e0af1acb19ca2e7fa5ce43f7db35a9e21d82a9d96bc592bfe2857c598b54f6596ec75e2ed16262505943ff7a1c2b7ad"
+    env: both
+    reason: >-
+      Teleport between placed waystones. Requires Balm and Shogi above.
+      Fits the pack's slow-travel world: Tectonic makes continents large
+      enough that crossing them repeatedly stops being scenic.
+
+  - name: "Ambient Creatures"
+    file: "ambient_creatures-0.1.2-beta-26.2.jar"
+    url: "https://cdn.modrinth.com/data/egUSQYsJ/versions/FthG5U92/ambient_creatures-0.1.2-beta-26.2.jar"
+    sha512: "684fdfeafa3b91e4fd5db0c7ace1a1c7ff8be07cb7ea95d46edb3d874c7ac75830b67d5728aed34944b26ff89307a025f8de4bf7ad9b06e9bdc89cf6206bfe54"
+    env: both
+    reason: >-
+      Adds penguins, capybaras and raccoons. Adds real entities, so it is
+      required on both sides -- unlike Cosy Critters, which only renders
+      client-side decoration.
+      CAUTION: 0.1.2-beta, ~1.5k downloads, and 0.1.0 crashed servers
+      outright (fixed in 0.1.1). The least battle-tested mod in the pack.
+
+  - name: "Critters and Companions (Unofficial Fabric Port)"
+    file: "crittersandcompanions-26.2.0-0.1.3-fabric.jar"
+    url: "https://cdn.modrinth.com/data/shNmXuqa/versions/924I6srW/crittersandcompanions-26.2.0-0.1.3-fabric.jar"
+    sha512: "b9518efaac550d0b8b8f77e06f9041610a8521d3f260258b1bb02b332fe81afab7589bfcf7fbd544e3fea10995181143a5766269f6bf8736b5b3d11e4f6aa1e0"
+    env: both
+    reason: >-
+      Otters, koi, dumbo octopus, ladybugs, snails, stag beetles and
+      friends. Requires GeckoLib and Forge Config API Port, both above.
+      An unofficial port: the original stops at 1.21.1, so this is the
+      only route to 26.2. Reasonably exercised (~23k downloads) and its
+      changelogs read like someone actually testing -- successive
+      releases fixed a stag beetle client crash, a grappling-hook death
+      crash, and lingering jockey mounts.
+
+  - name: "Xaero's World Map"
+    file: "xaeroworldmap-fabric-26.2-1.44.2.jar"
+    url: "https://cdn.modrinth.com/data/NcUtCpym/versions/NzjI8AbM/xaeroworldmap-fabric-26.2-1.44.2.jar"
+    sha512: "f159f3393d84e00c6f31bb0ea3e1bd41a51315fc2905f9e87d796fc075f8be1722fa207d3e07bc965aca5fb596fc19782cd58ce4952c9259f9241fc06bdae8b0"
+    env: both
+    reason: >-
+      Full-screen explored-world map; companion to Xaero's Minimap.
+
+  - name: "Xaero's Maps: Multiplayer+"
+    file: "xmmp-0.3.2+26.1.2-fabric.jar"
+    url: "https://cdn.modrinth.com/data/stTaMuWa/versions/ejoBFml4/xmmp-0.3.2%2B26.1.2-fabric.jar"
+    sha512: "a06bfd987b34c37ba97220a49b102ab6fe49cb8b861ca8e45798a98d768827cc975f8d2cd8c5c77560a0d90cecd00361085f78acba0d7871bf69659e66a5f3a7"
+    env: both
+    reason: >-
+      Syncs world map exploration between players -- genuinely
+      multiplayer, hence both sides. Needs Fabric Language Kotlin, plus
+      Xaero's Minimap and World Map (0.3.2 made those soft dependencies).
+      CAUTION: built for 26.1.2 with 26.2 added to its compatibility list
+      afterwards, and only ~2.7k downloads. Run --check-deps after
+      building: if it reports the server missing xaeroworldmap or
+      xaerominimap, those two need `env: both`.
 
   - name: "Xaero's Minimap"
     file: "xaerominimap-fabric-26.2-26.1.3.jar"
