@@ -185,10 +185,20 @@ def validate(pack: dict) -> None:
             if not entry.get(key):
                 raise BuildError(f"datapack {entry.get('name', '?')} missing {key}")
 
+    # Filenames must be unique within a destination directory, not just
+    # within `mods` -- two shaderpacks sharing a name would silently
+    # overwrite each other in shaderpacks/.
+    seen_shaders: dict[str, str] = {}
     for entry in pack.get("shaderpacks", []):
         for key in ("name", "file", "url", "sha512"):
             if not entry.get(key):
                 raise BuildError(f"shaderpack {entry.get('name', '?')} missing {key}")
+        if entry["file"] in seen_shaders:
+            raise BuildError(
+                f"duplicate shaderpack filename {entry['file']} "
+                f"({seen_shaders[entry['file']]} and {entry['name']})"
+            )
+        seen_shaders[entry["file"]] = entry["name"]
 
     # server.properties holds exactly one resource-pack URL, so two
     # flagged entries have no correct answer. Fail loudly rather than
@@ -563,6 +573,90 @@ def check_dependencies(pack: dict, offline: bool) -> int:
     return problems
 
 
+# --- Side (env) checking ---------------------------------------------
+#
+# --check-deps can only reason about mods that are present: it verifies
+# that everything in a set has its declared dependencies satisfied. A mod
+# wrongly marked server-only is simply absent from the client set, so it
+# declares nothing and violates nothing -- invisible to that check, and
+# visible to players only as a feature that silently does not work.
+#
+# Modrinth publishes each project's client_side/server_side requirement.
+# Comparing our `env` against that catches exactly the missing-but-should
+# -be-present case.
+
+PROJECT_ID_RE = re.compile(r"cdn\.modrinth\.com/data/([^/]+)/")
+
+
+def fetch_project_sides(project_ids: list[str]) -> dict[str, dict]:
+    """Fetch client_side/server_side for many projects at once."""
+    out: dict[str, dict] = {}
+    # Chunked: the ids go in the query string, and a few dozen 8-char IDs
+    # plus JSON encoding gets long enough to be worth not finding out.
+    for i in range(0, len(project_ids), 25):
+        chunk = project_ids[i:i + 25]
+        query = urllib.parse.urlencode({"ids": json.dumps(chunk)})
+        for proj in json.loads(fetch(f"{MODRINTH_API}/projects?{query}")):
+            out[proj["id"]] = proj
+    return out
+
+
+def check_env(pack: dict) -> int:
+    """Compare each mod's `env` against what Modrinth declares."""
+    print("\nChecking `env` against Modrinth's declared sides")
+
+    entries = []
+    for entry in pack.get("mods", []):
+        m = PROJECT_ID_RE.search(entry.get("url", ""))
+        if m:
+            entries.append((m.group(1), entry))
+        else:
+            print(f"  skipped  {entry['name']} -- not a Modrinth CDN URL")
+
+    projects = fetch_project_sides([pid for pid, _ in entries])
+    problems = 0
+
+    for pid, entry in entries:
+        proj = projects.get(pid)
+        if proj is None:
+            print(f"  skipped  {entry['name']} -- project {pid} not found")
+            continue
+
+        env = entry["env"]
+        included = {"client": env in ("client", "both"),
+                    "server": env in ("server", "both")}
+        override = entry.get("env_override")
+
+        for side in ("client", "server"):
+            declared = proj.get(f"{side}_side", "optional")
+
+            if declared == "required" and not included[side]:
+                if override:
+                    print(f"  allowed  {entry['name']}: upstream requires "
+                          f"{side}, env={env} -- override: {override}")
+                    continue
+                print(f"  MISSING  {entry['name']}: upstream marks {side}_side "
+                      f"'required' but env={env} excludes {side}")
+                problems += 1
+
+            elif declared == "unsupported" and included[side]:
+                if override:
+                    print(f"  allowed  {entry['name']}: upstream marks {side} "
+                          f"unsupported, env={env} -- override: {override}")
+                    continue
+                print(f"  EXTRA    {entry['name']}: upstream marks {side}_side "
+                      f"'unsupported' but env={env} ships it to {side}")
+                problems += 1
+
+    if problems:
+        print(f"\n{problems} env problem(s). A mod missing from a side does "
+              f"not error -- it silently does nothing. Fix `env` in "
+              f"pack.yaml, or set `env_override: \"why\"` if deliberate.")
+    else:
+        print("\nEvery mod's env agrees with Modrinth's declared sides.")
+    return problems
+
+
 def resolve_project(slug: str, mc_version: str, loader: str) -> str:
     """Print a ready-to-paste pack.yaml block for a Modrinth project.
 
@@ -658,6 +752,10 @@ def main() -> int:
                         help="verify Fabric mod dependencies per side and "
                              "exit; catches what Fabric would reject at "
                              "launch")
+    parser.add_argument("--check-env", action="store_true",
+                        help="verify each mod's env against Modrinth's "
+                             "declared client/server requirements; catches "
+                             "mods missing from a side they belong on")
     args = parser.parse_args()
 
     if args.clean:
@@ -682,6 +780,9 @@ def main() -> int:
         pack["loader_version"] = resolve_loader_version(
             pack["loader_version"], args.offline
         )
+
+        if args.check_env:
+            return 1 if check_env(pack) else 0
 
         if args.check_deps:
             return 1 if check_dependencies(pack, args.offline) else 0

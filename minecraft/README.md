@@ -41,6 +41,7 @@ and client mods were documented-but-manual.
 ./build.py               # writes dist/pack.mrpack and MODLIST.md
 ./build.py --check       # verify hashes, write nothing
 ./build.py --check-deps  # verify mod dependencies per side
+./build.py --check-env   # verify each mod is on the sides upstream requires
 ./build.py --offline     # build from cache, no network
 ./build.py --clean       # drop the download cache
 ./build.py --resolve SLUG  # print an updated block for a Modrinth project
@@ -135,6 +136,41 @@ in that side's set), or `unchecked` (a version range in a syntax the
 checker does not parse -- reported rather than silently passed).
 
 CI runs this on every push and PR.
+
+### Side checking
+
+`--check-deps` has a blind spot it cannot close: it verifies that every
+mod *present* has its dependencies satisfied. A mod wrongly marked
+`server` is simply absent from the client set, so it declares nothing
+and violates nothing. Fabric starts happily. Players just find that a
+feature does nothing, with no error anywhere to explain why.
+
+`--check-env` closes it from the other direction. Modrinth publishes
+each project's `client_side` and `server_side` requirement, and this
+compares that against the `env` in `pack.yaml`:
+
+- **MISSING** -- upstream marks a side `required`, our `env` excludes it.
+  Players silently lose the feature. This is the case that bit us with
+  Easy Shulker Boxes and Bundle Upgrade.
+- **EXTRA** -- upstream marks a side `unsupported`, our `env` ships it
+  there anyway. Usually harmless, occasionally a crash.
+
+`optional` never forces anything, so a mod that works on both sides is
+free to be `client`, `server`, or `both`.
+
+Upstream metadata is author-maintained and occasionally wrong. To
+deviate deliberately, record why:
+
+```yaml
+    env_override: "ships client-side too, upstream metadata is stale"
+```
+
+That silences the check for that entry and leaves the reasoning in the
+manifest rather than in someone's memory.
+
+CI runs this on every push and PR. It calls the Modrinth API, so an
+upstream outage will fail the run -- an accepted trade, since a
+client-less mod is far more expensive to discover than a re-run.
 
 Requires [uv](https://docs.astral.sh/uv/). `build.py` is a uv script (PEP
 723 inline metadata) -- uv installs PyYAML into an isolated env on first
