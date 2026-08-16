@@ -21,6 +21,7 @@ Pack version 1.1.0
 | Lithium | server only | Tick/simulation optimization |
 | Krypton | server only | Networking-stack optimization |
 | FerriteCore | server only | Reduces memory footprint of loaded chunks/block states |
+| Chunky | server only | Pre-generates chunks on demand via console commands. Idle otherwise; it does nothing until you run /chunky start. |
 | Sodium | client only | Rendering engine replacement. Pinned to 0.9.1 because Iris 1.11.2 requires exactly this build -- Sodium's own 0.9.1 notes state "Iris 1.11.1 is not compatible". Iris and Sodium version together; bump them as a pair or not at all. |
 | Iris Shaders | client only | Shader loader. Required to load the shaderpack below; does nothing on its own until a player selects one. Pins Sodium 0.9.1 exactly. |
 | Better Clouds | client only | Replaces vanilla cloud rendering |
@@ -49,4 +50,4 @@ Client only, and **not enabled by default** -- turn one on under Video Settings 
 | Matcha Flavoured | server (data) + client (resource pack) |
 | Path Generator Datapack | server only |
 
-27 files, 144.6 MiB total download.
+28 files, 144.9 MiB total download.
