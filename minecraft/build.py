@@ -184,6 +184,17 @@ def validate(pack: dict) -> None:
             if not entry.get(key):
                 raise BuildError(f"datapack {entry.get('name', '?')} missing {key}")
 
+    # server.properties holds exactly one resource-pack URL, so two
+    # flagged entries have no correct answer. Fail loudly rather than
+    # silently pushing whichever sorted first.
+    flagged = [d["name"] for d in pack.get("datapacks", [])
+               if d.get("resourcepack")]
+    if len(flagged) > 1:
+        raise BuildError(
+            "only one datapack may set `resourcepack: true` -- a server "
+            f"can push a single resource pack. Flagged: {', '.join(flagged)}"
+        )
+
 
 def build_index(pack: dict, offline: bool) -> dict:
     files = []
@@ -653,6 +664,7 @@ def main() -> int:
 
         write_mrpack(index)
         write_modlist(pack, index)
+        pushed = write_resourcepack_env(pack, index)
 
     except BuildError as exc:
         # Flush first: stdout is block-buffered when piped, so without this
@@ -668,6 +680,9 @@ def main() -> int:
 
     print(f"\nwrote {OUTPUT.relative_to(HERE)} ({OUTPUT.stat().st_size:,} bytes)")
     print(f"wrote {MODLIST.relative_to(HERE)}")
+    print(f"wrote dist/resourcepack.env" + (
+        f" -- server will push {pushed} to clients" if pushed
+        else " (no server resource pack)"))
     print(f"  {len(index['files'])} files total")
     for key, n in sorted(counts.items()):
         print(f"    {key}: {n}")
