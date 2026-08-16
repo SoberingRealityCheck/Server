@@ -85,6 +85,39 @@ kicking them. Set `MC_RESOURCE_PACK_ENFORCE=true` in `.env` to require
 it instead; that guarantees everyone sees the same game at the cost of
 locking out anyone whose download fails.
 
+### Known issue: shaders + Distant Horizons
+
+**Symptom.** With shaders enabled, distant terrain renders as vertical
+smears, the world looks inside-out, and geometry that should be hidden
+draws over everything. The minimap looks normal, which is the tell that
+the world data is fine and only rendering is broken.
+
+**Fix, in the moment.** Force Iris to rebuild its render targets:
+
+- Drag the window edge a few pixels and drag it back, **or**
+- Toggle shaders off and on again from Video Settings
+
+Either works immediately. It comes back on relaunch or sometimes after
+alt-tabbing, and the same fix applies again.
+
+**Why.** At pipeline init, DH's LOD pass ends up bound to framebuffer
+dimensions that do not match the real drawing surface, so LOD geometry
+rasterises at the wrong scale. Both workarounds force a rebuild at the
+correct size. It is an upstream Iris/DH bug, not a pack
+misconfiguration -- do not go changing DH settings to chase it.
+
+macOS is especially prone: on a Retina display the window size and
+backing pixel size differ by 2x, and Iris additionally force-disables
+instanced rendering on macOS when Sodium is present.
+
+Trying fullscreen at launch is worth a shot -- if the surface never
+resizes after init, the bad path may not trigger.
+
+**Also expected, and not a bug:** under Iris, distant LODs render
+untextured. DH 3.2.0's LOD textures apply only to base DH rendering.
+Shaders and maximum distant-terrain fidelity are partly at odds; pick
+whichever you want more.
+
 ### Dependency checking
 
 `--check-deps` opens every jar, reads its real `fabric.mod.json`, and
