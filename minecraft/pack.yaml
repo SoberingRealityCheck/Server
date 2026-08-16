@@ -138,6 +138,15 @@ mods:
     env: server
     reason: "Reduces memory footprint of loaded chunks/block states"
 
+  - name: "Chunky"
+    file: "Chunky-Fabric-1.5.3.jar"
+    url: "https://cdn.modrinth.com/data/fALzjamp/versions/4Eotm6ov/Chunky-Fabric-1.5.3.jar"
+    sha512: "b83bfe7b218d0aa6232af977ae741dc1f82b10e50cd12bb759f65cf416b8b62beccb543e587ef0b9670abe03815660f8e091bc6823624d65cf07300571573516"
+    env: server
+    reason: >-
+      Pre-generates chunks on demand via console commands. Idle otherwise; it does nothing
+      until you run /chunky start.
+
   # --- Client rendering -----------------------------------------------
   - name: "Sodium"
     file: "sodium-fabric-0.9.1+mc26.2.jar"

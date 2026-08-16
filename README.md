@@ -84,6 +84,47 @@ docker compose up -d --force-recreate minecraft
 Players update by re-importing the same `.mrpack` into their launcher.
 See `minecraft/README.md`.
 
+## Pre-generating chunks
+
+Chunky is installed server-side. It generates terrain ahead of players
+rather than during play, which matters here for two reasons: Terralith
+and Tectonic make chunk generation much more expensive than vanilla, and
+Distant Horizons builds its LOD data from chunks that already exist --
+so an ungenerated world shows players an empty horizon regardless of
+their render distance.
+
+Run it from the console:
+
+```bash
+docker compose exec minecraft rcon-cli chunky radius 3000
+docker compose exec minecraft rcon-cli chunky start
+docker compose exec minecraft rcon-cli chunky progress
+```
+
+`radius` is in blocks from spawn. 3000 is a reasonable start for a small
+group; 10000 is a lot of disk and hours of CPU.
+
+Useful commands:
+
+| Command | Effect |
+|---|---|
+| `chunky pause` / `chunky continue` | Suspend and resume; state survives restarts |
+| `chunky quiet 30` | Progress updates every 30s instead of spamming |
+| `chunky world the_nether` | Switch target dimension before starting |
+| `chunky cancel` | Stop and discard the task |
+
+**Do it with nobody playing.** Pre-generation saturates the CPU, and on
+a 2-vCPU t3.large that means noticeable tick lag for anyone online.
+Pause it before people join.
+
+Watch disk while it runs -- the root volume is 25 GB and generated
+chunks are the fastest way to fill it:
+
+```bash
+docker compose exec minecraft du -sh /data/world
+df -h /
+```
+
 ## Backups
 
 The world is a directory: `data/world`. Stop the server (or run
