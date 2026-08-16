@@ -231,13 +231,18 @@ datapacks:
     url: "https://cdn.modrinth.com/data/QI0EmgZ1/versions/RVX0a6It/Matcha_Flavoured.zip"
     sha512: "12dc5a600d473f06a44a4370c02b404a0260adf696a591a3fbb0f135bca613ffba4f9990f625746375fa9181bbb300eeffd9cc420e6a50f91a48c21314c81505"
     # Combined data + resource pack: one zip, read by the server as data
-    # and by the client as assets. Upstream's own instructions say to
-    # place the same file in both locations. Without the client copy,
-    # players see missing textures and raw lang keys for the ~50 added
-    # foods, alloys, and tool sets.
+    # and by the client as assets. Without the client half, players see
+    # missing textures and raw lang keys for the ~50 added foods, alloys,
+    # and tool sets.
     #
-    # Players must still enable it under Options -> Resource Packs; a
-    # .mrpack can place the file but cannot pre-select it.
+    # This flag makes build.py emit dist/resourcepack.env, which
+    # docker-compose.yml loads -- the server then pushes this exact URL
+    # and hash to every client on join. Nothing to install by hand and
+    # nothing to toggle, and because both values are derived from this
+    # entry, the pushed pack always matches the installed data.
+    #
+    # Only one datapack may set this: server.properties holds a single
+    # resource-pack URL.
     resourcepack: true
 
   - name: "Path Generator Datapack"

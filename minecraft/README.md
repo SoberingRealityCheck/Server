@@ -55,25 +55,35 @@ network. Players need no file.
 
 The exception is a pack that ships **data and assets in one zip**. The
 server reads `data/`, the client reads `assets/` -- and textures and
-lang strings are not networked. Without a local copy the player sees
+lang strings are not networked. Without the client half the player sees
 missing textures and raw translation keys. Mark those with:
 
 ```yaml
     resourcepack: true
 ```
 
-`build.py` then emits the same artifact twice: to `world/datapacks/`
-server-side and `resourcepacks/` client-side. Matcha Flavoured is one of
-these; Path Generator is not.
+Matcha Flavoured is one of these; Path Generator is not.
 
-Players must still enable it under **Options → Resource Packs**. A
-`.mrpack` can place a resource pack but cannot pre-select it.
+The client half is **not** shipped inside the `.mrpack`. A `.mrpack` can
+place a file in `resourcepacks/` but cannot enable it, which would leave
+every player a manual toggle to discover. Instead the server pushes it:
+`build.py` writes `dist/resourcepack.env` with the pack's URL and SHA1,
+`docker-compose.yml` loads that as an `env_file`, and Minecraft prompts
+each client on join.
 
-Alternatively the server can push it: set `RESOURCE_PACK` to the
-Modrinth CDN URL and `RESOURCE_PACK_SHA1` in `docker-compose.yml`, and
-every client is prompted on join with no launcher-side install at all.
-That covers players who connect without the pack, at the cost of a
-download on first join.
+Both values are derived from the same pinned entry the server installs,
+so the pushed pack cannot drift from the installed data. The file is
+regenerated on every build and cleared when no datapack is flagged, so a
+removed pack stops being pushed.
+
+Only one datapack may set the flag -- `server.properties` holds a single
+resource-pack URL, and `build.py` rejects a second rather than silently
+choosing.
+
+Declining the download leaves a player with untextured items rather than
+kicking them. Set `MC_RESOURCE_PACK_ENFORCE=true` in `.env` to require
+it instead; that guarantees everyone sees the same game at the cost of
+locking out anyone whose download fails.
 
 ### Dependency checking
 
