@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium Realistic Terrain"
-version: "1.0.3"
+version: "1.1.0"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -140,11 +140,24 @@ mods:
 
   # --- Client rendering -----------------------------------------------
   - name: "Sodium"
-    file: "sodium-fabric-0.9.0+mc26.2.jar"
-    url: "https://cdn.modrinth.com/data/AANobbMI/versions/3QgJXuSK/sodium-fabric-0.9.0%2Bmc26.2.jar"
-    sha512: "cff27e97d179ec1d3bcbcfc49820ec62b04fd101c98c2922cbcf426a3a0d3b32cd73e2d4cbefe0e291c9074484fbfdfa9d53b8cf0dc8783b015f33b2e21126a3"
+    file: "sodium-fabric-0.9.1+mc26.2.jar"
+    url: "https://cdn.modrinth.com/data/AANobbMI/versions/2Yom1N68/sodium-fabric-0.9.1%2Bmc26.2.jar"
+    sha512: "627fbf9625a4b94693c789c84a0686ffe558c0b1ecbeccf2602a903caafa9e126548b644282aa9c391dc798930d378724a383bea6b4397c5294d59ba5c0a6936"
     env: client
-    reason: "Rendering engine replacement"
+    reason: >-
+      Rendering engine replacement. Pinned to 0.9.1 because Iris 1.11.2
+      requires exactly this build -- Sodium's own 0.9.1 notes state
+      "Iris 1.11.1 is not compatible". Iris and Sodium version together;
+      bump them as a pair or not at all.
+
+  - name: "Iris Shaders"
+    file: "iris-fabric-1.11.2+mc26.2.jar"
+    url: "https://cdn.modrinth.com/data/YL57xq9U/versions/oaD6KQls/iris-fabric-1.11.2%2Bmc26.2.jar"
+    sha512: "c1b46bcd1a0068deab3ae364a7229d31e27b7d45aea960e47503b8514354426badf83f354529db35d83e6b55727a53895fb9f13085e51d8148ee6765affac924"
+    env: client
+    reason: >-
+      Shader loader. Required to load the shaderpack below; does nothing
+      on its own until a player selects one. Pins Sodium 0.9.1 exactly.
 
   - name: "Better Clouds"
     file: "better-clouds-1.14.1+26.2-fabric.jar"
@@ -220,6 +233,27 @@ mods:
 
 # ModernFix omitted: no Fabric 26.2 build yet.
 # Particle Rain omitted: no Fabric 26.2 build yet.
+
+# Shader packs are GLSL for the player's GPU, so they are always
+# client-only -- the server has no renderer. Iris (in `mods` above)
+# loads them.
+#
+# Shipped but NOT enabled: the .mrpack places the file in shaderpacks/
+# and players turn it on under Video Settings -> Shaders. Enabling by
+# default would mean a laptop GPU meets a 60->15 fps drop on first
+# launch and reads it as the pack being broken.
+shaderpacks:
+  - name: "Complementary Shaders - Reimagined"
+    file: "ComplementaryReimagined_r5.8.1.zip"
+    url: "https://cdn.modrinth.com/data/HVnmMxH1/versions/yCCduG44/ComplementaryReimagined_r5.8.1.zip"
+    sha512: "6bd95215755d25812556ce790d976221f7d677d63112e3e4d3e70b08a62ed41348fa3792dd31bbe720d1e46fe2d525cadb4f66e6358118e1f4aa8e0d11f25c39"
+    reason: >-
+      Vanilla-preserving shader pack. r5.8 added Distant Horizons
+      support -- LOD terrain gets shadows and proper water reflections
+      -- which matters here since DH is the pack's headline feature.
+      Note that DH 3.2.0's new LOD textures apply to base DH rendering
+      only; under Iris, distant LODs render untextured. Ships with
+      Potato through Ultra profiles for weaker hardware.
 
 # Datapacks are ordinary pack files with a different destination path.
 # They land in world/datapacks/ and are picked up when the world

@@ -49,6 +49,7 @@ import yaml
 HERE = Path(__file__).resolve().parent
 PACK_FILE = HERE / "pack.yaml"
 OVERRIDES_DIR = HERE / "overrides"
+CLIENT_OVERRIDES_DIR = HERE / "client-overrides"
 CACHE_DIR = HERE / ".cache"
 DIST_DIR = HERE / "dist"
 OUTPUT = DIST_DIR / "pack.mrpack"
@@ -184,6 +185,11 @@ def validate(pack: dict) -> None:
             if not entry.get(key):
                 raise BuildError(f"datapack {entry.get('name', '?')} missing {key}")
 
+    for entry in pack.get("shaderpacks", []):
+        for key in ("name", "file", "url", "sha512"):
+            if not entry.get(key):
+                raise BuildError(f"shaderpack {entry.get('name', '?')} missing {key}")
+
     # server.properties holds exactly one resource-pack URL, so two
     # flagged entries have no correct answer. Fail loudly rather than
     # silently pushing whichever sorted first.
@@ -208,6 +214,12 @@ def build_index(pack: dict, offline: bool) -> dict:
         # but they are not shipped inside the .mrpack. The server pushes
         # them instead -- see write_resourcepack_env below.
 
+    # Shader packs are always client-only: they are GLSL for the player's
+    # GPU and the server has no renderer. Iris (a normal client mod)
+    # loads them.
+    for entry in pack.get("shaderpacks", []):
+        files.append(build_file_entry(entry, "shaderpacks", "client", offline))
+
     return {
         "formatVersion": 1,
         "game": "minecraft",
@@ -230,10 +242,19 @@ def write_mrpack(index: dict) -> None:
     with zipfile.ZipFile(OUTPUT, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.writestr("modrinth.index.json", json.dumps(index, indent=2))
 
-        if OVERRIDES_DIR.is_dir():
-            for path in sorted(OVERRIDES_DIR.rglob("*")):
+        # overrides/ applies to both sides; client-overrides/ is layered
+        # on top for clients only. Client-only config -- Iris settings,
+        # for instance -- belongs in the latter so the server never sees
+        # files it has no use for.
+        for src, prefix in (
+            (OVERRIDES_DIR, "overrides"),
+            (CLIENT_OVERRIDES_DIR, "client-overrides"),
+        ):
+            if not src.is_dir():
+                continue
+            for path in sorted(src.rglob("*")):
                 if path.is_file() and path.name != ".gitkeep":
-                    zf.write(path, f"overrides/{path.relative_to(OVERRIDES_DIR)}")
+                    zf.write(path, f"{prefix}/{path.relative_to(src)}")
 
 
 def write_resourcepack_env(pack: dict, index: dict) -> str | None:
@@ -298,6 +319,15 @@ def write_modlist(pack: dict, index: dict) -> None:
     for entry in pack.get("mods", []):
         reason = " ".join(entry.get("reason", "").split())
         lines.append(f"| {entry['name']} | {side[entry['env']]} | {reason} |")
+
+    if pack.get("shaderpacks"):
+        lines += ["", "## Shader packs", "",
+                  "Client only, and **not enabled by default** -- turn one on "
+                  "under Video Settings -> Shaders.", "",
+                  "| Shader pack | Notes |", "|---|---|"]
+        for entry in pack["shaderpacks"]:
+            reason = " ".join(entry.get("reason", "").split())
+            lines.append(f"| {entry['name']} | {reason} |")
 
     if pack.get("datapacks"):
         lines += ["", "## Datapacks", "", "| Datapack | Side |", "|---|---|"]
