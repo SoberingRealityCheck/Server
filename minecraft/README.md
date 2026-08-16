@@ -46,6 +46,35 @@ and client mods were documented-but-manual.
 ./build.py --resolve SLUG  # print an updated block for a Modrinth project
 ```
 
+### Datapacks and sides
+
+Datapacks default to server-only, and for a pure datapack that is
+correct: recipes, loot tables, worldgen and advancements are
+server-authoritative and reach clients as ordinary game state over the
+network. Players need no file.
+
+The exception is a pack that ships **data and assets in one zip**. The
+server reads `data/`, the client reads `assets/` -- and textures and
+lang strings are not networked. Without a local copy the player sees
+missing textures and raw translation keys. Mark those with:
+
+```yaml
+    resourcepack: true
+```
+
+`build.py` then emits the same artifact twice: to `world/datapacks/`
+server-side and `resourcepacks/` client-side. Matcha Flavoured is one of
+these; Path Generator is not.
+
+Players must still enable it under **Options → Resource Packs**. A
+`.mrpack` can place a resource pack but cannot pre-select it.
+
+Alternatively the server can push it: set `RESOURCE_PACK` to the
+Modrinth CDN URL and `RESOURCE_PACK_SHA1` in `docker-compose.yml`, and
+every client is prompted on join with no launcher-side install at all.
+That covers players who connect without the pack, at the cost of a
+download on first join.
+
 ### Dependency checking
 
 `--check-deps` opens every jar, reads its real `fabric.mod.json`, and
