@@ -132,8 +132,18 @@ its dependents unsatisfied on the client, and that only surfaces when a
 player launches the game. This catches it at build time.
 
 Output is one of `CONFLICT` (present but wrong version), `MISSING` (not
-in that side's set), or `unchecked` (a version range in a syntax the
+in that side's set), `BREAKS` (a mod declares hard incompatibility with
+something present), or `unchecked` (a version range in a syntax the
 checker does not parse -- reported rather than silently passed).
+
+Two things this got wrong early on, both worth remembering:
+
+- **Version components.** Minecraft mods routinely use four
+  (`26.2.0.9`). Truncating to three made every `26.2.0.x` compare equal,
+  so `>=26.2.0.6` silently passed against `26.2.0.2`.
+- **`breaks` is a separate field from `depends`.** Reading only the
+  latter missed "World Map is incompatible with Minimap `<26.4.0`"
+  entirely -- a constraint that stops the game from starting.
 
 CI runs this on every push and PR.
 

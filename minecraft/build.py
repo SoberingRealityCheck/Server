@@ -365,22 +365,34 @@ def write_modlist(pack: dict, index: dict) -> None:
 # before anything is deployed.
 
 def parse_semver(v: str) -> tuple[int, ...] | None:
-    """(major, minor, patch) or None if not parseable.
+    """Numeric version components, or None if not parseable.
 
     Build metadata (`+26.2`) and prerelease tags (`-beta.1`) are dropped:
     semver orders on the numeric core, and mod versions here carry the
     Minecraft version as build metadata.
+
+    Every component is kept, not just the first three. Minecraft mods
+    routinely use four (Waystones ships 26.2.0.9, Balm 26.2.0.2), and
+    truncating to three made every 26.2.0.x version compare equal --
+    which silently passed `>=26.2.0.6` against 26.2.0.2.
     """
     core = v.split("+", 1)[0].split("-", 1)[0].strip()
-    parts = core.split(".")
+    if not core:
+        return None
     out = []
-    for p in parts[:3]:
+    for p in core.split("."):
         if not p.isdigit():
             return None
         out.append(int(p))
-    while len(out) < 3:
-        out.append(0)
     return tuple(out)
+
+
+def compare_versions(a: tuple[int, ...], b: tuple[int, ...]) -> int:
+    """-1/0/1, zero-padding so 1.2 and 1.2.0 compare equal."""
+    n = max(len(a), len(b))
+    a = a + (0,) * (n - len(a))
+    b = b + (0,) * (n - len(b))
+    return (a > b) - (a < b)
 
 
 def satisfies_predicate(version: str, pred: str) -> bool | None:
@@ -405,24 +417,25 @@ def satisfies_predicate(version: str, pred: str) -> bool | None:
     if a is None or b is None:
         return None
 
+    c = compare_versions(a, b)
     if op == ">=":
-        return a >= b
+        return c >= 0
     if op == "<=":
-        return a <= b
-    if op in (">",):
-        return a > b
-    if op in ("<",):
-        return a < b
+        return c <= 0
+    if op == ">":
+        return c > 0
+    if op == "<":
+        return c < 0
     if op == "!=":
-        return a != b
+        return c != 0
     if op in ("=", "=="):
-        return a == b
+        return c == 0
     if op == "^":
         # compatible-with: same major, at least the given version
-        return a >= b and a[0] == b[0]
+        return c >= 0 and a[0] == b[0]
     if op == "~":
         # approximately: same major.minor, at least the given version
-        return a >= b and a[:2] == b[:2]
+        return c >= 0 and a[:2] == b[:2]
     return None
 
 
@@ -460,7 +473,8 @@ def record_version(out: dict, mod_id: str, version: str) -> None:
         out[mod_id] = version
 
 
-def read_fabric_metadata(blob: bytes, out: dict, depends: dict) -> None:
+def read_fabric_metadata(blob: bytes, out: dict, depends: dict,
+                         breaks: dict | None = None) -> None:
     """Collect ids/versions and declared dependencies from a mod jar.
 
     Recurses into nested jars: Fabric API ships its modules as jars
@@ -488,11 +502,17 @@ def read_fabric_metadata(blob: bytes, out: dict, depends: dict) -> None:
         # and its own bundled copy is right there beside it.
         if meta.get("depends") and depends is not None:
             depends[mod_id] = meta["depends"]
+        # `breaks` is a hard incompatibility: Fabric refuses to start if
+        # the named mod is present at a matching version. It is a
+        # separate field from `depends`, and reading only the latter is
+        # how "World Map breaks Minimap <26.4.0" went unnoticed.
+        if meta.get("breaks") and breaks is not None:
+            breaks[mod_id] = meta["breaks"]
 
     for nested in meta.get("jars", []):
         path = nested.get("file")
         if path and path in zf.namelist():
-            read_fabric_metadata(zf.read(path), out, depends)
+            read_fabric_metadata(zf.read(path), out, depends, breaks)
 
 
 def warn_java_drift(pack: dict) -> None:
@@ -540,10 +560,11 @@ def check_dependencies(pack: dict, offline: bool) -> int:
             "java": str(pack.get("java", 21)),
         }
         declared: dict[str, dict] = {}
+        breaks: dict[str, dict] = {}
 
         for entry in wanted:
             read_fabric_metadata(
-                cached_bytes(entry, offline), available, declared
+                cached_bytes(entry, offline), available, declared, breaks
             )
 
         print(f"\n  [{side}] {len(wanted)} mods, "
@@ -563,6 +584,22 @@ def check_dependencies(pack: dict, offline: bool) -> int:
                     problems += 1
                 elif ok is None:
                     print(f"    unchecked {mod_id} needs {dep_id} {spec} "
+                          f"(have {have}) -- could not parse range")
+
+        # Incompatibilities: a match here is a failure, the inverse of
+        # the dependency case above.
+        for mod_id, entries in sorted(breaks.items()):
+            for bad_id, spec in entries.items():
+                have = available.get(bad_id)
+                if have is None:
+                    continue  # not present, so nothing to conflict with
+                hit = satisfies(have, spec)
+                if hit is True:
+                    print(f"    BREAKS   {mod_id} is incompatible with "
+                          f"{bad_id} {spec}, but {have} is present")
+                    problems += 1
+                elif hit is None:
+                    print(f"    unchecked {mod_id} breaks {bad_id} {spec} "
                           f"(have {have}) -- could not parse range")
 
     if problems:

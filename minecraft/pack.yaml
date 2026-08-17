@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium Realistic Terrain"
-version: "1.2.1"
+version: "1.2.2"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -88,22 +88,24 @@ mods:
       standard library. Only here because Multiplayer+ needs it.
 
   - name: "Balm"
-    file: "balm-fabric-26.2-26.2.0.2.jar"
-    url: "https://cdn.modrinth.com/data/MBAkmtvl/versions/Gl7L60Mm/balm-fabric-26.2-26.2.0.2.jar"
-    sha512: "b5cc5882f2e2591acf8d5d5c1250e408015663140f564deaddf7393a32d21f4cc571f95acce87ceb37987ad2abd9dc93b12b7484a73e319eb86d586114c8a3e2"
+    file: "balm-fabric-26.2-26.2.0.6.jar"
+    url: "https://cdn.modrinth.com/data/MBAkmtvl/versions/hT8Zt2uD/balm-fabric-26.2-26.2.0.6.jar"
+    sha512: "0a0b4b71f2877abd234cf85302165bb05b2cb0e3c0b7c543fa0c12e5ae271dc879f300ecb6f1dbb00c6a8bf5e42e454d4f168a970a0f4a64c4a82122bf2a8fc6"
     env: both
     reason: >-
-      Multi-loader abstraction layer required by Waystones. Same author;
-      versioned in lockstep with it.
+      Multi-loader abstraction layer required by Waystones, which pins
+      `>=26.2.0.6`. Same author, released in lockstep -- bump Waystones,
+      Balm and Shogi together or not at all.
 
   - name: "Shogi"
-    file: "shogi-fabric-26.2-26.2.0.3.jar"
-    url: "https://cdn.modrinth.com/data/bi4iCmsw/versions/tlaGyX0N/shogi-fabric-26.2-26.2.0.3.jar"
-    sha512: "7e66a0b9e95e9a435e2538775b420753480dfe386fc41471006e14bfa4d86962898c29eec71518695a2ffb58742d8d75337ce3a279b1da80e69b3399ccf882b3"
+    file: "shogi-fabric-26.2-26.2.0.5.jar"
+    url: "https://cdn.modrinth.com/data/bi4iCmsw/versions/EgXnCQjN/shogi-fabric-26.2-26.2.0.5.jar"
+    sha512: "8f2201cc2163f2682a5d92b71d38ecffb16dbfd98d2c8c7aae98838fb441aea98b033222b7beb03284f7a2b6d3cfa0b6ffe53d5e8cee426f20a6399e5bdb1d3a"
     env: both
     reason: >-
       Rules/effects expression library required by Waystones -- it backs
-      the warp-requirement system (xp costs, cooldowns). Same author.
+      the warp-requirement system (xp costs, cooldowns). Waystones pins
+      `>=26.2.0.5`. Same author as Balm; bump the three together.
 
   - name: "GeckoLib"
     file: "geckolib-fabric-26.2-5.5.3.jar"
@@ -321,11 +323,15 @@ mods:
       xaerominimap, those two need `env: both`.
 
   - name: "Xaero's Minimap"
-    file: "xaerominimap-fabric-26.2-26.1.3.jar"
-    url: "https://cdn.modrinth.com/data/1bokaNcj/versions/e1D3Ei69/xaerominimap-fabric-26.2-26.1.3.jar"
-    sha512: "7032a4d640c426b56ddb7c0b5e12793089f5a8b7b6651a06198ce96acdedcb64968cfe8a3f420918f0f9e150e837618299036ca055f49c1633f3bd67721e2904"
+    file: "xaerominimap-fabric-26.2-26.4.2.jar"
+    url: "https://cdn.modrinth.com/data/1bokaNcj/versions/W7vHFz3T/xaerominimap-fabric-26.2-26.4.2.jar"
+    sha512: "dba00f85308524d9d65c559bc48456c8b65cef58eb54891e069cbaacb6e2f633d279b0d65325f510e3d9e590b67e6f5bdb7c816ada484a0d018850267fbc9131"
     env: client
-    reason: "Minimap + waypoints"
+    reason: >-
+      Minimap + waypoints. Must be >=26.4.0: Xaero's World Map 1.44.2
+      declares `breaks: {xaerominimap: "<26.4.0"}`, so older builds stop
+      the game from starting rather than merely misbehaving. 26.4.2 and
+      World Map 1.44.2 shipped the same day -- treat them as a pair.
 
   - name: "Better Advancements"
     file: "BetterAdvancements-Fabric-26.2-0.6.0.72.jar"
