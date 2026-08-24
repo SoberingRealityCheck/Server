@@ -25,7 +25,7 @@ from __future__ import annotations
 import hmac
 import os
 
-import boto3
+import boto3 # pyright: ignore[reportMissingImports]  (the Lambda runtime has boto3 preinstalled)
 
 ec2 = boto3.client("ec2")
 
