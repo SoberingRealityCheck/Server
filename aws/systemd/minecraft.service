@@ -1,0 +1,34 @@
+# Brings the server up when the instance boots.
+#
+# Necessary because the container's restart policy is "no" -- required
+# for auto-stop to work at all. Without this unit, a woken instance
+# would boot to an idle Docker daemon and no server.
+#
+# Install: see aws/NOTES.md, or let bootstrap.sh do it.
+
+[Unit]
+Description=Minecraft server (docker compose)
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=ubuntu
+WorkingDirectory=/home/ubuntu/Server
+
+# The pack must exist before the server can install from it. It is a
+# build artifact and gitignored, so a fresh clone has none -- rebuild
+# if missing. Cached jars make this near-instant on subsequent boots.
+ExecStartPre=/bin/sh -c 'test -f minecraft/dist/pack.mrpack || \
+  (cd minecraft && /home/ubuntu/.local/bin/uv run --script build.py)'
+
+ExecStart=/usr/bin/docker compose up -d
+ExecStop=/usr/bin/docker compose stop
+
+# The pack build downloads ~50 MB on a cold cache; do not shoot it.
+TimeoutStartSec=600
+
+[Install]
+WantedBy=multi-user.target

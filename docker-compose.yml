@@ -17,7 +17,13 @@
 services:
   minecraft:
     image: itzg/minecraft-server:java25
-    restart: unless-stopped
+
+    # NOT `unless-stopped`. Auto-stop works by letting the container
+    # exit when nobody is playing; a restart policy would immediately
+    # bring it back and the host would never go idle. Boot-time startup
+    # is handled by the minecraft.service systemd unit instead, so
+    # nothing is lost -- see aws/systemd/.
+    restart: "no"
 
     # Both needed for `docker attach` to give a working server console.
     # Without them you can still read logs, but not type commands.
@@ -104,6 +110,26 @@ services:
       # entirely, which is a worse first impression than odd textures.
       RESOURCE_PACK_ENFORCE: ${MC_RESOURCE_PACK_ENFORCE:-false}
       RESOURCE_PACK_PROMPT: ${MC_RESOURCE_PACK_PROMPT:-}
+
+      # --- Idle shutdown -------------------------------------------
+      # The container stops itself once nobody has been connected for
+      # a while. A systemd timer on the host notices the container is
+      # gone and powers the instance off, which is what actually stops
+      # EC2 billing -- stopping the container alone saves nothing.
+      #
+      # Touch /data/.skip-stop to suspend this during maintenance; the
+      # timer also refuses to shut down while anyone is on SSH.
+      ENABLE_AUTOSTOP: ${MC_ENABLE_AUTOSTOP:-true}
+
+      # Seconds after the last player disconnects. Long enough that a
+      # quick relog does not trigger a cold start, short enough that an
+      # abandoned session is not billed all night.
+      AUTOSTOP_TIMEOUT_EST: ${MC_AUTOSTOP_TIMEOUT_EST:-1800}
+
+      # Seconds after startup with nobody ever connecting -- covers a
+      # wake that nobody followed through on. Must comfortably exceed
+      # this modpack's boot time, which is minutes, not seconds.
+      AUTOSTOP_TIMEOUT_INIT: ${MC_AUTOSTOP_TIMEOUT_INIT:-1200}
 
       # RCON stays on the container's internal port only -- not published
       # above, so it is unreachable from the network. Use

@@ -1,0 +1,9 @@
+[Unit]
+Description=Power off the instance when the Minecraft server is idle
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/mc-idle-shutdown.sh
+# Runs as root: it needs to call shutdown.
+User=root

@@ -1,0 +1,16 @@
+[Unit]
+Description=Check every minute whether the instance can power off
+
+[Timer]
+# First check well after boot -- the script has its own grace period
+# too, but starting the timer late avoids pointless log noise.
+OnBootSec=15min
+OnUnitActiveSec=1min
+# Persistent=false is the default and is a no-op here: it only affects
+# OnCalendar= timers catching up after downtime, not the OnBootSec= /
+# OnUnitActiveSec= schedule this timer uses. Left explicit as a note
+# that this was considered, not left unset by oversight.
+Persistent=false
+
+[Install]
+WantedBy=timers.target

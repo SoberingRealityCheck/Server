@@ -180,6 +180,101 @@ Once players have connected to the new host successfully:
 
 ---
 
+## Cost and idle shutdown
+
+A t3.large left running is about **$61/month** compute plus ~$2 EBS --
+around $2/day for a box that is idle most of the time.
+
+This setup instead powers the instance off when nobody is playing, and
+players wake it via a URL. At a few hours of play a day that lands
+around **$10-15/month**.
+
+| Approach | Rough monthly | Notes |
+|---|---|---|
+| Always on | $63 | What you get by default |
+| Auto-stop + wake (this setup) | $10-15 | Cold start costs players ~3 min |
+| Fixed schedule (EventBridge) | ~$20 | Simpler, but unavailable off-hours |
+| 1-year Savings Plan | ~$40 | No behaviour change; stacks with the above |
+| Graviton t4g.large | ~$49 | ~19% cheaper, arm64 mod support unverified |
+
+Note that a public IPv4 address bills ~$3.65/month whether or not the
+instance is running, so that floor stays regardless. Keep the Elastic IP
+anyway -- it is what keeps DNS valid across stop/start.
+
+### How it works
+
+Three pieces, because no single one is sufficient:
+
+1. **`ENABLE_AUTOSTOP`** in the container stops the Minecraft server
+   after `AUTOSTOP_TIMEOUT_EST` seconds with no players. This frees CPU
+   but saves nothing on its own -- EC2 bills for a running instance
+   regardless of what it is running.
+2. **`mc-idle-shutdown.timer`** on the host checks every minute whether
+   the container is gone and powers the instance off. This is the part
+   that actually stops the meter.
+3. **A Lambda function URL** starts the instance again. It cannot live
+   on the instance, for obvious reasons.
+
+The container's restart policy is `"no"` -- required, since a restart
+policy would immediately revive the container and the host would never
+go idle. `minecraft.service` starts the stack at boot instead.
+
+### Guards
+
+Idle shutdown refuses to fire when:
+
+- the host has been up less than 15 minutes (otherwise a woken instance
+  could power off before the server finished starting -- an unwakeable
+  loop)
+- anyone is logged in over SSH
+- `/etc/mc-no-shutdown` exists
+- `data/.skip-stop` exists (which also suspends the container's own
+  auto-stop)
+
+Use the inhibit file for anything long-running with no players
+connected. **Chunky pre-generation is exactly this** -- it runs for
+hours and looks completely idle:
+
+```bash
+sudo touch /etc/mc-no-shutdown     # before starting a chunky run
+sudo rm /etc/mc-no-shutdown        # after it finishes
+```
+
+### Setting up the wake URL
+
+1. Create a Lambda function, Python 3.12, named e.g. `minecraft-wake`.
+2. Paste in `aws/wake/lambda_function.py`.
+3. Environment variables:
+   - `INSTANCE_ID` -- the instance to start
+   - `WAKE_SECRET` -- a long random string (`openssl rand -hex 24`)
+   - `BOOT_ESTIMATE` -- optional, minutes to show players (default `3`)
+4. Attach `aws/wake/iam-policy.json` to the function's execution role,
+   substituting your account and instance IDs. It grants
+   `StartInstances` on that one instance and nothing else -- no stop, no
+   terminate, no modify.
+5. Configure a **Function URL** with auth type `NONE`.
+6. Test: `https://<url>/?key=<secret>` should report waking or already
+   awake. Without the key it must return 404.
+
+Share the URL-with-key with players. The secret is weak protection for a
+weak risk: the worst an attacker can do is start a server that stops
+itself again within 20 minutes. Do not extend that function to stop or
+modify anything without revisiting that reasoning.
+
+If a Discord bot suits your group better, it needs the same two calls --
+`DescribeInstances` and `StartInstances` -- and can reuse the policy.
+
+### Turning it off
+
+```bash
+# One session
+sudo touch /etc/mc-no-shutdown
+
+# Permanently
+sudo systemctl disable --now mc-idle-shutdown.timer
+# and set MC_ENABLE_AUTOSTOP=false in .env, then recreate the container
+```
+
 ## Reference
 
 ### Backups

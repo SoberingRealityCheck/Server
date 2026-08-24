@@ -142,6 +142,23 @@ log "Building the modpack"
 
 # --- start -----------------------------------------------------------
 
+# --- idle shutdown ---------------------------------------------------
+
+log "Installing systemd units for boot-start and idle shutdown"
+# The compose restart policy is "no" so the container can auto-stop when
+# empty; minecraft.service is what brings it back after a wake.
+sudo install -m 0755 aws/systemd/mc-idle-shutdown.sh \
+  /usr/local/bin/mc-idle-shutdown.sh
+sudo install -m 0644 aws/systemd/minecraft.service \
+  aws/systemd/mc-idle-shutdown.service \
+  aws/systemd/mc-idle-shutdown.timer \
+  /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable minecraft.service
+sudo systemctl enable --now mc-idle-shutdown.timer
+
+# --- start -----------------------------------------------------------
+
 log "Starting the server"
 sudo docker compose up -d
 
@@ -154,6 +171,12 @@ cat <<EOF
   Watch it:      sudo docker compose logs -f minecraft
   Check status:  sudo docker compose ps
   Console:       sudo docker compose exec minecraft rcon-cli
+
+  Idle shutdown is ON: the server stops when empty and the instance
+  powers off a few minutes later. Set up the wake URL before telling
+  players -- see aws/NOTES.md. To keep it up meanwhile:
+
+    sudo touch /etc/mc-no-shutdown
 
   The healthcheck reports "healthy" only once the server answers status
   pings, so 'ps' is the honest answer to "is it up yet".
