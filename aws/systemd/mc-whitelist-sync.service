@@ -1,0 +1,18 @@
+# Pushes the whitelist to the front-door proxy. Started by
+# mc-whitelist-sync.path (on file change) or by hand.
+#
+# Install: see aws/NOTES.md, "Whitelist sync", or let bootstrap.sh do it.
+
+[Unit]
+Description=Push the Minecraft whitelist to the front-door proxy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=/usr/local/bin/mc-whitelist-sync.sh
+
+# A failed push (proxy down, key not yet authorised) surfaces in
+# `systemctl status mc-whitelist-sync` but wedges nothing: the .path
+# unit starts this again on the next change, and bootstrap/boot retries.

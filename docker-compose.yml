@@ -127,8 +127,10 @@ services:
       AUTOSTOP_TIMEOUT_EST: ${MC_AUTOSTOP_TIMEOUT_EST:-1800}
 
       # Seconds after startup with nobody ever connecting -- covers a
-      # wake that nobody followed through on. Must comfortably exceed
-      # this modpack's boot time, which is minutes, not seconds.
+      # wake the proxy triggered that no player then followed through on
+      # (their client timed out during the cold start and they gave up).
+      # Must comfortably exceed this modpack's boot time, which is
+      # minutes, not seconds.
       AUTOSTOP_TIMEOUT_INIT: ${MC_AUTOSTOP_TIMEOUT_INIT:-1200}
 
       # RCON stays on the container's internal port only -- not published

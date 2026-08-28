@@ -1,0 +1,25 @@
+# Fires mc-whitelist-sync.service whenever the whitelist or ops list
+# changes on disk. itzg/minecraft-server rewrites data/whitelist.json
+# from MC_WHITELIST on every container start, so a normal
+# "edit .env, recreate the container" cycle triggers a push with no
+# extra step. An in-game `/whitelist` change triggers one too.
+#
+# Install: see aws/NOTES.md, "Whitelist sync", or let bootstrap.sh do it.
+
+[Unit]
+Description=Watch the Minecraft whitelist/ops files for changes
+
+[Path]
+# Both directives per file: PathModified catches an in-place rewrite
+# (IN_MODIFY / IN_CLOSE_WRITE), PathChanged catches a temp-file-then-
+# rename (IN_MOVED_TO). itzg's mc-image-helper may use either. Watching
+# the files, not the data/ directory -- the directory churns constantly
+# with world and log writes during play.
+PathModified=/home/ubuntu/Server/data/whitelist.json
+PathChanged=/home/ubuntu/Server/data/whitelist.json
+PathModified=/home/ubuntu/Server/data/ops.json
+PathChanged=/home/ubuntu/Server/data/ops.json
+Unit=mc-whitelist-sync.service
+
+[Install]
+WantedBy=paths.target

@@ -1,0 +1,142 @@
+# lazymc config for the front-door proxy instance.
+#
+# This box is not the Minecraft server. It is a small, always-on
+# instance that answers the address players actually use, keeps the
+# server visible in the server list while it is off, wakes the real
+# server on the first join attempt, and forwards traffic once it is up.
+# See aws/NOTES.md, "Front door (auto-wake proxy)".
+#
+# Generated from `lazymc config generate` on lazymc 0.2.11, then edited
+# for this two-host setup. If the installed version differs, generate a
+# fresh config and re-apply the settings below rather than trusting this
+# file's [config] version.
+
+[public]
+address = "0.0.0.0:25565"
+
+# Version and protocol hint, shown to clients only while lazymc has not
+# yet reached the real server -- a cold proxy start, or the game host
+# down since the last proxy restart. Once lazymc probes the live server
+# it caches the real values and ignores these until the next restart.
+#
+# Left unset on purpose. lazymc then falls back to its own compiled-in
+# default pair (a real, coherent version/protocol), which renders as a
+# normal-but-outdated entry. Setting only one, or setting protocol to a
+# number that is not real for the running version, renders worse than
+# that -- and a bad protocol still passes `lazymc config test`.
+#
+# Two ways to get a correct sleeping entry:
+#   - set both to the running Minecraft version and its wire-protocol
+#     number (read the number from lazymc's log the first time it wakes
+#     the server, or from any server-list ping); or
+#   - set `server.probe_on_start = true` below, so lazymc wakes the game
+#     host once on every proxy start to learn them for real -- always
+#     correct, but costs one wake (~20 min of billed t3.large via
+#     AUTOSTOP_TIMEOUT_INIT) per proxy reboot.
+#
+# version = "26.2"
+# protocol = 999
+
+[server]
+# The game host's *private* IP -- stable across its stop/start cycles on
+# the same ENI, unlike its public IP, which the game host no longer even
+# has a fixed value for (see aws/NOTES.md). Same port as [public]: these
+# are two different hosts, so there is no bind conflict, and lazymc does
+# not require the ports to differ when the address does.
+address = "REPLACE_WITH_GAME_HOST_PRIVATE_IP:25565"
+directory = "."
+
+# Starts the real server by starting the EC2 instance it runs on, not a
+# local process. The `aws` CLI call returns in about a second either
+# way; lazymc then keeps polling `server.address` until the real server
+# answers, regardless of whether the command has exited.
+command = "aws ec2 start-instances --region us-east-2 --instance-ids REPLACE_WITH_GAME_HOST_INSTANCE_ID"
+
+# No local server process exists for lazymc to suspend -- `command`
+# above just calls the AWS API and exits. Leaving this at its default
+# (true) makes lazymc try to SIGSTOP a process that is already gone.
+freeze_process = false
+
+# Generous on purpose. A cold wake is EC2 boot + (on a cold jar cache) a
+# modpack rebuild + first-boot worldgen -- minutes, not seconds. A short
+# timeout here would drop lazymc back to "sleeping" while the server was
+# still legitimately starting; the next join then re-triggers the poll.
+# Matches AUTOSTOP_TIMEOUT_INIT on the game host.
+start_timeout = 1200
+
+wake_on_start = false
+
+# No crash-restart wanted. The game host's own idle-shutdown
+# (aws/systemd/mc-idle-shutdown.*) decides when to stop it, with guards
+# this proxy cannot see -- an active SSH session, the Chunky inhibit
+# file.
+#
+# This is safe regardless: in lazymc 0.2.11 (src/server.rs) "crashed"
+# means the process lazymc itself spawned via `command` exited nonzero
+# *while already in the Started state*. Here `command` is a one-shot
+# `aws` call that exits 0 in the Starting state, so that path cannot
+# fire. The game host later going away is just a status probe returning
+# nothing: Started -> Stopped, logged as "Server is now sleeping".
+wake_on_crash = false
+
+# Enforce the whitelist here too, so login spam from non-whitelisted
+# clients cannot wake the (expensive) game host. A copy of the game
+# host's whitelist.json / ops.json is pushed to this box whenever it
+# changes -- see aws/systemd/mc-whitelist-sync.* and NOTES.md,
+# "Whitelist sync".
+#
+# For lazymc to actually apply it, ALL of these must hold in
+# server.directory (= /etc/lazymc), and setup.sh puts them there:
+#   - wake_whitelist = true                 (this line)
+#   - server.properties containing `white-list=true`   (the enable flag
+#     lazymc checks before it will use a whitelist at all -- without it
+#     lazymc treats every client as allowed)
+#   - whitelist.json in Minecraft's format; ops.json too if you have ops
+#
+# lazymc matches the login-start username against the `name` fields,
+# case-sensitively. It reloads within ~2s of the file changing. If
+# whitelist.json is missing or empty while the flag is true, nobody can
+# wake the server -- it fails closed, which is the safe direction here.
+wake_whitelist = true
+
+# banned-ips.json is not synced. The game host enforces bans itself once
+# a whitelisted client connects; a banned-but-whitelisted client can
+# still wake it, then gets dropped on join.
+block_banned_ips = false
+
+[time]
+# Effectively never. Sleeping the server is the game host's job, not
+# this proxy's -- two independent stop decisions on two hosts is how you
+# get races between them. This just needs to outlast how long lazymc
+# runs before its next restart.
+sleep_after = 31536000
+
+[motd]
+sleeping = "☠ Server is asleep\n§2☻ Join to wake it up"
+starting = "§2☻ Server is starting...\n§7⌛ Give it a few minutes"
+
+[join]
+methods = ["hold", "kick"]
+
+[join.hold]
+# Keep below the Minecraft client's own 30s connect timeout.
+timeout = 25
+
+[join.kick]
+starting = "Server is starting up §c♥§r\n\nThis takes a few minutes on a cold start.\n\nWait, then reconnect."
+
+[rcon]
+# Left disabled (the default). lazymc would otherwise use RCON to stop
+# the backend itself, but RCON on the game host is deliberately
+# unpublished (see docker-compose.yml), and stopping is not this
+# proxy's job anyway -- see [time] above.
+enabled = false
+
+[advanced]
+# There is no server.properties on this box -- the Minecraft server runs
+# on the other host. lazymc's default (true) would have it write one
+# into /etc/lazymc on every start.
+rewrite_server_properties = false
+
+[config]
+version = "0.2.11"

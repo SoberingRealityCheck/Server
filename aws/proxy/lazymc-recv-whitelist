@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Receive a whitelist push from the game host and drop it into
+# /etc/lazymc, where lazymc's file watcher picks it up within ~2s.
+#
+# This runs as the forced command for the game host's sync key -- see
+# the authorized_keys entry that setup.sh tells you to add:
+#
+#   command="/usr/local/bin/lazymc-recv-whitelist",restrict ssh-ed25519 AAAA... game-host-whitelist-sync
+#
+# The client side sends a tar on stdin containing exactly these three
+# files (see aws/systemd/mc-whitelist-sync.sh).
+
+set -euo pipefail
+
+DEST="/etc/lazymc"
+FILES=(whitelist.json ops.json server.properties)
+
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+
+# Extract into a scratch dir, naming the three expected members
+# explicitly. Only those three basenames are ever copied to $DEST below,
+# so nothing in the stream can choose its own destination path.
+tar -x -C "$tmp" -f - "${FILES[@]}" 2>/dev/null || true
+
+installed=0
+for f in "${FILES[@]}"; do
+  [ -f "$tmp/$f" ] || continue
+  # Write a sibling temp then rename: rename within one directory is
+  # atomic, so lazymc's watcher never reads a half-written file.
+  install -m 0644 "$tmp/$f" "$DEST/.$f.new"
+  mv -f "$DEST/.$f.new" "$DEST/$f"
+  installed=$((installed + 1))
+done
+
+if [ "$installed" -eq 0 ]; then
+  echo "lazymc-recv-whitelist: no expected files in the push" >&2
+  exit 1
+fi
+
+echo "lazymc-recv-whitelist: updated $installed file(s) in $DEST"

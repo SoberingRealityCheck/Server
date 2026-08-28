@@ -157,6 +157,38 @@ sudo systemctl daemon-reload
 sudo systemctl enable minecraft.service
 sudo systemctl enable --now mc-idle-shutdown.timer
 
+# --- whitelist sync to the proxy -----------------------------------------
+# The proxy only wakes this host for whitelisted clients, so it needs a
+# current copy of the whitelist. This watches the files and pushes on
+# change. See aws/NOTES.md, "Whitelist sync".
+log "Installing the whitelist-sync units"
+sudo install -m 0755 aws/systemd/mc-whitelist-sync.sh \
+  /usr/local/bin/mc-whitelist-sync.sh
+sudo install -m 0644 aws/systemd/mc-whitelist-sync.service \
+  aws/systemd/mc-whitelist-sync.path \
+  /etc/systemd/system/
+sudo systemctl daemon-reload
+# Pre-create data/ (ubuntu-owned) so the path unit has a stable directory
+# to watch before the first `docker compose up` populates it.
+mkdir -p data
+sudo systemctl enable --now mc-whitelist-sync.path
+
+# Dedicated key for the push. The matching authorized_keys line (forced
+# to the receiver) goes on the proxy -- printed at the end of this run.
+if [ ! -f "$HOME/.ssh/mc-whitelist-sync" ]; then
+  log "Generating the whitelist-sync SSH key"
+  install -d -m 0700 "$HOME/.ssh"
+  ssh-keygen -t ed25519 -N '' -C 'game-host-whitelist-sync' \
+    -f "$HOME/.ssh/mc-whitelist-sync" >/dev/null
+fi
+
+# Where to push. Left as a placeholder for the operator to fill with
+# ubuntu@<proxy-private-ip>; the sync script no-ops until it is set.
+if [ ! -f /etc/mc-whitelist-sync.target ]; then
+  echo '# replace this line with: ubuntu@<proxy-private-ip>' \
+    | sudo tee /etc/mc-whitelist-sync.target >/dev/null
+fi
+
 # --- start -----------------------------------------------------------
 
 log "Starting the server"
@@ -173,8 +205,9 @@ cat <<EOF
   Console:       sudo docker compose exec minecraft rcon-cli
 
   Idle shutdown is ON: the server stops when empty and the instance
-  powers off a few minutes later. Set up the wake URL before telling
-  players -- see aws/NOTES.md. To keep it up meanwhile:
+  powers off a few minutes later. Set up the front-door proxy before
+  telling players -- it wakes this host on join. See aws/NOTES.md,
+  "Front door (auto-wake proxy)". To keep this host up meanwhile:
 
     sudo touch /etc/mc-no-shutdown
 
@@ -202,3 +235,20 @@ if grep -q '^MC_OPS=$' .env 2>/dev/null; then
 
 EOF
 fi
+
+cat <<EOF
+  Whitelist sync to the proxy -- two one-time steps:
+
+  1. On the PROXY, append this line to /home/ubuntu/.ssh/authorized_keys
+     (setup.sh there created the file):
+
+       command="/usr/local/bin/lazymc-recv-whitelist",restrict $(cat "$HOME/.ssh/mc-whitelist-sync.pub")
+
+  2. Back here, put the proxy's address in the target file:
+
+       echo 'ubuntu@<proxy-private-ip>' | sudo tee /etc/mc-whitelist-sync.target
+
+  Then push the current list once:  /usr/local/bin/mc-whitelist-sync.sh
+  After that it pushes automatically whenever the whitelist changes.
+
+EOF

@@ -3,8 +3,9 @@ Description=Check every minute whether the instance can power off
 
 [Timer]
 # First check well after boot -- the script has its own grace period
-# too, but starting the timer late avoids pointless log noise.
-OnBootSec=15min
+# too (BOOT_GRACE_SECONDS, 20min), but starting the timer late avoids
+# pointless log noise. Keep this at or above that grace.
+OnBootSec=20min
 OnUnitActiveSec=1min
 # Persistent=false is the default and is a no-op here: it only affects
 # OnCalendar= timers catching up after downtime, not the OnBootSec= /

@@ -1,0 +1,31 @@
+# Runs lazymc on the front-door proxy instance.
+#
+# Prerequisites, all handled by aws/proxy/setup.sh:
+#   - /usr/local/bin/lazymc          (the pinned binary)
+#   - /etc/lazymc/lazymc.toml        (from aws/proxy/, with placeholders filled)
+#   - /usr/local/bin/aws             (AWS CLI v2, for the start command)
+#   - an EC2 instance profile granting ec2:StartInstances on the game host
+#
+# Install: see aws/NOTES.md, "Front door (auto-wake proxy)".
+
+[Unit]
+Description=lazymc front-door proxy (wakes the Minecraft instance on join)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/etc/lazymc
+# Explicit config path rather than relying on the working directory, so
+# a daemon-reload that loses the WorkingDirectory still starts cleanly.
+ExecStart=/usr/local/bin/lazymc start --config /etc/lazymc/lazymc.toml
+
+# lazymc exiting is always a fault here (bad config, revoked IAM, a
+# panic) -- there is no clean-shutdown path for a proxy. Restart, but
+# not so fast that a config error spins the journal.
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

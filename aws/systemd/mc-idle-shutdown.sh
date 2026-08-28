@@ -11,11 +11,16 @@
 # Three guards, because an over-eager shutdown is far more annoying than
 # a few extra minutes of billing:
 #
-#   1. Boot grace  -- the container takes minutes to come up, and a
-#                     freshly booted host has no container running yet.
-#                     Shutting down during that window would make the
-#                     instance un-wakeable: it would power off before a
-#                     player could ever connect.
+#   1. Boot grace  -- the container takes minutes to come up, and on a
+#                     cold jar cache minecraft.service rebuilds the pack
+#                     first (a ~600s allowance of its own) before the
+#                     container even exists. A freshly booted host has no
+#                     container running yet. Shutting down during that
+#                     window would make the instance un-wakeable: it
+#                     would power off before a player could ever connect,
+#                     and now that waking is automatic nobody is
+#                     watching for it. The grace must comfortably exceed
+#                     the worst-case cold start -- hence 20 minutes.
 #   2. SSH sessions -- never yank the machine out from under someone
 #                     doing maintenance.
 #   3. Inhibit file -- an explicit override for long jobs like Chunky
@@ -26,7 +31,7 @@ set -euo pipefail
 
 COMPOSE_DIR="${COMPOSE_DIR:-/home/ubuntu/Server}"
 SERVICE="${SERVICE:-minecraft}"
-BOOT_GRACE_SECONDS="${BOOT_GRACE_SECONDS:-900}"
+BOOT_GRACE_SECONDS="${BOOT_GRACE_SECONDS:-1200}"
 INHIBIT_FILE="${INHIBIT_FILE:-/etc/mc-no-shutdown}"
 
 log() { printf '%s mc-idle-shutdown: %s\n' "$(date -Is)" "$*"; }

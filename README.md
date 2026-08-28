@@ -1,8 +1,9 @@
 # Server
 
-Self-hosted Minecraft on an AWS EC2 host: a single Docker container
-running a Fabric server, built from a Modrinth modpack defined in this
-repo.
+Self-hosted Minecraft on AWS EC2: a single Docker container running a
+Fabric server, built from a Modrinth modpack defined in this repo. The
+game host powers itself off when empty; a tiny always-on proxy instance
+wakes it on the next join.
 
 ## Layout
 
@@ -11,7 +12,10 @@ Server/
 ├── docker-compose.yml    # the entire stack -- one service
 ├── .env.example          # copy to .env; all values optional
 ├── aws/
-│   └── NOTES.md          # instance spec, security group, DNS
+│   ├── NOTES.md          # provisioning: both hosts, security groups, DNS
+│   ├── bootstrap.sh      # game-host setup (Docker, modpack, systemd units)
+│   ├── systemd/          # boot-start + idle-shutdown units for the game host
+│   └── proxy/            # lazymc front door: config, unit, setup.sh, IAM policy
 └── minecraft/
     ├── pack.yaml         # source of truth: mods, datapacks, versions
     ├── build.py          # compiles pack.yaml -> dist/pack.mrpack
@@ -51,6 +55,14 @@ Redis); it was retired because a four-service control plane for a
 single small server produced more failure modes than it prevented --
 most of them in the networking between its own containers.
 
+Two instances. The **game host** runs the container and stops itself
+when empty; a systemd timer then powers the instance off, which is what
+stops the EC2 bill. The **front-door proxy** is a small always-on
+instance running [lazymc](https://github.com/timvisee/lazymc): it owns
+the public address, keeps the server visible in the list while the game
+host is off, and calls `ec2:StartInstances` on the first join. Players
+connect once, to one address, whether the game host is up or not.
+
 No IaC layer -- infrastructure is provisioned manually per
 `aws/NOTES.md`.
 
@@ -58,7 +70,7 @@ No IaC layer -- infrastructure is provisioned manually per
 
 - Docker Engine + the Compose plugin
 - [uv](https://docs.astral.sh/uv/), to build the pack
-- An AWS EC2 instance (spec in `aws/NOTES.md`)
+- Two AWS EC2 instances -- game host and proxy (specs in `aws/NOTES.md`)
 - A DNS provider supporting A and SRV records
 
 ## Operating
@@ -146,3 +158,8 @@ to cron or a systemd timer when you want it automatic.
 Set `MC_WHITELIST` in `.env`. It is applied on every start, which means
 in-game `/whitelist add` does not persist across restarts -- edit `.env`
 and restart instead. Set `MC_ENABLE_WHITELIST=false` to run open.
+
+The front-door proxy enforces the same list before it will wake the game
+host, so login spam from non-whitelisted clients cannot run up an EC2
+bill. The game host pushes the list to the proxy automatically whenever
+it changes -- one-time wiring is in `aws/NOTES.md`, "Whitelist sync".
