@@ -2,7 +2,7 @@
 
 # Server runtime state: world, mods, logs, configs. Backed up separately
 # (see README.md), never committed.
-data/
+/data/
 
 
 # Build artifacts. dist/pack.mrpack is reproducible from pack.yaml via
@@ -10,5 +10,6 @@ data/
 minecraft/dist/
 minecraft/.cache/
 minecraft/__pycache__/
+minecraft/tools/__pycache__/
 
 *.pem
