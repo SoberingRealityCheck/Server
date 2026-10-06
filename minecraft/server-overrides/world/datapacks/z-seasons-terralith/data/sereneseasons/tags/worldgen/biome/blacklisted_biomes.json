@@ -1,0 +1,41 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "id": "#c:is_river",
+            "required": false
+        },
+        {
+            "id": "#c:is_beach",
+            "required": false
+        },
+        {
+            "id": "#c:is_cave",
+            "required": false
+        },
+        {
+            "id": "terralith:deep_warm_ocean",
+            "required": false
+        },
+        {
+            "id": "terralith:skylands_spring",
+            "required": false
+        },
+        {
+            "id": "terralith:skylands_summer",
+            "required": false
+        },
+        {
+            "id": "terralith:skylands_autumn",
+            "required": false
+        },
+        {
+            "id": "terralith:skylands_winter",
+            "required": false
+        },
+        {
+            "id": "terralith:alpha_islands_winter",
+            "required": false
+        }
+    ]
+}

@@ -65,6 +65,11 @@ missing textures and raw translation keys. Mark those with:
 
 Matcha Flavoured is one of these; Path Generator is not.
 
+Some authors ship the resource pack as a separate download instead of
+one combined zip (Matcha did from 1.12). For those, make `resourcepack`
+a block with its own `file`, `url` and `sha512` rather than `true`. The
+server pushes that file and installs the datapack zip as usual.
+
 The client half is **not** shipped inside the `.mrpack`. A `.mrpack` can
 place a file in `resourcepacks/` but cannot enable it, which would leave
 every player a manual toggle to discover. Instead the server pushes it:
@@ -209,6 +214,14 @@ Files here are copied verbatim into the instance, at the same relative
 path, on both sides. Use it for mod configs you want consistent across
 players. Currently empty.
 
+`server-overrides/` works the same way but only the server gets it.
+`server-overrides/world/datapacks/z-footpath-terralith/` extends Path
+Generator to Terralith's ground blocks (gravel, clay, mud, granite,
+calcite and so on). It replaces the base pack's `footpath:convert`
+function whole, so if Path Generator updates, re-copy its
+`convert.mcfunction` into ours first. The `z-` prefix makes it load
+after Path Generator, which is what lets it win.
+
 Server-side settings that the container can set as environment variables
 (difficulty, MOTD, view distance, whitelist) belong in `.env` instead --
 see the root README.
@@ -317,3 +330,13 @@ re-checking datapack compatibility -- Matcha Flavoured and Path
 Generator are pinned to 26.2 because that is what exists, not because of
 any relation to 1.21.1. `build.py` currently emits Fabric dependencies
 only; a NeoForge profile needs its dependency key added.
+
+### Seasons and Terralith
+
+Serene Seasons sorts biomes with four tags that list only vanilla
+biomes. `server-overrides/world/datapacks/z-seasons-terralith/` adds
+Terralith's biomes to them. The tag files are generated from
+`tools/seasons_terralith.py`, which holds the reason for every biome.
+`SEASONS_TERRALITH.md` covers what each list does, what was left out
+and what is untested. Run `python3 tools/seasons_terralith.py --audit`
+after a Terralith update to see every biome and what it gets.
