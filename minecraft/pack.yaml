@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium Realistic Terrain"
-version: "1.2.2"
+version: "1.3.0"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -42,9 +42,9 @@ loader_version: "latest"
 mods:
   # --- Core / libraries -----------------------------------------------
   - name: "Fabric API"
-    file: "fabric-api-0.157.0+26.2.jar"
-    url: "https://cdn.modrinth.com/data/P7dR8mSH/versions/vmQp7ixA/fabric-api-0.157.0%2B26.2.jar"
-    sha512: "4ebec489f2b2ce621ebebb2d1b7e9714b6fd288ebdb4e287d767cde57612cf1d3d1d4f51daf7e7ec9541fa146df6bde4978ab98a29637ced6d9bc2f3c4217650"
+    file: "fabric-api-0.161.0+26.2.jar"
+    url: "https://cdn.modrinth.com/data/P7dR8mSH/versions/ewUK83HI/fabric-api-0.161.0%2B26.2.jar"
+    sha512: "2502fa5ade78e9a120b3747bc1a9a2167d6671743bea45bf115d3174c94121aeda87c549446d1a604a9c11fb828de17a551e3514ce42f3e93069dd14bdaee55b"
     env: both
     reason: >-
       Required by nearly every other mod here. Marked `both` rather than
@@ -52,16 +52,16 @@ mods:
       need it client-side.
 
   - name: "Lithostitched"
-    file: "lithostitched-1.7.13-fabric-26.2.jar"
-    url: "https://cdn.modrinth.com/data/XaDC71GB/versions/vVFCOh7u/lithostitched-1.7.13-fabric-26.2.jar"
-    sha512: "22a6ef66abbc4fbba910cd7bba7e83f50f6cadb425058cbb484b9280c0aee59475bfb4fff41ee5dc939ecb124e2c8c518a84d1a5c58ecb7bf9b0ae856daf64bb"
+    file: "lithostitched-1.8.0-fabric-26.2.jar"
+    url: "https://cdn.modrinth.com/data/XaDC71GB/versions/sGGUpIGT/lithostitched-1.8.0-fabric-26.2.jar"
+    sha512: "a1736f1fa4b94ee7eae38ee13f0625f1128523f330e9972ca2f1be3186cf7b8cc4d8003d1d5f4fee7cb186a97723b3bce8e4e3587f92e5ca64fc8b0b9830e4e2"
     env: server
     reason: "Worldgen library required by Terralith and Tectonic"
 
   - name: "Forge Config API Port"
-    file: "ForgeConfigAPIPort-v26.2.0-mc26.2.x-Fabric.jar"
-    url: "https://cdn.modrinth.com/data/ohNO6lps/versions/86ROVP2H/ForgeConfigAPIPort-v26.2.0-mc26.2.x-Fabric.jar"
-    sha512: "105f4dab1c530341d8ee91bb8b301e9488a0d2237cb5d5f262bd08d5f9a4f5ec6ea936018570dcde4cca6c5e3e27ae148a9b18e3108019174b531fcf376f3e30"
+    file: "ForgeConfigAPIPort-v26.2.1-mc26.2.x-Fabric.jar"
+    url: "https://cdn.modrinth.com/data/ohNO6lps/versions/rSd3GiG8/ForgeConfigAPIPort-v26.2.1-mc26.2.x-Fabric.jar"
+    sha512: "948b8d83de61a11aad2fc0bb0744a8b4848c9b2f0663c9aa015389d9560b3fa78518e609c44ec90278de0e159a92ebd721ccbdebb453aa455c353e5cd19413bf"
     env: both
     reason: >-
       Required by Puzzles Lib. `both` because its dependents (Easy
@@ -69,18 +69,18 @@ mods:
       go wherever the mods needing it go.
 
   - name: "Puzzles Lib"
-    file: "PuzzlesLib-v26.2.0-mc26.2.x-Fabric.jar"
-    url: "https://cdn.modrinth.com/data/QAGBst4M/versions/7NdidvUq/PuzzlesLib-v26.2.0-mc26.2.x-Fabric.jar"
-    sha512: "c27ebb45076f479ca4f333e502474f60e2e189355b2890f3931f4c4a3b3f7eddb9d6cdb2325757e16838674ea003de350f76b06617e5a686162fb6900cedfb05"
+    file: "PuzzlesLib-v26.2.4-mc26.2.x-Fabric.jar"
+    url: "https://cdn.modrinth.com/data/QAGBst4M/versions/aNOJuoCM/PuzzlesLib-v26.2.4-mc26.2.x-Fabric.jar"
+    sha512: "116dcf2d9eee0dc882c66c9190c32fbf2e429845ef05b6a61f6f6d3a56edea62e2c0b32ba454249fd154f4cafe22a2fbe656e6a0994c8a36105a7296c9d15279"
     env: both
     reason: >-
       Required by Easy Shulker Boxes and Bundle Upgrade, both of which
       run on both sides -- so this must too.
 
   - name: "Fabric Language Kotlin"
-    file: "fabric-language-kotlin-1.13.12+kotlin.2.4.0.jar"
-    url: "https://cdn.modrinth.com/data/Ha28R6CL/versions/Pd0xrHCw/fabric-language-kotlin-1.13.12%2Bkotlin.2.4.0.jar"
-    sha512: "ca238ee480dfb237062200fd300be493d022e0837b6998c15807e01488b2a30d5ba4731e5c6d05a5333719c8923a1cb84c06fd6fa45aa88ced492ddb5b40906f"
+    file: "fabric-language-kotlin-1.14.1+kotlin.2.4.20.jar"
+    url: "https://cdn.modrinth.com/data/Ha28R6CL/versions/eRRZzGMc/fabric-language-kotlin-1.14.1%2Bkotlin.2.4.20.jar"
+    sha512: "91404f87774466ce8604aafea791d8cc97b603bc310dce17c8188f94f7783cca6dc14fc726ce871ca317bfe9033c199d8d858d51284106a00754e952147703b8"
     env: both
     reason: >-
       Kotlin runtime, required by Xaero's Maps: Multiplayer+. 8 MB, the
@@ -88,9 +88,9 @@ mods:
       standard library. Only here because Multiplayer+ needs it.
 
   - name: "Balm"
-    file: "balm-fabric-26.2-26.2.0.6.jar"
-    url: "https://cdn.modrinth.com/data/MBAkmtvl/versions/hT8Zt2uD/balm-fabric-26.2-26.2.0.6.jar"
-    sha512: "0a0b4b71f2877abd234cf85302165bb05b2cb0e3c0b7c543fa0c12e5ae271dc879f300ecb6f1dbb00c6a8bf5e42e454d4f168a970a0f4a64c4a82122bf2a8fc6"
+    file: "balm-fabric-26.2-26.2.0.9.jar"
+    url: "https://cdn.modrinth.com/data/MBAkmtvl/versions/qLWYe5p7/balm-fabric-26.2-26.2.0.9.jar"
+    sha512: "a558ef7b432faf31e4dd35339d8d2b330343c0c84715ed3890eb1c2df5b7914c6f0beae919c8fc33ba8c2bbf6da4fb98c452c8efc5d90338d3051af70e4513a8"
     env: both
     reason: >-
       Multi-loader abstraction layer required by Waystones, which pins
@@ -98,14 +98,31 @@ mods:
       Balm and Shogi together or not at all.
 
   - name: "Shogi"
-    file: "shogi-fabric-26.2-26.2.0.5.jar"
-    url: "https://cdn.modrinth.com/data/bi4iCmsw/versions/EgXnCQjN/shogi-fabric-26.2-26.2.0.5.jar"
-    sha512: "8f2201cc2163f2682a5d92b71d38ecffb16dbfd98d2c8c7aae98838fb441aea98b033222b7beb03284f7a2b6d3cfa0b6ffe53d5e8cee426f20a6399e5bdb1d3a"
+    file: "shogi-fabric-26.2-26.2.0.8.jar"
+    url: "https://cdn.modrinth.com/data/bi4iCmsw/versions/kjPMnetX/shogi-fabric-26.2-26.2.0.8.jar"
+    sha512: "87355753211cf4037ec5dda3aeb50a9d5cfe6de5839e2bba9dfcde2911a3268834a913765b6011599674cce3961314c9d8d78f2cdc242113ef36f70db0910570"
     env: both
     reason: >-
       Rules/effects expression library required by Waystones -- it backs
       the warp-requirement system (xp costs, cooldowns). Waystones pins
       `>=26.2.0.5`. Same author as Balm; bump the three together.
+
+  - name: "Resourceful Lib"
+    file: "ResourcefulLib-5.0.4.jar"
+    url: "https://cdn.modrinth.com/data/G1hIVOrD/versions/4BbCbnE6/ResourcefulLib-5.0.4.jar"
+    sha512: "6f72344ef44eb185ae76d4e5ca3fad685eb7af66f12b5dff0995c414157b5970e98b8b779799b4d8a07777dd900ce9dba86937a6d9c84a6f9ecbac0ddff4c4ef"
+    env: both
+    reason: "Library required by Friends & Foes, which runs on both sides, so this does too"
+
+  - name: "GlitchCore"
+    file: "GlitchCore-fabric-26.2-26.2.0.0.0.jar"
+    url: "https://cdn.modrinth.com/data/s3dmwKy5/versions/SDUCBYRU/GlitchCore-fabric-26.2-26.2.0.0.0.jar"
+    sha512: "b3c7a07bd6b2b636e125b0d6541d6cb9b3c6f94d8032a50b021a4e95d6d8d0147c57fb4a378e12d0d009b7ea854991710407703efe9207af91cd3d586e50f470"
+    env: both
+    reason: >-
+      Library required by Serene Seasons (>=26.2.0.0.0). Modrinth's
+      project metadata does not list this dependency; --check-deps found
+      it in the jar's fabric.mod.json. Beta (26.2.0.0.0).
 
   - name: "GeckoLib"
     file: "geckolib-fabric-26.2-5.5.3.jar"
@@ -127,9 +144,9 @@ mods:
     reason: "Required by AmbientSounds"
 
   - name: "YetAnotherConfigLib (YACL)"
-    file: "yet_another_config_lib_v3-3.9.5+26.2-fabric.jar"
-    url: "https://cdn.modrinth.com/data/1eAoo2KR/versions/LlSShNCR/yet_another_config_lib_v3-3.9.5%2B26.2-fabric.jar"
-    sha512: "bf709e5d1db2f104abb1e45d27dec39f10e0e2d546ec1e5df3a49b464c6f2b2daf39633e26e94e7869ae2a555258e5c4ee2d796c7d6d0e26300052a8de15052a"
+    file: "yet_another_config_lib_v3-3.9.7+26.2-fabric.jar"
+    url: "https://cdn.modrinth.com/data/1eAoo2KR/versions/DoR7RYgi/yet_another_config_lib_v3-3.9.7%2B26.2-fabric.jar"
+    sha512: "f36d91a9506ad9addbaaeecaea01d2b0cb5b060f52486b17688746cb597f0f3b23a80f8441f7a73a9cb8cde85af8809fe54825984b56345325359d505a80e7f2"
     env: both
     reason: >-
       Config library. Required client-side by Better Clouds, and
@@ -148,16 +165,25 @@ mods:
     reason: "~95 realistic biomes, vanilla blocks/mobs only"
 
   - name: "Tectonic"
-    file: "tectonic-3.0.26-fabric-26.2.jar"
-    url: "https://cdn.modrinth.com/data/lWDHr9jE/versions/rc4JXlpP/tectonic-3.0.26-fabric-26.2.jar"
-    sha512: "6ca2ac61ce7fa9e8758bdf83bff99c97d39a300efbec12db2714557aef420739b46a68aa62ee93cdd6339f8f7ad8cbbeca59f5be3c6361b8d0ea09e34a45864c"
+    file: "tectonic-3.0.28-fabric-26.2.jar"
+    url: "https://cdn.modrinth.com/data/lWDHr9jE/versions/tGbplDzo/tectonic-3.0.28-fabric-26.2.jar"
+    sha512: "c653ee42fe48c1be9512fa7791e8495095ae01cb607555202714bbb95cb49da272128bb295e8f8c262b63739e7ca2de4bba9196e1738b06012b498d220b55acf"
     env: server
     reason: "Continent-scale landform shaping, compatible with Terralith"
 
+  - name: "Streams Reflowing"
+    file: "StreamsReflowing-26.2-fabric-2.14.4.jar"
+    url: "https://cdn.modrinth.com/data/oLS8HdJ1/versions/2AFr1CZW/StreamsReflowing-26.2-fabric-2.14.4.jar"
+    sha512: "c83ba9b3908914b9fd700c85a4e892957f340807eeba14d48667183190c8ab4e7a8e8b9055ad582c1844f7c010f627d7eb6787746c0f307c6356bd3cb6801d0f"
+    env: both
+    reason: >-
+      Flowing streams in the terrain. Modrinth marks it required on
+      both sides. Needs Fabric API, which is above.
+
   - name: "Distant Horizons"
-    file: "DistantHorizons-3.2.0-b-26.2-fabric-neoforge.jar"
-    url: "https://cdn.modrinth.com/data/uCdwusMi/versions/gBf0SaV1/DistantHorizons-3.2.0-b-26.2-fabric-neoforge.jar"
-    sha512: "c1b8857776a002c2232887d891bd49195f3c3127a7abe1242376ad20371e31554d8ba6c7c92a195b70782cad94fe970941487f2af530988d9b8819455c859e72"
+    file: "DistantHorizons-3.3.2-26.2-fabric-neoforge.jar"
+    url: "https://cdn.modrinth.com/data/uCdwusMi/versions/9NoftEde/DistantHorizons-3.3.2-26.2-fabric-neoforge.jar"
+    sha512: "67206b0919c7632752c916fbc0e58a7ea066e8a2e1a21e5a718c286e8f5b323e255730d9b89d94f1d1e147bee1a8f5dd7092c5bf378f018a31806d3cb292241e"
     env: both
     reason: >-
       Long-distance LOD terrain. Server copy generates and syncs LODs;
@@ -165,15 +191,19 @@ mods:
       Do NOT downgrade below 3.1.1-b: 3.1.0-b crashes dedicated servers
       during init (LWJGL check dereferences the client wrapper, which is
       null server-side), and that fault is invisible to --check-deps
-      because it is a runtime NPE, not a declared dependency. Every 26.2
-      build of this mod is marked beta upstream; there is no stable
-      release for this Minecraft version yet.
+      because it is a runtime NPE, not a declared dependency. 3.3.0 was
+      the first stable (non-beta) release for 26.2.
+      Do NOT upgrade to 3.3.3 yet: on a fresh world the dedicated
+      server hangs forever on "Preparing level" (the Server thread
+      waits on the spawn chunk and nothing generates it). Reproduced
+      three times, with and without Streams Reflowing. 3.3.2 and
+      3.2.0-b boot fine on the same pack. Retest on the next release.
 
   # --- Server performance ---------------------------------------------
   - name: "Lithium"
-    file: "lithium-fabric-0.25.0+mc26.2.jar"
-    url: "https://cdn.modrinth.com/data/gvQqBUqZ/versions/x1OEDMlF/lithium-fabric-0.25.0%2Bmc26.2.jar"
-    sha512: "15027c279850999667cee29510e4491c01d17f121604c51dd9736a5b835dee6303183fdde63637b3dd666de3b28082b1818cacd6a047fee35fced49807b5eacf"
+    file: "lithium-fabric-0.25.3+mc26.2.jar"
+    url: "https://cdn.modrinth.com/data/gvQqBUqZ/versions/f7vZ0VWU/lithium-fabric-0.25.3%2Bmc26.2.jar"
+    sha512: "148b638f3c6229fbaf487120a2344a0af5e411a5aa6533d5db9d75da0a8c0d8304f63eb4cca13f4d03b2c9b4c23d559dd74c1d832422ef8a3087bd005e62a8bd"
     env: server
     reason: "Tick/simulation optimization"
 
@@ -202,51 +232,79 @@ mods:
 
   # --- Client rendering -----------------------------------------------
   - name: "Sodium"
-    file: "sodium-fabric-0.9.1+mc26.2.jar"
-    url: "https://cdn.modrinth.com/data/AANobbMI/versions/2Yom1N68/sodium-fabric-0.9.1%2Bmc26.2.jar"
-    sha512: "627fbf9625a4b94693c789c84a0686ffe558c0b1ecbeccf2602a903caafa9e126548b644282aa9c391dc798930d378724a383bea6b4397c5294d59ba5c0a6936"
+    file: "sodium-fabric-0.9.2+mc26.2.jar"
+    url: "https://cdn.modrinth.com/data/AANobbMI/versions/xJZxADzI/sodium-fabric-0.9.2%2Bmc26.2.jar"
+    sha512: "9b7a7aade8824543ce2a804fddfd04e37f57d1f91c00574e7dc87e554eb1835d888313ee6f715a7599bd729840cf01fd74e02aeae87b4e5a3c10c34a016e407c"
     env: client
     reason: >-
-      Rendering engine replacement. Pinned to 0.9.1 because Iris 1.11.2
-      requires exactly this build -- Sodium's own 0.9.1 notes state
-      "Iris 1.11.1 is not compatible". Iris and Sodium version together;
+      Rendering engine replacement. Pinned to 0.9.2 to match Iris 1.11.4.
+      Iris pins an exact Sodium build, and Sodium's own notes warn
+      that mismatched Iris builds are not compatible. Iris and Sodium version together;
       bump them as a pair or not at all.
 
   - name: "Iris Shaders"
-    file: "iris-fabric-1.11.2+mc26.2.jar"
-    url: "https://cdn.modrinth.com/data/YL57xq9U/versions/oaD6KQls/iris-fabric-1.11.2%2Bmc26.2.jar"
-    sha512: "c1b46bcd1a0068deab3ae364a7229d31e27b7d45aea960e47503b8514354426badf83f354529db35d83e6b55727a53895fb9f13085e51d8148ee6765affac924"
+    file: "iris-fabric-1.11.4+mc26.2.jar"
+    url: "https://cdn.modrinth.com/data/YL57xq9U/versions/gxZWWnKH/iris-fabric-1.11.4%2Bmc26.2.jar"
+    sha512: "dee955580976aebc92373f5c2d88398ad1019b043c6254a41fe7ab8a6ca3a5ff29d58df2b22ec43a31198beb769e814658eef06fbf980066a2e2c216eeafd32a"
     env: client
     reason: >-
       Shader loader. Required to load the shaderpack below; does nothing
-      on its own until a player selects one. Pins Sodium 0.9.1 exactly.
+      on its own until a player selects one. Pins an exact Sodium build (0.9.2).
 
   - name: "Better Clouds"
-    file: "better-clouds-1.14.1+26.2-fabric.jar"
-    url: "https://cdn.modrinth.com/data/5srFLIaK/versions/Dox3rFOC/better-clouds-1.14.1%2B26.2-fabric.jar"
-    sha512: "0375ca94b8f209d4b8e5a91df60f956e3cdf057092884abfad8a22ad611503a654482fcad170ca0aa48d209d5956b152a29ca3ee3f86b4a50a587caa746d0681"
+    file: "better-clouds-1.14.4+26.2-fabric.jar"
+    url: "https://cdn.modrinth.com/data/5srFLIaK/versions/6hLnIcGQ/better-clouds-1.14.4%2B26.2-fabric.jar"
+    sha512: "82aefd76c87c1784dabc46b1bbe03facc3bd77bd7cfa3a20f6ecbedeb21ce17a000bbc7536aa3220e1b3e86a47e1b09b93ead9c9570e4ab4cf9c7b2672b76711"
     env: client
     reason: "Replaces vanilla cloud rendering"
 
   # --- HUD / QOL ------------------------------------------------------
   - name: "JEI"
-    file: "jei-26.2-fabric-30.24.0.165.jar"
-    url: "https://cdn.modrinth.com/data/u6dRKJwZ/versions/Ax8OeQM7/jei-26.2-fabric-30.24.0.165.jar"
-    sha512: "dbaeec56ccdf6ee9ac0d5f39cf2872515079c7ebdfb065ebe3525c95718c80f319a4cc9eb9f8531fbaff738b8032b4911d302ed6fa45035629724d1a312c641b"
+    file: "jei-26.2-fabric-30.29.0.201.jar"
+    url: "https://cdn.modrinth.com/data/u6dRKJwZ/versions/d3HeviSL/jei-26.2-fabric-30.29.0.201.jar"
+    sha512: "2279cb0ec4e41d9eebad80c2ecac76d19c8bc8e5aac69ba13f35b77494625c70d66edc74d59959116012bfb2f464b55806dd69fbf6387f25679b1553953e329a"
     env: both
     reason: "Recipe/item viewer; recipes are server-stored since 1.21.2"
 
+  - name: "JEI WorldGen"
+    file: "jeiworldgen-fabric-26.2-1.4.5.jar"
+    url: "https://cdn.modrinth.com/data/YYrsrQ6q/versions/bO8tgBCi/jeiworldgen-fabric-26.2-1.4.5.jar"
+    sha512: "957985f892d6fa4e4dc73c69f1f5585cc8a8dc58270a0be5a4aec037f7141d24d36d9396bf511b67d908bb3c23b340642396b0b71cdd3dd117d51e9abb068954"
+    env: both
+    reason: >-
+      Shows ore generation in JEI. Upstream marks the server copy
+      optional, but ore data comes from the server's biome data, so
+      without it clients see no worldgen info on a multiplayer server.
+
+  - name: "Advanced Core Info"
+    file: "AdvancedCoreInfo-fabric-26.2-1.3.0.jar"
+    url: "https://cdn.modrinth.com/data/BaR4ijFC/versions/ndIjqmOP/AdvancedCoreInfo-fabric-26.2-1.3.0.jar"
+    sha512: "2bef965b66845f0d7cf12ba4d125b71721c49cdb694dbec384cadbdfa7586e5063efa622043a8ca923d0925ab84afbc94771948f918c3b72a79cd207bc5cc30b"
+    env: both
+    reason: "Library required by Advanced Loot Info. Beta (26.2-1.3.0)."
+
+  - name: "Advanced Loot Info"
+    file: "AdvancedLootInfo-fabric-26.2-2.3.0.jar"
+    url: "https://cdn.modrinth.com/data/PEPVViac/versions/c6oui4En/AdvancedLootInfo-fabric-26.2-2.3.0.jar"
+    sha512: "bde8875f8dec7477cede550bca520cbcd7c723306e51d0b1ff9b2de156f435f035d6929e808c308b11094d53da78c5d76162692e1565781b76603fbc0e801fe4"
+    env: both
+    reason: >-
+      Mob drops, chest loot and villager trades inside JEI. Needed on
+      the server too: loot tables are server data, and Matcha Flavoured
+      rewrites many of them with a datapack, which a client-only viewer
+      cannot see. CAUTION: beta (26.2-2.3.0).
+
   - name: "Jade"
-    file: "Jade-mc26.2-Fabric-26.2.8.jar"
-    url: "https://cdn.modrinth.com/data/nvQzSEkH/versions/YVZmJZjb/Jade-mc26.2-Fabric-26.2.8.jar"
-    sha512: "a748497dc5a005ad3a917699a9e7cae848adbf3ca4956c222453e8d55136803f0631f2b2f8223001ac26da0ce9e61140f580c26010e0b7ac81b417267637f775"
+    file: "Jade-mc26.2-Fabric-26.2.11.jar"
+    url: "https://cdn.modrinth.com/data/nvQzSEkH/versions/ue8CO97w/Jade-mc26.2-Fabric-26.2.11.jar"
+    sha512: "730e07dd5cbbf850ba0e7fd4852b528867d3e2fc2de63b156c89eee9ee6dd92d882b744f97fe724f2aa0afc5b468577486d9558f80d3e46cc5fa133ba241b9c9"
     env: both
     reason: "Hover-to-inspect HUD; server copy adds item storage/brewing data"
 
   - name: "Easy Shulker Boxes"
-    file: "EasyShulkerBoxes-v26.2.1-mc26.2.x-Fabric.jar"
-    url: "https://cdn.modrinth.com/data/gA5euN8S/versions/4RYPu1vM/EasyShulkerBoxes-v26.2.1-mc26.2.x-Fabric.jar"
-    sha512: "9bd075959655fb6f02f9853b9211159deecf67a4bbb8c0b9117be346d8705c2162fc0efaf50cc1bd3194c72b0b9cec5421b5220806c21a8ffcd917f2b421bced"
+    file: "EasyShulkerBoxes-v26.2.3-mc26.2.x-Fabric.jar"
+    url: "https://cdn.modrinth.com/data/gA5euN8S/versions/tgTqvgZy/EasyShulkerBoxes-v26.2.3-mc26.2.x-Fabric.jar"
+    sha512: "f7365c61bfdfad2e5396d791bcd1d172a15de09c229d1706a1650b588b45f4e65a0bc3239652cf3bd9b64a5b823784ea5b8ebfb8b2b4f4a2c9c9e045f587fe5d"
     env: both
     reason: >-
       View/edit shulker box contents without placing them. Upstream is
@@ -255,19 +313,57 @@ mods:
       `server` until now, which silently denied players the feature.
 
   - name: "Bundle Upgrade"
-    file: "BundleUpgrade-v26.2.0-mc26.2.x-Fabric.jar"
-    url: "https://cdn.modrinth.com/data/4GmQWkZz/versions/swuSlvGL/BundleUpgrade-v26.2.0-mc26.2.x-Fabric.jar"
-    sha512: "a2040e0493927cac41795e4ddb924b3e862be0ad74bae1ad6b22f178c7acec8572e2d7cbd7cb8c0ad0e62880dbdbd20119a7b68e063a5f410e5ab4d4e57412c0"
+    file: "BundleUpgrade-v26.2.2-mc26.2.x-Fabric.jar"
+    url: "https://cdn.modrinth.com/data/4GmQWkZz/versions/7ybcuHGt/BundleUpgrade-v26.2.2-mc26.2.x-Fabric.jar"
+    sha512: "a203e1ad150247f619a80007f08006e8d5ac061cd41f66559804e97dfd744caab6abc6d4098fe954605189c0926410a6eafe12cada537f4a0cc2efb3ece42d1c"
     env: both
     reason: >-
       Bundle inventory interactions. Same as Easy Shulker Boxes: real
       interactions rather than tooltips, required on both sides per
       upstream.
 
+  - name: "Traveler's Backpack"
+    file: "travelersbackpack-fabric-26.2-11.3.3.jar"
+    url: "https://cdn.modrinth.com/data/rlloIFEV/versions/I6Fg8UrJ/travelersbackpack-fabric-26.2-11.3.3.jar"
+    sha512: "aa2b34ef57aa24d5ee91bb5a899983238bc9476a41f640a571801b336270f8f94941abee5836b7bd4dd9ce6fa7f50167ce88b5fb7ee02bbae9d29565fdd16d03"
+    env: both
+    reason: >-
+      Wearable backpacks with extra storage. Real items and inventory
+      screens, so required on both sides. Needs Fabric API and Forge
+      Config API Port, both above.
+
+  - name: "Better Tridents"
+    file: "BetterTridents-v26.2.0-mc26.2.x-Fabric.jar"
+    url: "https://cdn.modrinth.com/data/KNUSlHiU/versions/rXW0xJZF/BetterTridents-v26.2.0-mc26.2.x-Fabric.jar"
+    sha512: "2e2e817d28d196d99218c3541a442dd99a083801e5c0d3035e12a5f984e6213550844017da931eac75cb6dbd13228b1f83229e61721a8c2aa39094c3e935a676"
+    env: both
+    reason: >-
+      Craftable tridents (elder guardians drop fragments), loyalty
+      return from the void, and trident repair. Needs Puzzles Lib and
+      Forge Config API Port, both above.
+      The trident recipe and anvil repair both use prismarine shards.
+      Matcha Flavoured renames that item to "Raw Silver" (and the
+      prismarine block to "Malachite") and drops it from emerald ore
+      instead of guardians, so players see "Raw Silver" in the recipe.
+      Verified: the elder guardian fragment drop still works through
+      Matcha's replacement of the guardian loot table.
+
+  - name: "Serene Seasons"
+    file: "SereneSeasons-fabric-26.2-26.1.2.0.6.jar"
+    url: "https://cdn.modrinth.com/data/e0bNACJD/versions/q5mzi8wy/SereneSeasons-fabric-26.2-26.1.2.0.6.jar"
+    sha512: "fe468f4268f00d86a1cafb75db9fbcd8e7e03ecd6de5ebf74a4c775dc45895fa9a597d569ef24d6f537b0cb1f5160808eb82912da05e47397ca7ce193d0e96de"
+    env: both
+    reason: >-
+      Seasons: winter snow and ice, seasonal foliage color and crop
+      fertility. Required on both sides. Sorts biomes with four tags
+      that only list vanilla biomes, so Terralith is taught to it by
+      server-overrides/world/datapacks/z-seasons-terralith -- see README.
+      CAUTION: beta, built for 26.1.2 and flagged as working on 26.2.
+
   - name: "Waystones"
-    file: "waystones-fabric-26.2-26.2.0.9.jar"
-    url: "https://cdn.modrinth.com/data/LOpKHB2A/versions/5lrxhmSm/waystones-fabric-26.2-26.2.0.9.jar"
-    sha512: "09b39fea07b175f557a8c3c8ea6734355e0af1acb19ca2e7fa5ce43f7db35a9e21d82a9d96bc592bfe2857c598b54f6596ec75e2ed16262505943ff7a1c2b7ad"
+    file: "waystones-fabric-26.2-26.2.0.12.jar"
+    url: "https://cdn.modrinth.com/data/LOpKHB2A/versions/HUacBshD/waystones-fabric-26.2-26.2.0.12.jar"
+    sha512: "8df1076c6bfe80c058b19fe78d1a1dcdd14729656213d0d0573cfee416a9be4927610950e7d3f5990dae677f76e453d3c84549a8b96d54428f577cf0e466082a"
     env: both
     reason: >-
       Teleport between placed waystones. Requires Balm and Shogi above.
@@ -300,38 +396,72 @@ mods:
       releases fixed a stag beetle client crash, a grappling-hook death
       crash, and lingering jockey mounts.
 
+  - name: "Naturalist"
+    file: "naturalist-2.0.6-fabric-26.2.jar"
+    url: "https://cdn.modrinth.com/data/F8BQNPWX/versions/zrGHo70e/naturalist-2.0.6-fabric-26.2.jar"
+    sha512: "316c7c4005be3cec99f054177e8697d447ca8ce6dd4cf5bd981accc51491f0a83fb9463253ecfef57ea6b0ed2c2d3326da5e0722e699a8afa969f8b17940f9ec"
+    env: both
+    reason: >-
+      47 real animals (bears, deer, snakes, sharks, big cats and more).
+      Spawns by biome tag, and its own tags already list Terralith
+      biomes. Adds real entities, so both sides.
+      Mobs that overlap other mods are switched off in
+      server-overrides/config/naturalist-server.properties: dragonfly
+      and snail (Critters and Companions), capybara (Ambient
+      Creatures), crab (Friends & Foes).
+
+  - name: "Friends & Foes"
+    file: "friendsandfoes-fabric-4.0.27+mc26.2.jar"
+    url: "https://cdn.modrinth.com/data/POQ2i9zu/versions/rJBCX3gG/friendsandfoes-fabric-4.0.27%2Bmc26.2.jar"
+    sha512: "d34fcf84e44588dee2d9d0836249298a3f3269042a4529ccb00cac42c44b6a7b41357d5284fb8a4904003dc7a0b71002440ba5f581b3d93ad8ca01ed6ab7cc6d"
+    env: both
+    reason: >-
+      The mob-vote mobs: crab, glare, iceologer, illusioner, mauler,
+      moobloom, rascal, tuff golem, wildfire. Needs Resourceful Lib.
+      The page still advertises a copper golem, but the 26.2 jar has
+      none (vanilla has its own).
+
+  - name: "Sea Life"
+    file: "SeaLife-v26.2.0-mc26.2.x-Fabric.jar"
+    url: "https://cdn.modrinth.com/data/2RxBOoXP/versions/lWzitsEC/SeaLife-v26.2.0-mc26.2.x-Fabric.jar"
+    sha512: "b464041cb454d5d6a028bb99faf53d2191e5eedac07313e945cdf2147babc0f2754909559b3c1667ba6037e5b7ea30bfa74dc8e27db2e9e3df4fd1b1abc00d5f"
+    env: both
+    reason: >-
+      New fish and rays for oceans and rivers. Needs Puzzles Lib and
+      Forge Config API Port, both above.
+
   - name: "Xaero's World Map"
-    file: "xaeroworldmap-fabric-26.2-1.44.2.jar"
-    url: "https://cdn.modrinth.com/data/NcUtCpym/versions/NzjI8AbM/xaeroworldmap-fabric-26.2-1.44.2.jar"
-    sha512: "f159f3393d84e00c6f31bb0ea3e1bd41a51315fc2905f9e87d796fc075f8be1722fa207d3e07bc965aca5fb596fc19782cd58ce4952c9259f9241fc06bdae8b0"
+    file: "xaeroworldmap-fabric-26.2-1.47.0.jar"
+    url: "https://cdn.modrinth.com/data/NcUtCpym/versions/ebWaQDqf/xaeroworldmap-fabric-26.2-1.47.0.jar"
+    sha512: "27e3166bc7257fac3b12898e11e80875d9fa05c9da3127d8a7f5233f4aa66a8fbb8cdccec9c83aba1d4d4234ab23cf9ccb31b28fb7b48a0162854ddc22ff04b1"
     env: both
     reason: >-
       Full-screen explored-world map; companion to Xaero's Minimap.
 
   - name: "Xaero's Maps: Multiplayer+"
-    file: "xmmp-0.3.2+26.1.2-fabric.jar"
-    url: "https://cdn.modrinth.com/data/stTaMuWa/versions/ejoBFml4/xmmp-0.3.2%2B26.1.2-fabric.jar"
-    sha512: "a06bfd987b34c37ba97220a49b102ab6fe49cb8b861ca8e45798a98d768827cc975f8d2cd8c5c77560a0d90cecd00361085f78acba0d7871bf69659e66a5f3a7"
+    file: "xmmp-1.1.1+26.2-fabric.jar"
+    url: "https://cdn.modrinth.com/data/stTaMuWa/versions/S5atSSQA/xmmp-1.1.1%2B26.2-fabric.jar"
+    sha512: "ee3c6f55a529df3528300b23b258f3f4af74f50759f78786ed20046935934a21ae73b8fd7563e740423ef7801f591a64dbb308de0f8b58d9b4589c8aa822946f"
     env: both
     reason: >-
       Syncs world map exploration between players -- genuinely
       multiplayer, hence both sides. Needs Fabric Language Kotlin, plus
       Xaero's Minimap and World Map (0.3.2 made those soft dependencies).
-      CAUTION: built for 26.1.2 with 26.2 added to its compatibility list
-      afterwards, and only ~2.7k downloads. Run --check-deps after
+      Small mod (a few thousand downloads). Run --check-deps after
       building: if it reports the server missing xaeroworldmap or
       xaerominimap, those two need `env: both`.
 
   - name: "Xaero's Minimap"
-    file: "xaerominimap-fabric-26.2-26.4.2.jar"
-    url: "https://cdn.modrinth.com/data/1bokaNcj/versions/W7vHFz3T/xaerominimap-fabric-26.2-26.4.2.jar"
-    sha512: "dba00f85308524d9d65c559bc48456c8b65cef58eb54891e069cbaacb6e2f633d279b0d65325f510e3d9e590b67e6f5bdb7c816ada484a0d018850267fbc9131"
+    file: "xaerominimap-fabric-26.2-26.6.0.jar"
+    url: "https://cdn.modrinth.com/data/1bokaNcj/versions/JRopWECg/xaerominimap-fabric-26.2-26.6.0.jar"
+    sha512: "7452e9d462d5803eb81ef0f931d265da86ce81917eba6de124cccee40eb244d7e4bfd88eb85f8bb739970ecd12d74a6b0754e60c3fcbbdd9cabb0012c1f04f46"
     env: client
     reason: >-
-      Minimap + waypoints. Must be >=26.4.0: Xaero's World Map 1.44.2
-      declares `breaks: {xaerominimap: "<26.4.0"}`, so older builds stop
-      the game from starting rather than merely misbehaving. 26.4.2 and
-      World Map 1.44.2 shipped the same day -- treat them as a pair.
+      Minimap + waypoints. Must stay in step with Xaero's World Map:
+      World Map declares a `breaks` on older Minimap builds (it did for
+      <26.4.0), so a mismatch stops the game from starting rather than
+      merely misbehaving. 26.6.0 and World Map 1.47.0 shipped the same
+      day -- treat them as a pair.
 
   - name: "Better Advancements"
     file: "BetterAdvancements-Fabric-26.2-0.6.0.72.jar"
@@ -362,8 +492,33 @@ mods:
     env: client
     reason: "Sound occlusion/reverb through blocks"
 
+  - name: "Cool Rain"
+    file: "coolrain-1.4.0-26.2.jar"
+    url: "https://cdn.modrinth.com/data/iDyqnQLT/versions/zc88gNk3/coolrain-1.4.0-26.2.jar"
+    sha512: "02c709c3a6983f38cc5b4fca92b238ebf61c5f5c1c4ae86458905f8e2d2e7064a83786db22d8fb97162ecf3e0646d896e4d6060f77f6356427bb44e17a97f6c5"
+    env: client
+    reason: >-
+      Rain sounds that change with the block it lands on, such as leaves
+      or water. Upstream marks it required client-side and optional
+      server-side, so it ships to clients only.
+
+  - name: "Presence Footsteps"
+    file: "PresenceFootsteps-1.13.3+26.2.jar"
+    url: "https://cdn.modrinth.com/data/rcTfTZr3/versions/8TkGmrgl/PresenceFootsteps-1.13.3%2B26.2.jar"
+    sha512: "c0b6a1fc1340b7666903f680e12c45fdd24cb75a34ee5eea815e4f8b77752e3f4ecea1df5971ef87474316c97f94ac424c27a75b8b67ca1100467d6ad6181f79"
+    env: client
+    reason: "Footstep and block sounds that depend on the surface and what you wear"
+
+  - name: "Particle Rain"
+    file: "particlerain-4.0.0-beta.11+26.2-fabric.jar"
+    url: "https://cdn.modrinth.com/data/nrikgvxm/versions/oPqk9oQ8/particlerain-4.0.0-beta.11%2B26.2-fabric.jar"
+    sha512: "29035d0795bd5c37f681353c4054341f569065379b9859055bb7e4ca4ef42595c6a58a3600febcd529a4af46bbaf689985d4f3ca150eb4fe7c965c0f6c68107f"
+    env: client
+    reason: >-
+      Replaces vanilla rain and snow with particles. Client-only.
+      CAUTION: the only 26.2 build is a beta (v4-beta.11, 24 Aug 2026).
+
 # ModernFix omitted: no Fabric 26.2 build yet.
-# Particle Rain omitted: no Fabric 26.2 build yet.
 
 # Shader packs are GLSL for the player's GPU, so they are always
 # client-only -- the server has no renderer. Iris (in `mods` above)
@@ -375,21 +530,21 @@ mods:
 # launch and reads it as the pack being broken.
 shaderpacks:
   - name: "Complementary Shaders - Reimagined"
-    file: "ComplementaryReimagined_r5.8.1.zip"
-    url: "https://cdn.modrinth.com/data/HVnmMxH1/versions/yCCduG44/ComplementaryReimagined_r5.8.1.zip"
-    sha512: "6bd95215755d25812556ce790d976221f7d677d63112e3e4d3e70b08a62ed41348fa3792dd31bbe720d1e46fe2d525cadb4f66e6358118e1f4aa8e0d11f25c39"
+    file: "ComplementaryReimagined_r5.9.3.zip"
+    url: "https://cdn.modrinth.com/data/HVnmMxH1/versions/Bqen1mJX/ComplementaryReimagined_r5.9.3.zip"
+    sha512: "45304b1d7862afdb2177b7e6226fc9c6737911d17a4ad46cc9c519ca4deb935f05072cd337cd8b19a15bb8062b57b54eceec7bdee4cd572d94858e2946d37d85"
     reason: >-
       Vanilla-preserving shader pack. r5.8 added Distant Horizons
       support -- LOD terrain gets shadows and proper water reflections
       -- which matters here since DH is the pack's headline feature.
-      Note that DH 3.2.0's new LOD textures apply to base DH rendering
+      Note that DH's new LOD textures (3.2.0 on) apply to base DH rendering
       only; under Iris, distant LODs render untextured. Ships with
       Potato through Ultra profiles for weaker hardware.
 
   - name: "BSL Shaders"
-    file: "BSL_v10.1.3.zip"
-    url: "https://cdn.modrinth.com/data/Q1vvjJYV/versions/hIibTfxn/BSL_v10.1.3.zip"
-    sha512: "3e68c8038e38b0860cf1258e5fc84bcd98007a70fb7ba49e306186be6e905187527b630b77cb9e8cc8ee80865606c0fb398c419a22f0076b2ed5c7d73748a9ba"
+    file: "BSL_v10.1.8.zip"
+    url: "https://cdn.modrinth.com/data/Q1vvjJYV/versions/Y68yiql9/BSL_v10.1.8.zip"
+    sha512: "94a3c25d6820868db624e11347873e6b572e7cd571967d9ac6f4690ca5d37ca302a7645d85eec800e0654541e3825fba14d37b5a25d3996aaf038178552be26f"
     reason: >-
       Warmer, more stylised look than Complementary -- which began life
       as a BSL edit, so the two share a lineage and settings layout.
@@ -412,24 +567,40 @@ shaderpacks:
 # the network.
 datapacks:
   - name: "Matcha Flavoured"
-    file: "Matcha_Flavoured.zip"
-    url: "https://cdn.modrinth.com/data/QI0EmgZ1/versions/RVX0a6It/Matcha_Flavoured.zip"
-    sha512: "12dc5a600d473f06a44a4370c02b404a0260adf696a591a3fbb0f135bca613ffba4f9990f625746375fa9181bbb300eeffd9cc420e6a50f91a48c21314c81505"
-    # Combined data + resource pack: one zip, read by the server as data
-    # and by the client as assets. Without the client half, players see
+    file: "MF_DP_1_12_3_26_2.zip"
+    url: "https://cdn.modrinth.com/data/QI0EmgZ1/versions/o2nmeGGh/MF_DP_1_12_3_26_2.zip"
+    sha512: "abe85595904c08ff6c4859308e2e2953564d12782e1daee22feb748760a77e9742543aa3d9e17d46af6674bc6256feace909bb4ed0f1820c05c838c68bd38177"
+    # Since 1.12 the author ships the resource pack as its own download
+    # (MF_RP_*), separate from the datapack zip. Without it players see
     # missing textures and raw lang keys for the ~50 added foods, alloys,
     # and tool sets.
     #
-    # This flag makes build.py emit dist/resourcepack.env, which
-    # docker-compose.yml loads -- the server then pushes this exact URL
-    # and hash to every client on join. Nothing to install by hand and
-    # nothing to toggle, and because both values are derived from this
-    # entry, the pushed pack always matches the installed data.
+    # build.py emits dist/resourcepack.env from this block, which
+    # docker-compose.yml loads -- the server then pushes this URL and
+    # hash to every client on join. Nothing to install by hand.
+    #
+    # Pinned to 1.12.3, not the newer 1.12.4: the 1.12.4 datapack ships
+    # two broken loot tables (a trailing comma in fishing/junk.json and
+    # a "name" where a loot-table entry needs "value" in
+    # entities/fox.json). Both fail to load on the server, and Sea
+    # Life's fish trap depends on the junk table. 1.12.4 fixed armour
+    # and tool intrinsics, multiplayer sleep speed, chocolate stacking
+    # and fox pelt textures, so 1.12.3 has those bugs instead. Retest
+    # when 1.12.5 or later lands.
+    #
+    # The RP is versioned separately and 1.12.3's matches 1.12.4's
+    # (the 1.12.4 changelog says it is unchanged). When a release says
+    # the RP changed, bump this block too.
     #
     # Only one datapack may set this: server.properties holds a single
     # resource-pack URL.
-    resourcepack: true
+    resourcepack:
+      file: "MF_RP_1_12_3_26_2.zip"
+      url: "https://cdn.modrinth.com/data/QI0EmgZ1/versions/WRkL802v/MF_RP_1_12_3_26_2.zip"
+      sha512: "1a5eff90f0f37d572847d8528074c4c6b7bb63089810d2afbae27ee9cc5a06e50fa8d91192a521830ae224af58b914b716b0880ef84057364bd611e49cee05e3"
 
+  # Extended for Terralith's ground blocks by
+  # server-overrides/world/datapacks/z-footpath-terralith -- see README.
   - name: "Path Generator Datapack"
     file: "Path-Generator-Datapack262.zip"
     url: "https://cdn.modrinth.com/data/a1wqmF96/versions/kV3ba4GV/Path-Generator-Datapack262.zip"
