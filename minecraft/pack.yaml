@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium Realistic Terrain"
-version: "1.3.0"
+version: "1.4.0"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -257,6 +257,19 @@ mods:
     sha512: "82aefd76c87c1784dabc46b1bbe03facc3bd77bd7cfa3a20f6ecbedeb21ce17a000bbc7536aa3220e1b3e86a47e1b09b93ead9c9570e4ab4cf9c7b2672b76711"
     env: client
     reason: "Replaces vanilla cloud rendering"
+
+  - name: "Falling Leaves Plus"
+    file: "fallingleavesplus-v26.2.2-mc26.2.x+fabric.jar"
+    url: "https://cdn.modrinth.com/data/PZyzzLjz/versions/jpOBCBbh/fallingleavesplus-v26.2.2-mc26.2.x%2Bfabric.jar"
+    sha512: "7b459848fb83dc79d8f3f68f861a783b4f841354c872de87080183533b36a972699983fe77f3704b3e9d09a08b7a7be8a4824b94732f7e1718af06f36bfe5db1"
+    env: client
+    reason: >-
+      Tree-specific falling leaf particles: acorns from oaks, cones from
+      spruces, snowflakes from snow-covered leaves. Client-only. Chosen
+      over the older Falling Leaves, whose Serene Seasons support is an
+      empty stub and which needs Cloth Config. UNTESTED with Serene
+      Seasons: check that the particles match the seasonal foliage
+      colors in autumn.
 
   # --- HUD / QOL ------------------------------------------------------
   - name: "JEI"
@@ -550,16 +563,22 @@ shaderpacks:
       as a BSL edit, so the two share a lineage and settings layout.
       Built for 26.2 (published April 2026).
 
-  - name: "Bliss"
-    file: "Bliss_v2.1.2_(Chocapic13_Shaders_edit).zip"
-    url: "https://cdn.modrinth.com/data/ZvMtQlho/versions/kC2Y8q1P/Bliss_v2.1.2_%28Chocapic13_Shaders_edit%29.zip"
-    sha512: "dafc60be4980ec40f40edc0f2625cb0976f3c9ce5ed86383146a120480826bb1de70ef5e38b7f1437294ed4d38c6ef3c82ebef0ae4e00b8cee165788c9c18280"
+  - name: "RedHat Shaders"
+    file: "RedHat_v34.3.1.zip"
+    url: "https://cdn.modrinth.com/data/ZvitaqQh/versions/Ca8OxUZj/RedHat_v34.3.1.zip"
+    sha512: "bb0f2608f9055cf992c91375c98e77feafef4f596d9bf4046683664e6eb49d9cf294b3d74b28e640c4301b3bb525dca41c2ea97b992f14cbf923dbef3f5a0b60"
     reason: >-
-      Chocapic13 edit with volumetric lighting and a colder, more
-      atmospheric look. Caveat: this build is from November 2025 and the
-      author added 26.2 to its compatibility list afterwards rather than
-      rebuilding for it -- it is the only 26.2-declared release. Treat it
-      as the least-proven of the three on this Minecraft version.
+      Replaces Bliss. An edit of an older Chocapic13, the same family as
+      Bliss, with 3D godrays, cinematic options and a fantasy look. Chosen
+      because it needs only OpenGL 3.2 and uses the fewest texture units
+      of the lookalikes (9 in its busiest pass, against 28 for Bliss, by
+      a rough count that ignores #ifdef). Bliss would not load on macOS:
+      Iris failed with "No more available texture units while activating
+      sampler shadow" on an Apple M4 Pro (OpenGL 4.1 Metal) in every
+      attempt from Aug to Oct 2026, with and without Distant Horizons.
+      UNTESTED on that Mac. It is built on an older Chocapic, so it has no
+      Distant Horizons support and distant LODs will look unshaded.
+      Updated Apr 2026, lists 26.2.
 
 # Datapacks are ordinary pack files with a different destination path.
 # They land in world/datapacks/ and are picked up when the world
