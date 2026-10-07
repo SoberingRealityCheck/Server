@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium Realistic Terrain"
-version: "1.4.0"
+version: "1.4.1"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -541,6 +541,12 @@ mods:
 # and players turn it on under Video Settings -> Shaders. Enabling by
 # default would mean a laptop GPU meets a 60->15 fps drop on first
 # launch and reads it as the pack being broken.
+#
+# One shader on purpose. Bliss never loaded on macOS (Iris ran out of
+# texture units) and BSL and RedHat were dropped to keep a single,
+# tested look. Recommended settings are in the README, not shipped: a
+# launcher can re-apply override files on an update and wipe a player's
+# own tweaks.
 shaderpacks:
   - name: "Complementary Shaders - Reimagined"
     file: "ComplementaryReimagined_r5.9.3.zip"
@@ -553,32 +559,9 @@ shaderpacks:
       Note that DH's new LOD textures (3.2.0 on) apply to base DH rendering
       only; under Iris, distant LODs render untextured. Ships with
       Potato through Ultra profiles for weaker hardware.
-
-  - name: "BSL Shaders"
-    file: "BSL_v10.1.8.zip"
-    url: "https://cdn.modrinth.com/data/Q1vvjJYV/versions/Y68yiql9/BSL_v10.1.8.zip"
-    sha512: "94a3c25d6820868db624e11347873e6b572e7cd571967d9ac6f4690ca5d37ca302a7645d85eec800e0654541e3825fba14d37b5a25d3996aaf038178552be26f"
-    reason: >-
-      Warmer, more stylised look than Complementary -- which began life
-      as a BSL edit, so the two share a lineage and settings layout.
-      Built for 26.2 (published April 2026).
-
-  - name: "RedHat Shaders"
-    file: "RedHat_v34.3.1.zip"
-    url: "https://cdn.modrinth.com/data/ZvitaqQh/versions/Ca8OxUZj/RedHat_v34.3.1.zip"
-    sha512: "bb0f2608f9055cf992c91375c98e77feafef4f596d9bf4046683664e6eb49d9cf294b3d74b28e640c4301b3bb525dca41c2ea97b992f14cbf923dbef3f5a0b60"
-    reason: >-
-      Replaces Bliss. An edit of an older Chocapic13, the same family as
-      Bliss, with 3D godrays, cinematic options and a fantasy look. Chosen
-      because it needs only OpenGL 3.2 and uses the fewest texture units
-      of the lookalikes (9 in its busiest pass, against 28 for Bliss, by
-      a rough count that ignores #ifdef). Bliss would not load on macOS:
-      Iris failed with "No more available texture units while activating
-      sampler shadow" on an Apple M4 Pro (OpenGL 4.1 Metal) in every
-      attempt from Aug to Oct 2026, with and without Distant Horizons.
-      UNTESTED on that Mac. It is built on an older Chocapic, so it has no
-      Distant Horizons support and distant LODs will look unshaded.
-      Updated Apr 2026, lists 26.2.
+      Recommended settings are in the README. Water reflections are best
+      set to sky-only, because the screen-space ones smear under tree
+      canopies.
 
 # Datapacks are ordinary pack files with a different destination path.
 # They land in world/datapacks/ and are picked up when the world

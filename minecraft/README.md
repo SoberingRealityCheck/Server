@@ -214,6 +214,11 @@ Files here are copied verbatim into the instance, at the same relative
 path, on both sides. Use it for mod configs you want consistent across
 players. Currently empty.
 
+`client-overrides/` works the same way but only players get it. Currently
+empty on purpose. A launcher can re-apply override files on a pack
+update and wipe a player's own tweaks. So the shader settings below live
+in this README and are not shipped.
+
 `server-overrides/` works the same way but only the server gets it.
 `server-overrides/world/datapacks/z-footpath-terralith/` extends Path
 Generator to Terralith's ground blocks (gravel, clay, mud, granite,
@@ -239,6 +244,35 @@ Nothing needs to be matched by hand against a server list.
 
 Each release also carries a generated `MODLIST.md` describing exactly
 what that version contains.
+
+### Settings that worked well for me
+
+Complementary Reimagined is the one shader in the pack. It is installed
+but not turned on. Turn it on under Video Settings, Shaders. These are
+the settings I use, under Shader Pack Settings. They are a starting
+point. Change whatever you like.
+
+| Setting | Value |
+|---|---|
+| Water Reflection Quality | Sky only |
+| Block Reflection Quality | Low |
+| Real-Time Shadows | Low |
+| Light Shaft Quality | Low |
+| Cloud Quality | Low |
+| Entity Shadows | OFF |
+| Anti-Aliasing (FXAA) | OFF |
+
+Why sky-only water reflections? The default (Medium) reflects only what
+is on screen. Under a tree canopy the reflection has nothing to show for
+the hidden parts, so it smears the nearest pixel into streaks. Sky only
+has no streaks, but the water no longer mirrors trees.
+
+Clouds. Distant Horizons turns off vanilla clouds when it loads, and
+Better Clouds only draws when vanilla clouds are on. If you see no
+clouds, open the Distant Horizons settings, go to Advanced Options,
+Graphics, and turn off Override Vanilla Settings. Then turn Clouds back
+on in Video Settings. With it off, the seam between normal terrain and
+distant terrain may flicker a little.
 
 The pack is not published on modrinth.com. The tradeoff is that
 launchers cannot auto-detect updates, so a new release means downloading
