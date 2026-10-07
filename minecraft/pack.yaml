@@ -17,7 +17,7 @@
 # verifies each one, so a changed or tampered artifact fails the build
 # rather than reaching the server.
 
-name: "Elysium Realistic Terrain"
+name: "Elysium"
 version: "1.4.1"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant

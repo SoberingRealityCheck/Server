@@ -7,7 +7,7 @@
 | Version | 26.2 |
 | Loader | Fabric |
 | Port | 25565/TCP |
-| Profile | Elysium Realistic Terrain |
+| Profile | Elysium |
 
 Terralith/Tectonic worldgen, Distant Horizons LOD rendering, performance
 and QOL mods, layered under the Matcha Flavoured and Path Generator
