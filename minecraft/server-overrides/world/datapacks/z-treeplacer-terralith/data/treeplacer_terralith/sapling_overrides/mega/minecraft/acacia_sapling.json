@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": {
+    "terralith:amethyst_canyon": [
+      {
+        "feature": "terralith:jungle/amethyst/tree_2x2",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/tree_2x2_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/tree_2x2_azalea_flowering",
+        "weight": 1
+      }
+    ],
+    "terralith:amethyst_rainforest": [
+      {
+        "feature": "terralith:jungle/amethyst/tree_2x2",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/tree_2x2_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/tree_2x2_azalea_flowering",
+        "weight": 1
+      }
+    ]
+  }
+}

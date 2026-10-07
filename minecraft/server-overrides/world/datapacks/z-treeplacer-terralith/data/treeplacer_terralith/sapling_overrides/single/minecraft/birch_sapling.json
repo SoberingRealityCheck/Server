@@ -1,0 +1,167 @@
+{
+  "replace": false,
+  "values": {
+    "terralith:alpine_highlands": [
+      {
+        "feature": "terralith:highlands/alpine/pine",
+        "weight": 1
+      }
+    ],
+    "terralith:birch_taiga": [
+      {
+        "feature": "terralith:taiga/birch/birch",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/birch/birch_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/birch/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/birch",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/birch_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:blooming_plateau": [
+      {
+        "feature": "minecraft:birch",
+        "weight": 1
+      }
+    ],
+    "terralith:blooming_valley": [
+      {
+        "feature": "terralith:forest/flower/mid/birch_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:forest/flower/small/birch_small",
+        "weight": 1
+      }
+    ],
+    "terralith:cloud_forest": [
+      {
+        "feature": "terralith:flower/white/birch_bending",
+        "weight": 1
+      }
+    ],
+    "terralith:granite_cliffs": [
+      {
+        "feature": "terralith:cliffs/white/birch_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:haze_mountain": [
+      {
+        "feature": "terralith:mountains/misty/trees_birch",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_forest": [
+      {
+        "feature": "minecraft:birch",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_valley": [
+      {
+        "feature": "minecraft:birch",
+        "weight": 1
+      }
+    ],
+    "terralith:lush_valley": [
+      {
+        "feature": "terralith:shield/birch",
+        "weight": 1
+      }
+    ],
+    "terralith:orchid_swamp": [
+      {
+        "feature": "terralith:swamp/orchid/small/swamp_small",
+        "weight": 1
+      }
+    ],
+    "terralith:sakura_grove": [
+      {
+        "feature": "terralith:birch/cloud_tree_tall",
+        "weight": 1
+      }
+    ],
+    "terralith:sakura_valley": [
+      {
+        "feature": "terralith:birch/cloud_tree_tall",
+        "weight": 1
+      }
+    ],
+    "terralith:shield": [
+      {
+        "feature": "terralith:shield/birch",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_autumn": [
+      {
+        "feature": "terralith:skylands/cloud_tree_birch",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_spring": [
+      {
+        "feature": "terralith:birch/cloud_tree_tall",
+        "weight": 1
+      }
+    ],
+    "terralith:snowy_shield": [
+      {
+        "feature": "terralith:shield/birch",
+        "weight": 1
+      }
+    ],
+    "terralith:temperate_highlands": [
+      {
+        "feature": "terralith:highlands/temperate/cloud_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/temperate/trees_neg",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/temperate/trees_pos",
+        "weight": 1
+      }
+    ],
+    "terralith:white_cliffs": [
+      {
+        "feature": "terralith:cliffs/white/birch_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:yellowstone": [
+      {
+        "feature": "terralith:yellowstone/birch",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/birch_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:yosemite_lowlands": [
+      {
+        "feature": "terralith:yellowstone/birch",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/birch_alt",
+        "weight": 1
+      }
+    ]
+  }
+}

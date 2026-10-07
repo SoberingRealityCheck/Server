@@ -219,6 +219,35 @@ empty on purpose. A launcher can re-apply override files on a pack
 update and wipe a player's own tweaks. So the shader settings below live
 in this README and are not shipped.
 
+### local-mods/
+
+Each folder here is the source of a small mod that `build.py` zips into a
+jar and puts in the pack. Which side gets it comes from `environment` in
+its `fabric.mod.json`. Use it for data that a mod reads, so players get it
+with no setting to turn on. A resource pack would be a toggle to find.
+
+There are currently no local mods. The former `elysium-ambience` rule
+extended AmbientSounds with a tree-aware leaf-wind ambience, louder in
+rain and storms. AmbientSounds and Presence Footsteps have been removed
+in favor of the Dynamic Surroundings Sounds resource pack, which includes
+leaf-wind and river audio along with broad sound replacements. Its
+resource-pack format cannot reproduce the old rule's tree-and-weather
+trigger exactly.
+
+### Resource packs
+
+Resource packs declared in `pack.yaml` are installed for clients under
+`resourcepacks/`, but launchers cannot enable them automatically. Turn
+Dynamic Surroundings Sounds Pack on under Options -> Resource Packs. It
+replaces many vanilla sound events, including footsteps; because resource
+packs can overlap with sound mods, listen for conflicts with Cool Rain,
+Hear the Wind, and other client audio mods.
+
+The pack is GPL-3.0. Its project page credits Dynamic Surroundings,
+Presence Footsteps and AmbientSounds 6 and describes asset licensing;
+see the [project page](https://modrinth.com/resourcepack/dynamic-surroundings-sounds-pack)
+for those credits and asset notes.
+
 `server-overrides/` works the same way but only the server gets it.
 `server-overrides/world/datapacks/z-footpath-terralith/` extends Path
 Generator to Terralith's ground blocks (gravel, clay, mud, granite,

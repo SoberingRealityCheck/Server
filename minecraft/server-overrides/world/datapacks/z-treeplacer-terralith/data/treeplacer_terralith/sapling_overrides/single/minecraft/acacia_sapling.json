@@ -1,0 +1,119 @@
+{
+  "replace": false,
+  "values": {
+    "terralith:amethyst_canyon": [
+      {
+        "feature": "terralith:jungle/amethyst/acacia_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/small_azalea",
+        "weight": 1
+      }
+    ],
+    "terralith:amethyst_rainforest": [
+      {
+        "feature": "terralith:jungle/amethyst/acacia_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/small_azalea",
+        "weight": 1
+      }
+    ],
+    "terralith:arid_highlands": [
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      }
+    ],
+    "terralith:ashen_savanna": [
+      {
+        "feature": "terralith:shrubland/hot/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/tiny_trees",
+        "weight": 1
+      }
+    ],
+    "terralith:hot_shrubland": [
+      {
+        "feature": "terralith:shrubland/hot/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/tiny_trees",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_forest": [
+      {
+        "feature": "terralith:flower/lavender/flower",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_valley": [
+      {
+        "feature": "terralith:flower/lavender/flower",
+        "weight": 1
+      }
+    ],
+    "terralith:savanna_badlands": [
+      {
+        "feature": "minecraft:acacia",
+        "weight": 1
+      }
+    ],
+    "terralith:savanna_slopes": [
+      {
+        "feature": "minecraft:acacia",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_summer": [
+      {
+        "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/acacia_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/small_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:skylands/summer/bending_acacia",
+        "weight": 1
+      }
+    ],
+    "terralith:tropical_jungle": [
+      {
+        "feature": "terralith:coastal/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      }
+    ]
+  }
+}

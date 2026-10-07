@@ -1,0 +1,221 @@
+{
+  "replace": false,
+  "values": {
+    "terralith:alpha_islands": [
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      }
+    ],
+    "terralith:alpha_islands_winter": [
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      }
+    ],
+    "terralith:birch_taiga": [
+      {
+        "feature": "terralith:taiga/birch/oak",
+        "weight": 1
+      }
+    ],
+    "terralith:blooming_plateau": [
+      {
+        "feature": "minecraft:fancy_oak",
+        "weight": 1
+      }
+    ],
+    "terralith:blooming_valley": [
+      {
+        "feature": "terralith:forest/flower/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:forest/flower/mid/oak_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:forest/flower/mid/oak_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:forest/flower/small/oak_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:forest/flower/small/oak_small_m",
+        "weight": 1
+      }
+    ],
+    "terralith:brushland": [
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      }
+    ],
+    "terralith:cold_shrubland": [
+      {
+        "feature": "minecraft:fancy_oak",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      }
+    ],
+    "terralith:deep_warm_ocean": [
+      {
+        "feature": "minecraft:fancy_oak",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      }
+    ],
+    "terralith:haze_mountain": [
+      {
+        "feature": "minecraft:fancy_oak",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:mountains/misty/trees_base",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:mountains/misty/trees_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:mountains/misty/trees_top",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/small_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:hot_shrubland": [
+      {
+        "feature": "minecraft:fancy_oak",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      }
+    ],
+    "terralith:jungle_mountains": [
+      {
+        "feature": "minecraft:fancy_oak",
+        "weight": 1
+      }
+    ],
+    "terralith:lush_valley": [
+      {
+        "feature": "terralith:shield/dark_oak",
+        "weight": 1
+      }
+    ],
+    "terralith:rocky_jungle": [
+      {
+        "feature": "minecraft:fancy_oak",
+        "weight": 1
+      }
+    ],
+    "terralith:rocky_shrubland": [
+      {
+        "feature": "minecraft:fancy_oak",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      }
+    ],
+    "terralith:savanna_badlands": [
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      }
+    ],
+    "terralith:savanna_slopes": [
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      }
+    ],
+    "terralith:shield": [
+      {
+        "feature": "terralith:shield/dark_oak",
+        "weight": 1
+      }
+    ],
+    "terralith:shrubland": [
+      {
+        "feature": "minecraft:fancy_oak",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/small_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_autumn": [
+      {
+        "feature": "terralith:skylands/big_cone_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:skylands/mid_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:snowy_shield": [
+      {
+        "feature": "terralith:shield/dark_oak",
+        "weight": 1
+      }
+    ],
+    "terralith:stony_spires": [
+      {
+        "feature": "terralith:yosemite/oak",
+        "weight": 1
+      }
+    ],
+    "terralith:temperate_highlands": [
+      {
+        "feature": "terralith:highlands/temperate/trees_orange",
+        "weight": 1
+      }
+    ],
+    "terralith:warm_river": [
+      {
+        "feature": "minecraft:fancy_oak",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:oak",
+        "weight": 1
+      }
+    ],
+    "terralith:yosemite_lowlands": [
+      {
+        "feature": "terralith:yosemite/oak",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yosemite/oak_mega",
+        "weight": 1
+      }
+    ]
+  }
+}

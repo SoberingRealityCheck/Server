@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": {
+    "terralith:jungle_mountains": [
+      {
+        "feature": "minecraft:mega_jungle_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:rocky_jungle": [
+      {
+        "feature": "minecraft:mega_jungle_tree",
+        "weight": 1
+      }
+    ]
+  }
+}

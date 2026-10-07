@@ -1,0 +1,89 @@
+{
+  "replace": false,
+  "values": {
+    "terralith:desert_oasis": [
+      {
+        "feature": "terralith:canyon/sandstone/palm_1",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:canyon/sandstone/palm_medium",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:canyon/sandstone/palm_tall",
+        "weight": 1
+      }
+    ],
+    "terralith:desert_spires": [
+      {
+        "feature": "terralith:canyon/sandstone/palm_1",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:canyon/sandstone/palm_medium",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:canyon/sandstone/palm_tall",
+        "weight": 1
+      }
+    ],
+    "terralith:jungle_mountains": [
+      {
+        "feature": "minecraft:jungle_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:red_oasis": [
+      {
+        "feature": "terralith:canyon/red_sandstone/palm_1",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:canyon/red_sandstone/palm_medium",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:canyon/red_sandstone/palm_tall",
+        "weight": 1
+      }
+    ],
+    "terralith:rocky_jungle": [
+      {
+        "feature": "minecraft:jungle_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:sandstone_valley": [
+      {
+        "feature": "terralith:canyon/sandstone/palm_1",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:canyon/sandstone/palm_medium",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:canyon/sandstone/palm_tall",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_summer": [
+      {
+        "feature": "minecraft:jungle_tree_no_vine",
+        "weight": 1
+      }
+    ],
+    "terralith:tropical_jungle": [
+      {
+        "feature": "minecraft:jungle_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:coastal/fancy_oak",
+        "weight": 1
+      }
+    ]
+  }
+}

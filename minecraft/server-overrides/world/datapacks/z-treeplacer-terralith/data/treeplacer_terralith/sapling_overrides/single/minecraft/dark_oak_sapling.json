@@ -1,0 +1,67 @@
+{
+  "replace": false,
+  "values": {
+    "terralith:forested_highlands": [
+      {
+        "feature": "terralith:highlands/forest/trees_maple",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_forest": [
+      {
+        "feature": "terralith:flower/lavender/main_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_valley": [
+      {
+        "feature": "terralith:flower/lavender/main_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:mirage_isles": [
+      {
+        "feature": "terralith:enchanted/jungle_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:sakura_grove": [
+      {
+        "feature": "terralith:sakura/tree_huge_dark_oak",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:sakura/tree_medium_dark_oak",
+        "weight": 1
+      }
+    ],
+    "terralith:sakura_valley": [
+      {
+        "feature": "terralith:sakura/tree_huge_dark_oak",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:sakura/tree_medium_dark_oak",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_winter": [
+      {
+        "feature": "terralith:skylands/winter/oak",
+        "weight": 1
+      }
+    ],
+    "terralith:snowy_maple_forest": [
+      {
+        "feature": "terralith:highlands/forest/tree_maple_cold",
+        "weight": 1
+      }
+    ],
+    "terralith:temperate_highlands": [
+      {
+        "feature": "terralith:highlands/temperate/dark_oak",
+        "weight": 1
+      }
+    ]
+  }
+}

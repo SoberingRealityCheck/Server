@@ -1,0 +1,45 @@
+{
+  "replace": false,
+  "values": {
+    "terralith:sakura_grove": [
+      {
+        "feature": "terralith:sakura/tree_huge_cherry",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:sakura/tree_medium_cherry",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:sakura/tree_roof_cherry",
+        "weight": 1
+      }
+    ],
+    "terralith:sakura_valley": [
+      {
+        "feature": "terralith:sakura/tree_huge_cherry",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:sakura/tree_medium_cherry",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:sakura/tree_roof_cherry",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_spring": [
+      {
+        "feature": "terralith:sakura/tree_roof_cherry",
+        "weight": 1
+      }
+    ],
+    "terralith:snowy_cherry_grove": [
+      {
+        "feature": "minecraft:cherry",
+        "weight": 1
+      }
+    ]
+  }
+}

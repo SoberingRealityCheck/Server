@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.4.1"
+version: "1.5.0"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -135,13 +135,6 @@ mods:
       keeping in step rather than tracking GeckoLib's latest
       independently, since it ships breaking API changes in point
       releases.
-
-  - name: "CreativeCore"
-    file: "CreativeCore_FABRIC_v2.14.16_mc26.2.jar"
-    url: "https://cdn.modrinth.com/data/OsZiaDHq/versions/SI6rsPDj/CreativeCore_FABRIC_v2.14.16_mc26.2.jar"
-    sha512: "627a0821c5d833a5bc2fe8dee7c00ef67a6e6c69ddddeed5049c70883597956181778c30c143e1fcd201939c47b806de6a5aeee65b024342c0ff1a094db59a33"
-    env: client
-    reason: "Required by AmbientSounds"
 
   - name: "YetAnotherConfigLib (YACL)"
     file: "yet_another_config_lib_v3-3.9.7+26.2-fabric.jar"
@@ -373,6 +366,43 @@ mods:
       server-overrides/world/datapacks/z-seasons-terralith -- see README.
       CAUTION: beta, built for 26.1.2 and flagged as working on 26.2.
 
+  - name: "Soft Leaves"
+    file: "soft_leaves-fabric-26.2-1.2.0.jar"
+    url: "https://cdn.modrinth.com/data/2VPEkVF7/versions/qXXB9lT6/soft_leaves-fabric-26.2-1.2.0.jar"
+    sha512: "60a7f41b087e4290fb553b44b71f3e4fc72bf1ffc982b0efc1b94669da0a8862009970ffb7333487be24621d1018208ebd932b86b771b848abd2c835c17c7483"
+    env: both
+    reason: >-
+      Leaves stop blocking you. You push through bushes and canopies with
+      rustling sounds, flying leaf particles and a slowdown that grows
+      with speed, and a canopy softens a fall. Mobs path through leaves
+      too, so it needs the server. It changes how trees behave, which
+      is the one place this pack departs from vanilla on purpose.
+
+  - name: "Chimes"
+    file: "Chimes-v2.1.2-26.2-Fabric.jar"
+    url: "https://cdn.modrinth.com/data/mjGOuygR/versions/djJczP1W/Chimes-v2.1.2-26.2-Fabric.jar"
+    sha512: "8a78139b02fbedc97ce6514d892ac06377dde80966927d74c5e52eefdfa389d57e0ff09bb088811a66d2760fe8f4330d26cfed753fe57196dfb218181c52d4fd"
+    env: both
+    reason: >-
+      Placeable wind chimes (bamboo, iron and more) that make ambient
+      sounds when hung. They also keep phantoms away. Adds real blocks
+      and recipes, so both sides.
+
+  - name: "Treeplacer"
+    file: "treeplacer-fabric-26.1_26.2-2.2.0.jar"
+    url: "https://cdn.modrinth.com/data/4im8hCxA/versions/PMoUMgR9/treeplacer-fabric-26.1%2026.2-2.2.0.jar"
+    sha512: "bc4ef51f8affaf638adb1b4d63f324f3651c753c737349c7abfc97472e85a2a6fec894598c505db7432ab7f60541b992801eca89098f02eefa1eaab3344634a5"
+    env: both
+    reason: >-
+      Lets a datapack choose which tree a sapling grows into, by biome.
+      Terralith's trees only exist at worldgen, so without this a planted
+      sapling always makes a vanilla tree. The mapping is
+      server-overrides/world/datapacks/z-treeplacer-terralith, generated
+      by tools/treeplacer_terralith.py from Terralith's own files. The
+      older Terralith add-on for Treeplacer targets Terralith 2.3.5 on
+      1.20.1 and is not used. The filename here has an underscore where
+      the download has a space, so launchers get a plain path.
+
   - name: "Waystones"
     file: "waystones-fabric-26.2-26.2.0.12.jar"
     url: "https://cdn.modrinth.com/data/LOpKHB2A/versions/HUacBshD/waystones-fabric-26.2-26.2.0.12.jar"
@@ -491,12 +521,12 @@ mods:
     env: client
     reason: "Ambient critters -- birds, moths, spiders"
 
-  - name: "AmbientSounds"
-    file: "AmbientSounds_FABRIC_v6.3.6_mc26.2.jar"
-    url: "https://cdn.modrinth.com/data/fM515JnW/versions/jGlT0HRa/AmbientSounds_FABRIC_v6.3.6_mc26.2.jar"
-    sha512: "02163deeee68e4d7b884dd99efa90220ab3197616edbd305a6fabb0bf9b0ac61c74af97d1fa534155a71034736df2daa3cd384d207c964c7b78205a16b168e06"
+  - name: "Hear the Wind"
+    file: "hear_the_wind-0.2.0+26.2-fabric.jar"
+    url: "https://cdn.modrinth.com/data/VXq8DhOP/versions/WkCblIMJ/hear_the_wind-0.2.0%2B26.2-fabric.jar"
+    sha512: "97eeda21681f0479eab59549de769984ce0e8f8890972924b03c6e649e15b89141ee966dc211ef851f297c67a47f6a3e9a8d5109d8527f54423cdac5558941a1"
     env: client
-    reason: "Ambient biome/weather/cave sound layer"
+    reason: "Wind rushes in as you move fast: long falls, boats, minecarts, mounts"
 
   - name: "Sound Physics Remastered"
     file: "sound-physics-remastered-fabric-1.5.1+26.2.jar"
@@ -514,13 +544,6 @@ mods:
       Rain sounds that change with the block it lands on, such as leaves
       or water. Upstream marks it required client-side and optional
       server-side, so it ships to clients only.
-
-  - name: "Presence Footsteps"
-    file: "PresenceFootsteps-1.13.3+26.2.jar"
-    url: "https://cdn.modrinth.com/data/rcTfTZr3/versions/8TkGmrgl/PresenceFootsteps-1.13.3%2B26.2.jar"
-    sha512: "c0b6a1fc1340b7666903f680e12c45fdd24cb75a34ee5eea815e4f8b77752e3f4ecea1df5971ef87474316c97f94ac424c27a75b8b67ca1100467d6ad6181f79"
-    env: client
-    reason: "Footstep and block sounds that depend on the surface and what you wear"
 
   - name: "Particle Rain"
     file: "particlerain-4.0.0-beta.11+26.2-fabric.jar"
@@ -562,6 +585,19 @@ shaderpacks:
       Recommended settings are in the README. Water reflections are best
       set to sky-only, because the screen-space ones smear under tree
       canopies.
+
+# Installed client-side as an optional resource pack; launchers cannot
+# enable it automatically. Players turn it on under Options -> Resource Packs.
+resourcepacks:
+  - name: "Dynamic Surroundings Sounds Pack"
+    file: "DynamicSurroundings_R24.zip"
+    url: "https://cdn.modrinth.com/data/x1a4wWrm/versions/HTxBs1W4/DynamicSurroundings_R24.zip"
+    sha512: "7680349efd6fbcd6605252306609279a82d99068b1034cbd3f85da72f4d970636da028cadf4fc954672271c7781e4b9e3144d932a0fcf2cb83225795c8b8f08b"
+    reason: >-
+      Broad ambience and replacement footsteps. Includes river/riverrun
+      and windleaves audio. Replaces AmbientSounds and Presence Footsteps;
+      it does not reproduce Elysium Ambience's tree-and-weather trigger.
+      The pack is GPL-3.0; see its project page for credits and asset notes.
 
 # Datapacks are ordinary pack files with a different destination path.
 # They land in world/datapacks/ and are picked up when the world

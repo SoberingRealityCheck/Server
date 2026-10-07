@@ -51,6 +51,7 @@ PACK_FILE = HERE / "pack.yaml"
 OVERRIDES_DIR = HERE / "overrides"
 CLIENT_OVERRIDES_DIR = HERE / "client-overrides"
 SERVER_OVERRIDES_DIR = HERE / "server-overrides"
+LOCAL_MODS_DIR = HERE / "local-mods"
 CACHE_DIR = HERE / ".cache"
 DIST_DIR = HERE / "dist"
 OUTPUT = DIST_DIR / "pack.mrpack"
@@ -201,6 +202,18 @@ def validate(pack: dict) -> None:
             )
         seen_shaders[entry["file"]] = entry["name"]
 
+    seen_resourcepacks: dict[str, str] = {}
+    for entry in pack.get("resourcepacks", []):
+        for key in ("name", "file", "url", "sha512"):
+            if not entry.get(key):
+                raise BuildError(f"resourcepack {entry.get('name', '?')} missing {key}")
+        if entry["file"] in seen_resourcepacks:
+            raise BuildError(
+                f"duplicate resourcepack filename {entry['file']} "
+                f"({seen_resourcepacks[entry['file']]} and {entry['name']})"
+            )
+        seen_resourcepacks[entry["file"]] = entry["name"]
+
     # server.properties holds exactly one resource-pack URL, so two
     # flagged entries have no correct answer. Fail loudly rather than
     # silently pushing whichever sorted first.
@@ -237,6 +250,11 @@ def build_index(pack: dict, offline: bool) -> dict:
     for entry in pack.get("shaderpacks", []):
         files.append(build_file_entry(entry, "shaderpacks", "client", offline))
 
+    # Resource packs are installed for clients but are not auto-enabled:
+    # .mrpack has no mechanism to turn a player's resource pack on.
+    for entry in pack.get("resourcepacks", []):
+        files.append(build_file_entry(entry, "resourcepacks", "client", offline))
+
     return {
         "formatVersion": 1,
         "game": "minecraft",
@@ -249,6 +267,37 @@ def build_index(pack: dict, offline: bool) -> dict:
             "fabric-loader": pack["loader_version"],
         },
     }
+
+
+def local_mod_jars() -> list[tuple[str, str, bytes]]:
+    """Zip each folder in local-mods/ into a mod jar.
+
+    Returns (prefix, jar name, bytes) for each one. A local mod is just
+    a source tree: a fabric.mod.json plus whatever data or assets it
+    carries. Which side gets it comes from the "environment" key in its
+    fabric.mod.json. The jar is built the same way every time (sorted
+    files, fixed timestamps) so a rebuild gives identical bytes.
+
+    Why a jar and not a resource pack: Fabric loads every mod's assets
+    for all players with no setting to turn on. A resource pack would be
+    a toggle each player has to find.
+    """
+    side_prefix = {"client": "client-overrides", "server": "server-overrides"}
+    out = []
+    if not LOCAL_MODS_DIR.is_dir():
+        return out
+    for src in sorted(p for p in LOCAL_MODS_DIR.iterdir() if p.is_dir()):
+        meta = json.loads((src / "fabric.mod.json").read_text())
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as jar:
+            for path in sorted(src.rglob("*")):
+                if path.is_file():
+                    info = zipfile.ZipInfo(str(path.relative_to(src)), (2026, 1, 1, 0, 0, 0))
+                    info.compress_type = zipfile.ZIP_DEFLATED
+                    jar.writestr(info, path.read_bytes())
+        prefix = side_prefix.get(meta.get("environment"), "overrides")
+        out.append((prefix, f"{src.name}.jar", buf.getvalue()))
+    return out
 
 
 def write_mrpack(index: dict) -> None:
@@ -274,6 +323,9 @@ def write_mrpack(index: dict) -> None:
             for path in sorted(src.rglob("*")):
                 if path.is_file() and path.name != ".gitkeep":
                     zf.write(path, f"{prefix}/{path.relative_to(src)}")
+
+        for prefix, name, data in local_mod_jars():
+            zf.writestr(f"{prefix}/mods/{name}", data)
 
 
 def write_resourcepack_env(pack: dict, index: dict, offline: bool) -> str | None:
@@ -359,12 +411,33 @@ def write_modlist(pack: dict, index: dict) -> None:
             reason = " ".join(entry.get("reason", "").split())
             lines.append(f"| {entry['name']} | {reason} |")
 
+    if pack.get("resourcepacks"):
+        lines += ["", "## Resource packs", "",
+                  "Client only, and **not enabled by default** -- turn one "
+                  "on under Options -> Resource Packs.", "",
+                  "| Resource pack | Notes |", "|---|---|"]
+        for entry in pack["resourcepacks"]:
+            reason = " ".join(entry.get("reason", "").split())
+            lines.append(f"| {entry['name']} | {reason} |")
+
     if pack.get("datapacks"):
         lines += ["", "## Datapacks", "", "| Datapack | Side |", "|---|---|"]
         for entry in pack["datapacks"]:
             where = ("server (data) + client (resource pack)"
                      if entry.get("resourcepack") else "server only")
             lines.append(f"| {entry['name']} | {where} |")
+
+    local = [(p.name, json.loads((p / "fabric.mod.json").read_text()))
+             for p in sorted(LOCAL_MODS_DIR.iterdir())
+             if p.is_dir()] if LOCAL_MODS_DIR.is_dir() else []
+    if local:
+        lines += ["", "## Built into the pack", "",
+                  "Small mods made for this pack. Source is in `local-mods/`.", "",
+                  "| Mod | Side | What it does |", "|---|---|---|"]
+        for folder, meta in local:
+            env = {"client": "client only", "server": "server only"}.get(
+                meta.get("environment"), "client + server")
+            lines.append(f"| {meta['name']} | {env} | {meta.get('description', '')} |")
 
     total = sum(f["fileSize"] for f in index["files"])
     lines += [

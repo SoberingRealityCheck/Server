@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": {
+    "terralith:ice_marsh": [
+      {
+        "feature": "terralith:swamp/ice/small/swamp_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/small/swamp_special_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_special_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_tiny",
+        "weight": 1
+      }
+    ]
+  }
+}

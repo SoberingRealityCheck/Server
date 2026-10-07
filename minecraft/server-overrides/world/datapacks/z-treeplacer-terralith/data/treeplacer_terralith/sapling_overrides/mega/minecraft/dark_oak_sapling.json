@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": {
+    "terralith:mirage_isles": [
+      {
+        "feature": "terralith:enchanted/big_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_autumn": [
+      {
+        "feature": "terralith:skylands/mega_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_winter": [
+      {
+        "feature": "terralith:skylands/winter/big_oak",
+        "weight": 1
+      }
+    ]
+  }
+}
