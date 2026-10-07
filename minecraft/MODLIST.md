@@ -55,6 +55,8 @@ Pack version 1.5.1
 | Xaero's Maps: Multiplayer+ | client + server | Syncs world map exploration between players -- genuinely multiplayer, hence both sides. Needs Fabric Language Kotlin, plus Xaero's Minimap and World Map (0.3.2 made those soft dependencies). Small mod (a few thousand downloads). Run --check-deps after building: if it reports the server missing xaeroworldmap or xaerominimap, those two need `env: both`. |
 | Xaero's Minimap | client only | Minimap + waypoints. Must stay in step with Xaero's World Map: World Map declares a `breaks` on older Minimap builds (it did for <26.4.0), so a mismatch stops the game from starting rather than merely misbehaving. 26.6.0 and World Map 1.47.0 shipped the same day -- treat them as a pair. |
 | Better Advancements | client only | Full-screen advancement UI |
+| AutoHUD | client only | Hides HUD parts that aren't changing (hotbar, health, hunger, armor) and fades them back in when they matter, like Breath of the Wild. Needs Fabric API, above. YACL, above, gives it an in-game config screen. |
+| Dynamic Crosshair | client only | Crosshair changes with what you aim at and hold, and hides when it has nothing to say. Same author as AutoHUD. Needs Fabric API, above. |
 | Cosy Critters & Creepy Crawlies | client only | Ambient critters -- birds, moths, spiders |
 | Hear the Wind | client only | Wind rushes in as you move fast: long falls, boats, minecarts, mounts |
 | Sound Physics Remastered | client only | Sound occlusion/reverb through blocks |
@@ -84,4 +86,4 @@ Client only, and **not enabled by default** -- turn one on under Options -> Reso
 | Matcha Flavoured | server (data) + client (resource pack) |
 | Path Generator Datapack | server only |
 
-55 files, 177.9 MiB total download.
+57 files, 178.8 MiB total download.
