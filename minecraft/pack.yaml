@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.5.0"
+version: "1.5.1"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -395,8 +395,10 @@ mods:
     env: both
     reason: >-
       Lets a datapack choose which tree a sapling grows into, by biome.
-      Terralith's trees only exist at worldgen, so without this a planted
-      sapling always makes a vanilla tree. The mapping is
+      Terralith's trees only exist at worldgen. The datapack lets planted
+      saplings use same-wood tree variants suited to their biome, with
+      curated similar-biome sources for selected variants and tree-less
+      biomes. Saplings never switch wood species. The mapping is
       server-overrides/world/datapacks/z-treeplacer-terralith, generated
       by tools/treeplacer_terralith.py from Terralith's own files. The
       older Terralith add-on for Treeplacer targets Terralith 2.3.5 on

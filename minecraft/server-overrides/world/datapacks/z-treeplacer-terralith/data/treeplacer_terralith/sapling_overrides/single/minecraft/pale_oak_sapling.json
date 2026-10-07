@@ -1,6 +1,26 @@
 {
   "replace": false,
   "values": {
+    "terralith:lavender_forest": [
+      {
+        "feature": "terralith:flower/blue/blue_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/main_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_valley": [
+      {
+        "feature": "terralith:flower/blue/blue_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/main_tree",
+        "weight": 1
+      }
+    ],
     "terralith:moonlight_grove": [
       {
         "feature": "terralith:flower/blue/blue_tree",
@@ -12,6 +32,36 @@
       }
     ],
     "terralith:moonlight_valley": [
+      {
+        "feature": "terralith:flower/blue/blue_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/main_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_autumn": [
+      {
+        "feature": "terralith:flower/blue/blue_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/main_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_winter": [
+      {
+        "feature": "terralith:flower/blue/blue_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/main_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:snowy_maple_forest": [
       {
         "feature": "terralith:flower/blue/blue_tree",
         "weight": 1

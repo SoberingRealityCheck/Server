@@ -403,3 +403,31 @@ Terralith's biomes to them. The tag files are generated from
 `SEASONS_TERRALITH.md` covers what each list does, what was left out
 and what is untested. Run `python3 tools/seasons_terralith.py --audit`
 after a Terralith update to see every biome and what it gets.
+
+### Saplings and Terralith
+
+`server-overrides/world/datapacks/z-treeplacer-terralith/` maps sapling
+growth to Terralith's configured trees. In a Terralith biome with trees,
+all recognized single sapling types can grow one of that biome's tree
+variants **of the same wood species**; a spruce sapling always grows a
+spruce-trunk tree, for example. Related biomes can share variants of that
+same species, while 2x2 sapling growth similarly uses available giant
+trees of the matching wood. This lets a player-planted sapling get a
+thematically fitting variant without changing its wood type.
+The Ice Marsh mangrove variants are also available to propagules in
+Orchid Swamp, Warm River, the tropical/amethyst rainforests, and the
+desert oases/Lush Desert.
+
+For selected tree-less Terralith biomes, `tools/treeplacer_terralith.py`
+uses a manually chosen similar biome as the palette source. Unmapped
+Terralith cases and all vanilla biomes retain vanilla growth. Rebuild the
+datapack after changing its source mappings with:
+
+```sh
+python3 minecraft/tools/treeplacer_terralith.py
+python3 minecraft/build.py
+```
+
+The palette choices are pragmatic rather than a simulation of every
+species' climate limits. A selected tree that cannot fit still does not
+grow; Treeplacer does not then retry vanilla growth.

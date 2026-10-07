@@ -3,6 +3,70 @@
   "values": {
     "terralith:alpine_grove": [
       {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
         "feature": "terralith:taiga/tiny/pine_tiny",
         "weight": 1
       },
@@ -13,11 +77,189 @@
       {
         "feature": "terralith:taiga/tiny/spruce_tiny_m",
         "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
       }
     ],
     "terralith:alpine_highlands": [
       {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
         "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:birch_taiga": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:blooming_plateau": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:blooming_valley": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
         "weight": 1
       }
     ],
@@ -33,6 +275,10 @@
     ],
     "terralith:cloud_forest": [
       {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
         "feature": "terralith:flower/white/cloud_tree",
         "weight": 1
       },
@@ -43,9 +289,721 @@
       {
         "feature": "terralith:flower/white/twilight_tree",
         "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
       }
     ],
     "terralith:cold_shrubland": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:emerald_peaks": [
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:forested_highlands": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:frozen_cliffs": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:glacial_chasm": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:granite_cliffs": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:haze_mountain": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:highlands": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_forest": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/birch_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_valley": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/birch_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:lush_valley": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:moonlight_grove": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/birch_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:moonlight_valley": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/birch_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:orchid_swamp": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:painted_mountains": [
       {
         "feature": "terralith:shrubland/cold/small_tree",
         "weight": 1
@@ -55,7 +1013,465 @@
         "weight": 1
       }
     ],
-    "terralith:forested_highlands": [
+    "terralith:rocky_mountains": [
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      }
+    ],
+    "terralith:rocky_shrubland": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:scarlet_mountains": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:shield": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:shield_clearing": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:siberian_grove": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:siberian_taiga": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_autumn": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/birch_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_winter": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/birch_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      }
+    ],
+    "terralith:snowy_badlands": [
       {
         "feature": "minecraft:pine",
         "weight": 1
@@ -113,72 +1529,6 @@
         "weight": 1
       }
     ],
-    "terralith:frozen_cliffs": [
-      {
-        "feature": "minecraft:spruce",
-        "weight": 1
-      }
-    ],
-    "terralith:haze_mountain": [
-      {
-        "feature": "minecraft:spruce",
-        "weight": 1
-      }
-    ],
-    "terralith:highlands": [
-      {
-        "feature": "minecraft:pine",
-        "weight": 1
-      },
-      {
-        "feature": "minecraft:spruce",
-        "weight": 1
-      }
-    ],
-    "terralith:lush_valley": [
-      {
-        "feature": "terralith:shield/spruce_big",
-        "weight": 1
-      }
-    ],
-    "terralith:moonlight_grove": [
-      {
-        "feature": "terralith:flower/blue/birch_tree",
-        "weight": 1
-      }
-    ],
-    "terralith:moonlight_valley": [
-      {
-        "feature": "terralith:flower/blue/birch_tree",
-        "weight": 1
-      }
-    ],
-    "terralith:rocky_shrubland": [
-      {
-        "feature": "terralith:shrubland/cold/small_tree",
-        "weight": 1
-      },
-      {
-        "feature": "terralith:shrubland/cold/tiny_trees",
-        "weight": 1
-      }
-    ],
-    "terralith:shield": [
-      {
-        "feature": "terralith:shield/spruce_big",
-        "weight": 1
-      }
-    ],
-    "terralith:skylands_winter": [
-      {
-        "feature": "terralith:taiga/mid/pine_mid",
-        "weight": 1
-      },
-      {
-        "feature": "terralith:taiga/small/pine_small",
-        "weight": 1
-      }
-    ],
     "terralith:snowy_maple_forest": [
       {
         "feature": "minecraft:pine",
@@ -186,6 +1536,30 @@
       },
       {
         "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/blue/birch_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/spruce_tiny",
         "weight": 1
       },
       {
@@ -239,11 +1613,59 @@
     ],
     "terralith:snowy_shield": [
       {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
         "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
         "weight": 1
       }
     ],
-    "terralith:windswept_spires": [
+    "terralith:temperate_highlands": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
       {
         "feature": "terralith:taiga/mid/spruce_mid",
         "weight": 1
@@ -253,35 +1675,409 @@
         "weight": 1
       },
       {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
         "feature": "terralith:taiga/small/spruce_small",
         "weight": 1
       },
       {
         "feature": "terralith:taiga/small/spruce_small_m",
         "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:valley_clearing": [
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      }
+    ],
+    "terralith:volcanic_peaks": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:white_cliffs": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:windswept_spires": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
       }
     ],
     "terralith:wintry_forest": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
       {
         "feature": "terralith:snowy/spruce",
         "weight": 1
       },
       {
         "feature": "terralith:snowy/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
         "weight": 1
       }
     ],
     "terralith:wintry_lowlands": [
       {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
         "feature": "terralith:snowy/spruce",
         "weight": 1
       },
       {
         "feature": "terralith:snowy/spruce_tiny",
         "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
       }
     ],
     "terralith:yellowstone": [
+      {
+        "feature": "minecraft:pine",
+        "weight": 1
+      },
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/alpine/spruce_pine",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/cold/tiny_trees",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/pine_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/mid/spruce_mid_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/pine_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/small/spruce_small_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/pine_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tall/spruce_tall_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/pine_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:taiga/tiny/spruce_tiny_m",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:yellowstone/spruce_big_alt",
+        "weight": 1
+      }
+    ],
+    "terralith:yosemite_cliffs": [
       {
         "feature": "terralith:yellowstone/spruce_big",
         "weight": 1
@@ -292,6 +2088,26 @@
       }
     ],
     "terralith:yosemite_lowlands": [
+      {
+        "feature": "minecraft:spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/cloud_tree_bending",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:flower/white/twilight_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shield/spruce_big",
+        "weight": 1
+      },
       {
         "feature": "terralith:yellowstone/spruce_big",
         "weight": 1

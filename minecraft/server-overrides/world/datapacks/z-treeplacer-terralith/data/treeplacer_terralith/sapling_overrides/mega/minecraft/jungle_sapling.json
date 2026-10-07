@@ -1,13 +1,55 @@
 {
   "replace": false,
   "values": {
+    "terralith:amethyst_canyon": [
+      {
+        "feature": "minecraft:mega_jungle_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:amethyst_rainforest": [
+      {
+        "feature": "minecraft:mega_jungle_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:desert_oasis": [
+      {
+        "feature": "minecraft:mega_jungle_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:desert_spires": [
+      {
+        "feature": "minecraft:mega_jungle_tree",
+        "weight": 1
+      }
+    ],
     "terralith:jungle_mountains": [
       {
         "feature": "minecraft:mega_jungle_tree",
         "weight": 1
       }
     ],
+    "terralith:red_oasis": [
+      {
+        "feature": "minecraft:mega_jungle_tree",
+        "weight": 1
+      }
+    ],
     "terralith:rocky_jungle": [
+      {
+        "feature": "minecraft:mega_jungle_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:sandstone_valley": [
+      {
+        "feature": "minecraft:mega_jungle_tree",
+        "weight": 1
+      }
+    ],
+    "terralith:tropical_jungle": [
       {
         "feature": "minecraft:mega_jungle_tree",
         "weight": 1

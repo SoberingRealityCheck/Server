@@ -24,8 +24,10 @@ How it works, in plain steps:
 
 Treeplacer looks up a sapling like this (read from its source): block
 override, block tag, exact biome id, biome tag, then "all_biomes". We only
-use exact biome ids. A biome with no entry for a sapling falls back to
-vanilla, and so do all 55 vanilla biomes in the world.
+use exact biome ids. In Terralith, a sapling only uses trees with its own
+trunk wood species. Related biomes can share variants of that species;
+selected tree-less biomes borrow same-species variants from a similar
+Terralith biome. Unmapped cases and all vanilla biomes fall back to vanilla.
 
 If a chosen tree cannot be placed (no room), Treeplacer does NOT fall back
 to a vanilla tree. The sapling just stays. Vanilla behaves the same way
@@ -72,6 +74,101 @@ SAPLINGS = {
     "acacia": ["acacia_sapling"], "dark_oak": ["dark_oak_sapling"],
     "cherry": ["cherry_sapling"], "pale_oak": ["pale_oak_sapling"],
     "mangrove": ["mangrove_propagule"],
+}
+# Related biomes can share variants, but only within the same wood species.
+# These groups intentionally describe thematic continuity, not every biome
+# that happens to share a temperature or terrain tag.
+BIOME_VARIANT_GROUPS = (
+    (
+        "terralith:alpine_grove", "terralith:alpine_highlands",
+        "terralith:highlands", "terralith:temperate_highlands",
+        "terralith:windswept_spires", "terralith:forested_highlands",
+        "terralith:rocky_shrubland", "terralith:yellowstone",
+    ),
+    (
+        "terralith:birch_taiga", "terralith:blooming_plateau",
+        "terralith:blooming_valley", "terralith:cloud_forest",
+        "terralith:haze_mountain", "terralith:lush_valley",
+        "terralith:orchid_swamp", "terralith:shield",
+        "terralith:shield_clearing", "terralith:snowy_shield",
+        "terralith:yosemite_lowlands", "terralith:granite_cliffs",
+        "terralith:white_cliffs",
+    ),
+    (
+        "terralith:ashen_savanna", "terralith:arid_highlands",
+        "terralith:hot_shrubland", "terralith:savanna_badlands",
+        "terralith:savanna_slopes", "terralith:fractured_savanna",
+        "terralith:brushland", "terralith:stony_spires",
+        "terralith:shrubland",
+    ),
+    (
+        "terralith:desert_oasis", "terralith:desert_spires",
+        "terralith:red_oasis", "terralith:sandstone_valley",
+        "terralith:jungle_mountains", "terralith:rocky_jungle",
+        "terralith:tropical_jungle", "terralith:amethyst_rainforest",
+        "terralith:amethyst_canyon",
+    ),
+    (
+        "terralith:sakura_grove", "terralith:sakura_valley",
+        "terralith:snowy_cherry_grove", "terralith:skylands_spring",
+    ),
+    (
+        "terralith:moonlight_grove", "terralith:moonlight_valley",
+        "terralith:skylands_autumn", "terralith:skylands_winter",
+        "terralith:snowy_maple_forest", "terralith:lavender_forest",
+        "terralith:lavender_valley",
+    ),
+    (
+        "terralith:wintry_forest", "terralith:wintry_lowlands",
+        "terralith:siberian_grove", "terralith:siberian_taiga",
+        "terralith:cold_shrubland", "terralith:frozen_cliffs",
+        "terralith:alpine_grove", "terralith:alpine_highlands",
+        "terralith:skylands_winter", "terralith:snowy_maple_forest",
+    ),
+)
+
+# Species-specific sharing is for cases where a variant fits a biome that
+# is not part of the broader mixed-woodland groups. Mangrove variants are
+# appropriate in wetlands, warm rivers, rainforests, and oases.
+BIOME_SPECIES_VARIANT_GROUPS = {
+    "mangrove": (
+        "terralith:ice_marsh",
+        "terralith:orchid_swamp",
+        "terralith:warm_river",
+        "terralith:tropical_jungle",
+        "terralith:amethyst_rainforest",
+        "terralith:amethyst_canyon",
+        "terralith:desert_oasis",
+        "terralith:red_oasis",
+        "terralith:lush_desert",
+    ),
+}
+
+# Tree-less biomes can borrow the same-species variants from an analogous
+# biome. Any species absent from that source remains vanilla in the target.
+BIOME_PALETTE_FALLBACKS = {
+    "terralith:ancient_sands": ("terralith:arid_highlands",),
+    "terralith:caldera": ("terralith:arid_highlands",),
+    "terralith:desert_canyon": ("terralith:arid_highlands",),
+    "terralith:emerald_peaks": ("terralith:alpine_grove",),
+    "terralith:fractured_savanna": ("terralith:ashen_savanna",),
+    "terralith:glacial_chasm": ("terralith:frozen_cliffs",),
+    "terralith:gravel_desert": ("terralith:arid_highlands",),
+    "terralith:lush_desert": ("terralith:desert_oasis",),
+    "terralith:painted_mountains": ("terralith:rocky_shrubland",),
+    "terralith:rocky_mountains": ("terralith:rocky_shrubland",),
+    "terralith:scarlet_mountains": ("terralith:highlands",),
+    "terralith:shield_clearing": ("terralith:shield",),
+    "terralith:siberian_grove": ("terralith:wintry_forest",),
+    "terralith:siberian_taiga": ("terralith:wintry_forest",),
+    "terralith:snowy_badlands": ("terralith:snowy_maple_forest",),
+    "terralith:steppe": ("terralith:shrubland",),
+    "terralith:valley_clearing": ("terralith:lush_valley",),
+    "terralith:volcanic_crater": ("terralith:arid_highlands",),
+    "terralith:volcanic_peaks": ("terralith:highlands",),
+    "terralith:warped_mesa": ("terralith:savanna_badlands",),
+    "terralith:white_mesa": ("terralith:savanna_badlands",),
+    "terralith:yosemite_cliffs": ("terralith:yosemite_lowlands",),
 }
 
 # Trunk placers that make a 2x2 trunk. Treeplacer uses a separate "mega"
@@ -223,6 +320,49 @@ def build(data):
         for (species, kind), feats in by_group.items():
             for sapling in SAPLINGS[species]:
                 mapping[(sapling, kind)][biome] = sorted(feats)
+    # Preserve the species identity of every feature throughout sharing:
+    # an oak sapling can only ever receive features whose trunk is oak.
+    palettes = defaultdict(lambda: defaultdict(lambda: defaultdict(set)))
+    sapling_species = {
+        sapling: species
+        for species, saplings in SAPLINGS.items()
+        for sapling in saplings
+    }
+    for (sapling, kind), biomes in mapping.items():
+        for biome, features in biomes.items():
+            palettes[biome][sapling_species[sapling]][kind].update(features)
+
+    biome_sources = defaultdict(set)
+    for group in BIOME_VARIANT_GROUPS:
+        for biome in group:
+            biome_sources[biome].update(other for other in group if other != biome)
+    for biome, sources in BIOME_PALETTE_FALLBACKS.items():
+        biome_sources[biome].update(sources)
+
+    species_sources = defaultdict(lambda: defaultdict(set))
+    for species, group in BIOME_SPECIES_VARIANT_GROUPS.items():
+        for biome in group:
+            species_sources[species][biome].update(
+                other for other in group if other != biome
+            )
+
+    biomes = set(data.biomes())
+    for biome in biomes:
+        for species, saplings in SAPLINGS.items():
+            kinds = {"single"}
+            if species in {sapling_species[s] for s, k in mapping if k == "mega"}:
+                kinds.add("mega")
+            for kind in kinds:
+                features = set(palettes[biome][species][kind])
+                sources = biome_sources[biome] | species_sources[species][biome]
+                for source in sources:
+                    if source not in biomes:
+                        raise ValueError(f"unknown biome palette source: {source}")
+                    features.update(palettes[source][species][kind])
+                if features:
+                    for sapling in saplings:
+                        mapping[(sapling, kind)][biome] = sorted(features)
+
     return mapping, skipped
 
 
@@ -247,6 +387,7 @@ def report(mapping, skipped):
         print(f"{sapling:22} {kind:7} {len(biomes):5}  {n:5}")
     covered = {b for biomes in mapping.values() for b in biomes}
     print(f"\n{len(covered)} Terralith biomes have at least one mapped sapling")
+    print("Only same-wood variants are shared between sapling mappings")
     if skipped:
         print("\nTrees skipped (not a normal wood tree):")
         for b, fs in sorted(skipped.items()):

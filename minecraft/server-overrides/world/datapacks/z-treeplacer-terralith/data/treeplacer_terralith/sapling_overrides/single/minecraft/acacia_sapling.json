@@ -3,6 +3,14 @@
   "values": {
     "terralith:amethyst_canyon": [
       {
+        "feature": "terralith:coastal/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      },
+      {
         "feature": "terralith:jungle/amethyst/acacia_azalea",
         "weight": 1
       },
@@ -21,6 +29,14 @@
     ],
     "terralith:amethyst_rainforest": [
       {
+        "feature": "terralith:coastal/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      },
+      {
         "feature": "terralith:jungle/amethyst/acacia_azalea",
         "weight": 1
       },
@@ -37,13 +53,21 @@
         "weight": 1
       }
     ],
-    "terralith:arid_highlands": [
+    "terralith:ancient_sands": [
       {
         "feature": "terralith:highlands/arid/tree",
         "weight": 1
       }
     ],
-    "terralith:ashen_savanna": [
+    "terralith:arid_highlands": [
+      {
+        "feature": "minecraft:acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      },
       {
         "feature": "terralith:shrubland/hot/small_tree",
         "weight": 1
@@ -53,13 +77,171 @@
         "weight": 1
       }
     ],
-    "terralith:hot_shrubland": [
+    "terralith:ashen_savanna": [
+      {
+        "feature": "minecraft:acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      },
       {
         "feature": "terralith:shrubland/hot/small_tree",
         "weight": 1
       },
       {
         "feature": "terralith:shrubland/hot/tiny_trees",
+        "weight": 1
+      }
+    ],
+    "terralith:brushland": [
+      {
+        "feature": "minecraft:acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/tiny_trees",
+        "weight": 1
+      }
+    ],
+    "terralith:caldera": [
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      }
+    ],
+    "terralith:desert_canyon": [
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      }
+    ],
+    "terralith:desert_oasis": [
+      {
+        "feature": "terralith:coastal/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/acacia_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/small_azalea",
+        "weight": 1
+      }
+    ],
+    "terralith:desert_spires": [
+      {
+        "feature": "terralith:coastal/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/acacia_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/small_azalea",
+        "weight": 1
+      }
+    ],
+    "terralith:fractured_savanna": [
+      {
+        "feature": "minecraft:acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/tiny_trees",
+        "weight": 1
+      }
+    ],
+    "terralith:gravel_desert": [
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      }
+    ],
+    "terralith:hot_shrubland": [
+      {
+        "feature": "minecraft:acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/tiny_trees",
+        "weight": 1
+      }
+    ],
+    "terralith:jungle_mountains": [
+      {
+        "feature": "terralith:coastal/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/acacia_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/small_azalea",
         "weight": 1
       }
     ],
@@ -75,15 +257,153 @@
         "weight": 1
       }
     ],
+    "terralith:moonlight_grove": [
+      {
+        "feature": "terralith:flower/lavender/flower",
+        "weight": 1
+      }
+    ],
+    "terralith:moonlight_valley": [
+      {
+        "feature": "terralith:flower/lavender/flower",
+        "weight": 1
+      }
+    ],
+    "terralith:red_oasis": [
+      {
+        "feature": "terralith:coastal/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/acacia_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/small_azalea",
+        "weight": 1
+      }
+    ],
+    "terralith:rocky_jungle": [
+      {
+        "feature": "terralith:coastal/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/acacia_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/small_azalea",
+        "weight": 1
+      }
+    ],
+    "terralith:sandstone_valley": [
+      {
+        "feature": "terralith:coastal/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/acacia_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/small_azalea",
+        "weight": 1
+      }
+    ],
     "terralith:savanna_badlands": [
       {
         "feature": "minecraft:acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/tiny_trees",
         "weight": 1
       }
     ],
     "terralith:savanna_slopes": [
       {
         "feature": "minecraft:acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/tiny_trees",
+        "weight": 1
+      }
+    ],
+    "terralith:shrubland": [
+      {
+        "feature": "minecraft:acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/tiny_trees",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_autumn": [
+      {
+        "feature": "terralith:flower/lavender/flower",
         "weight": 1
       }
     ],
@@ -105,6 +425,36 @@
         "weight": 1
       }
     ],
+    "terralith:skylands_winter": [
+      {
+        "feature": "terralith:flower/lavender/flower",
+        "weight": 1
+      }
+    ],
+    "terralith:snowy_maple_forest": [
+      {
+        "feature": "terralith:flower/lavender/flower",
+        "weight": 1
+      }
+    ],
+    "terralith:stony_spires": [
+      {
+        "feature": "minecraft:acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/small_tree",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:shrubland/hot/tiny_trees",
+        "weight": 1
+      }
+    ],
     "terralith:tropical_jungle": [
       {
         "feature": "terralith:coastal/bending_acacia",
@@ -112,6 +462,40 @@
       },
       {
         "feature": "terralith:coastal/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/acacia_azalea",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/bending_acacia",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/big_hawaii",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:jungle/amethyst/small_azalea",
+        "weight": 1
+      }
+    ],
+    "terralith:volcanic_crater": [
+      {
+        "feature": "terralith:highlands/arid/tree",
+        "weight": 1
+      }
+    ],
+    "terralith:warped_mesa": [
+      {
+        "feature": "minecraft:acacia",
+        "weight": 1
+      }
+    ],
+    "terralith:white_mesa": [
+      {
+        "feature": "minecraft:acacia",
         "weight": 1
       }
     ]

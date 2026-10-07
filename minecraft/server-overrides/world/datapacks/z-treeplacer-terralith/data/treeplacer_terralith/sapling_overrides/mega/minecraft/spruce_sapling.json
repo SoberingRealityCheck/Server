@@ -1,9 +1,123 @@
 {
   "replace": false,
   "values": {
+    "terralith:alpine_grove": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/max_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:alpine_highlands": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/max_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/mega_spruce",
+        "weight": 1
+      }
+    ],
     "terralith:bryce_canyon": [
       {
         "feature": "minecraft:mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:cold_shrubland": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/max_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:frozen_cliffs": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/max_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_forest": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:lavender_valley": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:moonlight_grove": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:moonlight_valley": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:siberian_grove": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/max_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:siberian_taiga": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/max_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:skylands_autumn": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
         "weight": 1
       }
     ],
@@ -11,9 +125,35 @@
       {
         "feature": "terralith:skylands/winter/mega_spruce",
         "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/max_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/mega_spruce",
+        "weight": 1
+      }
+    ],
+    "terralith:snowy_maple_forest": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/max_spruce",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:snowy/mega_spruce",
+        "weight": 1
       }
     ],
     "terralith:wintry_forest": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      },
       {
         "feature": "terralith:snowy/max_spruce",
         "weight": 1
@@ -24,6 +164,10 @@
       }
     ],
     "terralith:wintry_lowlands": [
+      {
+        "feature": "terralith:skylands/winter/mega_spruce",
+        "weight": 1
+      },
       {
         "feature": "terralith:snowy/max_spruce",
         "weight": 1

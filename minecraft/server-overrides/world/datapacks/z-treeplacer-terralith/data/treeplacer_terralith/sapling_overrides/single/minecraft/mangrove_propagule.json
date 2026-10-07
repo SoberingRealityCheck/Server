@@ -1,7 +1,151 @@
 {
   "replace": false,
   "values": {
+    "terralith:amethyst_canyon": [
+      {
+        "feature": "terralith:swamp/ice/small/swamp_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/small/swamp_special_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_special_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_tiny",
+        "weight": 1
+      }
+    ],
+    "terralith:amethyst_rainforest": [
+      {
+        "feature": "terralith:swamp/ice/small/swamp_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/small/swamp_special_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_special_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_tiny",
+        "weight": 1
+      }
+    ],
+    "terralith:desert_oasis": [
+      {
+        "feature": "terralith:swamp/ice/small/swamp_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/small/swamp_special_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_special_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_tiny",
+        "weight": 1
+      }
+    ],
     "terralith:ice_marsh": [
+      {
+        "feature": "terralith:swamp/ice/small/swamp_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/small/swamp_special_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_special_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_tiny",
+        "weight": 1
+      }
+    ],
+    "terralith:lush_desert": [
+      {
+        "feature": "terralith:swamp/ice/small/swamp_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/small/swamp_special_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_special_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_tiny",
+        "weight": 1
+      }
+    ],
+    "terralith:orchid_swamp": [
+      {
+        "feature": "terralith:swamp/ice/small/swamp_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/small/swamp_special_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_special_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_tiny",
+        "weight": 1
+      }
+    ],
+    "terralith:red_oasis": [
+      {
+        "feature": "terralith:swamp/ice/small/swamp_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/small/swamp_special_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_special_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_tiny",
+        "weight": 1
+      }
+    ],
+    "terralith:tropical_jungle": [
+      {
+        "feature": "terralith:swamp/ice/small/swamp_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/small/swamp_special_small",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_special_tiny",
+        "weight": 1
+      },
+      {
+        "feature": "terralith:swamp/ice/tiny/swamp_tiny",
+        "weight": 1
+      }
+    ],
+    "terralith:warm_river": [
       {
         "feature": "terralith:swamp/ice/small/swamp_small",
         "weight": 1
