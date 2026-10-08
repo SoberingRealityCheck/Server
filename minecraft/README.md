@@ -286,19 +286,28 @@ what that version contains.
 
 Nova Reimagined is a second shader. It is Complementary with snow that
 follows the season. Pick it under Video Settings, Shaders, the same way.
-It is untested on 26.2 and on macOS. If it fails to load, go back to
-Complementary.
+
+**It does not load on macOS as shipped.** Nova 1.0.3 has three problems
+on a Mac (details in the `pack.yaml` entry). Two can be worked around
+in the shader settings. Turn World-Space Reflections off, and turn
+Distant Horizons material textures off. The third is a one line bug in
+the shader code that crashes Apple's GL compiler. We are not allowed to
+ship a patched copy (Complementary License), so it needs a fix from the
+author. On Windows and Linux it is untested. If it fails, switch back
+to Complementary.
 
 Snow on the ground comes from two mods we ported to 26.2:
 
 - Season Cache puts snow and ice in loaded chunks as seasons change,
-  and works out a snow map from the region files.
-- Nova Reimagined Snow sends that map to the shader. It is not in the
-  pack yet. Without it the shader guesses from where you stand.
+  and works out a snow map from the region files. Server and client.
+- Nova Reimagined Snow sends that map to the shader. Client only. Its
+  Distant Horizons textures come out plain white, because they expect
+  a companion resource pack we do not ship.
 
 Credit: Nova Reimagined, Nova Reimagined Snow and Season Cache are by
 ItsThatNova. Complementary Reimagined is by EminGT. The ports are at
-github.com/SoberingRealityCheck/season-cache (more to come).
+github.com/SoberingRealityCheck/season-cache and
+github.com/SoberingRealityCheck/nova-reimagined-snow.
 
 ### Settings that worked well for me
 

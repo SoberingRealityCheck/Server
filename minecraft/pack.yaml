@@ -389,6 +389,21 @@ mods:
       UNTESTED in a real client session: watch snow placement and the
       server log after the first season change.
 
+  - name: "Nova Reimagined Snow"
+    file: "compsnow-1.0.3+26.2.jar"
+    url: "https://github.com/SoberingRealityCheck/nova-reimagined-snow/releases/download/v1.0.3-26.2/compsnow-1.0.3%2B26.2.jar"
+    sha512: "00f74c6c9a36eb84e3b00eb8f4deb9023e5439dcf667990c664d94d0c67401fbbcf05e5f7d178ec04a29b6759a280585100b1c2988a56426e7dcf43e8b3d6abf"
+    env: client
+    reason: >-
+      Feeds the Nova Reimagined shader its snow map. Reads what Season
+      Cache streams from the server and turns it into textures the
+      shader samples. Does nothing unless Nova is the active shader.
+      Client only. Our 26.2 port of ItsThatNova's mod (MIT), source at
+      github.com/SoberingRealityCheck/nova-reimagined-snow. Loads and
+      uploads its textures on macOS. Its Distant Horizons texture slots
+      fall back to plain white, because they expect a companion
+      resource pack we do not ship.
+
   - name: "Soft Leaves"
     file: "soft_leaves-fabric-26.2-1.2.0.jar"
     url: "https://cdn.modrinth.com/data/2VPEkVF7/versions/qXXB9lT6/soft_leaves-fabric-26.2-1.2.0.jar"
@@ -629,9 +644,18 @@ shaderpacks:
       Horizons terrain too. Reads the snow map from Season Cache and
       Nova Reimagined Snow. Without those it falls back to a guess from
       the player's position. Upstream lists support up to 1.21.11 but the
-      shader is plain GLSL, so we pin the upstream zip as is. UNTESTED
-      on 26.2 and on macOS. If it fails to compile, the Complementary
-      entry above is the safe choice.
+      shader is plain GLSL, so we pin the upstream zip as is. We may not
+      modify it: the Complementary License allows a modpack to include
+      the pack only unmodified. macOS: 1.0.3 does NOT load as shipped.
+      Three upstream problems, found by testing on an M4 Mac. (1) It
+      asks for shader storage buffers when World-Space Reflections is
+      on, which is the default, and macOS has none. (2) The line
+      `float thunderFactor = GetThunderFactor();` in
+      lib/colors/lightAndAmbientColors.glsl crashes Apple's GL
+      compiler. (3) Distant Horizons terrain needs 21 samplers and
+      macOS allows 16. Settings fix 1 and 3, only a code change fixes
+      2. Windows and Linux are untested. If it fails, use the
+      Complementary entry above.
 
 # Installed client-side as an optional resource pack; launchers cannot
 # enable it automatically. Players turn it on under Options -> Resource Packs.
