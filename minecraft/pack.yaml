@@ -536,6 +536,18 @@ mods:
       Crosshair changes with what you aim at and hold, and hides when it
       has nothing to say. Same author as AutoHUD. Needs Fabric API, above.
 
+  - name: "Mod Menu"
+    file: "modmenu-20.0.3.jar"
+    url: "https://cdn.modrinth.com/data/mOgUt4GM/versions/iRo7AZXf/modmenu-20.0.3.jar"
+    sha512: "c8224aa7a460d0c56ccb9978a112e4ad0d3eb17e2796e0c468a2392d220749f4f602838a11b3666145462c26078a879ab8a2fc177aa440f58e189c92a0088d6e"
+    env: client
+    reason: >-
+      Mods button on the main menu, and the way into AutoHUD, Dynamic
+      Crosshair and other mod config screens. Its fabric.mod.json needs
+      only Fabric API. Upstream lists Text Placeholder API as a required
+      dependency on Modrinth but the jar does not depend on it, so it is
+      left out.
+
   # --- Ambience -------------------------------------------------------
   - name: "Cosy Critters & Creepy Crawlies"
     file: "cosycritters-0.3.3+26.2-fabric.jar"

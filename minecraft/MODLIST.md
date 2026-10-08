@@ -57,6 +57,7 @@ Pack version 1.6.1
 | Better Advancements | client only | Full-screen advancement UI |
 | AutoHUD | client only | Hides HUD parts that aren't changing (hotbar, health, hunger, armor) and fades them back in when they matter, like Breath of the Wild. Needs Fabric API, above. YACL, above, gives it an in-game config screen. |
 | Dynamic Crosshair | client only | Crosshair changes with what you aim at and hold, and hides when it has nothing to say. Same author as AutoHUD. Needs Fabric API, above. |
+| Mod Menu | client only | Mods button on the main menu. Opens the config screens for AutoHUD, Dynamic Crosshair and others. Needs Fabric API, above. |
 | Cosy Critters & Creepy Crawlies | client only | Ambient critters -- birds, moths, spiders |
 | AmbientSounds | client only | Ambient biome/weather/cave sound layer |
 | Hear the Wind | client only | Wind rushes in as you move fast: long falls, boats, minecarts, mounts |
