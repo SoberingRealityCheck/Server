@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "elysium_dh_emissive",
+  "version": "1.0.0",
+  "name": "Elysium DH Emissive Falloff",
+  "description": "Patch for Distant Horizons 3.3.2. Dims emissive LODs by how little of the LOD they fill.",
+  "authors": ["Elysium"],
+  "license": "CC0-1.0",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=0.15",
+    "distanthorizons": "3.3.2"
+  },
+  "mixins": ["elysium_dh_emissive.mixins.json"]
+}

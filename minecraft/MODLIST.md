@@ -99,6 +99,6 @@ Small mods made for this pack. Source is in `local-mods/`.
 
 | Mod | Side | What it does |
 |---|---|---|
-| Elysium Ambience | client only | Data only. Adds leaf-rustle wind and river rules to AmbientSounds. No code. River audio is from the Dynamic Surroundings Sounds Pack (GPL-3.0). |
+| Elysium Ambience | client only | Data only. Adds leaf-rustle wind and river rules to AmbientSounds and silences its rain loop (Cool Rain does rain). No code. River audio is from the Dynamic Surroundings Sounds Pack (GPL-3.0). |
 
 64 files, 265.6 MiB total download.
