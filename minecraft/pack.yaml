@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.6.0"
+version: "1.6.1"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -515,6 +515,38 @@ mods:
     sha512: "5073a4322ad7655ea54533060e6661c2cc5df161d97f63860ec8ffcf57423e1df432049b3d40f9f84d2e77bb7e3928e6218ed808d3243ef30b1f3fa5ebf38560"
     env: client
     reason: "Full-screen advancement UI"
+
+  - name: "AutoHUD"
+    file: "autohud-9.2+26.2-fabric.jar"
+    url: "https://cdn.modrinth.com/data/temczoTQ/versions/oKaktJZ1/autohud-9.2%2B26.2-fabric.jar"
+    sha512: "52ee79bd3ca49e4c6f9a175dd77ff02fcaf66394295d92d5720bf5a951d7c1a02bde5e25b84d6587fc4a7eede3528d03f16ff7d5a5f7027394786073ec5ae0d6"
+    env: client
+    reason: >-
+      Hides HUD parts that aren't changing (hotbar, health, hunger, armor)
+      and fades them back in when they matter, like Breath of the Wild.
+      Needs Fabric API, above. YACL, above, gives it an in-game config
+      screen.
+
+  - name: "Dynamic Crosshair"
+    file: "dynamiccrosshair-9.14+26.2-fabric.jar"
+    url: "https://cdn.modrinth.com/data/ZcR9weSm/versions/JGy4NTx0/dynamiccrosshair-9.14%2B26.2-fabric.jar"
+    sha512: "23d0ef2cf46b1c2c2d82b6551abd9641c72925e8598dc12f67e18a73384282a04cf4265e4a1ae07f7f786c3fbf60b80608ee76261dae985634502289e98bdc3a"
+    env: client
+    reason: >-
+      Crosshair changes with what you aim at and hold, and hides when it
+      has nothing to say. Same author as AutoHUD. Needs Fabric API, above.
+
+  - name: "Mod Menu"
+    file: "modmenu-20.0.3.jar"
+    url: "https://cdn.modrinth.com/data/mOgUt4GM/versions/iRo7AZXf/modmenu-20.0.3.jar"
+    sha512: "c8224aa7a460d0c56ccb9978a112e4ad0d3eb17e2796e0c468a2392d220749f4f602838a11b3666145462c26078a879ab8a2fc177aa440f58e189c92a0088d6e"
+    env: client
+    reason: >-
+      Mods button on the main menu, and the way into AutoHUD, Dynamic
+      Crosshair and other mod config screens. Its fabric.mod.json needs
+      only Fabric API. Upstream lists Text Placeholder API as a required
+      dependency on Modrinth but the jar does not depend on it, so it is
+      left out.
 
   # --- Ambience -------------------------------------------------------
   - name: "Cosy Critters & Creepy Crawlies"
