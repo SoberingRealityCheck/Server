@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.6.1"
+version: "1.6.2"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -198,6 +198,14 @@ mods:
       waits on the spawn chunk and nothing generates it). Reproduced
       three times, with and without Streams Reflowing. 3.3.2 and
       3.2.0-b boot fine on the same pack. Retest on the next release.
+
+  # Elysium DH Emissive Falloff is NOT listed here. It is our own mixin
+  # patch for Distant Horizons 3.3.2, built from dh-patches/emissive-lod/
+  # and shipped as overrides/mods/elysium-dh-emissive.jar (both sides).
+  # Hack: --check-deps and MODLIST.md don't see it. It hard-depends on
+  # distanthorizons 3.3.2 exactly, so a DH bump fails loudly at launch
+  # instead of silently breaking. Re-check the mixin targets, rebuild,
+  # and change the version in its fabric.mod.json when bumping DH.
 
   # --- Server performance ---------------------------------------------
   - name: "Lithium"
