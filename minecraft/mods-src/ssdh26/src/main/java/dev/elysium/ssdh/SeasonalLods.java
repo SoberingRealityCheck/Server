@@ -59,16 +59,19 @@ public class SeasonalLods implements ClientModInitializer {
     static final int SEASON_DELAY_TICKS = 10;
     static final int JOIN_DELAY_TICKS = 60;
 
-    // Sections we start rebuilding per tick. DH rebuilds on its own threads,
-    // this just stops us queuing thousands at once. Guess. Tune by watching.
-    static final int SECTIONS_PER_TICK = 8;
+    // Sections we hand to DH per tick. DH rebuilds on its own threads, this
+    // just stops us queuing thousands at once. Guess. Tune by watching.
+    //
+    // We go through DhClientLevel.clientside.reloadPos(), DH's own queue.
+    // It is safe to call from the client thread and DH retries busy sections
+    // itself. The catch: reloadPos also queues the 4 neighbors (DH does that
+    // for edge culling), so a full sweep does some sections up to 5 times.
+    // We pay that CPU to avoid poking LodRenderSection from outside the
+    // quadtree tick. The count is low because each call fans out.
+    static final int SECTIONS_PER_TICK = 4;
 
-    // A section can be busy when we ask. We retry it later, but not forever.
-    static final int MAX_ATTEMPTS = 200;
-
-    private record Pending(LodRenderSection section, int attempts) {}
-
-    private final ArrayDeque<Pending> pending = new ArrayDeque<>();
+    private final ArrayDeque<Long> pending = new ArrayDeque<>();
+    private ClientLevelModule target = null;
     private Season.SubSeason lastSubSeason = null;
 
     // Set from DH's event thread, read on the client tick. -1 means nothing armed.
@@ -105,6 +108,7 @@ public class SeasonalLods implements ClientModInitializer {
             lastSubSeason = null;
             armedTicks = -1;
             pending.clear();
+            target = null;
             return;
         }
 
@@ -124,7 +128,14 @@ public class SeasonalLods implements ClientModInitializer {
             if (armed == 0) startSweep();
         }
 
-        pump();
+        // A DH update can rename the internals we touch. Log it and stop
+        // sweeping. Never take the client tick down with us.
+        try {
+            pump();
+        } catch (LinkageError | Exception e) {
+            LOG.error("Sweep failed. Giving up until the next season change.", e);
+            pending.clear();
+        }
     }
 
     private static Season.SubSeason currentSubSeason(Minecraft mc) {
@@ -173,7 +184,8 @@ public class SeasonalLods implements ClientModInitializer {
                 return 0;
             }
             state.quadtree.populateListWithEnabledRenderSections(sections);
-        } catch (Exception e) {
+            target = dhLevel.clientside;
+        } catch (LinkageError | Exception e) {
             LOG.error("Could not list DH sections. Colors will fix themselves as DH rebuilds.", e);
             return 0;
         }
@@ -182,27 +194,16 @@ public class SeasonalLods implements ClientModInitializer {
         sections.sort(Comparator.comparingInt(s -> DhSectionPos.getManhattanBlockDistance(s.pos, player)));
 
         pending.clear();
-        for (LodRenderSection s : sections) pending.add(new Pending(s, 0));
+        for (LodRenderSection s : sections) pending.add(s.pos);
         LOG.info("Sweep started: {} sections.", sections.size());
         return sections.size();
     }
 
-    /** Start up to SECTIONS_PER_TICK rebuilds. Busy sections go to the back. */
+    /** Hand up to SECTIONS_PER_TICK positions to DH's reload queue. */
     private void pump() {
+        if (target == null) return;
         for (int budget = SECTIONS_PER_TICK; budget > 0 && !pending.isEmpty(); budget--) {
-            Pending p = pending.pollFirst();
-            if (!p.section().getRenderingEnabled()) continue; // DH dropped it (moved away)
-
-            boolean started;
-            try {
-                started = p.section().uploadRenderDataToGpuAsync();
-            } catch (Exception e) {
-                LOG.debug("Section rebuild failed: {}", e.toString());
-                continue;
-            }
-            if (!started && p.attempts() < MAX_ATTEMPTS) {
-                pending.addLast(new Pending(p.section(), p.attempts() + 1));
-            }
+            target.reloadPos(pending.pollFirst());
         }
     }
 }

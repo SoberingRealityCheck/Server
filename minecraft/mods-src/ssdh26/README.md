@@ -23,8 +23,9 @@ The mod lands in `build/libs/ssdh26-1.0.0.jar`.
 1. Watch the Serene Seasons sub-season every tick.
 2. On a change (or joining a world), wait a few ticks.
 3. Clear DH's tint cache and block color cache.
-4. Walk every rendered LOD section, nearest first. Ask DH to rebuild
-   8 per tick.
+4. Walk every rendered LOD section, nearest first. Hand 4 per tick to
+   DH's own reload queue. (It also queues each section's neighbors, so
+   some sections rebuild more than once. See the comment in the code.)
 
 DH keeps the old buffer on screen until the new one is ready. So the
 recolor is a quiet sweep. No flash, no ring.
@@ -36,18 +37,24 @@ recolor is a quiet sweep. No flash, no ring.
 It compiles. It has never been run in a real client. Things to check
 when it is:
 
-- Do far LODs actually change color after the sweep? That needs DH's
-  tint path to see Serene Seasons' colors. Not confirmed.
-- Is 8 sections per tick too slow or too heavy? It's a guess.
+- Do far LODs actually change color after the sweep? Read from the
+  bytecode, it should. DH asks vanilla's tint sources for colors. Those
+  read `BiomeColors.GRASS_COLOR_RESOLVER` at call time. Serene Seasons
+  replaces that field. Not seen working yet.
+- Serene Seasons only swaps the grass and foliage resolvers. Dry foliage
+  and water are not seasonal, so LODs won't change for those. Same as
+  nearby terrain.
+- Is 4 sections per tick too slow or too heavy? It's a guess.
 - Do the delays (10 ticks after a season change, 60 after joining)
   catch the season sync from the server?
 
 It reaches only public DH fields and methods, no reflection. A DH update
-can still rename them and break the build.
+can still rename them. That breaks the build, or at runtime the sweep logs
+an error and stops. `fabric.mod.json` pins DH to 3.3.x.
 
 ## Credit
 
 The idea comes from ItsThatNova's
 [Serene Seasons X Distant Horizons](https://github.com/ItsThatNova/serene-seasons-x-distant-horizons)
-(MIT, Minecraft 1.21.1). This is a fresh rewrite for 26.2 and shares no
-code with it. The MIT license and their copyright notice stay in `LICENSE`.
+(MIT, Minecraft 1.21.1). This is a rewrite for 26.2 and was
+written from that design. The MIT license and their copyright notice stay in `LICENSE`.
