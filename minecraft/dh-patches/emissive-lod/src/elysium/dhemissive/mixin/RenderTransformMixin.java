@@ -26,6 +26,7 @@ public class RenderTransformMixin
 		@Local(name = "block") IBlockStateWrapper block,
 		@Local(name = "blockLight") int blockLight)
 	{
+		elysium.dhemissive.Probe.render(material, blockLight, block.getLightEmission());
 		boolean glows = material == EDhApiBlockMaterial.ILLUMINATED.index
 			|| material == EDhApiBlockMaterial.LAVA.index;
 		if (glows && !EmissiveFalloff.keepGlow(blockLight, block.getLightEmission()))
