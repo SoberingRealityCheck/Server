@@ -366,6 +366,19 @@ mods:
       server-overrides/world/datapacks/z-seasons-terralith -- see README.
       CAUTION: beta, built for 26.1.2 and flagged as working on 26.2.
 
+  - name: "Seasonal LODs"
+    file: "ssdh26-1.0.0.jar"
+    url: "https://github.com/SoberingRealityCheck/ssdh/releases/download/v1.0.0/ssdh26-1.0.0.jar"
+    sha512: "f6625e19fae0b73b122a15cc9907e11215751d8dc33d91a7e9f0f83ac6eedfec92377f65f672dbea760f8b74c6d7f7ef343c96b0b8b13fd9827176ccc938253a"
+    env: client
+    reason: >-
+      Far Distant Horizons terrain follows Serene Seasons. Without it,
+      near trees and grass change color with the season and far LODs
+      stay stuck on the old colors. Clears DH's color caches on a season
+      change, then rebuilds the visible LODs nearest first. Our own mod,
+      source at github.com/SoberingRealityCheck/ssdh. Client only: the
+      server stores block and biome, never colors.
+
   - name: "Soft Leaves"
     file: "soft_leaves-fabric-26.2-1.2.0.jar"
     url: "https://cdn.modrinth.com/data/2VPEkVF7/versions/qXXB9lT6/soft_leaves-fabric-26.2-1.2.0.jar"

@@ -1,5 +1,0 @@
-libs/*.jar
-build/
-.gradle/
-.idea/
-run/
