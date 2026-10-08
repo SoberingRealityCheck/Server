@@ -282,9 +282,27 @@ Nothing needs to be matched by hand against a server list.
 Each release also carries a generated `MODLIST.md` describing exactly
 what that version contains.
 
+### Nova Reimagined (experimental)
+
+Nova Reimagined is a second shader. It is Complementary with snow that
+follows the season. Pick it under Video Settings, Shaders, the same way.
+It is untested on 26.2 and on macOS. If it fails to load, go back to
+Complementary.
+
+Snow on the ground comes from two mods we ported to 26.2:
+
+- Season Cache puts snow and ice in loaded chunks as seasons change,
+  and works out a snow map from the region files.
+- Nova Reimagined Snow sends that map to the shader. It is not in the
+  pack yet. Without it the shader guesses from where you stand.
+
+Credit: Nova Reimagined, Nova Reimagined Snow and Season Cache are by
+ItsThatNova. Complementary Reimagined is by EminGT. The ports are at
+github.com/SoberingRealityCheck/season-cache (more to come).
+
 ### Settings that worked well for me
 
-Complementary Reimagined is the one shader in the pack. It is installed
+Complementary Reimagined is the main shader in the pack. It is installed
 but not turned on. Turn it on under Video Settings, Shaders. These are
 the settings I use, under Shader Pack Settings. They are a starting
 point. Change whatever you like.
