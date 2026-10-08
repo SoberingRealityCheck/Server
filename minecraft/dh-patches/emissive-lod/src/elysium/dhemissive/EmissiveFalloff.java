@@ -44,6 +44,21 @@ public final class EmissiveFalloff
 		return blockLight * 2 >= emission;
 	}
 
+	/**
+	 * Hack: tune by eye. Shader packs multiply the flat glow (2.5 in
+	 * Complementary) by the LOD's color. Real loaded blocks glow far less
+	 * than that, so LODs look much brighter at the edge of render distance.
+	 * Darkening the color is the only lever, since the glow strength is a
+	 * constant inside the shader pack. Lower = dimmer LOD lights.
+	 */
+	public static final double SHADER_GLOW_GAIN = 0.4;
+
+	/** Multiplier for the RGB of a glowing LOD block: block brightness (0-15) times the gain. */
+	public static double glowColorScale(int blockLight)
+	{
+		return SHADER_GLOW_GAIN * Math.min(15, Math.max(0, blockLight)) / 15.0;
+	}
+
 	// ---- watch it work: java -cp classes elysium.dhemissive.EmissiveFalloff ----
 
 	public static void main(String[] args)
