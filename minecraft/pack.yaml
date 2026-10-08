@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.5.1"
+version: "1.6.0"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -135,6 +135,13 @@ mods:
       keeping in step rather than tracking GeckoLib's latest
       independently, since it ships breaking API changes in point
       releases.
+
+  - name: "CreativeCore"
+    file: "CreativeCore_FABRIC_v2.14.16_mc26.2.jar"
+    url: "https://cdn.modrinth.com/data/OsZiaDHq/versions/SI6rsPDj/CreativeCore_FABRIC_v2.14.16_mc26.2.jar"
+    sha512: "627a0821c5d833a5bc2fe8dee7c00ef67a6e6c69ddddeed5049c70883597956181778c30c143e1fcd201939c47b806de6a5aeee65b024342c0ff1a094db59a33"
+    env: client
+    reason: "Required by AmbientSounds"
 
   - name: "YetAnotherConfigLib (YACL)"
     file: "yet_another_config_lib_v3-3.9.7+26.2-fabric.jar"
@@ -523,6 +530,13 @@ mods:
     env: client
     reason: "Ambient critters -- birds, moths, spiders"
 
+  - name: "AmbientSounds"
+    file: "AmbientSounds_FABRIC_v6.3.6_mc26.2.jar"
+    url: "https://cdn.modrinth.com/data/fM515JnW/versions/jGlT0HRa/AmbientSounds_FABRIC_v6.3.6_mc26.2.jar"
+    sha512: "02163deeee68e4d7b884dd99efa90220ab3197616edbd305a6fabb0bf9b0ac61c74af97d1fa534155a71034736df2daa3cd384d207c964c7b78205a16b168e06"
+    env: client
+    reason: "Ambient biome/weather/cave sound layer"
+
   - name: "Hear the Wind"
     file: "hear_the_wind-0.2.0+26.2-fabric.jar"
     url: "https://cdn.modrinth.com/data/VXq8DhOP/versions/WkCblIMJ/hear_the_wind-0.2.0%2B26.2-fabric.jar"
@@ -546,6 +560,13 @@ mods:
       Rain sounds that change with the block it lands on, such as leaves
       or water. Upstream marks it required client-side and optional
       server-side, so it ships to clients only.
+
+  - name: "Presence Footsteps"
+    file: "PresenceFootsteps-1.13.3+26.2.jar"
+    url: "https://cdn.modrinth.com/data/rcTfTZr3/versions/8TkGmrgl/PresenceFootsteps-1.13.3%2B26.2.jar"
+    sha512: "c0b6a1fc1340b7666903f680e12c45fdd24cb75a34ee5eea815e4f8b77752e3f4ecea1df5971ef87474316c97f94ac424c27a75b8b67ca1100467d6ad6181f79"
+    env: client
+    reason: "Footstep and block sounds that depend on the surface and what you wear"
 
   - name: "Particle Rain"
     file: "particlerain-4.0.0-beta.11+26.2-fabric.jar"
@@ -596,10 +617,11 @@ resourcepacks:
     url: "https://cdn.modrinth.com/data/x1a4wWrm/versions/HTxBs1W4/DynamicSurroundings_R24.zip"
     sha512: "7680349efd6fbcd6605252306609279a82d99068b1034cbd3f85da72f4d970636da028cadf4fc954672271c7781e4b9e3144d932a0fcf2cb83225795c8b8f08b"
     reason: >-
-      Broad ambience and replacement footsteps. Includes river/riverrun
-      and windleaves audio. Replaces AmbientSounds and Presence Footsteps;
-      it does not reproduce Elysium Ambience's tree-and-weather trigger.
-      The pack is GPL-3.0; see its project page for credits and asset notes.
+      Extra sample replacements for vanilla sounds (footsteps, blocks,
+      mobs, items). Used together with AmbientSounds and Presence
+      Footsteps, not instead of them. Overlap is untested: both can
+      play a footstep or ambient loop at once. GPL-3.0; see its project
+      page for credits and asset notes.
 
 # Datapacks are ordinary pack files with a different destination path.
 # They land in world/datapacks/ and are picked up when the world

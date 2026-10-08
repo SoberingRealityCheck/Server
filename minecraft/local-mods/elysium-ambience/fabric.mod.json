@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "elysium_ambience",
+  "version": "1.1.0",
+  "name": "Elysium Ambience",
+  "description": "Data only. Adds leaf-rustle wind and river rules to AmbientSounds. No code. River audio is from the Dynamic Surroundings Sounds Pack (GPL-3.0).",
+  "authors": ["Elysium"],
+  "license": "CC0-1.0",
+  "environment": "client",
+  "suggests": {
+    "ambientsounds": "*"
+  }
+}

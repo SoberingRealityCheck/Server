@@ -1,0 +1,16 @@
+{
+  "name": "river",
+  "regions": ["surface"],
+  "bad-regions": ["underwater", "cave", "nether", "end", "ocean", "beach"],
+  "biomes": ["#is_river", "river", "frozen_river"],
+  "features": ["water"],
+  "sounds": [
+    {
+      "name": "river",
+      "category": "water",
+      "files": ["ambientsounds:water.river", "ambientsounds:water.riverrun"],
+      "volume": 0.35
+    }
+  ]
+}
+`

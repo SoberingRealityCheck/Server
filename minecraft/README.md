@@ -226,22 +226,30 @@ jar and puts in the pack. Which side gets it comes from `environment` in
 its `fabric.mod.json`. Use it for data that a mod reads, so players get it
 with no setting to turn on. A resource pack would be a toggle to find.
 
-There are currently no local mods. The former `elysium-ambience` rule
-extended AmbientSounds with a tree-aware leaf-wind ambience, louder in
-rain and storms. AmbientSounds and Presence Footsteps have been removed
-in favor of the Dynamic Surroundings Sounds resource pack, which includes
-leaf-wind and river audio along with broad sound replacements. Its
-resource-pack format cannot reproduce the old rule's tree-and-weather
-trigger exactly.
+`elysium-ambience` is data for AmbientSounds. It has two rules:
+
+- `leaf-wind`: wind in leaves near trees on the surface. Quiet in clear
+  weather (0.2), louder in rain and storms (0.45).
+- `river`: a stream sound in river biomes when water is nearby (0.35).
+  The two audio files are copied from the Dynamic Surroundings Sounds
+  Pack (GPL-3.0). That pack only plays its own river sound when a
+  salmon makes noise, so this rule fills the gap. Hack: it keys on the
+  river biome tags, not on flowing water, because AmbientSounds can't
+  tell flowing water from still. Streams Reflowing streams outside river
+  biomes stay silent.
+
+Untested in game. The river volume and region are guesses.
 
 ### Resource packs
 
 Resource packs declared in `pack.yaml` are installed for clients under
 `resourcepacks/`, but launchers cannot enable them automatically. Turn
 Dynamic Surroundings Sounds Pack on under Options -> Resource Packs. It
-replaces many vanilla sound events, including footsteps; because resource
-packs can overlap with sound mods, listen for conflicts with Cool Rain,
-Hear the Wind, and other client audio mods.
+runs alongside AmbientSounds and Presence Footsteps, not instead of them.
+Expect overlap. Footsteps may double up, and the pack's own ambient
+events can stack on AmbientSounds loops. If it sounds muddy, turn the
+resource pack off first. Also listen for conflicts with Cool Rain and
+Hear the Wind.
 
 The pack is GPL-3.0. Its project page credits Dynamic Surroundings,
 Presence Footsteps and AmbientSounds 6 and describes asset licensing;

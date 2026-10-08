@@ -1,0 +1,25 @@
+{
+  "name": "leaf-wind",
+  "regions": ["surface"],
+  "bad-regions": ["highland", "underwater", "cave", "nether", "end"],
+  "sounds": [
+    {
+      "name": "leaf-wind",
+      "category": "wind",
+      "files": ["ambientsounds:wind.wind-in-leaves"],
+      "air": { "min": 0.6 },
+      "features": ["tree"],
+      "overall-raining": false,
+      "volume": 0.1
+    },
+    {
+      "name": "leaf-wind-storm",
+      "category": "wind",
+      "files": ["ambientsounds:wind.wind-in-leaves"],
+      "air": { "min": 0.6 },
+      "features": ["tree"],
+      "overall-raining": true,
+      "volume": 0.35
+    }
+  ]
+}
