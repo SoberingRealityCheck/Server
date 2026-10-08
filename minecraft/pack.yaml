@@ -414,9 +414,9 @@ mods:
       resource pack we do not ship.
 
   - name: "Seasonal LODs"
-    file: "ssdh26-1.0.1.jar"
-    url: "https://github.com/SoberingRealityCheck/ssdh/releases/download/v1.0.1/ssdh26-1.0.1.jar"
-    sha512: "75ba006bb5af634f39bde25002114ad7dd3aecc3930405bc760a8d81bd2879788a5f1e6c7045e7a34e89f42f22263a5ef15963df3eff7ff7dc12babeb9ba3ad3"
+    file: "ssdh26-1.0.2.jar"
+    url: "https://github.com/SoberingRealityCheck/ssdh/releases/download/v1.0.2/ssdh26-1.0.2.jar"
+    sha512: "d44a894587740936d61325b951c8852c6ea47620f46050db55b7172a98b48b90f6f9c7e4b76b9747d44933b7ac1a2a749bd9ad6a4d43f924be09937672a30f39"
     env: client
     reason: >-
       Far Distant Horizons terrain follows Serene Seasons. Without it,
@@ -427,6 +427,8 @@ mods:
       server stores block and biome, never colors. Also publishes the
       ssdh:season_meta and ssdh:season_phase textures that Nova
       Reimagined reads for seasonal Distant Horizons grass.
+      Runs a second sweep 20 seconds after each season change, because
+      the first one can leave far grass on the old season.
 
   - name: "Soft Leaves"
     file: "soft_leaves-fabric-26.2-1.2.0.jar"
