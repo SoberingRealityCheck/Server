@@ -91,6 +91,19 @@ kicking them. Set `MC_RESOURCE_PACK_ENFORCE=true` in `.env` to require
 it instead; that guarantees everyone sees the same game at the cost of
 locking out anyone whose download fails.
 
+### HUD and map settings
+
+All client side. The pack sets none of these, so each player tunes their own.
+
+- **Hotbar / health / hunger:** AutoHUD. Options -> Mod Menu -> AutoHUD
+  (it uses YACL). Each HUD part has its own hide delay and fade.
+- **Crosshair:** Dynamic Crosshair. Same place.
+- **Minimap:** Xaero's Minimap. Press `Y` in game for its settings (size,
+  zoom, opacity, position). If it's too big, shrink the size and lower
+  opacity first. Xaero's default keys can differ, so check Options ->
+  Controls.
+- **World map:** `M`. Its gear icon has its own settings.
+
 ### Known issue: shaders + Distant Horizons
 
 **Symptom.** With shaders enabled, distant terrain renders as vertical
