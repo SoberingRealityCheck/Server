@@ -253,6 +253,56 @@ with no setting to turn on. A resource pack would be a toggle to find.
 
 Untested in game. The river volume and region are guesses.
 
+### dh-patches/emissive-lod/
+
+A mixin patch for Distant Horizons 3.3.2. Source is in `dh-patches/emissive-lod/`.
+The built jar is checked in at `overrides/mods/elysium-dh-emissive.jar`, so
+both sides get it. `build.py` does not build it. Rebuild with
+`dh-patches/emissive-lod/build.sh` (plain javac, no gradle).
+
+**Problem.** DH merges 2x2 columns into one LOD column and keeps the
+winning block's full light. Air never votes. So a lantern hanging over
+open air wins its slice and grows into a full-bright plate at every
+detail level. Under shaders it is worse. Complementary gives the
+ILLUMINATED and LAVA materials a flat glow that ignores light level, so
+scaling light alone would change nothing.
+
+**Fix.** Two hooks.
+
+- When DH builds a lower detail level, the block's own emission shrinks
+  with how much of the 2x2 it fills. Light that spread in from neighbours
+  is left alone. A fully covered 2x2 (lava lake, glowstone wall) is
+  unchanged.
+- Client only. When the light is under half the block's emission, the
+  render data drops the ILLUMINATED or LAVA material, so shaders stop
+  glowing it.
+
+Run `java -cp dh-patches/emissive-lod/.build/classes elysium.dhemissive.EmissiveFalloff`
+to see the curve. Light by detail level, emission 15:
+
+| level | lone in air | 2x2 cluster | half row | lava lake |
+|------:|------------:|------------:|---------:|----------:|
+| 1 | 7 | 15 | 11 | 15 |
+| 2 | 0 | 7 | 7 | 15 |
+| 3 | 0 | 0 | 3 | 15 |
+
+Hack: the sqrt curve is a guess. It leans dim on purpose. Tune it in
+`EmissiveFalloff.java`.
+
+**Limits.**
+
+- Untested in game. It compiles and the target methods and local names
+  match the 3.3.2 jar. Nothing has run it under Knot. Check the log for a
+  Mixin error on first launch.
+- Tied to DH 3.3.2. `fabric.mod.json` requires exactly that version, so a
+  DH bump stops the game at launch. Re-check the targets, rebuild, then
+  change the version.
+- DH keeps lower detail levels in its SQLite cache, on the server and on
+  each client. Existing worlds keep the old bright LODs until that
+  database is deleted or the area is regenerated. New and changed chunks
+  use the patch. I have not checked where DH stores that database for
+  this pack, so find it before promising anyone a clean wipe.
+
 ### Resource packs
 
 Resource packs declared in `pack.yaml` are installed for clients under
