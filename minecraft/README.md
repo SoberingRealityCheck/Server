@@ -239,7 +239,7 @@ jar and puts in the pack. Which side gets it comes from `environment` in
 its `fabric.mod.json`. Use it for data that a mod reads, so players get it
 with no setting to turn on. A resource pack would be a toggle to find.
 
-`elysium-ambience` is data for AmbientSounds. It has two rules:
+`elysium-ambience` is data for AmbientSounds. It has two rules and one override:
 
 - `leaf-wind`: wind in leaves near trees on the surface. Quiet in clear
   weather (0.2), louder in rain and storms (0.45).
@@ -251,7 +251,16 @@ with no setting to turn on. A resource pack would be a toggle to find.
   tell flowing water from still. Streams Reflowing streams outside river
   biomes stay silent.
 
-Untested in game. The river volume and region are guesses.
+- `rain` (override): AmbientSounds' own rain loop, with no sounds. Cool
+  Rain already plays rain that matches the surface, so two rain beds
+  stacked. The rule keeps its `mute` so birds and wind still duck in
+  rain. Hack: this replaces the jar's file and relies on the local mod
+  loading after AmbientSounds (`suggests` orders it). `storm.close` and
+  `storm.away` still play their recorded storm beds, which likely have
+  rain in them. Left alone for the thunder.
+
+Untested in game. The river volume and region are guesses. So is the empty
+`rain` rule. If rain still doubles up, the override is not winning.
 
 ### dh-patches/emissive-lod/
 
