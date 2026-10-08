@@ -13,3 +13,4 @@ minecraft/__pycache__/
 minecraft/tools/__pycache__/
 
 *.pem
+.DS_Store
