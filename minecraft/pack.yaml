@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.6.3"
+version: "1.7.0"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -381,6 +381,51 @@ mods:
       server-overrides/world/datapacks/z-seasons-terralith -- see README.
       CAUTION: beta, built for 26.1.2 and flagged as working on 26.2.
 
+  - name: "Season Cache"
+    file: "seasoncache-1.3.1+26.2.2.jar"
+    url: "https://github.com/SoberingRealityCheck/season-cache/releases/download/v1.3.1-26.2.2/seasoncache-1.3.1%2B26.2.2.jar"
+    sha512: "49408a34e10d54573b0b5ca1ce5eeb9ef1dd0a0cc2192bcd070fd5e9938107360adb1d142328d5d53b71a449f876629aa2d2c07d369bb604fd55f3a2650487a5"
+    env: both
+    reason: >-
+      Keeps placed snow and ice in step with Serene Seasons. On a season
+      change it adds snow layers and ice in loaded chunks and melts them
+      in spring, nearest the players first. Serene Seasons alone only
+      changes snow as weather happens to fall. Also builds a per-chunk
+      snow map from the region files and streams it to clients, which
+      Nova Reimagined Snow reads. Our 26.2 port of ItsThatNova's mod
+      (MIT), source at github.com/SoberingRealityCheck/season-cache.
+      The first 26.2 build hung the server thread on chunk load. Fixed in 26.2.1. Still
+      lightly tested: watch snow placement and the server log after the
+      first season change.
+
+  - name: "Nova Reimagined Snow"
+    file: "compsnow-1.0.3+26.2.1.jar"
+    url: "https://github.com/SoberingRealityCheck/nova-reimagined-snow/releases/download/v1.0.3-26.2.1/compsnow-1.0.3%2B26.2.1.jar"
+    sha512: "3a1a1dc07320397969882e9d13900686eb2534391653a0c322fba2acfc2145d387c9745c47fe112c34ce026c5ebd562ba54a826e945196526ae907f92eb751ef"
+    env: client
+    reason: >-
+      Feeds the Nova Reimagined shader its snow map. Reads what Season
+      Cache streams from the server and turns it into textures the
+      shader samples. Does nothing unless Nova is the active shader.
+      Client only. Our 26.2 port of ItsThatNova's mod (MIT), source at
+      github.com/SoberingRealityCheck/nova-reimagined-snow. Loads and
+      uploads its textures on macOS. Its Distant Horizons texture slots
+      fall back to plain white, because they expect a companion
+      resource pack we do not ship.
+
+  - name: "Seasonal LODs"
+    file: "ssdh26-1.0.0.jar"
+    url: "https://github.com/SoberingRealityCheck/ssdh/releases/download/v1.0.0/ssdh26-1.0.0.jar"
+    sha512: "f6625e19fae0b73b122a15cc9907e11215751d8dc33d91a7e9f0f83ac6eedfec92377f65f672dbea760f8b74c6d7f7ef343c96b0b8b13fd9827176ccc938253a"
+    env: client
+    reason: >-
+      Far Distant Horizons terrain follows Serene Seasons. Without it,
+      near trees and grass change color with the season and far LODs
+      stay stuck on the old colors. Clears DH's color caches on a season
+      change, then rebuilds the visible LODs nearest first. Our own mod,
+      source at github.com/SoberingRealityCheck/ssdh. Client only: the
+      server stores block and biome, never colors.
+
   - name: "Soft Leaves"
     file: "soft_leaves-fabric-26.2-1.2.0.jar"
     url: "https://cdn.modrinth.com/data/2VPEkVF7/versions/qXXB9lT6/soft_leaves-fabric-26.2-1.2.0.jar"
@@ -622,9 +667,9 @@ mods:
 # default would mean a laptop GPU meets a 60->15 fps drop on first
 # launch and reads it as the pack being broken.
 #
-# One shader on purpose. Bliss never loaded on macOS (Iris ran out of
-# texture units) and BSL and RedHat were dropped to keep a single,
-# tested look. Recommended settings are in the README, not shipped: a
+# Two shaders, and Nova Reimagined is the experiment. Bliss never loaded
+# on macOS (Iris ran out of texture units) and BSL and RedHat were
+# dropped to keep a tested look. Recommended settings are in the README, not shipped: a
 # launcher can re-apply override files on an update and wipe a player's
 # own tweaks.
 shaderpacks:
@@ -642,6 +687,29 @@ shaderpacks:
       Recommended settings are in the README. Water reflections are best
       set to sky-only, because the screen-space ones smear under tree
       canopies.
+
+  - name: "Nova Reimagined"
+    file: "NovaReimagined_v1.0.3.zip"
+    url: "https://cdn.modrinth.com/data/Uzkg6HgX/versions/FENoHvT5/NovaReimagined_v1.0.3.zip"
+    sha512: "4a7804e2c40358a478bf7cfc4fe26d314fca7f43bf88b9c903a7ae33d842577e5649855249d1aac9b04f813cede4ed1bb04948c719019f79b749ee89091049b1"
+    reason: >-
+      Complementary Reimagined with a snow system that follows the
+      season: snow builds on terrain, leaves and wood, and on Distant
+      Horizons terrain too. Reads the snow map from Season Cache and
+      Nova Reimagined Snow. Without those it falls back to a guess from
+      the player's position. Upstream lists support up to 1.21.11 but the
+      shader is plain GLSL, so we pin the upstream zip as is. We may not
+      modify it: the Complementary License allows a modpack to include
+      the pack only unmodified. macOS: 1.0.3 does NOT load as shipped.
+      Three upstream problems, found by testing on an M4 Mac. (1) It
+      asks for shader storage buffers when World-Space Reflections is
+      on, which is the default, and macOS has none. (2) The line
+      `float thunderFactor = GetThunderFactor();` in
+      lib/colors/lightAndAmbientColors.glsl crashes Apple's GL
+      compiler. (3) Distant Horizons terrain needs 21 samplers and
+      macOS allows 16. Settings fix 1 and 3, only a code change fixes
+      2. Windows and Linux are untested. If it fails, use the
+      Complementary entry above.
 
 # Installed client-side as an optional resource pack; launchers cannot
 # enable it automatically. Players turn it on under Options -> Resource Packs.
