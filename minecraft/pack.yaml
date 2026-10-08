@@ -434,19 +434,13 @@ mods:
       CAUTION: 0.1.2-beta, ~1.5k downloads, and 0.1.0 crashed servers
       outright (fixed in 0.1.1). The least battle-tested mod in the pack.
 
-  - name: "Critters and Companions (Unofficial Fabric Port)"
-    file: "crittersandcompanions-26.2.0-0.1.3-fabric.jar"
-    url: "https://cdn.modrinth.com/data/shNmXuqa/versions/924I6srW/crittersandcompanions-26.2.0-0.1.3-fabric.jar"
-    sha512: "b9518efaac550d0b8b8f77e06f9041610a8521d3f260258b1bb02b332fe81afab7589bfcf7fbd544e3fea10995181143a5766269f6bf8736b5b3d11e4f6aa1e0"
-    env: both
-    reason: >-
-      Otters, koi, dumbo octopus, ladybugs, snails, stag beetles and
-      friends. Requires GeckoLib and Forge Config API Port, both above.
-      An unofficial port: the original stops at 1.21.1, so this is the
-      only route to 26.2. Reasonably exercised (~23k downloads) and its
-      changelogs read like someone actually testing -- successive
-      releases fixed a stag beetle client crash, a grappling-hook death
-      crash, and lingering jockey mounts.
+  # Critters and Companions (Unofficial Fabric Port) 0.1.3 is NOT listed
+  # here. Its Modrinth project page now 404s in the API, so the jar is
+  # bundled in overrides/mods/ and ships inside the .mrpack itself.
+  # Hack: build.py's --check-deps and MODLIST.md don't see it. Needs
+  # GeckoLib + Forge Config API Port (both above). Fine for a few
+  # friends. Don't publish this pack publicly with a copied jar in it.
+  # Otters, koi, dumbo octopus, ladybugs, snails, stag beetles.
 
   - name: "Naturalist"
     file: "naturalist-2.0.6-fabric-26.2.jar"
