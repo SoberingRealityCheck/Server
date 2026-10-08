@@ -374,9 +374,9 @@ mods:
       CAUTION: beta, built for 26.1.2 and flagged as working on 26.2.
 
   - name: "Season Cache"
-    file: "seasoncache-1.3.1+26.2.jar"
-    url: "https://github.com/SoberingRealityCheck/season-cache/releases/download/v1.3.1-26.2/seasoncache-1.3.1%2B26.2.jar"
-    sha512: "66a70139e39afc4bf9752e36af52370228a1d58b8274a522b12bd2e69a860f32036f509d7c9dc101ec5b824a5700cc03873d0eebb37ed90c323d976a19895f81"
+    file: "seasoncache-1.3.1+26.2.1.jar"
+    url: "https://github.com/SoberingRealityCheck/season-cache/releases/download/v1.3.1-26.2.1/seasoncache-1.3.1%2B26.2.1.jar"
+    sha512: "a0d9734ab518dffdea6e2ef1876dedabb6fd961f41a5c040b5284ee0e67e26bdf7770c0e8e1c67cf53304a1ac5881c6e28971daf9c19ed523829d3fc03d7dd80"
     env: both
     reason: >-
       Keeps placed snow and ice in step with Serene Seasons. On a season
@@ -386,8 +386,9 @@ mods:
       snow map from the region files and streams it to clients, which
       Nova Reimagined Snow reads. Our 26.2 port of ItsThatNova's mod
       (MIT), source at github.com/SoberingRealityCheck/season-cache.
-      UNTESTED in a real client session: watch snow placement and the
-      server log after the first season change.
+      Version 26.2.1 fixes a server thread hang on chunk load. Still
+      lightly tested: watch snow placement and the server log after the
+      first season change.
 
   - name: "Nova Reimagined Snow"
     file: "compsnow-1.0.3+26.2.jar"
