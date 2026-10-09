@@ -21,10 +21,14 @@ Pack version 1.7.1
 | GeckoLib | client + server | Animation library required by Critters and Companions. 5.5.3 is the exact version that port states it was built against -- worth keeping in step rather than tracking GeckoLib's latest independently, since it ships breaking API changes in point releases. |
 | CreativeCore | client only | Required by AmbientSounds |
 | YetAnotherConfigLib (YACL) | client + server | Config library. Required client-side by Better Clouds, and server-side too because Xaero's Maps: Multiplayer+ runs on both sides and hard-depends on it -- caught by --check-deps, which reads the real fabric.mod.json rather than Modrinth's project-level metadata. Upstream marks both sides optional, so shipping it to the server is harmless. |
+| Architectury API | client + server | Library required by Terrain Slabs, which runs on both sides |
+| MidnightLib | client + server | Config library required by Terrain Slabs, which runs on both sides |
 | Terralith | server only | ~95 realistic biomes, vanilla blocks/mobs only |
 | Tectonic | server only | Continent-scale landform shaping, compatible with Terralith |
 | Streams Reflowing | client + server | Flowing streams in the terrain. Modrinth marks it required on both sides. Needs Fabric API, which is above. |
 | Distant Horizons | client + server | Long-distance LOD terrain. Server copy generates and syncs LODs; client copy renders them. Needs both halves to work. Do NOT downgrade below 3.1.1-b: 3.1.0-b crashes dedicated servers during init (LWJGL check dereferences the client wrapper, which is null server-side), and that fault is invisible to --check-deps because it is a runtime NPE, not a declared dependency. 3.3.0 was the first stable (non-beta) release for 26.2. Do NOT upgrade to 3.3.3 yet: on a fresh world the dedicated server hangs forever on "Preparing level" (the Server thread waits on the spawn chunk and nothing generates it). Reproduced three times, with and without Streams Reflowing. 3.3.2 and 3.2.0-b boot fine on the same pack. Retest on the next release. |
+| Nullscape | server only | Reworks the End's terrain (taller, shattered islands, floating valleys) without adding items or mobs. Worldgen only, so the server is enough. CAUTION: it only changes chunks generated after install. An End that already exists keeps its old terrain until it is reset. Does not mix with other End worldgen mods. |
+| Terrain Slabs | client + server | Generates slabs on the surface and in caves to smooth slopes, so hills are walkable without jumping. Adds real blocks, so both sides. Needs Architectury API and MidnightLib, above. Its page doesn't mention Terralith, so check for odd steps on Terralith cliffs. Distant Horizons will not draw the slabs at range. |
 | Lithium | server only | Tick/simulation optimization |
 | Krypton | server only | Networking-stack optimization |
 | FerriteCore | server only | Reduces memory footprint of loaded chunks/block states |
@@ -61,6 +65,12 @@ Pack version 1.7.1
 | AutoHUD | client only | Hides HUD parts that aren't changing (hotbar, health, hunger, armor) and fades them back in when they matter, like Breath of the Wild. Needs Fabric API, above. YACL, above, gives it an in-game config screen. |
 | Dynamic Crosshair | client only | Crosshair changes with what you aim at and hold, and hides when it has nothing to say. Same author as AutoHUD. Needs Fabric API, above. |
 | Mod Menu | client only | Mods button on the main menu, and the way into AutoHUD, Dynamic Crosshair and other mod config screens. Its fabric.mod.json needs only Fabric API. Upstream lists Text Placeholder API as a required dependency on Modrinth but the jar does not depend on it, so it is left out. |
+| 3D Skin Layers | client only | Draws the outer skin layer (hat, jacket, sleeves, pants) as real 3D voxels instead of a flat overlay. Client only. Not tested with Sodium and the shaders yet. |
+| Chat Heads | client only | Shows the sender's head next to each chat message. Client only. The jar is named for 26.1 but Modrinth lists it for 26.2. Sender detection can be wrong on some servers. |
+| Simple Voice Chat | client + server | Proximity voice chat. Both sides. The server needs its UDP port open (default 24454) in docker-compose.yml and the host firewall. CAUTION: the only 26.2 build is a beta (2.6.24). |
+| Simple Voice Chat Radio | server only | Radio block that streams MP3 stations through voice chat. Server only. CAUTION: built for 26.1.2, not 26.2. Its fabric.mod.json says minecraft >=26.1 so it loads, but nobody has run it on 26.2. If the server crashes at boot, remove this first. |
+| Reliable Gliders | client + server | A simple, balanced glider item. Adds a real item, so both sides. |
+| slab back | client + server | Two slabs craft back into the full block. Picked over Craft Slabs Back Into Blocks because it only needs Fabric API. Side set by --check-env. |
 | Cosy Critters & Creepy Crawlies | client only | Ambient critters -- birds, moths, spiders |
 | AmbientSounds | client only | Ambient biome/weather/cave sound layer |
 | Hear the Wind | client only | Wind rushes in as you move fast: long falls, boats, minecarts, mounts |
@@ -68,6 +78,7 @@ Pack version 1.7.1
 | Cool Rain | client only | Rain sounds that change with the block it lands on, such as leaves or water. Upstream marks it required client-side and optional server-side, so it ships to clients only. |
 | Presence Footsteps | client only | Footstep and block sounds that depend on the surface and what you wear |
 | Particle Rain | client only | Replaces vanilla rain and snow with particles. Client-only. CAUTION: the only 26.2 build is a beta (v4-beta.11, 24 Aug 2026). |
+| Windy | client only | Wind particles. Client only. Needs YACL and Fabric API, above. Overlaps with Particle Rain, Falling Leaves Plus and Hear the Wind, so watch for too many particles at once. |
 
 ## Shader packs
 
@@ -101,4 +112,4 @@ Small mods made for this pack. Source is in `local-mods/`.
 |---|---|---|
 | Elysium Ambience | client only | Data only. Adds leaf-rustle wind and river rules to AmbientSounds and silences its rain loop (Cool Rain does rain). No code. River audio is from the Dynamic Surroundings Sounds Pack (GPL-3.0). |
 
-64 files, 265.6 MiB total download.
+75 files, 274.5 MiB total download.
