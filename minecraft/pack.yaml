@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.7.5"
+version: "1.7.6"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -583,6 +583,24 @@ mods:
     reason: >-
       New fish and rays for oceans and rivers. Needs Puzzles Lib and
       Forge Config API Port, both above.
+
+  - name: "Respawning Animals"
+    file: "RespawningAnimals-v26.2.0-mc26.2.x-Fabric.jar"
+    url: "https://cdn.modrinth.com/data/WnwcSeWc/versions/KqYxDgHK/RespawningAnimals-v26.2.0-mc26.2.x-Fabric.jar"
+    sha512: "b272833b69294ca02383a0188478686d73fa90f83eb3b394da15bfb2e241cdc213224a2980a8cd5d3a2c43b6388c7799b28361dd4bc1d4e5505aaa576b200fb2"
+    env: server
+    reason: >-
+      Land animals despawn when you leave and respawn around active
+      players, like Bedrock. Only mobs in vanilla's CREATURE category
+      count, so Naturalist land animals, Ambient Creatures and the
+      Friends & Foes creatures churn. Fish, sharks, whales and
+      butterflies do not. It skips named, tamed, leashed, bred, ridden
+      and structure-spawned animals. Needs Puzzles Lib, Forge Config API
+      Port and Fabric API, all above. Server only. A world made without
+      it keeps the gamerule off. Turn it on with
+      `/gamerule respawninganimals:remove_animals_when_far_away true`.
+      New worlds have it on. Animals already in a world become
+      persistent, so only new spawns churn.
 
   - name: "Xaero's World Map"
     file: "xaeroworldmap-fabric-26.2-1.47.0.jar"
