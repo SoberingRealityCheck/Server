@@ -18,11 +18,11 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.7.1"
+version: "1.7.2"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
-  Matcha Flavoured and Path Generator datapacks.
+  Matcha Flavoured datapack.
 
 minecraft: "26.2"
 loader: fabric
@@ -886,10 +886,3 @@ datapacks:
       file: "MF_RP_1_12_3_26_2.zip"
       url: "https://cdn.modrinth.com/data/QI0EmgZ1/versions/WRkL802v/MF_RP_1_12_3_26_2.zip"
       sha512: "1a5eff90f0f37d572847d8528074c4c6b7bb63089810d2afbae27ee9cc5a06e50fa8d91192a521830ae224af58b914b716b0880ef84057364bd611e49cee05e3"
-
-  # Extended for Terralith's ground blocks by
-  # server-overrides/world/datapacks/z-footpath-terralith -- see README.
-  - name: "Path Generator Datapack"
-    file: "Path-Generator-Datapack262.zip"
-    url: "https://cdn.modrinth.com/data/a1wqmF96/versions/kV3ba4GV/Path-Generator-Datapack262.zip"
-    sha512: "5b66b37dee927b359dfe91114a20c1980c4d3bf5a96e67ea0313d1c87692ca206a9a0f28a32f554540207e9668bef555ad0391b6e8a1199bd25121dee0f0ac36"

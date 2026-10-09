@@ -10,8 +10,8 @@
 | Profile | Elysium |
 
 Terralith/Tectonic worldgen, Distant Horizons LOD rendering, performance
-and QOL mods, layered under the Matcha Flavoured and Path Generator
-datapacks. Full contents: `MODLIST.md` (generated -- see below).
+and QOL mods, layered under the Matcha Flavoured
+datapack. Full contents: `MODLIST.md` (generated -- see below).
 
 ## How the pack works
 
@@ -63,7 +63,7 @@ missing textures and raw translation keys. Mark those with:
     resourcepack: true
 ```
 
-Matcha Flavoured is one of these; Path Generator is not.
+Matcha Flavoured is one of these.
 
 Some authors ship the resource pack as a separate download instead of
 one combined zip (Matcha did from 1.12). For those, make `resourcepack`
@@ -329,12 +329,6 @@ see the [project page](https://modrinth.com/resourcepack/dynamic-surroundings-so
 for those credits and asset notes.
 
 `server-overrides/` works the same way but only the server gets it.
-`server-overrides/world/datapacks/z-footpath-terralith/` extends Path
-Generator to Terralith's ground blocks (gravel, clay, mud, granite,
-calcite and so on). It replaces the base pack's `footpath:convert`
-function whole, so if Path Generator updates, re-copy its
-`convert.mcfunction` into ours first. The `z-` prefix makes it load
-after Path Generator, which is what lets it win.
 
 Server-side settings that the container can set as environment variables
 (difficulty, MOTD, view distance, whitelist) belong in `.env` instead --
