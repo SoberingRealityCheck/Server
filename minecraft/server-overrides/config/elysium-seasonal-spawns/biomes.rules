@@ -60,7 +60,7 @@ why    = Open grassland. Little cover in winter.
 
 [swamp]
 biomes = #c:is_swamp minecraft:swamp minecraft:mangrove_swamp
-why    = Wetlands. Cold-blooded animals here still go dormant in winter.
+why    = Wetlands. Plain swamp has a real winter, so cold-blooded animals go dormant there. Mangrove swamp is tropical in this pack and only 2-number rows reach it.
 
 [river]
 biomes = #minecraft:is_river #c:is_river

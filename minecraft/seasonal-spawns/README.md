@@ -25,11 +25,26 @@ That is all it does. This has three consequences you should know.
 1. **It can only lower a rate.** 1.00 is the pack's normal. It cannot
    go higher. If you want more deer in autumn, lower everything else, or
    raise the base with the `min_animals_near_player` gamerule.
-2. **It does not set how many animals are in the world.** It changes the
-   mix of what spawns and how fast the world refills. Respawning
-   Animals keeps topping up toward a cap of its own. If the world is
-   already full, a lower chance only slows the refill. Watch a world
-   for a few game days before you count on a density change.
+2. **It does not set how many animals are in the world. Read this one.**
+   It changes the mix of what spawns and how fast the world refills.
+   Respawning Animals tops the world up to a cap of its own (the
+   `min_animals_near_player` gamerule, 15 by default) and tries again
+   every tick. A cancelled spawn is retried, so a slot an animal is
+   barred from is filled by something that is not barred.
+
+   **The likely result, not yet checked in a live world:** in winter
+   taiga the bears, hedgehogs and snakes drop out and their slots fill
+   with pigs, cows, sheep, chickens, turkeys and foxes. The total count
+   stays near the cap. The share of farm animals goes up in winter. That
+   is the opposite of realism. The density knob that really changes the
+   count is `min_animals_near_player`. It is global, not per biome or per
+   season. Setting it per season is on the "Ideas not built" list.
+
+   **A check to run in game:** stand in the same taiga in summer and in
+   winter (`/season set mid_winter` jumps the calendar). Count the
+   creatures within 128 blocks after a few minutes. An easy count is
+   `/execute if entity @e[type=!player,distance=..128]` with the type you
+   want, or the entity counter on F3.
 3. **It cannot tell apart animals that share a type.** Naturalist uses
    one entity (`naturalist:bird`) for six birds and one (`naturalist:snake`)
    for three snakes. Rules for those work on biome only.
@@ -178,13 +193,17 @@ editing `src/`. You do not need to rebuild to change a `.rules` file.
 
 ## Tested, and not tested
 
-Tested on 2026-10-09, on a throwaway dedicated server built from this
-pack's server mods plus this jar (Minecraft 26.2, Fabric Loader 0.19.5,
-Java 25). Console only, no player:
+Tested on 2026-10-09 on throwaway dedicated servers (Minecraft 26.2,
+Fabric Loader 0.19.5, Java 25). Console only, no player. The sample
+tables below came from a server with the pack's mod set as of 1.7.1 plus
+this jar. A last boot of the exact 1.7.7 pack (jar and rules from
+`server-overrides/`) repeated the audit, `here` and a taiga summer and
+winter sample with the same results: bears, hedgehogs and snakes at
+zero in winter, back to normal in summer.
 
 - The jar loads and the mixin applies. `defaultRequire = 1` means a bad
   target would have stopped the server.
-- The rules load: 22 sections, 23 animals, 15 groups.
+- The rules load: 22 sections, 23 animals, 15 groups. The audit puts 118 of 165 biomes in a group. The other 47 are mostly oceans, caves, Nether and End.
 - `audit`, `here`, `sample`, `stats` and `reload` all ran.
 - A broken rules file is reported as `file:line: message`, the old rules
   stay, and the next `reload` recovers.

@@ -18,7 +18,7 @@ Each animal has up to four parts.
   like.
 - **Rule.** What the `.rules` file does. A chance of 1.00 is the pack's
   normal. Rows are `spring summer autumn winter`, or `dry wet` in the
-  tropical biomes (desert, savanna, jungle, badlands).
+  tropical biomes (desert, savanna, jungle, badlands, and mangrove swamp).
 - **Confidence.** `sourced`, `reasoned` or `guess`, the same label the
   rule carries.
 
@@ -47,10 +47,12 @@ sourced rule.
   pick. The game tries again a moment later.
 - It changes the mix and how fast the world refills. It does **not**
   directly set how many animals are in the world. Respawning Animals
-  keeps topping up toward its own cap (the `min_animals_near_player`
-  gamerule, 15 by default). If the world is full, a lower chance only
-  slows the refill. Run `/seasonalspawns sample` and watch the world
-  over a few game days before you count on a density change.
+  tops the world up to its own cap (the `min_animals_near_player`
+  gamerule, 15 by default) and retries every tick. So when a rule bars
+  bears in winter, the slot is likely filled by an animal that is not
+  barred, often a farm animal. The count stays near the cap and the mix
+  moves. This is the expected result and has not been checked in a live
+  world. See the README for a check to run.
 
 ## Bears
 
@@ -254,7 +256,8 @@ the continent. They crowd the waterholes.
   burrows. A Nevada tortoise comes out each spring. Swamp-living
   species in warm places do not have a real cold season. Cold-winter
   species sleep through winter.
-- **Rule.** Desert `0.60 1.00`. Swamp `0.70 1.00 0.80 0.10`.
+- **Rule.** Desert `0.60 1.00`. Swamp `0.70 1.00 0.80 0.10` (plain swamp
+  only, since mangrove swamp is tropical here).
 - **Confidence.** reasoned. The one page I found (a news story about
   one tortoise) gives no timings and does not back the numbers.
 
@@ -316,6 +319,7 @@ the continent. They crowd the waterholes.
   days. Mating is in spring and nesting in early summer.
 - **Rule.** Snowy `0.00` all year (this catches the ice marsh).
   Taiga `0.10 0.50 0.10 0.00`. Elsewhere `0.80 1.00 0.80 0.10`.
+  Mangrove swamp is tropical in this pack, so it gets no seasonal rule.
 - **Confidence.** reasoned. The temperatures are repeated across pages
   of mixed quality.
 - **Sources.** <https://www.magnoliaplantation.com/magnolia-articles/alligators-magnolia>,
@@ -327,7 +331,8 @@ the continent. They crowd the waterholes.
 - **In the real world.** Temperate frogs go dormant in winter. Warm, wet
   spring weather wakes them and they breed in new pools. Wood frogs
   breed first.
-- **Rule.** `1.00 0.90 0.70 0.10`.
+- **Rule.** `1.00 0.90 0.70 0.10`. This reaches plain swamp only. Mangrove
+  swamp is tropical in this pack, has no 4-number rows, and stays at 1.00.
 - **Confidence.** sourced.
 - **Sources.** <https://www.brandywine.org/conservancy/blog/vernal-pools-and-amphibians-who-love-them-your-new-noisy-neighbors>,
   <https://www.sungazette.com/news/outdoors/2023/04/reflections-in-nature-wood-frog-breeding-season-is-early-spring/>.

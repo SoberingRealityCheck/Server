@@ -3,8 +3,9 @@
 # They cannot heat themselves, so their year follows the temperature.
 # In a cold winter they go dormant (the word is "brumation") and come
 # out in spring. These rows are for four-season biomes only. In the
-# tropical biomes (desert, savanna, jungle, badlands) there is no cold
-# season in this pack, so there is no row and the chance stays at 1.0.
+# tropical biomes (desert, savanna, jungle, badlands and mangrove swamp)
+# there is no cold season in this pack, so there is no row and the chance
+# stays at 1.0.
 #
 # Row format:   group = spring summer autumn winter
 # Dormant animals still move on warm winter days, so winter is a small
@@ -65,6 +66,8 @@ source     = https://www.brandywine.org/conservancy/blog/vernal-pools-and-amphib
 why        = Frogs go dormant in winter. Warm, wet spring weather wakes them and they
              breed in the new pools in early spring, wood frogs first. Spring is their
              loudest and most visible time. Autumn is the wind-down. In this game frogs
-             live in swamp and mangrove swamp, where winter is a real season.
+             live in swamp and mangrove swamp. Plain swamp has a real winter, so it
+             gets these rows. Mangrove swamp is tropical in this pack, has no cold
+             season, and is left at 1.0 all year.
 #               spring summer autumn winter
 any = 1.0  0.9  0.7  0.1
