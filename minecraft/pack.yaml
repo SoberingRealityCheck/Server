@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.7.0"
+version: "1.7.1"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -156,6 +156,20 @@ mods:
       project-level metadata. Upstream marks both sides optional, so
       shipping it to the server is harmless.
 
+  - name: "Architectury API"
+    file: "architectury-fabric-21.1.11.jar"
+    url: "https://cdn.modrinth.com/data/lhGA9TYQ/versions/w3CUWoxd/architectury-fabric-21.1.11.jar"
+    sha512: "b4c74ce1c0bb47e8ba54cbdd9b24fe8cc7cfc2ed7194f1e451e369adb1f1ae9ac37afc4612124b9793cb5fd7705ebce5634caa80c2825bd23d3dba8eb0bcc53d"
+    env: both
+    reason: "Library required by Terrain Slabs, which runs on both sides"
+
+  - name: "MidnightLib"
+    file: "midnightlib-fabric-1.9.3+26.2.jar"
+    url: "https://cdn.modrinth.com/data/codAaoxh/versions/3uBvRFE9/midnightlib-fabric-1.9.3%2B26.2.jar"
+    sha512: "46a0959737bb54431f0ae0a7dfa2467f26211d27ea2cd1ef7a7750c9a97425f481db46bab6cc861cd3b77accb7dfef3653dc5c683d7dfc07fa7f76824351ce22"
+    env: both
+    reason: "Config library required by Terrain Slabs, which runs on both sides"
+
   # --- Worldgen -------------------------------------------------------
   - name: "Terralith"
     file: "Terralith_26.2_v2.6.4.jar"
@@ -206,6 +220,30 @@ mods:
   # distanthorizons 3.3.2 exactly, so a DH bump fails loudly at launch
   # instead of silently breaking. Re-check the mixin targets, rebuild,
   # and change the version in its fabric.mod.json when bumping DH.
+
+  - name: "Nullscape"
+    file: "Nullscape_26.2_v1.2.20.jar"
+    url: "https://cdn.modrinth.com/data/LPjGiSO4/versions/lpsdO6Sg/Nullscape_26.2_v1.2.20.jar"
+    sha512: "8c8f5ec050fb038da653c1023d2bbaf01cf0a88354d8081dbf99513375a64ebc18c669650d017c938ab4c4314c47f8b706422d8df43f4652c6c85460a63b6f01"
+    env: server
+    reason: >-
+      Reworks the End's terrain (taller, shattered islands, floating
+      valleys) without adding items or mobs. Worldgen only, so the
+      server is enough. CAUTION: it only changes chunks generated after
+      install. An End that already exists keeps its old terrain until
+      it is reset. Does not mix with other End worldgen mods.
+
+  - name: "Terrain Slabs"
+    file: "Terrain Slabs v3.3.3-26.2.jar"
+    url: "https://cdn.modrinth.com/data/SJu6sklj/versions/ghb8NWuP/Terrain%20Slabs%20v3.3.3-26.2.jar"
+    sha512: "5c25fcf8196878c543491819d4fc79c075e743d00e5c84b516ac5723ca67a78112a139cd0115c64822687749f26f6c15712df562531a509c70d6ec1b2500b9e1"
+    env: both
+    reason: >-
+      Generates slabs on the surface and in caves to smooth slopes, so
+      hills are walkable without jumping. Adds real blocks, so both
+      sides. Needs Architectury API and MidnightLib, above. Its page
+      doesn't mention Terralith, so check for odd steps on Terralith
+      cliffs. Distant Horizons will not draw the slabs at range.
 
   # --- Server performance ---------------------------------------------
   - name: "Lithium"
@@ -414,9 +452,9 @@ mods:
       resource pack we do not ship.
 
   - name: "Seasonal LODs"
-    file: "ssdh26-1.0.0.jar"
-    url: "https://github.com/SoberingRealityCheck/ssdh/releases/download/v1.0.0/ssdh26-1.0.0.jar"
-    sha512: "f6625e19fae0b73b122a15cc9907e11215751d8dc33d91a7e9f0f83ac6eedfec92377f65f672dbea760f8b74c6d7f7ef343c96b0b8b13fd9827176ccc938253a"
+    file: "ssdh26-1.0.2.jar"
+    url: "https://github.com/SoberingRealityCheck/ssdh/releases/download/v1.0.2/ssdh26-1.0.2.jar"
+    sha512: "d44a894587740936d61325b951c8852c6ea47620f46050db55b7172a98b48b90f6f9c7e4b76b9747d44933b7ac1a2a749bd9ad6a4d43f924be09937672a30f39"
     env: client
     reason: >-
       Far Distant Horizons terrain follows Serene Seasons. Without it,
@@ -424,7 +462,11 @@ mods:
       stay stuck on the old colors. Clears DH's color caches on a season
       change, then rebuilds the visible LODs nearest first. Our own mod,
       source at github.com/SoberingRealityCheck/ssdh. Client only: the
-      server stores block and biome, never colors.
+      server stores block and biome, never colors. Also publishes the
+      ssdh:season_meta and ssdh:season_phase textures that Nova
+      Reimagined reads for seasonal Distant Horizons grass.
+      Runs a second sweep 20 seconds after each season change, because
+      the first one can leave far grass on the old season.
 
   - name: "Soft Leaves"
     file: "soft_leaves-fabric-26.2-1.2.0.jar"
@@ -601,6 +643,65 @@ mods:
       dependency on Modrinth but the jar does not depend on it, so it is
       left out.
 
+  # --- Players --------------------------------------------------------
+  - name: "3D Skin Layers"
+    file: "skinlayers3d-fabric-1.11.3-mc26.2.jar"
+    url: "https://cdn.modrinth.com/data/zV5r3pPn/versions/AfYGPfcD/skinlayers3d-fabric-1.11.3-mc26.2.jar"
+    sha512: "552bafff617fec708739faeb0a94001f5180aced60dc298710b9217893c3b7448c5acfed926f31d162978b4532e7d85a4887e8128bc6579c48a7e7a55aab79c2"
+    env: client
+    reason: >-
+      Draws the outer skin layer (hat, jacket, sleeves, pants) as real
+      3D voxels instead of a flat overlay. Client only. Not tested with
+      Sodium and the shaders yet.
+
+  - name: "Chat Heads"
+    file: "chat_heads-1.3.2-fabric-26.1.jar"
+    url: "https://cdn.modrinth.com/data/Wb5oqrBJ/versions/rsO6BV1x/chat_heads-1.3.2-fabric-26.1.jar"
+    sha512: "d5e79fefa0d5d597b2c66cd20ab7346daa512e68027995759808520809250f9960cadfa5f71516cd854d84dff2669d3928610145e58c994b0a711031627bd131"
+    env: client
+    reason: >-
+      Shows the sender's head next to each chat message. Client only.
+      The jar is named for 26.1 but Modrinth lists it for 26.2. Sender
+      detection can be wrong on some servers.
+
+  - name: "Simple Voice Chat"
+    file: "voicechat-fabric-2.6.24+26.2.jar"
+    url: "https://cdn.modrinth.com/data/9eGKb6K1/versions/Ls232EsW/voicechat-fabric-2.6.24%2B26.2.jar"
+    sha512: "592c66fafdf00d9b9b23f23da8dbfd8bb996c2f639b8d55c2028a9fd55d79a7df67f1d23e1ef11a52919baa6b946a65190f805f884f0d50492db10d8bcd83db0"
+    env: both
+    reason: >-
+      Proximity voice chat. Both sides. The server needs its UDP port
+      open (default 24454) in docker-compose.yml and the host firewall.
+      CAUTION: the only 26.2 build is a beta (2.6.24).
+
+  - name: "Simple Voice Chat Radio"
+    file: "SVC-Radio-2.2.1+26.1.fabric.jar"
+    url: "https://cdn.modrinth.com/data/Ab2GBNpI/versions/SjmcseRA/SVC-Radio-2.2.1%2B26.1.fabric.jar"
+    sha512: "0ac898b9400029abb2931a86c33864bfadceae0cc7ed911bce4dc7ee087e35a24a0713a21cb0d488460ced367d373c06bee5272517dc02c3bb7071ef896dbd93"
+    env: server
+    reason: >-
+      Radio block that streams MP3 stations through voice chat. Server
+      only. CAUTION: built for 26.1.2, not 26.2. Its fabric.mod.json
+      says minecraft >=26.1 so it loads, but nobody has run it on 26.2.
+      If the server crashes at boot, remove this first.
+
+  - name: "Reliable Gliders"
+    file: "reliable_gliders-fabric-26.2-1.3.3.jar"
+    url: "https://cdn.modrinth.com/data/pVIWsXir/versions/ApuzuPxT/reliable_gliders-fabric-26.2-1.3.3.jar"
+    sha512: "7d1ea607419ffafb410cf5dac5835ac356e3db5f672356a28732af6c955ffbed83288b06fe129caabf7096e6a264070c59f603ccc889dfd09469fecdfe75f448"
+    env: both
+    reason: "A simple, balanced glider item. Adds a real item, so both sides."
+
+  - name: "slab back"
+    file: "slab-back-1.10.1.jar"
+    url: "https://cdn.modrinth.com/data/l0JYwJHY/versions/junIeLd2/slab-back-1.10.1.jar"
+    sha512: "5b60560e6aad4e4f026f8760682ff4057745a3e0873fa0a9382a4f40c66e31ce647ba4947859b52ef9b2c939f6b6b492d1be7ec6dc112a01ebee63b6bcced075"
+    env: both
+    reason: >-
+      Two slabs craft back into the full block. Picked over Craft Slabs
+      Back Into Blocks because it only needs Fabric API. Side set by
+      --check-env.
+
   # --- Ambience -------------------------------------------------------
   - name: "Cosy Critters & Creepy Crawlies"
     file: "cosycritters-0.3.3+26.2-fabric.jar"
@@ -655,6 +756,16 @@ mods:
     reason: >-
       Replaces vanilla rain and snow with particles. Client-only.
       CAUTION: the only 26.2 build is a beta (v4-beta.11, 24 Aug 2026).
+
+  - name: "Windy"
+    file: "Windy-1.1.1+26.1.jar"
+    url: "https://cdn.modrinth.com/data/EwYg6C78/versions/qKwLQacO/Windy-1.1.1%2B26.1.jar"
+    sha512: "953d568f15c5d82dbb12d6dee12dd4947fa977f560dab155b1fd2201ad559c259ce4d93ca589fc30f80aa9332231483d2116742639eab9a9df01c962938fbcf6"
+    env: client
+    reason: >-
+      Wind particles. Client only. Needs YACL and Fabric API, above.
+      Overlaps with Particle Rain, Falling Leaves Plus and Hear the
+      Wind, so watch for too many particles at once.
 
 # ModernFix omitted: no Fabric 26.2 build yet.
 
