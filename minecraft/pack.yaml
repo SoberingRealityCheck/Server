@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.7.4"
+version: "1.7.5"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the

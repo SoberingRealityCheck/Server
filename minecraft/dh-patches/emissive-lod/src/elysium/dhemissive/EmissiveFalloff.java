@@ -51,7 +51,7 @@ public final class EmissiveFalloff
 	 * Darkening the color is the only lever, since the glow strength is a
 	 * constant inside the shader pack. Lower = dimmer LOD lights.
 	 */
-	public static final double SHADER_GLOW_GAIN = 0.4;
+	public static final double SHADER_GLOW_GAIN = 0.8;
 
 	/** Multiplier for the RGB of a glowing LOD block: block brightness (0-15) times the gain. */
 	public static double glowColorScale(int blockLight)
