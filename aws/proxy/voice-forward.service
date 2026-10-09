@@ -1,0 +1,30 @@
+# Relays Simple Voice Chat's UDP port from the proxy to the game host.
+#
+# lazymc only proxies TCP, and the game host has no stable public IP, so
+# voice clients talk to the proxy's Elastic IP and this unit passes the
+# packets on over the private network. Clients reach it automatically:
+# Simple Voice Chat tells them to use the same address they joined on.
+#
+# Hack: socat forks one relay per client address. Fine for 8 players, not
+# built for more. -T 60 drops a relay after 60 s of silence, and the
+# voice keepalive runs every second, so a live player never hits it.
+#
+# Not started by setup.sh. Fill VOICE_TARGET in /etc/lazymc/voice.env
+# first (the game host's PRIVATE IP). When the game host is off the
+# packets go nowhere, which is fine, nobody is in voice then.
+
+[Unit]
+Description=Simple Voice Chat UDP relay to the game host
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+EnvironmentFile=/etc/lazymc/voice.env
+ExecStart=/usr/bin/socat -T 60 UDP4-LISTEN:24454,fork,reuseaddr UDP4:${VOICE_TARGET}:24454
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
