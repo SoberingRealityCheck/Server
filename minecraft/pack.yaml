@@ -276,6 +276,17 @@ mods:
       Pre-generates chunks on demand via console commands. Idle otherwise; it does nothing
       until you run /chunky start.
 
+  - name: "spark"
+    file: "spark-1.10.187-fabric.jar"
+    url: "https://cdn.modrinth.com/data/l6YH9Als/versions/e3hsPc1o/spark-1.10.187-fabric.jar"
+    sha512: "c74bf5d5a16b2445ec6ea717eac756412b272a8015e91f91a7bf5a27e6f2f99c4a11878d434510f941f37b0344b3a7d1ba0dd6c34e80642762c48fb6e9a93894"
+    env: server
+    reason: >-
+      Profiler for lag hunting. Idle until you run /spark profiler start,
+      then /spark profiler stop prints a link to a report that shows
+      what the server thread was doing. Server only, so players need
+      nothing. Added to chase the lag after teleports into new terrain.
+
   # --- Client rendering -----------------------------------------------
   - name: "Sodium"
     file: "sodium-fabric-0.9.2+mc26.2.jar"
