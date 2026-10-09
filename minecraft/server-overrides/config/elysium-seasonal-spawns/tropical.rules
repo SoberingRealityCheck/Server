@@ -1,0 +1,119 @@
+# Animals of savanna, desert, badlands and jungle.
+# These biomes are "tropical" in this pack. Serene Seasons gives them a
+# dry and a wet half-year, not four seasons. So the rows here have TWO
+# numbers:   group = dry wet
+#
+# Savanna animals are tied to water and rain, not to temperature. The
+# real pattern is the same on every continent. In the wet season water
+# is everywhere and herds spread out. In the dry season they crowd
+# around the few places that still have water. Seen from one patch of
+# savanna away from the water, the dry season is the thin one.
+#
+# Lions, giraffes and rhinos have no rule. See ANIMALS.md for why.
+
+[elephant]
+animals    = naturalist:elephant
+confidence = sourced
+source     = https://www.frontiersin.org/journals/ecology-and-evolution/articles/10.3389/fevo.2018.00167/full
+why        = Elephants have to drink every two to three days. In the dry season GPS
+             tracking shows them making longer, straighter trips toward water and
+             gathering at the few waterholes that last. In the wet season they spread
+             across the whole range. A patch of savanna away from water holds fewer in
+             the dry half. The drop is small because they do not leave their range.
+#                dry  wet
+savanna = 0.8  1.0
+
+[zebra]
+animals    = naturalist:zebra
+confidence = sourced
+source     = https://www.cms.int/fr/node/41605
+why        = Plains zebra travel with the wildebeest in the Serengeti and Mara. Rainfall
+             drives the loop. Herds leave the dry plains for the Mara River region and
+             come back with the rains. The wet-season range is where they calve. So a
+             patch of dry-season savanna is mostly empty of them. They are the strongest
+             case of rain-following in the pack, so they get the biggest dry cut.
+#                dry  wet
+savanna = 0.5  1.0
+
+[hippo]
+animals    = naturalist:hippo
+confidence = sourced
+source     = https://news.ucsb.edu/2019/019687/hippos-hidden-world
+why        = In the dry season a river shrinks to scattered pools and the hippos pack into
+             them. Large young males travel up to 15 km upstream to find water. In the
+             wet season water is plentiful and they spread out and move downstream. Away
+             from the last pools, the dry half is thin. The source is one river system
+             in Tanzania and it mostly tracked males.
+#                dry  wet
+savanna = 0.5  1.0
+
+[ostrich]
+animals    = naturalist:ostrich
+confidence = sourced
+source     = https://agris.fao.org/search/zh/records/65df76284c5aef494fe2c9bb
+why        = Ostriches time their breeding to the rains so that chicks hatch when food
+             is greener. Birds in drier country wander to follow rain. A 15-year study in
+             the Mara and Serengeti found a main breeding peak in February and a minor one
+             in October. Sources disagree on the exact months, so this only models "more
+             in the wet half, fewer in the dry half". The size of the drop is a guess.
+#                dry  wet
+savanna = 0.7  1.0
+
+[vulture]
+animals    = naturalist:vulture
+confidence = reasoned
+source     = https://hawkmountain.org/blog/in-the-field/thermal-scouting
+why        = Vultures soar on thermals, which are strongest in hot, dry weather, and they
+             feed on carcasses. Dry-season die-offs of grazers feed them. The wet half
+             has more food of other kinds and weaker lift, so they are somewhat fewer
+             in the sky. This is reasoned. The page above only covers thermals. It does
+             not say anything about dry-season die-offs. The size is a guess.
+#                 dry  wet
+savanna  = 1.0  0.7
+desert   = 1.0  0.7
+badlands = 1.0  0.7
+
+[komodo-dragon]
+animals    = naturalist:komodo_dragon
+confidence = sourced
+source     = https://journal.ugm.ac.id/jtbb/article/download/48280/27394
+             https://flore.unifi.it/retrieve/eab0d6df-ed42-4e0e-ab7d-b282c1c9bea7/Jessop_et_al_2022.pdf
+             https://zoobarcelona.cat/en/node/231
+why        = Komodo dragons live on a few dry, volcanic islands in eastern Indonesia, in
+             tropical savanna and open dry forest. Most of the rain falls from December to
+             March. A 2022 tracking study found they move more in the dry season. The
+             dry half is also mating and nesting time. They are not a rainforest or
+             desert animal, so desert is cut and jungle is cut to a small chance.
+             Naturalist spawns them in all four. Sparse jungle is open enough that the
+             small chance stays.
+#                 dry  wet
+desert   = 0.0  0.0
+jungle   = 0.3  0.3
+savanna  = 1.0  0.7
+badlands = 1.0  0.7
+
+[capybara]
+animals    = ambient_creatures:capybara
+confidence = reasoned
+why        = Capybaras live beside water in tropical South America. Where there is a
+             dry season they gather at the last wet places. A patch of savanna away
+             from water holds fewer of them in the dry half. This is well-known
+             but no source was read for it. Swamp and jungle are wet all year here, so
+             they get no rule.
+#                dry  wet
+savanna = 0.5  1.0
+
+[tortoise]
+animals    = naturalist:tortoise
+confidence = reasoned
+why        = Two different lives share one animal here. In desert, tortoises spend most
+             of their time in burrows. They come out to feed after rain and shelter
+             through the hottest, driest weather, so the dry half is thin. In swamp,
+             where there is a real cold season, they go dormant in winter like other
+             reptiles (see snakes in reptiles.rules for the sourced version of that
+             behaviour). Nothing here is sourced. The one news page found about a Nevada
+             tortoise leaving its burrow in spring gives no timings.
+#                dry  wet
+desert = 0.6  1.0
+#                 spring summer autumn winter
+swamp  = 0.7  1.0  0.8  0.1

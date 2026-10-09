@@ -1,0 +1,91 @@
+# Biome groups.
+#
+# A group is a name for a set of biomes. The animal files use these
+# names in their rows. A biome can be in many groups. That is fine,
+# because in an animal's rows the FIRST row that fits wins, so put the
+# most specific group first.
+#
+# "any" is built in. It matches every biome. Don't define it.
+#
+# Each entry is either:
+#   #namespace:tag       every biome in that biome tag
+#   namespace:biome      one biome
+#
+# Tropical or not is NOT decided here. Serene Seasons decides that, from
+# its own tags (see ../../world/datapacks/z-seasons-terralith and
+# SEASONS_TERRALITH.md). Deserts, badlands, savannas and jungles get a
+# wet and dry year. Everything else gets four seasons. So rows for a
+# savanna group have 2 numbers (dry wet) and rows for a forest group
+# have 4 (spring summer autumn winter).
+#
+# Run `/seasonalspawns audit` in game to list every biome and the groups
+# it landed in. Biomes in no group are only reached by 'any' rows.
+#
+# The audit on 2026-10-09 found these Terralith land biomes in no group.
+# They are listed by id below: blooming_plateau, lush_valley,
+# shield_clearing, valley_clearing (forest), yellowstone (taiga), the four
+# cliffs (mountain), warped_mesa (badlands). Left out on purpose:
+# alpha_islands, skylands and mirage_isles (fixed-season fantasy islands),
+# and shrubland and hot_shrubland (dry scrub, no animal here is tied to it).
+# Note mangrove_swamp counts as TROPICAL in this pack, so it is reached by
+# 2-number rows only. Re-run the audit after a Terralith update.
+
+[forest]
+biomes = #minecraft:is_forest #c:is_forest terralith:blooming_plateau terralith:lush_valley terralith:shield_clearing terralith:valley_clearing
+why    = Broadleaf and mixed woods, including dark forest, birch and flower forest.
+
+[taiga]
+biomes = #minecraft:is_taiga #c:is_taiga terralith:yellowstone
+why    = Cold conifer forest. Long snow cover in winter.
+
+[snowy]
+biomes = #c:is_snowy #c:is_icy
+why    = Snow-covered ground even outside winter: snowy plains, ice spikes, snowy slopes, frozen and jagged peaks, grove.
+
+[bare-snow]
+biomes = minecraft:snowy_plains minecraft:ice_spikes minecraft:snowy_slopes minecraft:frozen_peaks minecraft:jagged_peaks minecraft:snowy_beach
+why    = Snow with no trees. 'snowy' also holds snowy taiga and grove, which are forest, so animals that need trees use this one instead.
+
+[mountain]
+biomes = #minecraft:is_mountain #c:is_mountain terralith:granite_cliffs terralith:white_cliffs terralith:yosemite_cliffs terralith:basalt_cliffs
+why    = Peaks, slopes, meadow and cherry grove. Deep snow forces grazers downhill in winter.
+
+[hills]
+biomes = #minecraft:is_hill #c:is_hill
+why    = Windswept hills and forests. Lower and milder than mountains.
+
+[plains]
+biomes = #c:is_plains minecraft:plains minecraft:sunflower_plains minecraft:meadow
+why    = Open grassland. Little cover in winter.
+
+[swamp]
+biomes = #c:is_swamp minecraft:swamp minecraft:mangrove_swamp
+why    = Wetlands. Cold-blooded animals here still go dormant in winter.
+
+[river]
+biomes = #minecraft:is_river #c:is_river
+why    = River channels and their banks.
+
+[beach]
+biomes = #minecraft:is_beach #c:is_beach minecraft:stony_shore
+why    = Shorelines.
+
+[jungle]
+biomes = #minecraft:is_jungle #c:is_jungle
+why    = Rainforest and bamboo jungle. Tropical in this pack, so wet and dry rows.
+
+[savanna]
+biomes = #minecraft:is_savanna #c:is_savanna
+why    = Open tropical grassland with scattered trees. Wet and dry rows. The dry season is when animals crowd the water.
+
+[desert]
+biomes = #c:is_desert
+why    = Sand desert. Tropical in this pack, so wet and dry rows.
+
+[badlands]
+biomes = #minecraft:is_badlands #c:is_badlands terralith:warped_mesa
+why    = Mesa and eroded canyon country. Tropical in this pack, so wet and dry rows.
+
+[polar]
+biomes = minecraft:ice_spikes minecraft:frozen_ocean minecraft:deep_frozen_ocean minecraft:frozen_river minecraft:snowy_plains minecraft:snowy_beach
+why    = Ice and tundra coasts. Where polar animals live in this game.

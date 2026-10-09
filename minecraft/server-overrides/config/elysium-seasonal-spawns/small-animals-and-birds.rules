@@ -1,0 +1,79 @@
+# Small mammals and birds.
+#
+# Row format:   group = spring summer autumn winter
+#
+# Birds: Naturalist uses ONE entity (naturalist:bird) for blue jay,
+# canary, cardinal, finch, robin and sparrow. The spawn list cannot
+# tell them apart, so the rows work by biome only. Read the 'why'.
+
+[songbirds]
+animals    = naturalist:bird
+confidence = reasoned
+source     = https://www.fws.gov/sites/default/files/documents/2024-04/1111.pdf
+why        = Real songbirds split three ways. Some stay all year (cardinal, house
+             sparrow). Some move short distances (blue jay). Some leave (robins from
+             the far north, though many northern robins stay). In a cold winter the
+             biomes with snow lose the most birds. Warmer woods and fields lose little.
+             The cardinal, sparrow and jay do not leave, but the entity here is all six
+             at once, so this is a blend. The numbers are reasoned from general bird
+             sources, not measured. Birds in the pack spawn in 3 to 4 per group.
+#                  spring summer autumn winter
+snowy    = 0.8  1.0  0.9  0.4
+taiga    = 0.9  1.0  1.0  0.6
+mountain = 0.9  1.0  1.0  0.6
+any      = 0.95 1.0  1.0  0.8
+
+[ducks]
+animals    = naturalist:duck
+confidence = sourced
+source     = https://www.metroparks.com/bird-of-the-week-mallard/
+             https://www.audubon.org/bird-guide-api/1482
+why        = Northern mallards fly south from late September through October and come
+             back from late February. Their peak is March. Some park and city ducks do not
+             go and stay as residents where water stays open. Where winter freezes the
+             ponds and rivers, ducks leave. Where it does not they stay, and may even be
+             joined by arrivals. So the cold biomes lose them in winter and the rest do
+             not.
+#                  spring summer autumn winter
+snowy    = 0.9  1.0  0.5  0.0
+taiga    = 1.0  1.0  0.8  0.2
+mountain = 1.0  1.0  0.8  0.2
+
+[hedgehogs]
+animals    = naturalist:hedgehog
+confidence = sourced
+source     = https://hiwwt.org.uk/node/6892
+             https://research.ucc.ie/en/publications/nesting-behaviour-and-seasonal-body-mass-changes-in-a-rural-irish/
+why        = European hedgehogs hibernate from about October or November to March or
+             April. They wake now and then on warm days. In mild Irish winters they
+             hibernate for less time and come out earlier. Hibernation is deeper and
+             longer in the cold.
+#                  spring summer autumn winter
+snowy    = 0.2  1.0  0.5  0.0
+taiga    = 0.3  1.0  0.6  0.0
+mountain = 0.3  1.0  0.6  0.0
+any      = 0.6  1.0  0.8  0.05
+
+[rabbits]
+animals    = minecraft:rabbit
+confidence = reasoned
+source     = https://tb.plazi.org/GgServer/html/03822308B754FFEDFF6DF725F820F363
+why        = Rabbits are active all year. The species account says breeding length
+             follows latitude and the growing season. Deep snow cuts their food and
+             cover, so snowy ground and conifer forest thin out in winter. Desert
+             rabbits are untouched because desert has no cold season in this pack.
+#                  spring summer autumn winter
+snowy = 1.0  1.0  0.9  0.6
+taiga = 1.0  1.0  1.0  0.8
+
+[raccoons]
+animals    = ambient_creatures:raccoon
+confidence = reasoned
+why        = Raccoons do not hibernate. In hard cold they spend days or weeks in a den
+             in a light sleep called torpor and come out to feed on warmer days. They eat
+             heavily in autumn to build fat. They can lose up to half their weight over
+             winter. In this game they live in forests and by rivers. No source was read
+             for this rule. The numbers are a guess at how much of winter is spent
+             below ground.
+#              spring summer autumn winter
+any = 0.9  1.0  1.0  0.5

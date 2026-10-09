@@ -312,6 +312,29 @@ Hack: the sqrt curve is a guess. It leans dim on purpose. Tune it in
   use the patch. I have not checked where DH stores that database for
   this pack, so find it before promising anyone a clean wipe.
 
+### seasonal-spawns/
+
+A small server-side mod. Land animals spawn at different rates by season
+and by biome, from plain text rule files. Needs Serene Seasons for the
+calendar and works with Respawning Animals.
+
+- Source and docs: `seasonal-spawns/`. Start with its `README.md`.
+- The rules you edit: `server-overrides/config/elysium-seasonal-spawns/*.rules`.
+  Every rule has a reason, a confidence label and sources.
+- Why each animal has its numbers, with real range and seasonal
+  behaviour: `seasonal-spawns/ANIMALS.md`.
+- The built jar is checked in at `server-overrides/mods/elysium-seasonal-spawns.jar`
+  so only the server gets it. `build.py` does not build it. Rebuild with
+  `seasonal-spawns/build.sh` (plain javac, needs Java 25). Changing a
+  `.rules` file does not need a rebuild.
+- Check the rules without a game: `seasonal-spawns/build.sh test` prints
+  every rule as a table and reports mistakes as `file:line: message`.
+- In game: `/seasonalspawns here`, `sample`, `stats`, `audit`, `reload`.
+
+It can only lower a spawn rate, and it does not set how many animals the
+world holds. Read the "What it does, and what it does not" section of its
+README before relying on a density change.
+
 ### Resource packs
 
 Resource packs declared in `pack.yaml` are installed for clients under

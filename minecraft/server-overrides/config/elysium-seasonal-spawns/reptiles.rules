@@ -1,0 +1,70 @@
+# Cold-blooded animals: snakes, lizards, alligators, frogs.
+#
+# They cannot heat themselves, so their year follows the temperature.
+# In a cold winter they go dormant (the word is "brumation") and come
+# out in spring. These rows are for four-season biomes only. In the
+# tropical biomes (desert, savanna, jungle, badlands) there is no cold
+# season in this pack, so there is no row and the chance stays at 1.0.
+#
+# Row format:   group = spring summer autumn winter
+# Dormant animals still move on warm winter days, so winter is a small
+# number and not zero in mild country. In cold country it is zero.
+
+[snakes]
+animals    = naturalist:snake
+confidence = sourced
+source     = https://researchonline.jcu.edu.au/52035/
+why        = Wild timber rattlesnakes in Tennessee went into winter dormancy around
+             10 October (give or take 12 days) and came out around 7 April (give or take
+             17). All winter they made only about six short moves. Care guides put the
+             activity cutoff near 15 C. Cold country has a longer sleep and a shorter
+             active season. One entity covers the plain snake, the coral snake and the
+             rattlesnake, so the rule cannot tell them apart. It works on biome only.
+#                  spring summer autumn winter
+snowy    = 0.0  0.5  0.0  0.0
+mountain = 0.5  1.0  0.6  0.0
+taiga    = 0.5  1.0  0.6  0.0
+any      = 0.7  1.0  0.8  0.05
+
+[lizards]
+animals    = naturalist:lizard
+confidence = reasoned
+source     = https://researchonline.jcu.edu.au/52035/
+why        = Lizards are cold-blooded like snakes and go dormant in the cold the same way.
+             The page above studied snakes, not lizards. The rows are copied from the
+             snakes and not measured for lizards.
+#                  spring summer autumn winter
+snowy    = 0.0  0.5  0.0  0.0
+mountain = 0.5  1.0  0.6  0.0
+taiga    = 0.5  1.0  0.6  0.0
+any      = 0.7  1.0  0.8  0.05
+
+[alligators]
+animals    = naturalist:alligator
+confidence = reasoned
+source     = https://www.magnoliaplantation.com/magnolia-articles/alligators-magnolia
+             https://www.nps.gov/ever/learn/nature/alligator.htm
+why        = American alligators live in warm southern swamps and rivers. They stop eating
+             below about 20 C and go dormant near 13 C. The dormant spell is about
+             four to five months, roughly late November to late February, and they come
+             out on warm days in between. Mating is spring and nesting is early summer.
+             The temperatures come from several pages that repeat each other, so this is
+             marked reasoned. They can't live in snow country, so snowy gets zero and
+             taiga a small summer chance. Naturalist spawns them in Terralith's ice
+             marsh, which is the case the snowy rule exists for.
+#                  spring summer autumn winter
+snowy    = 0.0  0.0  0.0  0.0
+taiga    = 0.1  0.5  0.1  0.0
+any      = 0.8  1.0  0.8  0.1
+
+[frogs]
+animals    = minecraft:frog
+confidence = sourced
+source     = https://www.brandywine.org/conservancy/blog/vernal-pools-and-amphibians-who-love-them-your-new-noisy-neighbors
+             https://www.sungazette.com/news/outdoors/2023/04/reflections-in-nature-wood-frog-breeding-season-is-early-spring/
+why        = Frogs go dormant in winter. Warm, wet spring weather wakes them and they
+             breed in the new pools in early spring, wood frogs first. Spring is their
+             loudest and most visible time. Autumn is the wind-down. In this game frogs
+             live in swamp and mangrove swamp, where winter is a real season.
+#               spring summer autumn winter
+any = 1.0  0.9  0.7  0.1
