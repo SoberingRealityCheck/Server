@@ -280,12 +280,14 @@ mods:
     file: "spark-1.10.187-fabric.jar"
     url: "https://cdn.modrinth.com/data/l6YH9Als/versions/e3hsPc1o/spark-1.10.187-fabric.jar"
     sha512: "c74bf5d5a16b2445ec6ea717eac756412b272a8015e91f91a7bf5a27e6f2f99c4a11878d434510f941f37b0344b3a7d1ba0dd6c34e80642762c48fb6e9a93894"
-    env: server
+    env: both
     reason: >-
       Profiler for lag hunting. Idle until you run /spark profiler start,
       then /spark profiler stop prints a link to a report that shows
-      what the server thread was doing. Server only, so players need
-      nothing. Added to chase the lag after teleports into new terrain.
+      what the thread was doing. On the server it chases lag after
+      teleports into new terrain. On the client it profiles the
+      integrated server and the render thread in singleplayer, where
+      the server copy can't see.
 
   # --- Client rendering -----------------------------------------------
   - name: "Sodium"

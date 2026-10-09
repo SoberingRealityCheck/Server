@@ -33,7 +33,7 @@ Pack version 1.7.1
 | Krypton | server only | Networking-stack optimization |
 | FerriteCore | server only | Reduces memory footprint of loaded chunks/block states |
 | Chunky | server only | Pre-generates chunks on demand via console commands. Idle otherwise; it does nothing until you run /chunky start. |
-| spark | server only | Profiler for lag hunting. Idle until you run /spark profiler start, then /spark profiler stop prints a link to a report that shows what the server thread was doing. Server only, so players need nothing. Added to chase the lag after teleports into new terrain. |
+| spark | client + server | Profiler for lag hunting. Idle until you run /spark profiler start, then /spark profiler stop prints a link to a report that shows what the thread was doing. On the server it chases lag after teleports into new terrain. On the client it profiles the integrated server and the render thread in singleplayer, where the server copy can't see. |
 | Sodium | client only | Rendering engine replacement. Pinned to 0.9.2 to match Iris 1.11.4. Iris pins an exact Sodium build, and Sodium's own notes warn that mismatched Iris builds are not compatible. Iris and Sodium version together; bump them as a pair or not at all. |
 | Iris Shaders | client only | Shader loader. Required to load the shaderpack below; does nothing on its own until a player selects one. Pins an exact Sodium build (0.9.2). |
 | Better Clouds | client only | Replaces vanilla cloud rendering |
