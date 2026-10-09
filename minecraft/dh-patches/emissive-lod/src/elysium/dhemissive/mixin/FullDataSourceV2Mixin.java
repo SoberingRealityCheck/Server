@@ -39,7 +39,6 @@ public class FullDataSourceV2Mixin
 		IBlockStateWrapper block = inputDataSource.mapping.getBlockStateWrapper(id);
 		int emission = block.getLightEmission();
 		int after = EmissiveFalloff.scaleBlockLight(blockLight, emission, covered);
-		elysium.dhemissive.Probe.merge(blockLight, after, emission, covered);
 		return (byte) after;
 	}
 }
