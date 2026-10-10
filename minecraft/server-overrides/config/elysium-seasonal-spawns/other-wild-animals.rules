@@ -1,0 +1,167 @@
+# Wild animals that did not fit the other files: wolf, fox, goat, turkey,
+# mole, rat, sea turtle, crab, penguin, mammoth, jumping spider.
+#
+# Row format:   group = spring summer autumn winter     (ordinary biomes)
+#               group = dry wet                         (tropical biomes)
+# The first row that fits wins. 'any' fits everything. See the other files
+# and the README for the full rules.
+
+[wolf]
+animals    = minecraft:wolf
+confidence = sourced
+source     = https://ielc.libguides.com/sdzg/factsheets/graywolf/reproduction-development
+             https://dec.ny.gov/nature/animals-fish-plants/gray-wolf
+             https://amp.cbc.ca/news/canada/saskatchewan/spring-sign-new-wolf-pups-prince-albert-national-park-1.5087945
+why        = Wolves live in cold and temperate country all year and do not hibernate.
+             Pups are born in April and May. GPS collars in a Saskatchewan park showed
+             the breeding female going underground about the start of April and staying
+             at the den. The pack keeps hunting but ranges closer to home, so spring
+             is a little thin. The den is abandoned at about two months, when the pups
+             move to rendezvous sites. Habitat fix too: wolves are animals of temperate
+             and cold country, so the jungle spawn (sparse jungle) is cut to a small
+             chance. Savanna plateau and wooded badlands are dry open country where
+             wolves do live, so they are left alone.
+#                 spring summer autumn winter
+any = 0.8  1.0  1.0  1.0
+#                  dry  wet
+jungle = 0.3  0.3
+
+[fox]
+animals    = minecraft:fox
+confidence = sourced
+source     = https://icwdm.org/species/carnivores/foxes/fox-biology/
+             https://naturalresources.extension.wisc.edu/?p=1864
+why        = Red foxes mate in winter and the kits are born from March in the south
+             to May in the far north. Kits stay in and around the den until they are
+             weaned at eight to ten weeks, then start hunting with the parents. Spring
+             is when the adults stay close to a den, and by summer the family is out.
+             They stay active through winter. So spring is a little thin and nothing else
+             changes.
+#                 spring summer autumn winter
+any = 0.8  1.0  1.0  1.0
+
+[goat]
+animals    = minecraft:goat
+confidence = sourced
+source     = https://adfg.alaska.gov/static/education/wns/mountain_goat.pdf
+             https://bioone.org/journals/journal-of-wildlife-management/volume-72/issue-8/2007-584/Seasonal-Altitudinal-Movements-of-Mountain-Goats/10.2193/2007-584.full
+why        = Mountain goats summer in high alpine meadows. In winter coastal goats come
+             down to forest near or below the treeline, and goats in drier country stay
+             on steep, windswept slopes where the snow blows off. A Washington study of
+             42 goats found they could not be sorted into migrants and non-migrants.
+             The game puts goats only on frozen peaks, jagged peaks and snowy slopes,
+             which is the high summer range. So the winter count there is lower, since
+             part of the herd has gone down the mountain. The size of the drop is a
+             judgement call.
+#                  spring summer autumn winter
+mountain = 0.9  1.0  1.0  0.6
+
+[turkey]
+animals    = naturalist:turkey
+confidence = reasoned
+source     = https://www.nwtf.org/content-hub/how-the-turkey-world-turns
+             https://tdl-ir.tdl.org/items/f2841bf9-59d0-4f82-8f55-b9f6d47c6639
+why        = Wild turkeys do not migrate. In fall and winter they gather in larger flocks
+             and shift to oak woods for acorns and to tall roost trees. Their home ranges
+             are smallest in winter, so they sit tight. They are in the woods in every
+             season. Deep snow is hard on a ground-feeding bird, so the cold, snowy
+             biomes lose some in winter. The sources cover flocking and roosting, not
+             snow depth, so the numbers are reasoned.
+#                  spring summer autumn winter
+snowy = 0.9  1.0  1.0  0.6
+taiga = 1.0  1.0  1.0  0.8
+
+[mole]
+animals    = naturalist:mole
+confidence = reasoned
+source     = https://www.wildlifeonline.me.uk/animals/species/european-mole
+             https://www.rhs.org.uk/biodiversity/moles
+why        = Moles are active all year and cannot hibernate because they store little
+             fat. Molehills peak in late winter and spring, when males widen their
+             range looking for mates and young moles disperse above ground. They dig
+             deeper in cold and drought. So the animal is always there, but frozen ground
+             in a hard winter keeps them below the surface and out of sight. Only
+             the cold biomes get a winter cut. The pages say nothing about frozen ground,
+             so that part is reasoned.
+#                  spring summer autumn winter
+snowy = 1.0  1.0  1.0  0.5
+taiga = 1.0  1.0  1.0  0.7
+
+[rat]
+animals    = naturalist:rat
+confidence = reasoned
+why        = Rats live beside people and their food. Away from buildings they are
+             cold-sensitive and breed best in the warm months, so wild rats thin out in
+             a cold winter. The numbers are a rough reading of general knowledge. No
+             source was read.
+#                  spring summer autumn winter
+snowy = 0.7  1.0  0.8  0.3
+taiga = 0.8  1.0  0.9  0.5
+any   = 0.9  1.0  1.0  0.8
+
+[sea-turtle]
+animals    = minecraft:turtle
+confidence = sourced
+source     = https://www.fws.gov/refuge/archie-carr/species
+             https://sccf.org/2024/01/23/where-are-the-sea-turtles/
+             https://biology.fau.edu/news/seasonal-seas/index.php
+why        = Sea turtles come up the beach to nest in the warm months. In Florida the
+             season runs roughly May to October (one conservancy), March to October
+             (a university lab), with the peak in May to August (the Archie Carr
+             refuge). Winter is rarely busy, and the refuge logged one very late nest
+             in December. Many turtles leave for warmer or deeper water in the cold.
+             The game spawns turtles only on beaches. Spring and autumn are the edges
+             of the season.
+#               spring summer autumn winter
+beach = 0.6  1.0  0.6  0.1
+
+[crab]
+animals    = friendsandfoes:crab
+confidence = guess
+why        = Beach crabs shelter and slow down when it is cold, and move to deeper
+             water. No source was read. Mangrove swamp is tropical in this pack and has
+             no cold season, so only beach gets a rule.
+#               spring summer autumn winter
+beach = 0.8  1.0  0.9  0.4
+
+[penguin]
+animals    = ambient_creatures:penguin
+confidence = reasoned
+source     = https://en.wikipedia.org/wiki/Ad%C3%A9lie_penguin
+             https://link.springer.com/doi/10.1007/s00300-007-0352-5
+why        = Penguins differ by species. Adelie penguins breed on bare ground in summer
+             and spend winter out on the pack ice, up to about 3000 km from the colony,
+             following the ice edge. Emperors do the opposite and breed on the sea ice
+             through the Antarctic winter. The game has one penguin on ice spikes, frozen
+             ocean, frozen river and stony shore. It is read as the Adelie kind, so summer
+             is the colony season and winter is mostly out at sea. The emperor case is
+             not modelled. The source for the winter range is a tracking study that I
+             did not read in full.
+#                spring summer autumn winter
+polar = 1.0  1.0  0.8  0.6
+
+[mammoth]
+animals    = naturalist:mammoth
+confidence = guess
+source     = https://en.wikipedia.org/wiki/Mammoth_steppe
+why        = Woolly mammoths are extinct. They lived on the cold, dry mammoth steppe
+             in the ice ages, in open and semi-open tundra and steppe-tundra with
+             intermediate cold. A study cited by that page found they disappeared from
+             northern Europe in the extreme cold of the last glacial maximum. So the
+             harshest ground (bare snow, deep winter) is the thinnest. This is an
+             extinct animal in a modern game, so the rarity is a balance call.
+#                    spring summer autumn winter
+bare-snow = 0.7  0.8  0.7  0.5
+any       = 0.8  0.8  0.8  0.6
+
+[jumping-spider]
+animals    = crittersandcompanions:jumping_spider
+confidence = reasoned
+why        = Jumping spiders are cold-blooded. In cold country they sit out winter in a
+             silk retreat and come out in spring. In the tropics they are active all
+             year. Critters and Companions spawns them in jungle, forest and lush caves.
+             Only the four-season forest gets seasonal rows. No source was read.
+#                  spring summer autumn winter
+snowy  = 0.6  1.0  0.6  0.0
+taiga  = 0.6  1.0  0.6  0.1
+forest = 0.8  1.0  0.8  0.2

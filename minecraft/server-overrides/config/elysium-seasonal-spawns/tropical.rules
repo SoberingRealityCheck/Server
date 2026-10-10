@@ -9,7 +9,11 @@
 # around the few places that still have water. Seen from one patch of
 # savanna away from the water, the dry season is the thin one.
 #
-# Lions, giraffes and rhinos have no rule. See ANIMALS.md for why.
+# Every big savanna animal follows the same logic, so their numbers sit
+# close together: 1.0 in the wet half, 0.5 to 0.9 in the dry half, with the
+# strongest rain-followers (zebra) at the bottom and the animals that
+# range freely over the whole region (giraffe) at the top. Animals tied
+# to water drop most. Predators follow their prey.
 
 [elephant]
 animals    = naturalist:elephant
@@ -117,3 +121,88 @@ why        = Two different lives share one animal here. In desert, tortoises spe
 desert = 0.6  1.0
 #                 spring summer autumn winter
 swamp  = 0.7  1.0  0.8  0.1
+
+[rhino]
+animals    = naturalist:rhino
+confidence = sourced
+source     = https://rhinoresourcecenter.com/wp-content/uploads/2019/12/1577270031.pdf
+             https://ielc.libguides.com/sdzg/factsheets/whiterhino/behavior
+why        = Black rhinos must drink every 24 to 48 hours and stay loyal to a permanent
+             water source. A Kruger study found they have smaller home ranges and stick
+             closer to one place in the dry season, which points to surface water as the
+             limit. White rhinos' home ranges shrink in the dry season too, and they
+             travel daily to the few permanent waters. So a patch of savanna away from
+             water holds fewer rhinos in the dry half. They stay in the region, so the
+             cut is modest.
+#                dry  wet
+savanna = 0.8  1.0
+
+[lion]
+animals    = naturalist:lion
+confidence = reasoned
+source     = https://pmc.ncbi.nlm.nih.gov/articles/PMC4929767
+why        = Lions follow their prey. Studies in Etosha and the Serengeti found they hunt
+             near ambush cover in the wet season and near permanent water in the dry
+             season, where prey is easy to predict. The herbivores in these files crowd
+             water in the dry half, so lions do too. A patch of savanna away from
+             water holds fewer of them then. This is a milder cut than the zebra's
+             because a pride covers a lot of ground. I did not read that paper end to
+             end, so the link is background and the numbers are reasoned.
+#                dry  wet
+savanna = 0.85 1.0
+
+[giraffe]
+animals    = naturalist:giraffe
+confidence = reasoned
+source     = https://publish.csiro.au/WR/fulltext/WR13211
+why        = Giraffe browse trees and do not depend on grass or standing water the way
+             zebra and rhino do. They breed all year, and birth peaks follow local rain
+             but differ between sites (wet season in Namibia, dry season in Tarangire,
+             August to September near Nairobi). So there is no clear direction at the
+             population level. The one small effect is that in the dry months they
+             gather where the leaves and water last. That makes the cut mild. The source
+             is the rainfall and birth-timing paper, which shows the sites disagree. It
+             does not show the gathering, which is reasoned.
+#                dry  wet
+savanna = 0.9  1.0
+
+[armadillo]
+animals    = minecraft:armadillo
+confidence = reasoned
+source     = https://gadnrle.org/sites/default/files/Armadillo%20Fact%20Sheet_UGA.pdf
+why        = Nine-banded armadillos eat insects and worms dug out of soil. Cold is what
+             limits their range, and they do not hibernate. Cold does not exist in the
+             tropical biomes here, so the only seasonal lever is moisture: dry ground
+             is harder to dig and holds fewer worms and grubs. That part is reasoned. The
+             fact sheet covers cold and burrows, not rainfall. Savanna and badlands are
+             where the game spawns them.
+#                 dry  wet
+savanna  = 0.7  1.0
+badlands = 0.7  1.0
+
+[camel]
+animals    = minecraft:camel
+confidence = sourced
+source     = https://animaldiversity.org/accounts/Camelus_dromedarius
+             https://www.cms.int/sites/default/files/publication/WildCamel_GreatGobi_MNG.pdf
+             https://www.publish.csiro.au/RJ/RJ09050
+why        = Camels live in desert with a long dry season and a short rainy one. They
+             are nomads. They move toward rain and long distances to oases for water and
+             plants. In Australia, feral camels moved into areas that got more rain in
+             the warm months, though the sample was small. In the dry half they crowd the
+             water, so a stretch of open desert is emptier. Camels are rare in the game
+             already (weight 1), so this makes them rarer.
+#               dry  wet
+desert = 0.7  1.0
+
+[desert-scorpion]
+animals    = naturalist:desert_scorpion
+confidence = reasoned
+why        = Scorpions are night hunters that shelter in burrows by day. Desert
+             invertebrates tend to come out and feed more when the ground is damp, so
+             the dry half is quieter above ground. This is general desert ecology. No
+             source was read for it, and the size of the cut is a guess. The jungle
+             scorpion lives in a wet, warm place all year and gets no rule.
+#                 dry  wet
+desert   = 0.8  1.0
+badlands = 0.8  1.0

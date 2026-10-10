@@ -28,7 +28,7 @@ Each animal has up to four parts.
 |---|---|
 | sourced | A page I read says the behaviour the rule models. The link is in the rule and below. |
 | reasoned | Well-known biology, but I did not read a source for this exact rule. The link, if there is one, is background. Check it before you trust it. |
-| guess | A game-balance call. No real-world claim. (No rule uses this today.) |
+| guess | A game-balance call. The farm animals use it: the habitat direction is sourced but the size of each cut is a balance call. So do the crab and the mammoth. |
 
 A source can back the behaviour and still not back the number. No page
 says "0.5". The size of every drop is my call. The sources say which
@@ -156,12 +156,36 @@ that. A seasonal rule would not fix the real mismatch. Left alone.
 - **Not backed.** A search for Bengal tiger monsoon movement found only
   flood-rescue news. No rule uses it.
 
-### Wolf and fox (`minecraft:wolf`, `minecraft:fox`). No rule.
+### Wolf (`minecraft:wolf`)
 
-Both live in the same places all year. Wolves hunt in packs through
-winter. Foxes breed in January and February and have pups from March to
-May near the den. Neither disappears from a biome in any season, so a
-rule would be invented. Left alone.
+- **In the pack.** Forest, taiga, old-growth taiga, grove, snowy taiga,
+  sparse jungle, savanna plateau, wooded badlands.
+- **In the real world.** Wolves live in cold and temperate country all
+  year. They do not hibernate. Pups are born in April and May. GPS
+  collars in a Saskatchewan park showed the breeding female going
+  underground about the start of April and staying at the den. The den is
+  abandoned at about two months, when the pups move to rendezvous sites.
+- **Rule.** Everywhere `0.80 1.00 1.00 1.00`. A **habitat fix** too:
+  sparse jungle (tropical) is cut to `0.30 0.30`, since wolves are animals
+  of cold and temperate country. Savanna plateau and wooded badlands are
+  dry open country where wolves do live.
+- **Confidence.** sourced.
+- **Sources.** <https://ielc.libguides.com/sdzg/factsheets/graywolf/reproduction-development>,
+  <https://dec.ny.gov/nature/animals-fish-plants/gray-wolf>,
+  <https://amp.cbc.ca/news/canada/saskatchewan/spring-sign-new-wolf-pups-prince-albert-national-park-1.5087945>.
+- **Not backed.** I first left wolves out as "no seasonal change". The
+  denning is a real, if small, spring effect.
+
+### Fox (`minecraft:fox`)
+
+- **In the pack.** Taiga types and grove.
+- **In the real world.** Red foxes mate in winter. Kits are born from
+  March in the south to May in the far north and stay in and around the
+  den until weaned at eight to ten weeks. They stay active through winter.
+- **Rule.** Everywhere `0.80 1.00 1.00 1.00`.
+- **Confidence.** sourced.
+- **Sources.** <https://icwdm.org/species/carnivores/foxes/fox-biology/>,
+  <https://naturalresources.extension.wisc.edu/?p=1864>.
 
 ## Savanna, desert and jungle (wet and dry)
 
@@ -272,18 +296,72 @@ the continent. They crowd the waterholes.
 - **Note.** Naturalist's own capybara is switched off in
   `naturalist-server.properties`. This is Ambient Creatures'.
 
-### Lion, giraffe, rhino (`naturalist:lion`, `naturalist:giraffe`, `naturalist:rhino`). No rule.
+### Rhino (`naturalist:rhino`)
 
-- **Lion.** Lions follow prey. Sources show they hunt near ambush cover
-  in the wet season and near permanent water in the dry season. That
-  moves where they are. It does not make them rarer. The herbivore rows
-  already thin their prey. A second cut would double count.
-- **Giraffe.** Giraffe breed all year. Birth peaks follow local rain, but
-  sites disagree (Namibia in the wet season, Tarangire in the dry,
-  Nairobi in August and September, Serengeti in September). A browser
-  that feeds on trees does not depend on grass or standing water the
-  way the others do. No clear direction. No rule.
-- **Rhino.** Mostly resident. I did not find a seasonal source. No rule.
+- **In the pack.** Savanna.
+- **In the real world.** Black rhinos must drink every 24 to 48 hours and
+  stay loyal to a permanent water source. A Kruger study found smaller
+  home ranges and more site loyalty in the dry season, pointing to surface
+  water as the limit. White rhino ranges shrink in the dry season too, and
+  they travel daily to the few permanent waters.
+- **Rule.** Savanna `0.80 1.00` (dry, wet). Modest, because they stay in
+  the region.
+- **Confidence.** sourced.
+- **Sources.** <https://rhinoresourcecenter.com/wp-content/uploads/2019/12/1577270031.pdf>,
+  <https://ielc.libguides.com/sdzg/factsheets/whiterhino/behavior>.
+
+### Lion (`naturalist:lion`)
+
+- **In the pack.** Savanna.
+- **In the real world.** Lions follow prey. Studies in Etosha and the
+  Serengeti found they hunt near ambush cover in the wet season and near
+  permanent water in the dry season.
+- **Rule.** Savanna `0.85 1.00`. The herbivores crowd water in the dry
+  half, and so do lions. A milder cut than the zebra's because a pride
+  covers a lot of ground. (I first left lions out, to avoid
+  double-counting the prey. That was wrong. A predator's spawn chance
+  should follow its prey's.)
+- **Confidence.** reasoned. The paper did not open in full.
+- **Source.** <https://pmc.ncbi.nlm.nih.gov/articles/PMC4929767>.
+
+### Giraffe (`naturalist:giraffe`)
+
+- **In the pack.** Savanna.
+- **In the real world.** Giraffe breed all year. Birth peaks follow local
+  rain but sites disagree (Namibia in the wet season, Tarangire in the
+  dry, Nairobi in August and September, Serengeti in September). A tree
+  browser does not depend on grass or standing water the way zebra and
+  rhino do.
+- **Rule.** Savanna `0.90 1.00`. A small cut, for the dry months when
+  they gather where leaves and water last.
+- **Confidence.** reasoned. The paper shows the sites disagree. It does not
+  show the gathering.
+- **Source.** <https://publish.csiro.au/WR/fulltext/WR13211>.
+
+### Armadillo (`minecraft:armadillo`)
+
+- **In the pack.** Savanna and badlands.
+- **In the real world.** Nine-banded armadillos eat insects and worms dug
+  from soil. Cold limits their range and they do not hibernate. There is
+  no cold in the tropical biomes here, so the only seasonal lever is
+  moisture: dry ground is harder to dig.
+- **Rule.** Savanna and badlands `0.70 1.00`.
+- **Confidence.** reasoned. The fact sheet covers cold and burrows, not
+  rain.
+- **Source.** <https://gadnrle.org/sites/default/files/Armadillo%20Fact%20Sheet_UGA.pdf>.
+
+### Camel (`minecraft:camel`)
+
+- **In the pack.** Desert (weight 1, already rare).
+- **In the real world.** Dromedaries live in desert with a long dry season
+  and a short rainy one. They are nomads and travel long distances to
+  oases. Feral camels in Australia moved into areas that got more rain
+  in the warm months, though the sample was small.
+- **Rule.** Desert `0.70 1.00`.
+- **Confidence.** sourced, with that warning.
+- **Sources.** <https://animaldiversity.org/accounts/Camelus_dromedarius>,
+  <https://www.cms.int/sites/default/files/publication/WildCamel_GreatGobi_MNG.pdf>,
+  <https://www.publish.csiro.au/RJ/RJ09050>.
 
 ## Cold-blooded animals
 
@@ -340,14 +418,46 @@ the continent. They crowd the waterholes.
   paper on a frog breeding in mangrove creeks after rain, September
   to March. It is one species on one coast. Not used.
 
-### Scorpions, turtle, crab. No rule.
+### Sea turtle (`minecraft:turtle`)
 
-- **Desert and jungle scorpion.** Night animals that live in places
-  where this pack has no cold season. No source, no seasonal signal.
-- **Turtle.** Sea turtles nest on beaches in the warm months. A search
-  for the nesting season returned nothing useful. No rule.
-- **Crab (Friends & Foes).** Beach and mangrove swamp. No source. No
-  rule.
+- **In the pack.** Beach only.
+- **In the real world.** Sea turtles come ashore to nest in the warm
+  months. In Florida the season runs about May to October (a
+  conservancy), March to October (a university lab), with the peak in May
+  to August (the Archie Carr refuge). Winter nesting is rare. The refuge
+  logged one very late nest in December. Many turtles leave for warmer
+  or deeper water in the cold.
+- **Rule.** Beach `0.60 1.00 0.60 0.10`.
+- **Confidence.** sourced.
+- **Sources.** <https://www.fws.gov/refuge/archie-carr/species>,
+  <https://sccf.org/2024/01/23/where-are-the-sea-turtles/>,
+  <https://biology.fau.edu/news/seasonal-seas/index.php>.
+
+### Crab (`friendsandfoes:crab`)
+
+- **In the pack.** Beach and mangrove swamp.
+- **Rule.** Beach `0.80 1.00 0.90 0.40`. Mangrove swamp is tropical here
+  and gets none.
+- **Confidence.** guess. Beach crabs shelter and slow down in the cold.
+  No source was read.
+
+### Desert scorpion (`naturalist:desert_scorpion`)
+
+- **In the pack.** Desert and badlands.
+- **Rule.** Desert and badlands `0.80 1.00` (dry, wet). Night hunters
+  that sit in burrows by day. Desert invertebrates tend to come out and
+  feed more when the ground is damp.
+- **Confidence.** reasoned. General desert ecology, no source read.
+  The jungle scorpion gets no rule because it lives in a warm, wet place
+  all year.
+
+### Jumping spider (`crittersandcompanions:jumping_spider`)
+
+- **In the pack.** Jungle, forest, lush caves.
+- **Rule.** Snowy `0.60 1.00 0.60 0.00`. Taiga `0.60 1.00 0.60 0.10`.
+  Forest `0.80 1.00 0.80 0.20`. Cold-blooded. In cold country they sit
+  out winter in a silk retreat. Jungle is tropical and gets no rule.
+- **Confidence.** reasoned. No source read.
 
 ## Birds
 
@@ -388,25 +498,38 @@ the continent. They crowd the waterholes.
 - **Sources.** <https://www.metroparks.com/bird-of-the-week-mallard/>,
   <https://www.audubon.org/bird-guide-api/1482>.
 
-### Turkey (`naturalist:turkey`). No rule.
+### Turkey (`naturalist:turkey`)
 
-Wild turkeys do not migrate. In winter they gather in large flocks
-(sometimes hundreds in the west) and roost in tall trees, with hens in
-big flocks and toms in small ones. Their home ranges are smallest then.
-They are in the woods in every season, and the number in view depends on
-flock size, which this mod cannot model. Left alone.
+- **In the pack.** Forest, flower forest, taiga, old-growth taiga, grove.
+- **In the real world.** Wild turkeys do not migrate. In fall and winter
+  they gather in larger flocks, hens in big flocks and toms in small
+  ones (sometimes hundreds in the west). They shift to oak woods and
+  tall roost trees. Home ranges are smallest in winter.
+- **Rule.** Snowy `0.90 1.00 1.00 0.60`. Taiga `1.00 1.00 1.00 0.80`. Deep
+  snow is hard on a ground-feeding bird.
+- **Confidence.** reasoned. The pages cover flocking and roosting, not snow.
+- **Sources.** <https://www.nwtf.org/content-hub/how-the-turkey-world-turns>,
+  <https://tdl-ir.tdl.org/items/f2841bf9-59d0-4f82-8f55-b9f6d47c6639>.
 
 ### Parrot (`minecraft:parrot`). No rule.
 
-Jungle birds with no real seasonal signal in this pack. Left alone.
+Jungle birds with no clean seasonal signal at this level of detail.
+Different parrots breed in different seasons. Left alone.
 
-### Penguin (`ambient_creatures:penguin`). No rule.
+### Penguin (`ambient_creatures:penguin`)
 
-Emperors breed through the Antarctic winter. Adelie penguins come ashore
-to breed in summer and spend winter on the pack ice. Both are around
-all year in some form. There is no clean "gone in season X" for a
-colony. Left alone. (The mod spawns them on ice spikes, frozen ocean,
-frozen river and stony shore.)
+- **In the pack.** Ice spikes, frozen ocean, deep frozen ocean, frozen
+  river, stony shore.
+- **In the real world.** Species differ. Adelie penguins breed on bare
+  ground in summer and spend winter out on the pack ice, up to about
+  3000 km from the colony, following the ice edge. Emperors do the
+  opposite and breed on the sea ice through the Antarctic winter.
+- **Rule.** Polar group `1.00 1.00 0.80 0.60`. Read as the Adelie kind,
+  so winter is mostly out at sea. The emperor case is not modelled. Stony
+  shore is outside the polar group and stays at 1.00.
+- **Confidence.** reasoned. The tracking study was not read in full.
+- **Sources.** <https://en.wikipedia.org/wiki/Ad%C3%A9lie_penguin>,
+  <https://link.springer.com/doi/10.1007/s00300-007-0352-5>.
 
 ## Small mammals
 
@@ -446,43 +569,122 @@ frozen river and stony shore.)
 - **Rule.** `0.90 1.00 1.00 0.50`.
 - **Confidence.** reasoned.
 
-### Mole, rat (`naturalist:mole`, `naturalist:rat`). No rule.
+### Mole (`naturalist:mole`)
 
-- **Mole.** Active all year. They do not hibernate because they store
-  little fat. Hill-building peaks in late winter and spring, with a
-  smaller peak in autumn. Deeper tunnels in drought and cold. The animal
-  is still there, so there is nothing to thin.
-- **Rat.** Lives alongside people all year. No signal.
+- **In the pack.** Forest, plains, meadow.
+- **In the real world.** Active all year. They cannot hibernate because
+  they store little fat. Molehills peak in late winter and spring, when
+  males widen their range looking for mates and young moles disperse
+  above ground. They dig deeper in cold and drought.
+- **Rule.** Snowy `1.00 1.00 1.00 0.50`. Taiga `... 0.70`. No rule
+  elsewhere. The animal is always there, so only the frozen ground of a
+  hard winter, which keeps them below the surface, gets a cut.
+- **Confidence.** reasoned. The pages say nothing about frozen ground.
+- **Sources.** <https://www.wildlifeonline.me.uk/animals/species/european-mole>,
+  <https://www.rhs.org.uk/biodiversity/moles>.
 
-### Goat (`minecraft:goat`). No rule.
+### Rat (`naturalist:rat`)
 
-A search for mountain goats came back empty. Real mountain goats move
-to lower or windswept ground in winter, but I read no source. Left alone
-until someone finds one.
+- **In the pack.** Forest and plains.
+- **In the real world.** Rats live beside people and food. Away from
+  buildings they are cold-sensitive and breed best in warm months.
+- **Rule.** Snowy `0.70 1.00 0.80 0.30`. Taiga `0.80 1.00 0.90 0.50`.
+  Elsewhere `0.90 1.00 1.00 0.80`.
+- **Confidence.** reasoned. No source was read.
+
+### Goat (`minecraft:goat`)
+
+- **In the pack.** Frozen peaks, jagged peaks, snowy slopes.
+- **In the real world.** Mountain goats summer in high alpine meadows.
+  In winter coastal goats come down to forest near the treeline. Goats
+  in drier country stay on steep, windswept slopes where snow blows off.
+  A study of 42 Cascade goats found they could not be sorted into
+  migrants and non-migrants.
+- **Rule.** Mountain `0.90 1.00 1.00 0.60`. The game only spawns goats
+  at the high summer range, so winter is thin because part of the herd
+  has gone down. The size of the drop is a judgement call.
+- **Confidence.** sourced for the pattern.
+- **Sources.** <https://adfg.alaska.gov/static/education/wns/mountain_goat.pdf>,
+  <https://bioone.org/journals/journal-of-wildlife-management/volume-72/issue-8/2007-584/Seasonal-Altitudinal-Movements-of-Mountain-Goats/10.2193/2007-584.full>.
+
+### Mammoth (`naturalist:mammoth`)
+
+- **In the pack.** Snowy plains, ice spikes, snowy slopes, frozen peaks.
+- **In the real world.** Extinct. It lived on the cold, dry mammoth steppe
+  in the ice ages, in open and semi-open tundra and steppe-tundra with
+  intermediate cold. A study cited on the mammoth steppe page found they
+  disappeared from northern Europe in the extreme cold of the last
+  glacial maximum.
+- **Rule.** Bare snow `0.70 0.80 0.70 0.50`. Elsewhere
+  `0.80 0.80 0.80 0.60`. The harshest ground is the thinnest. This is an
+  extinct animal in a modern game, so the rarity is a balance call.
+- **Confidence.** guess.
+- **Source.** <https://en.wikipedia.org/wiki/Mammoth_steppe>.
+
+## Farm animals living wild
+
+Cow, sheep, pig, chicken, horse, donkey and llama spawn in 20 to 25
+biomes each in vanilla, with the biggest spawn weights in the game
+(sheep 12, pig 10, chicken 10, cow 8). They crowd out every wild animal.
+They also fill any slot a seasonal rule frees, because the game keeps
+trying until the animal cap is full. So they have rules too, in
+`livestock.rules`.
+
+The idea: treat them as feral herds. They live where their wild
+ancestors lived, and they are scarce. The habitat direction is backed by
+sources. The size of each cut is a game-balance call, so all seven
+sections are labelled **guess**. If farm animals feel too rare, raise the
+numbers. If wild animals are still crowded out, lower them.
+
+| Animal | Wild ancestor and home | Biggest chance | Smallest chance |
+|---|---|---|---|
+| Cow | Aurochs. Forest, grassland and river plain of Europe, Asia and North Africa. | Plains `0.6` | Jungle `0.15`, badlands `0.10`, snowy winter `0.05` |
+| Sheep | Mouflon of Anatolia and Iran, and wild sheep generally. Dry, rocky uplands and steppe. | Mountain `0.9` | Jungle `0.05`, swamp `0.10` |
+| Pig | Wild boar. Woodland, scrub and marsh edge. Autumn mast. | Forest autumn `0.7` | Badlands `0.10`, snowy `0.05` |
+| Chicken | Red junglefowl. Forest edge in the warm tropics of India and southeast Asia. | Jungle `0.7` | Snowy and cold winter `0.0` |
+| Horse | Steppe horses (Przewalski's, tarpan). Open grassland. | Plains `0.7` | Savanna `0.3` |
+| Donkey | African wild ass. Dry country of north-east Africa. | Savanna dry `1.0` | Anywhere else `0.3` |
+| Llama | Guanaco. High, open Andes. | Mountain `0.9` | Lowlands `0.2` to `0.3` |
+
+- **Sources.** <https://www.fao.org/4/Y2647E/y2647e15.htm>,
+  <https://www.fao.org/docrep/pdf/009/x8750e/x8750e03.pdf>,
+  <https://przewalskihorse.nl/unique-but-why/original-habitat/>,
+  <https://www.cnrs.fr/en/acorn-production-cycles-influence-wild-boar-populations>.
+  Two weaker ones are used only for the ancestor's name and region: a
+  general-knowledge page on the aurochs, and a quiz table for the red
+  junglefowl. The red junglefowl is the weakest, and I found no
+  authoritative range page for it.
+- **Measured.** Share of 3000 spawn picks in summer taiga, before and
+  after: sheep `10.2%` to `2.1%`, pig `8.3%` to `3.8%`, cow `6.0%` to
+  `1.8%`, chicken `7.8%` to `1.7%`. Wild animals took the space.
+- **Mooshroom** spawns only on mushroom fields and is left alone.
 
 ## Left alone on purpose
 
 | Animal | Why |
 |---|---|
-| Cow, pig, sheep, chicken, horse, donkey, llama | Livestock. People manage these. They are the base of the spawn table. |
-| Mammoth | Extinct. It lived on the cold, dry mammoth steppe in the ice ages. Setting a season for it would be made up. |
-| Armadillo, camel | No seasonal source read. |
-| Critters and Companions animals (ferret, jumping spider, shima enaga and others) | Not researched yet. They are `CREATURE` and already show up in `/seasonalspawns sample`. Shima enaga is a small snow bird of Japan, so it is the likeliest one to need a winter rule. |
+| Panda, red panda | Real pandas and red pandas live in cool bamboo and montane forest in the Himalaya and China. The game puts both in hot jungle. A seasonal rule cannot fix that. The jungle is the only place the game lets them live. |
+| Parrot | Jungle bird with no clean seasonal signal at this level of detail. Different parrots breed in different seasons. |
+| Shima enaga | Resident small bird of Japan, snow-white in winter. It stays all year. |
+| Ferret (Critters and Companions) | Forest and plains. Polecats stay active all year. Nothing to model without a source. |
 | Strider | Nether. The Nether has no seasons, so the mod does nothing there. |
 | Glare | Lives in lush caves, underground. Seasons do not reach it. |
 | Moobloom | A fantasy cow in flower biomes. |
 | Rascal, tuff golem | Spawn from structures (mineshafts, mansions), not from biomes. |
+| Jungle scorpion | Lives in a wet, warm place all year. |
 | Butterfly, firefly, dragonfly, fish, sharks, whales | Not `CREATURE`. The hook never sees them. |
+| Critters and Companions insects, otter, koi, sea bunny, octopus | Ambient or water types. The hook never sees them. |
 
 ## What I could not find
 
-These searches came back empty or off-target. The rules for them are
-either `reasoned` or missing. If you find a good source, add it and
-move the label to `sourced`.
+These searches came back empty, thin or off-target. The rules for them
+are `reasoned` or `guess`. If you find a good source, add it and move
+the label to `sourced`.
 
 - Deer winter "yarding".
-- Giraffe seasonal movement.
-- Wolf and mountain goat seasonal behaviour.
-- Sea turtle nesting season.
+- Giraffe seasonal movement at the population level (sites disagree).
 - Bengal tiger monsoon movement (only flood news).
 - Desert tortoise brumation timing (only a one-tortoise news story).
+- Authoritative range of the red junglefowl and the vicuña.
+- Lion movement (the paper cited did not open in full).
+- Moles in frozen ground.

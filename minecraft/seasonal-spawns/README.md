@@ -34,11 +34,16 @@ That is all it does. This has three consequences you should know.
 
    **The likely result, not yet checked in a live world:** in winter
    taiga the bears, hedgehogs and snakes drop out and their slots fill
-   with pigs, cows, sheep, chickens, turkeys and foxes. The total count
-   stays near the cap. The share of farm animals goes up in winter. That
-   is the opposite of realism. The density knob that really changes the
-   count is `min_animals_near_player`. It is global, not per biome or per
-   season. Setting it per season is on the "Ideas not built" list.
+   with whatever is left: turkeys, foxes, wolves, and the farm animals.
+   The total count stays near the cap. Farm animals used to be the worst
+   case, because they have the biggest vanilla spawn weights and filled
+   every freed slot. They now have their own scarce rules
+   (`livestock.rules`), and in summer taiga their share of picks fell
+   from about 32% to about 9%. In winter they are cut again. Even so,
+   expect the mix to lean toward whoever is not barred. The density knob
+   that really changes the count is `min_animals_near_player`. It is
+   global, not per biome or per season. Setting it per season is on the
+   "Ideas not built" list.
 
    **A check to run in game:** stand in the same taiga in summer and in
    winter (`/season set mid_winter` jumps the calendar). Count the
@@ -203,7 +208,10 @@ zero in winter, back to normal in summer.
 
 - The jar loads and the mixin applies. `defaultRequire = 1` means a bad
   target would have stopped the server.
-- The rules load: 22 sections, 23 animals, 15 groups. The audit puts 118 of 165 biomes in a group. The other 47 are mostly oceans, caves, Nether and End.
+- The rules load: 46 sections, 47 animals, 15 groups (22 sections and 23
+  animals in the first runs below, before farm animals and the rest were
+  added). The audit puts 118 of 165 biomes in a group. The other 47 are
+  mostly oceans, caves, Nether and End.
 - `audit`, `here`, `sample`, `stats` and `reload` all ran.
 - A broken rules file is reported as `file:line: message`, the old rules
   stay, and the next `reload` recovers.
@@ -233,6 +241,11 @@ zero in winter, back to normal in summer.
   - The tiger (`0.6` in every season) came out at 8.6%, 8.8%, 8.7% and
     8.9%. Flat, as it should be. (A 1000-pick run once showed 6.6% in
     spring. That was luck.)
+- **Farm animals,** after `livestock.rules` was added. Share of 3000
+  picks in summer taiga: sheep 10.2% to 2.1%, pig 8.3% to 3.8%, cow 6.0%
+  to 1.8%, chicken 7.8% to 1.7%. In summer forest each is 1 to 2%. In
+  summer savanna each is about 1%, and the donkey and horse are under
+  1%. Wild animals take the space.
 
 Not tested:
 
