@@ -17,8 +17,8 @@
 # verifies each one, so a changed or tampered artifact fails the build
 # rather than reaching the server.
 
-name: "Elysium"
-version: "1.7.5"
+name: "Elysium RW Test"
+version: "1.7.5-rw1"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, performance and QOL mods, layered under the
@@ -184,6 +184,18 @@ mods:
     sha512: "c653ee42fe48c1be9512fa7791e8495095ae01cb607555202714bbb95cb49da272128bb295e8f8c262b63739e7ca2de4bba9196e1738b06012b498d220b55acf"
     env: server
     reason: "Continent-scale landform shaping, compatible with Terralith"
+
+  - name: "RoadWeaver (26.2 port)"
+    file: "roadweaver-2.3.1-26.2-port.jar"
+    url: "https://github.com/SoberingRealityCheck/rw-26-port/releases/download/v2.3.1-26.2-port/roadweaver-2.3.1-26.2-port.jar"
+    sha512: "df039a8230ea77839fffdf74756643b772800cb2904d00e051ba800fd1227e5e669e05d75f56a27cdda3cb6b12342bf3979a2a88360665802a7b026c90be5b64"
+    env: server
+    reason: >-
+      Roads between villages. Unofficial server-only port of RoadWeaver 2.3.1
+      (MIT), see the rw-26-port repo. Plans roads at world creation, then
+      adds them as chunks generate. Pregenerate with Chunky so the cost is
+      paid up front. TEST BUILD: not in the main pack until spark says the
+      tick cost is fine.
 
   - name: "Streams Reflowing"
     file: "StreamsReflowing-26.2-fabric-2.14.4.jar"
