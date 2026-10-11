@@ -23,6 +23,13 @@ public class FullDataSourceV2Mixin
 		@Local(name = "id") int id,
 		@Local(argsOnly = true) FullDataSourceV2 inputDataSource)
 	{
+		// Hot path: most columns are dark. scaleBlockLight(0, ...) is 0 anyway,
+		// so skip the loop and both block lookups.
+		if (blockLight == 0)
+		{
+			return blockLight;
+		}
+
 		int covered = 0;
 		for (int mergeId : mergeIds)
 		{
@@ -39,7 +46,6 @@ public class FullDataSourceV2Mixin
 		IBlockStateWrapper block = inputDataSource.mapping.getBlockStateWrapper(id);
 		int emission = block.getLightEmission();
 		int after = EmissiveFalloff.scaleBlockLight(blockLight, emission, covered);
-		elysium.dhemissive.Probe.merge(blockLight, after, emission, covered);
 		return (byte) after;
 	}
 }
