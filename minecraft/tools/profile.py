@@ -92,6 +92,12 @@ def server(seconds, upload):
     say("== 0. who is on")
     who = rcon("list")
     say(who or "(empty reply)")
+    # `list` is plain vanilla, so it must answer. If not, don't wait 120s for nothing.
+    if not re.search(r"There are \d+ of", who):
+        say("!! no answer from rcon. Is the container up? Run from the repo root, where")
+        say("   docker-compose.yml is, and check `docker compose ps`. The server may have")
+        say("   auto-stopped (idle) or still be booting. Stopping.")
+        return
     if re.search(r"There are 0 of", who):
         say("!! nobody online. The profile will be empty. Join first.")
 
