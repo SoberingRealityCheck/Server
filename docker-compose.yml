@@ -32,6 +32,13 @@ services:
 
     ports:
       - "25565:25565"
+      # Simple Voice Chat. UDP, and a separate port from the game. The
+      # proxy (lazymc) only speaks TCP, so voice does not go through it:
+      # aws/proxy/voice-forward.service relays this port to the game host.
+      # Clients use the same address they typed for the game, so there is
+      # no voice_host to set. Change the port in
+      # data/config/voicechat/voicechat-server.properties if you change it here.
+      - "24454:24454/udp"
 
     volumes:
       # World, mods, configs, logs -- everything the server writes.

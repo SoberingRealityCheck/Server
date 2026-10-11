@@ -160,6 +160,18 @@ sudo install -m 0644 "$SCRIPT_DIR/lazymc.service" /etc/systemd/system/lazymc.ser
 sudo systemctl daemon-reload
 sudo systemctl enable lazymc.service
 
+# --- voice chat relay --------------------------------------------------
+
+log "Installing the voice chat relay"
+sudo apt-get install -y -qq socat
+if [ ! -f "$CONFIG_DIR/voice.env" ]; then
+  printf 'VOICE_TARGET=REPLACE_WITH_GAME_HOST_PRIVATE_IP\n' > "$CONFIG_DIR/voice.env"
+  warn "Edit $CONFIG_DIR/voice.env: VOICE_TARGET is the game host's PRIVATE IP"
+fi
+sudo install -m 0644 "$SCRIPT_DIR/voice-forward.service" /etc/systemd/system/voice-forward.service
+sudo systemctl daemon-reload
+sudo systemctl enable voice-forward.service
+
 # --- done ------------------------------------------------------------
 
 log "Done."
@@ -191,6 +203,13 @@ cat <<EOF
        lazymc config test --config /etc/lazymc/lazymc.toml
        sudo systemctl start lazymc
        journalctl -u lazymc -f
+
+  5. Voice chat: set VOICE_TARGET in $CONFIG_DIR/voice.env to the game
+     host's private IP, then:
+
+       sudo systemctl start voice-forward
+
+     Both security groups need UDP 24454 too. See aws/NOTES.md, section 3.
 
   Then point the mc.<domain> A record at THIS instance's Elastic IP and
   test a real join. See aws/NOTES.md, "Front door (auto-wake proxy)".
