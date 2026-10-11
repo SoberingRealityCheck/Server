@@ -17,12 +17,12 @@
 # verifies each one, so a changed or tampered artifact fails the build
 # rather than reaching the server.
 
-name: "Elysium RW Test"
-version: "1.7.5-rw1"
+name: "Elysium"
+version: "1.7.6"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
-  Horizons LOD rendering, performance and QOL mods, layered under the
-  Matcha Flavoured datapack.
+  Horizons LOD rendering, roads between villages, performance and QOL
+  mods, layered under the Matcha Flavoured datapack.
 
 minecraft: "26.2"
 loader: fabric
@@ -192,10 +192,11 @@ mods:
     env: server
     reason: >-
       Roads between villages. Unofficial server-only port of RoadWeaver 2.3.1
-      (MIT), see the rw-26-port repo. Plans roads at world creation, then
-      adds them as chunks generate. Pregenerate with Chunky so the cost is
-      paid up front. TEST BUILD: not in the main pack until spark says the
-      tick cost is fine.
+      (MIT) from the rw-26-port repo, because upstream has no 26.x build.
+      Plans roads at world creation, then adds them as chunks generate.
+      Pregenerate with Chunky so the cost is paid up front. Config is in
+      server-overrides/config/roadweaver. Swap to the official jar when
+      upstream ships one for 26.x.
 
   - name: "Streams Reflowing"
     file: "StreamsReflowing-26.2-fabric-2.14.4.jar"

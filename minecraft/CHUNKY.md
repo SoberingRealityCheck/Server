@@ -3,7 +3,9 @@
 Chunky is installed on the server and runs only when started. Run it when
 nobody is playing: world generation is CPU- and disk-intensive.
 
-By default, Chunky uses the world's spawn as the center. Choose a radius,
+By default, Chunky uses the world's spawn as the center. On a new world,
+run it before players arrive: RoadWeaver plans and builds roads as chunks
+generate, so pregenerating pays that cost up front (about 6.5% extra). Choose a radius,
 then start the job:
 
 ```bash
