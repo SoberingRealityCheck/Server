@@ -13,12 +13,15 @@ happening. An idle server profiles as nothing. Join, go to the laggy
 place (new terrain, a farm, the DH area), then start the script.
 
 SERVER mode, in order:
-  1. prints spark's own help for `profiler`, so a wrong flag shows up
-  2. snapshot: tps, memory, gc
-  3. starts spark with --thread * and --only-ticks-over 50, so it only
+  1. snapshot: tps, memory, gc
+  2. starts spark with --thread * and --only-ticks-over 50, so it only
      records slow ticks and spikes don't get averaged away
-  4. waits, then stops spark and grabs the report link
+  3. waits, then ALWAYS stops spark (even on Ctrl-C)
+  4. result is the newest data/config/spark/*.sparkprofile (private).
+     With --upload it uploads and prints a PUBLIC link instead.
   5. counts "Can't keep up" lines in the container log for the window
+spark answers rcon async, so replies may come back empty. The script
+doesn't depend on reply text. Empty just means "look in the log".
 
 CLIENT mode: spark on the client only takes /sparkc typed into chat, no
 rcon. So this uses JFR (Java Flight Recorder) on the running game JVM:
@@ -29,11 +32,12 @@ If jcmd is missing or can't attach (launchers often bundle a JRE with
 no jcmd), it says so and prints the /sparkc lines to paste instead.
 
 Heads up:
-  - spark report links are PUBLIC (anyone with the link can open it).
-  - Reports land in profiling/<timestamp>/report.txt (gitignored).
-  - Nothing here was run against a live server/client when written.
-    The JFR parser was only tested on a toy JFR file. The spark
-    flags are from memory of 1.10.x. Step 1 shows if one is wrong.
+  - spark report links (--upload) are PUBLIC (anyone with the link can open it).
+  - The text report lands in profiling/<timestamp>/report.txt (gitignored).
+  - Not run against a live server or the real game when written.
+    Spark flags were checked against the 1.10.187 jar's strings only.
+    Client JFR was tested on a toy program, not Minecraft: JDK 21
+    jcmd attached to a Zulu 25 JVM, and Zulu 25's jfr read the file.
 """
 import argparse, collections, datetime, os, re, shutil, subprocess, sys, time
 
@@ -74,58 +78,77 @@ def count_behind(log):
     return len(hits), sum(int(a) for a, _ in hits), sum(int(b) for _, b in hits)
 
 
-def server(seconds):
+def newest_profile():
+    """Newest file spark saved under data/config/spark/. Doesn't need rcon output."""
+    files = [os.path.join(d, f) for d in ["data/config/spark"]
+             if os.path.isdir(d) for f in os.listdir(d) if f.endswith(".sparkprofile")]
+    return max(files, key=os.path.getmtime) if files else None
+
+
+def server(seconds, upload):
+    # Hack to know: spark runs async. rcon may return an EMPTY reply for
+    # tps/health/start/stop. So empty means "unknown, keep going", and we
+    # never gate on reply text. The saved file is the reliable result.
     say("== 0. who is on")
     who = rcon("list")
-    say(who)
+    say(who or "(empty reply)")
     if re.search(r"There are 0 of", who):
         say("!! nobody online. The profile will be empty. Join first.")
 
-    say("\n== 1. spark profiler help (check the flags we use exist)")
-    say(rcon("spark profiler"))
-
-    say("\n== 2. snapshot before")
+    say("\n== 1. snapshot before")
     for c in ["spark tps", "spark health --memory", "spark gc"]:
         say(f"-- {c}")
-        say(rcon(c))
+        say(rcon(c) or "(empty reply. spark answers async, check `docker compose logs minecraft`)")
 
-    say("\n== 3. start profiler")
+    say("\n== 2. start profiler")
+    # flags checked against the spark-1.10.187 jar: thread, only-ticks-over,
+    # save-to-file all exist. (Not run live.)
     start = datetime.datetime.now(datetime.timezone.utc).isoformat()
-    out = rcon("spark profiler start --thread * --only-ticks-over 50")
-    say(out)
-    if not re.search(r"started|running", out, re.I):
-        say("!! start did not look right. Retrying without --only-ticks-over.")
-        out = rcon("spark profiler start --thread *")
-        say(out)
-        if not re.search(r"started|running", out, re.I):
-            say("!! still no. Read the help in step 1 and fix the flags. Stopping.")
-            return
+    say(rcon("spark profiler start --thread * --only-ticks-over 50") or "(empty reply)")
 
-    say(f"\n== 4. recording for {seconds}s")
-    time.sleep(seconds)
-    out = rcon("spark profiler stop")
-    say(out)
+    say(f"\n== 3. recording for {seconds}s")
+    out = ""
+    try:
+        time.sleep(seconds)
+    except KeyboardInterrupt:
+        say("!! interrupted. Stopping the profiler anyway.")
+    finally:
+        # always stop, or spark keeps profiling on the server
+        stop = "spark profiler stop" if upload else "spark profiler stop --save-to-file"
+        out = rcon(stop)
+        say(out or "(empty reply)")
+
     urls = re.findall(r"https://spark\.lucko\.me/\S+", out)
-    if not urls:
-        # some versions only log the link. look in the container log.
+    if upload and not urls:
         _, log = run(["docker", "compose", "logs", "--no-log-prefix", "--since", start, "minecraft"])
         urls = re.findall(r"https://spark\.lucko\.me/\S+", clean(log))
-    say(f"report link: {urls[-1] if urls else 'NOT FOUND, check `docker compose logs minecraft`'}")
+    if upload:
+        result = urls[-1] if urls else "NOT FOUND. Run `/spark profiler stop` output is lost, try again"
+    else:
+        time.sleep(3)
+        f = newest_profile()
+        result = f or "NO FILE in data/config/spark/. Rerun with --upload or check the log"
+        if f and time.time() - os.path.getmtime(f) > seconds + 60:
+            result += "  (!! older than this run, probably stale)"
+    say(f"report: {result}")
 
-    say("\n== 5. snapshot after")
+    say("\n== 4. snapshot after")
     for c in ["spark tps", "spark health --memory"]:
         say(f"-- {c}")
-        say(rcon(c))
+        say(rcon(c) or "(empty reply)")
 
-    say("\n== 6. 'Can't keep up' in the log for this window")
+    say("\n== 5. 'Can't keep up' in the log for this window")
     _, log = run(["docker", "compose", "logs", "--no-log-prefix", "--since", start, "minecraft"])
     n, ms, ticks = count_behind(clean(log))
     say(f"{n} warnings, {ms} ms total, {ticks} ticks behind")
 
     say("\n== summary")
-    say(f"window: {seconds}s | can't-keep-up: {n} ({ticks} ticks) | report: {urls[-1] if urls else 'none'}")
-    say("Open the report. Look at the 'Server thread' tree, biggest self-time first.")
-    say("Chunk gen / entity ticking / a single mod name at the top is your answer.")
+    say(f"window: {seconds}s | can't-keep-up: {n} ({ticks} ticks) | report: {result}")
+    if not upload:
+        say("Saved file is private. To view: copy it off the host and open it at")
+        say("https://spark.lucko.me/ (the viewer takes a .sparkprofile via drag and drop).")
+    say("In the report look at the 'Server thread' tree, biggest self-time first.")
+    say("Chunk gen / entity ticking / one mod name at the top is your answer.")
 
 
 # ---------------------------------------------------------------- client
@@ -149,8 +172,15 @@ def find_game():
     return pid, (m.group(1) if m else None)
 
 
-def find_tool(name):
-    """jcmd / jfr: PATH first, then JAVA_HOME, then the macOS java_home."""
+def find_tool(name, pid=None):
+    """jcmd / jfr. The game's own java dir first (its jfr always matches
+    the game's JFR format, tested: JRE 25 jfr reads it), then PATH, then
+    JAVA_HOME, then the macOS java_home."""
+    if pid:
+        _, exe = run(["ps", "-o", "comm=", "-p", pid])
+        p = os.path.join(os.path.dirname(exe), name)
+        if exe and os.path.exists(p):
+            return p
     t = shutil.which(name)
     if t:
         return t
@@ -205,7 +235,7 @@ def client(seconds):
         return
     say(f"pid {pid}, gameDir {gamedir}")
 
-    jcmd, jfr = find_tool("jcmd"), find_tool("jfr")
+    jcmd, jfr = find_tool("jcmd", pid), find_tool("jfr", pid)
     log_start = None
     jfr_file = os.path.join(OUT, "client.jfr")
     ok = False
@@ -230,21 +260,29 @@ def client(seconds):
 
     if ok:
         say("\n== 3. read the recording")
-        _, txt = run([jfr, "print", "--events", "jdk.ExecutionSample", "--stack-depth", "1", jfr_file], timeout=300)
+        code, txt = run([jfr, "print", "--events", "jdk.ExecutionSample", "--stack-depth", "1", jfr_file], timeout=300)
         threads, frames = parse_jfr(txt)
-        total = sum(threads.values()) or 1
-        say(f"{total} cpu samples. Busiest threads:")
-        for t, n in threads.most_common(6):
+        total = sum(threads.values())
+        if code != 0 or total == 0:
+            say(f"!! jfr print gave no samples (exit {code}). Its output:")
+            say(txt[:600])
+            say("Likely the jfr tool (JDK) is older than the game's java. Use a JDK 25 jfr.")
+            say(f"The raw recording is kept at {jfr_file}")
+            ok = False
+        if ok:
+            say(f"{total} cpu samples. Busiest threads:")
+        for t, n in (threads.most_common(6) if ok else []):
             say(f"  {n:6}  {100*n//total:3}%  {t}")
-        for t in [t for t, _ in threads.most_common(2)]:
+        for t in [t for t, _ in threads.most_common(2)] if ok else []:
             say(f"hottest top frames on '{t}':")
             top = [(f, n) for (th, f), n in frames.most_common() if th == t][:10]
             for f, n in top:
                 say(f"  {n:6}  {f}")
-        _, gctxt = run([jfr, "print", "--events", "jdk.GarbageCollection", jfr_file], timeout=120)
-        gcn, gcms = jfr_gc(gctxt)
-        say(f"GC: {gcn} collections, {gcms:.0f} ms total pause")
-    else:
+        if ok:
+            _, gctxt = run([jfr, "print", "--events", "jdk.GarbageCollection", jfr_file], timeout=120)
+            gcn, gcms = jfr_gc(gctxt)
+            say(f"GC: {gcn} collections, {gcms:.0f} ms total pause")
+    if not ok:
         say("\n== fallback: use spark in game")
         say("Type these in chat:")
         for l in SPARKC:
@@ -276,12 +314,13 @@ def main():
     ap = argparse.ArgumentParser(description="Profile Elysium lag (server or client).")
     ap.add_argument("mode", choices=["server", "client"])
     ap.add_argument("--seconds", type=int, default=120, help="how long to record (default 120)")
+    ap.add_argument("--upload", action="store_true", help="server: upload to a PUBLIC spark link instead of saving a file")
     a = ap.parse_args()
     ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    OUT = os.path.join("profiling", f"{ts}-{a.mode}")
+    OUT = os.path.abspath(os.path.join("profiling", f"{ts}-{a.mode}"))  # abs: the game JVM resolves paths in ITS cwd
     os.makedirs(OUT, exist_ok=True)
     try:
-        (server if a.mode == "server" else client)(a.seconds)
+        server(a.seconds, a.upload) if a.mode == "server" else client(a.seconds)
     finally:
         with open(os.path.join(OUT, "report.txt"), "w") as f:
             f.write("\n".join(LINES) + "\n")
