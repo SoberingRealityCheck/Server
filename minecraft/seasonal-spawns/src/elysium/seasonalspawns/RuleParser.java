@@ -38,7 +38,14 @@ public final class RuleParser {
     private static final Pattern BIOME_MATCHER = Pattern.compile("#?[a-z0-9_.-]+:[a-z0-9_./-]+");
 
     /** Keys that hold text. Anything else on the left of "=" is a group name in a rule row. */
-    private static final List<String> TEXT_KEYS = List.of("animals", "biomes", "why", "source", "confidence");
+    private static final List<String> TEXT_KEYS =
+            List.of("animals", "biomes", "why", "source", "confidence", "reference", "floor");
+
+    /** The one section name that is not a group or an animal list. See Rules.CapacitySettings. */
+    private static final String CAPACITY = "capacity";
+
+    /** Hand-set capacity multipliers may go above 1 (up to this). Chances for animals may not. */
+    private static final double MAX_CAPACITY_MULTIPLIER = 2.0;
 
     private record RawRow(String group, List<Double> numbers, int line) {}
 
@@ -73,8 +80,17 @@ public final class RuleParser {
 
         List<Rules.Section> sections = new ArrayList<>();
         Map<String, Rules.Section> byAnimal = new LinkedHashMap<>();
+        Rules.CapacitySettings capacity = null;
         for (Raw raw : raws) {
             if (raw.text.containsKey("biomes")) {
+                continue;
+            }
+            if (raw.name.equals(CAPACITY)) {
+                if (capacity != null) {
+                    errors.add(where(raw.file, raw.line) + "[capacity] is defined twice");
+                } else {
+                    capacity = buildCapacity(raw, groups, errors);
+                }
                 continue;
             }
             if (!raw.text.containsKey("animals")) {
@@ -94,7 +110,7 @@ public final class RuleParser {
                 }
             }
         }
-        return new Result(new Rules(groups, sections, byAnimal), errors);
+        return new Result(new Rules(groups, sections, byAnimal, capacity), errors);
     }
 
     // ---- reading lines -------------------------------------------------
@@ -182,7 +198,7 @@ public final class RuleParser {
 
     private static void buildGroup(Raw raw, Map<String, Rules.Group> groups, List<String> errors) {
         String at = where(raw.file, raw.line);
-        if (raw.name.equals(Rules.ANYWHERE) || TEXT_KEYS.contains(raw.name)) {
+        if (raw.name.equals(Rules.ANYWHERE) || raw.name.equals(CAPACITY) || TEXT_KEYS.contains(raw.name)) {
             errors.add(at + "'" + raw.name + "' is reserved and can't be a group name");
             return;
         }
@@ -254,6 +270,96 @@ public final class RuleParser {
         if (raw.rows.isEmpty()) {
             errors.add(at + "[" + raw.name + "] has no rows");
         }
+        List<Rules.Row> rows = buildRows(raw, groups, errors, 1.0, "chance");
+
+        if (errors.size() > before) {
+            return null;
+        }
+        return new Rules.Section(raw.name, raw.file, raw.line, List.copyOf(animals), confidence,
+                source, why, List.copyOf(rows));
+    }
+
+    /**
+     * The [capacity] section. Keys: reference (a biome id and a season word),
+     * floor (a number), why, source, confidence, plus optional rows of
+     * multipliers. Rows may be empty, since 1.0 everywhere is a fine start.
+     */
+    private static Rules.CapacitySettings buildCapacity(Raw raw, Map<String, Rules.Group> groups, List<String> errors) {
+        String at = where(raw.file, raw.line);
+        int before = errors.size();
+        if (raw.text.containsKey("animals") || raw.text.containsKey("biomes")) {
+            errors.add(at + "[capacity] can't have 'animals =' or 'biomes ='");
+        }
+
+        String referenceBiome = "";
+        String referencePhase = "";
+        String reference = raw.text.get("reference");
+        if (reference == null) {
+            errors.add(at + "[capacity] needs 'reference = <biome id> <season>', like minecraft:forest summer");
+        } else {
+            String[] parts = reference.strip().split("\\s+");
+            if (parts.length != 2 || !BIOME_MATCHER.matcher(parts[0]).matches() || parts[0].startsWith("#")) {
+                errors.add(at + "reference must be one biome id and one season word, like minecraft:forest summer");
+            } else if (!Rules.SEASONS.contains(parts[1]) && !Rules.TROPICAL_SEASONS.contains(parts[1])) {
+                errors.add(at + "reference season '" + parts[1] + "' must be one of "
+                        + Rules.SEASONS + " or " + Rules.TROPICAL_SEASONS);
+            } else {
+                referenceBiome = parts[0];
+                referencePhase = parts[1];
+            }
+        }
+
+        double floor = 0;
+        String floorText = raw.text.get("floor");
+        if (floorText == null) {
+            errors.add(at + "[capacity] needs 'floor = <number>', the lowest cap a player is given");
+        } else {
+            try {
+                floor = Double.parseDouble(floorText.strip());
+                if (floor < 0) {
+                    errors.add(at + "floor must be 0 or more");
+                }
+            } catch (NumberFormatException e) {
+                errors.add(at + "floor '" + floorText + "' is not a number");
+            }
+        }
+
+        Rules.Confidence confidence = null;
+        String confidenceText = raw.text.get("confidence");
+        if (confidenceText == null) {
+            errors.add(at + "[capacity] needs 'confidence = sourced | reasoned | guess'");
+        } else {
+            try {
+                confidence = Rules.Confidence.valueOf(confidenceText.strip().toUpperCase());
+            } catch (IllegalArgumentException e) {
+                errors.add(at + "confidence '" + confidenceText + "' must be sourced, reasoned or guess");
+            }
+        }
+        String why = raw.text.get("why");
+        if (why == null || why.isBlank()) {
+            errors.add(at + "[capacity] needs a 'why =' line");
+        }
+        String source = raw.text.getOrDefault("source", "");
+        if (confidence == Rules.Confidence.SOURCED && source.isBlank()) {
+            errors.add(at + "[capacity] says 'sourced' but has no 'source ='");
+        }
+
+        List<Rules.Row> rows = buildRows(raw, groups, errors, MAX_CAPACITY_MULTIPLIER, "multiplier");
+        if (errors.size() > before) {
+            return null;
+        }
+        return new Rules.CapacitySettings(referenceBiome, referencePhase, floor, confidence, source, why,
+                List.copyOf(rows), raw.file, raw.line);
+    }
+
+    /**
+     * Checks and converts the rows of one section. Used for animals (numbers 0 to 1)
+     * and for [capacity] (numbers 0 to 2). A row must have 4 numbers or 2, name a
+     * known group (or 'any'), and be reachable: the first matching row wins, so a
+     * later row for the same group and kind, or any row after 'any', can never run.
+     */
+    private static List<Rules.Row> buildRows(
+            Raw raw, Map<String, Rules.Group> groups, List<String> errors, double maxValue, String what) {
         List<Rules.Row> rows = new ArrayList<>();
         // "group|kind" -> true once seen, so a later row for the same pair can't ever run
         Map<String, Boolean> seen = new LinkedHashMap<>();
@@ -267,8 +373,8 @@ public final class RuleParser {
             }
             boolean ok = true;
             for (double n : row.numbers()) {
-                if (n < 0.0 || n > 1.0) {
-                    errors.add(rowAt + "chance " + n + " is outside 0 to 1");
+                if (n < 0.0 || n > maxValue) {
+                    errors.add(rowAt + what + " " + n + " is outside 0 to " + (maxValue == 1.0 ? "1" : maxValue));
                     ok = false;
                     break;
                 }
@@ -291,12 +397,7 @@ public final class RuleParser {
                 rows.add(new Rules.Row(row.group(), values, row.line()));
             }
         }
-
-        if (errors.size() > before) {
-            return null;
-        }
-        return new Rules.Section(raw.name, raw.file, raw.line, List.copyOf(animals), confidence,
-                source, why, List.copyOf(rows));
+        return rows;
     }
 
     private static String where(String file, int line) {

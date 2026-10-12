@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "id": "testbot",
+  "version": "0.0.1",
+  "name": "Test Bot (dev only)",
+  "environment": "server",
+  "entrypoints": { "main": ["testbot.TestBot"] },
+  "depends": { "minecraft": "~26.2-", "fabric-api": "*" }
+}

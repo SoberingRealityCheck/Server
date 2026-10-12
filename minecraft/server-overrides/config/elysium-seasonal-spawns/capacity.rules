@@ -1,0 +1,41 @@
+# How many land animals a player's area can hold, by biome and season.
+#
+# Respawning Animals fills the world up to a cap of land animals per player
+# (15 by default, the min_animals_near_player gamerule). Without this file
+# every place gets that same 15. With it, the cap becomes 15 x a fraction
+# that depends on where the player is and what season it is.
+#
+# How the fraction is worked out, for each biome and season:
+#   1. Add up (spawn weight x average group size x the seasonal chance from
+#      the other .rules files) for every land animal the biome can spawn.
+#      That is the biome's "creature weight".
+#   2. Divide by the creature weight of the reference place below. That
+#      gives a fraction. Richer than the reference is cut back to 1.0.
+#   3. Multiply by any row below. Rows are for places where step 1 is wrong.
+# A player's cap is the average over 9 spots around them, 64 blocks apart.
+# Ocean spots are skipped, since they have no land animals.
+#
+# Warning: spawn weights are not animal counts. They are odds that mod
+# authors tuned against each other, so some biomes will come out too rich
+# or too poor. Run `/seasonalspawns capacity` to see the table. Fix what looks
+# wrong with a row. A row multiplies the result, 0 to 2, and the final
+# fraction is still capped at 1.0.
+#
+# Delete this whole file to turn the feature off. The game's own cap is
+# then used everywhere.
+
+[capacity]
+reference  = minecraft:forest summer
+floor      = 3
+confidence = guess
+why        = The reference is summer forest because it is the richest ordinary place:
+             Naturalist, Ambient Creatures and the farm animals all spawn there. Every
+             other place is measured against it. The floor of 3 keeps a desert or a
+             winter tundra from going empty. Both numbers are balance calls.
+#                 spring summer autumn winter
+# The audit of the first table (2026-10): frozen ocean scored 0.65 and ice spikes
+# 0.78 of a summer forest. That is the penguin: weight 50 and groups of 10, so one
+# animal adds 500 to the sum. Real polar country is poor in land animals, and the
+# fraction should say so. Everything else in the table looked plausible: rainforest
+# and savanna richest, forest next, then plains, taiga and mountains, then desert.
+polar = 0.6  0.6  0.6  0.6

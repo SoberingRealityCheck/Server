@@ -315,8 +315,10 @@ Hack: the sqrt curve is a guess. It leans dim on purpose. Tune it in
 ### seasonal-spawns/
 
 A small server-side mod. Land animals spawn at different rates by season
-and by biome, from plain text rule files. Needs Serene Seasons for the
-calendar and works with Respawning Animals.
+and by biome, from plain text rule files. A second setting gives each
+player a cap on how many land animals their area holds, by biome and
+season (`capacity.rules`). Needs Serene Seasons for the calendar and works
+with Respawning Animals.
 
 - Source and docs: `seasonal-spawns/`. Start with its `README.md`.
 - The rules you edit: `server-overrides/config/elysium-seasonal-spawns/*.rules`.
@@ -331,9 +333,11 @@ calendar and works with Respawning Animals.
   every rule as a table and reports mistakes as `file:line: message`.
 - In game: `/seasonalspawns here`, `sample`, `stats`, `audit`, `reload`.
 
-It can only lower a spawn rate, and it does not set how many animals the
-world holds. Read the "What it does, and what it does not" section of its
-README before relying on a density change.
+The chances can only lower a spawn rate. The cap (`capacity.rules`) is what
+changes how many animals an area holds, and it is a ceiling: where the land
+cannot hold that many anyway, the count stays lower. Read the "What it does,
+and what it does not" section of its README before tuning. A fake-player
+test tool is in `seasonal-spawns/dev/`. It is not part of the pack.
 
 ### Resource packs
 

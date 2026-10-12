@@ -28,6 +28,7 @@ get() { [ -f "$work/$2" ] || curl -sfL -o "$work/$2" "$1"; }
 M=https://maven.fabricmc.net
 get "$M/net/fabricmc/fabric-loader/0.19.5/fabric-loader-0.19.5.jar" loader.jar
 get "$M/net/fabricmc/sponge-mixin/0.17.4%2Bmixin.0.8.7/sponge-mixin-0.17.4%2Bmixin.0.8.7.jar" mixin.jar
+get "https://repo1.maven.org/maven2/io/github/llamalad7/mixinextras-common/0.5.5/mixinextras-common-0.5.5.jar" mixinextras.jar
 get "https://piston-data.mojang.com/v1/objects/823e2250d24b3ddac457a60c92a6a941943fcd6a/server.jar" mc-bundle.jar
 get "https://cdn.modrinth.com/data/P7dR8mSH/versions/ewUK83HI/fabric-api-0.161.0%2B26.2.jar" fabric-api.jar
 get "https://cdn.modrinth.com/data/e0bNACJD/versions/q5mzi8wy/SereneSeasons-fabric-26.2-26.1.2.0.6.jar" serene.jar
@@ -43,7 +44,7 @@ if [ ! -d "$work/fapi" ]; then
   done
 fi
 
-cp_list="$work/loader.jar:$work/mixin.jar:$work/serene.jar:$work/mc/META-INF/versions/26.2/server-26.2.jar"
+cp_list="$work/loader.jar:$work/mixin.jar:$work/mixinextras.jar:$work/serene.jar:$work/mc/META-INF/versions/26.2/server-26.2.jar"
 for j in $(find "$work/fapi" "$work/mc/META-INF/libraries" -name '*.jar'); do
   cp_list="$cp_list:$j"
 done

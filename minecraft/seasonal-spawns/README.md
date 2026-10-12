@@ -5,6 +5,14 @@ through winter. Zebra follow the rains. Frogs wake in spring. You set the
 numbers in plain text files, and every number has a reason written next
 to it.
 
+It does two separate things:
+
+1. **Which animals spawn.** A per-animal chance by season and biome
+   (`*.rules`). Bears are barred in winter.
+2. **How many animals the area holds.** A per-player cap that depends on
+   biome and season (`capacity.rules`). A winter taiga holds fewer animals
+   than a summer forest.
+
 It is a small server-side Fabric mod. It needs Serene Seasons for the
 calendar. It works with Respawning Animals, which is what makes animals
 come and go in the first place.
@@ -15,47 +23,84 @@ come and go in the first place.
 
 ## What it does, and what it does not
 
-Every time the game picks a land animal to spawn, this mod asks one
-question: *is this animal allowed to spawn here, in this season?* The
-answer is a number from 0 to 1. The mod rolls against it. A "no"
-cancels that one spawn.
+**Which animals.** Every time the game picks a land animal to spawn, this
+mod asks: *is this animal allowed to spawn here, in this season?* The
+answer is a number from 0 to 1. The mod rolls against it. A "no" cancels
+that one spawn.
 
-That is all it does. This has three consequences you should know.
+**How many.** Respawning Animals fills the world up to a cap of land
+animals per player (the `min_animals_near_player` gamerule, 15 by
+default) and tries again every tick. Without the second feature, a spawn
+the first feature cancels is simply retried, so a slot an animal is barred
+from is filled by something that is not barred. The mix changes. The
+count does not. So the second feature gives each player a cap that
+depends on where they are. See "The creature cap" below.
 
-1. **It can only lower a rate.** 1.00 is the pack's normal. It cannot
-   go higher. If you want more deer in autumn, lower everything else, or
-   raise the base with the `min_animals_near_player` gamerule.
-2. **It does not set how many animals are in the world. Read this one.**
-   It changes the mix of what spawns and how fast the world refills.
-   Respawning Animals tops the world up to a cap of its own (the
-   `min_animals_near_player` gamerule, 15 by default) and tries again
-   every tick. A cancelled spawn is retried, so a slot an animal is
-   barred from is filled by something that is not barred.
+Things to know:
 
-   **The likely result, not yet checked in a live world:** in winter
-   taiga the bears, hedgehogs and snakes drop out and their slots fill
-   with whatever is left: turkeys, foxes, wolves, and the farm animals.
-   The total count stays near the cap. Farm animals used to be the worst
-   case, because they have the biggest vanilla spawn weights and filled
-   every freed slot. They now have their own scarce rules
-   (`livestock.rules`), and in summer taiga their share of picks fell
-   from about 32% to about 9%. In winter they are cut again. Even so,
-   expect the mix to lean toward whoever is not barred. The density knob
-   that really changes the count is `min_animals_near_player`. It is
-   global, not per biome or per season. Setting it per season is on the
-   "Ideas not built" list.
-
-   **A check to run in game:** stand in the same taiga in summer and in
-   winter (`/season set mid_winter` jumps the calendar). Count the
-   creatures within 128 blocks after a few minutes. An easy count is
-   `/execute if entity @e[type=!player,distance=..128]` with the type you
-   want, or the entity counter on F3.
-3. **It cannot tell apart animals that share a type.** Naturalist uses
+1. **The chance can only lower a rate.** 1.00 is the pack's normal. It
+   cannot go higher. If you want more deer in autumn, lower everything
+   else, or raise the base with the `min_animals_near_player` gamerule.
+2. **The cap is a ceiling, not a target.** It stops spawning at the cap.
+   Where the land cannot hold that many animals anyway (placement rules,
+   light, no grass), the count stays lower. In the live test, a taiga and a
+   desert site held 1 to 7 animals with the cap off, well under 15.
+3. **A falling cap does not remove animals.** Animals within 32 blocks of
+   a player never despawn, and ones further out leave slowly. After a
+   season change the count drifts down over minutes, not at once.
+4. **It cannot tell apart animals that share a type.** Naturalist uses
    one entity (`naturalist:bird`) for six birds and one (`naturalist:snake`)
    for three snakes. Rules for those work on biome only.
 
 Only land animals are touched (vanilla's `CREATURE` category). Monsters,
-fish, ambient mobs and the Nether never reach the rules.
+fish, ambient mobs and the Nether never reach the rules or the cap.
+
+## The creature cap
+
+The cap makes the count follow the biome and the season. How it works:
+
+1. For every biome and season, add up
+   `spawn weight x average group size x seasonal chance`
+   for each land animal the biome can spawn. That is the biome's
+   "creature weight". The seasonal chance is the same number the `.rules`
+   files already give, so a winter taiga with no bears has a smaller sum.
+2. Divide by the creature weight of a **reference place** (summer forest
+   by default). That is the biome's fraction. Richer than the reference is
+   cut back to 1.0.
+3. Multiply by a hand-set row in `capacity.rules` if the weights got a
+   place wrong.
+4. A player's cap is `base x fraction`, never under a floor (3) and never
+   over the base. The base is the cap Respawning Animals already set. The
+   fraction is the average over 9 spots around the player, 64 blocks
+   apart. Ocean spots are skipped.
+5. The game's own check, "is there room for another animal near this
+   player?", is wrapped so it compares the count with that cap instead of
+   the fixed 15. Any one nearby player with room is still enough.
+
+`/seasonalspawns capacity` prints the whole table. `/seasonalspawns here`
+shows the cap at your feet and the count of animals the game sees.
+
+### Known problems with the weight sum
+
+- **Weights are not abundance.** They are odds that mod authors tuned
+  against each other. The penguin has weight 50 and groups of 10, so it
+  alone made frozen ocean look 65% as rich as a summer forest. The first
+  table had that and it is fixed with a `polar` row. Others may be wrong.
+  Read the table and fix what looks wrong with a row.
+- **The scale is the reference.** If you change the reference place, every
+  cap moves. Adding a mod that adds animals to the reference biome
+  makes every other place look poorer.
+- **Placement rules are ignored.** The sum counts animals a biome lists
+  even if they rarely find a place to stand.
+- **The floor flattens cold places.** Winter taiga comes out at 0.14 of the
+  reference, under the floor of 3. So summer and winter taiga look alike.
+  Lower the floor, or raise the taiga row, if you want a bigger swing.
+- **Coarse numbers.** The game allows a spawn while `count < cap`, so a cap
+  of 3.4 holds up to 4 animals. A pack that spawns together can overshoot
+  by a few.
+
+To turn the whole feature off, delete `capacity.rules`. The game's own cap
+then applies everywhere.
 
 ## Edit the rules
 
@@ -143,7 +188,8 @@ All need operator level (game master). They also work from the console.
 
 | Command | What it does |
 |---|---|
-| `/seasonalspawns here` | The season and biome where you stand, the groups it is in, and every animal whose chance is under 1.00 right now. The tuning tool. |
+| `/seasonalspawns here` | The season and biome where you stand, the groups it is in, every animal whose chance is under 1.00 right now, and the creature cap here with the count of animals near. The tuning tool. |
+| `/seasonalspawns capacity` | The creature cap table. Chat gets the reference and the richest and poorest places. The server log gets every biome with its fraction for each season. |
 | `/seasonalspawns sample [n]` | Asks the game's own spawn picker for `n` land animals here (default 1000) and shows the mix. A pick the rules cancelled shows as "nothing". Compare two seasons to see what a rule really does. |
 | `/seasonalspawns stats` | Per animal, how many spawns the rules allowed and cancelled since startup. Only counts picks where the chance was under 1.00. Samples count too. |
 | `/seasonalspawns audit` | Lists every biome and its groups in the server log. |
@@ -168,9 +214,25 @@ Rules.chance(animal, groups, tropical, phase)      <- plain data in, number out
 roll. A "no" cancels this one pick. The game tries again later.
 ```
 
-The hook is one `@Inject` on `NaturalSpawner.getRandomSpawnMobAt`, at its
-return. The rules code (`Rules`, `RuleParser`, `Table`) has no Minecraft
-in it, so it is tested with strings and no mocks.
+```
+game asks "room for another animal near this player?"    LocalMobCapCalculatorMixin
+        |
+        v
+CapacityTable.capFor(player)        <- cached 100 ticks per player
+        |  samples 9 spots around the player, looks up each biome's row
+        |  (rows were built once at server start from every biome's spawn list)
+        v
+Capacity.cap(base, fraction, floor)                <- plain numbers in, number out
+        |
+        v
+count < cap ?   (the game's count, read through MobCountsAccessor)
+```
+
+The spawn hook is one `@Inject` on `NaturalSpawner.getRandomSpawnMobAt`, at
+its return. The cap hook is one `@WrapOperation` on the
+`MobCounts.canSpawn` call inside `LocalMobCapCalculator.canSpawn`. The
+rules and cap math (`Rules`, `RuleParser`, `Capacity`, `Table`) have no
+Minecraft in them, so they are tested with strings and no mocks.
 
 Files:
 
@@ -178,11 +240,16 @@ Files:
 |---|---|
 | `src/elysium/seasonalspawns/Rules.java` | The rule data and `chance()`. |
 | `.../RuleParser.java` | Text in, `Rules` out, or a list of `file:line: message`. |
+| `.../Capacity.java` | The cap math: weight sum, fraction, cap. No Minecraft. |
 | `.../Table.java` | Reads a folder, prints every rule as a grid. Run by `build.sh`. |
-| `.../SelfTest.java` | 21 checks on the two above. Run by `build.sh`. |
-| `.../SeasonalSpawns.java` | The only file that talks to the game: loading, Serene Seasons, commands. |
-| `.../mixin/NaturalSpawnerMixin.java` | The hook. |
+| `.../SelfTest.java` | 44 checks on the files above. Run by `build.sh`. |
+| `.../CapacityTable.java` | Builds the per-biome table from the game's spawn lists and answers "what is this player's cap". |
+| `.../SeasonalSpawns.java` | Loading, Serene Seasons, commands, the spawn decision. |
+| `.../mixin/NaturalSpawnerMixin.java` | The spawn hook. |
 | `.../mixin/NaturalSpawnerAccessor.java` | Lets `sample` call the same picker. |
+| `.../mixin/LocalMobCapCalculatorMixin.java` | The cap hook. |
+| `.../mixin/MobCountsAccessor.java` | Reads the game's per-player animal count. |
+| `dev/` | A fake-player test tool. Not in the pack. See `dev/README.md`. |
 
 ## Build
 
@@ -247,13 +314,53 @@ zero in winter, back to normal in summer.
   summer savanna each is about 1%, and the donkey and horse are under
   1%. Wild animals take the space.
 
+### The creature cap, with a fake player
+
+`sample` cannot show the cap, because natural spawning only runs near a
+player. So `dev/testbot` logs in a fake creative player (see `dev/README.md`)
+and the real spawn loop runs. Each run: 6 x 6000 ticks (about 30 game
+minutes), after the saved animals were cleared. The number is the
+settled count of land animals the game sees near the bot (average of the
+last three readings), at a forest site near the world spawn.
+
+| Run | Cap the mod worked out | Animals held |
+|---|---|---|
+| Summer, cap on | 9.6 | 9.0 |
+| Summer, cap off | (15) | 8.7 |
+| Winter, cap on | 6.5 | 6.3 |
+| Winter, cap off | (15) | 10.7 |
+| Summer, cap forced to 2 | 2.0 | 2 |
+
+What this shows:
+
+- **The hook works.** With the cap forced down to 2, the forest holds
+  exactly 2 animals instead of about 9. The count follows the cap.
+- **The seasonal swing is real, where the land can hold it.** Winter
+  forest holds about 6 with the cap on and about 11 with it off. That is
+  the cap, not the bears being barred: the control had the same bar and
+  the animals were refilled by others.
+- **In summer the cap barely binds.** The forest is the reference, so its
+  cap is nearly the base, and the natural count there is already
+  8 to 13.
+
+What it does not show:
+
+- **Most places never reach their cap.** The taiga and desert sites held 2
+  to 9 animals with the cap off, far under 15. Placement, light and
+  despawning limit them. The cap only matters where the natural count
+  would otherwise be higher.
+- **Those two sites are unreliable.** Their animals were mostly saved
+  ones in chunks that loaded after the clear, so their counts say little
+  about spawning. Pack spawns (capybara groups of up to 6) also overshoot
+  a cap of 3.
+- **One site, one world seed, one run per cell.** Treat the numbers as a
+  demonstration, not a measurement.
+
 Not tested:
 
-- **Live spawning with a player.** A headless server has no player, so
-  natural spawning never ran. `sample` calls the same picker but it is not
-  the full spawn loop.
-- **Whether density really drops.** See "does not set how many animals"
-  above. Needs a real world and a few game days.
+- **Players walking around.** The bot stands still. A real player moves, so
+  their area changes and animals they leave behind despawn.
+- **More than one real player near each other.**
 - **Clients.** The jar is server-only. A client that has it installed
   gets no feature from it.
 - **Existing worlds.** Respawning Animals defaults off in a world made
@@ -262,8 +369,13 @@ Not tested:
 
 ## Hacks and limits
 
-- The mixin targets a **private** method by name. A Minecraft update that
-  renames it stops the server at startup, loudly.
+- The spawn hook targets a **private** method by name. The cap hook targets
+  one call inside `LocalMobCapCalculator.canSpawn` and grabs the loop's
+  player variable by type. A Minecraft update that reshapes either stops
+  the server at startup, loudly. The cap hook is forced to load at server
+  start (`verifyCapHook`) so it cannot hide until the first player joins.
+- The cap is worked out per player and cached for 100 ticks (5 seconds).
+  A season change takes up to 5 seconds to show in the cap.
 - The calendar is global. Every biome shares one year. Differences between
   biomes come only from the rows you write.
 - Four seasons only. The three sub-seasons inside each are not used, so a
@@ -277,8 +389,11 @@ Not tested:
 
 - **Migration.** Make out-of-season animals despawn faster, so geese leave
   in autumn and not just spawn less.
-- **Move the cap by season.** Set `min_animals_near_player` per season. Needs
-  a check that Respawning Animals picks up a gamerule changed from code.
+- **Cull to the cap.** When the cap falls, make the extra animals despawn,
+  instead of waiting for them to wander out of range.
+- **A better capacity source.** The weight sum is a stand-in. Hand-written
+  capacity by biome group and season, justified by real plant productivity,
+  would not depend on how mod authors tuned their weights.
 - **Ease between seasons** using the sub-season progress Serene Seasons
   already reports.
 - **Split the six birds and three snakes** so each gets its own rules. That

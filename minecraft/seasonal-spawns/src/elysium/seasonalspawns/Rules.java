@@ -24,7 +24,7 @@ public final class Rules {
     /** Built-in group name that matches every biome. */
     public static final String ANYWHERE = "any";
 
-    public static final Rules EMPTY = new Rules(Map.of(), List.of(), Map.of());
+    public static final Rules EMPTY = new Rules(Map.of(), List.of(), Map.of(), null);
 
     /** How much to trust a section. Shown by the table and by /seasonalspawns. */
     public enum Confidence {
@@ -53,14 +53,62 @@ public final class Rules {
             Confidence confidence, String source, String why,
             List<Row> rows) {}
 
+    /**
+     * Settings for the creature cap (see Capacity). Null in Rules means the cap
+     * feature is off and the game's own cap is left alone.
+     *
+     * referenceBiome and referencePhase name the place that counts as 1.0, for
+     * example minecraft:forest and summer. floor is the lowest cap a player can
+     * be given. rows are hand-set multipliers (0 to 2) by biome group and season,
+     * for places the weight sum gets wrong. They use the same row format as the
+     * animals: 4 numbers for ordinary biomes, 2 (dry wet) for tropical ones.
+     */
+    public record CapacitySettings(
+            String referenceBiome, String referencePhase, double floor,
+            Confidence confidence, String source, String why,
+            List<Row> rows, String file, int line) {}
+
     private final Map<String, Group> groups;
     private final List<Section> sections;
     private final Map<String, Section> byAnimal;
+    private final CapacitySettings capacity;
 
-    public Rules(Map<String, Group> groups, List<Section> sections, Map<String, Section> byAnimal) {
+    public Rules(Map<String, Group> groups, List<Section> sections, Map<String, Section> byAnimal,
+                 CapacitySettings capacity) {
         this.groups = groups;
         this.sections = sections;
         this.byAnimal = byAnimal;
+        this.capacity = capacity;
+    }
+
+    /** Null when capacity.rules has no [capacity] section. Then the cap feature is off. */
+    public CapacitySettings capacity() {
+        return capacity;
+    }
+
+    /** The hand-set multiplier for a place. 1.0 when no row fits or the feature is off. */
+    public double capacityMultiplier(Set<String> inGroups, boolean tropical, int phase) {
+        if (capacity == null) {
+            return 1.0;
+        }
+        return firstRow(capacity.rows(), inGroups, tropical, phase, 1.0);
+    }
+
+    /** Index of a season word in SEASONS (not tropical) or TROPICAL_SEASONS (tropical). -1 if unknown. */
+    public static int phaseIndex(String word, boolean tropical) {
+        return (tropical ? TROPICAL_SEASONS : SEASONS).indexOf(word);
+    }
+
+    private static double firstRow(List<Row> rows, Set<String> inGroups, boolean tropical, int phase, double none) {
+        for (Row row : rows) {
+            if (row.tropical() != tropical) {
+                continue;
+            }
+            if (row.group().equals(ANYWHERE) || inGroups.contains(row.group())) {
+                return row.chances()[phase];
+            }
+        }
+        return none;
     }
 
     public Map<String, Group> groups() {
@@ -95,14 +143,6 @@ public final class Rules {
         if (section == null) {
             return 1.0;
         }
-        for (Row row : section.rows()) {
-            if (row.tropical() != tropical) {
-                continue;
-            }
-            if (row.group().equals(ANYWHERE) || inGroups.contains(row.group())) {
-                return row.chances()[phase];
-            }
-        }
-        return 1.0;
+        return firstRow(section.rows(), inGroups, tropical, phase, 1.0);
     }
 }

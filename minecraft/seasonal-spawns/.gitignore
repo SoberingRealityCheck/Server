@@ -1,1 +1,3 @@
 .build/
+dev/testbot/.classes/
+dev/testbot/testbot.jar

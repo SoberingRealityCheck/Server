@@ -73,10 +73,75 @@ public final class SelfTest {
         fails("bad entity id", "[g]\nbiomes = a:b\n[a]\nanimals = bear\nconfidence = guess\nwhy = x\ng = 1 1 1 1\n", "not an entity id");
         fails("line outside a section", "oops = 1\n", "outside any [section]");
 
+        capacityChecks();
+
         System.out.println(checks + " checks, " + failed + " failed");
         if (failed > 0) {
             System.exit(1);
         }
+    }
+
+    private static final String CAPACITY = """
+            [forest]
+            biomes = minecraft:forest
+
+            [desert]
+            biomes = minecraft:desert
+
+            [capacity]
+            reference  = minecraft:forest summer
+            floor      = 3
+            confidence = guess
+            why        = Test data.
+            desert  = 0.5 0.5 0.5 0.5
+            desert  = 0.9 0.9
+            """;
+
+    private static void capacityChecks() {
+        // pure math
+        Capacity.Entry deer = new Capacity.Entry("t:deer", 10, 4.0);   // 10 x 4 = 40
+        Capacity.Entry bear = new Capacity.Entry("t:bear", 10, 1.5);   // 10 x 1.5 = 15
+        java.util.List<Capacity.Entry> forest = java.util.List.of(deer, bear);
+        double summer = Capacity.weightedSum(forest, a -> 1.0);
+        near("weighted sum counts weight x group size", 55.0, summer);
+        double winter = Capacity.weightedSum(forest, a -> a.equals("t:bear") ? 0.0 : 1.0);
+        near("a barred animal drops out of the sum", 40.0, winter);
+        near("reference place is 1.0", 1.0, Capacity.fraction(summer, summer, 1.0));
+        near("poorer place is a fraction", 40.0 / 55.0, Capacity.fraction(winter, summer, 1.0));
+        near("richer place clamps to 1.0", 1.0, Capacity.fraction(110.0, summer, 1.0));
+        near("multiplier scales the fraction", 0.5, Capacity.fraction(summer, summer, 0.5));
+        near("no reference means no change", 1.0, Capacity.fraction(10.0, 0.0, 1.0));
+        near("cap is base x fraction", 7.5, Capacity.cap(15, 0.5, 3));
+        near("cap never drops under the floor", 3.0, Capacity.cap(15, 0.05, 3));
+        near("cap never exceeds the base", 15.0, Capacity.cap(15, 1.0, 3));
+        near("a base under the floor wins", 2.0, Capacity.cap(2, 0.1, 3));
+
+        // parsing [capacity]
+        RuleParser.Result ok = RuleParser.parse(java.util.List.of(new RuleParser.Source("cap.rules", CAPACITY)));
+        check("capacity section parses", ok.errors().isEmpty(), ok.errors().toString());
+        Rules.CapacitySettings cap = ok.rules().capacity();
+        check("capacity settings are kept", cap != null && cap.referenceBiome().equals("minecraft:forest")
+                && cap.referencePhase().equals("summer") && cap.floor() == 3.0, String.valueOf(cap));
+        near("capacity multiplier, ordinary biome", 0.5, ok.rules().capacityMultiplier(Set.of("desert"), false, 2));
+        near("capacity multiplier, tropical biome", 0.9, ok.rules().capacityMultiplier(Set.of("desert"), true, 1));
+        near("capacity multiplier, no row", 1.0, ok.rules().capacityMultiplier(Set.of("forest"), false, 0));
+        check("no [capacity] section means feature off",
+                RuleParser.parse(java.util.List.of(new RuleParser.Source("g.rules", GOOD))).rules().capacity() == null, "");
+        check("phaseIndex finds a season", Rules.phaseIndex("winter", false) == 3
+                && Rules.phaseIndex("wet", true) == 1 && Rules.phaseIndex("wet", false) == -1, "");
+
+        fails("capacity without reference",
+                "[capacity]\nfloor = 3\nconfidence = guess\nwhy = x\n", "needs 'reference =");
+        fails("capacity without floor",
+                "[capacity]\nreference = a:b summer\nconfidence = guess\nwhy = x\n", "needs 'floor =");
+        fails("capacity with bad season",
+                "[capacity]\nreference = a:b monsoon\nfloor = 3\nconfidence = guess\nwhy = x\n", "reference season");
+        fails("capacity multiplier too big",
+                "[g]\nbiomes = a:b\n[capacity]\nreference = a:b summer\nfloor = 3\nconfidence = guess\nwhy = x\ng = 3 1 1 1\n",
+                "outside 0 to 2");
+        fails("capacity twice",
+                "[capacity]\nreference = a:b summer\nfloor = 3\nconfidence = guess\nwhy = x\n"
+                        + "[capacity]\nreference = a:b summer\nfloor = 3\nconfidence = guess\nwhy = x\n", "defined twice");
     }
 
     private static void fails(String label, String text, String expectedPart) {

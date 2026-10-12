@@ -69,6 +69,25 @@ public final class Table {
                 }
             }
         }
+        Rules.CapacitySettings cap = rules.capacity();
+        if (cap != null) {
+            out.append('\n');
+            out.append(String.format("[capacity]  %s  (%s:%d)%n", cap.confidence().name().toLowerCase(),
+                    cap.file(), cap.line()));
+            out.append(String.format("  1.0 is %s in %s. Lowest cap %.1f.%n",
+                    cap.referenceBiome(), cap.referencePhase(), cap.floor()));
+            out.append("  Hand-set multipliers on top of the weight sum (the game fills in the sum):\n");
+            if (cap.rows().isEmpty()) {
+                out.append("  (none)\n");
+            }
+            for (Rules.Row row : cap.rows()) {
+                out.append(String.format("  %-18s", row.group() + (row.tropical() ? " (dry wet)" : "")));
+                for (double c : row.chances()) {
+                    out.append(String.format(" %7.2f", c));
+                }
+                out.append('\n');
+            }
+        }
         return out.toString();
     }
 

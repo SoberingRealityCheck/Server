@@ -45,14 +45,15 @@ sourced rule.
   pack's normal. 1.00 is the ceiling.
 - It is applied after the game picks an animal. A "no" cancels that one
   pick. The game tries again a moment later.
-- It changes the mix and how fast the world refills. It does **not**
-  directly set how many animals are in the world. Respawning Animals
-  tops the world up to its own cap (the `min_animals_near_player`
+- The chances change the mix and how fast the world refills. They do
+  **not** directly set how many animals are in the world. Respawning
+  Animals tops the world up to its own cap (the `min_animals_near_player`
   gamerule, 15 by default) and retries every tick. So when a rule bars
-  bears in winter, the slot is likely filled by an animal that is not
-  barred, often a farm animal. The count stays near the cap and the mix
-  moves. This is the expected result and has not been checked in a live
-  world. See the README for a check to run.
+  bears in winter, the slot is filled by an animal that is not barred.
+- How many animals an area holds is a separate setting: the creature cap
+  in `capacity.rules`. It uses the chances above too. Every chance you
+  lower also lowers the weight sum, so a winter taiga without bears gets
+  a smaller cap. See the README.
 
 ## Bears
 

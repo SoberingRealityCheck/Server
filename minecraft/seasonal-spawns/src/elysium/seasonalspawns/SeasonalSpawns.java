@@ -71,8 +71,40 @@ public final class SeasonalSpawns implements ModInitializer {
     @Override
     public void onInitialize() {
         reload();
-        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resources, success) -> reload());
+        // The cap table reads every biome, so it waits until the server's registries and tags exist.
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+            verifyCapHook();
+            CapacityTable.rebuild(server, rules);
+        });
+        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resources, success) -> {
+            reload();
+            CapacityTable.rebuild(server, rules);
+        });
         CommandRegistrationCallback.EVENT.register((dispatcher, buildContext, selection) -> registerCommands(dispatcher));
+    }
+
+    /**
+     * Mixins are applied when a class first loads. The cap calculator would not load until
+     * the first player walks around, so a broken cap hook would hide until then. Load it now.
+     * If the hook is wrong the server stops here with a clear message, like the spawn hook does.
+     */
+    private static void verifyCapHook() {
+        try {
+            Class.forName("net.minecraft.world.level.LocalMobCapCalculator");
+            Class<?> counts = Class.forName("net.minecraft.world.level.LocalMobCapCalculator$MobCounts");
+            if (!elysium.seasonalspawns.mixin.MobCountsAccessor.class.isAssignableFrom(counts)) {
+                throw new IllegalStateException("the MobCounts accessor was not applied");
+            }
+            LOGGER.info("Creature cap hook applied.");
+        } catch (Throwable t) {
+            LOGGER.error("The creature cap hook did not apply. Minecraft probably changed LocalMobCapCalculator.", t);
+            throw new IllegalStateException("elysium-seasonal-spawns: creature cap hook failed", t);
+        }
+    }
+
+    /** Called by LocalMobCapCalculatorMixin. -1 means "use the game's own cap". */
+    public static double capFor(net.minecraft.server.level.ServerPlayer player) {
+        return CapacityTable.capFor(player, rules);
     }
 
     // ---- loading -------------------------------------------------------
@@ -131,7 +163,7 @@ public final class SeasonalSpawns implements ModInitializer {
     }
 
     /** Index into Rules.SEASONS, or into Rules.TROPICAL_SEASONS for tropical biomes. */
-    private static int phase(ServerLevel level, boolean tropical) {
+    static int phase(ServerLevel level, boolean tropical) {
         ISeasonState state = SeasonHelper.getSeasonState(level);
         if (tropical) {
             // EARLY_DRY, MID_DRY, LATE_DRY, EARLY_WET, MID_WET, LATE_WET
@@ -139,6 +171,10 @@ public final class SeasonalSpawns implements ModInitializer {
         }
         // SPRING, SUMMER, AUTUMN, WINTER. Same order as Rules.SEASONS.
         return state.getSeason().ordinal();
+    }
+
+    static String idOfType(EntityType<?> type) {
+        return idOf(type);
     }
 
     private static String idOf(EntityType<?> type) {
@@ -153,7 +189,7 @@ public final class SeasonalSpawns implements ModInitializer {
         return GROUPS_OF_BIOME.computeIfAbsent(key, k -> computeGroups(biome));
     }
 
-    private static Set<String> computeGroups(Holder<Biome> biome) {
+    static Set<String> computeGroups(Holder<Biome> biome) {
         Set<String> found = new HashSet<>();
         for (Rules.Group group : rules.groups().values()) {
             for (String matcher : group.matchers()) {
@@ -182,8 +218,12 @@ public final class SeasonalSpawns implements ModInitializer {
                         .then(Commands.argument("count", IntegerArgumentType.integer(1, 20000))
                                 .executes(c -> say(c.getSource(),
                                         sample(c.getSource(), IntegerArgumentType.getInteger(c, "count"))))))
+                .then(Commands.literal("capacity").executes(c -> say(c.getSource(), capacity())))
                 .then(Commands.literal("reload").executes(c -> {
                     boolean ok = reload();
+                    if (ok) {
+                        CapacityTable.rebuild(c.getSource().getServer(), rules);
+                    }
                     return say(c.getSource(), List.of(ok
                             ? "Reloaded " + rules.animals().size() + " animals."
                             : "Reload failed. Kept the old rules. The problems are in the server log."));
@@ -226,6 +266,57 @@ public final class SeasonalSpawns implements ModInitializer {
         if (shown == 0) {
             out.add("  (none. Every animal is at 1.00 here)");
         }
+        out.addAll(capHere(source, level, pos));
+        return out;
+    }
+
+    /** The land-animal cap at the sender's spot, and how many animals are near. */
+    private static List<String> capHere(CommandSourceStack source, ServerLevel level, BlockPos pos) {
+        List<String> out = new java.util.ArrayList<>();
+        if (!CapacityTable.enabled()) {
+            out.add("Creature cap: off (no [capacity] section). The game's own cap applies.");
+            return out;
+        }
+        int base = MobCategory.CREATURE.getMaxInstancesPerChunk();
+        double area = CapacityTable.areaFraction(level, pos);
+        if (area < 0) {
+            out.add("Creature cap: no land around here, so the game's own cap (" + base + ") applies.");
+            return out;
+        }
+        double floor = rules.capacity().floor();
+        double cap = Capacity.cap(base, area, floor);
+        var near = level.getEntitiesOfClass(net.minecraft.world.entity.Mob.class,
+                new net.minecraft.world.phys.AABB(pos).inflate(128),
+                m -> m.getType().getCategory() == MobCategory.CREATURE
+                        && !m.isPersistenceRequired() && !m.requiresCustomPersistence());
+        out.add(String.format("Creature cap here: %.1f of a base %d (area average %.2f of the reference, floor %.0f). "
+                + "Animals counted within 128 blocks: %d.", cap, base, area, floor, near.size()));
+        return out;
+    }
+
+    /** The whole table goes to the server log. The chat gets the reference and the extremes. */
+    private static List<String> capacity() {
+        List<String> out = new java.util.ArrayList<>();
+        if (!CapacityTable.enabled()) {
+            out.add("Creature cap is off. Add a [capacity] section to capacity.rules to turn it on.");
+            return out;
+        }
+        Rules.CapacitySettings s = rules.capacity();
+        out.add(CapacityTable.referenceNote());
+        out.add(String.format("Base cap %d (from Respawning Animals). Lowest cap %.0f.",
+                MobCategory.CREATURE.getMaxInstancesPerChunk(), s.floor()));
+        List<String> lines = CapacityTable.lines();
+        LOGGER.info("--- creature cap table: biome, fraction of the reference by season ---");
+        lines.forEach(LOGGER::info);
+        out.add(lines.size() + " land biomes. Richest five, then poorest five (fractions of the reference):");
+        for (int i = 0; i < Math.min(5, lines.size()); i++) {
+            out.add("  " + lines.get(i));
+        }
+        out.add("  ...");
+        for (int i = Math.max(5, lines.size() - 5); i < lines.size(); i++) {
+            out.add("  " + lines.get(i));
+        }
+        out.add("The full list is in the server log.");
         return out;
     }
 
