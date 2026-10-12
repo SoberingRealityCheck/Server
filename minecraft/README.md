@@ -9,9 +9,9 @@
 | Port | 25565/TCP |
 | Profile | Elysium |
 
-Terralith/Tectonic worldgen, Distant Horizons LOD rendering, performance
-and QOL mods, layered under the Matcha Flavoured
-datapack. Full contents: `MODLIST.md` (generated -- see below).
+Terralith/Tectonic worldgen, Distant Horizons LOD rendering, roads
+between villages (RoadWeaver), performance and QOL mods, layered under
+the Matcha Flavoured datapack. Full contents: `MODLIST.md` (generated -- see below).
 
 ## How the pack works
 
@@ -98,11 +98,10 @@ All client side. The pack sets none of these, so each player tunes their own.
 - **Hotbar / health / hunger:** AutoHUD. Options -> Mod Menu -> AutoHUD
   (it uses YACL). Each HUD part has its own hide delay and fade.
 - **Crosshair:** Dynamic Crosshair. Same place.
-- **Minimap:** Xaero's Minimap. Press `Y` in game for its settings (size,
-  zoom, opacity, position). If it's too big, shrink the size and lower
-  opacity first. Xaero's default keys can differ, so check Options ->
-  Controls.
-- **World map:** `M`. Its gear icon has its own settings.
+- **Maps:** Ultimate Map Atlases. Craft an atlas, put vanilla maps in it,
+  and open it to show the minimap and world view. The atlas is closed
+  when crafted, so open it first. Keys are in Options -> Controls. There
+  is no automatic world map. You only see what you have mapped on paper.
 
 ### Known issue: shaders + Distant Horizons
 
@@ -357,6 +356,41 @@ see the [project page](https://modrinth.com/resourcepack/dynamic-surroundings-so
 for those credits and asset notes.
 
 `server-overrides/` works the same way but only the server gets it.
+
+### RoadWeaver (roads between villages)
+
+Server-only. Players install nothing and get no road map screen.
+
+RoadWeaver has no 26.x build upstream, so the jar comes from
+[rw-26-port](https://github.com/SoberingRealityCheck/rw-26-port), an
+unofficial server-only port of RoadWeaver 2.3.1 (MIT, credits in its
+NOTICE). It has no client code. When upstream ships a 26.x release, swap
+the `pack.yaml` entry to that jar and drop the port.
+
+What it does: at world creation it scans around spawn, finds villages,
+and plans roads. After that it plans more as chunks generate, and lays
+the roads down in those chunks. Roads appear **only in chunks generated
+after the mod is installed**. Terrain players already explored stays as it
+was. Run Chunky (see `CHUNKY.md`) on a new world so the cost is paid up
+front.
+
+Config is `server-overrides/config/roadweaver/roadweaver.json`. The one
+change from the mod's default: the village whitelist also includes
+`terralith:fortified_village`. The default only matches
+`#minecraft:village`, and most villages in this pack are Terralith's.
+
+Measured on a fresh world, same seed and a 19,321 chunk Chunky run:
+about 2 extra minutes once at world creation and about 6.5% on the
+pregeneration (16:43 against 15:41). Tick cost with players online has
+not been measured yet. Check it with spark.
+
+Notes:
+
+- A new world's first boot is slow for that reason. The scan is saved,
+  so later boots are not.
+- It logs a `ConcurrentModificationException` early in worldgen. That is
+  an upstream race that does not stop roads. Ignore it.
+- Roads are physical blocks. Removing the mod leaves them in the world.
 
 Server-side settings that the container can set as environment variables
 (difficulty, MOTD, view distance, whitelist) belong in `.env` instead --

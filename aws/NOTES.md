@@ -93,6 +93,7 @@ host's is:
 |---|---|---|---|---|
 | SSH | TCP | 22 | your admin IP(s) only | management |
 | Custom TCP | TCP | 25565 | **the proxy's security group** | Minecraft, from the proxy only |
+| Custom UDP | UDP | 24454 | **the proxy's security group** | Simple Voice Chat, relayed by the proxy |
 
 Source 25565 from the proxy's security group id, not `0.0.0.0/0`. The
 public game port lives on the proxy; players never connect here
@@ -339,6 +340,7 @@ the one that gets the Elastic IP.
 | SSH | TCP | 22 | your admin IP(s) only | management |
 | SSH | TCP | 22 | the **game host's** security group id | whitelist push (see "Whitelist sync") |
 | Custom TCP | TCP | 25565 | `0.0.0.0/0` | Minecraft Java -- the real public game port |
+| Custom UDP | UDP | 24454 | `0.0.0.0/0` | Simple Voice Chat -- `voice-forward.service` relays it to the game host |
 
 Then, on the **game host's** security group, allow 25565 from *this*
 security group's id (section 3).

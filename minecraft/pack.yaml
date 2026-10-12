@@ -21,8 +21,8 @@ name: "Elysium"
 version: "1.7.12"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
-  Horizons LOD rendering, performance and QOL mods, layered under the
-  Matcha Flavoured datapack.
+  Horizons LOD rendering, roads between villages, performance and QOL
+  mods, layered under the Matcha Flavoured datapack.
 
 minecraft: "26.2"
 loader: fabric
@@ -76,16 +76,6 @@ mods:
     reason: >-
       Required by Easy Shulker Boxes and Bundle Upgrade, both of which
       run on both sides -- so this must too.
-
-  - name: "Fabric Language Kotlin"
-    file: "fabric-language-kotlin-1.14.1+kotlin.2.4.20.jar"
-    url: "https://cdn.modrinth.com/data/Ha28R6CL/versions/eRRZzGMc/fabric-language-kotlin-1.14.1%2Bkotlin.2.4.20.jar"
-    sha512: "91404f87774466ce8604aafea791d8cc97b603bc310dce17c8188f94f7783cca6dc14fc726ce871ca317bfe9033c199d8d858d51284106a00754e952147703b8"
-    env: both
-    reason: >-
-      Kotlin runtime, required by Xaero's Maps: Multiplayer+. 8 MB, the
-      largest single file in the pack -- it bundles the whole Kotlin
-      standard library. Only here because Multiplayer+ needs it.
 
   - name: "Balm"
     file: "balm-fabric-26.2-26.2.0.9.jar"
@@ -147,14 +137,11 @@ mods:
     file: "yet_another_config_lib_v3-3.9.7+26.2-fabric.jar"
     url: "https://cdn.modrinth.com/data/1eAoo2KR/versions/DoR7RYgi/yet_another_config_lib_v3-3.9.7%2B26.2-fabric.jar"
     sha512: "f36d91a9506ad9addbaaeecaea01d2b0cb5b060f52486b17688746cb597f0f3b23a80f8441f7a73a9cb8cde85af8809fe54825984b56345325359d505a80e7f2"
-    env: both
+    env: client
     reason: >-
-      Config library. Required client-side by Better Clouds, and
-      server-side too because Xaero's Maps: Multiplayer+ runs on both
-      sides and hard-depends on it -- caught by --check-deps, which
-      reads the real fabric.mod.json rather than Modrinth's
-      project-level metadata. Upstream marks both sides optional, so
-      shipping it to the server is harmless.
+      Config library. Required client-side by Better Clouds. It was `both`
+      only because Xaero's Maps: Multiplayer+ hard-depended on it on the
+      server, and that mod is gone.
 
   - name: "Architectury API"
     file: "architectury-fabric-21.1.11.jar"
@@ -184,6 +171,19 @@ mods:
     sha512: "c653ee42fe48c1be9512fa7791e8495095ae01cb607555202714bbb95cb49da272128bb295e8f8c262b63739e7ca2de4bba9196e1738b06012b498d220b55acf"
     env: server
     reason: "Continent-scale landform shaping, compatible with Terralith"
+
+  - name: "RoadWeaver (26.2 port)"
+    file: "roadweaver-2.3.1-26.2-port.jar"
+    url: "https://github.com/SoberingRealityCheck/rw-26-port/releases/download/v2.3.1-26.2-port/roadweaver-2.3.1-26.2-port.jar"
+    sha512: "df039a8230ea77839fffdf74756643b772800cb2904d00e051ba800fd1227e5e669e05d75f56a27cdda3cb6b12342bf3979a2a88360665802a7b026c90be5b64"
+    env: server
+    reason: >-
+      Roads between villages. Unofficial server-only port of RoadWeaver 2.3.1
+      (MIT) from the rw-26-port repo, because upstream has no 26.x build.
+      Plans roads at world creation, then adds them as chunks generate.
+      Pregenerate with Chunky so the cost is paid up front. Config is in
+      server-overrides/config/roadweaver. Swap to the official jar when
+      upstream ships one for 26.x.
 
   - name: "Streams Reflowing"
     file: "StreamsReflowing-26.2-fabric-2.14.4.jar"
@@ -259,6 +259,25 @@ mods:
     sha512: "b8d9af34cd0050493afb8a6232cb8f785daa9d8887b7045f6e6a53c6bb9b5ffc4318fd9b0347a940eacfeba4773f10cb80ae0be1e79ce4c1888f96eda21e564e"
     env: server
     reason: "Networking-stack optimization"
+
+  - name: "Maps of the Unknown"
+    file: "bettermaps+26.2-0.9.1.jar"
+    url: "https://cdn.modrinth.com/data/JX1fvBwM/versions/q7SVubjm/bettermaps%2B26.2-0.9.1.jar"
+    sha512: "7222bb4a32124a74ff2f72b0ed3fb0f07fcbc0c192592d3bda5574a7d3d50a86a0b47ea23372bf5a995ba20d675e5af24a515c34beeac3623712f779478983d7"
+    env: server
+    reason: >-
+      Profile 2026-10-12 showed ~21s of 46s of slow ticks in villager
+      restock -> explorer map -> findNearestMapStructure, which
+      generates chunks on the Server thread. This defers the structure
+      search until a player opens the map. Do NOT add Async Locator's
+      trade/chest-map features next to it, they conflict.
+
+  - name: "Unruled API"
+    file: "unruled_api-unruled-api+26.2-2.3.3.jar"
+    url: "https://cdn.modrinth.com/data/pZ0PWFaa/versions/XRwrYSiD/unruled_api-unruled-api%2B26.2-2.3.3.jar"
+    sha512: "058c58e599f53b1a5be6cfe81df0ef2411a81fb35083464a3e0874412f3c95a3d0bf0b11a6eb1087a9ee8a9b2da7eed4411865de2155bf5056b0794ae8c8355e"
+    env: server
+    reason: "Gamerule library, required by Maps of the Unknown"
 
   - name: "FerriteCore"
     file: "ferritecore-9.0.0-fabric.jar"
@@ -449,6 +468,25 @@ mods:
       lightly tested: watch snow placement and the server log after the
       first season change.
 
+  - name: "Season Maps"
+    file: "seasonmaps-0.1.0.jar"
+    url: "https://github.com/SoberingRealityCheck/season-maps/releases/download/v0.1.0/seasonmaps-0.1.0.jar"
+    sha512: "4b0d68efe6be594782fea6a2dadaad62bdeeaa75bef3eba07b073ce28390147dbc482ca4f7445b6276fe927528d5e30bc367fc657c8cb0e00b81ec0f3e686b97"
+    env: both
+    reason: >-
+      Biome- and season-tinted colors for vanilla maps, which is what the
+      Xaero map mods used to do per pixel at a high render cost. The
+      server records each map pixel's biome (and surface block for
+      grass/plant pixels) as you map and sends it with map packets. The
+      client tints from the game's own BlockColors, so spruce/birch leaves
+      are fixed colors and flowers get none. Works with Ultimate Map
+      Atlases (draws through the same vanilla map texture). Needs Serene
+      Seasons, above. Our own mod, source at
+      github.com/SoberingRealityCheck/season-maps. Maps made before it
+      was installed stay vanilla until re-scanned. Lightly tested: server
+      self test and tint rules only, nobody has looked at the maps in
+      play yet.
+
   - name: "Nova Reimagined Snow"
     file: "compsnow-1.0.3+26.2.1.jar"
     url: "https://github.com/SoberingRealityCheck/nova-reimagined-snow/releases/download/v1.0.3-26.2.1/compsnow-1.0.3%2B26.2.1.jar"
@@ -601,39 +639,18 @@ mods:
       `/gamerule respawninganimals:remove_animals_when_far_away true`.
       New worlds have it on. Animals already in a world become
       persistent, so only new spawns churn.
-
-  - name: "Xaero's World Map"
-    file: "xaeroworldmap-fabric-26.2-1.47.0.jar"
-    url: "https://cdn.modrinth.com/data/NcUtCpym/versions/ebWaQDqf/xaeroworldmap-fabric-26.2-1.47.0.jar"
-    sha512: "27e3166bc7257fac3b12898e11e80875d9fa05c9da3127d8a7f5233f4aa66a8fbb8cdccec9c83aba1d4d4234ab23cf9ccb31b28fb7b48a0162854ddc22ff04b1"
+  - name: "Ultimate Map Atlases"
+    file: "ultimate_map_atlases-26.2.jar"
+    url: "https://cdn.modrinth.com/data/sMGE68Dq/versions/bgd39YOI/ultimate_map_atlases-26.2.jar"
+    sha512: "4826d2a5b51124293efa1f75bd476ebe3ffdb017ad75ee70bcabbf0fe74320fea0034406d2d701784a0500b3fb5870736183fc760b06c5f3d421fd9e0c80adbe"
     env: both
     reason: >-
-      Full-screen explored-world map; companion to Xaero's Minimap.
-
-  - name: "Xaero's Maps: Multiplayer+"
-    file: "xmmp-1.1.1+26.2-fabric.jar"
-    url: "https://cdn.modrinth.com/data/stTaMuWa/versions/S5atSSQA/xmmp-1.1.1%2B26.2-fabric.jar"
-    sha512: "ee3c6f55a529df3528300b23b258f3f4af74f50759f78786ed20046935934a21ae73b8fd7563e740423ef7801f591a64dbb308de0f8b58d9b4589c8aa822946f"
-    env: both
-    reason: >-
-      Syncs world map exploration between players -- genuinely
-      multiplayer, hence both sides. Needs Fabric Language Kotlin, plus
-      Xaero's Minimap and World Map (0.3.2 made those soft dependencies).
-      Small mod (a few thousand downloads). Run --check-deps after
-      building: if it reports the server missing xaeroworldmap or
-      xaerominimap, those two need `env: both`.
-
-  - name: "Xaero's Minimap"
-    file: "xaerominimap-fabric-26.2-26.6.0.jar"
-    url: "https://cdn.modrinth.com/data/1bokaNcj/versions/JRopWECg/xaerominimap-fabric-26.2-26.6.0.jar"
-    sha512: "7452e9d462d5803eb81ef0f931d265da86ce81917eba6de124cccee40eb244d7e4bfd88eb85f8bb739970ecd12d74a6b0754e60c3fcbbdd9cabb0012c1f04f46"
-    env: client
-    reason: >-
-      Minimap + waypoints. Must stay in step with Xaero's World Map:
-      World Map declares a `breaks` on older Minimap builds (it did for
-      <26.4.0), so a mismatch stops the game from starting rather than
-      merely misbehaving. 26.6.0 and World Map 1.47.0 shipped the same
-      day -- treat them as a pair.
+      Replaces the Xaero map mods. Craftable atlases hold vanilla maps and
+      show a minimap + world view built from them, so exploring means
+      carrying paper. Vanilla map colors have no biome tint, which also
+      removed Xaero's per-pixel tint cost (about 15% of Render-thread
+      samples in the 2026-10-12 client profile). Small mod, UNTESTED here.
+      Seasonal biome tint for the maps is a planned in-house mod.
 
   - name: "Better Advancements"
     file: "BetterAdvancements-Fabric-26.2-0.6.0.72.jar"
