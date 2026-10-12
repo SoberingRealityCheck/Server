@@ -275,7 +275,8 @@ zero in winter, back to normal in summer.
 
 - The jar loads and the mixin applies. `defaultRequire = 1` means a bad
   target would have stopped the server.
-- The rules load: 46 sections, 47 animals, 15 groups (22 sections and 23
+- The rules load: 51 sections, 52 animals, 15 groups (the last five are
+  `second-pass.rules`, added after the runs below, which saw 46 and 47. 22 sections and 23
   animals in the first runs below, before farm animals and the rest were
   added). The audit puts 118 of 165 biomes in a group. The other 47 are
   mostly oceans, caves, Nether and End.

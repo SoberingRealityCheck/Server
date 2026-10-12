@@ -665,14 +665,25 @@ numbers. If wild animals are still crowded out, lower them.
 | Animal | Why |
 |---|---|
 | Panda, red panda | Real pandas and red pandas live in cool bamboo and montane forest in the Himalaya and China. The game puts both in hot jungle. A seasonal rule cannot fix that. The jungle is the only place the game lets them live. |
-| Parrot | Jungle bird with no clean seasonal signal at this level of detail. Different parrots breed in different seasons. |
-| Shima enaga | Resident small bird of Japan, snow-white in winter. It stays all year. |
-| Ferret (Critters and Companions) | Forest and plains. Polecats stay active all year. Nothing to model without a source. |
 | Strider | Nether. The Nether has no seasons, so the mod does nothing there. |
 | Glare | Lives in lush caves, underground. Seasons do not reach it. |
-| Moobloom | A fantasy cow in flower biomes. |
 | Rascal, tuff golem | Spawn from structures (mineshafts, mansions), not from biomes. |
-| Jungle scorpion | Lives in a wet, warm place all year. |
+
+## Second pass (`second-pass.rules`)
+
+Five animals first left alone, then given rules after review. All are weak
+rules, and `guess` and `reasoned` say so. A chance only lowers a rate, so a
+spring peak is written as the other seasons being cut.
+
+| Animal | Rule | Basis |
+|---|---|---|
+| Moobloom (`friendsandfoes:moobloom`) | Spring `1.0`, summer `1.0`, autumn `0.55`, winter `0.25`. | guess. A fantasy cow that follows flowers. Flower and pollinator studies show the bloom peaking in spring and early summer. The autumn and winter numbers are a judgement call. |
+| Ferret (`crittersandcompanions:ferret`) | `0.8 1.0 1.0 0.5`. | reasoned, read as the wild polecat. Kits born early summer, young disperse in autumn, less active and seen less in winter. |
+| Shima enaga (`crittersandcompanions:shima_enaga`) | `0.7 0.7 1.0 1.0`. | reasoned. The bird stays all year. Winter flocks of 10 to 20 are easy to find. Spring and summer pairs nest and are hidden. Sources are tour pages. |
+| Parrot (`minecraft:parrot`) | Dry `1.0`, wet `0.8`. | guess. Studies cover a few species and some nest in the wet and some in the dry. |
+| Jungle scorpion (`naturalist:jungle_scorpion`) | Dry `0.7`, wet `1.0`. | guess. No source found. |
+
+Still left alone: panda and red panda (see above).
 | Butterfly, firefly, dragonfly, fish, sharks, whales | Not `CREATURE`. The hook never sees them. |
 | Critters and Companions insects, otter, koi, sea bunny, octopus | Ambient or water types. The hook never sees them. |
 
