@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Turns the CSV from `/seasonalspawns shares` into an outlier report and a heatmap.
+Turns the CSV from `/seasonalspawns shares` into an outlier report and an HTML page.
 
     python3 dev/shares.py path/to/seasonal-spawns-shares.csv [out-dir]
 
@@ -23,8 +23,7 @@ Weak spots, said plainly:
 The thresholds below are the project's idea of "absurd". Change them and rerun.
 """
 import csv
-import html
-import math
+import json
 import re
 import sys
 from collections import defaultdict
@@ -190,74 +189,15 @@ def report(rows):
     return "\n".join(out)
 
 
-# ---- the heatmap -----------------------------------------------------------
+# ---- the page --------------------------------------------------------------
 
-def color(share, listed_but_barred):
-    if share <= 0:
-        return "#7a2e2e" if listed_but_barred else "#e6e6e6"
-    # sqrt so a 3% animal is still visible next to a 60% one
-    t = math.sqrt(min(share, 1.0))
-    lightness = 92 - 62 * t
-    hue = 210 - 210 * (1 if share >= DOMINANT else 0)   # blue, red when dominant
-    return f"hsl({hue:.0f},70%,{lightness:.0f}%)"
-
-
-def heatmap(rows):
-    by_cat = defaultdict(list)
-    for r in rows:
-        by_cat[r["category"]].append(r)
-    parts = ["""<!doctype html><html><head><meta charset="utf-8"><title>Spawn shares</title><style>
-body{font:13px system-ui;margin:16px;background:#fff;color:#111}
-h2{margin-top:32px}
-table{border-collapse:collapse}
-th.b{writing-mode:vertical-rl;font-weight:normal;font-size:10px;text-align:left;height:150px;padding:0 1px}
-td.a{font-size:11px;padding:0 6px 0 0;white-space:nowrap;position:sticky;left:0;background:#fff}
-td.c{padding:1px;height:14px}
-.strip{display:flex;width:20px;height:14px;gap:0}
-.strip div{flex:1}
-.note{max-width:70ch;color:#444}
-</style></head><body>
-<h1>Spawn shares by animal, biome and season</h1>
-<p class="note">Each cell is four strips: spring, summer, autumn, winter. Tropical biomes show dry, dry, wet, wet.
-Blue shades are the animal's share of its category's spawns there (square-root scale). Red means it takes over
-(at least 50%). Dark brown means the animal is listed but barred that season. Light grey means not listed.
-Hover a cell for the numbers. Every biome counts the same, however big it is.</p>"""]
-    for cat in sorted(by_cat):
-        crows = by_cat[cat]
-        biomes = sorted({r["biome"] for r in crows})
-        cell = {}
-        for r in crows:
-            cell[(r["animal"], r["biome"], r["season"])] = r
-        trop = {r["biome"]: r["tropical"] == "true" for r in crows}
-        # most-spawned animals first
-        weight_of = defaultdict(float)
-        for r in crows:
-            weight_of[r["animal"]] += r["share"]
-        animals = sorted(weight_of, key=lambda a: -weight_of[a])
-        parts.append(f"<h2>{html.escape(cat)}</h2><table><tr><th></th>")
-        for b in biomes:
-            parts.append(f'<th class="b">{html.escape(b)}</th>')
-        parts.append("</tr>")
-        for a in animals:
-            parts.append(f'<tr><td class="a">{html.escape(a)}</td>')
-            for b in biomes:
-                seasons = ["dry", "dry", "wet", "wet"] if trop[b] else SEASON_ORDER[:4]
-                strips, tips = [], []
-                present = False
-                for s in seasons:
-                    r = cell.get((a, b, s))
-                    if r is None:
-                        strips.append('<div style="background:#e6e6e6"></div>')
-                        continue
-                    present = True
-                    strips.append(f'<div style="background:{color(r["share"], r["mass"] == 0)}"></div>')
-                    tips.append(f'{s} {r["share"]:.1%}')
-                tip = html.escape(f"{a} in {b}: " + ", ".join(dict.fromkeys(tips))) if present else ""
-                parts.append(f'<td class="c" title="{tip}"><div class="strip">{"".join(strips)}</div></td>')
-            parts.append("</tr>")
-        parts.append("</table>")
-    parts.append("</body></html>")
-    return "\n".join(parts)
+def page(rows):
+    """shares.html: the template next to this script, with the data pasted in.
+    All the maths for the page happens in the page (see shares-template.html)."""
+    data = [[r["category"], r["biome"].replace("minecraft:", ""), r["tropical"] == "true", r["season"],
+             r["animal"], round(r["mass"], 2)] for r in rows]
+    template = (Path(__file__).parent / "shares-template.html").read_text()
+    return template.replace("__DATA__", json.dumps(data, separators=(",", ":")))
 
 
 def main():
@@ -270,7 +210,7 @@ def main():
     add_shares(rows)
     text = report(rows)
     (out_dir / "shares-report.txt").write_text(text)
-    (out_dir / "shares.html").write_text(heatmap(rows))
+    (out_dir / "shares.html").write_text(page(rows))
     print(text)
     print(f"\nwrote {out_dir / 'shares-report.txt'} and {out_dir / 'shares.html'}")
 

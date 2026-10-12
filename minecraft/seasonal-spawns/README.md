@@ -216,10 +216,16 @@ season is that animal. The report lists:
 - **Poor biomes.** Where the effective number of species is under 1.5.
 - **Empty.** Biome-seasons where every listed animal is barred.
 
-`shares.html` is a grid. Each cell is four strips for spring to winter.
-Blue is the share, red is 50% or more, brown is "listed but barred", grey is
-"not listed". Hover for the numbers. The thresholds sit at the top of the
-script.
+`shares.html` has two views. Pick a category and a season at the top.
+
+1. **Which animals are common or rare.** One bar per animal, longest first.
+   The bar is the animal's typical share across the biomes that list it.
+   A thin line shows its smallest to largest share. Red means it takes over
+   somewhere. Grey means it never passes 3%.
+2. **One biome through the year.** Pick a biome. You get one 100% bar per
+   season, with each animal keeping its colour, so you can watch a mix change.
+
+The report thresholds sit at the top of the script.
 
 Limits, said plainly:
 
