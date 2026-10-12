@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.7.6"
+version: "1.7.7"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, roads between villages, performance and QOL
@@ -272,6 +272,25 @@ mods:
     sha512: "b8d9af34cd0050493afb8a6232cb8f785daa9d8887b7045f6e6a53c6bb9b5ffc4318fd9b0347a940eacfeba4773f10cb80ae0be1e79ce4c1888f96eda21e564e"
     env: server
     reason: "Networking-stack optimization"
+
+  - name: "Maps of the Unknown"
+    file: "bettermaps+26.2-0.9.1.jar"
+    url: "https://cdn.modrinth.com/data/JX1fvBwM/versions/q7SVubjm/bettermaps%2B26.2-0.9.1.jar"
+    sha512: "7222bb4a32124a74ff2f72b0ed3fb0f07fcbc0c192592d3bda5574a7d3d50a86a0b47ea23372bf5a995ba20d675e5af24a515c34beeac3623712f779478983d7"
+    env: server
+    reason: >-
+      Profile 2026-10-12 showed ~21s of 46s of slow ticks in villager
+      restock -> explorer map -> findNearestMapStructure, which
+      generates chunks on the Server thread. This defers the structure
+      search until a player opens the map. Do NOT add Async Locator's
+      trade/chest-map features next to it, they conflict.
+
+  - name: "Unruled API"
+    file: "unruled_api-unruled-api+26.2-2.3.3.jar"
+    url: "https://cdn.modrinth.com/data/pZ0PWFaa/versions/XRwrYSiD/unruled_api-unruled-api%2B26.2-2.3.3.jar"
+    sha512: "058c58e599f53b1a5be6cfe81df0ef2411a81fb35083464a3e0874412f3c95a3d0bf0b11a6eb1087a9ee8a9b2da7eed4411865de2155bf5056b0794ae8c8355e"
+    env: server
+    reason: "Gamerule library, required by Maps of the Unknown"
 
   - name: "FerriteCore"
     file: "ferritecore-9.0.0-fabric.jar"
