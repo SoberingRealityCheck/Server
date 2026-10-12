@@ -644,13 +644,20 @@ mods:
     url: "https://cdn.modrinth.com/data/sMGE68Dq/versions/bgd39YOI/ultimate_map_atlases-26.2.jar"
     sha512: "4826d2a5b51124293efa1f75bd476ebe3ffdb017ad75ee70bcabbf0fe74320fea0034406d2d701784a0500b3fb5870736183fc760b06c5f3d421fd9e0c80adbe"
     env: both
+    source_commit: "449831f4bd067674aed5332ce7dbc1e7650fadcd"
+    local_file: "mods/ultimate_map_atlases-26.2.jar"
+    local_sha512: "e45919cf4b32867059d0be1d67cbb856be21cc0e1f5052afca1173aff1239855752c053dd94b435ed8bce27647c1aed5c22c3eadf8be8abf66b69dcbfc6d6fb9"
     reason: >-
-      Replaces the Xaero map mods. Craftable atlases hold vanilla maps and
-      show a minimap + world view built from them, so exploring means
-      carrying paper. Vanilla map colors have no biome tint, which also
-      removed Xaero's per-pixel tint cost (about 15% of Render-thread
-      samples in the 2026-10-12 client profile). Small mod, UNTESTED here.
-      Seasonal biome tint for the maps is a planned in-house mod.
+      Local build of upstream's 26.2 source (commit 449831f) with a
+      config-screen text fix
+      (see patches/ultimate-map-atlases-26.2.patch). Replaces the Xaero
+      map mods. Craftable atlases hold vanilla maps and show a minimap +
+      world view built from them. Empty-map entries are enabled in the
+      server config; maps still need to be inserted into the atlas.
+      Vanilla map colors have no biome tint, which also removed Xaero's
+      per-pixel tint cost (about 15% of Render-thread samples in the
+      2026-10-12 client profile). Seasonal biome tint for the maps is a
+      planned in-house mod.
 
   - name: "Better Advancements"
     file: "BetterAdvancements-Fabric-26.2-0.6.0.72.jar"

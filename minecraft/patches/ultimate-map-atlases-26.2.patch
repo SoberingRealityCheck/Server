@@ -1,0 +1,90 @@
+diff --git a/src/main/java/net/nanaky/ultimate_map_atlases/config/UltimateMapAtlasesConfigScreen.java b/src/main/java/net/nanaky/ultimate_map_atlases/config/UltimateMapAtlasesConfigScreen.java
+index c798aa2..370419e 100644
+--- a/src/main/java/net/nanaky/ultimate_map_atlases/config/UltimateMapAtlasesConfigScreen.java
++++ b/src/main/java/net/nanaky/ultimate_map_atlases/config/UltimateMapAtlasesConfigScreen.java
+@@ -103,7 +103,7 @@ public class UltimateMapAtlasesConfigScreen {
+             g.fill(0, listBottom, width, listBottom + 1, 0xFF555555);
+ 
+             // ── Title ─────────────────────────────────────────────────────────
+-            g.centeredText(font, "Ultimate Map Atlases Config", width / 2, 5, 0xFFFFFF);
++            g.centeredText(font, "Ultimate Map Atlases Config", width / 2, 5, 0xFFFFFFFF);
+ 
+             // ── Active tab underline ──────────────────────────────────────────
+             int tabCount = TAB_NAMES.length;
+@@ -123,7 +123,7 @@ public class UltimateMapAtlasesConfigScreen {
+                 if (rowBot > LIST_TOP && rowTop < listBottom) {
+                     // Alternating row tint
+                     if (i % 2 == 0) g.fill(0, rowTop, width, rowBot, 0x18FFFFFF);
+-                    g.text(font, entry.label, 12, y + 5, 0xDDDDDD);
++                    g.text(font, entry.label(), 12, y + 5, 0xFFDDDDDD);
+                 }
+                 y += ENTRY_HEIGHT;
+             }
+@@ -133,7 +133,7 @@ public class UltimateMapAtlasesConfigScreen {
+             if (currentTab == 4) {
+                 g.fill(0, listBottom - 14, width, listBottom, 0xAA774400);
+                 g.centeredText(font, "! Server settings require op permissions and a restart",
+-                        width / 2, listBottom - 11, 0xFFCC44);
++                        width / 2, listBottom - 11, 0xFFFFCC44);
+             }
+ 
+             super.extractRenderState(g, mx, my, pt);
+@@ -283,7 +283,7 @@ public class UltimateMapAtlasesConfigScreen {
+     // ── Entry types ───────────────────────────────────────────────────────────
+ 
+     interface ConfigEntry {
+-        String label = "";
++        String label();
+         void addWidget(MapAtlasesConfigScreen screen, int screenWidth, int y);
+         void save();
+     }
+@@ -299,6 +299,9 @@ public class UltimateMapAtlasesConfigScreen {
+             this.value = get.get();
+         }
+ 
++        @Override
++        public String label() { return label; }
++
+         @Override
+         public void addWidget(MapAtlasesConfigScreen screen, int screenWidth, int y) {
+             int listBottom = screen.height - MapAtlasesConfigScreen.LIST_BOTTOM_PAD;
+@@ -325,6 +328,9 @@ public class UltimateMapAtlasesConfigScreen {
+             this.label = label; this.get = get; this.set = set; this.min = min; this.max = max;
+         }
+ 
++        @Override
++        public String label() { return label; }
++
+         @Override
+         public void addWidget(MapAtlasesConfigScreen screen, int screenWidth, int y) {
+             int listBottom = screen.height - MapAtlasesConfigScreen.LIST_BOTTOM_PAD;
+@@ -354,6 +360,9 @@ public class UltimateMapAtlasesConfigScreen {
+             this.label = label; this.get = get; this.set = set; this.min = min; this.max = max;
+         }
+ 
++        @Override
++        public String label() { return label; }
++
+         @Override
+         public void addWidget(MapAtlasesConfigScreen screen, int screenWidth, int y) {
+             int listBottom = screen.height - MapAtlasesConfigScreen.LIST_BOTTOM_PAD;
+@@ -382,6 +391,9 @@ public class UltimateMapAtlasesConfigScreen {
+             this.label = label; this.get = get; this.set = set;
+         }
+ 
++        @Override
++        public String label() { return label; }
++
+         @Override
+         public void addWidget(MapAtlasesConfigScreen screen, int screenWidth, int y) {
+             int listBottom = screen.height - MapAtlasesConfigScreen.LIST_BOTTOM_PAD;
+@@ -409,6 +421,9 @@ public class UltimateMapAtlasesConfigScreen {
+             for (int i = 0; i < values.length; i++) if (values[i] == current) { index = i; break; }
+         }
+ 
++        @Override
++        public String label() { return label; }
++
+         @Override
+         public void addWidget(MapAtlasesConfigScreen screen, int screenWidth, int y) {
+             int listBottom = screen.height - MapAtlasesConfigScreen.LIST_BOTTOM_PAD;

@@ -1,0 +1,19 @@
+{
+  "maxMapCount": 2048,
+  "acceptPaperForEmptyMaps": false,
+  "requireEmptyMapsToExpand": true,
+  "mapEntryValueMultiplier": 1,
+  "pityActivationMapCount": 0,
+  "enableEmptyMapEntryAndFill": true,
+  "activationLocation": "HOTBAR_AND_HANDS",
+  "creativeTeleport": true,
+  "pinMarkerId": "",
+  "lightMap": false,
+  "entityRadar": false,
+  "shearButton": true,
+  "roundRobinUpdate": false,
+  "mapUpdatePerTick": 1,
+  "mapUpdateMultithreaded": "SINGLE_PLAYER_ONLY",
+  "debugUpdate": false,
+  "markersUpdatePeriod": 10
+}
