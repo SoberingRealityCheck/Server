@@ -8,6 +8,9 @@
 
 [songbirds]
 animals    = naturalist:bird
+# Weight 10 in ~94 biomes with a group of 3-4, so songbirds were 20% of land spawns on average
+# and up to 79% where few other animals live. Capped to 5. See `/seasonalspawns shares`.
+weight     = 5
 confidence = reasoned
 source     = https://www.fws.gov/sites/default/files/documents/2024-04/1111.pdf
 why        = Real songbirds split three ways. Some stay all year (cardinal, house
@@ -25,6 +28,8 @@ any      = 0.95 1.0  1.0  0.8
 
 [ducks]
 animals    = naturalist:duck
+# Weight 10 with no other bird near water: up to 85% of land spawns by a pond. Capped to 6.
+weight     = 6
 confidence = sourced
 source     = https://www.metroparks.com/bird-of-the-week-mallard/
              https://www.audubon.org/bird-guide-api/1482

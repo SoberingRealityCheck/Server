@@ -89,7 +89,7 @@ final class CapacityTable {
             Identifier key = holder.key().identifier();
             Set<String> groups = SeasonalSpawns.computeGroups(holder);
             boolean tropical = SeasonHelper.usesTropicalSeasons(holder);
-            List<Capacity.Entry> entries = entriesOf(holder.value());
+            List<Capacity.Entry> entries = entriesOf(holder.value(), rules);
             double[] s = new double[tropical ? Rules.TROPICAL_SEASONS.size() : Rules.SEASONS.size()];
             for (int phase = 0; phase < s.length; phase++) {
                 final int p = phase;
@@ -145,11 +145,12 @@ final class CapacityTable {
     }
 
     /** A biome's land-animal spawn list as plain entries. */
-    private static List<Capacity.Entry> entriesOf(Biome biome) {
+    private static List<Capacity.Entry> entriesOf(Biome biome, Rules rules) {
         List<Capacity.Entry> out = new ArrayList<>();
         for (Weighted<MobSpawnSettings.SpawnerData> w : biome.getMobSettings().getMobs(MobCategory.CREATURE).unwrap()) {
             MobSpawnSettings.SpawnerData data = w.value();
-            out.add(new Capacity.Entry(SeasonalSpawns.idOfType(data.type()), w.weight(),
+            String id = SeasonalSpawns.idOfType(data.type());
+            out.add(new Capacity.Entry(id, rules.cappedWeight(id, w.weight()),
                     (data.minCount() + data.maxCount()) / 2.0));
         }
         return out;

@@ -154,14 +154,35 @@ public final class SeasonalSpawns implements ModInitializer {
     }
 
     /** Called by the mixin. True means go ahead with the spawn. */
-    public static boolean allows(ServerLevel level, BlockPos pos, EntityType<?> type, RandomSource random) {
-        double chance = chanceAt(level, pos, type);
+    public static boolean allows(ServerLevel level, BlockPos pos, EntityType<?> type, MobCategory category,
+                                 RandomSource random) {
+        double chance = chanceAt(level, pos, type) * weightFactorAt(level, pos, type, category);
         if (chance >= 1.0) {
             return true;
         }
         boolean ok = random.nextDouble() < chance;
         STATS.computeIfAbsent(idOf(type), k -> new long[2])[ok ? 0 : 1]++;
         return ok;
+    }
+
+    /**
+     * The extra chance from a section's 'weight =' cap. Needs the weight this biome lists for the
+     * animal, so it scans the biome's spawn list. Only animals with a cap pay for that scan.
+     * 1.0 when there is no cap, or the biome does not list the animal (a structure spawn).
+     */
+    static double weightFactorAt(ServerLevel level, BlockPos pos, EntityType<?> type, MobCategory category) {
+        Rules current = rules;
+        String id = idOf(type);
+        Rules.Section section = current.sectionOf(id);
+        if (section == null || section.weight() == null) {
+            return 1.0;
+        }
+        for (var w : level.getBiome(pos).value().getMobSettings().getMobs(category).unwrap()) {
+            if (w.value().type() == type) {
+                return current.weightFactor(id, w.weight());
+            }
+        }
+        return 1.0;
     }
 
     /** 1.0 when no rule applies, or when the dimension has no seasons. */
@@ -240,6 +261,7 @@ public final class SeasonalSpawns implements ModInitializer {
                                         .executes(c -> say(c.getSource(),
                                                 sample(c.getSource(), IntegerArgumentType.getInteger(c, "count"),
                                                         categoryNamed(StringArgumentType.getString(c, "category"))))))))
+                .then(Commands.literal("shares").executes(c -> say(c.getSource(), shares(c.getSource()))))
                 .then(Commands.literal("capacity").executes(c -> say(c.getSource(), capacity())))
                 .then(Commands.literal("reload").executes(c -> {
                     boolean ok = reload();
@@ -411,6 +433,52 @@ public final class SeasonalSpawns implements ModInitializer {
         }
         out.add(unruled + " have no rule. The full list is in the server log.");
         return out;
+    }
+
+    /**
+     * Writes one CSV row for every animal, biome and season, with the numbers the spawner uses:
+     * the weight the biome lists, the weight after a 'weight =' cap, the average group size, and
+     * the seasonal chance. Nothing is worked out here. dev/shares.py turns the file into shares,
+     * a heatmap and an outlier list. Keeping the maths out of the game means a human can redo it
+     * in a spreadsheet.
+     *
+     * Hack: every biome counts the same, however much of the world it covers. Biomes from the
+     * Nether and End are in the file too (the python script drops the ones without seasons).
+     */
+    private static List<String> shares(CommandSourceStack source) {
+        var biomes = source.getServer().registryAccess().lookupOrThrow(Registries.BIOME);
+        Path out = FabricLoader.getInstance().getGameDir().resolve("seasonal-spawns-shares.csv");
+        StringBuilder csv = new StringBuilder(
+                "category,biome,tropical,season,animal,weight_listed,weight_capped,mean_group,chance\n");
+        int rows = 0;
+        for (Holder.Reference<Biome> holder : (Iterable<Holder.Reference<Biome>>) biomes.listElements()::iterator) {
+            Set<String> groups = computeGroups(holder);
+            boolean tropical = SeasonHelper.usesTropicalSeasons(holder);
+            List<String> names = tropical ? Rules.TROPICAL_SEASONS : Rules.SEASONS;
+            for (MobCategory category : MobCategory.values()) {
+                if (!covers(category)) {
+                    continue;
+                }
+                for (var w : holder.value().getMobSettings().getMobs(category).unwrap()) {
+                    String id = idOf(w.value().type());
+                    double group = (w.value().minCount() + w.value().maxCount()) / 2.0;
+                    for (int p = 0; p < names.size(); p++) {
+                        csv.append(String.format("%s,%s,%s,%s,%s,%d,%d,%.2f,%.3f%n", category.getName(),
+                                holder.key().identifier(), tropical, names.get(p), id, w.weight(),
+                                rules.cappedWeight(id, w.weight()), group,
+                                rules.chance(id, groups, tropical, p)));
+                        rows++;
+                    }
+                }
+            }
+        }
+        try {
+            Files.writeString(out, csv.toString());
+        } catch (IOException e) {
+            return List.of("Could not write " + out + ": " + e);
+        }
+        return List.of("Wrote " + rows + " rows to " + out,
+                "Next: python3 dev/shares.py " + out);
     }
 
     private static List<String> stats() {

@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
  *   animals    = naturalist:bear naturalist:black_bear
  *   confidence = sourced                      <- sourced | reasoned | guess
  *   source     = https://example.org/page     <- needed when sourced
+ *   weight     = 20                           <- optional. Caps the spawn weight (see Rules.Section)
  *   why        = Text that can run on
  *                to indented lines.
  *   forest = 0.8 1.0 1.0 0.0                  <- spring summer autumn winter
@@ -39,7 +40,7 @@ public final class RuleParser {
 
     /** Keys that hold text. Anything else on the left of "=" is a group name in a rule row. */
     private static final List<String> TEXT_KEYS =
-            List.of("animals", "biomes", "why", "source", "confidence", "reference", "floor");
+            List.of("animals", "biomes", "why", "source", "confidence", "reference", "floor", "weight");
 
     /** The one section name that is not a group or an animal list. See Rules.CapacitySettings. */
     private static final String CAPACITY = "capacity";
@@ -267,8 +268,21 @@ public final class RuleParser {
             errors.add(at + "[" + raw.name + "] says 'sourced' but has no 'source ='");
         }
 
-        if (raw.rows.isEmpty()) {
-            errors.add(at + "[" + raw.name + "] has no rows");
+        Integer weight = null;
+        String weightText = raw.text.get("weight");
+        if (weightText != null) {
+            try {
+                weight = Integer.parseInt(weightText.strip());
+                if (weight < 1) {
+                    errors.add(at + "weight must be 1 or more. To stop an animal, use a row of 0.00.");
+                }
+            } catch (NumberFormatException e) {
+                errors.add(at + "weight '" + weightText + "' must be a whole number, like 20");
+            }
+        }
+
+        if (raw.rows.isEmpty() && weightText == null) {
+            errors.add(at + "[" + raw.name + "] has no rows and no weight");
         }
         List<Rules.Row> rows = buildRows(raw, groups, errors, 1.0, "chance");
 
@@ -276,7 +290,7 @@ public final class RuleParser {
             return null;
         }
         return new Rules.Section(raw.name, raw.file, raw.line, List.copyOf(animals), confidence,
-                source, why, List.copyOf(rows));
+                source, why, weight, List.copyOf(rows));
     }
 
     /**

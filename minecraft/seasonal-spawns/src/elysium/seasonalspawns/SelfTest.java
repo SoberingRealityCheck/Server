@@ -74,6 +74,7 @@ public final class SelfTest {
         fails("line outside a section", "oops = 1\n", "outside any [section]");
 
         capacityChecks();
+        weightChecks();
 
         System.out.println(checks + " checks, " + failed + " failed");
         if (failed > 0) {
@@ -96,6 +97,53 @@ public final class SelfTest {
             desert  = 0.5 0.5 0.5 0.5
             desert  = 0.9 0.9
             """;
+
+    private static void weightChecks() {
+        String text = """
+                [panda]
+                animals    = test:panda
+                confidence = guess
+                why        = Weight only. No rows.
+                weight     = 20
+
+                [wolf]
+                animals    = test:wolf
+                confidence = guess
+                why        = Rows and a weight.
+                weight     = 50
+                any = 1.0 1.0 1.0 0.5
+                """;
+        RuleParser.Result r = RuleParser.parse(List.of(new RuleParser.Source("w.rules", text)));
+        check("weight-only section parses", r.errors().isEmpty(), r.errors().toString());
+        Rules rules = r.rules();
+        check("weight is kept", rules.sectionOf("test:panda").weight() == 20, "");
+        check("weight cap lowers a big weight", rules.cappedWeight("test:panda", 80) == 20, "");
+        check("weight cap never raises", rules.cappedWeight("test:panda", 10) == 10, "");
+        check("no section means the listed weight", rules.cappedWeight("test:cow", 8) == 8, "");
+        near("pick factor is capped over listed", 0.25, rules.weightFactor("test:panda", 80));
+        near("pick factor is 1 when under the cap", 1.0, rules.weightFactor("test:panda", 10));
+        near("pick factor is 1 with no cap", 1.0, rules.weightFactor("test:cow", 8));
+        near("rows still work next to a weight", 0.5, rules.chance("test:wolf", Set.of(), false, 3));
+        near("no rows means chance 1", 1.0, rules.chance("test:panda", Set.of(), false, 3));
+
+        RuleParser.Result bad = RuleParser.parse(List.of(new RuleParser.Source("b.rules", """
+                [a]
+                animals = test:a
+                confidence = guess
+                why = x
+                weight = lots
+                [b]
+                animals = test:b
+                confidence = guess
+                why = x
+                weight = 0
+                [c]
+                animals = test:c
+                confidence = guess
+                why = x
+                """)));
+        check("bad weights and empty sections are errors", bad.errors().size() == 3, bad.errors().toString());
+    }
 
     private static void capacityChecks() {
         // pure math

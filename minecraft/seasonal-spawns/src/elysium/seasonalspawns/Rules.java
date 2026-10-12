@@ -46,11 +46,20 @@ public final class Rules {
         }
     }
 
-    /** A block of rules for one family of animals, with the reasons for them. */
+    /**
+     * A block of rules for one family of animals, with the reasons for them.
+     *
+     * weight is optional (null = none). It caps the animal's spawn weight in every
+     * biome: the game's listed weight W becomes min(W, weight). It can only lower,
+     * never raise, same as chances. Two things use it: the pick odds (the veto
+     * rolls an extra min(1, weight / W)) and the creature cap's weight sum.
+     * A section may have a weight and no rows.
+     */
     public record Section(
             String name, String file, int line,
             List<String> animals,
             Confidence confidence, String source, String why,
+            Integer weight,
             List<Row> rows) {}
 
     /**
@@ -121,6 +130,20 @@ public final class Rules {
 
     public Section sectionOf(String animalId) {
         return byAnimal.get(animalId);
+    }
+
+    /** The weight the game should treat this animal as having, given the weight the biome lists. */
+    public int cappedWeight(String animalId, int listed) {
+        Section section = byAnimal.get(animalId);
+        return section == null || section.weight() == null ? listed : Math.min(listed, section.weight());
+    }
+
+    /** Extra chance (0..1) that comes from the weight cap alone. 1.0 when there is no cap. */
+    public double weightFactor(String animalId, int listed) {
+        if (listed <= 0) {
+            return 1.0;
+        }
+        return (double) cappedWeight(animalId, listed) / listed;
     }
 
     public Set<String> animals() {

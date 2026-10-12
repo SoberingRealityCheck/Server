@@ -1,0 +1,31 @@
+# Spawn weight caps for animals that have no seasonal rule.
+#
+# Animals that DO have a rule put their `weight =` line in that rule's section instead
+# (an animal can be in only one section). Both do the same thing. See the README,
+# "Weight caps".
+#
+# A cap lowers the weight the game lists for the animal, in every biome. It never raises one.
+# To make a rare animal more common, cap the animals around it.
+#
+# The numbers come from `/seasonalspawns shares` + dev/shares.py. That report shows how big a
+# slice of each biome's spawns every animal takes, season by season.
+
+[panda]
+animals    = minecraft:panda
+confidence = guess
+# Vanilla lists pandas at weight 80 in bamboo jungle. That one number made bamboo jungle
+# the richest land biome in the creature cap. Capped to 30 so the pandas are still the
+# signature animal there, but the rest of the jungle gets a turn.
+why        = Pandas are real bamboo specialists, so they should stay the headline there.
+             At weight 80 they also made the weight sum so big that bamboo jungle got the
+             biggest creature cap of any biome.
+weight     = 30
+
+[mauler]
+animals    = friendsandfoes:mauler
+confidence = guess
+# Savanna lists it at weight 32. Other biomes list it at 8 or 16.
+why        = Friends and Foes lists the mauler in savanna at four times the weight of most
+             animals there. Capped to 10 so it is one common animal of many, not the
+             first thing every player meets.
+weight     = 10

@@ -40,7 +40,7 @@ abstract class NaturalSpawnerMixin {
             return;
         }
         Optional<MobSpawnSettings.SpawnerData> picked = cir.getReturnValue();
-        if (picked.isPresent() && !SeasonalSpawns.allows(level, pos, picked.get().type(), random)) {
+        if (picked.isPresent() && !SeasonalSpawns.allows(level, pos, picked.get().type(), category, random)) {
             cir.setReturnValue(Optional.empty());
         }
     }

@@ -54,8 +54,9 @@ Things to know:
    one entity (`naturalist:bird`) for six birds and one (`naturalist:snake`)
    for three snakes. Rules for those work on biome only.
 
-Only land animals are touched (vanilla's `CREATURE` category). Monsters,
-fish, ambient mobs and the Nether never reach the rules or the cap.
+The rules cover every animal category: land animals, ambient mobs, fish and
+other water animals. Monsters and the Nether never reach them. The creature
+**cap** below counts land animals only (vanilla's `CREATURE` category).
 
 ## The creature cap
 
@@ -88,7 +89,8 @@ shows the cap at your feet and the count of animals the game sees.
   against each other. The penguin has weight 50 and groups of 10, so it
   alone made frozen ocean look 65% as rich as a summer forest. The first
   table had that and it is fixed with a `polar` row. Others may be wrong.
-  Read the table and fix what looks wrong with a row.
+  Read the table and fix what looks wrong with a row. For one animal with a
+  silly weight (the panda is 80), cap the animal instead. See "Weight caps".
 - **The scale is the reference.** If you change the reference place, every
   cap moves. Adding a mod that adds animals to the reference biome
   makes every other place look poorer.
@@ -138,6 +140,7 @@ confidence = sourced                       <- sourced | reasoned | guess
 source     = https://example.org/page      <- needed if sourced
 why        = Plain words. What the real animal does.
              Indented lines carry on from the line above.
+weight     = 10                            <- optional cap on the spawn weight
 #          spring summer autumn winter
 taiga    = 0.4  1.0  0.8  0.0
 any      = 0.8  1.0  1.0  0.15
@@ -164,6 +167,69 @@ Rules:
   `source` above them.
 - `why` is required. `source` is required when `confidence = sourced`. The
   loader refuses a section without them, on purpose.
+
+### Weight caps
+
+Every biome lists each animal with a spawn **weight**. The game picks
+animals in proportion to those weights. Some mods list silly ones, like
+a capybara at 30 beside a rhino at 1. That makes the capybara a third of
+all land spawns where it lives and the rhino a rarity you may never meet.
+
+`weight = N` in a section caps the weight of every animal in it, in every
+biome. The game's weight W becomes `min(W, N)`.
+
+- It can only **lower** a weight, like a chance. To make a rare animal more
+  common, cap the animals around it.
+- Two things change: the odds the spawner picks the animal (the mod
+  cancels the extra `1 - N/W` of picks), and the creature cap's weight
+  sum.
+- A section can hold a `weight` and no rows. Animals with no seasonal rule
+  go in `weights.rules`. Animals that have a section put the line there,
+  because each animal gets only one section.
+- Hack: a cap also lowers the total spawn rate where the animal has no
+  company. A lone capped animal is vetoed more often, so it spawns less.
+  Respawning Animals tries again each tick, so the count mostly recovers.
+- Hack: if a biome lists the same animal twice with different weights, the
+  first entry sets the factor for both.
+
+To pick numbers, look at the shares. See "Seeing who is over- or
+under-represented".
+
+### Seeing who is over- or under-represented
+
+```sh
+/seasonalspawns shares                     # in game or on the console
+python3 minecraft/seasonal-spawns/dev/shares.py <server>/seasonal-spawns-shares.csv
+```
+
+The command writes a CSV with one row per animal, biome and season. The
+script (Python, no packages) reads it and writes `shares-report.txt` and
+`shares.html` next to it.
+
+A **share** is the odds that the next spawn in one category, biome and
+season is that animal. The report lists:
+
+- **Ghosts.** Animals that never reach 3% of spawns anywhere.
+- **Hogs and dominant animals.** One animal at 25% or more across many
+  biomes, or 50% or more of one biome.
+- **Season reach.** Animals that vanish or swing 4x between seasons.
+- **Poor biomes.** Where the effective number of species is under 1.5.
+- **Empty.** Biome-seasons where every listed animal is barred.
+
+`shares.html` is a grid. Each cell is four strips for spring to winter.
+Blue is the share, red is 50% or more, brown is "listed but barred", grey is
+"not listed". Hover for the numbers. The thresholds sit at the top of the
+script.
+
+Limits, said plainly:
+
+- Every biome counts the same, however much of the world it covers.
+- A share is the mix of picks. It is not a count of animals. A pick can
+  still fail on light or terrain, so ambient bats (picked 80% of the time)
+  do not fill the sky. The spawner retries.
+- Rare-by-design animals (rhino, zebra, donkey, camel) stay under 2% after
+  the caps. That is the source mod's choice. Lower the animals around them
+  to change it.
 
 ### The three confidence labels
 
@@ -194,6 +260,7 @@ All need operator level (game master). They also work from the console.
 | `/seasonalspawns capacity` | The creature cap table. Chat gets the reference and the richest and poorest places. The server log gets every biome with its fraction for each season. |
 | `/seasonalspawns sample [n] [category]` | Asks the game's own spawn picker for `n` animals here (default 1000) and shows the mix. The category is the game's name: `creature` (default), `ambient`, `water_creature`, `water_ambient`, `underground_water_creature`, `axolotls`. Fish are `water_ambient`. Stand in the water for water categories. A pick the rules cancelled shows as "nothing". Compare two seasons to see what a rule really does. |
 | `/seasonalspawns animals` | Every animal in any biome's spawn list, by category, with whether a rule covers it. The full list goes to the server log, with `[NO RULE]` on the gaps. Run it after adding a mod. |
+| `/seasonalspawns shares` | Writes `seasonal-spawns-shares.csv` in the server folder: every animal, biome and season with its weight, capped weight, group size and chance. Feed it to `dev/shares.py` for the outlier report and heatmap. |
 | `/seasonalspawns stats` | Per animal, how many spawns the rules allowed and cancelled since startup. Only counts picks where the chance was under 1.00. Samples count too. |
 | `/seasonalspawns audit` | Lists every biome and its groups in the server log. |
 | `/seasonalspawns reload` | Reloads the `.rules` files. Also happens on `/reload`. |

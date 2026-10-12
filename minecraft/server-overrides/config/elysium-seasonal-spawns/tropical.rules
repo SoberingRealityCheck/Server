@@ -53,6 +53,8 @@ savanna = 0.5  1.0
 
 [ostrich]
 animals    = naturalist:ostrich
+# The mod lists weight 28 against 1 to 5 for the other big savanna animals. Capped to 10.
+weight     = 10
 confidence = sourced
 source     = https://agris.fao.org/search/zh/records/65df76284c5aef494fe2c9bb
 why        = Ostriches time their breeding to the rains so that chicks hatch when food
@@ -79,6 +81,8 @@ badlands = 1.0  0.7
 
 [komodo-dragon]
 animals    = naturalist:komodo_dragon
+# Listed at weight 20. Capped to 10 so it stops crowding out the rest of the dry-land animals.
+weight     = 10
 confidence = sourced
 source     = https://journal.ugm.ac.id/jtbb/article/download/48280/27394
              https://flore.unifi.it/retrieve/eab0d6df-ed42-4e0e-ab7d-b282c1c9bea7/Jessop_et_al_2022.pdf
@@ -98,6 +102,9 @@ badlands = 1.0  0.7
 
 [capybara]
 animals    = ambient_creatures:capybara
+# Listed at weight 30 with groups of 4 to 5. It was 36% of land spawns in the 7 biomes
+# that list it, and up to 56%. Capped to 10.
+weight     = 10
 confidence = reasoned
 why        = Capybaras live beside water in tropical South America. Where there is a
              dry season they gather at the last wet places. A patch of savanna away
@@ -197,6 +204,8 @@ desert = 0.7  1.0
 
 [desert-scorpion]
 animals    = naturalist:desert_scorpion
+# Listed at weight 20. About 22% of land spawns across the 10 biomes that list it. Capped to 12.
+weight     = 12
 confidence = reasoned
 why        = Scorpions are night hunters that shelter in burrows by day. Desert
              invertebrates tend to come out and feed more when the ground is damp, so

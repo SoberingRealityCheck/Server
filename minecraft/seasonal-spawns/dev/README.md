@@ -3,6 +3,20 @@
 Not part of the pack. Nothing here is built by `build.py` or shipped to
 players or the server.
 
+## shares.py
+
+Turns the CSV from `/seasonalspawns shares` into an outlier report and a
+heatmap. Python standard library only.
+
+```sh
+python3 -I dev/shares.py <server>/seasonal-spawns-shares.csv [out-dir]
+```
+
+It writes `shares-report.txt` (ghosts, hogs, dominant animals, season
+swings, poor biomes) and `shares.html` (animal by biome, four seasons per
+cell). The thresholds are constants at the top of the script. The README has
+the details and the limits ("Seeing who is over- or under-represented").
+
 ## testbot
 
 A headless server has no player, and natural spawning only runs near a
