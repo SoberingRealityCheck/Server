@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.7.7"
+version: "1.7.8"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, roads between villages, performance and QOL
@@ -76,16 +76,6 @@ mods:
     reason: >-
       Required by Easy Shulker Boxes and Bundle Upgrade, both of which
       run on both sides -- so this must too.
-
-  - name: "Fabric Language Kotlin"
-    file: "fabric-language-kotlin-1.14.1+kotlin.2.4.20.jar"
-    url: "https://cdn.modrinth.com/data/Ha28R6CL/versions/eRRZzGMc/fabric-language-kotlin-1.14.1%2Bkotlin.2.4.20.jar"
-    sha512: "91404f87774466ce8604aafea791d8cc97b603bc310dce17c8188f94f7783cca6dc14fc726ce871ca317bfe9033c199d8d858d51284106a00754e952147703b8"
-    env: both
-    reason: >-
-      Kotlin runtime, required by Xaero's Maps: Multiplayer+. 8 MB, the
-      largest single file in the pack -- it bundles the whole Kotlin
-      standard library. Only here because Multiplayer+ needs it.
 
   - name: "Balm"
     file: "balm-fabric-26.2-26.2.0.9.jar"
@@ -147,14 +137,11 @@ mods:
     file: "yet_another_config_lib_v3-3.9.7+26.2-fabric.jar"
     url: "https://cdn.modrinth.com/data/1eAoo2KR/versions/DoR7RYgi/yet_another_config_lib_v3-3.9.7%2B26.2-fabric.jar"
     sha512: "f36d91a9506ad9addbaaeecaea01d2b0cb5b060f52486b17688746cb597f0f3b23a80f8441f7a73a9cb8cde85af8809fe54825984b56345325359d505a80e7f2"
-    env: both
+    env: client
     reason: >-
-      Config library. Required client-side by Better Clouds, and
-      server-side too because Xaero's Maps: Multiplayer+ runs on both
-      sides and hard-depends on it -- caught by --check-deps, which
-      reads the real fabric.mod.json rather than Modrinth's
-      project-level metadata. Upstream marks both sides optional, so
-      shipping it to the server is harmless.
+      Config library. Required client-side by Better Clouds. It was `both`
+      only because Xaero's Maps: Multiplayer+ hard-depended on it on the
+      server, and that mod is gone.
 
   - name: "Architectury API"
     file: "architectury-fabric-21.1.11.jar"
@@ -616,38 +603,18 @@ mods:
       New fish and rays for oceans and rivers. Needs Puzzles Lib and
       Forge Config API Port, both above.
 
-  - name: "Xaero's World Map"
-    file: "xaeroworldmap-fabric-26.2-1.47.0.jar"
-    url: "https://cdn.modrinth.com/data/NcUtCpym/versions/ebWaQDqf/xaeroworldmap-fabric-26.2-1.47.0.jar"
-    sha512: "27e3166bc7257fac3b12898e11e80875d9fa05c9da3127d8a7f5233f4aa66a8fbb8cdccec9c83aba1d4d4234ab23cf9ccb31b28fb7b48a0162854ddc22ff04b1"
+  - name: "Ultimate Map Atlases"
+    file: "ultimate_map_atlases-26.2.jar"
+    url: "https://cdn.modrinth.com/data/sMGE68Dq/versions/bgd39YOI/ultimate_map_atlases-26.2.jar"
+    sha512: "4826d2a5b51124293efa1f75bd476ebe3ffdb017ad75ee70bcabbf0fe74320fea0034406d2d701784a0500b3fb5870736183fc760b06c5f3d421fd9e0c80adbe"
     env: both
     reason: >-
-      Full-screen explored-world map; companion to Xaero's Minimap.
-
-  - name: "Xaero's Maps: Multiplayer+"
-    file: "xmmp-1.1.1+26.2-fabric.jar"
-    url: "https://cdn.modrinth.com/data/stTaMuWa/versions/S5atSSQA/xmmp-1.1.1%2B26.2-fabric.jar"
-    sha512: "ee3c6f55a529df3528300b23b258f3f4af74f50759f78786ed20046935934a21ae73b8fd7563e740423ef7801f591a64dbb308de0f8b58d9b4589c8aa822946f"
-    env: both
-    reason: >-
-      Syncs world map exploration between players -- genuinely
-      multiplayer, hence both sides. Needs Fabric Language Kotlin, plus
-      Xaero's Minimap and World Map (0.3.2 made those soft dependencies).
-      Small mod (a few thousand downloads). Run --check-deps after
-      building: if it reports the server missing xaeroworldmap or
-      xaerominimap, those two need `env: both`.
-
-  - name: "Xaero's Minimap"
-    file: "xaerominimap-fabric-26.2-26.6.0.jar"
-    url: "https://cdn.modrinth.com/data/1bokaNcj/versions/JRopWECg/xaerominimap-fabric-26.2-26.6.0.jar"
-    sha512: "7452e9d462d5803eb81ef0f931d265da86ce81917eba6de124cccee40eb244d7e4bfd88eb85f8bb739970ecd12d74a6b0754e60c3fcbbdd9cabb0012c1f04f46"
-    env: client
-    reason: >-
-      Minimap + waypoints. Must stay in step with Xaero's World Map:
-      World Map declares a `breaks` on older Minimap builds (it did for
-      <26.4.0), so a mismatch stops the game from starting rather than
-      merely misbehaving. 26.6.0 and World Map 1.47.0 shipped the same
-      day -- treat them as a pair.
+      Replaces the Xaero map mods. Craftable atlases hold vanilla maps and
+      show a minimap + world view built from them, so exploring means
+      carrying paper. Vanilla map colors have no biome tint, which also
+      removed Xaero's per-pixel tint cost (about 15% of Render-thread
+      samples in the 2026-10-12 client profile). Small mod, UNTESTED here.
+      Seasonal biome tint for the maps is a planned in-house mod.
 
   - name: "Better Advancements"
     file: "BetterAdvancements-Fabric-26.2-0.6.0.72.jar"
