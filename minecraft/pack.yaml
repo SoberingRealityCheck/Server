@@ -18,7 +18,7 @@
 # rather than reaching the server.
 
 name: "Elysium"
-version: "1.7.8"
+version: "1.7.9"
 summary: >-
   Fabric realistic-terrain profile: Terralith/Tectonic worldgen, Distant
   Horizons LOD rendering, roads between villages, performance and QOL
@@ -467,6 +467,25 @@ mods:
       The first 26.2 build hung the server thread on chunk load. Fixed in 26.2.1. Still
       lightly tested: watch snow placement and the server log after the
       first season change.
+
+  - name: "Season Maps"
+    file: "seasonmaps-0.1.0.jar"
+    url: "https://github.com/SoberingRealityCheck/season-maps/releases/download/v0.1.0/seasonmaps-0.1.0.jar"
+    sha512: "4b0d68efe6be594782fea6a2dadaad62bdeeaa75bef3eba07b073ce28390147dbc482ca4f7445b6276fe927528d5e30bc367fc657c8cb0e00b81ec0f3e686b97"
+    env: both
+    reason: >-
+      Biome- and season-tinted colors for vanilla maps, which is what the
+      Xaero map mods used to do per pixel at a high render cost. The
+      server records each map pixel's biome (and surface block for
+      grass/plant pixels) as you map and sends it with map packets. The
+      client tints from the game's own BlockColors, so spruce/birch leaves
+      are fixed colors and flowers get none. Works with Ultimate Map
+      Atlases (draws through the same vanilla map texture). Needs Serene
+      Seasons, above. Our own mod, source at
+      github.com/SoberingRealityCheck/season-maps. Maps made before it
+      was installed stay vanilla until re-scanned. Lightly tested: server
+      self test and tint rules only, nobody has looked at the maps in
+      play yet.
 
   - name: "Nova Reimagined Snow"
     file: "compsnow-1.0.3+26.2.1.jar"
