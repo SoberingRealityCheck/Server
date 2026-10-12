@@ -21,8 +21,8 @@ import java.util.Optional;
  * if it may go ahead. If not, say nothing was picked. The game then ends
  * that spawn attempt and tries again on a later tick.
  *
- * Only land animals (MobCategory.CREATURE). Monsters, fish and ambient
- * mobs never reach the rules.
+ * Every animal category (see SeasonalSpawns.covers): land animals, ambient
+ * mobs, fish and other water mobs. Monsters never reach the rules.
  *
  * Hack: this targets a private method by name. A Minecraft update that
  * renames or reshapes getRandomSpawnMobAt breaks the mod at startup
@@ -36,7 +36,7 @@ abstract class NaturalSpawnerMixin {
             ServerLevel level, StructureManager structures, ChunkGenerator generator,
             MobCategory category, RandomSource random, BlockPos pos,
             CallbackInfoReturnable<Optional<MobSpawnSettings.SpawnerData>> cir) {
-        if (category != MobCategory.CREATURE) {
+        if (!SeasonalSpawns.covers(category)) {
             return;
         }
         Optional<MobSpawnSettings.SpawnerData> picked = cir.getReturnValue();

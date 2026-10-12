@@ -1,0 +1,269 @@
+# Fish, sea mammals and other water animals.
+#
+# Row format:   group = spring summer autumn winter     (ordinary biomes)
+#               group = dry wet                         (tropical biomes)
+# The first row that fits wins. 'any' fits everything.
+#
+# Warm oceans are NOT tropical in this pack. Only terralith:deep_warm_ocean
+# is (see SEASONS_TERRALITH.md and the z-seasons-terralith datapack).
+# So ocean rows have 4 numbers. The one tropical ocean biome has no ocean
+# row and gets 1.0. That is fine. It is one rare biome.
+#
+# A chance can only LOWER a spawn rate. The peak season stays at 1.0.
+#
+# Two kinds of rule are in this file.
+#   1. Seasons. Fish that move with the year.
+#   2. Habitat fixes. The mod or the game puts an animal in water it does
+#      not live in. Those rows are flat across the year on purpose.
+#      Where a flat row says 1.0 it is only there to EXEMPT a group from
+#      a later row. It is not a rule with no signal.
+#
+# Animals with no real signal are not here. See "Left alone" in
+# seasonal-spawns/docs-fragments/water-animals.md.
+#
+# Where each animal spawns was read from the jars (sealife, naturalist,
+# crittersandcompanions) and the 26.2 server jar. Critters spawn biomes
+# for sea bunny and dumbo octopus are a HACK reading of the class
+# constants. The order looked right but it is not proof.
+
+[tuna]
+animals    = sealife:tuna
+confidence = sourced
+source     = https://pmc.ncbi.nlm.nih.gov/articles/PMC5784186
+why        = Atlantic bluefin tuna leave their feeding grounds to spawn in warm water
+             in spring and early summer. Eastern fish reach the Mediterranean in May
+             and June and are back on the North Atlantic feeding grounds in July and
+             August. Western fish go to the Gulf of Mexico in April to June and
+             return over the summer. Spawning waits until the water is above 20 C.
+             So temperate water has them in the warm half of the year and not in
+             winter. Warm oceans get no cut, since the pack's tuna there stands in for
+             the warm-water tunas that live there all year. The paper is about bluefin
+             only. The size of the winter drop is my call.
+#                  spring summer autumn winter
+warm-ocean = 1.0  1.0  1.0  1.0
+ocean      = 0.7  1.0  0.9  0.4
+
+[sardine]
+animals    = sealife:sardine
+confidence = reasoned
+source     = https://en.wikipedia.org/wiki/Sardine_run
+why        = The South African sardine run is a winter event. Billions of sardines move
+             along the coast from May to July, when the water cools below about 21 C.
+             Sardines like water of about 14 to 20 C. The page also says the cause is
+             poorly understood. One regional event does not describe sardines in
+             general, so this is a light rule. The pack only spawns sardines in cold and
+             temperate water. Summer is cut because those waters are at the warm edge
+             of what sardines like. Winter is full.
+#               spring summer autumn winter
+any = 0.9  0.6  0.9  1.0
+
+[anchovy]
+animals    = sealife:anchovy
+confidence = sourced
+source     = https://fishbase.se/summary/66
+why        = FishBase says the European anchovy "tends to move further north and into
+             surface waters in summer, retreating and descending in winter". It spawns
+             from April to November with a peak in the warmest months. So cold and
+             shallow water holds them in summer and loses them in winter. They go
+             deeper, not away, so the deep ocean loses less. The numbers are my call.
+#                  spring summer autumn winter
+deep-ocean = 0.7  1.0  0.9  0.6
+cold-ocean = 0.6  1.0  0.9  0.3
+any        = 0.7  1.0  0.9  0.5
+
+[angelfish]
+animals    = sealife:angelfish
+confidence = reasoned
+source     = https://www.fishbase.se/summary/4717
+why        = This mod's angelfish spawns in jungle and swamp. That fits the real
+             freshwater angelfish of the Amazon. FishBase says adults live in swamps
+             and flooded ground with dense plants, and that the fish does not migrate.
+             Two things follow. It is a tropical animal, so a plain swamp in a real
+             winter is too cold and it thins out. In the tropical biomes the flooded
+             half of the year gives it the most living space. The dry half is cut
+             moderately. The search found no study of wild angelfish through the
+             year. The dry and wet numbers are a guess. The cold-swamp cut is reasoned.
+#                dry  wet
+jungle = 0.7  1.0
+swamp  = 0.7  1.0
+#                  spring summer autumn winter
+swamp  = 0.6  1.0  0.7  0.2
+
+[silver-stripe-blaasop]
+animals    = sealife:silver_stripe_blaasop
+confidence = sourced
+source     = https://fishbase.se/summary/Lagocephalus-sceleratus
+why        = HACK. A habitat fix in the shape of a season rule. The mod spawns this
+             pufferfish only in cold and frozen oceans. FishBase lists the real
+             silver-cheeked toadfish as tropical, 40 N to 40 S, on reefs and sand at
+             18 to 100 m. The page gives no temperature numbers. The honest fix is to
+             move it to the warm oceans in the mod's biome tag. This file can only
+             lower a rate. So it leaves a trickle, and only when a cold sea is at its
+             warmest: summer and early autumn. In winter it is gone.
+#               spring summer autumn winter
+any = 0.1  0.6  0.4  0.0
+
+[rays]
+animals    = sealife:stingray naturalist:ray
+confidence = reasoned
+source     = https://www.sciencedaily.com/releases/2018/08/180823122323.htm
+why        = Stingrays and eagle rays in the temperate Atlantic move with the year.
+             Cownose rays pour into Chesapeake Bay every summer to mate and pup, leave
+             in autumn, and winter off Cape Canaveral, Florida. That is one species in
+             one place. It is the only seasonal source read. So temperate and cold
+             water are full in summer and thin in winter, and warm water has them all
+             year. The numbers are my call. Rays are bottom animals, so deep water gets
+             no special row.
+#                  spring summer autumn winter
+cold-ocean = 0.5  1.0  0.7  0.2
+warm-ocean = 1.0  1.0  1.0  1.0
+ocean      = 0.7  1.0  0.9  0.4
+
+[jellyfish]
+animals    = naturalist:jellyfish
+confidence = reasoned
+source     = https://en.wikipedia.org/wiki/Jellyfish
+why        = Jellyfish blooms follow warm water. In the Mediterranean, monitoring from
+             2013 to 2020 saw blooms nearly all year, with peaks from March to July
+             and often again in autumn. That is one sea. Winter is the low point, and
+             the cold seas more so. Warm seas drop only a little. The page gives no
+             numbers. All of them are my call.
+#                  spring summer autumn winter
+warm-ocean = 1.0  1.0  1.0  0.9
+cold-ocean = 0.8  1.0  0.9  0.3
+any        = 0.9  1.0  1.0  0.6
+
+[whale]
+animals    = naturalist:whale
+confidence = sourced
+source     = https://www.fisheries.noaa.gov/species/humpback-whale
+             https://en.wikipedia.org/wiki/Humpback_whale
+why        = Humpbacks feed in cold, high-latitude water in summer and build fat. In
+             winter they move to tropical water to mate and calve. Some trips are 5,000
+             miles each way. So cold seas are full in summer and nearly empty in
+             winter, and warm seas are the reverse. Temperate water sees the animals
+             pass through, so it gets a light dip. The mod has one whale entity, so
+             this reads the humpback and ignores whales that stay put, such as the
+             sperm whale. The numbers are my call. Spring and autumn are the trips.
+#                  spring summer autumn winter
+cold-ocean = 0.8  1.0  0.9  0.35
+warm-ocean = 0.9  0.5  0.7  1.0
+any        = 0.9  0.8  0.9  0.8
+
+[great-white-shark]
+animals    = naturalist:great_white_shark
+confidence = reasoned
+source     = https://pmc.ncbi.nlm.nih.gov/articles/PMC3741326
+why        = Great whites come to the coast at set times of year, and the time depends
+             on where you look. At Gansbaai in South Africa the sightings were highest
+             in autumn and winter (March to August). Other studies came up in a search
+             but I only read this one: central California in fall and winter, Cape Cod
+             in late summer and fall, western Australia in spring and early summer.
+             Fall and winter is the common thread. Two further points. The mod puts
+             this shark only in warm and lukewarm ocean, but real great whites are
+             temperate-water sharks, so the hottest part of the year is cut. Spring is
+             a little thin as the water warms. The numbers are my call.
+#               spring summer autumn winter
+any = 0.8  0.5  1.0  1.0
+
+[dolphin]
+animals    = minecraft:dolphin
+confidence = sourced
+source     = https://journal.iwc.int/index.php/jcrm/article/view/748
+why        = Along the US mid-Atlantic coast, aerial surveys found the most bottlenose
+             dolphins in winter. Few were seen in late spring, summer and early autumn.
+             The authors link this to water temperature and prey. In the warm south they
+             stay in a local range all year. So cold and temperate coasts thin out in
+             winter as dolphins move toward warmer water, and warm coasts do not
+             change much. The survey is one coast and one species. The sources
+             disagree on whether a given coast is fullest in winter or summer, so the
+             size of every cut is a guess. The pack spawns dolphins in ocean, deep ocean
+             and the warm oceans. The cold row only matters if another mod adds
+             cold-ocean biomes.
+#                  spring summer autumn winter
+cold-ocean = 0.6  1.0  0.7  0.1
+warm-ocean = 0.9  0.9  1.0  1.0
+ocean      = 0.8  1.0  0.9  0.5
+
+[squid]
+animals    = minecraft:squid
+confidence = reasoned
+source     = https://en.wikipedia.org/wiki/Squid
+why        = Habitat fix only. The game spawns squid in rivers and frozen rivers. Real
+             squid are sea animals. The page describes them in open ocean, shelf and
+             deep water and never in fresh water. Rivers are cut to zero. (The first
+             version kept 0.35. The server owner does not want squid in rivers.) The
+             seasons for squid are too different between species to use. California
+             market squid spawn inshore from spring to autumn. Atlantic longfin squid
+             spawn inshore from spring to summer. So the sea rows stay at 1.0.
+#                  spring summer autumn winter
+river = 0.0  0.0  0.0  0.0
+
+[cod]
+animals    = minecraft:cod
+confidence = reasoned
+source     = https://animaldiversity.org/accounts/Gadus_morhua
+why        = Two things in one rule. First, a habitat fix. Cod live in cold and
+             temperate seas and spawn at 5 to 7 C. The game also spawns them in
+             lukewarm ocean. Warm water is cut hard, and most in summer. It keeps
+             some chance in winter, when a lukewarm sea is cool enough. Second, a
+             season. The classic model has cod offshore in winter to spawn and
+             inshore in summer to feed, but a newer tagging study found adults
+             wintering inshore. The Animal Diversity page says many stocks move into
+             warmer water in winter and early spring to spawn, and that spawning
+             peaks in winter and spring. The sources pull in two directions. So the
+             season part is small. Deep water is steadier and shallow water is a
+             little thin in winter.
+#                  spring summer autumn winter
+warm-ocean = 0.3  0.1  0.3  0.6
+deep-ocean = 0.85 0.8  0.9  1.0
+any        = 1.0  1.0  0.95 0.75
+
+[nautilus]
+animals    = minecraft:nautilus
+confidence = sourced
+source     = https://en.wikipedia.org/wiki/Nautilus
+why        = Habitat fix. Nautiluses live only in the Indo-Pacific, 30 N to 30 S, on the
+             deep slopes of coral reefs. Most are found at 100 to 700 m. They avoid
+             water above 25 C. The game spawns them in cold and frozen oceans too, which
+             is far outside that range, so those are cut hard. Deep ocean is where they
+             live, so it is untouched. Shallow oceans are cut by half, because the
+             animal stays below the warm surface. The page names no season. The
+             numbers are my call.
+#                  spring summer autumn winter
+cold-ocean = 0.15 0.15 0.15 0.15
+deep-ocean = 1.0  1.0  1.0  1.0
+any        = 0.5  0.5  0.5  0.5
+
+[deep-sea-in-shallows]
+animals    = naturalist:anglerfish naturalist:blobfish naturalist:giant_isopod crittersandcompanions:dumbo_octopus
+confidence = reasoned
+source     = https://en.wikipedia.org/wiki/Giant_isopod
+             https://en.wikipedia.org/wiki/Dumbo_octopus
+             https://en.wikipedia.org/wiki/Anglerfish
+why        = Habitat fix. These are deep-sea animals. Giant isopods mostly live from
+             about 170 m down to 2,140 m. Dumbo octopuses are thought to live at 1,000
+             to 7,000 m. Deep-sea anglerfish live in the dark water of the deep. The
+             blobfish page was only a disambiguation page, so its depth (800 m or more)
+             comes from search results and is weak. The Naturalist mod spawns its three
+             in every ocean except frozen ones. Critters spawns the dumbo octopus in 5
+             ocean biomes. Shallow water is not where any of them live. Shallow oceans
+             are cut to a fifth. Deep oceans are untouched. There is no season. The
+             deep sea has none, and the one hint, giant isopods breeding more in
+             autumn and winter, is one line on one page. Skipped.
+#                  spring summer autumn winter
+deep-ocean = 1.0  1.0  1.0  1.0
+any        = 0.2  0.2  0.2  0.2
+
+[koi]
+animals    = crittersandcompanions:koi_fish
+confidence = reasoned
+source     = none found
+why        = Koi live in the pack's river biome. Koi carp are a hardy cold-water fish
+             but they slow right down in cold water. Pond-keeping pages put the feeding
+             stop at about 10 C and dormancy at about 4 to 10 C. They sit low and still,
+             so in a river in winter they are hard to find. I read none of those pages
+             in full. They were search results only, and most were pond-shop pages. So
+             this is reasoned, with no source. The numbers are my call.
+#                  spring summer autumn winter
+river = 0.9  1.0  0.9  0.4

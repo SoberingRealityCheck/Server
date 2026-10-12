@@ -1,7 +1,9 @@
 # Seasonal Spawns
 
-Land animals spawn at different rates by season and by biome. Bears sleep
-through winter. Zebra follow the rains. Frogs wake in spring. You set the
+Animals spawn at different rates by season and by biome. Bears sleep
+through winter. Zebra follow the rains. Frogs wake in spring. Butterflies
+fly in summer. Salmon run in autumn. That covers land animals, insects,
+bats, fish and other water animals. It does not cover monsters. You set the
 numbers in plain text files, and every number has a reason written next
 to it.
 
@@ -190,7 +192,8 @@ All need operator level (game master). They also work from the console.
 |---|---|
 | `/seasonalspawns here` | The season and biome where you stand, the groups it is in, every animal whose chance is under 1.00 right now, and the creature cap here with the count of animals near. The tuning tool. |
 | `/seasonalspawns capacity` | The creature cap table. Chat gets the reference and the richest and poorest places. The server log gets every biome with its fraction for each season. |
-| `/seasonalspawns sample [n]` | Asks the game's own spawn picker for `n` land animals here (default 1000) and shows the mix. A pick the rules cancelled shows as "nothing". Compare two seasons to see what a rule really does. |
+| `/seasonalspawns sample [n] [category]` | Asks the game's own spawn picker for `n` animals here (default 1000) and shows the mix. The category is the game's name: `creature` (default), `ambient`, `water_creature`, `water_ambient`, `underground_water_creature`, `axolotls`. Fish are `water_ambient`. Stand in the water for water categories. A pick the rules cancelled shows as "nothing". Compare two seasons to see what a rule really does. |
+| `/seasonalspawns animals` | Every animal in any biome's spawn list, by category, with whether a rule covers it. The full list goes to the server log, with `[NO RULE]` on the gaps. Run it after adding a mod. |
 | `/seasonalspawns stats` | Per animal, how many spawns the rules allowed and cancelled since startup. Only counts picks where the chance was under 1.00. Samples count too. |
 | `/seasonalspawns audit` | Lists every biome and its groups in the server log. |
 | `/seasonalspawns reload` | Reloads the `.rules` files. Also happens on `/reload`. |
@@ -275,7 +278,9 @@ zero in winter, back to normal in summer.
 
 - The jar loads and the mixin applies. `defaultRequire = 1` means a bad
   target would have stopped the server.
-- The rules load: 51 sections, 52 animals, 15 groups (the last five are
+- The rules load: 95 sections, 105 animals, 20 groups in the full pack (with
+  insects, bats, fish and water animals added). `animals` lists 22 animals
+  with no rule, all on purpose. 51 sections, 52 animals, 15 groups (the last five are
   `second-pass.rules`, added after the runs below, which saw 46 and 47. 22 sections and 23
   animals in the first runs below, before farm animals and the rest were
   added). The audit puts 118 of 165 biomes in a group. The other 47 are

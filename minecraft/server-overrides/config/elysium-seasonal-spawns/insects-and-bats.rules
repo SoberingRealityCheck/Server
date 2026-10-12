@@ -1,0 +1,263 @@
+# Insects and bats.
+#
+# These are the most seasonal animals in the pack. Most adult insects live
+# for a few weeks or one warm season. In a cold winter there are none to
+# see. So the cold groups (snowy, taiga, mountain) get zeros in winter.
+#
+# Rows are listed cold to mild. The first row that fits wins, so 'snowy'
+# comes before 'taiga' and 'any' comes last. Some sections end with a
+# 2-number 'any' row (dry wet). That row is only for the tropical biomes
+# (desert, savanna, jungle, badlands, mangrove swamp). The 4-number rows
+# never apply there.
+#
+# Two limits to know.
+#   1. Biome here means the biome at the spawn spot. Lush caves and
+#      dripstone caves are in the 'cave' group (biomes.rules). A cave is
+#      sheltered, so the bugs that spawn in lush caves have a milder 'cave'
+#      row ahead of the cold rows. Those cave numbers are guesses. Bats are the one animal
+#      where it is right.
+#   2. Nobody published "0.5". The source says when and how strong. The
+#      size of each number is a call.
+#
+# The rows are copied across a lot of insects on purpose. Where a number
+# is the same, the reason is the same.
+
+[butterflies]
+animals    = naturalist:butterfly
+confidence = reasoned
+source     = https://learnbutterflies.com/abundance-diversity-seasonality/
+             https://www.birdsandblooms.com/blog/butterflies-in-winter/
+why        = Cold country has almost no adult butterflies in winter. Most species
+             spend the cold months as caterpillars, pupae or eggs. A few hardy kinds
+             (tortoiseshells, anglewings, mourning cloaks) overwinter as adults and
+             the monarch flies south. So winter is zero in snow, taiga and mountain
+             country and a trace elsewhere. Adults fly from late spring and peak in
+             summer. In the tropics the pattern is rain, not cold. The first page
+             above (read) says butterflies in seasonal tropical forest are far more
+             abundant in the wet season. They are scarce and hide in the dry season
+             and come out in a mass about three to four weeks after the first rains.
+             The same page says tropical seasonality is weaker than in temperate
+             regions and some wet forests are even all year. So jungle only drops a
+             little in the dry half. Savanna, desert, badlands and mangrove swamp
+             drop a lot. The second page was seen in search results only. The
+             temperate winter claim rests on it and on general knowledge.
+#              spring summer autumn winter
+snowy    = 0.0  0.5  0.0  0.0
+taiga    = 0.1  0.9  0.3  0.0
+mountain = 0.1  1.0  0.4  0.0
+any      = 0.5  1.0  0.7  0.05
+#              dry  wet
+jungle   = 0.7  1.0
+any      = 0.3  1.0
+
+[fireflies]
+animals    = naturalist:firefly
+confidence = reasoned
+source     = https://extension.okstate.edu/fact-sheets/print-publications/epp-entomology-and-plant-pathologhy/epp-7345-an-introduction-to-fireflies-a.pdf
+why        = Adult fireflies live only about one to four weeks. They spend most of
+             their life as larvae underground. The Oklahoma State fact sheet says the
+             adults peak in May and June and are around from May to November in
+             warm, humid weather. The page would not open for me. I only saw its
+             summary in a search result, so this is reasoned and not sourced. Spring
+             is cut because only late spring has adults. Summer is the peak.
+             Autumn is a trace. A Texas report of a late-September wave says it
+             happens, but it is rare. Winter is zero. Snow country is cut harder
+             because the season there is shorter and later. Tropical fireflies
+             (Southeast Asian mangrove kinds, for example) are around much of the
+             year. I found no wet or dry timing for them. The tropical rows are a
+             guess that they follow the rains, and mild.
+#              spring summer autumn winter
+snowy    = 0.0  0.3  0.0  0.0
+taiga    = 0.2  0.9  0.05 0.0
+mountain = 0.2  0.9  0.05 0.0
+any      = 0.6  1.0  0.1  0.0
+#              dry  wet
+any      = 0.6  1.0
+
+[bats]
+animals    = minecraft:bat
+confidence = sourced
+source     = https://www.ontario.ca/page/little-brown-bat
+             https://digitalcommons.usf.edu/kip_articles/469/
+why        = Temperate bats hibernate. The Ontario page (read) says little brown bats
+             hibernate from October or November to March or April, in caves or mines
+             that are humid and stay above freezing. A bat asleep in a cave is not
+             a bat you meet. So winter is zero in cold country and low elsewhere.
+             Spring and autumn are partial. The bats are waking in April and they
+             are swarming and going in from autumn. Summer is the peak. Some
+             temperate species stay active all year in warm country. A Florida
+             study (seen in a search result, not read) found one that does.
+             That is why the mild 'any' winter is 0.15 and not zero. The tropical
+             biomes get no row at all. Tropical bats do not hibernate. They keep
+             1.0 all year. I found no tropical bat page that gave a wet and dry
+             split, so I did not invent one. The bat is the one animal in this
+             file that lives in caves on purpose. The biome used is the cave biome
+             at the spawn spot. That is right here, because a cave roost is where
+             the bat season shows.
+#              spring summer autumn winter
+snowy    = 0.3  0.9  0.4  0.0
+taiga    = 0.5  1.0  0.7  0.0
+mountain = 0.5  1.0  0.7  0.0
+any      = 0.8  1.0  0.9  0.15
+
+[dragonflies]
+animals    = crittersandcompanions:dragonfly
+confidence = reasoned
+source     = https://www.worlddragonfly.org/article/13887890-2011-570155
+why        = In this pack the dragonfly spawns only in rivers. Temperate dragonfly
+             adults fly from late spring to early autumn. Larvae live in the water
+             through winter and the adults come out when it warms. The page above
+             (read) is a Hong Kong study. It says flying seasons began in March or
+             April, and in eight species they ran to November, and it calls the
+             life cycles "intermediate" between equatorial and high latitude
+             species. It is not a temperate study, so it only backs the shape. The
+             May to September window comes from search results I did not open.
+             Winter is zero in cold country and a trace in mild country. River
+             biome itself is never tropical, so there are no dry and wet rows.
+#              spring summer autumn winter
+snowy    = 0.0  0.4  0.0  0.0
+taiga    = 0.2  1.0  0.4  0.0
+mountain = 0.2  1.0  0.4  0.0
+any      = 0.4  1.0  0.6  0.05
+
+[ladybugs]
+animals    = crittersandcompanions:ladybug
+confidence = sourced
+source     = https://pmc.ncbi.nlm.nih.gov/articles/PMC5999267/
+why        = Adult ladybirds spend the cold months packed in groups under bark and
+             leaf litter. The page above (read) followed one European species. It
+             says they arrived at the winter sites from late October to early
+             November and left from mid April to late April. The beetles are
+             out and about from spring to autumn. In winter the sleeping groups
+             are tucked away, so you rarely meet one in the open. Cold country has
+             a later spring and an earlier autumn. The page is one species in one
+             region, so the sizes are my call. The game spawns them in forest
+             and lush caves.
+#              spring summer autumn winter
+cave     = 0.8  1.0  0.9  0.6
+snowy    = 0.0  0.6  0.1  0.0
+taiga    = 0.3  1.0  0.5  0.0
+mountain = 0.3  1.0  0.5  0.0
+any      = 0.6  1.0  0.8  0.1
+
+[stag-beetles]
+animals    = crittersandcompanions:stag_beetle
+confidence = sourced
+source     = https://www.donauauen.at/en/facts/nature-science/fauna-engl/stag-beetle
+             https://www.newforestnpa.gov.uk/discover/wildlife/beetles/stag-beetle
+why        = Adult stag beetles live a few weeks in early summer. The larvae live
+             for years in rotting wood. The Donau-Auen park page (read) says the
+             flying period is from the end of May to June or July. The New Forest
+             page (read) says adults are found from late May to the end of August.
+             So summer is the peak, spring is a small early tail, and autumn and
+             winter are near zero. In cold country the beetles come later and
+             spring is zero. Zero in a mild winter is a call. Both pages are
+             European (Lucanus cervus), not the game's own beetle.
+#              spring summer autumn winter
+cave     = 0.4  1.0  0.3  0.2
+snowy    = 0.0  0.4  0.0  0.0
+taiga    = 0.0  1.0  0.1  0.0
+mountain = 0.0  1.0  0.1  0.0
+any      = 0.2  1.0  0.1  0.0
+
+[weevils]
+animals    = crittersandcompanions:weevil
+confidence = reasoned
+source     = https://prairiepest.ca/risk-maps/cabbage-seedpod-weevil/
+why        = The game has no species, only a generic weevil. Many real weevils
+             overwinter as adults in leaf litter and soil. The pest pages seen in
+             search results say they come out in spring when the soil warms (15 C for
+             the cabbage seedpod weevil) and feed through the warm months. Some
+             species overwinter as larvae instead, and the adults appear in May or
+             June. So the rows are the generic version. Spring is part strength,
+             summer is the peak, autumn fades, winter is mostly in shelter. None of
+             the pages are about the game's animal. The weevil is reasoned
+             from a few pest species.
+#              spring summer autumn winter
+cave     = 0.8  1.0  0.9  0.6
+snowy    = 0.0  0.5  0.1  0.0
+taiga    = 0.4  1.0  0.5  0.0
+mountain = 0.4  1.0  0.5  0.0
+any      = 0.7  1.0  0.8  0.1
+
+[roly-polies]
+animals    = crittersandcompanions:roly_poly
+confidence = reasoned
+source     = https://essexfieldclub.org.uk/archivetext.php/s/028/o/0141
+             https://scaber.org/porcellio/woodlice/habitat/
+why        = Woodlice follow moisture more than temperature. The old Essex page
+             (seen in search results) says they moved to the dampest spot whatever
+             the temperature. It also says in winter most species are scarce and
+             found only deep in crevices, in a semi-lethargic state. A habitat page
+             says a hot summer (32 C) and a cold snap (-5 C) both push them deeper
+             into shelter. So hot dry summer and winter are both low. Autumn is
+             damp and cool, so it is the peak. Woodlice do not need much warmth, so
+             the cuts are milder than for the winged insects. I could not open
+             either page in full. Reasoned.
+#              spring summer autumn winter
+cave     = 1.0  1.0  1.0  0.8
+snowy    = 0.1  0.6  0.2  0.0
+taiga    = 0.5  0.9  1.0  0.1
+mountain = 0.5  0.9  1.0  0.1
+any      = 0.8  0.8  1.0  0.3
+
+[snails]
+animals    = crittersandcompanions:snail
+confidence = reasoned
+source     = https://www.publishing.csiro.au/zo/ZO9680857
+             https://meetingorganizer.copernicus.org/EGU22/EGU22-5061.html
+why        = Land snails go dormant when it is too cold (hibernation) or too dry
+             (aestivation). Rain brings them out. Search results said a study of a
+             pest snail calls winter dormancy brief and daily, and summer
+             dormancy in rare-rain country lasts days to weeks. A pest guide says
+             they are mostly inactive in summer and active in moist soil the
+             rest of the year. A UK garden snail study says waking from hibernation
+             follows the first heavy rain in May and not the air temperature. I
+             did not open any of these pages. That is why it is reasoned. Summer is
+             cut for the dry heat. Winter is cut hard. Spring and autumn rain is
+             the peak. The game spawns snails only in forest and lush caves. There
+             is no dry and wet row because those biomes are not tropical.
+#              spring summer autumn winter
+cave     = 1.0  0.9  1.0  0.7
+snowy    = 0.2  0.5  0.3  0.0
+taiga    = 0.8  0.9  1.0  0.1
+mountain = 0.8  0.9  1.0  0.1
+any      = 1.0  0.7  1.0  0.3
+
+[stick-bugs]
+animals    = crittersandcompanions:stick_bug
+confidence = guess
+source     = none found
+why        = Stick insects are mostly tropical and subtropical. A Queensland trap
+             study seen in a search result found one species breeding all year
+             in rainforest with no wet or dry cycle. A Panama study found the
+             group poor and sparse. I found nothing on stick insects in a cold
+             forest, and no page about this animal. In the game the stick bug
+             spawns in forest and lush caves, not in jungle. So this is a guess
+             that a forest stick bug is a summer and autumn animal that cold
+             country does not hold. Winter is zero. Zero is my call, and a real
+             temperate stick insect overwinters as an egg, which fits.
+#              spring summer autumn winter
+cave     = 0.6  1.0  0.8  0.3
+snowy    = 0.0  0.2  0.0  0.0
+taiga    = 0.1  0.6  0.4  0.0
+mountain = 0.1  0.6  0.4  0.0
+any      = 0.4  1.0  0.8  0.0
+
+[leaf-insects]
+animals    = crittersandcompanions:leaf_insect
+confidence = reasoned
+source     = https://researchonline.jcu.edu.au/5919/
+why        = Real leaf insects live in the tropics of South and Southeast Asia.
+             They do not live in cold forest. In the game they spawn in jungle and
+             in forest. The page above is the Queensland trap study of a stick
+             insect (not a leaf insect). I saw it only in search results. It
+             found no wet or dry cycle in egg output, so jungle gets no row and
+             stays at 1.0. The cold forest is the mismatch. A leaf insect would not
+             survive a snowy winter, so snow country is near zero and the cold
+             groups are cut hard. Leaf insects are tougher on this than stick bugs.
+#              spring summer autumn winter
+snowy    = 0.0  0.1  0.0  0.0
+taiga    = 0.0  0.4  0.1  0.0
+mountain = 0.0  0.4  0.1  0.0
+any      = 0.3  1.0  0.7  0.0

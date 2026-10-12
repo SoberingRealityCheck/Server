@@ -2,6 +2,7 @@ package elysium.seasonalspawns;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import elysium.seasonalspawns.mixin.NaturalSpawnerAccessor;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -139,6 +140,19 @@ public final class SeasonalSpawns implements ModInitializer {
 
     // ---- the decision --------------------------------------------------
 
+    /**
+     * Which mob categories the rules may veto. Everything that is an animal, not a monster.
+     * MONSTER and MISC (villagers, iron golems and the like) are left out on purpose.
+     * Rules go by entity id, so an animal is covered whatever category its mod picked.
+     * The creature CAP (CapacityTable) is a separate thing and stays CREATURE only.
+     */
+    public static boolean covers(MobCategory category) {
+        return switch (category) {
+            case CREATURE, AMBIENT, WATER_CREATURE, WATER_AMBIENT, UNDERGROUND_WATER_CREATURE, AXOLOTLS -> true;
+            default -> false;
+        };
+    }
+
     /** Called by the mixin. True means go ahead with the spawn. */
     public static boolean allows(ServerLevel level, BlockPos pos, EntityType<?> type, RandomSource random) {
         double chance = chanceAt(level, pos, type);
@@ -213,11 +227,19 @@ public final class SeasonalSpawns implements ModInitializer {
                 .then(Commands.literal("here").executes(c -> say(c.getSource(), here(c.getSource()))))
                 .then(Commands.literal("stats").executes(c -> say(c.getSource(), stats())))
                 .then(Commands.literal("audit").executes(c -> say(c.getSource(), audit(c.getSource()))))
+                .then(Commands.literal("animals").executes(c -> say(c.getSource(), animals(c.getSource()))))
                 .then(Commands.literal("sample")
-                        .executes(c -> say(c.getSource(), sample(c.getSource(), 1000)))
+                        .executes(c -> say(c.getSource(), sample(c.getSource(), 1000, MobCategory.CREATURE)))
                         .then(Commands.argument("count", IntegerArgumentType.integer(1, 20000))
                                 .executes(c -> say(c.getSource(),
-                                        sample(c.getSource(), IntegerArgumentType.getInteger(c, "count"))))))
+                                        sample(c.getSource(), IntegerArgumentType.getInteger(c, "count"),
+                                                MobCategory.CREATURE)))
+                                // category is the game's own name: creature, ambient, water_creature,
+                                // water_ambient, underground_water_creature, axolotls
+                                .then(Commands.argument("category", StringArgumentType.word())
+                                        .executes(c -> say(c.getSource(),
+                                                sample(c.getSource(), IntegerArgumentType.getInteger(c, "count"),
+                                                        categoryNamed(StringArgumentType.getString(c, "category"))))))))
                 .then(Commands.literal("capacity").executes(c -> say(c.getSource(), capacity())))
                 .then(Commands.literal("reload").executes(c -> {
                     boolean ok = reload();
@@ -326,21 +348,68 @@ public final class SeasonalSpawns implements ModInitializer {
      * spawner would try here right now. A pick the rules vetoed counts as "none".
      * Samples add to /seasonalspawns stats.
      */
-    private static List<String> sample(CommandSourceStack source, int count) {
+    private static List<String> sample(CommandSourceStack source, int count, MobCategory category) {
         ServerLevel level = source.getLevel();
         BlockPos pos = BlockPos.containing(source.getPosition());
         Map<String, Integer> seen = new TreeMap<>();
         for (int i = 0; i < count; i++) {
             var picked = NaturalSpawnerAccessor.elysium$pick(level, level.structureManager(),
-                    level.getChunkSource().getGenerator(), MobCategory.CREATURE, level.getRandom(), pos);
+                    level.getChunkSource().getGenerator(), category, level.getRandom(), pos);
             seen.merge(picked.map(p -> idOf(p.type())).orElse("(nothing: vetoed, or no animals here)"), 1, Integer::sum);
         }
         List<String> out = new java.util.ArrayList<>();
-        out.add(count + " picks at " + pos.toShortString() + ":");
+        out.add(count + " " + category.getName() + " picks at " + pos.toShortString() + ":");
         seen.entrySet().stream()
                 .sorted((a, b) -> b.getValue() - a.getValue())
                 .forEach(e -> out.add(String.format("  %-40s %5d  %4.1f%%", e.getKey(), e.getValue(),
                         100.0 * e.getValue() / count)));
+        return out;
+    }
+
+    /** The category with this game name, or CREATURE if there is none (a typo should not crash). */
+    private static MobCategory categoryNamed(String name) {
+        for (MobCategory c : MobCategory.values()) {
+            if (c.getName().equalsIgnoreCase(name)) {
+                return c;
+            }
+        }
+        return MobCategory.CREATURE;
+    }
+
+    /**
+     * Every animal that appears in any biome's spawn list, by category, and whether a rule
+     * covers it. This is the "what did I miss" tool. The full list goes to the server log.
+     * It only sees animals that spawn by biome. Structure-only spawns do not show up.
+     */
+    private static List<String> animals(CommandSourceStack source) {
+        var biomes = source.getServer().registryAccess().lookupOrThrow(Registries.BIOME);
+        Map<String, Map<String, Integer>> byCategory = new TreeMap<>();
+        for (Holder.Reference<Biome> holder : (Iterable<Holder.Reference<Biome>>) biomes.listElements()::iterator) {
+            for (MobCategory category : MobCategory.values()) {
+                if (!covers(category)) {
+                    continue;
+                }
+                for (var w : holder.value().getMobSettings().getMobs(category).unwrap()) {
+                    byCategory.computeIfAbsent(category.getName(), k -> new TreeMap<>())
+                            .merge(idOf(w.value().type()), 1, Integer::sum);
+                }
+            }
+        }
+        List<String> out = new java.util.ArrayList<>();
+        int unruled = 0;
+        LOGGER.info("--- animals in biome spawn lists: category, id, biomes it spawns in, rule? ---");
+        for (var cat : byCategory.entrySet()) {
+            for (var e : cat.getValue().entrySet()) {
+                boolean ruled = rules.sectionOf(e.getKey()) != null;
+                if (!ruled) {
+                    unruled++;
+                }
+                LOGGER.info("{} {} in {} biomes {}", cat.getKey(), e.getKey(), e.getValue(),
+                        ruled ? "[rule]" : "[NO RULE]");
+            }
+            out.add(String.format("%-28s %3d animals", cat.getKey(), cat.getValue().size()));
+        }
+        out.add(unruled + " have no rule. The full list is in the server log.");
         return out;
     }
 

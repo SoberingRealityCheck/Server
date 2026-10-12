@@ -314,8 +314,9 @@ Hack: the sqrt curve is a guess. It leans dim on purpose. Tune it in
 
 ### seasonal-spawns/
 
-A small server-side mod. Land animals spawn at different rates by season
-and by biome, from plain text rule files. A second setting gives each
+A small server-side mod. Animals (land, insects, bats, fish and other
+water animals, not monsters) spawn at different rates by season and by
+biome, from plain text rule files. A second setting gives each
 player a cap on how many land animals their area holds, by biome and
 season (`capacity.rules`). Needs Serene Seasons for the calendar and works
 with Respawning Animals.
@@ -331,7 +332,7 @@ with Respawning Animals.
   `.rules` file does not need a rebuild.
 - Check the rules without a game: `seasonal-spawns/build.sh test` prints
   every rule as a table and reports mistakes as `file:line: message`.
-- In game: `/seasonalspawns here`, `sample`, `stats`, `audit`, `reload`.
+- In game: `/seasonalspawns here`, `sample`, `animals`, `stats`, `audit`, `reload`.
 
 The chances can only lower a spawn rate. The cap (`capacity.rules`) is what
 changes how many animals an area holds, and it is a ceiling: where the land

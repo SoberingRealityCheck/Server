@@ -684,8 +684,19 @@ spring peak is written as the other seasons being cut.
 | Jungle scorpion (`naturalist:jungle_scorpion`) | Dry `0.7`, wet `1.0`. | guess. No source found. |
 
 Still left alone: panda and red panda (see above).
-| Butterfly, firefly, dragonfly, fish, sharks, whales | Not `CREATURE`. The hook never sees them. |
-| Critters and Companions insects, otter, koi, sea bunny, octopus | Ambient or water types. The hook never sees them. |
+| Cat, ocelot, mauler | Village pet, tropical resident, and a made-up desert predator. See [ANIMALS-insects-and-bats.md](ANIMALS-insects-and-bats.md). |
+
+Insects, bats, fish and the other water animals are covered now. The hook
+sees every animal category (`creature`, `ambient`, `water_ambient`,
+`water_creature`, `underground_water_creature`, `axolotls`). Monsters never
+reach the rules. The long write-ups are in their own pages:
+
+- [ANIMALS-insects-and-bats.md](ANIMALS-insects-and-bats.md) (`insects-and-bats.rules`)
+- [ANIMALS-freshwater-fish.md](ANIMALS-freshwater-fish.md) (`fish-freshwater.rules`)
+- [ANIMALS-water-animals.md](ANIMALS-water-animals.md) (`water-animals.rules`)
+
+Those pages also list what each one leaves alone. Run `/seasonalspawns animals`
+to see anything still without a rule.
 
 ## What I could not find
 

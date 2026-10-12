@@ -89,3 +89,25 @@ why    = Mesa and eroded canyon country. Tropical in this pack, so wet and dry r
 [polar]
 biomes = minecraft:ice_spikes minecraft:frozen_ocean minecraft:deep_frozen_ocean minecraft:frozen_river minecraft:snowy_plains minecraft:snowy_beach
 why    = Ice and tundra coasts. Where polar animals live in this game.
+
+# ---- water groups (added with the fish and water-animal rules) ----
+
+[cold-ocean]
+biomes = minecraft:cold_ocean minecraft:deep_cold_ocean minecraft:frozen_ocean minecraft:deep_frozen_ocean
+why    = Cold seas, including the frozen ones. Fish here run cool all year and the sea ice moves with the season.
+
+[warm-ocean]
+biomes = minecraft:warm_ocean minecraft:lukewarm_ocean minecraft:deep_lukewarm_ocean
+why    = Warm shallow seas and reef water. Little seasonal swing in the water itself.
+
+[deep-ocean]
+biomes = #minecraft:is_deep_ocean #c:is_deep_ocean
+why    = Open deep water. Deep-sea animals live here and do not feel the seasons at the surface.
+
+[ocean]
+biomes = #minecraft:is_ocean #c:is_ocean
+why    = Every ocean biome, deep or shallow, warm or cold. Put the specific ocean groups above it in a row list.
+
+[cave]
+biomes = minecraft:lush_caves minecraft:dripstone_caves minecraft:deep_dark #c:is_cave
+why    = Underground biomes. Air stays damp and mild all year, so insects and snails kept in a cave do not feel the surface winter. Put this group BEFORE the cold rows in a list.
