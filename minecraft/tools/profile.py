@@ -25,7 +25,8 @@ doesn't depend on reply text. Empty just means "look in the log".
 
 CLIENT mode: spark on the client only takes /sparkc typed into chat, no
 rcon. So this uses JFR (Java Flight Recorder) on the running game JVM:
-  1. finds the game process, then jcmd JFR.start for N seconds
+  1. finds the game process, then jcmd JFR.start, waits N seconds
+     (Ctrl-C early is fine: it dumps what it has, then analyzes it)
   2. reads the .jfr file: busiest threads + hottest top frames
   3. counts DH warnings and "Can't keep up" in the client latest.log
 If jcmd is missing or can't attach (launchers often bundle a JRE with
@@ -247,16 +248,19 @@ def client(seconds):
     ok = False
     if jcmd and jfr:
         say(f"\n== 2. JFR for {seconds}s (go hit the lag now)")
-        code, out = run([jcmd, pid, "JFR.start", "name=elysium", "settings=profile",
-                         f"duration={seconds}s", f"filename={jfr_file}"])
+        # No duration=: we stop it ourselves, so Ctrl-C still saves what was recorded.
+        code, out = run([jcmd, pid, "JFR.start", "name=elysium", "settings=profile"])
         say(out)
         if code == 0:
-            time.sleep(seconds + 5)
-            ok = os.path.exists(jfr_file)
-            if not ok:
-                # duration end writes the file. if not, dump it by hand.
+            try:
+                time.sleep(seconds)
+            except KeyboardInterrupt:
+                say("!! interrupted. Saving what was recorded so far.")
+            finally:
+                # dump writes the file, stop ends the recording in the game
                 run([jcmd, pid, "JFR.dump", "name=elysium", f"filename={jfr_file}"])
-                ok = os.path.exists(jfr_file)
+                run([jcmd, pid, "JFR.stop", "name=elysium"])
+            ok = os.path.exists(jfr_file)
         else:
             say("!! jcmd could not attach. Likely a java version mismatch with the game.")
     else:
