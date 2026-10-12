@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spawn shares</title>
+<!-- Filled in by dev/shares.py. __DATA__ below becomes rows of
+     [category, biome, tropical, season, animal, mass].
+     mass = capped weight x group size x seasonal chance. Share = mass / total mass of the
+     same category, biome and season. No libraries. -->
+<style>
+  body { font: 14px/1.4 system-ui, sans-serif; margin: 16px auto; max-width: 980px; padding: 0 16px; color: #1c1c1c; background: #fff; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 32px 0 4px; }
+  p.note { color: #555; margin: 4px 0 12px; max-width: 75ch; }
+  label { margin-right: 14px; }
+  select { font: inherit; padding: 2px 4px; }
+  .row { display: grid; grid-template-columns: 210px 1fr 190px; gap: 8px; align-items: center; padding: 2px 0; }
+  .name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .name small { color: #888; }
+  .track { position: relative; height: 16px; background: #f0f0f0; border-radius: 2px; }
+  .fill { position: absolute; left: 0; top: 0; bottom: 0; background: #5b8fd6; border-radius: 2px; }
+  .whisk { position: absolute; top: 7px; height: 2px; background: #333; }
+  .whisk::before, .whisk::after { content: ""; position: absolute; top: -4px; width: 2px; height: 10px; background: #333; }
+  .whisk::before { left: 0; } .whisk::after { right: 0; }
+  .over .fill { background: #d65b5b; }
+  .ghost .fill { background: #aaa; }
+  .over .name { color: #b13030; font-weight: 600; }
+  .ghost .name { color: #777; }
+  .stat { font-size: 12px; color: #555; white-space: nowrap; }
+  .key span { display: inline-block; margin-right: 14px; }
+  .key i { display: inline-block; width: 10px; height: 10px; margin-right: 4px; vertical-align: -1px; }
+  .bar { display: flex; height: 30px; border-radius: 3px; overflow: hidden; background: #f0f0f0; }
+  .bar div { overflow: hidden; white-space: nowrap; font-size: 11px; color: #fff; padding: 8px 3px 0; box-sizing: border-box; border-right: 1px solid #fff; }
+  .season { display: grid; grid-template-columns: 60px 1fr; gap: 8px; align-items: center; margin: 6px 0; }
+  .small { color: #777; font-size: 12px; margin: 0 0 6px 68px; }
+  @media (max-width: 700px) { .row { grid-template-columns: 130px 1fr; } .stat { display: none; } }
+  @media (prefers-color-scheme: dark) {
+    body { background: #181818; color: #e6e6e6; }
+    .track, .bar { background: #2a2a2a; } .whisk, .whisk::before, .whisk::after { background: #ddd; }
+    .stat, p.note, .small { color: #aaa; } .bar div { border-right-color: #181818; }
+  }
+</style>
+</head>
+<body>
+<h1>Who spawns, and how often</h1>
+<p class="note">A <b>share</b> is the odds that the next animal the spawner makes, in one category, biome and season,
+is this one. It is the mix of picks. It is not a head count. Every biome counts the same, however big it is.</p>
+
+<p>
+  <label>Category <select id="cat"></select></label>
+  <label>Season <select id="season"></select></label>
+</p>
+
+<h2>1. Which animals are common or rare?</h2>
+<p class="note">One row per animal. The bar is its <b>median share</b> across the biomes that list it. The line runs from its
+smallest to its largest share. Red means it takes over somewhere (median 25% or more, or 50% or more in one biome).
+Grey means it never gets past 3% anywhere. "barred" counts biomes where the rules block it in this season.</p>
+<div id="animals"></div>
+
+<h2>2. What does one biome look like through the year?</h2>
+<p class="note">Each bar is 100% of that biome's spawns in the category. Each animal keeps its colour across seasons,
+so you can watch it grow or shrink.</p>
+<p><label>Biome <select id="biome"></select></label></p>
+<div id="biomebars"></div>
+
+<script>
+const DATA = __DATA__;   // [category, biome, tropical, season, animal, mass]
+const SEASONS = ["spring", "summer", "autumn", "winter"], DRYWET = ["dry", "wet"];
+const $ = id => document.getElementById(id);
+
+// total mass per category|biome|season, then each row's share
+const total = {};
+for (const [c, b, t, s, a, m] of DATA) total[c + "|" + b + "|" + s] = (total[c + "|" + b + "|" + s] || 0) + m;
+const rows = DATA.map(([c, b, t, s, a, m]) => ({ c, b, t, s, a, share: m / (total[c + "|" + b + "|" + s] || 1) }));
+
+const cats = [...new Set(rows.map(r => r.c))].sort();
+$("cat").innerHTML = cats.map(c => `<option>${c}</option>`).join("");
+$("cat").value = cats.includes("creature") ? "creature" : cats[0];
+$("season").innerHTML = ["year average", ...SEASONS, ...DRYWET].map(s => `<option>${s}</option>`).join("");
+
+const pct = x => (100 * x).toFixed(x < 0.1 ? 1 : 0) + "%";
+const median = xs => { const s = [...xs].sort((a, b) => a - b), n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2; };
+const short = id => { const [ns, n] = id.split(":"); return ns === "minecraft" ? n : `<small>${ns}:</small>${n}`; };
+
+function animalView() {
+  const cat = $("cat").value, season = $("season").value;
+  // share of each animal in each biome: the chosen season, or the biome's own seasons averaged
+  const acc = {};   // animal -> biome -> [shares]
+  for (const r of rows) {
+    if (r.c !== cat) continue;
+    if (season !== "year average" && r.s !== season) continue;
+    ((acc[r.a] ||= {})[r.b] ||= []).push(r.share);
+  }
+  const stats = Object.entries(acc).map(([a, bs]) => {
+    const v = Object.values(bs).map(x => x.reduce((p, q) => p + q, 0) / x.length);
+    return { a, n: v.length, med: median(v), min: Math.min(...v), max: Math.max(...v), barred: v.filter(x => x === 0).length };
+  }).sort((x, y) => y.med - x.med || y.max - x.max);
+  $("animals").innerHTML = stats.length ? stats.map(s => {
+    const cls = (s.med >= 0.25 || s.max >= 0.5) ? "over" : (s.max < 0.03 ? "ghost" : "");
+    const text = `${pct(s.med)} typical, ${pct(s.min)} to ${pct(s.max)}, ${s.n} biome${s.n == 1 ? "" : "s"}` + (s.barred ? `, ${s.barred} barred` : "");
+    return `<div class="row ${cls}"><div class="name" title="${s.a}">${short(s.a)}</div>
+      <div class="track"><div class="fill" style="width:${100 * s.med}%"></div>
+      <div class="whisk" style="left:${100 * s.min}%;width:${100 * (s.max - s.min)}%"></div></div>
+      <div class="stat">${text}</div></div>`;
+  }).join("") : "<p class='note'>Nothing here in this season. Tropical biomes only have dry and wet. The others only have the four seasons.</p>";
+}
+
+function fillBiomes() {
+  const cat = $("cat").value;
+  const biomes = [...new Set(rows.filter(r => r.c === cat).map(r => r.b))].sort();
+  const old = $("biome").value;
+  $("biome").innerHTML = biomes.map(b => `<option>${b}</option>`).join("");
+  $("biome").value = biomes.includes(old) ? old : (biomes.includes("flower_forest") ? "flower_forest" : biomes[0]);
+}
+
+function colour(i) { return `hsl(${(i * 137.5) % 360},48%,42%)`; }
+
+function biomeView() {
+  const cat = $("cat").value, biome = $("biome").value;
+  const here = rows.filter(r => r.c === cat && r.b === biome);
+  if (!here.length) { $("biomebars").innerHTML = ""; return; }
+  const seasons = here[0].t ? DRYWET : SEASONS;
+  // order animals by their share summed over the year, biggest first. Same colours in every bar.
+  const sum = {};
+  for (const r of here) sum[r.a] = (sum[r.a] || 0) + r.share;
+  const order = Object.keys(sum).sort((x, y) => sum[y] - sum[x]);
+  $("biomebars").innerHTML = seasons.map(s => {
+    const parts = order.map((a, i) => ({ a, i, share: (here.find(r => r.s === s && r.a === a) || { share: 0 }).share }))
+      .filter(p => p.share > 0);
+    const segs = parts.map(p => `<div style="width:${100 * p.share}%;background:${colour(p.i)}" title="${p.a} ${pct(p.share)}">${p.share >= 0.06 ? short(p.a).replace(/<[^>]+>/g, "") + " " + pct(p.share) : ""}</div>`).join("");
+    const small = parts.filter(p => p.share < 0.06).map(p => `${p.a.split(":")[1]} ${pct(p.share)}`).join(", ");
+    return `<div class="season"><b>${s}</b><div class="bar">${segs || ""}</div></div>` +
+      (parts.length ? (small ? `<div class="small">Smaller: ${small}</div>` : "") : `<div class="small">Every animal here is barred in ${s}.</div>`);
+  }).join("");
+}
+
+$("cat").onchange = () => { fillBiomes(); animalView(); biomeView(); };
+$("season").onchange = animalView;
+$("biome").onchange = biomeView;
+fillBiomes(); animalView(); biomeView();
+</script>
+</body>
+</html>

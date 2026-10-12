@@ -1,0 +1,98 @@
+# Big forest and cold-country mammals: bears, deer, boar, tiger, polar bear.
+#
+# How to read a row:   group = spring summer autumn winter
+# Each number is the chance (0 to 1) that a spawn the game just picked
+# for this animal is allowed. 1.0 is the pack's normal. 0.0 is never.
+# The first row that fits the biome wins. 'any' fits everything.
+#
+# confidence:
+#   sourced  = a source below says the behaviour this rule models
+#   reasoned = well-known biology, no direct source read for this rule
+#   guess    = game-balance call, no real-world claim
+# Do not trust 'reasoned' or 'guess' rows more than you trust the author.
+
+[bears]
+animals    = naturalist:bear naturalist:black_bear
+confidence = sourced
+source     = https://www.nps.gov/articles/bears-winter.htm
+             https://bear.org/5-stages-of-activity-and-hibernation/
+why        = Bears sleep through winter. Where winters are long they go into dens around
+             September or October and stay until April, 6 to 7 months near Ely, Minnesota
+             (NPS). Where food lasts longer, as in the eastern US, they go in late
+             November or December and stay under 5 months. Before denning they eat all day
+             (hyperphagia), so autumn is when they are easiest to find. They can leave the
+             den on a warm spell, but most are out of sight. Spring is thin because they
+             come out from April and are not yet roaming. Short winters in mild forests
+             leave a small winter chance. In this pack bears spawn in forest and taiga.
+#                  spring summer autumn winter
+taiga    = 0.4  1.0  0.8  0.0
+snowy    = 0.4  1.0  0.8  0.0
+mountain = 0.5  1.0  0.9  0.05
+any      = 0.8  1.0  1.0  0.15
+
+[polar-bear]
+animals    = minecraft:polar_bear
+confidence = sourced
+source     = https://polarbearagreement.org/polar-bear-biology/movement-and-migration
+             https://www.sciencedaily.com/releases/2013/03/130319202040.htm
+why        = Polar bears hunt seals from sea ice. Where the ice melts out in summer, as in
+             western Hudson Bay, they come ashore and live off fat until it freezes again
+             in late November or early December. They cannot hunt seals from land. A share
+             of the population stays on the ice instead, so summer is reduced and not
+             empty. Only pregnant females den through winter. Winter and spring are the
+             hunting season, so those stay at normal.
+#                spring summer autumn winter
+polar = 1.0  0.5  0.7  1.0
+
+[deer]
+animals    = naturalist:deer
+confidence = reasoned
+source     = https://d11.seafwa.org/journal/2004/daily-movements-female-white-tailed-deer-relative-parturition-and-breeding
+             https://iowadnr.gov/About-DNR/DNR-News-Releases/ArticleID/2469/Fawning-season-is-here-deer-are-on-the-move
+why        = Deer are in the woods all year. The sources show the seasonal part is about how
+             visible they are. Movement peaks in the autumn rut. In spring does hide near
+             new fawns, move less, and fawns are born scentless and still. The winter
+             numbers are reasoned and not from these pages. Where snow gets deep, deer
+             leave exposed ground for sheltered conifer stands and lower slopes, so
+             mountains and snowy ground lose the most. Temperate woods lose little.
+#                  spring summer autumn winter
+mountain = 0.9  1.0  1.0  0.4
+snowy    = 0.9  1.0  1.0  0.5
+taiga    = 0.9  1.0  1.0  0.6
+any      = 0.9  1.0  1.0  0.8
+
+[wild-boar]
+animals    = naturalist:boar
+confidence = reasoned
+source     = https://www.cnrs.fr/en/acorn-production-cycles-influence-wild-boar-populations
+             https://link.springer.com/article/10.1007/s10342-019-01248-5
+why        = Boar are active all year. The sources show autumn is when they roam the
+             woods hardest, rooting for acorns, so autumn stays at normal. Deep snow
+             makes foraging hard for a short-legged animal, so snowy and cold ground
+             thins out in winter. This part is reasoned, not from the pages. A mild
+             winter drop for everywhere else keeps the gap small.
+#                  spring summer autumn winter
+snowy    = 1.0  1.0  1.0  0.4
+taiga    = 1.0  1.0  1.0  0.6
+mountain = 1.0  1.0  1.0  0.6
+any      = 1.0  1.0  1.0  0.85
+
+[tiger]
+animals    = naturalist:tiger
+confidence = sourced
+source     = https://www.catsg.org/living-species-tiger
+             https://ielc.libguides.com/sdzg/factsheets/tiger/distribution
+why        = Habitat fix, not a seasonal rule. Tigers range from Siberian taiga through
+             grassland and tropical forest to mangrove swamp. They avoid open ground and
+             are not found in desert. Naturalist also spawns them in desert, badlands,
+             and treeless snow (snowy plains, ice spikes, snowy slopes, peaks), so those
+             are cut. Snowy taiga and grove are forest, so they are left alone: Siberian
+             tigers live there. Dry deciduous forest and scrub in India borders the
+             badlands case, so badlands keeps a small chance. Tigers do not hibernate,
+             so no seasonal rows. (Desert and badlands are tropical in this pack, so
+             those rows have two numbers: dry wet.)
+#                 dry  wet
+desert   = 0.0  0.0
+badlands = 0.25 0.25
+#                 spring summer autumn winter
+bare-snow = 0.6  0.6  0.6  0.6

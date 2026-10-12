@@ -1,0 +1,80 @@
+# Animals first left alone, then given rules.
+# moobloom, ferret, shima enaga, parrot, jungle scorpion.
+#
+# Row format:   group = spring summer autumn winter     (ordinary biomes)
+#               group = dry wet                         (tropical biomes)
+# The first row that fits wins. 'any' fits everything.
+#
+# A chance can only LOWER a spawn rate. So "a spring boost" is written as
+# the other seasons being cut. The peak season stays at 1.0.
+
+[moobloom]
+animals    = friendsandfoes:moobloom
+confidence = guess
+source     = https://sicb.org/?p=11571
+             https://complete.bioone.org/journals/northwest-science/volume-97/issue-3/046.097.0304/Flower-Phenology-Bumble-Bee-Foraging-and-Climate-Change-in-North/10.3955/046.097.0304.full
+why        = The moobloom is a fantasy cow that lives on flowers. It spawns in flower
+             forest, sunflower plains, meadow and cherry grove. There is no real animal
+             to copy, so this follows the flowers. Meadow studies show the bloom rising
+             in spring and peaking in spring and early summer. Pollinators track it. The
+             sources do not measure the autumn drop, so autumn and winter are a judgement
+             call: some flowers last into autumn, and in winter there are almost none.
+             Spring and summer are full. Autumn is a little over half. Winter is a quarter.
+#                 spring summer autumn winter
+any = 1.0  1.0  0.55 0.25
+
+[ferret]
+animals    = crittersandcompanions:ferret
+confidence = reasoned
+source     = https://vwt.org.uk/species/polecat/
+             https://www.vwt.org.uk/news-media/news/national-polecat-survey-update
+why        = The ferret is a tame polecat, so this reads the wild European polecat.
+             Polecats mate in February to March and the kits are born in early summer.
+             Kits leave their mother and spread out in autumn, so September has many
+             young animals on the move. In winter polecats are less active and are seen
+             much less. Live sightings peak in summer, when they are more active in the
+             day. Winter is cut to about half. Spring is a little thin, since the females
+             are in dens.
+#                 spring summer autumn winter
+any = 0.8  1.0  1.0  0.5
+
+[shima-enaga]
+animals    = crittersandcompanions:shima_enaga
+confidence = reasoned
+source     = https://bharasymiw1.photobiz.com/blog/hokkaido-bird-watching-photography-workshop-shima-enaga-flocking-behavior
+             https://www.fun-japan.jp/en/articles/14237
+why        = The Hokkaido bird stays all year, so it never leaves. What changes is how
+             easy it is to find. In winter, family flocks of 10 to 20 roost and move
+             together, and they defend a winter ground. In spring (about April) the flocks
+             break up into pairs and the birds are spread thin and hidden while nesting.
+             So spring and summer are lower and autumn and winter are full. Both sources
+             are tour and travel pages, not field studies. The drop is small.
+#                 spring summer autumn winter
+any = 0.7  0.7  1.0  1.0
+
+[parrot]
+animals    = minecraft:parrot
+confidence = guess
+source     = https://www.audubon.org/magazine/tropical-bird-breeding-seasons-explained
+             https://sora.unm.edu/sites/default/files/journals/wilson/v111n04/p0488-p0493.pdf
+why        = Tropical parrots do not follow four seasons. Some species nest in the wet
+             season (scarlet macaws, January to April in Peru). A study of green-rumped
+             parrotlets in Venezuela found breeding stops in the dry season and flocks of
+             over 100 form. So in the wet half the pairs are in tree holes and fewer are
+             in the open, and in the dry half the flocks are out in the open. Other
+             parrots do the opposite, and the sources cover only a few species. This is
+             a small cut, not a rule about all parrots.
+#                  dry  wet
+any = 1.0  0.8
+
+[jungle-scorpion]
+animals    = naturalist:jungle_scorpion
+confidence = guess
+source     = none found
+why        = I found no source on jungle scorpion seasons. This is general reasoning.
+             Scorpions are cold-blooded and wet-forest invertebrates tend to be most
+             active when it is warm and humid. In the dry half of a tropical year the
+             leaf litter dries out and they hide deeper. So the dry half is cut a
+             little. This is a guess. Change it or delete the section if you disagree.
+#                  dry  wet
+any = 0.7  1.0

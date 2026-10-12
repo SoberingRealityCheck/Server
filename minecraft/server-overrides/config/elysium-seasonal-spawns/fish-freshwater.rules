@@ -1,0 +1,302 @@
+# Freshwater fish: SeaLife, Naturalist, and vanilla salmon.
+#
+# Row format:   group = spring summer autumn winter     (ordinary biomes)
+#               group = dry wet                         (tropical biomes)
+# The first row that fits wins. 'any' fits everything.
+#
+# What a number means for a fish. The game spawns fish in any water inside
+# a biome, so "forest" here means a pond or river inside a forest. The
+# number is how likely a pick goes ahead. I read it as how many of the
+# species you would see in the water that season. Peak season is 1.0.
+# The other seasons are cut.
+#
+# Fish do not leave. Cold-blooded fish slow down in cold water and sit in
+# deep holes. They are still there under the ice. So winter is a low
+# number and not zero, except where the fish cannot live at all.
+#
+# Weak spots, said once here:
+#  - Most of the cuts are my size call. The sources give the direction
+#    and the timing. They do not give a number.
+#  - A fish in a deep hole is not "gone". The cut is about what you meet
+#    in the shallows. It is a hack that treats seen and present as the same.
+#  - Mangrove swamp counts as tropical in this pack. A temperate fish with
+#    only 4-number rows is left at 1.0 there. I did that on purpose. Real
+#    carp, bass and pickerel do live in warm southern swamps.
+#  - Terralith ice_marsh, desert_oasis and warm_river are in some spawn
+#    tags. I did not check which groups they land in. Run the audit.
+#  - Ocean-going fish (electric ray, and the sea phase of salmon and
+#    lamprey) are not here. See the docs fragment, 'Left alone'.
+
+# ---- warm-water fish: slow in the cold, active when it warms ----
+
+[bass]
+animals    = sealife:bass naturalist:bass
+# naturalist:bass is listed at weight 10 and was up to 75% of fish in a biome. Capped to 6.
+# sealife:bass is already 6, so the cap does nothing to it.
+weight     = 6
+confidence = sourced
+source     = https://ncpedia.org/largemouth-bass-nc-wins
+why        = Largemouth bass spawn in spring. Males move to the shallows as the water
+             nears 60 F and nest when it holds 63 to 68 F for several days. In winter
+             they get sluggish, eat little and sit deep. A warm spell over 50 F wakes
+             them. So spring and summer are the busy half and winter is thin. The page
+             does not say how thin. Habitat fix: bass do not live in snow country.
+             Naturalist puts them in Terralith's ice marsh. That biome gets a
+             small summer chance and nothing else. Both ids share one rule because
+             both mods mean the same fish.
+#            spring summer autumn winter
+snowy = 0.0  0.3  0.1  0.0
+any   = 0.9  1.0  0.7  0.2
+
+[carp-koi-goldfish]
+animals    = sealife:carp sealife:koi sealife:goldfish
+confidence = reasoned
+source     = https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11576824/
+             https://pondinformer.com/?p=39844
+why        = All three are carp relatives. Common carp winter in deep water and move to
+             shallow, weedy water in spring to spawn once it is about 13 to 18 C. They
+             survive under ice. Pond goldfish and koi stop eating below about 10 C and
+             sit near the bottom in a half-sleep. They eat the most in spring and
+             autumn. I read these as search-result summaries. I did not open the pages.
+             Koi and goldfish are copied from carp. Nobody studied them wild here.
+#     spring summer autumn winter
+any = 0.9  1.0  0.7  0.2
+
+[catfish]
+animals    = sealife:catfish naturalist:catfish
+confidence = reasoned
+source     = https://www.in-fisherman.com/editorial/the-spring-catfish-spawn-connection/155780
+why        = Catfish gather in deep winter holes and stay put. They start to feed at
+             55 to 60 F, move shallow in spring, and spawn in late spring and summer at
+             70 to 85 F. So summer is the peak and winter the low. I read a search
+             summary, not the page. Habitat fix: no catfish lives in an ice marsh.
+             Naturalist spawns them there, so snowy is nearly shut.
+#            spring summer autumn winter
+snowy = 0.0  0.2  0.0  0.0
+any   = 0.6  1.0  0.7  0.15
+
+[bowfin]
+animals    = sealife:bowfin
+confidence = reasoned
+source     = https://vtfishandwildlife.com/learn-more/vermont-critters/fish/bowfin
+why        = Bowfin spawn in May and early June at 60 to 66 F. The male guards a nest
+             in weedy shallows, which makes late spring the most visible time. The page
+             says nothing about winter. The cold-season cut is the same as for other
+             warm-water fish and is a guess. Bowfin can breathe air, so low oxygen
+             in a swamp pond does not push them out.
+#     spring summer autumn winter
+any = 0.8  1.0  0.7  0.2
+
+[pickerel]
+animals    = sealife:pickerel
+confidence = reasoned
+source     = https://en.wikipedia.org/wiki/Chain_pickerel
+             https://www.maine.gov/ifw/docs/strategic-management-plans/pickerel.pdf
+why        = Chain pickerel spawn late winter to early spring in flooded plants. A few
+             southern ones spawn in winter and some populations have a small fall
+             spawn. They are ambush fish that stay in weed beds and are fairly cold
+             tolerant. So spring is the peak, summer and autumn are a little under
+             it, and winter is cut. I did not open the pages.
+#     spring summer autumn winter
+any = 1.0  0.8  0.8  0.4
+
+[minnow]
+animals    = sealife:minnow
+# Weight 14. About a third of freshwater fish spawns in 28 biomes. Capped to 7.
+weight     = 7
+confidence = reasoned
+source     = https://academics.cehd.umn.edu/hatch/research/fish/fishes/fathead_minnow.html
+why        = Fathead minnows start spawning in late May to early June once the water is
+             over about 16 C and keep going to mid-August. Spawning stops under about
+             10 C. The cold half is quiet. The page is about the fathead only.
+             SeaLife's minnow is a generic small fish, so this is the closest match.
+#     spring summer autumn winter
+any = 0.7  1.0  0.7  0.2
+
+[chub]
+animals    = sealife:chub
+confidence = reasoned
+source     = https://academics.cehd.umn.edu/hatch/research/fish/fishes/creek_chub.html
+why        = Creek chub spawn from March to July depending on latitude, at 12 to 19 C.
+             The male builds a gravel ridge in a stream with some current. That makes
+             spring the busy season and a little into summer. Autumn and winter are
+             quiet. I read search excerpts of the page, not the whole page.
+#     spring summer autumn winter
+any = 1.0  0.9  0.6  0.2
+
+# ---- cold-water fish: comfortable in the cold, stressed or gone in summer heat ----
+
+[trout]
+animals    = sealife:trout
+# Weight 8 beside fish at 1 to 3. Trout was the top fish in 54 biome-seasons and about 60%
+# of freshwater fish spawns over 19 biomes. Capped to 4.
+weight     = 4
+confidence = reasoned
+source     = https://tacklevillage.com/when-do-brook-trout-spawn/
+             https://www.ctriver.org/post/fall-redds
+why        = Brook and brown trout spawn in autumn. Brook trout run roughly September to
+             November and browns from mid-September into November. Eggs sit in gravel
+             redds over winter. Autumn is when you see them, in the shallows over
+             gravel. The summer dip is a guess. Trout are cold-water fish and
+             warm summer streams push them to deep pools and springs. I did not search
+             for that. The sources are a tackle site and a river group. Not strong.
+#     spring summer autumn winter
+any = 0.8  0.6  1.0  0.6
+
+[pike]
+animals    = sealife:northern_pike
+confidence = sourced
+source     = https://digital.outdoornebraska.gov/nebraskaland-magazine/ice-off-pikes-up
+why        = Pike spawn as soon as the ice goes, in shallow weedy water and marshes.
+             Nebraska Game and Parks says they can start under the ice if it lasts. So
+             spring is the peak. The page does not cover summer or winter. They are
+             a cold and cool-water fish, so I kept winter fairly high. Summer is cut
+             because warm shallows push them to deeper water. That part is reasoned,
+             not read. Their spawn list is all cold biomes (taiga, snowy, grove,
+             frozen river), so no habitat fix is needed.
+#     spring summer autumn winter
+any = 1.0  0.7  0.8  0.6
+
+[perch]
+animals    = sealife:perch
+confidence = sourced
+source     = https://dnr.wisconsin.gov/topic/Fishing/species/yperch.html
+why        = Yellow perch spawn in April or early May, soon after ice-out, at 45 to 52 F.
+             The Wisconsin page also says they favour colder water and sit deeper. A
+             Michigan DNR page that I could only see in a search summary says they stay
+             active all winter under the ice. So the winter cut is mild. Spring is
+             the visible peak.
+#     spring summer autumn winter
+any = 1.0  0.7  0.9  0.6
+
+[walleye]
+animals    = sealife:walleye
+confidence = reasoned
+source     = https://www.crescent-news.com/sports/outdoors/temperature-stream-flow-key-to-walleye-run/article_f34514c9-a8b2-500e-9f78-5e6c9560e515.html
+             https://www.in-fisherman.com/editorial/hot-little-numbers-for-river-walleyes/154576
+why        = Walleye run up rivers to spawn in early spring. On the Maumee the peak is
+             the last week of March into early April at 40 to 50 F. Males come first
+             when the water is barely above freezing. Rivers get the strongest spring.
+             Elsewhere they are a cool-water fish that stays active under ice. Summer
+             and winter cuts are my size call. Sources are a local paper and an angling
+             magazine. I read search summaries only.
+#         spring summer autumn winter
+river = 1.0  0.6  0.7  0.5
+any   = 0.9  0.7  0.8  0.6
+
+# ---- fish that move between sea and river ----
+
+[lamprey]
+animals    = sealife:lamprey
+confidence = sourced
+source     = https://www.fws.gov/midwest/SeaLamprey/
+why        = Sea lampreys run up streams in early spring and spawn in April. Males start
+             a nest once the water is past about 4.5 C. In Portugal the run goes from
+             December to June with a peak in February and March, so the date moves with
+             latitude. Adults die after spawning. So a river is busy in spring and
+             nearly empty by summer. The sea phase has no season, so only river rows
+             exist. Ocean biomes stay at 1.0. The summer to winter numbers are my size
+             call.
+#          spring summer autumn winter
+river = 1.0  0.2  0.2  0.4
+
+[salmon]
+animals    = minecraft:salmon
+confidence = sourced
+source     = https://trainingcenter.fws.gov/resources/knowledge-resources/salmon/asalmon3.html
+why        = Atlantic salmon enter New England rivers from spring, peak in June, and
+             spawn from late October through November. Pacific fall-run chinook and
+             coho come in from late July and spawn October to December. I saw that in
+             search summaries, not on a page I opened. Most adults die after spawning.
+             So a river is fullest in autumn and thin in the dead of winter. Salmon
+             at sea have no season in this data, so the cold oceans stay at 1.0 and
+             only river and frozen river get rows. Vanilla also spawns salmon in
+             frozen, cold and deep cold oceans.
+#          spring summer autumn winter
+river = 0.5  0.7  1.0  0.3
+
+# ---- tropical and warm-country fish: dry / wet ----
+
+[lungfish]
+animals    = sealife:lungfish
+confidence = sourced
+source     = https://www.frontiersin.org/articles/10.3389/fphys.2016.00532/full
+why        = African lungfish dig into mud and seal themselves in a mucus cocoon when
+             their water dries up. They live on in there for months and sometimes years
+             and wake within a day of the rain. A buried fish cannot be seen, so the
+             dry half is mostly empty. The page gives no calendar months, only "the
+             dry season". Dry and wet is the right axis for that. Cold swamp is a
+             habitat fix. These are tropical fish and the temperate swamp has a
+             real winter, so winter there is nearly shut. Not every lungfish
+             sleeps in the dry. The Australian one does not. The mod does not say
+             which kind this is. I assumed African.
+#               dry  wet
+jungle   = 0.2  1.0
+swamp    = 0.3  1.0
+#              spring summer autumn winter
+swamp = 0.5  1.0  0.5  0.1
+
+[pupfish]
+animals    = sealife:pupfish
+confidence = reasoned
+source     = https://www.desertusa.com/fish/pupfish.html
+why        = Desert pupfish go dormant in the cold, buried in mud, and come back as the
+             water warms. Spawning starts at the end of February and runs through
+             summer. Summer heat dries many pools and kills most fish. In this pack
+             the desert and savanna have no cold season, only a wet and dry year.
+             Winter dormancy does not apply there. I put the pool-drying idea on the
+             dry half, but that is a guess. The page does not tie it to a dry
+             season. River is a temperate biome here, and a desert fish in a cold
+             river goes dormant in winter.
+#               dry  wet
+desert  = 0.6  1.0
+savanna = 0.7  1.0
+#           spring summer autumn winter
+river = 0.9  1.0  0.7  0.1
+
+[siamese-fighting-fish]
+animals    = sealife:siamese_fighting_fish
+confidence = guess
+source     = https://seriouslyfish.com/species/betta-splendens
+             https://sites.google.com/view/lotusfins/betta-fish/splenden-complex
+why        = Wild bettas live in rice paddies, swamps and ditches in Thailand and
+             nearby. Hobby pages say they spread across flooded land in the rainy
+             season and get stuck in pools and ditches in the dry season. Neither page
+             says when they breed. The dry cut is a guess built on that spread. The
+             sources are fish-keeping sites, not field studies. Tropical fish
+             cannot take a cold swamp, so plain swamp has a cold-weather cut.
+#               dry  wet
+jungle = 0.6  1.0
+swamp  = 0.6  1.0
+#           spring summer autumn winter
+swamp = 0.7  1.0  0.7  0.1
+
+[neon-tetra]
+animals    = sealife:neon_tetra
+confidence = guess
+source     = none found
+why        = I found no page on wild neon tetra seasons. They are South American
+             blackwater fish and cannot take a cold winter. So the only rule is a
+             habitat fix. A cold swamp in winter is nearly shut. Jungle and mangrove
+             swamp stay at 1.0. A tetra study from Colombia suggests many tropical fish
+             breed in the flood season, but that is a different species.
+#           spring summer autumn winter
+swamp = 0.7  1.0  0.7  0.1
+
+[piranha]
+animals    = sealife:piranha naturalist:piranha
+# naturalist:piranha is weight 8 and about half of all fish in jungle water. Capped to 5.
+weight     = 5
+confidence = guess
+source     = https://doaj.org/article/32f34c405a0f41d3af255aa492da4830
+why        = Red-bellied piranha breed twice a year, tied to the flood pulse. They
+             spawn in flooded plants. In the dry season they crowd into the main
+             channel and feed more. These two effects pull in opposite directions
+             for a tropical biome, so jungle and mangrove swamp are left at 1.0.
+             The only rule is a habitat fix. Piranha are warm-water fish and a cold
+             swamp has no place for them. Winter there is shut and spring and
+             autumn are cut hard. Lush caves, which Naturalist also uses, has no
+             row and stays at 1.0. The cold numbers are a guess. I did not search
+             for the piranha's cold limit.
+#           spring summer autumn winter
+swamp = 0.4  1.0  0.4  0.0

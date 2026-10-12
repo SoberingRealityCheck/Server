@@ -311,6 +311,34 @@ Hack: the sqrt curve is a guess. It leans dim on purpose. Tune it in
   use the patch. I have not checked where DH stores that database for
   this pack, so find it before promising anyone a clean wipe.
 
+### seasonal-spawns/
+
+A small server-side mod. Animals (land, insects, bats, fish and other
+water animals, not monsters) spawn at different rates by season and by
+biome, from plain text rule files. A second setting gives each
+player a cap on how many land animals their area holds, by biome and
+season (`capacity.rules`). Needs Serene Seasons for the calendar and works
+with Respawning Animals.
+
+- Source and docs: `seasonal-spawns/`. Start with its `README.md`.
+- The rules you edit: `server-overrides/config/elysium-seasonal-spawns/*.rules`.
+  Every rule has a reason, a confidence label and sources.
+- Why each animal has its numbers, with real range and seasonal
+  behaviour: `seasonal-spawns/ANIMALS.md`.
+- The built jar is checked in at `server-overrides/mods/elysium-seasonal-spawns.jar`
+  so only the server gets it. `build.py` does not build it. Rebuild with
+  `seasonal-spawns/build.sh` (plain javac, needs Java 25). Changing a
+  `.rules` file does not need a rebuild.
+- Check the rules without a game: `seasonal-spawns/build.sh test` prints
+  every rule as a table and reports mistakes as `file:line: message`.
+- In game: `/seasonalspawns here`, `sample`, `animals`, `stats`, `audit`, `reload`.
+
+The chances can only lower a spawn rate. The cap (`capacity.rules`) is what
+changes how many animals an area holds, and it is a ceiling: where the land
+cannot hold that many anyway, the count stays lower. Read the "What it does,
+and what it does not" section of its README before tuning. A fake-player
+test tool is in `seasonal-spawns/dev/`. It is not part of the pack.
+
 ### Resource packs
 
 Resource packs declared in `pack.yaml` are installed for clients under

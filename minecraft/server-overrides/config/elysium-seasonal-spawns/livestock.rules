@@ -1,0 +1,179 @@
+# Farm animals living wild: cows, sheep, pigs, chickens, horses, donkeys, llamas.
+#
+# Why this file exists. In vanilla these animals spawn in 20 to 25 biomes
+# each, with the biggest spawn weights in the game (sheep 12, pigs 10,
+# chickens 10, cows 8). They drown out every wild animal in the pack. They
+# also fill any slot a seasonal rule frees up, because the game keeps
+# trying until the animal cap is full. So they get rules too.
+#
+# The idea: treat them as feral herds, living where their wild ancestors
+# lived, and scarce. Cattle come from the aurochs (forest, grassland, river
+# plain). Sheep from mouflon (mountain and steppe country). Pigs from wild
+# boar (woodland, scrub, marsh edge). Chickens from the red junglefowl
+# (forest edge in the warm tropics). Horses from steppe horses. Donkeys
+# from the African wild ass (dry country). Llamas from Andean guanacos.
+#
+# The 'confidence' on these sections is 'guess' on purpose. The habitat
+# direction (which biome suits which animal) is backed by the sources. The
+# SIZE of the cuts is a game-balance call. Nobody published "0.3". If farm
+# animals feel too rare, raise the numbers. If they still crowd out the
+# wild animals, lower them.
+#
+# Row format:   group = spring summer autumn winter     (ordinary biomes)
+#               group = dry wet                         (tropical biomes)
+# 'any' is the catch-all and must come last in its kind.
+
+[cattle]
+animals    = minecraft:cow
+confidence = guess
+source     = https://www.fao.org/4/Y2647E/y2647e15.htm
+             https://www.vedantu.com/animal/aurochs
+why        = Wild cattle (aurochs) lived in forest, grassland and river plain across
+             Europe, Asia and North Africa. They were not rainforest or desert animals,
+             and not high-mountain ones. So plains and forest keep the most, cold and
+             wet ground keeps less, and jungle and badlands keep little. Grazers do
+             worse in snow, so winter is lower everywhere. The aurochs is extinct and
+             the vedantu page is a general-knowledge site, so the size of every cut
+             here is a balance call.
+#                  spring summer autumn winter
+snowy    = 0.2  0.3  0.3  0.05
+plains   = 0.6  0.6  0.6  0.4
+hills    = 0.3  0.4  0.4  0.2
+mountain = 0.2  0.3  0.3  0.1
+taiga    = 0.25 0.3  0.3  0.1
+forest   = 0.4  0.4  0.4  0.25
+swamp    = 0.3  0.3  0.3  0.15
+any      = 0.3  0.3  0.3  0.2
+#                  dry  wet
+savanna  = 0.3  0.5
+jungle   = 0.15 0.15
+badlands = 0.1  0.15
+any      = 0.1  0.15
+
+[sheep]
+animals    = minecraft:sheep
+confidence = guess
+source     = https://www.fao.org/docrep/pdf/009/x8750e/x8750e03.pdf
+             https://bio.libretexts.org/Sandboxes/Team%3A_Ecology_Wildlife_and_Conservation_(EVC)/4%3A_The_Domestication_of_Wildlife/4.3%3A_Domestication_of_Animals_as_Agriculture
+why        = Domestic sheep descend from mouflon, which are animals of the dry,
+             rocky uplands of Anatolia and Iran. Wild sheep in general (mouflon, argali,
+             bighorn) are mountain and steppe animals. So mountains and hills keep the
+             most, open plains keep some, and wet lowlands and jungle keep almost none.
+             Winter is lower where snow lies deep. The size of the cuts is a balance
+             call.
+#                  spring summer autumn winter
+snowy    = 0.1  0.15 0.15 0.05
+mountain = 0.8  0.9  0.8  0.5
+hills    = 0.7  0.7  0.7  0.5
+plains   = 0.4  0.4  0.4  0.3
+taiga    = 0.2  0.25 0.25 0.1
+forest   = 0.25 0.25 0.25 0.15
+swamp    = 0.1  0.1  0.1  0.05
+any      = 0.2  0.2  0.2  0.15
+#                  dry  wet
+badlands = 0.4  0.4
+savanna  = 0.2  0.3
+jungle   = 0.05 0.05
+any      = 0.1  0.1
+
+[pigs]
+animals    = minecraft:pig
+confidence = guess
+source     = https://www.fao.org/docrep/pdf/009/x8750e/x8750e03.pdf
+             https://link.springer.com/article/10.1007/s10342-019-01248-5
+why        = Domestic pigs descend from wild boar. Boar live in woodland, scrub and marsh
+             edge across Europe, Asia and North Africa, and eat acorns and roots. Their
+             relatives in southeast Asia are forest animals too. So forest, marsh and
+             jungle keep the most. Open plains and bare country keep little. Autumn is
+             the mast season, so forest autumn is the highest. Deep snow is hard on a
+             short-legged animal. The size of the cuts is a balance call.
+#                  spring summer autumn winter
+snowy    = 0.1  0.15 0.15 0.05
+forest   = 0.55 0.6  0.7  0.45
+swamp    = 0.5  0.5  0.5  0.4
+taiga    = 0.35 0.4  0.5  0.2
+hills    = 0.3  0.3  0.3  0.2
+mountain = 0.15 0.2  0.2  0.1
+plains   = 0.25 0.25 0.3  0.2
+any      = 0.25 0.25 0.3  0.2
+#                  dry  wet
+jungle   = 0.35 0.35
+savanna  = 0.2  0.3
+badlands = 0.1  0.1
+any      = 0.1  0.1
+
+[chickens]
+animals    = minecraft:chicken
+confidence = guess
+source     = https://www.jetpunk.com/user-quizzes/237955/domesticated-animals/stats
+why        = Chickens descend from the red junglefowl of India and southeast Asia, a bird
+             of forest edge and scrub in the warm tropics. The source is a quiz table, the
+             weakest source in these files, and it only gives the origin. The rest is
+             general knowledge: they are not cold-country birds and not open-plains
+             birds. So jungle keeps the most, forest some, and cold or bare ground
+             almost none, with winter close to zero in cold country. The size of the cuts
+             is a balance call.
+#                  spring summer autumn winter
+snowy    = 0.05 0.1  0.05 0.0
+taiga    = 0.1  0.2  0.15 0.0
+mountain = 0.1  0.15 0.1  0.0
+forest   = 0.4  0.4  0.4  0.2
+swamp    = 0.3  0.3  0.3  0.2
+hills    = 0.2  0.25 0.2  0.1
+plains   = 0.2  0.25 0.2  0.1
+any      = 0.2  0.25 0.25 0.1
+#                  dry  wet
+jungle   = 0.7  0.7
+savanna  = 0.25 0.3
+badlands = 0.15 0.15
+any      = 0.15 0.15
+
+[horses]
+animals    = minecraft:horse
+confidence = guess
+source     = https://przewalskihorse.nl/unique-but-why/original-habitat/
+why        = Wild horses are steppe animals. The Przewalski's horse site says they once
+             ranged over a belt of grassland from Manchuria to Iberia. So open plains
+             keep the most. Forest, hills and savanna keep less. Deep snow is hard on
+             them, so winter is lower. The size of the cuts is a balance call.
+#                  spring summer autumn winter
+plains   = 0.6  0.7  0.7  0.5
+hills    = 0.3  0.3  0.3  0.2
+any      = 0.3  0.3  0.3  0.2
+#                  dry  wet
+savanna  = 0.3  0.4
+any      = 0.2  0.2
+
+[donkeys]
+animals    = minecraft:donkey
+confidence = guess
+source     = https://www.fao.org/docrep/pdf/009/x8750e/x8750e03.pdf
+why        = Donkeys descend from the African wild ass of the dry country of north-east
+             Africa. They are built for scrub and dry grassland. So savanna keeps the
+             most, and it barely changes between dry and wet half-years, since they are
+             dry-country animals. Plains and meadow keep less. The source gives the
+             wild ancestor's region only. The size of the cuts is a balance call.
+#                  spring summer autumn winter
+plains   = 0.4  0.4  0.4  0.3
+mountain = 0.3  0.3  0.3  0.2
+any      = 0.3  0.3  0.3  0.2
+#                  dry  wet
+savanna  = 1.0  0.8
+any      = 0.3  0.3
+
+[llamas]
+animals    = minecraft:llama
+confidence = guess
+source     = https://www.fao.org/docrep/pdf/009/x8750e/x8750e03.pdf
+why        = Llamas descend from the guanaco, an animal of the high, open Andes. The
+             source puts their domestication around Lake Junin and Lake Titicaca. So
+             mountains and windswept hills keep the most and lowlands keep little.
+             Winter is lower on the high ground, where snow lies. The size of the cuts
+             is a balance call.
+#                  spring summer autumn winter
+mountain = 0.8  0.9  0.8  0.6
+hills    = 0.8  0.8  0.8  0.6
+any      = 0.3  0.3  0.3  0.2
+#                  dry  wet
+savanna  = 0.3  0.4
+any      = 0.2  0.2
