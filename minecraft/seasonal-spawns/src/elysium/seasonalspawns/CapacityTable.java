@@ -13,6 +13,7 @@ import net.minecraft.util.random.Weighted;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.Heightmap;
 import sereneseasons.api.season.SeasonHelper;
 
 import java.util.ArrayList;
@@ -32,7 +33,8 @@ import java.util.UUID;
  *
  * How a player's cap is worked out:
  *   - Sample 9 spots around the player, 64 blocks apart. That covers the area
- *     the game counts animals over (about 128 blocks).
+ *     the game counts animals over (about 128 blocks). Each spot is read at the
+ *     surface, so a miner underground still gets the cap of the land above.
  *   - Each spot's biome has a row in the table: a fraction of the reference.
  *   - Average the fractions of the spots that are land. Ocean has no land
  *     animals, so it is skipped and does not drag a beach cap down.
@@ -180,14 +182,27 @@ final class CapacityTable {
         return cap;
     }
 
-    /** The average fraction around a spot, or -1 if none of the sample spots is land. */
+    /**
+     * The average fraction around a spot, or -1 if none of the sample spots is usable land.
+     *
+     * Each spot is looked up AT THE SURFACE, not at the player's height. Biomes are 3D, so a
+     * player mining at y=0 would otherwise get a cave biome, and the surface animals above them
+     * would be capped by whatever cave they stand in. A spot whose chunk is not loaded is
+     * skipped, so this never forces a chunk to load.
+     */
     static double areaFraction(ServerLevel level, BlockPos center) {
         Map<Identifier, Row> rows = table;
         double total = 0;
         int n = 0;
         for (int dx = -1; dx <= 1; dx++) {
             for (int dz = -1; dz <= 1; dz++) {
-                Double f = fractionAt(level, center.offset(dx * SAMPLE_SPACING, 0, dz * SAMPLE_SPACING), rows);
+                int x = center.getX() + dx * SAMPLE_SPACING;
+                int z = center.getZ() + dz * SAMPLE_SPACING;
+                if (!level.hasChunkAt(new BlockPos(x, 0, z))) {
+                    continue;
+                }
+                int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+                Double f = fractionAt(level, new BlockPos(x, y, z), rows);
                 if (f != null) {
                     total += f;
                     n++;

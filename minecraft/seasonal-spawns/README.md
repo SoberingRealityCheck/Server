@@ -376,6 +376,10 @@ Not tested:
   start (`verifyCapHook`) so it cannot hide until the first player joins.
 - The cap is worked out per player and cached for 100 ticks (5 seconds).
   A season change takes up to 5 seconds to show in the cap.
+- The cap reads each sample spot at the surface, and skips spots in chunks
+  that are not loaded. Biomes are 3D, so reading at the player's height
+  would give a miner the cap of the cave they stand in. Checked: at y=-50
+  in a deep cave the cap equals the forest surface above it.
 - The calendar is global. Every biome shares one year. Differences between
   biomes come only from the rows you write.
 - Four seasons only. The three sub-seasons inside each are not used, so a
