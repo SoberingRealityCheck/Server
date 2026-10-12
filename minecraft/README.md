@@ -98,11 +98,10 @@ All client side. The pack sets none of these, so each player tunes their own.
 - **Hotbar / health / hunger:** AutoHUD. Options -> Mod Menu -> AutoHUD
   (it uses YACL). Each HUD part has its own hide delay and fade.
 - **Crosshair:** Dynamic Crosshair. Same place.
-- **Minimap:** Xaero's Minimap. Press `Y` in game for its settings (size,
-  zoom, opacity, position). If it's too big, shrink the size and lower
-  opacity first. Xaero's default keys can differ, so check Options ->
-  Controls.
-- **World map:** `M`. Its gear icon has its own settings.
+- **Maps:** Ultimate Map Atlases. Craft an atlas, put vanilla maps in it,
+  and open it to show the minimap and world view. The atlas is closed
+  when crafted, so open it first. Keys are in Options -> Controls. There
+  is no automatic world map. You only see what you have mapped on paper.
 
 ### Known issue: shaders + Distant Horizons
 
