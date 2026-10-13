@@ -1,4 +1,5 @@
 .env
+.claude/
 
 # Server runtime state: world, mods, logs, configs. Backed up separately
 # (see README.md), never committed.
