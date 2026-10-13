@@ -35,6 +35,15 @@ get only the client-side set. This replaces the old
 `mods/server` + `mods/client` split, where shared mods were listed twice
 and client mods were documented-but-manual.
 
+Most mods are downloaded from their pinned URLs. An entry with
+`local_file` instead uses a SHA-512-verified JAR under `overrides/`, so a
+personal build can ship a locally patched mod without also installing the
+upstream copy. Ultimate Map Atlases uses this for the config text fix;
+the source delta is in `patches/ultimate-map-atlases-26.2.patch`, based on
+upstream commit `449831f4bd067674aed5332ce7dbc1e7650fadcd`. To rebuild it,
+apply that patch to the pinned upstream source and run its Gradle build
+with Java 25.
+
 ### Building
 
 ```bash
@@ -100,8 +109,16 @@ All client side. The pack sets none of these, so each player tunes their own.
 - **Crosshair:** Dynamic Crosshair. Same place.
 - **Maps:** Ultimate Map Atlases. Craft an atlas, put vanilla maps in it,
   and open it to show the minimap and world view. The atlas is closed
-  when crafted, so open it first. Keys are in Options -> Controls. There
-  is no automatic world map. You only see what you have mapped on paper.
+  when crafted, so open it first. To add maps, combine the atlas with a
+  map and one slimeball or honey bottle per map in a crafting grid (or
+  use a cartography table). Empty maps must be added *to the atlas*;
+  carrying them in your hotbar does not add them. The server enables
+  empty-map entries, so the atlas can consume them to map new areas as
+  you explore. The 26.2 mod build has a config-screen bug: setting labels
+  and the screen title were blank, although tab and control button text
+  rendered normally. The pack ships a local patched build. Keys are in
+  Options -> Controls. There is no automatic world map: you only see what
+  you have mapped on paper.
 
 ### Known issue: shaders + Distant Horizons
 

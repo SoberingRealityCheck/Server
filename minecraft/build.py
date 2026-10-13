@@ -42,7 +42,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import yaml
 
@@ -153,6 +153,32 @@ def build_file_entry(entry: dict, dest_dir: str, env: str, offline: bool) -> dic
     }
 
 
+def local_override_bytes(entry: dict) -> bytes:
+    """Read and verify a mod JAR shipped from the pack's overrides folder."""
+    if not isinstance(entry.get("local_file"), str):
+        raise BuildError(f"{entry['name']}: local_file must be a relative path")
+    relative = PurePosixPath(entry["local_file"])
+    if relative.is_absolute() or ".." in relative.parts:
+        raise BuildError(f"{entry['name']}: local_file must stay inside overrides/")
+
+    overrides_root = OVERRIDES_DIR.resolve()
+    path = OVERRIDES_DIR.joinpath(*relative.parts).resolve()
+    if not path.is_relative_to(overrides_root):
+        raise BuildError(f"{entry['name']}: local_file must stay inside overrides/")
+    if not path.is_file():
+        raise BuildError(f"{entry['name']}: local override not found: {path}")
+    blob = path.read_bytes()
+    actual = hashlib.sha512(blob).hexdigest()
+    if actual != entry["local_sha512"].lower():
+        raise BuildError(
+            f"{entry['name']}: local override sha512 mismatch\n"
+            f"    expected {entry['local_sha512'].lower()}\n"
+            f"    actual   {actual}\n"
+            f"    file     {path}"
+        )
+    return blob
+
+
 def validate(pack: dict) -> None:
     """Catch manifest mistakes before any network work happens."""
     for key in ("name", "version", "minecraft", "loader", "loader_version"):
@@ -181,6 +207,17 @@ def validate(pack: dict) -> None:
                 f"({seen[entry['file']]} and {entry['name']})"
             )
         seen[entry["file"]] = entry["name"]
+        if "local_file" in entry:
+            if not re.fullmatch(r"[0-9a-fA-F]{128}", str(entry.get("local_sha512", ""))):
+                raise BuildError(
+                    f"{entry['name']}: local_file requires a 128-digit SHA-512 "
+                    "in local_sha512"
+                )
+            if entry["local_file"] != f"mods/{entry['file']}":
+                raise BuildError(
+                    f"{entry['name']}: local_file must be mods/{entry['file']}"
+                )
+            local_override_bytes(entry)
 
     for entry in pack.get("datapacks", []):
         for key in ("name", "file", "url", "sha512"):
@@ -236,7 +273,10 @@ def build_index(pack: dict, offline: bool) -> dict:
     files = []
 
     for entry in pack.get("mods", []):
-        files.append(build_file_entry(entry, "mods", entry["env"], offline))
+        if "local_file" in entry:
+            local_override_bytes(entry)
+        else:
+            files.append(build_file_entry(entry, "mods", entry["env"], offline))
 
     for entry in pack.get("datapacks", []):
         files.append(build_file_entry(entry, "world/datapacks", "server", offline))
@@ -657,7 +697,9 @@ def check_dependencies(pack: dict, offline: bool) -> int:
 
         for entry in wanted:
             read_fabric_metadata(
-                cached_bytes(entry, offline), available, declared, breaks
+                local_override_bytes(entry) if "local_file" in entry
+                else cached_bytes(entry, offline),
+                available, declared, breaks
             )
 
         print(f"\n  [{side}] {len(wanted)} mods, "
@@ -920,7 +962,10 @@ def main() -> int:
         index = build_index(pack, args.offline)
 
         if args.check:
-            print(f"OK: {len(index['files'])} files verified, nothing written")
+            verified = len(index["files"]) + sum(
+                "local_file" in entry for entry in pack.get("mods", [])
+            )
+            print(f"OK: {verified} files verified, nothing written")
             return 0
 
         write_mrpack(index)

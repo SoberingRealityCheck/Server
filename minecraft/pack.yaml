@@ -644,13 +644,20 @@ mods:
     url: "https://cdn.modrinth.com/data/sMGE68Dq/versions/bgd39YOI/ultimate_map_atlases-26.2.jar"
     sha512: "4826d2a5b51124293efa1f75bd476ebe3ffdb017ad75ee70bcabbf0fe74320fea0034406d2d701784a0500b3fb5870736183fc760b06c5f3d421fd9e0c80adbe"
     env: both
+    source_commit: "449831f4bd067674aed5332ce7dbc1e7650fadcd"
+    local_file: "mods/ultimate_map_atlases-26.2.jar"
+    local_sha512: "e45919cf4b32867059d0be1d67cbb856be21cc0e1f5052afca1173aff1239855752c053dd94b435ed8bce27647c1aed5c22c3eadf8be8abf66b69dcbfc6d6fb9"
     reason: >-
-      Replaces the Xaero map mods. Craftable atlases hold vanilla maps and
-      show a minimap + world view built from them, so exploring means
-      carrying paper. Vanilla map colors have no biome tint, which also
-      removed Xaero's per-pixel tint cost (about 15% of Render-thread
-      samples in the 2026-10-12 client profile). Small mod, UNTESTED here.
-      Seasonal biome tint for the maps is a planned in-house mod.
+      Local build of upstream's 26.2 source (commit 449831f) with a
+      config-screen text fix
+      (see patches/ultimate-map-atlases-26.2.patch). Replaces the Xaero
+      map mods. Craftable atlases hold vanilla maps and show a minimap +
+      world view built from them. Empty-map entries are enabled in the
+      server config; maps still need to be inserted into the atlas.
+      Vanilla map colors have no biome tint, which also removed Xaero's
+      per-pixel tint cost (about 15% of Render-thread samples in the
+      2026-10-12 client profile). Seasonal biome tint for the maps is a
+      planned in-house mod.
 
   - name: "Better Advancements"
     file: "BetterAdvancements-Fabric-26.2-0.6.0.72.jar"
@@ -890,9 +897,9 @@ resourcepacks:
 # the network.
 datapacks:
   - name: "Matcha Flavoured"
-    file: "MF_DP_1_12_3_26_2.zip"
-    url: "https://cdn.modrinth.com/data/QI0EmgZ1/versions/o2nmeGGh/MF_DP_1_12_3_26_2.zip"
-    sha512: "abe85595904c08ff6c4859308e2e2953564d12782e1daee22feb748760a77e9742543aa3d9e17d46af6674bc6256feace909bb4ed0f1820c05c838c68bd38177"
+    file: "MF_1_12_5_26_2.zip"
+    url: "https://cdn.modrinth.com/data/QI0EmgZ1/versions/cwZ158UI/MF_1_12_5_26_2.zip"
+    sha512: "99192a249019d05113011c94ab40e4d18d7c04cb3c303265d3a17a6fa8bb88bb9ff73f1c6eb117e8ef6cf9c097fd2b1ef69b6c96478451ee9fd987662738c000"
     # Since 1.12 the author ships the resource pack as its own download
     # (MF_RP_*), separate from the datapack zip. Without it players see
     # missing textures and raw lang keys for the ~50 added foods, alloys,
@@ -902,18 +909,18 @@ datapacks:
     # docker-compose.yml loads -- the server then pushes this URL and
     # hash to every client on join. Nothing to install by hand.
     #
-    # Pinned to 1.12.3, not the newer 1.12.4: the 1.12.4 datapack ships
-    # two broken loot tables (a trailing comma in fishing/junk.json and
-    # a "name" where a loot-table entry needs "value" in
-    # entities/fox.json). Both fail to load on the server, and Sea
-    # Life's fish trap depends on the junk table. 1.12.4 fixed armour
-    # and tool intrinsics, multiplayer sleep speed, chocolate stacking
-    # and fox pelt textures, so 1.12.3 has those bugs instead. Retest
-    # when 1.12.5 or later lands.
+    # Pinned to 1.12.5, the last release for 26.2. The author says only
+    # a game-breaking bug will get another one. 1.12.4 shipped two
+    # broken loot tables (a trailing comma in fishing/junk.json and a
+    # "name" where a loot-table entry needs "value" in
+    # entities/fox.json), so the pin sat at 1.12.3. 1.12.5 fixes both.
+    # Checked: all 4526 json files parse, fox.json uses "value", and
+    # every matcha: loot-table reference resolves. Not tested on a live
+    # server yet.
     #
-    # The RP is versioned separately and 1.12.3's matches 1.12.4's
-    # (the 1.12.4 changelog says it is unchanged). When a release says
-    # the RP changed, bump this block too.
+    # The RP is versioned separately and has no newer 26.2 build. Its
+    # 1.12.3 file is still the latest. When a release says the RP
+    # changed, bump this block too. 1.12.6 is 26.3 only.
     #
     # Only one datapack may set this: server.properties holds a single
     # resource-pack URL.
