@@ -10,7 +10,7 @@ Pack version 1.7.12
 | Mod | Side | Why |
 |---|---|---|
 | Fabric API | client + server | Required by nearly every other mod here. Marked `both` rather than server-only: the old client list omitted it, but JEI and Jade both need it client-side. |
-| Lithostitched | server only | Worldgen library required by Terralith and Tectonic |
+| Lithostitched | client + server | Worldgen library required by Terralith and Tectonic |
 | Forge Config API Port | client + server | Required by Puzzles Lib. `both` because its dependents (Easy Shulker Boxes, Bundle Upgrade) run on both sides -- a library must go wherever the mods needing it go. |
 | Puzzles Lib | client + server | Required by Easy Shulker Boxes and Bundle Upgrade, both of which run on both sides -- so this must too. |
 | Balm | client + server | Multi-loader abstraction layer required by Waystones, which pins `>=26.2.0.6`. Same author, released in lockstep -- bump Waystones, Balm and Shogi together or not at all. |
@@ -22,8 +22,8 @@ Pack version 1.7.12
 | YetAnotherConfigLib (YACL) | client only | Config library. Required client-side by Better Clouds. It was `both` only because Xaero's Maps: Multiplayer+ hard-depended on it on the server, and that mod is gone. |
 | Architectury API | client + server | Library required by Terrain Slabs, which runs on both sides |
 | MidnightLib | client + server | Config library required by Terrain Slabs, which runs on both sides |
-| Terralith | server only | ~95 realistic biomes, vanilla blocks/mobs only |
-| Tectonic | server only | Continent-scale landform shaping, compatible with Terralith |
+| Terralith | client + server | ~95 realistic biomes, vanilla blocks/mobs only |
+| Tectonic | client + server | Continent-scale landform shaping, compatible with Terralith |
 | RoadWeaver (26.2 port) | server only | Roads between villages. Unofficial server-only port of RoadWeaver 2.3.1 (MIT) from the rw-26-port repo, because upstream has no 26.x build. Plans roads at world creation, then adds them as chunks generate. Pregenerate with Chunky so the cost is paid up front. Config is in server-overrides/config/roadweaver. Swap to the official jar when upstream ships one for 26.x. |
 | Streams Reflowing | client + server | Flowing streams in the terrain. Modrinth marks it required on both sides. Needs Fabric API, which is above. |
 | Distant Horizons | client + server | Long-distance LOD terrain. Server copy generates and syncs LODs; client copy renders them. Needs both halves to work. Do NOT downgrade below 3.1.1-b: 3.1.0-b crashes dedicated servers during init (LWJGL check dereferences the client wrapper, which is null server-side), and that fault is invisible to --check-deps because it is a runtime NPE, not a declared dependency. 3.3.0 was the first stable (non-beta) release for 26.2. Do NOT upgrade to 3.3.3 yet: on a fresh world the dedicated server hangs forever on "Preparing level" (the Server thread waits on the spawn chunk and nothing generates it). Reproduced three times, with and without Streams Reflowing. 3.3.2 and 3.2.0-b boot fine on the same pack. Retest on the next release. |
@@ -35,6 +35,7 @@ Pack version 1.7.12
 | Unruled API | server only | Gamerule library, required by Maps of the Unknown |
 | FerriteCore | server only | Reduces memory footprint of loaded chunks/block states |
 | Chunky | server only | Pre-generates chunks on demand via console commands. Idle otherwise; it does nothing until you run /chunky start. |
+| World Preview (Unofficial Port) 1.4.0 | client only | Preview tab on the Create World screen. Shows biomes and terrain from the loaded worldgen, so Terralith and Tectonic show up. No chunks get generated. Unverified: whether Tectonic's terrain shows or only the biomes. |
 | spark | client + server | Profiler for lag hunting. Idle until you run /spark profiler start, then /spark profiler stop prints a link to a report that shows what the thread was doing. On the server it chases lag after teleports into new terrain. On the client it profiles the integrated server and the render thread in singleplayer, where the server copy can't see. |
 | Sodium | client only | Rendering engine replacement. Pinned to 0.9.2 to match Iris 1.11.4. Iris pins an exact Sodium build, and Sodium's own notes warn that mismatched Iris builds are not compatible. Iris and Sodium version together; bump them as a pair or not at all. |
 | Iris Shaders | client only | Shader loader. Required to load the shaderpack below; does nothing on its own until a player selects one. Pins an exact Sodium build (0.9.2). |
@@ -114,4 +115,4 @@ Small mods made for this pack. Source is in `local-mods/`.
 |---|---|---|
 | Elysium Ambience | client only | Data only. Adds leaf-rustle wind and river rules to AmbientSounds and silences its rain loop (Cool Rain does rain). No code. River audio is from the Dynamic Surroundings Sounds Pack (GPL-3.0). |
 
-76 files, 262.5 MiB total download.
+77 files, 263.3 MiB total download.

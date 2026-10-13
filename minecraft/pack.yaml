@@ -55,7 +55,8 @@ mods:
     file: "lithostitched-1.8.0-fabric-26.2.jar"
     url: "https://cdn.modrinth.com/data/XaDC71GB/versions/sGGUpIGT/lithostitched-1.8.0-fabric-26.2.jar"
     sha512: "a1736f1fa4b94ee7eae38ee13f0625f1128523f330e9972ca2f1be3186cf7b8cc4d8003d1d5f4fee7cb186a97723b3bce8e4e3587f92e5ca64fc8b0b9830e4e2"
-    env: server
+    env: both
+    env_override: "Client copy only feeds the World Preview screen. Terralith and Tectonic need it to load."
     reason: "Worldgen library required by Terralith and Tectonic"
 
   - name: "Forge Config API Port"
@@ -162,14 +163,14 @@ mods:
     file: "Terralith_26.2_v2.6.4.jar"
     url: "https://cdn.modrinth.com/data/8oi3bsk5/versions/OxfI2n80/Terralith_26.2_v2.6.4.jar"
     sha512: "0830f4601674c4ea58d247a71bfdc820e4676900e173c7d6df4e58e348a09da43b279cea060df7b67e6f74c84e2a05b401b2df79836c37cffc8dc994844ab250"
-    env: server
+    env: both
     reason: "~95 realistic biomes, vanilla blocks/mobs only"
 
   - name: "Tectonic"
     file: "tectonic-3.0.28-fabric-26.2.jar"
     url: "https://cdn.modrinth.com/data/lWDHr9jE/versions/tGbplDzo/tectonic-3.0.28-fabric-26.2.jar"
     sha512: "c653ee42fe48c1be9512fa7791e8495095ae01cb607555202714bbb95cb49da272128bb295e8f8c262b63739e7ca2de4bba9196e1738b06012b498d220b55acf"
-    env: server
+    env: both
     reason: "Continent-scale landform shaping, compatible with Terralith"
 
   - name: "RoadWeaver (26.2 port)"
@@ -294,6 +295,18 @@ mods:
     reason: >-
       Pre-generates chunks on demand via console commands. Idle otherwise; it does nothing
       until you run /chunky start.
+
+  - name: "World Preview (Unofficial Port) 1.4.0"
+    file: "world_preview-1.4.0.jar"
+    url: "https://cdn.modrinth.com/data/UzHQGpqb/versions/jWHkg0cY/world_preview-1.4.0.jar"
+    sha512: "aca82cab2c62195cde2aea549d1ffee6adb4f14a223fc7c94a6d8ea4c120e228852d0c0f2b99b30898818a49e2f2b4b790f95596aaf811e6e4b1a5387203ac4a"
+    env: client
+    env_override: "Upstream metadata says server required. The preview screen is client-only and the server needs nothing from it."
+    reason: >-
+      Preview tab on the Create World screen. Shows biomes and terrain
+      from the loaded worldgen, so Terralith and Tectonic show up.
+      No chunks get generated. Unverified: whether Tectonic's terrain
+      shows or only the biomes.
 
   - name: "spark"
     file: "spark-1.10.187-fabric.jar"
