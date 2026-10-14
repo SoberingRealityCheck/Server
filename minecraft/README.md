@@ -153,6 +153,46 @@ untextured. DH 3.2.0's LOD textures apply only to base DH rendering.
 Shaders and maximum distant-terrain fidelity are partly at odds; pick
 whichever you want more.
 
+### Testing locally (singleplayer = server)
+
+A plain client install is not the server. Server-only mods are missing,
+`server-overrides/` never arrives, and gamerules live in the world. So
+test in an instance built by `tools/local_instance.py`:
+
+```bash
+tools/local_instance.py install ~/path/to/instance   # every mod, all configs
+# launch once, create a world called "elysium-test", quit
+tools/local_instance.py world   ~/path/to/instance elysium-test
+tools/local_instance.py check   ~/path/to/instance elysium-test
+```
+
+`check` prints every value that differs: mods, config values (compared
+as values, not bytes, since mods rewrite their files on boot), enabled
+datapacks, difficulty, gamerules. It also compares config against the
+local server's `data/` when that exists. Exit code 1 on any difference.
+Run it after every `install`, and after pack changes.
+
+Known gaps:
+
+- **Hack:** seasonal-spawns and RoadWeaver say `"environment": "server"`,
+  which Fabric refuses in singleplayer. `install` flips that one field in
+  the instance's copy. The pack jars are untouched.
+- Gamerules and difficulty are not in any repo file on the server. They
+  were set by hand. `world-rules.json` is a snapshot taken from the local
+  `data/world` on 2026-10-14. **Check it matches the real server**, then
+  retake with `local_instance.py capture --server-data DIR`.
+  `world` ships them as a datapack (`z-elysium-rules`) that re-applies
+  on every world load, so a gamerule changed by hand there snaps back.
+- A datapack added to an existing world may start disabled. `check`
+  prints the `/datapack enable` line for each one.
+- The Matcha resource pack is placed but not enabled. The server pushes
+  it, singleplayer cannot.
+- Not covered: the seed (set `level-seed` the same on both to compare
+  terrain), and view distance (a client option).
+- Not tested against a real launcher yet. Tested: install into an empty
+  folder, world + check against a copy of the server's level.dat, and
+  that check catches a changed config, a missing mod and a gamerule.
+
 ### Dependency checking
 
 `--check-deps` opens every jar, reads its real `fabric.mod.json`, and
