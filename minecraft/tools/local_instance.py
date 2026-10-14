@@ -16,6 +16,7 @@ mods/, config/, saves/). Make an empty Fabric 26.2 profile, then:
   1. install   every mod (client, both AND server), all configs, packs.
   2. launch once, create world WORLD_NAME, quit.
   3. world     datapacks + a pack that sets difficulty and gamerules.
+               (Create the world with Allow Commands ON.)
   4. check     prints every value that differs from the repo / server.
 
 Why a plain client install is not enough:
@@ -27,8 +28,8 @@ Why a plain client install is not enough:
     the instance's copy. The jars in the pack are not touched.
   - server-overrides/ (configs, datapacks) never reaches a client.
   - Gamerules and difficulty live in the world, not in any config file.
-    They are not in the repo, so world-rules.json records them. Re-take
-    it from the server with `capture`.
+    Matcha sets ten of them itself on first load. world-rules.json records
+    all of them so `check` can prove they match. Re-take it with `capture`.
 
 Dishonest on purpose: this talks to disk and the network. The compare
 functions at the top are pure and are what `check` is made of.
@@ -247,7 +248,14 @@ def cmd_install(inst: Path) -> int:
     return 0
 
 
-def cmd_world(inst: Path, name: str) -> int:
+def chunk_dirs(save: Path) -> list[Path]:
+    """Per-dimension region/entities/poi folders (26.x layout:
+    dimensions/<ns>/<dim>/). These are the generated terrain."""
+    return [d for d in sorted(save.glob("dimensions/*/*/*"))
+            if d.name in ("region", "entities", "poi") and d.is_dir()]
+
+
+def cmd_world(inst: Path, name: str, wipe_chunks: bool) -> int:
     save = inst / "saves" / name
     if not (save / "level.dat").exists():
         print(f"no world at {save}. Create it in game first, then quit.")
@@ -266,7 +274,21 @@ def cmd_world(inst: Path, name: str) -> int:
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(text)
     print(f"{RULES_PACK}: difficulty {rules['difficulty']} + {len(rules['gamerules'])} gamerules")
-    print("Open the world once, then run `check`. A new pack may start disabled.")
+
+    # Matcha ships 150 worldgen files (ores, flowers). Chunks made before
+    # the pack was in the world do not have them, so terrain would differ.
+    made = [d for d in chunk_dirs(save) if any(d.iterdir())]
+    if made and wipe_chunks:
+        for d in made:
+            shutil.rmtree(d)
+            d.mkdir()
+        print(f"wiped {len(made)} chunk folders. Terrain regenerates with the packs.")
+    elif made:
+        print("WARNING: chunks already exist, made without these datapacks. Terrain near\n"
+              "  spawn will not match the server. Re-run with --wipe-chunks (deletes terrain).")
+    print("Open the world once, then run `check`. A new pack may start disabled: run the\n"
+          "/datapack enable lines it prints (world needs Allow Commands on), quit,\n"
+          "then `world --wipe-chunks` again so terrain is built with every pack on.")
     return 0
 
 
@@ -372,6 +394,8 @@ def main() -> int:
     w = sub.add_parser("world")
     w.add_argument("instance")
     w.add_argument("name")
+    w.add_argument("--wipe-chunks", action="store_true",
+                   help="delete generated terrain so it regenerates with the datapacks")
     c = sub.add_parser("check")
     c.add_argument("instance")
     c.add_argument("name", nargs="?")
@@ -384,7 +408,7 @@ def main() -> int:
         if a.cmd == "install":
             return cmd_install(Path(a.instance))
         if a.cmd == "world":
-            return cmd_world(Path(a.instance), a.name)
+            return cmd_world(Path(a.instance), a.name, a.wipe_chunks)
         if a.cmd == "capture":
             return cmd_capture(find_server_data(a.server_data))
         return cmd_check(Path(a.instance), a.name, find_server_data(a.server_data))

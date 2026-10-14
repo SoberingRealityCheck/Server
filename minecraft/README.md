@@ -177,21 +177,35 @@ Known gaps:
 - **Hack:** seasonal-spawns and RoadWeaver say `"environment": "server"`,
   which Fabric refuses in singleplayer. `install` flips that one field in
   the instance's copy. The pack jars are untouched.
-- Gamerules and difficulty are not in any repo file on the server. They
-  were set by hand. `world-rules.json` is a snapshot taken from the local
-  `data/world` on 2026-10-14. **Check it matches the real server**, then
-  retake with `local_instance.py capture --server-data DIR`.
-  `world` ships them as a datapack (`z-elysium-rules`) that re-applies
-  on every world load, so a gamerule changed by hand there snaps back.
+- Gamerules and difficulty live in the world. Matcha sets ten of them
+  (keep inventory, no regen, sleep 200%, no phantoms, ...) on first load,
+  so those come with the datapack. `world-rules.json` records every rule,
+  snapshotted from the local `data/world` on 2026-10-14, so `check` can
+  prove they match. The rest look like vanilla defaults. Retake it with
+  `local_instance.py capture --server-data DIR`. `world` also ships it as a
+  datapack (`z-elysium-rules`) that re-applies on every world load, so a
+  gamerule changed by hand there snaps back.
+- **Create the world with Allow Commands on.** Without it the
+  `/datapack enable` lines `check` prints cannot run.
+- Matcha adds worldgen (ores, flowers). Chunks made before its datapack
+  was in the world differ from the server. `world` warns when chunks
+  exist. `world NAME --wipe-chunks` deletes the terrain so it regenerates
+  with every pack on. So: world, open, `check`, run the enable lines,
+  quit, `world --wipe-chunks`, play.
 - A datapack added to an existing world may start disabled. `check`
   prints the `/datapack enable` line for each one.
 - The Matcha resource pack is placed but not enabled. The server pushes
   it, singleplayer cannot.
 - Not covered: the seed (set `level-seed` the same on both to compare
   terrain), and view distance (a client option).
-- Not tested against a real launcher yet. Tested: install into an empty
-  folder, world + check against a copy of the server's level.dat, and
-  that check catches a changed config, a missing mod and a gamerule.
+- **Not tested in a real game yet.** Tested: install into an empty folder,
+  world + check against a copy of the server's level.dat (so the world
+  checks only prove the check runs), and that check catches a changed
+  config, a missing mod and a changed gamerule. Not shown: that the
+  environment hack lets the two mods load, that `z-elysium-rules` gets
+  enabled, `--wipe-chunks` on a real save. Scanned once by hand: the 78
+  jars have no top-level duplicate mod id and no `breaks` hit from a
+  server-only mod.
 
 ### Dependency checking
 
