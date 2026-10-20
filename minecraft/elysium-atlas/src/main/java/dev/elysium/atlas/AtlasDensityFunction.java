@@ -17,10 +17,11 @@ import net.minecraft.world.level.levelgen.DensityFunction;
  *   height       atlas surface Y in blocks
  *   continents   continentalness in Tectonic's raw_continents range (-0.45 deep sea .. ~0.35 high inland)
  *   relief       local relief in kilometres (8 km window)
+ *   calm         0 on rivers and lakes, rising to 1 away from them: scales Tectonic's own noise so it cannot fill a channel
  */
 public record AtlasDensityFunction(Channel channel, DensityFunction fallback) implements DensityFunction {
     public enum Channel implements StringRepresentable {
-        OFFSET("offset", -1.5, 4.0), HEIGHT("height", -64, 640), CONTINENTS("continents", -0.45, 0.35), RELIEF("relief", 0, 5.1);
+        OFFSET("offset", -1.5, 4.0), HEIGHT("height", -64, 640), CONTINENTS("continents", -0.45, 0.35), RELIEF("relief", 0, 5.1), CALM("calm", 0, 1);
 
         public static final Codec<Channel> CODEC = StringRepresentable.fromEnum(Channel::values);
         final String id; final double min, max;
@@ -38,12 +39,13 @@ public record AtlasDensityFunction(Channel channel, DensityFunction fallback) im
     public double compute(FunctionContext ctx) {
         if (!Atlas.active()) return fallback.compute(ctx);
         Atlas a = Atlas.get();
-        double x = ctx.blockX(), z = ctx.blockZ();
+        int x = ctx.blockX(), z = ctx.blockZ();
         return switch (channel) {
-            case OFFSET -> a.heightOrOcean(x, z) / 128.0 - 1.0;
-            case HEIGHT -> a.heightOrOcean(x, z);
+            case OFFSET -> a.column(x, z).height() / 128.0 - 1.0;
+            case HEIGHT -> a.column(x, z).height();
             case CONTINENTS -> continents(a.heightOrOcean(x, z) - (a.seaLevelY + 0.5));
             case RELIEF -> a.relief(x, z) / 1000.0;
+            case CALM -> a.column(x, z).calm();
         };
     }
 

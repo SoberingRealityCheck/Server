@@ -359,7 +359,7 @@ test tool is in `seasonal-spawns/dev/`. It is not part of the pack.
 ### elysium-atlas/
 
 A server-side mod that makes a new world follow a baked atlas of the real globe (elevation,
-coasts, relief, surface biomes) by feeding it into Tectonic. Vertical slice; no rivers yet.
+coasts, relief, surface biomes, rivers and lakes) by feeding it into Tectonic. Vertical slice.
 
 - Source, docs and the atlas bake script: `elysium-atlas/`. Start with its `README.md`.
 - The built jar is checked in at `server-overrides/mods/elysium_atlas.jar`. `build.py` does not

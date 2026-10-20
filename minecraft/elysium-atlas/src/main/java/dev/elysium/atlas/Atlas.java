@@ -33,6 +33,8 @@ public final class Atlas {
     public final int spawnX, spawnZ;
     /** Finest first. */
     public final List<AtlasLevel> levels = new ArrayList<>();
+    /** Rivers and lakes, or null for an atlas baked without water. */
+    public final Water water;
 
     private Atlas(Path dir) throws IOException {
         this.dir = dir;
@@ -60,6 +62,7 @@ public final class Atlas {
             levels.add(new AtlasLevel(l.get("name").getAsString(), dir.resolve(l.get("dir").getAsString()), l.get("cell").getAsInt(), tile));
         }
         levels.sort((a, c) -> Integer.compare(a.cell, c.cell));
+        water = m.has("water") ? new Water(dir.resolve(m.getAsJsonObject("water").get("file").getAsString())) : null;
         LOG.info("Atlas {} loaded from {}: {} levels, {} biomes, {} m/block", version, dir, levels.size(), palette.size(), metresPerBlock);
     }
 
@@ -119,6 +122,22 @@ public final class Atlas {
             if (b >= 0) return b;
         }
         return -1;
+    }
+
+    private static final int CACHE = 1024;
+    private record Cached(int x, int z, Water.Column c) {}
+    private final ThreadLocal<Cached[]> columns = ThreadLocal.withInitial(() -> new Cached[CACHE]);
+
+    /** Terrain after rivers and lakes are cut in, per block column. Cached per thread: the density functions, fluid picker and biome source all ask for the same columns. */
+    public Water.Column column(int x, int z) {
+        Cached[] cache = columns.get();
+        int slot = ((x & 31) | (z & 31) << 5) & (CACHE - 1);
+        Cached c = cache[slot];
+        if (c != null && c.x == x && c.z == z) return c.c;
+        double h = heightOrOcean(x, z);
+        Water.Column col = water != null ? water.column(x + 0.5, z + 0.5, h) : new Water.Column(h, Water.NO_FLUID, 1, false);
+        cache[slot] = new Cached(x, z, col);
+        return col;
     }
 
     /** Local relief in metres (8 km window), or 0. */

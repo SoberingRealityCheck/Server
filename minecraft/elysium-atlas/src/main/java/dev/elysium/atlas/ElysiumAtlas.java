@@ -18,7 +18,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.level.storage.LevelResource;
 
@@ -34,7 +36,11 @@ public final class ElysiumAtlas implements ModInitializer {
     public void onInitialize() {
         Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Identifier.fromNamespaceAndPath(MOD_ID, "sample"), AtlasDensityFunction.MAP_CODEC);
         Registry.register(BuiltInRegistries.BIOME_SOURCE, Identifier.fromNamespaceAndPath(MOD_ID, "atlas"), AtlasBiomeSource.CODEC);
-        ServerLifecycleEvents.SERVER_STARTING.register(server -> Atlas.setActive(usesAtlas(server)));
+        ServerLifecycleEvents.SERVER_STARTING.register(server -> {
+            boolean on = usesAtlas(server);
+            AtlasFluidPicker.atlasSettings = on && overworldGenerator(server) instanceof NoiseBasedChunkGenerator g ? g.generatorSettings().value() : null;
+            Atlas.setActive(on);
+        });
         ServerLifecycleEvents.SERVER_STARTED.register(ElysiumAtlas::onStarted);
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> Atlas.setActive(false));
         CommandRegistrationCallback.EVENT.register((dispatcher, registry, env) -> dispatcher.register(
@@ -49,9 +55,14 @@ public final class ElysiumAtlas implements ModInitializer {
     }
 
     /** Checked before any chunk is generated, from the overworld's level stem. */
-    private static boolean usesAtlas(MinecraftServer server) {
+    private static ChunkGenerator overworldGenerator(MinecraftServer server) {
         LevelStem stem = server.registryAccess().lookupOrThrow(Registries.LEVEL_STEM).getValue(LevelStem.OVERWORLD);
-        return stem != null && stem.generator().getBiomeSource() instanceof AtlasBiomeSource;
+        return stem == null ? null : stem.generator();
+    }
+
+    private static boolean usesAtlas(MinecraftServer server) {
+        ChunkGenerator g = overworldGenerator(server);
+        return g != null && g.getBiomeSource() instanceof AtlasBiomeSource;
     }
 
     /** Commands need the atlas; on other worlds they say so instead of throwing. */
@@ -96,8 +107,10 @@ public final class ElysiumAtlas implements ModInitializer {
         var pos = c.getSource().getPosition();
         double[] ll = a.toLonLat(pos.x, pos.z);
         int b = a.biome(pos.x, pos.z);
-        String msg = String.format("%.4f, %.4f | atlas Y %.1f | relief %.0f m | atlas biome %s | %s",
-                ll[1], ll[0], a.heightOrOcean(pos.x, pos.z), a.relief(pos.x, pos.z), b >= 0 ? a.palette.get(b) : "none", a.version);
+        var col = a.column((int) Math.floor(pos.x), (int) Math.floor(pos.z));
+        String msg = String.format("%.4f, %.4f | atlas Y %.1f | carved Y %.1f | water %s | relief %.0f m | atlas biome %s | %s",
+                ll[1], ll[0], a.heightOrOcean(pos.x, pos.z), col.height(), col.fluid() == Water.NO_FLUID ? "none" : "below Y " + col.fluid(),
+                a.relief(pos.x, pos.z), b >= 0 ? a.palette.get(b) : "none", a.version);
         c.getSource().sendSuccess(() -> Component.literal(msg), false);
         return 1;
     }
@@ -123,15 +136,16 @@ public final class ElysiumAtlas implements ModInitializer {
         try {
             Files.createDirectories(out.getParent());
             try (var w = Files.newBufferedWriter(out)) {
-                w.write("x,z,floor_y,surface_y,atlas_y,biome\n");
+                w.write("x,z,floor_y,surface_y,atlas_y,carved_y,fluid_y,biome\n");
                 for (int z = z0; z < z0 + size; z += step) {
                     for (int x = x0; x < x0 + size; x += step) {
                         int floor = gen.getBaseHeight(x, z, Heightmap.Types.OCEAN_FLOOR_WG, level, rs);
                         int surf = gen.getBaseHeight(x, z, Heightmap.Types.WORLD_SURFACE_WG, level, rs);
                         double ay = a.heightOrOcean(x, z);
+                        var col = a.column(x, z);
                         var biome = gen.getBiomeSource().getNoiseBiome(x >> 2, (Math.max(surf, floor) - 1) >> 2, z >> 2, rs.sampler());
-                        w.write(x + "," + z + "," + floor + "," + surf + "," + String.format("%.2f", ay) + "," + biome.unwrapKey().map(k -> k.identifier().toString()).orElse("?") + "\n");
-                        double e = Math.abs(floor - ay);
+                        w.write(x + "," + z + "," + floor + "," + surf + "," + String.format("%.2f", ay) + "," + String.format("%.2f", col.height()) + "," + (col.fluid() == Water.NO_FLUID ? "" : col.fluid()) + "," + biome.unwrapKey().map(k -> k.identifier().toString()).orElse("?") + "\n");
+                        double e = Math.abs(floor - col.height());
                         err += e; maxErr = Math.max(maxErr, e); n++;
                     }
                 }
@@ -140,7 +154,7 @@ public final class ElysiumAtlas implements ModInitializer {
             c.getSource().sendFailure(Component.literal("probe failed: " + e));
             return 0;
         }
-        String msg = String.format("probe %d columns in %.1f s: mean |floor - atlas| %.2f, max %.1f -> %s", n, (System.nanoTime() - t0) / 1e9, err / n, maxErr, out);
+        String msg = String.format("probe %d columns in %.1f s: mean |floor - carved atlas| %.2f, max %.1f -> %s", n, (System.nanoTime() - t0) / 1e9, err / n, maxErr, out);
         Atlas.LOG.info(msg);
         c.getSource().sendSuccess(() -> Component.literal(msg), false);
         return 1;

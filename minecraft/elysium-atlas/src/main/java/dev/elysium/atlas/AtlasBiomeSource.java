@@ -38,13 +38,17 @@ public final class AtlasBiomeSource extends BiomeSource {
     private final int caveMargin;
     /** Resolved on first use, so decoding the world preset does not need the atlas on non-atlas servers. */
     private volatile List<Holder<Biome>> palette;
-    private final Holder<Biome> fallback;
+    private final Holder<Biome> fallback, river, frozenRiver;
+    /** Per palette index: cold enough that its rivers freeze. Resolved with the palette. */
+    private volatile boolean[] cold;
 
     private AtlasBiomeSource(HolderGetter<Biome> biomes, Optional<BiomeSource> underground, int caveMargin) {
         this.biomes = biomes;
         this.underground = underground;
         this.caveMargin = caveMargin;
         fallback = biomes.getOrThrow(ResourceKey.create(Registries.BIOME, Identifier.parse("minecraft:deep_ocean")));
+        river = biomes.getOrThrow(ResourceKey.create(Registries.BIOME, Identifier.parse("minecraft:river")));
+        frozenRiver = biomes.getOrThrow(ResourceKey.create(Registries.BIOME, Identifier.parse("minecraft:frozen_river")));
     }
 
     private List<Holder<Biome>> palette() {
@@ -53,6 +57,9 @@ public final class AtlasBiomeSource extends BiomeSource {
             p = new ArrayList<>();
             for (String id : Atlas.get().palette)
                 p.add(biomes.getOrThrow(ResourceKey.create(Registries.BIOME, Identifier.parse(id))));
+            boolean[] c = new boolean[p.size()];
+            for (int i = 0; i < c.length; i++) c[i] = p.get(i).value().getBaseTemperature() < 0.15f;
+            cold = c;
             palette = p = List.copyOf(p);
         }
         return p;
@@ -64,19 +71,20 @@ public final class AtlasBiomeSource extends BiomeSource {
     @Override
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
         Stream<Holder<Biome>> caves = underground.map(u -> u.possibleBiomes().stream().filter(AtlasBiomeSource::isCave)).orElseGet(Stream::empty);
-        return Stream.concat(Stream.concat(palette().stream(), Stream.of(fallback)), caves).distinct();
+        return Stream.concat(Stream.concat(palette().stream(), Stream.of(fallback, river, frozenRiver)), caves).distinct();
     }
 
     @Override
     public Holder<Biome> getNoiseBiome(int qx, int qy, int qz, Climate.Sampler sampler) {
         Atlas a = Atlas.get();
         double x = (qx << 2) + 2, z = (qz << 2) + 2;
-        if (underground.isPresent() && (qy << 2) < a.heightOrOcean(x, z) - caveMargin) {
+        if (underground.isPresent() && (qy << 2) < a.column(qx << 2 | 2, qz << 2 | 2).height() - caveMargin) {
             Holder<Biome> h = underground.get().getNoiseBiome(qx, qy, qz, sampler);
             if (isCave(h)) return h;
         }
         List<Holder<Biome>> p = palette();
         int b = a.biome(x, z);
+        if (a.column(qx << 2 | 2, qz << 2 | 2).wet()) return b >= 0 && b < p.size() && cold[b] ? frozenRiver : river;
         return b >= 0 && b < p.size() ? p.get(b) : fallback;
     }
 

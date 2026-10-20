@@ -9,7 +9,7 @@
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 work="$here/.build"
-version=0.1.0
+version=0.2.0
 out="$here/../server-overrides/mods/elysium_atlas.jar"
 
 if [ -n "${JAVA_HOME:-}" ]; then PATH="$JAVA_HOME/bin:$PATH"; fi
@@ -23,6 +23,8 @@ mkdir -p "$work"
 # --- downloads (all pinned, all from the same sources pack.yaml uses) ----
 get() { [ -f "$work/$2" ] || curl -sfL -o "$work/$2" "$1"; }
 get "https://maven.fabricmc.net/net/fabricmc/fabric-loader/0.19.5/fabric-loader-0.19.5.jar" loader.jar
+get "https://maven.fabricmc.net/net/fabricmc/sponge-mixin/0.17.4%2Bmixin.0.8.7/sponge-mixin-0.17.4%2Bmixin.0.8.7.jar" mixin.jar
+get "https://repo1.maven.org/maven2/io/github/llamalad7/mixinextras-fabric/0.5.5/mixinextras-fabric-0.5.5.jar" mixinextras.jar
 get "https://piston-data.mojang.com/v1/objects/823e2250d24b3ddac457a60c92a6a941943fcd6a/server.jar" mc-bundle.jar
 get "https://cdn.modrinth.com/data/P7dR8mSH/versions/ewUK83HI/fabric-api-0.161.0%2B26.2.jar" fabric-api.jar
 
@@ -37,7 +39,7 @@ if [ ! -d "$work/fapi" ]; then
   done
 fi
 
-cp_list="$work/loader.jar:$work/mc/META-INF/versions/26.2/server-26.2.jar"
+cp_list="$work/loader.jar:$work/mixin.jar:$work/mixinextras.jar:$work/mc/META-INF/versions/26.2/server-26.2.jar"
 for j in $(find "$work/fapi" "$work/mc/META-INF/libraries" -name '*.jar'); do
   cp_list="$cp_list:$j"
 done
