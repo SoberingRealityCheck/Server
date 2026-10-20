@@ -9,11 +9,11 @@
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 work="$here/.build"
-version=0.2.0
+version=0.3.0
 out="$here/../server-overrides/mods/elysium_atlas.jar"
 
 if [ -n "${JAVA_HOME:-}" ]; then PATH="$JAVA_HOME/bin:$PATH"; fi
-major="$(javac -version 2>&1 | sed -E 's/javac ([0-9]+).*/\1/')"
+major="$(javac -version 2>&1 | sed -nE 's/^javac ([0-9]+).*/\1/p')"
 if [ "$major" -lt 25 ]; then
   echo "javac is $major. Need 25. Set JAVA_HOME to a JDK 25 and run again." >&2
   exit 1

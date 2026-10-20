@@ -135,7 +135,7 @@ public final class Atlas {
         Cached c = cache[slot];
         if (c != null && c.x == x && c.z == z) return c.c;
         double h = heightOrOcean(x, z);
-        Water.Column col = water != null ? water.column(x + 0.5, z + 0.5, h) : new Water.Column(h, Water.NO_FLUID, 1, false);
+        Water.Column col = water != null ? water.column(x + 0.5, z + 0.5, h) : new Water.Column(h, Water.NO_FLUID, 1, false, false);
         cache[slot] = new Cached(x, z, col);
         return col;
     }

@@ -84,7 +84,7 @@ public final class AtlasBiomeSource extends BiomeSource {
         }
         List<Holder<Biome>> p = palette();
         int b = a.biome(x, z);
-        if (a.column(qx << 2 | 2, qz << 2 | 2).wet()) return b >= 0 && b < p.size() && cold[b] ? frozenRiver : river;
+        if (a.column(qx << 2 | 2, qz << 2 | 2).river()) return b >= 0 && b < p.size() && cold[b] ? frozenRiver : river;
         return b >= 0 && b < p.size() ? p.get(b) : fallback;
     }
 

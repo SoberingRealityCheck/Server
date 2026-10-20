@@ -2,7 +2,7 @@
 
 Server-side Fabric mod for MC 26.2. Reads a baked atlas of the whole globe and feeds it into
 Tectonic, so a new world follows real terrain and climate. Vertical slice: elevation, coastlines,
-relief, surface biomes, rivers and lakes.
+relief, surface biomes, rivers, streams and lakes.
 
 Tested on a headless 26.2 server with Fabric API 0.161.0, Lithostitched 1.8.0, Tectonic 3.0.28
 and Terralith 2.6.4.
@@ -19,7 +19,7 @@ different order).
 ## Switching a world to the atlas
 
 1. Put the baked atlas at `config/elysium_atlas/atlas.json` (plus its `L0/`, `L1/` tile folders).
-   It is not in this repo: slice-3 is 31 MB (tiles plus `water.bin.gz`) and a full-detail atlas is 1-2 GB.
+   It is not in this repo: slice-4 is 64 MB (tiles plus `water.bin.gz`) and a full-detail atlas is 1-2 GB.
 2. In `config/tectonic.json` set `"max_y": 576` (world height -64..576). Do this only for the new
    world. The checked-in `server-overrides/config/tectonic.json` stays at 320 for the current one.
 3. `server.properties`: `level-type=elysium_atlas\:globe`, new `level-name` or the old world moved away.
@@ -51,7 +51,9 @@ Any change to them changes terrain in chunks not yet generated and leaves seams.
   carved to `level - 1 - depth*(1 - (d/w)^2)` with a levee 1.2 blocks above the water at its edge; a
   lake bed deepens 0.3 blocks per block from the shore up to the lake's depth; a 1.2-block lip outside
   the shore stops lake water spilling. The carved height replaces the atlas height in the offset hook.
-  Open-water columns get `minecraft:river` (or `frozen_river` where the atlas biome is cold).
+  River and lake columns get `minecraft:river` (or `frozen_river` where the atlas biome is cold);
+  stream columns keep the land biome. Streams use the same carve with half-width 4 and depth 3.
+  The segment index is sorted arrays, not a map: 3.5M segments are about 130 MB of floats plus the index.
 - Water above sea level needs two mixins, because Minecraft only fills water below Y 63 on its own:
   `NoiseBasedChunkGeneratorMixin` wraps the generator's global fluid picker where it is read (Tectonic
   replaces it in the constructor, so wrapping `createFluidPicker` does not work), and
@@ -73,6 +75,13 @@ github.com/nvkelso/natural-earth-vector) and the hydro_v2 warm grid for discharg
 River water level is the running minimum of atlas terrain from the source, so it never rises downstream;
 half-width is `1.8 * Q^0.28` blocks (4 to 32); a lake's level is the median of its flat DEM surface, or
 just under its shore where the DEM holds bathymetry (Lake Superior), and never above its low shore points.
+
+Streams (`bake/bake_streams.py`, about 4 min for the globe): the hydro_v2 drainage network for cells with
+at least 150 km2 upstream that no Natural Earth river crosses (about one stream per 100-150 blocks).
+Each 5 km cell drains to its neighbour with the largest drainage area; cell centres move to the lowest
+atlas point within 12 blocks, then the chains are smoothed and given a meander (5 blocks, 80-block
+wavelength) that fades out at both ends. A stream's level never drops below the river, lake, sea or
+downstream stream it joins. Slice-4: 3.1M stream segments, `water.bin.gz` 40 MB (format 2).
 
 `bake/bake_atlas.py OUT TILE_CACHE [--region LON0 LON1 LAT0 LAT1] [--spawn LON LAT]` builds it from
 Terrarium elevation tiles and the biome layers in the project's worldgen-experiments folder (set
@@ -97,6 +106,14 @@ Lausanne, with the Rhône entering at Villeneuve and leaving at Geneva. The Rhin
 Koblenz on the coarse (32-block) level. Same-seed normal world with the jar: still identical apart from one
 feature block.
 
+Streams, slice-4: 84% of stream vertices at Limoges have water, and 93% in the Massif Central (within
+2 blocks); the rest are heads and steep steps. Generation is about 15 chunks/s on 4 cores.
+
+Streams Reflowing 2.14.4 on an atlas world (LOW accuracy) runs without errors but plans no streams on most
+inland land (0 segments around Lausanne and most of Limoges, against about 7,000 per 768-block area in a
+normal world); its settings did not change that. At MAX accuracy spawn preparation took over an hour in
+either kind of world. The atlas draws its own streams instead.
+
 ## Commands (op level 2)
 
 - `/atlas here`: latitude, longitude, atlas height, carved height, water level, relief and biome where you stand.
@@ -113,11 +130,12 @@ On a non-atlas world they reply that the world does not use the atlas.
 
 ## Not done
 
-- Only Natural Earth rivers (about 4,000 lines). Smaller streams from hydro_v2 are not drawn yet.
+- Streams follow a 5 km drainage grid, so there are none in catchments under 150 km2 and their courses are
+  only as exact as that grid.
 - Channels narrower than 8 blocks are not possible: terrain density is interpolated over 4-block cells.
 - Water levels are whole blocks, so a river steps down 1 block at a time. Generated water is still; a
   step can spill a little when a player disturbs it.
 - Natural Earth lines are generalised (about 1 km), so a river can run beside its real valley floor.
 - Detail outside the Alps box (a global L1 is about 1-2 GB).
 - Sea-level rise is a 12 m placeholder.
-- Not tested with Distant Horizons, Streams Reflowing or RoadWeaver.
+- Not tested with Distant Horizons or RoadWeaver.

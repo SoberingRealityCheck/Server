@@ -4,6 +4,7 @@ Rivers: Natural Earth 10m centrelines plus the Europe supplement, oriented and s
 (5 km grid: Q, A). Water level per vertex = running minimum of atlas terrain from the source, so it
 never rises downstream. Lakes: Natural Earth 10m lakes plus the Europe supplement; level = low
 percentile of atlas terrain inside the outline (the DEM stores the lake surface).
+Streams: the hydro_v2 drainage network below the NE rivers (bake_streams.py).
 
 Usage: python3 bake_water.py ATLAS_DIR NE_DIR HYDRO_NPZ [ATLAS_VERSION]
 Water changes terrain, so give the atlas a new version (the mod warns when a world's atlas changes).
@@ -17,9 +18,10 @@ from shapely.strtree import STRtree
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from bake_atlas import ee_fwd, MPB, SEA_Y  # noqa: E402
+from bake_streams import bake_streams  # noqa: E402
 
 # ---- frozen parameters (changing any changes terrain: bump the atlas version)
-WATER_FORMAT = 1
+WATER_FORMAT = 2         # 2: river count after the segment count; segments past it are streams
 DENSIFY = 8.0            # blocks between river vertices
 SEG_OUT = 16.0           # blocks between output river vertices
 MIN_HALF_WIDTH = 4.0     # density terrain is interpolated over 4-block cells, so narrower channels vanish
@@ -91,6 +93,7 @@ class AtlasSampler:
 class Hydro:
     def __init__(self, path):
         d = np.load(path); self.Q = d["Q"]; self.A = d["A"]
+        self.sea, self.ice, self.lake, self.river = d["sea"], d["ice"], d["lake"], d["river"]
         ny, nx = self.Q.shape
         self.XM = float(ee_fwd(np.array(11.0 + 179.999), np.array(0.0))[0]) / 1000; self.YM = float(ee_fwd(np.array(0.0), np.array(90.0))[1]) / 1000
         self.nx, self.ny = nx, ny
@@ -247,12 +250,14 @@ def main():
     atlas_dir, ne, hydro_npz = sys.argv[1:4]
     atlas = AtlasSampler(atlas_dir); hydro = Hydro(hydro_npz)
     lakes = bake_lakes(ne, atlas)
-    segs = bake_rivers(ne, atlas, hydro, lakes)
+    rivers = bake_rivers(ne, atlas, hydro, lakes)
+    bbox = [float(v) for v in os.environ["STREAMS_BBOX"].split(",")] if os.environ.get("STREAMS_BBOX") else None
+    segs = rivers + bake_streams(atlas, hydro, rivers, lakes, bbox)
     edges, interior = lake_edges_and_interior(lakes)
     out = os.path.join(atlas_dir, "water.bin.gz")
     with gzip.open(out, "wb", compresslevel=6) as f:
         f.write(b"EWAT" + struct.pack("<HHi", WATER_FORMAT, BUCKET, LAKE_REACH))
-        f.write(struct.pack("<i", len(segs)))
+        f.write(struct.pack("<ii", len(segs), len(rivers)))
         f.write(np.asarray(segs, "<f4").tobytes())
         f.write(struct.pack("<i", len(lakes)))
         for l in lakes: f.write(struct.pack("<if", l["level"], l["depth"]))
@@ -263,10 +268,10 @@ def main():
         f.write(np.asarray([(k[0], k[1], v) for k, v in interior.items()], "<i4").tobytes())
     m = json.load(open(os.path.join(atlas_dir, "atlas.json")))
     if len(sys.argv) > 4: m["atlas_version"] = sys.argv[4]
-    m["water"] = {"file": "water.bin.gz", "format": WATER_FORMAT, "rivers": len(segs), "lakes": len(lakes),
-                  "sources": "Natural Earth 10m rivers, lakes and Europe supplements; hydro_v2 warm Q and A"}
+    m["water"] = {"file": "water.bin.gz", "format": WATER_FORMAT, "rivers": len(rivers), "streams": len(segs) - len(rivers), "lakes": len(lakes),
+                  "sources": "Natural Earth 10m rivers, lakes and Europe supplements; hydro_v2 warm Q and A; streams from the hydro_v2 network"}
     json.dump(m, open(os.path.join(atlas_dir, "atlas.json"), "w"), indent=1)
-    summary = {"segments": len(segs), "lakes": len(lakes), "edges": len(edges), "interior_buckets": len(interior),
+    summary = {"segments": len(segs), "streams": len(segs) - len(rivers), "lakes": len(lakes), "edges": len(edges), "interior_buckets": len(interior),
                "bytes": os.path.getsize(out)}
     for l in lakes:
         if l["name"] in ("Lake Geneva", "Bodensee", "Lago di Garda", "Lake Superior"): summary[l["name"]] = {"level": l["level"], "depth": round(l["depth"], 1)}
