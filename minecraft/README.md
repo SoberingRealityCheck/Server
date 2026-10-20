@@ -356,6 +356,20 @@ cannot hold that many anyway, the count stays lower. Read the "What it does,
 and what it does not" section of its README before tuning. A fake-player
 test tool is in `seasonal-spawns/dev/`. It is not part of the pack.
 
+### elysium-atlas/
+
+A server-side mod that makes a new world follow a baked atlas of the real globe (elevation,
+coasts, relief, surface biomes) by feeding it into Tectonic. Vertical slice; no rivers yet.
+
+- Source, docs and the atlas bake script: `elysium-atlas/`. Start with its `README.md`.
+- The built jar is checked in at `server-overrides/mods/elysium_atlas.jar`. `build.py` does not
+  build it. Rebuild with `elysium-atlas/build.sh` (plain javac, needs Java 25).
+- Inert on the current world: it only acts when `server.properties` has
+  `level-type=elysium_atlas\:globe`. Otherwise Tectonic runs unchanged.
+- An atlas world also needs the atlas data in `config/elysium_atlas/` (not in this repo) and
+  `"max_y": 576` in `config/tectonic.json`. Set both only for the new world; see the mod's README.
+- In game: `/atlas here`, `goto`, `probe`.
+
 ### Resource packs
 
 Resource packs declared in `pack.yaml` are installed for clients under

@@ -1,0 +1,11 @@
+{
+  "type": "lithostitched:wrap_density_function",
+  "target_function": "tectonic:terrain_spline/offset/final",
+  "wrapper_function": {
+    "type": "minecraft:flat_cache",
+    "argument": {
+      "type": "minecraft:cache_2d",
+      "argument": { "type": "elysium_atlas:sample", "channel": "offset", "fallback": { "type": "lithostitched:original_marker" } }
+    }
+  }
+}
