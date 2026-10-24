@@ -1,0 +1,661 @@
+# European plants: from the spawn (Lake Geneva) outwards.
+# Schema: see ../README.md. Colours follow the species' usual description (leaf_note / colour_note);
+# they are not measured from photographs.
+
+# ---------------------------------------------------------------- broadleaves
+european_beech:
+  name: European beech
+  latin: Fagus sylvatica
+  form: tree
+  leaf: fresh_green
+  leaf_note: Thin glossy leaves, bright fresh green; copper-brown in autumn.
+  autumn: "#b0702a"
+  range: Western and Central Europe, montane belt of the southern mountains.
+  look: Smooth grey trunk, dense high canopy.
+  render: 'tree("pale_oak_log", "oak_leaves", fancy(6, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+pedunculate_oak:
+  name: Pedunculate oak
+  latin: Quercus robur
+  form: tree
+  leaf: deep_green
+  leaf_note: Lobed, dull dark green leaves.
+  range: Lowlands from Ireland to the Urals.
+  look: Broad, branching lowland oak.
+  render: 'ref("wilderwild:fancy_oak")'
+  sapling: oak_sapling
+  stand_in: Wilder Wild fancy oak.
+
+sessile_oak:
+  name: Sessile oak
+  latin: Quercus petraea
+  form: tree
+  leaf: "#4a8a32"
+  leaf_note: Lobed, slightly glossy dark green leaves on stalks.
+  range: Uplands on acid soils, Atlantic to the Balkans.
+  look: Straighter upland oak.
+  render: 'tree("oak_log", "oak_leaves", straight(6, 3, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+hornbeam:
+  name: Hornbeam
+  latin: Carpinus betulus
+  form: tree
+  leaf: mid_green
+  leaf_note: Pleated, toothed mid-green leaves.
+  range: Oak-hornbeam woods of Central and Eastern Europe.
+  look: Grey fluted trunk under the oaks.
+  render: 'tree("pale_oak_log", "oak_leaves", straight(5, 2, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+sweet_chestnut:
+  name: Sweet chestnut
+  latin: Castanea sativa
+  form: tree
+  leaf: "#4f9234"
+  leaf_note: Long toothed leaves, glossy dark green.
+  range: Old coppices of the Atlantic south, Ticino, Cevennes, Apennine foothills.
+  look: Spiral-barked chestnut.
+  render: 'tree("dark_oak_log", "oak_leaves", fancy(5, 3, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+black_poplar:
+  name: Black poplar
+  latin: Populus nigra
+  form: tree
+  leaf: fresh_green
+  leaf_note: Glossy bright green triangular leaves.
+  range: Floodplains of the large rivers.
+  look: Big rough-barked floodplain poplar.
+  render: 'tree("dark_oak_log", "oak_leaves", fancy(8, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+lombardy_poplar:
+  name: Lombardy poplar
+  latin: Populus nigra 'Italica'
+  form: tree
+  leaf: fresh_green
+  leaf_note: As black poplar.
+  range: Field and road lines of the Po plain and Pannonia.
+  look: Narrow column.
+  render: 'tree("birch_log", "oak_leaves", straight(9, 3, 0), pinef(1, U(6, 8)))'
+  sapling: oak_sapling
+
+white_willow:
+  name: White willow
+  latin: Salix alba
+  form: tree
+  leaf: silvery_green
+  leaf_note: Narrow leaves with silky white undersides; the crown looks silver-grey.
+  range: Riverbanks across Europe.
+  render: 'ref("biomesoplenty:willow_tree")'
+  sapling: oak_sapling
+  stand_in: Biomes O' Plenty willow.
+
+black_alder:
+  name: Black alder
+  latin: Alnus glutinosa
+  form: tree
+  leaf: "#3c7a34"
+  leaf_note: Round, sticky, dark green leaves that fall green.
+  range: Wet woods and stream banks.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(5, 2, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+silver_birch:
+  name: Silver birch
+  latin: Betula pendula
+  form: tree
+  leaf: yellow_green
+  leaf_note: Small light green triangular leaves; yellow in autumn.
+  autumn: "#d0b840"
+  range: Heaths and pioneer woods across Europe.
+  look: White-barked, weeping twigs.
+  render: 'ref("wilderwild:birch_tree")'
+  sapling: birch_sapling
+  stand_in: Wilder Wild birch.
+
+downy_birch:
+  name: Downy birch
+  latin: Betula pubescens
+  form: tree
+  leaf: "#6f9f48"
+  leaf_note: Duller, darker green than silver birch.
+  range: Wet uplands, the north and the subarctic.
+  look: Low birch.
+  render: 'ref("wilderwild:short_birch")'
+  sapling: birch_sapling
+  stand_in: Wilder Wild short birch.
+
+hazel:
+  name: Hazel
+  latin: Corylus avellana
+  form: shrub
+  leaf: "#5fa03a"
+  leaf_note: Round soft leaves, light to mid green.
+  range: Understory and hedgerows throughout.
+  render: 'tree("oak_log", "oak_leaves", straight(1, 1, 0), bushf(2, 2, 1))'
+  sapling: oak_sapling
+
+green_alder:
+  name: Green alder
+  latin: Alnus alnobetula
+  form: shrub
+  leaf: "#5e9e3a"
+  leaf_note: Bright green, finely toothed leaves.
+  range: Wet Alpine avalanche slopes.
+  render: 'tree("birch_log", "oak_leaves", straight(1, 0, 0), bushf(2, 1, 0))'
+  sapling: oak_sapling
+
+# ---------------------------------------------------------------- conifers
+silver_fir:
+  name: Silver fir
+  latin: Abies alba
+  form: tree
+  leaf: fir_green
+  leaf_note: Flat glossy dark green needles, two white bands beneath.
+  range: "Montane beech-fir belt: Jura, Alps, Carpathians, Apennines, Pyrenees, Balkans."
+  render: 'ref("biomesoplenty:fir_tree")'
+  sapling: spruce_sapling
+  stand_in: Biomes O' Plenty fir.
+
+norway_spruce:
+  name: Norway spruce
+  latin: Picea abies
+  form: tree
+  leaf: dark_blue_green
+  leaf_note: Short four-sided dark green needles.
+  range: Alps, Carpathians, Scandinavia, the boreal east.
+  render: 'ref("biomesoplenty:tall_spruce_tree")'
+  sapling: spruce_sapling
+  stand_in: Biomes O' Plenty tall spruce.
+
+scots_pine:
+  name: Scots pine
+  latin: Pinus sylvestris
+  form: tree
+  leaf: glaucous_blue_green
+  leaf_note: Short twisted blue-green needles.
+  range: Sand, heath and dry slopes from Scotland to Siberia; Iberian and Balkan mountains.
+  look: Orange upper bark.
+  render: 'ref("biomesoplenty:pine_tree")'
+  sapling: spruce_sapling
+  stand_in: Biomes O' Plenty pine.
+
+arolla_pine:
+  name: Swiss stone pine
+  latin: Pinus cembra
+  form: tree
+  leaf: "#46705a"
+  leaf_note: Dense five-needle bundles, dark blue-green.
+  range: Alpine and Carpathian treeline.
+  render: 'ref("biomesoplenty:pine_tree_small")'
+  sapling: spruce_sapling
+  stand_in: Biomes O' Plenty small pine.
+
+european_larch:
+  name: European larch
+  latin: Larix decidua
+  form: tree
+  leaf: pale_yellow_green
+  leaf_note: Soft bright light green needles in tufts; gold in autumn.
+  autumn: "#d8a830"
+  range: Inner Alps, Carpathians.
+  render: 'tree("spruce_log", "birch_leaves", straight(7, 3, 0), sprucef(U(1, 2), U(0, 1), U(2, 3)))'
+  sapling: spruce_sapling
+
+black_pine:
+  name: Austrian black pine
+  latin: Pinus nigra
+  form: tree
+  leaf: "#34583a"
+  leaf_note: Long stiff very dark green needles.
+  range: Dinaric, Pindus, Pyrenean and Iberian limestone.
+  look: Dark umbrella crown.
+  render: 'tree("dark_oak_log", "spruce_leaves", straight(7, 3, 0), blob(2, 3, 0))'
+  sapling: spruce_sapling
+
+maritime_pine:
+  name: Maritime pine
+  latin: Pinus pinaster
+  form: tree
+  leaf: grey_green_pine
+  leaf_note: Long stout grey-green needles.
+  range: Landes, Atlantic Iberia.
+  look: Tall bare trunk.
+  render: 'tree("spruce_log", "spruce_leaves", straight(9, 3, 0), blob(2, 2, 0))'
+  sapling: spruce_sapling
+
+aleppo_pine:
+  name: Aleppo pine
+  latin: Pinus halepensis
+  form: tree
+  leaf: light_grey_green_pine
+  leaf_note: Thin sparse light yellow-green needles; the crown looks pale and airy.
+  range: Hot Mediterranean coasts and the Iberian southeast.
+  look: Leaning, open pine.
+  render: 'tree("spruce_log", "oak_leaves", forking(4, 2, 1), blob(2, 2, 0))'
+  sapling: spruce_sapling
+
+umbrella_pine:
+  name: Stone pine
+  latin: Pinus pinea
+  form: tree
+  leaf: deep_green_pine
+  leaf_note: Stiff deep green needles.
+  range: Mediterranean coasts and Iberian sands.
+  look: Flat dark parasol on a bare trunk.
+  render: 'tree("dark_oak_log", "spruce_leaves", straight(6, 2, 0), acaciaf(3))'
+  sapling: spruce_sapling
+
+italian_cypress:
+  name: Italian cypress
+  latin: Cupressus sempervirens
+  form: tree
+  leaf: near_black_green
+  leaf_note: Dense very dark green scale leaves.
+  range: Tuscany, the Aegean.
+  look: Narrow column.
+  render: 'ref("terrestria:cypress_tree")'
+  sapling: spruce_sapling
+  stand_in: Terrestria cypress.
+
+mountain_pine:
+  name: Mountain pine
+  latin: Pinus mugo
+  form: shrub
+  leaf: "#3a6040"
+  leaf_note: Dense bright to dark green needles.
+  range: Above the Alpine and Carpathian treeline.
+  look: Creeping krummholz.
+  render: 'tree("spruce_log", "spruce_leaves", straight(1, 0, 0), bushf(2, 1, 0))'
+  sapling: spruce_sapling
+
+common_juniper:
+  name: Common juniper
+  latin: Juniperus communis
+  form: shrub
+  leaf: glaucous_blue_green
+  leaf_note: Sharp needles with a white band, grey-blue-green overall.
+  range: Heaths, dry pastures, mountains.
+  render: 'tree("spruce_log", "spruce_leaves", straight(1, 0, 0), bushf(1, 2, 1))'
+  sapling: spruce_sapling
+
+# ---------------------------------------------------------------- Mediterranean evergreens
+holm_oak:
+  name: Holm oak
+  latin: Quercus ilex
+  form: tree
+  leaf: olive_green
+  leaf_note: Leathery leaves, dark green above, grey-felted beneath.
+  range: Mediterranean basin.
+  look: Dense, dark, rounded crown.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(3, 2, 0), blob(3, 3, 0))'
+  sapling: oak_sapling
+
+cork_oak:
+  name: Cork oak
+  latin: Quercus suber
+  form: tree
+  leaf: "#4e6638"
+  leaf_note: Leathery dark green leaves, grey beneath.
+  range: Iberian dehesa and montado, Provence, Sardinia.
+  look: Thick-barked spreading oak.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", forking(3, 1, 1), acaciaf(2))'
+  sapling: oak_sapling
+
+olive:
+  name: Wild olive
+  latin: Olea europaea var. sylvestris
+  form: tree
+  leaf: "#9aa88a"
+  leaf_note: Narrow leaves, grey-green above, silvery beneath.
+  range: Mediterranean lowlands; gone wild from the old groves.
+  render: 'tree("pale_oak_log", "pale_oak_leaves", forking(2, 1, 1), blob(2, 2, 0))'
+  sapling: oak_sapling
+  stand_in: Pale oak leaves (untinted silver-grey).
+
+strawberry_tree:
+  name: Strawberry tree
+  latin: Arbutus unedo
+  form: shrub
+  leaf: dark_glossy_green
+  leaf_note: Glossy dark green leathery leaves.
+  range: Maquis from Ireland's southwest to the Aegean.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(1, 1, 0), bushf(2, 2, 1))'
+  sapling: oak_sapling
+
+mastic:
+  name: Mastic (lentisk)
+  latin: Pistacia lentiscus
+  form: shrub
+  leaf: olive_green
+  leaf_note: Leathery dark olive-green leaflets.
+  range: Hot coastal maquis.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(1, 1, 0), bushf(2, 2, 1))'
+  sapling: oak_sapling
+
+kermes_oak:
+  name: Kermes oak
+  latin: Quercus coccifera
+  form: shrub
+  leaf: "#56663a"
+  leaf_note: Small spiny holly-like leaves, grey-green.
+  range: Garrigue and maquis on limestone.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(1, 1, 0), bushf(2, 2, 1))'
+  sapling: oak_sapling
+
+# ---------------------------------------------------------------- dwarf shrubs and herbs
+heather:
+  name: Heather (ling)
+  latin: Calluna vulgaris
+  form: shrub_ground
+  range: Atlantic heaths and moors, pine and birch woods.
+  render: 'segmented("biomesoplenty:purple_wildflowers", "flower_amount")'
+  stand_in: Biomes O' Plenty purple wildflowers.
+
+gorse:
+  name: Gorse
+  latin: Ulex europaeus
+  form: shrub_ground
+  range: Atlantic heaths and coasts.
+  look: Green bushes flecked with yellow.
+  render: 'flowers("bush", ("wildflowers", {"facing": "north", "flower_amount": "4"}), weights=[2, 1])'
+  stand_in: Bush and wildflowers.
+
+bilberry:
+  name: Bilberry
+  latin: Vaccinium myrtillus
+  form: shrub_ground
+  range: Under spruce and pine, upland heath.
+  render: 'flowers(("sweet_berry_bush", {"age": "1"}), "fern", weights=[1, 2])'
+  stand_in: Sweet berry bush.
+
+lavender:
+  name: True lavender
+  latin: Lavandula angustifolia
+  form: shrub_ground
+  range: Provence and Iberian limestone.
+  render: 'flowers("biomesoplenty:lavender", ("biomesoplenty:tall_lavender", {"half": "lower"}), weights=[2, 1])'
+  stand_in: Biomes O' Plenty lavender.
+
+common_thyme:
+  name: Common thyme
+  latin: Thymus vulgaris
+  form: shrub_ground
+  range: Garrigue of the western Mediterranean.
+  render: 'flowers("bush")'
+  stand_in: Grass-tinted bush.
+
+rosemary:
+  name: Rosemary
+  latin: Salvia rosmarinus
+  form: shrub_ground
+  range: Garrigue and coastal scrub.
+  render: 'flowers("biomesoplenty:white_lavender")'
+  stand_in: Biomes O' Plenty white lavender (pale flowers).
+
+grey_leaved_cistus:
+  name: Grey-leaved cistus
+  latin: Cistus albidus
+  form: shrub_ground
+  range: Garrigue on limestone, Iberia to Provence.
+  render: 'flowers("bush", "short_dry_grass", weights=[3, 1])'
+  stand_in: Bush.
+
+male_fern:
+  name: Male fern
+  latin: Dryopteris filix-mas
+  form: fern
+  range: Shaded woods across Europe.
+  render: 'flowers("fern", "short_grass", weights=[3, 1])'
+  stand_in: Fern.
+
+# ---------------------------------------------------------------- grasses (colour sets the grass tint)
+red_fescue:
+  name: Red fescue
+  latin: Festuca rubra
+  form: grass
+  colour: "#66b04c"
+  colour_note: Fine, dense, deep green.
+  range: Atlantic pastures, coasts and mountain grassland.
+  render: 'flowers("short_grass")'
+
+common_bent:
+  name: Common bent
+  latin: Agrostis capillaris
+  form: grass
+  colour: "#70ac4e"
+  colour_note: Fine mid-green, reddish panicles.
+  range: Acid grassland of the Atlantic uplands.
+  render: 'flowers("short_grass")'
+
+perennial_ryegrass:
+  name: Perennial ryegrass
+  latin: Lolium perenne
+  form: grass
+  colour: "#5eb04a"
+  colour_note: Glossy dark-mid green.
+  range: Fertile lowland pasture.
+  render: 'flowers("short_grass")'
+
+false_oat_grass:
+  name: False oat-grass
+  latin: Arrhenatherum elatius
+  form: grass
+  colour: "#78b456"
+  colour_note: Tall, mid green, slightly bluish.
+  range: Hay meadows of Central Europe.
+  render: 'flowers("short_grass", ("tall_grass", {"half": "lower"}), weights=[3, 1])'
+
+upright_brome:
+  name: Upright brome
+  latin: Bromus erectus
+  form: grass
+  colour: "#8ca85a"
+  colour_note: Grey-green tufts.
+  range: Dry calcareous grassland, Southern England to the Balkans.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[3, 1])'
+
+purple_moor_grass:
+  name: Purple moor-grass
+  latin: Molinia caerulea
+  form: grass
+  colour: "#8a9f5a"
+  colour_note: Grey-green tussocks, straw-coloured much of the year.
+  range: Wet moorland and blanket bog.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[2, 1])'
+
+wavy_hair_grass:
+  name: Wavy hair-grass
+  latin: Avenella flexuosa
+  form: grass
+  colour: "#7c9a55"
+  colour_note: Fine hair-like dull green leaves.
+  range: Pine, birch and spruce woods, the taiga.
+  render: 'flowers("short_grass")'
+
+blue_moor_grass:
+  name: Blue moor-grass
+  latin: Sesleria caerulea
+  form: grass
+  colour: "#6aa45a"
+  colour_note: Blue-green, matt.
+  range: Limestone turf of the Alps, Apennines and Dinarides.
+  render: 'flowers("short_grass")'
+
+mat_grass:
+  name: Mat-grass
+  latin: Nardus stricta
+  form: grass
+  colour: "#8c9e5e"
+  colour_note: Stiff grey-green, bleached in late summer.
+  range: Poor acid pasture in the mountains.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[3, 1])'
+
+sheeps_fescue:
+  name: Sheep's fescue
+  latin: Festuca ovina
+  form: grass
+  colour: "#7f9c5a"
+  colour_note: Fine grey-green tufts.
+  range: Thin dry soils, fjell, Iceland, Mediterranean mountains.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[3, 1])'
+
+wood_sedge:
+  name: Wood sedge
+  latin: Carex sylvatica
+  form: grass
+  colour: "#5ea84a"
+  colour_note: Fresh green arching leaves.
+  range: Beech and oak-hornbeam woods.
+  render: 'flowers("short_grass")'
+
+valais_fescue:
+  name: Valais fescue
+  latin: Festuca valesiaca
+  form: grass
+  colour: "#a2a862"
+  colour_note: Fine grey-green tufts, straw-coloured by midsummer.
+  range: Steppe from Pannonia to the Pontic plain.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[2, 3])'
+
+feather_grass:
+  name: Feather grass
+  latin: Stipa pennata
+  form: grass
+  colour: "#b2ad62"
+  colour_note: Grey-green leaves under silver feathered awns.
+  range: Pontic and Pannonian steppe.
+  render: 'flowers(("biomesoplenty:barley", {"half": "lower"}), "short_dry_grass", weights=[1, 2])'
+  stand_in: Biomes O' Plenty barley.
+
+retuse_false_brome:
+  name: Retuse false brome
+  latin: Brachypodium retusum
+  form: grass
+  colour: "#a7a75c"
+  colour_note: Stiff grey-green, dry most of the summer.
+  range: Garrigue and pine woods of the western Mediterranean.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[1, 2])'
+
+slender_wild_oat:
+  name: Slender wild oat
+  latin: Avena barbata
+  form: grass
+  colour: "#b4ac68"
+  colour_note: Green in spring, straw from early summer.
+  range: Annual grassland of the dehesa and Mediterranean hills.
+  render: 'flowers("short_dry_grass", "tall_dry_grass", "short_grass", weights=[2, 1, 1])'
+
+esparto:
+  name: Esparto grass
+  latin: Macrochloa tenacissima
+  form: grass
+  colour: "#b0aa6a"
+  colour_note: Tough rolled grey-green leaves.
+  range: Semi-desert of southeast Iberia.
+  render: 'flowers("short_dry_grass", "tall_dry_grass", weights=[2, 1])'
+
+# ---------------------------------------------------------------- flowers
+bluebell:
+  name: Bluebell
+  latin: Hyacinthoides non-scripta
+  form: flower
+  range: Atlantic beech and oak woods.
+  render: 'flowers("biomesoplenty:violet")'
+  stand_in: Biomes O' Plenty violet.
+
+wood_anemone:
+  name: Wood anemone
+  latin: Anemone nemorosa
+  form: flower
+  range: Spring floor of deciduous woods.
+  render: 'segmented("biomesoplenty:white_petals", "flower_amount")'
+  stand_in: Biomes O' Plenty white petals.
+
+white_clover:
+  name: White clover
+  latin: Trifolium repens
+  form: flower
+  range: Pasture.
+  render: 'segmented("wilderwild:clovers", "flower_amount")'
+  stand_in: Wilder Wild clovers.
+
+common_poppy:
+  name: Common poppy
+  latin: Papaver rhoeas
+  form: flower
+  range: Old fields and field margins.
+  render: 'flowers("poppy")'
+
+cornflower:
+  name: Cornflower
+  latin: Centaurea cyanus
+  form: flower
+  range: Old fields.
+  render: 'flowers("cornflower")'
+
+oxeye_daisy:
+  name: Oxeye daisy
+  latin: Leucanthemum vulgare
+  form: flower
+  range: Meadows and field edges.
+  render: 'flowers("oxeye_daisy")'
+
+meadow_buttercup:
+  name: Meadow buttercup
+  latin: Ranunculus acris
+  form: flower
+  range: Hay meadows and damp pasture.
+  render: 'flowers("dandelion")'
+  stand_in: Dandelion.
+
+maiden_pink:
+  name: Maiden pink
+  latin: Dianthus deltoides
+  form: flower
+  range: Dry meadows.
+  render: 'flowers("wilderwild:carnation")'
+  stand_in: Wilder Wild carnation.
+
+ragged_robin:
+  name: Ragged robin
+  latin: Silene flos-cuculi
+  form: flower
+  range: Wet meadows.
+  render: 'flowers("pink_tulip")'
+  stand_in: Pink tulip.
+
+spring_gentian:
+  name: Spring gentian
+  latin: Gentiana verna
+  form: flower
+  range: Alpine and subalpine turf.
+  render: 'flowers("cornflower")'
+  stand_in: Cornflower.
+
+alpine_pasqueflower:
+  name: Alpine pasqueflower
+  latin: Pulsatilla alpina
+  form: flower
+  range: Alpine meadows.
+  render: 'flowers("wilderwild:pasqueflower")'
+  stand_in: Wilder Wild pasqueflower.
+
+edelweiss:
+  name: Edelweiss
+  latin: Leontopodium nivale subsp. alpinum
+  form: flower
+  range: Alpine limestone grassland.
+  render: 'flowers("oxeye_daisy")'
+  stand_in: Oxeye daisy (white).
+
+wild_chives:
+  name: Wild chives
+  latin: Allium schoenoprasum
+  form: flower
+  range: Wet Alpine meadows and stream banks.
+  render: 'flowers("allium")'
+  stand_in: Allium.

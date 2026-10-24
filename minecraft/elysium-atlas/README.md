@@ -185,22 +185,22 @@ warped borders) stores one unit per RESOLVE Ecoregions 2017 ecoregion, `eco:<ECO
 838 units, 0.5 MB. Groups in `variants/regions.py` name sets of ecoregions and can split one along a
 meridian. The base biome map is unchanged, so regions change without rebaking terrain.
 
-**Profiles.** `variants/flora/*.py` holds one hand-written profile per ecoregion. Each profile sets:
-- grass and foliage colour;
-- tree cover;
-- weighted plant lists (trees, shrubs, ground cover, flowers, cacti) from the plant palette `variants/plants.py`.
-  The palette maps real plants to custom configured features built from vanilla blocks (live oak, mesquite,
-  loblolly pine, bluebonnet as cornflower), to vanilla features, or to plants from the pack's flora mods
-  (Wilder Wild juniper, swamp cypress, windmill palm, prickly pear; Terrestria agave, Indian paintbrush,
-  yucca palm; BOP goldenrod, sea oats). The mod therefore depends on Biomes O' Plenty, Wilder Wild and
-  Terrestria. Their own biomes and vanilla-biome edits are switched off in `../overrides/config`, so the
-  atlas still picks every biome.
+**Plant and ecoregion database.** `variants/db/` (schema in `variants/db/README.md`) is plain YAML: one entry
+per real species (`plants/*.yaml`: Latin name, form, summer leaf or turf colour with the description it is based
+on, and how it is built in game) and one per ecoregion (`ecoregions/*.yaml`: weighted species lists for trees,
+shrubs, ground, flowers and cacti, tree cover). Ecoregions set no colours: grass, foliage and per-leaf-block
+colours are weighted means over their species. Species are built from vanilla blocks (live oak, mesquite,
+loblolly pine, bluebonnet as cornflower), vanilla features, or the pack's flora mods (Wilder Wild juniper, swamp
+cypress, windmill palm, prickly pear; Terrestria agave, paintbrush, yucca palm; BOP fir, pine, goldenrod, sea
+oats). The mod therefore depends on Biomes O' Plenty, Wilder Wild and Terrestria. Their own biomes and
+vanilla-biome edits are switched off in `../overrides/config`, so the atlas still picks every biome.
 
-Every atlas biome covering at least 0.3% of a profiled ecoregion gets a variant. Its own plants are removed
-and the ecoregion's are added. Tree count is the profile's cover times a factor taken from the atlas biome's
-own tree count, so forest cells stay denser than plains cells. Ecoregions without a profile keep the atlas
-biome. Profiles so far cover 25 ecoregions in and around Texas (`flora/texas.py`) and 37 in Europe
-(`flora/europe.py`, from the spawn outwards; it replaced the earlier hand-written Alpine and Mediterranean variants).
+Every atlas biome covering at least 0.3% of a listed ecoregion gets a variant. Its own plants are removed
+and the ecoregion's are added. Tree count is the ecoregion's cover times a factor taken from the atlas biome's
+own tree count, so forest cells stay denser than plains cells. Ecoregions without an entry keep the atlas
+biome. The database covers 25 ecoregions in and around Texas and 37 in Europe (from the spawn outwards), with
+147 plants. The built mod carries it as `elysium_atlas/ecoregions.json`; `/atlas here` prints the ecoregion,
+its colours and its species.
 
 `variants/biome_variants.py SERVER_JAR TERRALITH_JAR` writes the biome files, features, names and
 `elysium_atlas/variants.json` into `src/main/resources`; `--check` reports stale output. `/atlas variants`
@@ -208,11 +208,11 @@ audits every variant against its parent (tags, spawns, features) and lists only 
 F3 show the region.
 
 Leaf colours (client): every green leaf follows the variant's foliage colour, including spruce, birch and the
-flora mods' leaves. `variants/leaf_tints.py` measures each species' own colour as an offset from vanilla's
-default foliage colour and makes pre-coloured mod textures greyscale (built-in pack `regional_leaves`). A profile's
-`"leaves": {leaf block: hex}` sets that leaf type's summer colour in that ecoregion, so leaf types keep separate
-colours within one region; it is stored relative to the profile's foliage (`leaf_palettes.json`), so seasons
-still shift it. `docs/ecoregion_colours.png` in the project folder shows every profile.
+flora mods' leaves. `variants/leaf_tints.py` makes pre-coloured mod textures greyscale (built-in pack
+`regional_leaves`) and gives each leaf block a default offset from the foliage colour. In an ecoregion each leaf
+block takes the mean colour of the species that grow it there, stored relative to the foliage
+(`leaf_palettes.json`) so seasons still shift it. `docs/ecoregion_colours.png` in the project folder shows every
+ecoregion.
 
 ## Distant Horizons SeedGen
 

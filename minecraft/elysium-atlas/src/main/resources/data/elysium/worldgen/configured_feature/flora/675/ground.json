@@ -1,1 +1,1 @@
-{"type":"minecraft:simple_block","config":{"to_place":{"type":"minecraft:weighted_state_provider","entries":[{"data":{"Name":"minecraft:tall_grass","Properties":{"half":"lower"}},"weight":1000},{"data":{"Name":"minecraft:short_grass"},"weight":846}]}}}
+{"type":"minecraft:simple_block","config":{"to_place":{"type":"minecraft:weighted_state_provider","entries":[{"data":{"Name":"minecraft:tall_grass","Properties":{"half":"lower"}},"weight":352},{"data":{"Name":"minecraft:short_grass"},"weight":1000}]}}}

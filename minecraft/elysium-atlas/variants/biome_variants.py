@@ -8,8 +8,9 @@ the same.
 
 Two sources, in order of precedence for a (unit, atlas biome) pair:
   VARIANTS below       hand-written variants
-  flora/*.py FLORA     per-ecoregion profiles: hand-picked colours, and the parent's plants replaced by the
-                       ecoregion's plant list. Ecoregions without a profile keep the atlas biome unchanged.
+  db/ecoregions/*.yaml per-ecoregion species lists (the plant and ecoregion database, db/README.md): the parent's
+                       plants replaced by the ecoregion's species, and grass, foliage and leaf colours derived
+                       from those species. Ecoregions without an entry keep the atlas biome unchanged.
 Data: data/unit_biomes.json and data/ecoregions.json (bake/bake_regions.py).
 
   python3 variants/biome_variants.py SERVER_JAR TERRALITH_JAR      # writes src/main/resources/...
@@ -24,7 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, "..", "src", "main", "resources")
 sys.path.insert(0, HERE)
 from regions import REGIONS, unit_names
-from plants import PLANTS
+import db
 
 FOREST_ATTRS = "minecraft:forest"   # plain overworld sky, fog and music, for variants of stylized parents
 CLIMATE = ("temperature", "downfall", "has_precipitation", "temperature_modifier")
@@ -37,21 +38,40 @@ SHRUB_COVER = {7: 0.1, 8: 0.05, 10: 0.1, 12: 0.3, 13: 0.15}
 GENERATED_DIRS = ("data/elysium/worldgen/biome/eco", "data/elysium/worldgen/placed_feature/flora",
                   "data/elysium/worldgen/configured_feature/flora", "data/elysium/worldgen/configured_feature/plant")
 
-VARIANTS = {}     # hand-written variants; the European set moved to flora/europe.py (slice-9)
+VARIANTS = {}     # hand-written variants; none since the ecoregion database took over (slice-9)
+# plant id -> (kind, feature or feature id, sapling, look), from the database
+PLANTS = {k: (e["kind"], e["feature"], e.get("sapling"), e.get("look", e["name"])) for k, e in db.plants().items()}
 
 
-def load_flora():
-    out = {}
-    for p in sorted(glob.glob(os.path.join(HERE, "flora", "*.py"))):
-        spec = importlib.util.spec_from_file_location("flora_" + os.path.basename(p)[:-3], p)
-        m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
-        for k, v in m.FLORA.items():
-            if k in out: raise SystemExit(f"ecoregion {k} has two flora profiles")
-            for layer in ("trees", "shrubs", "ground", "flowers", "cactus"):
-                for plant in v.get(layer, {}):
-                    if plant not in PLANTS: raise SystemExit(f"flora {k}: unknown plant {plant}")
-            out[k] = v
-    return out
+def leaf_blocks(src):
+    """plant id -> the leaf blocks its tree feature places (following references into vanilla and mod features)."""
+    memo = {}
+
+    def walk(node, seen, out):
+        if isinstance(node, dict):
+            n = node.get("Name")
+            if isinstance(n, str) and n.endswith("_leaves"): out.add(n)
+            for k, v in node.items():
+                if k == "feature" and isinstance(v, str): ref(v, seen, out)
+                else: walk(v, seen, out)
+        elif isinstance(node, list):
+            for v in node: walk(v, seen, out)
+
+    def ref(ident, seen, out):
+        if ident in seen: return
+        seen.add(ident)
+        for kind in ("configured_feature", "placed_feature"):
+            try: walk(src.get(kind, ident), seen, out); return
+            except SystemExit: pass
+
+    def of(pid):
+        if pid not in memo:
+            kind, feat = PLANTS[pid][:2]; out = set()
+            if kind == "ref": ref(feat, set(), out)
+            elif kind == "tree": walk(feat, set(), out)
+            memo[pid] = out
+        return memo[pid]
+    return of
 
 
 class Sources:
@@ -167,17 +187,15 @@ def rgb(h): return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
 def hexc(c): return "#%02x%02x%02x" % c
 
 
-def leaf_id(k): return k if ":" in k else "minecraft:" + k
 
-
-def palette(prof, leaf_table):
-    """A profile's leaf colours ("leaves": {leaf block: hex}, the summer colour of that leaf type in the region) as
-    (hue shift, saturation ratio, value ratio) against the profile's foliage colour, so the season moves them too."""
+def palette(foliage, leaves, leaf_table):
+    """An ecoregion's leaf colours ({leaf block: hex}, the summer colour of that leaf type there, from its species) as
+    (hue shift, saturation ratio, value ratio) against its foliage colour, so the season moves them too. Leaf blocks
+    without a regional tint (pale oak, cherry, the mods' coloured leaves) are left out."""
     out = {}
-    h0, s0, v0 = colorsys.rgb_to_hsv(*(x / 255 for x in rgb(prof["foliage"])))
-    for k, c in prof.get("leaves", {}).items():
-        b = leaf_id(k)
-        if b not in leaf_table: raise SystemExit(f"flora {prof['name']}: {b} is not a regionally tinted leaf (leaf_tints.py)")
+    h0, s0, v0 = colorsys.rgb_to_hsv(*(x / 255 for x in rgb(foliage)))
+    for b, c in sorted(leaves.items()):
+        if b not in leaf_table: continue
         h, sat, v = colorsys.rgb_to_hsv(*(x / 255 for x in rgb(c)))
         out[b] = [round((h - h0 + 0.5) % 1.0 - 0.5, 4), round(sat / s0, 4), round(v / v0, 4)]
     return out
@@ -289,7 +307,7 @@ def title(ident):
 
 
 def generate(src, check=False):
-    flora_db = load_flora()
+    flora_db = db.ecoregions(); leaves_of = leaf_blocks(src); P = db.plants(); species_db = {}
     data = os.path.join(HERE, "data")
     unit_biomes = json.load(open(os.path.join(data, "unit_biomes.json")))
     ecos = json.load(open(os.path.join(data, "ecoregions.json")))
@@ -337,7 +355,11 @@ def generate(src, check=False):
         eid = unit.split(":")[1]; prof = flora_db.get(int(eid))
         if not prof: continue
         total = sum(counts.values()); habitat = ecos.get(eid, {}).get("biome_num", 4)
-        grass, foliage = rgb(prof["grass"]), rgb(prof["foliage"])
+        g_hex, f_hex, leaf_hex = db.colours(prof, leaves_of)
+        grass, foliage = rgb(g_hex), rgb(f_hex)
+        species_db[eid] = {"name": prof["name"], "resolve": prof.get("resolve"), "grass": g_hex, "foliage": f_hex, "leaves": leaf_hex,
+                           **{L: {P[p]["name"]: w for p, w in (prof.get(L) or {}).items()} for L in db.LAYERS if prof.get(L)},
+                           "latin": {P[p]["name"]: P[p]["latin"] for L in db.LAYERS for p in (prof.get(L) or {}) if "latin" in P[p]}}
         pick = [(a, n) for a, n in counts.items() if (unit, a) not in claims and "ocean" not in a and n >= MIN_CELLS and n / total >= MIN_SHARE]
         if not pick: continue
         # plant list: tree counts follow the profile's cover, varied between atlas biomes by their own tree counts
@@ -382,12 +404,13 @@ def generate(src, check=False):
                           "why": prof["why"]}
             if a != base_id: table[vid]["replaces"] = [a]
             lang[f"biome.elysium.{path.replace('/', '.')}"] = prof["name"] if a == main else f"{prof['name']} ({title(a)})"
-            if prof.get("leaves"): palettes[vid] = palette(prof, leaf_table)
+            palettes[vid] = palette(f_hex, leaf_hex, leaf_table)
             n_flora += 1
     files = {**out, **placed, **flora.files,
              "assets/elysium/lang/en_us.json": lang,
              "elysium_atlas/variants.json": {"format": 2, "generated_by": "variants/biome_variants.py", "variants": table},
-             "elysium_atlas/leaf_palettes.json": {"generated_by": "variants/biome_variants.py (flora profiles' \"leaves\")", "palettes": palettes}}
+             "elysium_atlas/leaf_palettes.json": {"generated_by": "variants/biome_variants.py (leaf colours of each ecoregion's species)", "palettes": palettes},
+             "elysium_atlas/ecoregions.json": {"generated_by": "variants/biome_variants.py from variants/db", "ecoregions": species_db}}
     if check:
         stale = [p for p, d in files.items() if not os.path.exists(os.path.join(RES, p)) or json.load(open(os.path.join(RES, p))) != d]
         extra = [p for g in GENERATED_DIRS for p in glob.glob(os.path.join(RES, g, "**", "*.json"), recursive=True)

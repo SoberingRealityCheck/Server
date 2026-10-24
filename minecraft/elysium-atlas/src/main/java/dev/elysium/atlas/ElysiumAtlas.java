@@ -143,6 +143,8 @@ public final class ElysiumAtlas implements ModInitializer {
                 a.relief(pos.x, pos.z), b >= 0 ? a.palette.get(b) : "none", a.version)
                 + (a.regions == null ? "" : " | region " + a.regions.name(a.regions.at(pos.x, pos.z)));
         c.getSource().sendSuccess(() -> Component.literal(msg), false);
+        String eco = a.regions == null ? null : Ecoregions.describe(a.regions.name(a.regions.at(pos.x, pos.z)));
+        if (eco != null) c.getSource().sendSuccess(() -> Component.literal(eco), false);
         return 1;
     }
 

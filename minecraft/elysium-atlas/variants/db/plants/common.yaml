@@ -1,0 +1,46 @@
+# Plants found on more than one continent, and ground cover that is not one species.
+# Schema: see ../README.md.
+
+bracken:
+  name: Bracken
+  latin: Pteridium aquilinum
+  form: fern
+  range: Acid soils, heaths and wood edges in Europe and North America.
+  render: 'flowers(("large_fern", {"half": "lower"}), "fern", weights=[2, 1])'
+  stand_in: Large fern and fern.
+
+common_reed:
+  name: Common reed
+  latin: Phragmites australis
+  form: grass
+  colour: "#7a9f5a"
+  colour_note: Grey-green broad leaf blades on tall stems.
+  range: Marshes, ditches and lake shores worldwide.
+  render: 'flowers(("tall_grass", {"half": "lower"}), "short_grass", weights=[2, 1])'
+  stand_in: Tall grass.
+
+# ---- cover: not a species; never counted in colours
+forest_mosses:
+  name: Forest floor mosses
+  form: cover
+  note: Feather and carpet mosses (Hylocomium splendens, Rhytidiadelphus, Polytrichum) on wet woodland floors.
+  render: 'flowers("moss_carpet")'
+
+leaf_litter:
+  name: Leaf litter
+  form: cover
+  note: Fallen broadleaf leaves.
+  render: 'segmented("leaf_litter", "segment_amount", (1, 2, 3))'
+
+fallen_log:
+  name: Fallen log
+  form: cover
+  note: Old fallen trunk, placed with the trees.
+  render: 'ref("fallen_oak_tree")'
+  sapling: oak_sapling
+
+dead_brush:
+  name: Dead brush
+  form: cover
+  note: Dry, leafless shrubs on desert flats.
+  render: 'flowers("dead_bush")'

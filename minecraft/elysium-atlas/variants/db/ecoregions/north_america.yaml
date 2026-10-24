@@ -1,0 +1,302 @@
+# Ecoregions: Texas and the ecoregions around it.
+# Keys are RESOLVE Ecoregions 2017 ECO_IDs. Schema: see ../README.md.
+
+363:
+  name: Piney Woods
+  resolve: "Piney Woods"
+  tree_cover: 0.6
+  trees: {loblolly_pine: 6, shortleaf_pine: 2, sweetgum: 2, southern_red_oak: 1, post_oak: 1, bald_cypress: 0.5, fallen_log: 0.2}
+  ground: {leaf_litter: 2, yaupon: 2, christmas_fern: 1, eastern_woodland_sedge: 1.33, broomsedge: 0.67}
+  flowers: {flowering_dogwood: 1, drummond_phlox: 1}
+  flower_density: 0.5
+  rebase: {minecraft:swamp: minecraft:forest}
+  why: "Loblolly and shortleaf pine over sweetgum and oak, yaupon understory. The atlas maps most of it to swamp; it inherits forest."
+
+332:
+  name: Post Oak Savanna
+  resolve: "East Central Texas forests"
+  tree_cover: 0.35
+  trees: {post_oak: 6, blackjack_oak: 0, eastern_red_cedar: 1, cedar_elm: 1, loblolly_pine: 0.5}
+  shrubs: {blackjack_oak: 3, shin_oak: 1}
+  ground: {leaf_litter: 1, little_bluestem: 3}
+  flowers: {plains_coreopsis: 2, indian_blanket: 2, drummond_phlox: 2, winecup: 1, texas_bluebonnet: 1}
+  flower_density: 1.5
+  rebase: {minecraft:swamp: minecraft:plains}
+  why: "Post oak and blackjack oak mottes in little bluestem grassland."
+
+401:
+  name: Blackland Prairie
+  resolve: "Texas blackland prairies"
+  tree_cover: 0.15
+  tree_density: 0.6
+  trees: {cedar_elm: 3, pecan: 2, cottonwood: 1, honey_mesquite: 1, live_oak: 1}
+  ground: {little_bluestem: 2, big_bluestem: 2}
+  flowers: {texas_bluebonnet: 4, texas_paintbrush: 2, winecup: 1, plains_coreopsis: 1, antelope_horn_milkweed: 0.5, tall_goldenrod: 0.5}
+  flower_density: 4
+  rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands, minecraft:swamp: minecraft:plains}
+  why: "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks."
+
+391:
+  name: Hill Country
+  resolve: "Edwards Plateau savanna"
+  tree_cover: 0.4
+  tree_density: 0.6
+  trees: {ashe_juniper: 6, live_oak: 4, post_oak: 1, cedar_elm: 1}
+  shrubs: {shin_oak: 2, one_seed_juniper: 1}
+  ground: {sideoats_grama: 1.6, little_bluestem: 1.6, curly_mesquite: 0.8}
+  flowers: {texas_bluebonnet: 3, texas_paintbrush: 1, indian_blanket: 1, texas_lantana: 1, winecup: 1}
+  cactus: {texas_prickly_pear: 1}
+  flower_density: 2
+  cactus_density: 0.4
+  rebase: {minecraft:birch_forest: minecraft:savanna, minecraft:forest: minecraft:savanna, minecraft:sunflower_plains: minecraft:plains}
+  why: "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring."
+
+390:
+  name: Cross Timbers
+  resolve: "Cross-Timbers savanna-woodland"
+  tree_cover: 0.35
+  trees: {post_oak: 7, eastern_red_cedar: 1, cedar_elm: 1, shumard_oak: 0.5}
+  shrubs: {blackjack_oak: 3}
+  ground: {leaf_litter: 1, little_bluestem: 3}
+  flowers: {black_eyed_susan: 0.4, purple_coneflower: 0.4, prairie_bluets: 0.2, indian_blanket: 1, tall_goldenrod: 1}
+  flower_density: 0.8
+  why: "A belt of stunted post oak and blackjack oak woodland between the prairies."
+
+389:
+  name: Rolling Plains
+  resolve: "Central-Southern US mixed grasslands"
+  tree_cover: 0.12
+  trees: {honey_mesquite: 5, eastern_red_cedar: 1, cottonwood: 1, cedar_elm: 1}
+  shrubs: {shin_oak: 1}
+  ground: {little_bluestem: 1.33, sideoats_grama: 1.33, buffalograss: 1.33}
+  flowers: {indian_blanket: 2, plains_coreopsis: 1, winecup: 1, antelope_horn_milkweed: 1}
+  cactus: {texas_prickly_pear: 1}
+  flower_density: 1.2
+  cactus_density: 0.3
+  rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands}
+  why: "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar."
+
+384:
+  name: Gulf Coast Prairie
+  resolve: "Western Gulf coastal grasslands"
+  tree_cover: 0.15
+  tree_density: 0.7
+  trees: {live_oak_mossy: 5, huisache: 1, honey_mesquite: 1, sabal_palm: 0.3}
+  ground: {common_reed: 1, sea_oats: 0.5, little_bluestem: 2, gulf_cordgrass: 1}
+  flowers: {virginia_iris: 1, texas_paintbrush: 1, plains_coreopsis: 1}
+  flower_density: 1.5
+  rebase: {minecraft:savanna: minecraft:plains, terralith:ashen_savanna: minecraft:plains, minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains}
+  why: "Coastal tallgrass prairie and marsh, mossy live oak mottes on old dunes."
+
+402:
+  name: High Plains
+  resolve: "Western shortgrass prairie"
+  tree_cover: 0.03
+  tree_density: 0.5
+  trees: {cottonwood: 2, honey_mesquite: 2, eastern_red_cedar: 1}
+  ground: {sand_sagebrush: 1, russian_thistle: 0.3, blue_grama: 2, buffalograss: 2}
+  flowers: {desert_marigold: 1, winecup: 1}
+  cactus: {texas_prickly_pear: 1}
+  flower_density: 0.6
+  cactus_density: 0.2
+  rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands}
+  why: "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+
+428:
+  name: Chihuahuan Desert
+  resolve: "Chihuahuan desert"
+  tree_cover: 0.04
+  trees: {honey_mesquite: 3, pinyon_pine: 1, faxon_yucca: 1}
+  shrubs: {one_seed_juniper: 1}
+  ground: {creosote_bush: 4, dead_brush: 1, russian_thistle: 0.3, black_grama: 1, tobosa: 1}
+  flowers: {desert_marigold: 1, sacred_datura: 0.5}
+  cactus: {texas_prickly_pear: 2, tree_cholla: 1, lechuguilla: 2}
+  flower_density: 0.4
+  cactus_density: 1.2
+  why: "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+
+437:
+  name: Brush Country
+  resolve: "Tamaulipan mezquital"
+  tree_cover: 0.2
+  trees: {honey_mesquite: 6, huisache: 2, live_oak: 1, sabal_palm: 0.2}
+  shrubs: {texas_ebony: 3}
+  ground: {curly_mesquite: 2, sideoats_grama: 1}
+  flowers: {indian_blanket: 2, plains_coreopsis: 1, texas_lantana: 1}
+  cactus: {texas_prickly_pear: 1}
+  flower_density: 1
+  cactus_density: 1.0
+  why: "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
+
+436:
+  name: Tamaulipan Thornscrub
+  resolve: "Tamaulipan matorral"
+  tree_cover: 0.25
+  trees: {honey_mesquite: 3, huisache: 2}
+  shrubs: {texas_ebony: 5, one_seed_juniper: 1}
+  ground: {curly_mesquite: 2, sideoats_grama: 1}
+  flowers: {indian_blanket: 1, texas_lantana: 1}
+  cactus: {texas_prickly_pear: 2, lechuguilla: 0.5}
+  flower_density: 0.5
+  cactus_density: 1.2
+  why: "Dense evergreen thornscrub at the foot of the Sierra Madre Oriental."
+
+388:
+  name: Tallgrass Prairie
+  resolve: "Central Tallgrass prairie"
+  tree_cover: 0.12
+  tree_density: 0.7
+  trees: {white_oak: 2, cottonwood: 2, mockernut_hickory: 1, red_oak: 1}
+  ground: {big_bluestem: 2.4, little_bluestem: 0.8, switchgrass: 0.8}
+  flowers: {black_eyed_susan: 0.8, purple_coneflower: 0.8, prairie_bluets: 0.4, plains_coreopsis: 1, tall_goldenrod: 1, antelope_horn_milkweed: 0.5}
+  flower_density: 1.8
+  rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands}
+  why: "Big bluestem prairie of Iowa, Missouri and Kansas: the atlas plants forest on it; it inherits plains."
+
+392:
+  name: Flint Hills
+  resolve: "Flint Hills tallgrass prairie"
+  tree_cover: 0.06
+  tree_density: 0.5
+  trees: {white_oak: 1, cottonwood: 1, eastern_red_cedar: 1}
+  ground: {big_bluestem: 2, little_bluestem: 2}
+  flowers: {black_eyed_susan: 0.8, purple_coneflower: 0.8, prairie_bluets: 0.4, tall_goldenrod: 1}
+  flower_density: 1.5
+  rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands}
+  why: "The largest surviving tallgrass prairie, on flinty limestone hills."
+
+340:
+  name: Ozark Highlands
+  resolve: "Ozark Highlands mixed forests"
+  tree_cover: 0.65
+  trees: {white_oak: 3, red_oak: 3, mockernut_hickory: 3, shortleaf_pine: 1, eastern_red_cedar: 1, fallen_log: 0.2}
+  ground: {leaf_litter: 3, christmas_fern: 1, eastern_woodland_sedge: 0.67, little_bluestem: 0.33}
+  flowers: {flowering_dogwood: 1}
+  flower_density: 0.6
+  rebase: {minecraft:swamp: minecraft:forest}
+  why: "Oak-hickory forest with cedar glades on the dolomite plateaus."
+
+341:
+  name: Ozark Mountains
+  resolve: "Ozark Mountain forests"
+  tree_cover: 0.75
+  trees: {white_oak: 3, red_oak: 2, mockernut_hickory: 2, shortleaf_pine: 3, fallen_log: 0.2}
+  ground: {leaf_litter: 3, christmas_fern: 1, eastern_woodland_sedge: 1}
+  flowers: {flowering_dogwood: 1}
+  flower_density: 0.6
+  rebase: {minecraft:swamp: minecraft:forest}
+  why: "Boston and Ouachita Mountains: oak-hickory with more shortleaf pine on the ridges."
+
+337:
+  name: Mississippi Bottomlands
+  resolve: "Mississippi lowland forests"
+  tree_cover: 0.6
+  trees: {bald_cypress: 3, sweetgum: 3, pecan: 2, cottonwood: 2, live_oak_mossy: 1}
+  ground: {christmas_fern: 1, common_reed: 1, eastern_woodland_sedge: 1, switchgrass: 1}
+  flowers: {virginia_iris: 1}
+  flower_density: 0.6
+  why: "Bottomland hardwoods and cypress sloughs of the lower Mississippi."
+
+399:
+  name: Longleaf Savanna
+  resolve: "Southeast US conifer savannas"
+  tree_cover: 0.3
+  trees: {longleaf_pine: 6, loblolly_pine: 1, live_oak_mossy: 1}
+  ground: {christmas_fern: 1, yaupon: 1, wiregrass: 3}
+  flowers: {plains_coreopsis: 1, drummond_phlox: 1, tall_goldenrod: 0.5}
+  flower_density: 0.8
+  why: "Open longleaf pine over wiregrass on the Gulf coastal plain."
+
+400:
+  name: Southern Mixed Woods
+  resolve: "Southeast US mixed woodlands and savannas"
+  tree_cover: 0.6
+  trees: {loblolly_pine: 3, shortleaf_pine: 1, white_oak: 2, sweetgum: 2, mockernut_hickory: 1}
+  ground: {leaf_litter: 2, yaupon: 1, eastern_woodland_sedge: 0.5, broomsedge: 0.5}
+  flowers: {flowering_dogwood: 1}
+  flower_density: 0.6
+  rebase: {minecraft:swamp: minecraft:forest}
+  why: "Piedmont pine-oak-hickory woodland."
+
+346:
+  name: Mogollon Rim
+  resolve: "Arizona Mountains forests"
+  tree_cover: 0.45
+  trees: {ponderosa_pine: 7, douglas_fir: 1, quaking_aspen: 1, pinyon_pine: 1}
+  shrubs: {gambel_oak: 2}
+  ground: {mountain_muhly: 2, blue_grama: 1}
+  flowers: {desert_marigold: 1}
+  flower_density: 0.4
+  why: "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+
+353:
+  name: Southern Rockies
+  resolve: "Colorado Rockies forests"
+  tree_cover: 0.5
+  trees: {engelmann_spruce: 3, subalpine_fir: 3, quaking_aspen: 2, douglas_fir: 1, ponderosa_pine: 1}
+  shrubs: {gambel_oak: 1}
+  ground: {christmas_fern: 1, thurber_fescue: 1.33, mountain_muhly: 0.67}
+  flowers: {black_eyed_susan: 0.4, purple_coneflower: 0.4, prairie_bluets: 0.2}
+  flower_density: 0.6
+  why: "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
+
+429:
+  name: Pinyon-Juniper Plateau
+  resolve: "Colorado Plateau shrublands"
+  tree_cover: 0.15
+  trees: {pinyon_pine: 5, ponderosa_pine: 0.5}
+  shrubs: {one_seed_juniper: 4}
+  ground: {sand_sagebrush: 3, blue_grama: 2}
+  flowers: {desert_marigold: 1}
+  cactus: {texas_prickly_pear: 1}
+  flower_density: 0.3
+  cactus_density: 0.3
+  why: "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+
+326:
+  name: Sierra Madre Occidental
+  resolve: "Sierra Madre Occidental pine-oak forests"
+  tree_cover: 0.45
+  trees: {ponderosa_pine: 5, live_oak: 3, post_oak: 1, douglas_fir: 0.5}
+  shrubs: {one_seed_juniper: 1}
+  ground: {mountain_muhly: 3}
+  flowers: {plains_coreopsis: 1}
+  flower_density: 0.5
+  why: "Madrean pine-oak forest over the barrancas."
+
+327:
+  name: Sierra Madre Oriental
+  resolve: "Sierra Madre Oriental pine-oak forests"
+  tree_cover: 0.4
+  trees: {ponderosa_pine: 4, live_oak: 3, ashe_juniper: 2, post_oak: 1}
+  shrubs: {shin_oak: 1, texas_ebony: 1}
+  ground: {mountain_muhly: 1.5, sideoats_grama: 1.5}
+  flowers: {indian_blanket: 1}
+  flower_density: 0.5
+  why: "Pine-oak and juniper on the limestone ranges above Monterrey."
+
+545:
+  name: Sinaloan Dry Forest
+  resolve: "Sinaloan dry forests"
+  tree_cover: 0.35
+  trees: {huisache: 3, honey_mesquite: 2}
+  shrubs: {texas_ebony: 3}
+  ground: {sideoats_grama: 3}
+  flowers: {indian_blanket: 1}
+  cactus: {tree_cholla: 1}
+  flower_density: 0.5
+  cactus_density: 0.4
+  why: "Tropical deciduous forest with columnar cacti on the Pacific slope."
+
+432:
+  name: Mexican Plateau Matorral
+  resolve: "Meseta Central matorral"
+  tree_cover: 0.08
+  trees: {honey_mesquite: 2, huisache: 1}
+  shrubs: {texas_ebony: 2, one_seed_juniper: 1}
+  ground: {creosote_bush: 3, blue_grama: 1, tobosa: 1}
+  flowers: {desert_marigold: 1}
+  cactus: {texas_prickly_pear: 3, tree_cholla: 1, lechuguilla: 1}
+  flower_density: 0.4
+  cactus_density: 1.5
+  why: "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
