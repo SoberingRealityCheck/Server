@@ -83,6 +83,14 @@ atlas point within 12 blocks, then the chains are smoothed and given a meander (
 wavelength) that fades out at both ends. A stream's level never drops below the river, lake, sea or
 downstream stream it joins. Slice-4: 3.1M stream segments, `water.bin.gz` 40 MB (format 2).
 
+Sub-biomes (`bake/bake_subbiomes.py ATLAS_DIR TILE_CACHE WC_CACHE`, about 1 min, run last): on the
+4-block detail level, each cell gets one of 17 classes from terrain (slope, aspect, hollows, ridges,
+flow) and ESA WorldCover 2021 land use (old fields, woods, towns, wetland), then a biome from the class
+and the group of the formation biome already there (broadleaf, conifer, mountain, dry). Patches are at
+least about 36 blocks. Only L1 biome bytes and `atlas.json` change. Slice-5 = slice-4 + sub-biomes: in
+a lowland France window the share of `forest` falls from 41% to 17% and distinct biomes rise from 18
+to 28. Behind a TLS proxy set `GDAL_CURL_CA_BUNDLE`.
+
 `bake/bake_atlas.py OUT TILE_CACHE [--region LON0 LON1 LAT0 LAT1] [--spawn LON LAT]` builds it from
 Terrarium elevation tiles and the biome layers in the project's worldgen-experiments folder (set
 `ELYSIUM_WORLDGEN_EXPERIMENTS` to its path). Changing a frozen constant in it needs a new
