@@ -167,6 +167,22 @@ def rgb(h): return tuple(int(h[i:i + 2], 16) for i in (1, 3, 5))
 def hexc(c): return "#%02x%02x%02x" % c
 
 
+def leaf_id(k): return k if ":" in k else "minecraft:" + k
+
+
+def palette(prof, leaf_table):
+    """A profile's leaf colours ("leaves": {leaf block: hex}, the summer colour of that leaf type in the region) as
+    (hue shift, saturation ratio, value ratio) against the profile's foliage colour, so the season moves them too."""
+    out = {}
+    h0, s0, v0 = colorsys.rgb_to_hsv(*(x / 255 for x in rgb(prof["foliage"])))
+    for k, c in prof.get("leaves", {}).items():
+        b = leaf_id(k)
+        if b not in leaf_table: raise SystemExit(f"flora {prof['name']}: {b} is not a regionally tinted leaf (leaf_tints.py)")
+        h, sat, v = colorsys.rgb_to_hsv(*(x / 255 for x in rgb(c)))
+        out[b] = [round((h - h0 + 0.5) % 1.0 - 0.5, 4), round(sat / s0, 4), round(v / v0, 4)]
+    return out
+
+
 def shade(c, f):
     h, s, v = colorsys.rgb_to_hsv(*[x / 255 for x in c]); return tuple(int(round(x * 255)) for x in colorsys.hsv_to_rgb(h, s, max(0, min(1, v * f))))
 
@@ -283,7 +299,8 @@ def generate(src, check=False):
         if ident not in biome_cache: biome_cache[ident] = src.get("biome", ident)
         return biome_cache[ident]
 
-    out = {}; placed = {}; lang = {}; table = {}; claims = {}
+    out = {}; placed = {}; lang = {}; table = {}; claims = {}; palettes = {}
+    leaf_table = json.load(open(os.path.join(RES, "elysium_atlas", "leaf_tints.json")))["leaves"]
 
     def claim(vid, unit, atlas_biome):
         k = (unit, atlas_biome)
@@ -365,10 +382,12 @@ def generate(src, check=False):
                           "why": prof["why"]}
             if a != base_id: table[vid]["replaces"] = [a]
             lang[f"biome.elysium.{path.replace('/', '.')}"] = prof["name"] if a == main else f"{prof['name']} ({title(a)})"
+            if prof.get("leaves"): palettes[vid] = palette(prof, leaf_table)
             n_flora += 1
     files = {**out, **placed, **flora.files,
              "assets/elysium/lang/en_us.json": lang,
-             "elysium_atlas/variants.json": {"format": 2, "generated_by": "variants/biome_variants.py", "variants": table}}
+             "elysium_atlas/variants.json": {"format": 2, "generated_by": "variants/biome_variants.py", "variants": table},
+             "elysium_atlas/leaf_palettes.json": {"generated_by": "variants/biome_variants.py (flora profiles' \"leaves\")", "palettes": palettes}}
     if check:
         stale = [p for p, d in files.items() if not os.path.exists(os.path.join(RES, p)) or json.load(open(os.path.join(RES, p))) != d]
         extra = [p for g in GENERATED_DIRS for p in glob.glob(os.path.join(RES, g, "**", "*.json"), recursive=True)
@@ -379,7 +398,7 @@ def generate(src, check=False):
         f = os.path.join(RES, p); os.makedirs(os.path.dirname(f), exist_ok=True)
         with open(f, "w") as fh: json.dump(d, fh, indent=1 if p.endswith("variants.json") or "lang" in p else None, separators=None if "lang" in p or p.endswith("variants.json") else (",", ":")); fh.write("\n")
     print(f"{len(VARIANTS)} hand-written, {n_flora} from {len(flora_db)} ecoregion profiles; "
-          f"{len(table)} variants, {len(placed) + len(flora.files)} feature files")
+          f"{len(table)} variants ({len(palettes)} with leaf palettes), {len(placed) + len(flora.files)} feature files")
     return True
 
 

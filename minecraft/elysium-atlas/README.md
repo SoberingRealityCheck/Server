@@ -207,6 +207,13 @@ biome. Profiles so far cover 25 ecoregions in and around Texas (`flora/texas.py`
 audits every variant against its parent (tags, spawns, features) and lists only problems. `/atlas here` and
 F3 show the region.
 
+Leaf colours (client): every green leaf follows the variant's foliage colour, including spruce, birch and the
+flora mods' leaves. `variants/leaf_tints.py` measures each species' own colour as an offset from vanilla's
+default foliage colour and makes pre-coloured mod textures greyscale (built-in pack `regional_leaves`). A profile's
+`"leaves": {leaf block: hex}` sets that leaf type's summer colour in that ecoregion, so leaf types keep separate
+colours within one region; it is stored relative to the profile's foliage (`leaf_palettes.json`), so seasons
+still shift it. `docs/ecoregion_colours.png` in the project folder shows every profile.
+
 ## Distant Horizons SeedGen
 
 SeedGen (0.9.1) draws LODs from the world's density functions and biome source, so atlas terrain and

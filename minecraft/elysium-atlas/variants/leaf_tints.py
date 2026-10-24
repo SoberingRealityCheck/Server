@@ -28,7 +28,18 @@ GREY_MEAN = 0.566        # vanilla oak_leaves texture mean, so a retextured leaf
 
 # vanilla leaves with greyscale textures and fixed tints: species colour = the fixed tint
 VANILLA = {"minecraft:spruce_leaves": 0x619961, "minecraft:birch_leaves": 0x80A755, "minecraft:mangrove_leaves": 0x92C033}
-# mod leaves with pre-coloured textures (model parent minecraft:block/leaves, so tint index 0 is already there)
+# leaves that already follow the foliage colour (vanilla, or tinted by their own mod): listed so a region's palette
+# (profile "leaves", leaf_palettes.json) can recolour them; their default offset is none
+FOLLOW = ["minecraft:oak_leaves", "minecraft:dark_oak_leaves", "minecraft:acacia_leaves", "minecraft:jungle_leaves",
+          "biomesoplenty:pine_leaves"]
+# default character for greyscale mod leaves that have no colour of their own to measure (conifers a little bluer
+# and darker than broadleaves); a region's palette overrides it
+CHARACTER = {"terrestria:hemlock_leaves": (0.04, 0.70, 0.85), "terrestria:redwood_leaves": (0.02, 0.75, 0.85),
+             "wilderwild:cypress_leaves": (0.03, 0.75, 0.9), "terrestria:cypress_leaves": (0.04, 0.8, 0.75),
+             "biomesoplenty:pine_leaves": (0.03, 0.8, 0.9)}
+GREY = 0.15               # mean HSV saturation under which a texture counts as greyscale (tinted by its own mod)
+# mod leaves (model parent minecraft:block/leaves, so tint index 0 is already there): pre-coloured textures are
+# made greyscale; greyscale ones are kept and only take the regional tint
 MOD = ["biomesoplenty:fir_leaves", "biomesoplenty:redwood_leaves", "biomesoplenty:cypress_leaves", "biomesoplenty:palm_leaves",
        "biomesoplenty:willow_leaves", "biomesoplenty:mahogany_leaves",
        "wilderwild:baobab_leaves", "wilderwild:cypress_leaves", "wilderwild:willow_leaves",
@@ -57,6 +68,8 @@ def main():
     table = {}
     for b, c in VANILLA.items():
         table[b] = offset((((c >> 16) & 255) / 255, ((c >> 8) & 255) / 255, (c & 255) / 255))
+    for b in FOLLOW: table[b] = list(CHARACTER.get(b, (0.0, 1.0, 1.0)))
+    n_grey = 0
     for b in MOD:
         ns, name = b.split(":")
         model = read(f"assets/{ns}/models/block/{name}.json")
@@ -69,6 +82,9 @@ def main():
         im = np.asarray(Image.open(io.BytesIO(png)).convert("RGBA")).astype(np.float64) / 255
         a = im[..., 3] > 0.5
         mean = im[..., :3][a].mean(0)
+        px = im[..., :3][a]; sat = ((px.max(1) - px.min(1)) / np.maximum(px.max(1), 1e-6)).mean()
+        if sat < GREY:            # already a tint target of its own mod: keep the texture, only take our tint
+            table[b] = list(CHARACTER.get(b, (0.0, 1.0, 1.0))); n_grey += 1; continue
         lum = im[..., :3] @ np.array([0.299, 0.587, 0.114]); lmean = lum[a].mean()
         # the colour a tint must have to reproduce the original look on a GREY_MEAN texture in a default-foliage biome
         species = np.clip(mean / GREY_MEAN, 0, 1)
@@ -90,7 +106,8 @@ def main():
               open(os.path.join(PACK, "pack.mcmeta"), "w"), indent=1)
     os.makedirs(os.path.join(RES, "elysium_atlas"), exist_ok=True)
     json.dump({"foliage_default": FOLIAGE_DEFAULT, "leaves": table}, open(os.path.join(RES, "elysium_atlas", "leaf_tints.json"), "w"), indent=1)
-    print(f"{len(table)} leaf types: {len(VANILLA)} vanilla, {len(table) - len(VANILLA)} retextured")
+    print(f"{len(table)} leaf types: {len(VANILLA) + len(FOLLOW)} vanilla or foliage-following, {n_grey} greyscale mod leaves, "
+          f"{len(table) - len(VANILLA) - len(FOLLOW) - n_grey} retextured")
 
 
 if __name__ == "__main__":
