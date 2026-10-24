@@ -337,6 +337,8 @@ def generate(src, check=False):
             vid = f"elysium:eco/{eid}/{base_id.split(':')[1] if base_id.startswith('minecraft:') else base_id.replace(':', '_')}"
             if a != base_id: vid += f"_from_{a.split(':')[1]}"
             claim(vid, unit, a)
+            if vid in table:          # an ecoregion split into several units (regions.py groups) shares one variant
+                table[vid]["regions"].append(unit); continue
             remove, _ = plants.of_biome(base)
             add = []
             if prof.get("trees"):

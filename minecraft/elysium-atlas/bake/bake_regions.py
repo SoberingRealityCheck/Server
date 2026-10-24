@@ -41,6 +41,25 @@ def load_l0(adir, i0, j0, w, h):
     return out, m["biome_palette"]
 
 
+def detail_pairs(adir, units, i0, j0):
+    """(unit, biome) -> area in 32-block cells, over the detail levels' tiles."""
+    m = json.load(open(os.path.join(adir, "atlas.json"))); T = m["tile_size"]; n = T * T; acc = {}
+    for lv in m["levels"]:
+        if lv["name"] == "L0": continue
+        k = CELL // lv["cell"]; h, w = units.shape
+        for f in os.listdir(os.path.join(adir, lv["dir"])):
+            tx, tz = map(int, f.split(".")[0].split("_")); raw = gzip.open(os.path.join(adir, lv["dir"], f)).read()
+            b = np.frombuffer(raw[8 + 3 * n:8 + 4 * n], "u1").reshape(T, T)
+            J, I = np.mgrid[tz * T:(tz + 1) * T, tx * T:(tx + 1) * T]
+            r = np.floor_divide(J, k) - j0; c = np.floor_divide(I, k) - i0
+            ok = (r >= 0) & (r < h) & (c >= 0) & (c < w)
+            u = np.zeros(b.shape, np.int64); u[ok] = units[r[ok], c[ok]]; sel = (u > 0) & (b != 255)
+            vals, cnt = np.unique(u[sel] * 256 + b[sel], return_counts=True)
+            for v, ct in zip(vals, cnt):
+                key = divmod(int(v), 256); acc[key] = acc.get(key, 0.0) + ct / (k * k)
+    return acc
+
+
 def main():
     adir, shp, vdir = sys.argv[1:4]; t0 = time.time()
     sys.path.insert(0, vdir); import regions as R
@@ -107,6 +126,10 @@ def main():
     for v, c in zip(vals, cnt):
         u, b = divmod(int(v), 256)
         if b < len(pal): stats.setdefault(names[u - 1], {})[pal[b]] = int(c)
+    # detail levels (L1, with sub-biomes) carry biomes L0 does not; count them in L0-cell units
+    for (u, b), c in detail_pairs(adir, out, i0, j0).items():
+        if b < len(pal):
+            d = stats.setdefault(names[u - 1], {}); d[pal[b]] = d.get(pal[b], 0) + int(round(c))
     os.makedirs(os.path.join(vdir, "data"), exist_ok=True)
     with open(os.path.join(vdir, "data", "ecoregions.json"), "w") as f: json.dump({str(k): meta[k] for k in sorted(meta)}, f, indent=0, ensure_ascii=False)
     with open(os.path.join(vdir, "data", "unit_biomes.json"), "w") as f:
