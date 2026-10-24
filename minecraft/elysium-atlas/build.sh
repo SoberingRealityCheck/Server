@@ -9,7 +9,7 @@
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 work="$here/.build"
-version=0.8.0
+version=0.9.0
 out="$here/../server-overrides/mods/elysium_atlas.jar"
 
 if [ -n "${JAVA_HOME:-}" ]; then PATH="$JAVA_HOME/bin:$PATH"; fi
@@ -34,12 +34,16 @@ if [ ! -d "$work/mc" ]; then
 fi
 if [ ! -d "$work/fapi" ]; then
   mkdir -p "$work/fapi"
-  for part in fabric-api-base fabric-command-api-v2 fabric-lifecycle-events-v1; do
+  for part in fabric-api-base fabric-command-api-v2 fabric-lifecycle-events-v1 fabric-resource-loader-v1; do
     unzip -qo "$work/fabric-api.jar" "META-INF/jars/$part-*.jar" -d "$work/fapi"
   done
 fi
 
-cp_list="$work/loader.jar:$work/mixin.jar:$work/mixinextras.jar:$work/mc/META-INF/versions/26.2/server-26.2.jar"
+# client classes (leaf tints): the merged 26.2 jar from a Loom cache, e.g.
+#   ~/.gradle/caches/fabric-loom/minecraftMaven/net/minecraft/minecraft-merged-deobf/26.2/minecraft-merged-deobf-26.2.jar
+client="${MC_CLIENT_JAR:-$work/mc-merged.jar}"
+if [ ! -f "$client" ]; then echo "Need the 26.2 client classes: set MC_CLIENT_JAR or copy the jar to $work/mc-merged.jar" >&2; exit 1; fi
+cp_list="$client:$work/loader.jar:$work/mixin.jar:$work/mixinextras.jar:$work/mc/META-INF/versions/26.2/server-26.2.jar"
 for j in $(find "$work/fapi" "$work/mc/META-INF/libraries" -name '*.jar'); do
   cp_list="$cp_list:$j"
 done

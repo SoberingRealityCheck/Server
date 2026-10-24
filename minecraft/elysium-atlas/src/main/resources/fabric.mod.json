@@ -3,7 +3,7 @@
   "id": "elysium_atlas",
   "version": "${version}",
   "name": "Elysium Atlas",
-  "description": "Generates the overworld from a baked Earth atlas: atlas elevation and continentalness drive Tectonic's terrain, atlas biome IDs drive surface biomes, atlas rivers and lakes are carved and filled. Server-side.",
+  "description": "Generates the overworld from a baked Earth atlas: atlas elevation and continentalness drive Tectonic's terrain, atlas biome IDs drive surface biomes, atlas rivers and lakes are carved and filled. Server-side worldgen; on the client, regional leaf colours for spruce, birch and the flora mods' leaves.",
   "authors": [
     "Elysium pack"
   ],
@@ -12,11 +12,15 @@
   "entrypoints": {
     "main": [
       "dev.elysium.atlas.ElysiumAtlas"
+    ],
+    "client": [
+      "dev.elysium.atlas.client.ElysiumAtlasClient"
     ]
   },
   "mixins": [
     "elysium_atlas.mixins.json",
-    "elysium_atlas.compat.mixins.json"
+    "elysium_atlas.compat.mixins.json",
+    "elysium_atlas.client.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.19.0",

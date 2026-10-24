@@ -37,6 +37,8 @@ public final class Atlas {
     public final Water water;
     /** Region layer that picks biome variants, or null. */
     public final Regions regions;
+    /** Per-biome local relief, or null for an atlas baked without a detail table. */
+    public final Detail detail;
 
     private Atlas(Path dir) throws IOException {
         this.dir = dir;
@@ -71,6 +73,7 @@ public final class Atlas {
             for (JsonElement e : rg.getAsJsonArray("names")) names.add(e.getAsString());
             regions = new Regions(dir.resolve(rg.get("file").getAsString()), names);
         } else regions = null;
+        detail = m.has("detail") ? new Detail(m.getAsJsonObject("detail"), palette) : null;
         LOG.info("Atlas {} loaded from {}: {} levels, {} biomes, {} regions, {} m/block", version, dir, levels.size(), palette.size(), regions == null ? 0 : regions.names.size(), metresPerBlock);
     }
 
@@ -146,6 +149,14 @@ public final class Atlas {
         Water.Column col = water != null ? water.column(x + 0.5, z + 0.5, h) : new Water.Column(h, Water.NO_FLUID, 1, false, false);
         cache[slot] = new Cached(x, z, col);
         return col;
+    }
+
+    /** Per-biome local relief in blocks at a column (Detail), or 0. Finer levels carry real relief there, so it is damped. */
+    public double hills(int x, int z) {
+        if (detail == null) return 0;
+        Water.Column c = column(x, z);
+        boolean fine = levels.size() > 1 && levels.get(0).biome(x, z) >= 0;
+        return detail.blocks(this, x, z, c.calm(), c.height(), fine);
     }
 
     /** Local relief in metres (8 km window), or 0. */

@@ -5,7 +5,11 @@
     "type": "minecraft:flat_cache",
     "argument": {
       "type": "minecraft:cache_2d",
-      "argument": { "type": "elysium_atlas:sample", "channel": "offset", "fallback": { "type": "lithostitched:original_marker" } }
+      "argument": {
+        "type": "minecraft:add",
+        "argument1": { "type": "elysium_atlas:sample", "channel": "offset", "fallback": { "type": "lithostitched:original_marker" } },
+        "argument2": { "type": "elysium_atlas:sample", "channel": "hills", "fallback": 0.0 }
+      }
     }
   }
 }

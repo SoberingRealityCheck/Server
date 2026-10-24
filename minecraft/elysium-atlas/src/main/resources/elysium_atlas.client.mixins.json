@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "minVersion": "0.8.0",
+  "compatibilityLevel": "JAVA_25",
+  "package": "dev.elysium.atlas.client.mixin",
+  "client": ["BlockColorsMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

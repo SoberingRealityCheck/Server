@@ -1,0 +1,12 @@
+{
+ "model": {
+  "type": "minecraft:model",
+  "model": "biomesoplenty:block/fir_leaves",
+  "tints": [
+   {
+    "type": "minecraft:constant",
+    "value": -11299480
+   }
+  ]
+ }
+}

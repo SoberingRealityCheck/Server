@@ -18,10 +18,11 @@ import net.minecraft.world.level.levelgen.DensityFunction;
  *   continents   continentalness in Tectonic's raw_continents range (-0.45 deep sea .. ~0.35 high inland)
  *   relief       local relief in kilometres (8 km window)
  *   calm         0 on rivers and lakes, rising to 1 away from them: scales Tectonic's own noise so it cannot fill a channel
+ *   hills        per-biome local relief (Detail) in offset units (blocks / 128), added to the offset
  */
 public record AtlasDensityFunction(Channel channel, DensityFunction fallback) implements DensityFunction {
     public enum Channel implements StringRepresentable {
-        OFFSET("offset", -1.5, 4.0), HEIGHT("height", -64, 640), CONTINENTS("continents", -0.45, 0.35), RELIEF("relief", 0, 5.1), CALM("calm", 0, 1);
+        OFFSET("offset", -1.5, 4.0), HEIGHT("height", -64, 640), CONTINENTS("continents", -0.45, 0.35), RELIEF("relief", 0, 5.1), CALM("calm", 0, 1), HILLS("hills", -0.25, 0.25);
 
         public static final Codec<Channel> CODEC = StringRepresentable.fromEnum(Channel::values);
         final String id; final double min, max;
@@ -46,6 +47,7 @@ public record AtlasDensityFunction(Channel channel, DensityFunction fallback) im
             case CONTINENTS -> continents(a.heightOrOcean(x, z) - (a.seaLevelY + 0.5));
             case RELIEF -> a.relief(x, z) / 1000.0;
             case CALM -> a.column(x, z).calm();
+            case HILLS -> a.hills(x, z) / 128.0;
         };
     }
 

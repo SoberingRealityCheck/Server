@@ -1,0 +1,95 @@
+{
+ "foliage_default": 4764952,
+ "leaves": {
+  "minecraft:spruce_leaves": [
+   0.051,
+   0.422,
+   0.8453
+  ],
+  "minecraft:birch_leaves": [
+   -0.0364,
+   0.5661,
+   0.9227
+  ],
+  "minecraft:mangrove_leaves": [
+   -0.0613,
+   0.8466,
+   1.0608
+  ],
+  "biomesoplenty:fir_leaves": [
+   0.1017,
+   0.5089,
+   0.8258
+  ],
+  "biomesoplenty:redwood_leaves": [
+   -0.0434,
+   0.6291,
+   0.9319
+  ],
+  "biomesoplenty:cypress_leaves": [
+   0.008,
+   0.5699,
+   0.8024
+  ],
+  "biomesoplenty:palm_leaves": [
+   -0.2824,
+   0.0,
+   1.4088
+  ],
+  "biomesoplenty:willow_leaves": [
+   -0.2824,
+   0.0,
+   1.269
+  ],
+  "biomesoplenty:mahogany_leaves": [
+   0.051,
+   0.001,
+   1.3342
+  ],
+  "wilderwild:baobab_leaves": [
+   -0.2895,
+   0.0146,
+   1.3393
+  ],
+  "wilderwild:cypress_leaves": [
+   -0.2824,
+   0.0,
+   1.4088
+  ],
+  "wilderwild:willow_leaves": [
+   -0.2824,
+   0.0432,
+   1.3282
+  ],
+  "terrestria:hemlock_leaves": [
+   -0.2824,
+   0.0,
+   1.3394
+  ],
+  "terrestria:redwood_leaves": [
+   -0.2824,
+   0.0,
+   1.1468
+  ],
+  "terrestria:cypress_leaves": [
+   -0.1281,
+   0.0906,
+   1.3763
+  ],
+  "terrestria:rubber_leaves": [
+   -0.2824,
+   0.0,
+   1.1645
+  ],
+  "terrestria:jungle_palm_leaves": [
+   0.0529,
+   0.812,
+   1.0773
+  ],
+  "terrestria:yucca_palm_leaves": [
+   -0.0173,
+   0.8294,
+   0.9259
+  ]
+ }
+}
