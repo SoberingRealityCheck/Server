@@ -37,17 +37,18 @@ import java.util.Set;
  * changes only colours and effects; its feature patch is applied here.
  */
 public final class Variants {
-    public record Def(Identifier id, Identifier parent, List<String> regions, Map<Integer, List<Identifier>> addFeatures, Set<Identifier> removeFeatures) {}
+    public record Def(Identifier id, Identifier parent, List<Identifier> replaces, List<String> regions, Map<Integer, List<Identifier>> addFeatures, Set<Identifier> removeFeatures) {}
 
     /** By variant id. Empty when the jar carries no table. */
     public static final Map<Identifier, Def> DEFS = load();
     private static final Map<String, Identifier> BY_REGION_PARENT = new HashMap<>();
     static {
         for (Def d : DEFS.values())
-            for (String r : d.regions) {
-                Identifier old = BY_REGION_PARENT.put(r + "|" + d.parent, d.id);
-                if (old != null) throw new IllegalStateException("biome variants " + old + " and " + d.id + " both claim " + d.parent + " in " + r);
-            }
+            for (String r : d.regions)
+                for (Identifier atlasBiome : d.replaces) {
+                    Identifier old = BY_REGION_PARENT.put(r + "|" + atlasBiome, d.id);
+                    if (old != null) throw new IllegalStateException("biome variants " + old + " and " + d.id + " both replace " + atlasBiome + " in " + r);
+                }
     }
 
     private Variants() {}
@@ -57,9 +58,9 @@ public final class Variants {
         return d == null ? null : d.parent;
     }
 
-    /** The variant that replaces a parent biome in a region, or null. */
-    public static Identifier variantFor(String region, Identifier parent) {
-        return region == null ? null : BY_REGION_PARENT.get(region + "|" + parent);
+    /** The variant that replaces an atlas biome in a region unit, or null. Usually the variant's parent; "replaces" in the table can name others. */
+    public static Identifier variantFor(String region, Identifier atlasBiome) {
+        return region == null ? null : BY_REGION_PARENT.get(region + "|" + atlasBiome);
     }
 
     private static Map<Identifier, Def> load() {
@@ -80,8 +81,11 @@ public final class Variants {
                     }
                 Set<Identifier> remove = new HashSet<>();
                 if (v.has("remove_features")) v.getAsJsonArray("remove_features").forEach(f -> remove.add(Identifier.parse(f.getAsString())));
-                Identifier id = Identifier.parse(e.getKey());
-                out.put(id, new Def(id, Identifier.parse(v.get("parent").getAsString()), List.copyOf(regions), Map.copyOf(add), Set.copyOf(remove)));
+                Identifier id = Identifier.parse(e.getKey()), parent = Identifier.parse(v.get("parent").getAsString());
+                List<Identifier> replaces = new ArrayList<>();
+                if (v.has("replaces")) v.getAsJsonArray("replaces").forEach(r -> replaces.add(Identifier.parse(r.getAsString())));
+                else replaces.add(parent);
+                out.put(id, new Def(id, parent, List.copyOf(replaces), List.copyOf(regions), Map.copyOf(add), Set.copyOf(remove)));
             }
         } catch (IOException e) {
             throw new IllegalStateException("cannot read biome variant table", e);

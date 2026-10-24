@@ -121,9 +121,10 @@ public final class ElysiumAtlas implements ModInitializer {
                 }
             boolean ok = missing.isEmpty() && spawns && lost == 0;
             if (!ok) problems++;
-            String msg = String.format("%s <- %s [%s]: tags %s, spawns %s, features %s", d.id(), d.parent(), String.join(" ", d.regions()),
+            String msg = String.format("%s <- %s [%d units]: tags %s, spawns %s, features %s", d.id(), d.parent(), d.regions().size(),
                     missing.isEmpty() ? "ok" : "missing " + missing, spawns ? "ok" : "DIFFER", lost == 0 ? "ok" : lost + " parent features missing");
-            if (ok) c.getSource().sendSuccess(() -> Component.literal(msg), false); else c.getSource().sendFailure(Component.literal(msg));
+            if (!ok) c.getSource().sendFailure(Component.literal(msg));
+            else if (Variants.DEFS.size() <= 40) c.getSource().sendSuccess(() -> Component.literal(msg), false);
         }
         int n = problems;
         c.getSource().sendSuccess(() -> Component.literal(Variants.DEFS.size() + " variants, " + n + " with problems"), false);

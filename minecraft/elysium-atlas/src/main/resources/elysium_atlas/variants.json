@@ -1,194 +1,4788 @@
 {
-  "format": 1,
-  "generated_by": "variants/biome_variants.py",
-  "variants": {
-    "elysium:alpine_pasture": {
-      "parent": "minecraft:meadow",
-      "regions": [
-        "western_alps"
-      ],
-      "add_features": {},
-      "remove_features": [],
-      "why": "Western Alpine hay meadows: wetter and greener than the vanilla meadow."
-    },
-    "elysium:tyrolean_meadow": {
-      "parent": "minecraft:meadow",
-      "regions": [
-        "eastern_alps"
-      ],
-      "add_features": {},
-      "remove_features": [],
-      "why": "Eastern Alps are drier and sunnier in summer: a warmer, yellower green."
-    },
-    "elysium:spruce_fir_slopes": {
-      "parent": "minecraft:windswept_forest",
-      "regions": [
-        "western_alps"
-      ],
-      "add_features": {},
-      "remove_features": [],
-      "why": "Dense dark spruce and silver fir on the wetter western flank."
-    },
-    "elysium:larch_slopes": {
-      "parent": "minecraft:windswept_forest",
-      "regions": [
-        "eastern_alps"
-      ],
-      "add_features": {},
-      "remove_features": [],
-      "why": "Larch and Swiss pine stands: light, open, yellow-green canopy."
-    },
-    "elysium:beech_oak_forest": {
-      "parent": "minecraft:forest",
-      "regions": [
-        "west_european"
-      ],
-      "add_features": {
-        "vegetal_decoration": [
-          "elysium:variant/minecraft/patch_leaf_litter"
-        ]
-      },
-      "remove_features": [],
-      "why": "Beech and oak woods of the Jura, Vosges and Black Forest: fresh green canopy, deep leaf litter."
-    },
-    "elysium:hay_meadow": {
-      "parent": "minecraft:meadow",
-      "regions": [
-        "west_european",
-        "central_european"
-      ],
-      "add_features": {
-        "vegetal_decoration": [
-          "elysium:variant/minecraft/flower_plains"
-        ]
-      },
-      "remove_features": [],
-      "why": "Lowland hay meadows gone wild: tall grass and many flowers."
-    },
-    "elysium:atlantic_woodland": {
-      "parent": "minecraft:birch_forest",
-      "regions": [
-        "atlantic"
-      ],
-      "add_features": {
-        "vegetal_decoration": [
-          "elysium:variant/minecraft/patch_large_fern"
-        ]
-      },
-      "remove_features": [],
-      "why": "Oceanic oak-birch woods: wet, mossy, ferny, deep green."
-    },
-    "elysium:atlantic_heath": {
-      "parent": "terralith:brushland",
-      "regions": [
-        "atlantic"
-      ],
-      "add_features": {},
-      "remove_features": [],
-      "why": "Gorse and heather heath on poor soils near the coast: olive, not the brushland's sun-bleached yellow."
-    },
-    "elysium:atlantic_pasture": {
-      "parent": "minecraft:plains",
-      "regions": [
-        "atlantic"
-      ],
-      "add_features": {},
-      "remove_features": [],
-      "why": "Rain-fed grassland: the greenest open land in Europe."
-    },
-    "elysium:po_floodplain": {
-      "parent": "minecraft:swamp",
-      "regions": [
-        "po_plain"
-      ],
-      "add_features": {
-        "vegetal_decoration": [
-          "elysium:variant/minecraft/trees_birch_and_oak_leaf_litter",
-          "elysium:variant/minecraft/patch_tall_grass"
-        ]
-      },
-      "remove_features": [
-        "minecraft:trees_swamp"
-      ],
-      "why": "Former rice and poplar country: wet meadows and riverside woods, not a murky swamp."
-    },
-    "elysium:poplar_wood": {
-      "parent": "minecraft:birch_forest",
-      "regions": [
-        "po_plain"
-      ],
-      "add_features": {},
-      "remove_features": [],
-      "why": "Escaped poplar plantations along the old field grid: pale, silvery green."
-    },
-    "elysium:holm_oak_forest": {
-      "parent": "minecraft:forest",
-      "regions": [
-        "mediterranean"
-      ],
-      "add_features": {},
-      "remove_features": [],
-      "why": "Evergreen holm oak: dark grey-green canopy over dry grass."
-    },
-    "elysium:garrigue": {
-      "parent": "minecraft:meadow",
-      "regions": [
-        "mediterranean"
-      ],
-      "add_features": {
-        "vegetal_decoration": [
-          "elysium:variant/minecraft/patch_dry_grass_desert"
-        ]
-      },
-      "remove_features": [],
-      "why": "Low aromatic scrub and dry grass on limestone."
-    },
-    "elysium:maquis": {
-      "parent": "terralith:sakura_grove",
-      "regions": [
-        "mediterranean"
-      ],
-      "add_features": {
-        "vegetal_decoration": [
-          "elysium:variant/minecraft/trees_plains",
-          "elysium:variant/minecraft/patch_bush"
-        ]
-      },
-      "remove_features": [
-        "terralith:sakura/cherry_trees",
-        "terralith:sakura/cherry_trees_light",
-        "terralith:sakura/bamboo",
-        "terralith:sakura/flowers"
-      ],
-      "why": "The base map puts sakura here. Mediterranean scrub keeps its shape but drops the cherry trees and bamboo."
-    },
-    "elysium:apennine_beech": {
-      "parent": "terralith:sakura_grove",
-      "regions": [
-        "apennines",
-        "dinaric"
-      ],
-      "add_features": {
-        "vegetal_decoration": [
-          "elysium:variant/minecraft/trees_birch_and_oak_leaf_litter"
-        ]
-      },
-      "remove_features": [
-        "terralith:sakura/cherry_trees",
-        "terralith:sakura/cherry_trees_light",
-        "terralith:sakura/bamboo",
-        "terralith:sakura/flowers"
-      ],
-      "why": "Apennine and Dinaric beech belts. Replaces the base map's sakura."
-    },
-    "elysium:karst_highlands": {
-      "parent": "terralith:temperate_highlands",
-      "regions": [
-        "dinaric"
-      ],
-      "add_features": {},
-      "remove_features": [],
-      "why": "Thin soil on limestone: grey-green grass, scattered trees."
-    }
+ "format": 2,
+ "generated_by": "variants/biome_variants.py",
+ "variants": {
+  "elysium:alpine_pasture": {
+   "parent": "minecraft:meadow",
+   "regions": [
+    "eco:689:western_alps"
+   ],
+   "add_features": {},
+   "remove_features": [],
+   "why": "Western Alpine hay meadows: wetter and greener than the vanilla meadow."
+  },
+  "elysium:tyrolean_meadow": {
+   "parent": "minecraft:meadow",
+   "regions": [
+    "eco:689:eastern_alps"
+   ],
+   "add_features": {},
+   "remove_features": [],
+   "why": "Eastern Alps are drier and sunnier in summer: a warmer, yellower green."
+  },
+  "elysium:spruce_fir_slopes": {
+   "parent": "minecraft:windswept_forest",
+   "regions": [
+    "eco:689:western_alps"
+   ],
+   "add_features": {},
+   "remove_features": [],
+   "why": "Dense dark spruce and silver fir on the wetter western flank."
+  },
+  "elysium:larch_slopes": {
+   "parent": "minecraft:windswept_forest",
+   "regions": [
+    "eco:689:eastern_alps"
+   ],
+   "add_features": {},
+   "remove_features": [],
+   "why": "Larch and Swiss pine stands: light, open, yellow-green canopy."
+  },
+  "elysium:beech_oak_forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:686"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:variant/minecraft/patch_leaf_litter"
+    ]
+   },
+   "remove_features": [],
+   "why": "Beech and oak woods of the Jura, Vosges and Black Forest: fresh green canopy, deep leaf litter."
+  },
+  "elysium:hay_meadow": {
+   "parent": "minecraft:meadow",
+   "regions": [
+    "eco:686",
+    "eco:654"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:variant/minecraft/flower_plains"
+    ]
+   },
+   "remove_features": [],
+   "why": "Lowland hay meadows gone wild: tall grass and many flowers."
+  },
+  "elysium:atlantic_woodland": {
+   "parent": "minecraft:birch_forest",
+   "regions": [
+    "eco:664"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:variant/minecraft/patch_large_fern"
+    ]
+   },
+   "remove_features": [],
+   "why": "Oceanic oak-birch woods: wet, mossy, ferny, deep green."
+  },
+  "elysium:atlantic_heath": {
+   "parent": "terralith:brushland",
+   "regions": [
+    "eco:664"
+   ],
+   "add_features": {},
+   "remove_features": [],
+   "why": "Gorse and heather heath on poor soils near the coast: olive, not the brushland's sun-bleached yellow."
+  },
+  "elysium:atlantic_pasture": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:664"
+   ],
+   "add_features": {},
+   "remove_features": [],
+   "why": "Rain-fed grassland: the greenest open land in Europe."
+  },
+  "elysium:po_floodplain": {
+   "parent": "minecraft:swamp",
+   "regions": [
+    "eco:675"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:variant/minecraft/trees_birch_and_oak_leaf_litter",
+     "elysium:variant/minecraft/patch_tall_grass"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_swamp"
+   ],
+   "why": "Former rice and poplar country: wet meadows and riverside woods, not a murky swamp."
+  },
+  "elysium:poplar_wood": {
+   "parent": "minecraft:birch_forest",
+   "regions": [
+    "eco:675"
+   ],
+   "add_features": {},
+   "remove_features": [],
+   "why": "Escaped poplar plantations along the old field grid: pale, silvery green."
+  },
+  "elysium:holm_oak_forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:795",
+    "eco:799",
+    "eco:806"
+   ],
+   "add_features": {},
+   "remove_features": [],
+   "why": "Evergreen holm oak: dark grey-green canopy over dry grass."
+  },
+  "elysium:garrigue": {
+   "parent": "minecraft:meadow",
+   "regions": [
+    "eco:795",
+    "eco:799",
+    "eco:806"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:variant/minecraft/patch_dry_grass_desert"
+    ]
+   },
+   "remove_features": [],
+   "why": "Low aromatic scrub and dry grass on limestone."
+  },
+  "elysium:maquis": {
+   "parent": "terralith:sakura_grove",
+   "regions": [
+    "eco:795",
+    "eco:799",
+    "eco:806"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:variant/minecraft/trees_plains",
+     "elysium:variant/minecraft/patch_bush"
+    ]
+   },
+   "remove_features": [
+    "terralith:sakura/cherry_trees",
+    "terralith:sakura/cherry_trees_light",
+    "terralith:sakura/bamboo",
+    "terralith:sakura/flowers"
+   ],
+   "why": "The base map puts sakura here. Mediterranean scrub keeps its shape but drops the cherry trees and bamboo."
+  },
+  "elysium:apennine_beech": {
+   "parent": "terralith:sakura_grove",
+   "regions": [
+    "eco:644",
+    "eco:660",
+    "eco:794"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:variant/minecraft/trees_birch_and_oak_leaf_litter"
+    ]
+   },
+   "remove_features": [
+    "terralith:sakura/cherry_trees",
+    "terralith:sakura/cherry_trees_light",
+    "terralith:sakura/bamboo",
+    "terralith:sakura/flowers"
+   ],
+   "why": "Apennine and Dinaric beech belts. Replaces the base map's sakura."
+  },
+  "elysium:karst_highlands": {
+   "parent": "terralith:temperate_highlands",
+   "regions": [
+    "eco:660",
+    "eco:794"
+   ],
+   "add_features": {},
+   "remove_features": [],
+   "why": "Thin soil on limestone: grey-green grass, scattered trees."
+  },
+  "elysium:eco/326/terralith_yosemite_cliffs": {
+   "parent": "terralith:yosemite_cliffs",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_8",
+     "elysium:flora/326/shrubs_6",
+     "elysium:flora/326/ground_13",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:yosemite/grass",
+    "terralith:yosemite/waterfall",
+    "minecraft:patch_large_fern",
+    "minecraft:patch_grass_taiga_2",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/terralith_rocky_shrubland": {
+   "parent": "terralith:rocky_shrubland",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_12",
+     "elysium:flora/326/shrubs_8",
+     "elysium:flora/326/ground_11",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:shrubland/cold/bushes",
+    "terralith:shrubland/cold/small_trees",
+    "terralith:shrubland/cold/tiny_trees",
+    "terralith:shrubland/cold/cone_trees",
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/savanna_plateau": {
+   "parent": "minecraft:savanna_plateau",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_10",
+     "elysium:flora/326/shrubs_7",
+     "elysium:flora/326/ground_12",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/terralith_white_cliffs": {
+   "parent": "terralith:white_cliffs",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_11",
+     "elysium:flora/326/shrubs_7",
+     "elysium:flora/326/ground_12",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:cliffs/white/moss_patch",
+    "terralith:cliffs/white/trees_small",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/terralith_savanna_slopes": {
+   "parent": "terralith:savanna_slopes",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_10",
+     "elysium:flora/326/shrubs_7",
+     "elysium:flora/326/ground_12",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_granite",
+    "terralith:savanna/baobabs",
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/stony_peaks": {
+   "parent": "minecraft:stony_peaks",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_8",
+     "elysium:flora/326/shrubs_6",
+     "elysium:flora/326/ground_13",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/terralith_fractured_savanna": {
+   "parent": "terralith:fractured_savanna",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_10",
+     "elysium:flora/326/shrubs_7",
+     "elysium:flora/326/ground_12",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/shattered/trees_tall",
+    "terralith:savanna/shattered/med/trees_med",
+    "terralith:savanna/shattered/small/trees_small",
+    "terralith:savanna/shattered/tiny/trees_tiny",
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/terralith_jungle_mountains": {
+   "parent": "terralith:jungle_mountains",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_14",
+     "elysium:flora/326/shrubs_8",
+     "elysium:flora/326/ground_10",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:bamboo_light",
+    "minecraft:trees_jungle",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_14",
+     "elysium:flora/326/shrubs_8",
+     "elysium:flora/326/ground_11",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/terralith_cloud_forest": {
+   "parent": "terralith:cloud_forest",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_14",
+     "elysium:flora/326/shrubs_8",
+     "elysium:flora/326/ground_10",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:flower/white/trees",
+    "terralith:flower/white/flowers",
+    "minecraft:patch_large_fern",
+    "terralith:forest/vanilla/fallen_tree_spruce",
+    "minecraft:patch_bush",
+    "minecraft:patch_grass_taiga_2",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/windswept_savanna": {
+   "parent": "minecraft:windswept_savanna",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_11",
+     "elysium:flora/326/shrubs_7",
+     "elysium:flora/326/ground_12",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_savanna",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_normal",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/windswept_hills": {
+   "parent": "minecraft:windswept_hills",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_8",
+     "elysium:flora/326/shrubs_6",
+     "elysium:flora/326/ground_13",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_hills",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/326/windswept_forest": {
+   "parent": "minecraft:windswept_forest",
+   "regions": [
+    "eco:326"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/326/trees_11",
+     "elysium:flora/326/shrubs_7",
+     "elysium:flora/326/ground_12",
+     "elysium:flora/326/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_forest",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Madrean pine-oak forest over the barrancas."
+  },
+  "elysium:eco/327/savanna_plateau": {
+   "parent": "minecraft:savanna_plateau",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_11",
+     "elysium:flora/327/shrubs_7",
+     "elysium:flora/327/ground_12",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/terralith_savanna_slopes": {
+   "parent": "terralith:savanna_slopes",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_11",
+     "elysium:flora/327/shrubs_7",
+     "elysium:flora/327/ground_12",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_granite",
+    "terralith:savanna/baobabs",
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/terralith_arid_highlands": {
+   "parent": "terralith:arid_highlands",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_12",
+     "elysium:flora/327/shrubs_8",
+     "elysium:flora/327/ground_12",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:flower_warm",
+    "terralith:highlands/arid/bushes",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_dead_bush",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/windswept_hills": {
+   "parent": "minecraft:windswept_hills",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_9",
+     "elysium:flora/327/shrubs_7",
+     "elysium:flora/327/ground_13",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_hills",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/terralith_fractured_savanna": {
+   "parent": "terralith:fractured_savanna",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_11",
+     "elysium:flora/327/shrubs_7",
+     "elysium:flora/327/ground_12",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/shattered/trees_tall",
+    "terralith:savanna/shattered/med/trees_med",
+    "terralith:savanna/shattered/small/trees_small",
+    "terralith:savanna/shattered/tiny/trees_tiny",
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/windswept_savanna": {
+   "parent": "minecraft:windswept_savanna",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_12",
+     "elysium:flora/327/shrubs_8",
+     "elysium:flora/327/ground_12",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_savanna",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_normal",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/terralith_rocky_shrubland": {
+   "parent": "terralith:rocky_shrubland",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_13",
+     "elysium:flora/327/shrubs_8",
+     "elysium:flora/327/ground_11",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:shrubland/cold/bushes",
+    "terralith:shrubland/cold/small_trees",
+    "terralith:shrubland/cold/tiny_trees",
+    "terralith:shrubland/cold/cone_trees",
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/windswept_forest": {
+   "parent": "minecraft:windswept_forest",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_13",
+     "elysium:flora/327/shrubs_8",
+     "elysium:flora/327/ground_11",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_forest",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/terralith_blooming_plateau": {
+   "parent": "terralith:blooming_plateau",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_9",
+     "elysium:flora/327/shrubs_7",
+     "elysium:flora/327/ground_13",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_meadow",
+    "minecraft:patch_grass_plain",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/terralith_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_9",
+     "elysium:flora/327/shrubs_7",
+     "elysium:flora/327/ground_13",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/terralith_cloud_forest": {
+   "parent": "terralith:cloud_forest",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_14",
+     "elysium:flora/327/shrubs_8",
+     "elysium:flora/327/ground_10",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:flower/white/trees",
+    "terralith:flower/white/flowers",
+    "minecraft:patch_large_fern",
+    "terralith:forest/vanilla/fallen_tree_spruce",
+    "minecraft:patch_bush",
+    "minecraft:patch_grass_taiga_2",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/wooded_badlands": {
+   "parent": "minecraft:wooded_badlands",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_9",
+     "elysium:flora/327/shrubs_7",
+     "elysium:flora/327/ground_13",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_badlands",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_dry_grass_badlands",
+    "minecraft:patch_dead_bush_badlands",
+    "minecraft:patch_cactus_decorated",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/savanna": {
+   "parent": "minecraft:savanna",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_11",
+     "elysium:flora/327/shrubs_7",
+     "elysium:flora/327/ground_12",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/terralith_jungle_mountains": {
+   "parent": "terralith:jungle_mountains",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_14",
+     "elysium:flora/327/shrubs_8",
+     "elysium:flora/327/ground_10",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:bamboo_light",
+    "minecraft:trees_jungle",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/terralith_temperate_highlands": {
+   "parent": "terralith:temperate_highlands",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_14",
+     "elysium:flora/327/shrubs_8",
+     "elysium:flora/327/ground_10",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:highlands/temperate/trees_orange",
+    "terralith:highlands/temperate/dark_oak",
+    "terralith:highlands/temperate/cloud_trees",
+    "terralith:highlands/temperate/trees_neg",
+    "terralith:highlands/temperate/trees_pos",
+    "terralith:birch/fallen_tree",
+    "terralith:highlands/temperate/flowers",
+    "terralith:highlands/forest/tall_flowers",
+    "terralith:highlands/forest/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/327/terralith_granite_cliffs": {
+   "parent": "terralith:granite_cliffs",
+   "regions": [
+    "eco:327"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/327/trees_12",
+     "elysium:flora/327/shrubs_8",
+     "elysium:flora/327/ground_12",
+     "elysium:flora/327/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:cliffs/white/trees_small",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Pine-oak and juniper on the limestone ranges above Monterrey."
+  },
+  "elysium:eco/332/forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:332"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/332/trees_13",
+     "elysium:flora/332/shrubs_8",
+     "elysium:flora/332/ground_11",
+     "elysium:flora/332/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Post oak and blackjack oak mottes in little bluestem grassland."
+  },
+  "elysium:eco/332/birch_forest": {
+   "parent": "minecraft:birch_forest",
+   "regions": [
+    "eco:332"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/332/trees_8",
+     "elysium:flora/332/shrubs_6",
+     "elysium:flora/332/ground_13",
+     "elysium:flora/332/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:wildflowers_birch_forest",
+    "minecraft:trees_birch",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Post oak and blackjack oak mottes in little bluestem grassland."
+  },
+  "elysium:eco/332/plains_from_swamp": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:332"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/332/trees_10",
+     "elysium:flora/332/shrubs_7",
+     "elysium:flora/332/ground_13",
+     "elysium:flora/332/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Post oak and blackjack oak mottes in little bluestem grassland.",
+   "replaces": [
+    "minecraft:swamp"
+   ]
+  },
+  "elysium:eco/332/savanna": {
+   "parent": "minecraft:savanna",
+   "regions": [
+    "eco:332"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/332/trees_9",
+     "elysium:flora/332/shrubs_7",
+     "elysium:flora/332/ground_13",
+     "elysium:flora/332/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Post oak and blackjack oak mottes in little bluestem grassland."
+  },
+  "elysium:eco/332/terralith_blooming_valley": {
+   "parent": "terralith:blooming_valley",
+   "regions": [
+    "eco:332"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/332/trees_10",
+     "elysium:flora/332/shrubs_7",
+     "elysium:flora/332/ground_13",
+     "elysium:flora/332/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "terralith:forest/flower/cloud_trees",
+    "terralith:forest/flower/tiny/trees_tiny",
+    "terralith:forest/flower/small/trees_small",
+    "terralith:forest/flower/mid/trees_mid",
+    "terralith:forest/flower/tall/trees_tall",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Post oak and blackjack oak mottes in little bluestem grassland."
+  },
+  "elysium:eco/332/terralith_valley_clearing": {
+   "parent": "terralith:valley_clearing",
+   "regions": [
+    "eco:332"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/332/trees_8",
+     "elysium:flora/332/shrubs_6",
+     "elysium:flora/332/ground_13",
+     "elysium:flora/332/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/steppe/bush",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Post oak and blackjack oak mottes in little bluestem grassland."
+  },
+  "elysium:eco/332/plains": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:332"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/332/trees_8",
+     "elysium:flora/332/shrubs_6",
+     "elysium:flora/332/ground_13",
+     "elysium:flora/332/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Post oak and blackjack oak mottes in little bluestem grassland."
+  },
+  "elysium:eco/332/terralith_ashen_savanna": {
+   "parent": "terralith:ashen_savanna",
+   "regions": [
+    "eco:332"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/332/trees_11",
+     "elysium:flora/332/shrubs_8",
+     "elysium:flora/332/ground_12",
+     "elysium:flora/332/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_gravel",
+    "terralith:shrubland/hot/small_trees",
+    "terralith:shrubland/hot/tiny_trees",
+    "terralith:shrubland/hot/cone_trees",
+    "terralith:savanna/baobabs",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Post oak and blackjack oak mottes in little bluestem grassland."
+  },
+  "elysium:eco/332/sunflower_plains": {
+   "parent": "minecraft:sunflower_plains",
+   "regions": [
+    "eco:332"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/332/trees_8",
+     "elysium:flora/332/shrubs_6",
+     "elysium:flora/332/ground_13",
+     "elysium:flora/332/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_sunflower",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Post oak and blackjack oak mottes in little bluestem grassland."
+  },
+  "elysium:eco/337/swamp": {
+   "parent": "minecraft:swamp",
+   "regions": [
+    "eco:337"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/337/trees_14",
+     "elysium:flora/337/ground_10",
+     "elysium:flora/337/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_swamp",
+    "minecraft:flower_swamp",
+    "minecraft:patch_grass_normal",
+    "minecraft:patch_dead_bush",
+    "minecraft:patch_firefly_bush_swamp",
+    "minecraft:patch_firefly_bush_near_water_swamp"
+   ],
+   "why": "Bottomland hardwoods and cypress sloughs of the lower Mississippi."
+  },
+  "elysium:eco/337/forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:337"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/337/trees_16",
+     "elysium:flora/337/ground_9",
+     "elysium:flora/337/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Bottomland hardwoods and cypress sloughs of the lower Mississippi."
+  },
+  "elysium:eco/337/terralith_blooming_valley": {
+   "parent": "terralith:blooming_valley",
+   "regions": [
+    "eco:337"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/337/trees_13",
+     "elysium:flora/337/ground_10",
+     "elysium:flora/337/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:forest/flower/cloud_trees",
+    "terralith:forest/flower/tiny/trees_tiny",
+    "terralith:forest/flower/small/trees_small",
+    "terralith:forest/flower/mid/trees_mid",
+    "terralith:forest/flower/tall/trees_tall",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Bottomland hardwoods and cypress sloughs of the lower Mississippi."
+  },
+  "elysium:eco/340/forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:340"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/340/trees_15",
+     "elysium:flora/340/ground_10",
+     "elysium:flora/340/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Oak-hickory forest with cedar glades on the dolomite plateaus."
+  },
+  "elysium:eco/340/birch_forest": {
+   "parent": "minecraft:birch_forest",
+   "regions": [
+    "eco:340"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/340/trees_9",
+     "elysium:flora/340/ground_11",
+     "elysium:flora/340/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:wildflowers_birch_forest",
+    "minecraft:trees_birch",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Oak-hickory forest with cedar glades on the dolomite plateaus."
+  },
+  "elysium:eco/340/terralith_valley_clearing": {
+   "parent": "terralith:valley_clearing",
+   "regions": [
+    "eco:340"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/340/trees_9",
+     "elysium:flora/340/ground_11",
+     "elysium:flora/340/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/steppe/bush",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Oak-hickory forest with cedar glades on the dolomite plateaus."
+  },
+  "elysium:eco/340/forest_from_swamp": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:340"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/340/trees_12",
+     "elysium:flora/340/ground_11",
+     "elysium:flora/340/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Oak-hickory forest with cedar glades on the dolomite plateaus.",
+   "replaces": [
+    "minecraft:swamp"
+   ]
+  },
+  "elysium:eco/340/terralith_blooming_valley": {
+   "parent": "terralith:blooming_valley",
+   "regions": [
+    "eco:340"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/340/trees_12",
+     "elysium:flora/340/ground_11",
+     "elysium:flora/340/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:forest/flower/cloud_trees",
+    "terralith:forest/flower/tiny/trees_tiny",
+    "terralith:forest/flower/small/trees_small",
+    "terralith:forest/flower/mid/trees_mid",
+    "terralith:forest/flower/tall/trees_tall",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Oak-hickory forest with cedar glades on the dolomite plateaus."
+  },
+  "elysium:eco/341/forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:341"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/341/trees_15",
+     "elysium:flora/341/ground_9",
+     "elysium:flora/341/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Boston and Ouachita Mountains: oak-hickory with more shortleaf pine on the ridges."
+  },
+  "elysium:eco/341/terralith_blooming_valley": {
+   "parent": "terralith:blooming_valley",
+   "regions": [
+    "eco:341"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/341/trees_12",
+     "elysium:flora/341/ground_10",
+     "elysium:flora/341/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:forest/flower/cloud_trees",
+    "terralith:forest/flower/tiny/trees_tiny",
+    "terralith:forest/flower/small/trees_small",
+    "terralith:forest/flower/mid/trees_mid",
+    "terralith:forest/flower/tall/trees_tall",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Boston and Ouachita Mountains: oak-hickory with more shortleaf pine on the ridges."
+  },
+  "elysium:eco/341/forest_from_swamp": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:341"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/341/trees_12",
+     "elysium:flora/341/ground_10",
+     "elysium:flora/341/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Boston and Ouachita Mountains: oak-hickory with more shortleaf pine on the ridges.",
+   "replaces": [
+    "minecraft:swamp"
+   ]
+  },
+  "elysium:eco/341/birch_forest": {
+   "parent": "minecraft:birch_forest",
+   "regions": [
+    "eco:341"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/341/trees_9",
+     "elysium:flora/341/ground_10",
+     "elysium:flora/341/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:wildflowers_birch_forest",
+    "minecraft:trees_birch",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Boston and Ouachita Mountains: oak-hickory with more shortleaf pine on the ridges."
+  },
+  "elysium:eco/346/terralith_rocky_shrubland": {
+   "parent": "terralith:rocky_shrubland",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_14",
+     "elysium:flora/346/shrubs_8",
+     "elysium:flora/346/ground_11",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:shrubland/cold/bushes",
+    "terralith:shrubland/cold/small_trees",
+    "terralith:shrubland/cold/tiny_trees",
+    "terralith:shrubland/cold/cone_trees",
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/windswept_hills": {
+   "parent": "minecraft:windswept_hills",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_9",
+     "elysium:flora/346/shrubs_7",
+     "elysium:flora/346/ground_13",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_hills",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/terralith_yosemite_cliffs": {
+   "parent": "terralith:yosemite_cliffs",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_9",
+     "elysium:flora/346/shrubs_6",
+     "elysium:flora/346/ground_13",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:yosemite/grass",
+    "terralith:yosemite/waterfall",
+    "minecraft:patch_large_fern",
+    "minecraft:patch_grass_taiga_2",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/terralith_white_cliffs": {
+   "parent": "terralith:white_cliffs",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_12",
+     "elysium:flora/346/shrubs_8",
+     "elysium:flora/346/ground_12",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:cliffs/white/moss_patch",
+    "terralith:cliffs/white/trees_small",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/stony_peaks": {
+   "parent": "minecraft:stony_peaks",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_9",
+     "elysium:flora/346/shrubs_6",
+     "elysium:flora/346/ground_13",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/terralith_granite_cliffs": {
+   "parent": "terralith:granite_cliffs",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_12",
+     "elysium:flora/346/shrubs_8",
+     "elysium:flora/346/ground_12",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:cliffs/white/trees_small",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_14",
+     "elysium:flora/346/shrubs_8",
+     "elysium:flora/346/ground_10",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/terralith_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_9",
+     "elysium:flora/346/shrubs_7",
+     "elysium:flora/346/ground_13",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/terralith_blooming_plateau": {
+   "parent": "terralith:blooming_plateau",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_9",
+     "elysium:flora/346/shrubs_6",
+     "elysium:flora/346/ground_13",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_meadow",
+    "minecraft:patch_grass_plain",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/terralith_arid_highlands": {
+   "parent": "terralith:arid_highlands",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_12",
+     "elysium:flora/346/shrubs_8",
+     "elysium:flora/346/ground_12",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:flower_warm",
+    "terralith:highlands/arid/bushes",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_dead_bush",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/windswept_forest": {
+   "parent": "minecraft:windswept_forest",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_13",
+     "elysium:flora/346/shrubs_8",
+     "elysium:flora/346/ground_11",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_forest",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/346/terralith_forested_highlands": {
+   "parent": "terralith:forested_highlands",
+   "regions": [
+    "eco:346"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/346/trees_10",
+     "elysium:flora/346/shrubs_7",
+     "elysium:flora/346/ground_12",
+     "elysium:flora/346/flowers_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_bush",
+    "terralith:highlands/forest/trees_maple",
+    "terralith:highlands/forest/tall/trees_tall",
+    "terralith:highlands/forest/mid/trees_mid",
+    "terralith:highlands/forest/small/trees_small",
+    "terralith:highlands/forest/tiny/trees_tiny",
+    "terralith:highlands/trees",
+    "terralith:forest/vanilla/fallen_tree_dark_oak",
+    "terralith:highlands/forest/flowers",
+    "terralith:highlands/forest/tall_flowers",
+    "terralith:highlands/forest/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
+  },
+  "elysium:eco/353/windswept_hills": {
+   "parent": "minecraft:windswept_hills",
+   "regions": [
+    "eco:353"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/353/trees_10",
+     "elysium:flora/353/shrubs_7",
+     "elysium:flora/353/ground_12",
+     "elysium:flora/353/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_hills",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
+  },
+  "elysium:eco/353/grove": {
+   "parent": "minecraft:grove",
+   "regions": [
+    "eco:353"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/353/trees_15",
+     "elysium:flora/353/shrubs_8",
+     "elysium:flora/353/ground_10",
+     "elysium:flora/353/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_grove"
+   ],
+   "why": "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
+  },
+  "elysium:eco/353/windswept_forest": {
+   "parent": "minecraft:windswept_forest",
+   "regions": [
+    "eco:353"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/353/trees_13",
+     "elysium:flora/353/shrubs_8",
+     "elysium:flora/353/ground_11",
+     "elysium:flora/353/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_forest",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
+  },
+  "elysium:eco/353/terralith_granite_cliffs": {
+   "parent": "terralith:granite_cliffs",
+   "regions": [
+    "eco:353"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/353/trees_12",
+     "elysium:flora/353/shrubs_8",
+     "elysium:flora/353/ground_11",
+     "elysium:flora/353/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:cliffs/white/trees_small",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
+  },
+  "elysium:eco/353/stony_peaks": {
+   "parent": "minecraft:stony_peaks",
+   "regions": [
+    "eco:353"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/353/trees_9",
+     "elysium:flora/353/shrubs_6",
+     "elysium:flora/353/ground_12",
+     "elysium:flora/353/flowers_5"
+    ]
+   },
+   "remove_features": [],
+   "why": "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
+  },
+  "elysium:eco/353/snowy_slopes": {
+   "parent": "minecraft:snowy_slopes",
+   "regions": [
+    "eco:353"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/353/trees_9",
+     "elysium:flora/353/shrubs_6",
+     "elysium:flora/353/ground_12",
+     "elysium:flora/353/flowers_5"
+    ]
+   },
+   "remove_features": [],
+   "why": "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
+  },
+  "elysium:eco/353/terralith_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:353"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/353/trees_10",
+     "elysium:flora/353/shrubs_7",
+     "elysium:flora/353/ground_12",
+     "elysium:flora/353/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
+  },
+  "elysium:eco/353/terralith_blooming_plateau": {
+   "parent": "terralith:blooming_plateau",
+   "regions": [
+    "eco:353"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/353/trees_9",
+     "elysium:flora/353/shrubs_6",
+     "elysium:flora/353/ground_12",
+     "elysium:flora/353/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_meadow",
+    "minecraft:patch_grass_plain",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white"
+   ],
+   "why": "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
+  },
+  "elysium:eco/353/meadow": {
+   "parent": "minecraft:meadow",
+   "regions": [
+    "eco:353"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/353/trees_9",
+     "elysium:flora/353/shrubs_6",
+     "elysium:flora/353/ground_12",
+     "elysium:flora/353/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_grass_meadow",
+    "minecraft:flower_meadow",
+    "minecraft:trees_meadow",
+    "minecraft:wildflowers_meadow"
+   ],
+   "why": "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
+  },
+  "elysium:eco/363/forest_from_swamp": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:363"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/363/trees_13",
+     "elysium:flora/363/ground_11",
+     "elysium:flora/363/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Loblolly and shortleaf pine over sweetgum and oak, yaupon understory. The atlas maps most of it to swamp; it inherits forest.",
+   "replaces": [
+    "minecraft:swamp"
+   ]
+  },
+  "elysium:eco/363/forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:363"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/363/trees_16",
+     "elysium:flora/363/ground_9",
+     "elysium:flora/363/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Loblolly and shortleaf pine over sweetgum and oak, yaupon understory. The atlas maps most of it to swamp; it inherits forest."
+  },
+  "elysium:eco/363/terralith_blooming_valley": {
+   "parent": "terralith:blooming_valley",
+   "regions": [
+    "eco:363"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/363/trees_13",
+     "elysium:flora/363/ground_11",
+     "elysium:flora/363/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "terralith:forest/flower/cloud_trees",
+    "terralith:forest/flower/tiny/trees_tiny",
+    "terralith:forest/flower/small/trees_small",
+    "terralith:forest/flower/mid/trees_mid",
+    "terralith:forest/flower/tall/trees_tall",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Loblolly and shortleaf pine over sweetgum and oak, yaupon understory. The atlas maps most of it to swamp; it inherits forest."
+  },
+  "elysium:eco/384/plains_from_savanna": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:384"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/384/trees_6",
+     "elysium:flora/384/ground_14",
+     "elysium:flora/384/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Coastal tallgrass prairie and marsh, mossy live oak mottes on old dunes.",
+   "replaces": [
+    "minecraft:savanna"
+   ]
+  },
+  "elysium:eco/384/plains_from_ashen_savanna": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:384"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/384/trees_8",
+     "elysium:flora/384/ground_13",
+     "elysium:flora/384/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Coastal tallgrass prairie and marsh, mossy live oak mottes on old dunes.",
+   "replaces": [
+    "terralith:ashen_savanna"
+   ]
+  },
+  "elysium:eco/384/plains_from_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:384"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/384/trees_9",
+     "elysium:flora/384/ground_11",
+     "elysium:flora/384/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Coastal tallgrass prairie and marsh, mossy live oak mottes on old dunes.",
+   "replaces": [
+    "minecraft:forest"
+   ]
+  },
+  "elysium:eco/384/swamp": {
+   "parent": "minecraft:swamp",
+   "regions": [
+    "eco:384"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/384/trees_7",
+     "elysium:flora/384/ground_13",
+     "elysium:flora/384/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_swamp",
+    "minecraft:flower_swamp",
+    "minecraft:patch_grass_normal",
+    "minecraft:patch_dead_bush",
+    "minecraft:patch_firefly_bush_swamp",
+    "minecraft:patch_firefly_bush_near_water_swamp"
+   ],
+   "why": "Coastal tallgrass prairie and marsh, mossy live oak mottes on old dunes."
+  },
+  "elysium:eco/384/plains_from_birch_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:384"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/384/trees_5",
+     "elysium:flora/384/ground_14",
+     "elysium:flora/384/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Coastal tallgrass prairie and marsh, mossy live oak mottes on old dunes.",
+   "replaces": [
+    "minecraft:birch_forest"
+   ]
+  },
+  "elysium:eco/384/terralith_blooming_valley": {
+   "parent": "terralith:blooming_valley",
+   "regions": [
+    "eco:384"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/384/trees_7",
+     "elysium:flora/384/ground_13",
+     "elysium:flora/384/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "terralith:forest/flower/cloud_trees",
+    "terralith:forest/flower/tiny/trees_tiny",
+    "terralith:forest/flower/small/trees_small",
+    "terralith:forest/flower/mid/trees_mid",
+    "terralith:forest/flower/tall/trees_tall",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Coastal tallgrass prairie and marsh, mossy live oak mottes on old dunes."
+  },
+  "elysium:eco/388/plains_from_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:388"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/388/trees_8",
+     "elysium:flora/388/ground_12",
+     "elysium:flora/388/flowers_9"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Big bluestem prairie of Iowa, Missouri and Kansas: the atlas plants forest on it; it inherits plains.",
+   "replaces": [
+    "minecraft:forest"
+   ]
+  },
+  "elysium:eco/388/plains_from_birch_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:388"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/388/trees_4",
+     "elysium:flora/388/ground_14",
+     "elysium:flora/388/flowers_9"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Big bluestem prairie of Iowa, Missouri and Kansas: the atlas plants forest on it; it inherits plains.",
+   "replaces": [
+    "minecraft:birch_forest"
+   ]
+  },
+  "elysium:eco/388/plains_from_valley_clearing": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:388"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/388/trees_4",
+     "elysium:flora/388/ground_14",
+     "elysium:flora/388/flowers_9"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Big bluestem prairie of Iowa, Missouri and Kansas: the atlas plants forest on it; it inherits plains.",
+   "replaces": [
+    "terralith:valley_clearing"
+   ]
+  },
+  "elysium:eco/388/plains_from_snowy_maple_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:388"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/388/trees_5",
+     "elysium:flora/388/ground_14",
+     "elysium:flora/388/flowers_9"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Big bluestem prairie of Iowa, Missouri and Kansas: the atlas plants forest on it; it inherits plains.",
+   "replaces": [
+    "terralith:snowy_maple_forest"
+   ]
+  },
+  "elysium:eco/388/plains_from_birch_taiga": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:388"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/388/trees_7",
+     "elysium:flora/388/ground_13",
+     "elysium:flora/388/flowers_9"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Big bluestem prairie of Iowa, Missouri and Kansas: the atlas plants forest on it; it inherits plains.",
+   "replaces": [
+    "terralith:birch_taiga"
+   ]
+  },
+  "elysium:eco/388/plains": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:388"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/388/trees_4",
+     "elysium:flora/388/ground_14",
+     "elysium:flora/388/flowers_9"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Big bluestem prairie of Iowa, Missouri and Kansas: the atlas plants forest on it; it inherits plains."
+  },
+  "elysium:eco/389/plains_from_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:389"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/389/trees_9",
+     "elysium:flora/389/shrubs_9",
+     "elysium:flora/389/ground_12",
+     "elysium:flora/389/flowers_7",
+     "elysium:flora/389/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar.",
+   "replaces": [
+    "minecraft:forest"
+   ]
+  },
+  "elysium:eco/389/plains_from_birch_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:389"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/389/trees_4",
+     "elysium:flora/389/shrubs_6",
+     "elysium:flora/389/ground_14",
+     "elysium:flora/389/flowers_7",
+     "elysium:flora/389/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar.",
+   "replaces": [
+    "minecraft:birch_forest"
+   ]
+  },
+  "elysium:eco/389/plains_from_meadow": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:389"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/389/trees_5",
+     "elysium:flora/389/shrubs_6",
+     "elysium:flora/389/ground_14",
+     "elysium:flora/389/flowers_7",
+     "elysium:flora/389/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar.",
+   "replaces": [
+    "minecraft:meadow"
+   ]
+  },
+  "elysium:eco/389/plains": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:389"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/389/trees_5",
+     "elysium:flora/389/shrubs_7",
+     "elysium:flora/389/ground_14",
+     "elysium:flora/389/flowers_7",
+     "elysium:flora/389/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar."
+  },
+  "elysium:eco/389/plains_from_valley_clearing": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:389"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/389/trees_5",
+     "elysium:flora/389/shrubs_7",
+     "elysium:flora/389/ground_14",
+     "elysium:flora/389/flowers_7",
+     "elysium:flora/389/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar.",
+   "replaces": [
+    "terralith:valley_clearing"
+   ]
+  },
+  "elysium:eco/389/terralith_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:389"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/389/trees_5",
+     "elysium:flora/389/shrubs_7",
+     "elysium:flora/389/ground_14",
+     "elysium:flora/389/flowers_7",
+     "elysium:flora/389/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar."
+  },
+  "elysium:eco/389/terralith_highlands_from_forested_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:389"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/389/trees_6",
+     "elysium:flora/389/shrubs_7",
+     "elysium:flora/389/ground_14",
+     "elysium:flora/389/flowers_7",
+     "elysium:flora/389/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar.",
+   "replaces": [
+    "terralith:forested_highlands"
+   ]
+  },
+  "elysium:eco/389/sunflower_plains": {
+   "parent": "minecraft:sunflower_plains",
+   "regions": [
+    "eco:389"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/389/trees_5",
+     "elysium:flora/389/shrubs_7",
+     "elysium:flora/389/ground_14",
+     "elysium:flora/389/flowers_7",
+     "elysium:flora/389/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_sunflower",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar."
+  },
+  "elysium:eco/390/forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:390"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/390/trees_12",
+     "elysium:flora/390/shrubs_8",
+     "elysium:flora/390/ground_12",
+     "elysium:flora/390/flowers_6"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "A belt of stunted post oak and blackjack oak woodland between the prairies."
+  },
+  "elysium:eco/390/terralith_blooming_valley": {
+   "parent": "terralith:blooming_valley",
+   "regions": [
+    "eco:390"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/390/trees_9",
+     "elysium:flora/390/shrubs_7",
+     "elysium:flora/390/ground_13",
+     "elysium:flora/390/flowers_6"
+    ]
+   },
+   "remove_features": [
+    "terralith:forest/flower/cloud_trees",
+    "terralith:forest/flower/tiny/trees_tiny",
+    "terralith:forest/flower/small/trees_small",
+    "terralith:forest/flower/mid/trees_mid",
+    "terralith:forest/flower/tall/trees_tall",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "A belt of stunted post oak and blackjack oak woodland between the prairies."
+  },
+  "elysium:eco/390/birch_forest": {
+   "parent": "minecraft:birch_forest",
+   "regions": [
+    "eco:390"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/390/trees_7",
+     "elysium:flora/390/shrubs_6",
+     "elysium:flora/390/ground_13",
+     "elysium:flora/390/flowers_6"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:wildflowers_birch_forest",
+    "minecraft:trees_birch",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "A belt of stunted post oak and blackjack oak woodland between the prairies."
+  },
+  "elysium:eco/390/terralith_valley_clearing": {
+   "parent": "terralith:valley_clearing",
+   "regions": [
+    "eco:390"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/390/trees_7",
+     "elysium:flora/390/shrubs_6",
+     "elysium:flora/390/ground_13",
+     "elysium:flora/390/flowers_6"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/steppe/bush",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "A belt of stunted post oak and blackjack oak woodland between the prairies."
+  },
+  "elysium:eco/391/plains": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:391"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/391/trees_8",
+     "elysium:flora/391/shrubs_7",
+     "elysium:flora/391/ground_13",
+     "elysium:flora/391/flowers_9",
+     "elysium:flora/391/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring."
+  },
+  "elysium:eco/391/savanna_from_birch_forest": {
+   "parent": "minecraft:savanna",
+   "regions": [
+    "eco:391"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/391/trees_8",
+     "elysium:flora/391/shrubs_7",
+     "elysium:flora/391/ground_13",
+     "elysium:flora/391/flowers_9",
+     "elysium:flora/391/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring.",
+   "replaces": [
+    "minecraft:birch_forest"
+   ]
+  },
+  "elysium:eco/391/savanna_from_forest": {
+   "parent": "minecraft:savanna",
+   "regions": [
+    "eco:391"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/391/trees_12",
+     "elysium:flora/391/shrubs_9",
+     "elysium:flora/391/ground_10",
+     "elysium:flora/391/flowers_9",
+     "elysium:flora/391/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring.",
+   "replaces": [
+    "minecraft:forest"
+   ]
+  },
+  "elysium:eco/391/plains_from_sunflower_plains": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:391"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/391/trees_8",
+     "elysium:flora/391/shrubs_7",
+     "elysium:flora/391/ground_13",
+     "elysium:flora/391/flowers_9",
+     "elysium:flora/391/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring.",
+   "replaces": [
+    "minecraft:sunflower_plains"
+   ]
+  },
+  "elysium:eco/391/terralith_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:391"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/391/trees_8",
+     "elysium:flora/391/shrubs_7",
+     "elysium:flora/391/ground_13",
+     "elysium:flora/391/flowers_9",
+     "elysium:flora/391/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring."
+  },
+  "elysium:eco/391/terralith_blooming_plateau": {
+   "parent": "terralith:blooming_plateau",
+   "regions": [
+    "eco:391"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/391/trees_8",
+     "elysium:flora/391/shrubs_7",
+     "elysium:flora/391/ground_13",
+     "elysium:flora/391/flowers_9",
+     "elysium:flora/391/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_meadow",
+    "minecraft:patch_grass_plain",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white"
+   ],
+   "why": "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring."
+  },
+  "elysium:eco/391/terralith_valley_clearing": {
+   "parent": "terralith:valley_clearing",
+   "regions": [
+    "eco:391"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/391/trees_8",
+     "elysium:flora/391/shrubs_7",
+     "elysium:flora/391/ground_13",
+     "elysium:flora/391/flowers_9",
+     "elysium:flora/391/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/steppe/bush",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring."
+  },
+  "elysium:eco/391/terralith_forested_highlands": {
+   "parent": "terralith:forested_highlands",
+   "regions": [
+    "eco:391"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/391/trees_9",
+     "elysium:flora/391/shrubs_8",
+     "elysium:flora/391/ground_12",
+     "elysium:flora/391/flowers_9",
+     "elysium:flora/391/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_bush",
+    "terralith:highlands/forest/trees_maple",
+    "terralith:highlands/forest/tall/trees_tall",
+    "terralith:highlands/forest/mid/trees_mid",
+    "terralith:highlands/forest/small/trees_small",
+    "terralith:highlands/forest/tiny/trees_tiny",
+    "terralith:highlands/trees",
+    "terralith:forest/vanilla/fallen_tree_dark_oak",
+    "terralith:highlands/forest/flowers",
+    "terralith:highlands/forest/tall_flowers",
+    "terralith:highlands/forest/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring."
+  },
+  "elysium:eco/392/plains_from_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:392"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/392/trees_4",
+     "elysium:flora/392/ground_13",
+     "elysium:flora/392/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The largest surviving tallgrass prairie, on flinty limestone hills.",
+   "replaces": [
+    "minecraft:forest"
+   ]
+  },
+  "elysium:eco/392/plains_from_birch_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:392"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/392/trees_2",
+     "elysium:flora/392/ground_15",
+     "elysium:flora/392/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The largest surviving tallgrass prairie, on flinty limestone hills.",
+   "replaces": [
+    "minecraft:birch_forest"
+   ]
+  },
+  "elysium:eco/392/plains_from_valley_clearing": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:392"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/392/trees_2",
+     "elysium:flora/392/ground_15",
+     "elysium:flora/392/flowers_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "The largest surviving tallgrass prairie, on flinty limestone hills.",
+   "replaces": [
+    "terralith:valley_clearing"
+   ]
+  },
+  "elysium:eco/399/swamp": {
+   "parent": "minecraft:swamp",
+   "regions": [
+    "eco:399"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/399/trees_10",
+     "elysium:flora/399/ground_12",
+     "elysium:flora/399/flowers_6"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_swamp",
+    "minecraft:flower_swamp",
+    "minecraft:patch_grass_normal",
+    "minecraft:patch_dead_bush",
+    "minecraft:patch_firefly_bush_swamp",
+    "minecraft:patch_firefly_bush_near_water_swamp"
+   ],
+   "why": "Open longleaf pine over wiregrass on the Gulf coastal plain."
+  },
+  "elysium:eco/399/savanna": {
+   "parent": "minecraft:savanna",
+   "regions": [
+    "eco:399"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/399/trees_10",
+     "elysium:flora/399/ground_13",
+     "elysium:flora/399/flowers_6"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Open longleaf pine over wiregrass on the Gulf coastal plain."
+  },
+  "elysium:eco/399/forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:399"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/399/trees_13",
+     "elysium:flora/399/ground_11",
+     "elysium:flora/399/flowers_6"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Open longleaf pine over wiregrass on the Gulf coastal plain."
+  },
+  "elysium:eco/399/sparse_jungle": {
+   "parent": "minecraft:sparse_jungle",
+   "regions": [
+    "eco:399"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/399/trees_10",
+     "elysium:flora/399/ground_12",
+     "elysium:flora/399/flowers_6"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_sparse_jungle",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Open longleaf pine over wiregrass on the Gulf coastal plain."
+  },
+  "elysium:eco/399/terralith_ashen_savanna": {
+   "parent": "terralith:ashen_savanna",
+   "regions": [
+    "eco:399"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/399/trees_11",
+     "elysium:flora/399/ground_12",
+     "elysium:flora/399/flowers_6"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_gravel",
+    "terralith:shrubland/hot/small_trees",
+    "terralith:shrubland/hot/tiny_trees",
+    "terralith:shrubland/hot/cone_trees",
+    "terralith:savanna/baobabs",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Open longleaf pine over wiregrass on the Gulf coastal plain."
+  },
+  "elysium:eco/399/terralith_blooming_valley": {
+   "parent": "terralith:blooming_valley",
+   "regions": [
+    "eco:399"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/399/trees_10",
+     "elysium:flora/399/ground_12",
+     "elysium:flora/399/flowers_6"
+    ]
+   },
+   "remove_features": [
+    "terralith:forest/flower/cloud_trees",
+    "terralith:forest/flower/tiny/trees_tiny",
+    "terralith:forest/flower/small/trees_small",
+    "terralith:forest/flower/mid/trees_mid",
+    "terralith:forest/flower/tall/trees_tall",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Open longleaf pine over wiregrass on the Gulf coastal plain."
+  },
+  "elysium:eco/401/plains_from_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:401"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/401/trees_8",
+     "elysium:flora/401/ground_12",
+     "elysium:flora/401/flowers_11"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks.",
+   "replaces": [
+    "minecraft:forest"
+   ]
+  },
+  "elysium:eco/401/plains_from_birch_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:401"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/401/trees_4",
+     "elysium:flora/401/ground_14",
+     "elysium:flora/401/flowers_11"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks.",
+   "replaces": [
+    "minecraft:birch_forest"
+   ]
+  },
+  "elysium:eco/401/plains_from_valley_clearing": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:401"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/401/trees_4",
+     "elysium:flora/401/ground_14",
+     "elysium:flora/401/flowers_11"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks.",
+   "replaces": [
+    "terralith:valley_clearing"
+   ]
+  },
+  "elysium:eco/401/plains_from_swamp": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:401"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/401/trees_6",
+     "elysium:flora/401/ground_14",
+     "elysium:flora/401/flowers_11"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks.",
+   "replaces": [
+    "minecraft:swamp"
+   ]
+  },
+  "elysium:eco/401/sunflower_plains": {
+   "parent": "minecraft:sunflower_plains",
+   "regions": [
+    "eco:401"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/401/trees_4",
+     "elysium:flora/401/ground_14",
+     "elysium:flora/401/flowers_11"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_sunflower",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks."
+  },
+  "elysium:eco/401/plains_from_blooming_valley": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:401"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/401/trees_6",
+     "elysium:flora/401/ground_14",
+     "elysium:flora/401/flowers_11"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks.",
+   "replaces": [
+    "terralith:blooming_valley"
+   ]
+  },
+  "elysium:eco/401/terralith_ashen_savanna": {
+   "parent": "terralith:ashen_savanna",
+   "regions": [
+    "eco:401"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/401/trees_7",
+     "elysium:flora/401/ground_13",
+     "elysium:flora/401/flowers_11"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_gravel",
+    "terralith:shrubland/hot/small_trees",
+    "terralith:shrubland/hot/tiny_trees",
+    "terralith:shrubland/hot/cone_trees",
+    "terralith:savanna/baobabs",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks."
+  },
+  "elysium:eco/402/terralith_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_2",
+     "elysium:flora/402/ground_14",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/402/terralith_blooming_plateau": {
+   "parent": "terralith:blooming_plateau",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_2",
+     "elysium:flora/402/ground_14",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_meadow",
+    "minecraft:patch_grass_plain",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/402/plains_from_meadow": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_2",
+     "elysium:flora/402/ground_14",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws.",
+   "replaces": [
+    "minecraft:meadow"
+   ]
+  },
+  "elysium:eco/402/plains_from_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_4",
+     "elysium:flora/402/ground_12",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws.",
+   "replaces": [
+    "minecraft:forest"
+   ]
+  },
+  "elysium:eco/402/terralith_highlands_from_forested_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_3",
+     "elysium:flora/402/ground_13",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws.",
+   "replaces": [
+    "terralith:forested_highlands"
+   ]
+  },
+  "elysium:eco/402/plains": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_2",
+     "elysium:flora/402/ground_14",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/402/windswept_hills": {
+   "parent": "minecraft:windswept_hills",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_2",
+     "elysium:flora/402/ground_14",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_hills",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/402/sunflower_plains": {
+   "parent": "minecraft:sunflower_plains",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_2",
+     "elysium:flora/402/ground_14",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_sunflower",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/402/terralith_temperate_highlands": {
+   "parent": "terralith:temperate_highlands",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_4",
+     "elysium:flora/402/ground_12",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "terralith:highlands/temperate/trees_orange",
+    "terralith:highlands/temperate/dark_oak",
+    "terralith:highlands/temperate/cloud_trees",
+    "terralith:highlands/temperate/trees_neg",
+    "terralith:highlands/temperate/trees_pos",
+    "terralith:birch/fallen_tree",
+    "terralith:highlands/temperate/flowers",
+    "terralith:highlands/forest/tall_flowers",
+    "terralith:highlands/forest/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/402/terralith_rocky_shrubland": {
+   "parent": "terralith:rocky_shrubland",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_4",
+     "elysium:flora/402/ground_12",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "terralith:shrubland/cold/bushes",
+    "terralith:shrubland/cold/small_trees",
+    "terralith:shrubland/cold/tiny_trees",
+    "terralith:shrubland/cold/cone_trees",
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/402/plains_from_birch_forest": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_2",
+     "elysium:flora/402/ground_14",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws.",
+   "replaces": [
+    "minecraft:birch_forest"
+   ]
+  },
+  "elysium:eco/402/terralith_steppe": {
+   "parent": "terralith:steppe",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_2",
+     "elysium:flora/402/ground_14",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/steppe/bush",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/402/terralith_granite_cliffs": {
+   "parent": "terralith:granite_cliffs",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_3",
+     "elysium:flora/402/ground_12",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "terralith:cliffs/white/trees_small",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/402/terralith_arid_highlands": {
+   "parent": "terralith:arid_highlands",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_3",
+     "elysium:flora/402/ground_12",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:flower_warm",
+    "terralith:highlands/arid/bushes",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_dead_bush",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/402/stony_peaks": {
+   "parent": "minecraft:stony_peaks",
+   "regions": [
+    "eco:402"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/402/trees_2",
+     "elysium:flora/402/ground_14",
+     "elysium:flora/402/flowers_5",
+     "elysium:flora/402/cactus_3"
+    ]
+   },
+   "remove_features": [],
+   "why": "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
+  },
+  "elysium:eco/428/terralith_rocky_shrubland": {
+   "parent": "terralith:rocky_shrubland",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_6",
+     "elysium:flora/428/shrubs_10",
+     "elysium:flora/428/ground_13",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "terralith:shrubland/cold/bushes",
+    "terralith:shrubland/cold/small_trees",
+    "terralith:shrubland/cold/tiny_trees",
+    "terralith:shrubland/cold/cone_trees",
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/terralith_arid_highlands": {
+   "parent": "terralith:arid_highlands",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_5",
+     "elysium:flora/428/shrubs_10",
+     "elysium:flora/428/ground_14",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:flower_warm",
+    "terralith:highlands/arid/bushes",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_dead_bush",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/windswept_hills": {
+   "parent": "minecraft:windswept_hills",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_3",
+     "elysium:flora/428/shrubs_9",
+     "elysium:flora/428/ground_14",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_hills",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/wooded_badlands": {
+   "parent": "minecraft:wooded_badlands",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_3",
+     "elysium:flora/428/shrubs_9",
+     "elysium:flora/428/ground_14",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_badlands",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_dry_grass_badlands",
+    "minecraft:patch_dead_bush_badlands",
+    "minecraft:patch_cactus_decorated",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/savanna_plateau": {
+   "parent": "minecraft:savanna_plateau",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_4",
+     "elysium:flora/428/shrubs_9",
+     "elysium:flora/428/ground_14",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/terralith_blooming_plateau": {
+   "parent": "terralith:blooming_plateau",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_3",
+     "elysium:flora/428/shrubs_9",
+     "elysium:flora/428/ground_14",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_meadow",
+    "minecraft:patch_grass_plain",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/terralith_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_3",
+     "elysium:flora/428/shrubs_9",
+     "elysium:flora/428/ground_14",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/terralith_shrubland": {
+   "parent": "terralith:shrubland",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_5",
+     "elysium:flora/428/shrubs_10",
+     "elysium:flora/428/ground_13",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "terralith:shrubland/bushes",
+    "terralith:shrubland/small_trees",
+    "terralith:shrubland/cone_trees",
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/terralith_brushland": {
+   "parent": "terralith:brushland",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_6",
+     "elysium:flora/428/shrubs_11",
+     "elysium:flora/428/ground_12",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "terralith:brushland/patch_tall_grass",
+    "terralith:brushland/bushes",
+    "minecraft:flower_warm",
+    "terralith:brushland/grass",
+    "terralith:brushland/grass_extra",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/terralith_white_cliffs": {
+   "parent": "terralith:white_cliffs",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_4",
+     "elysium:flora/428/shrubs_10",
+     "elysium:flora/428/ground_14",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "terralith:cliffs/white/moss_patch",
+    "terralith:cliffs/white/trees_small",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/plains": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_3",
+     "elysium:flora/428/shrubs_9",
+     "elysium:flora/428/ground_14",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/428/savanna": {
+   "parent": "minecraft:savanna",
+   "regions": [
+    "eco:428"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/428/trees_4",
+     "elysium:flora/428/shrubs_9",
+     "elysium:flora/428/ground_14",
+     "elysium:flora/428/flowers_4",
+     "elysium:flora/428/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
+  },
+  "elysium:eco/429/windswept_hills": {
+   "parent": "minecraft:windswept_hills",
+   "regions": [
+    "eco:429"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/429/trees_7",
+     "elysium:flora/429/shrubs_9",
+     "elysium:flora/429/ground_14",
+     "elysium:flora/429/flowers_4",
+     "elysium:flora/429/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_hills",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+  },
+  "elysium:eco/429/terralith_rocky_shrubland": {
+   "parent": "terralith:rocky_shrubland",
+   "regions": [
+    "eco:429"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/429/trees_10",
+     "elysium:flora/429/shrubs_10",
+     "elysium:flora/429/ground_12",
+     "elysium:flora/429/flowers_4",
+     "elysium:flora/429/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:shrubland/cold/bushes",
+    "terralith:shrubland/cold/small_trees",
+    "terralith:shrubland/cold/tiny_trees",
+    "terralith:shrubland/cold/cone_trees",
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+  },
+  "elysium:eco/429/terralith_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:429"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/429/trees_7",
+     "elysium:flora/429/shrubs_9",
+     "elysium:flora/429/ground_14",
+     "elysium:flora/429/flowers_4",
+     "elysium:flora/429/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+  },
+  "elysium:eco/429/terralith_blooming_plateau": {
+   "parent": "terralith:blooming_plateau",
+   "regions": [
+    "eco:429"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/429/trees_6",
+     "elysium:flora/429/shrubs_9",
+     "elysium:flora/429/ground_14",
+     "elysium:flora/429/flowers_4",
+     "elysium:flora/429/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_meadow",
+    "minecraft:patch_grass_plain",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white"
+   ],
+   "why": "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+  },
+  "elysium:eco/429/stony_peaks": {
+   "parent": "minecraft:stony_peaks",
+   "regions": [
+    "eco:429"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/429/trees_6",
+     "elysium:flora/429/shrubs_9",
+     "elysium:flora/429/ground_14",
+     "elysium:flora/429/flowers_4",
+     "elysium:flora/429/cactus_4"
+    ]
+   },
+   "remove_features": [],
+   "why": "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+  },
+  "elysium:eco/429/terralith_white_cliffs": {
+   "parent": "terralith:white_cliffs",
+   "regions": [
+    "eco:429"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/429/trees_9",
+     "elysium:flora/429/shrubs_10",
+     "elysium:flora/429/ground_13",
+     "elysium:flora/429/flowers_4",
+     "elysium:flora/429/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:cliffs/white/moss_patch",
+    "terralith:cliffs/white/trees_small",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+  },
+  "elysium:eco/429/terralith_granite_cliffs": {
+   "parent": "terralith:granite_cliffs",
+   "regions": [
+    "eco:429"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/429/trees_9",
+     "elysium:flora/429/shrubs_10",
+     "elysium:flora/429/ground_13",
+     "elysium:flora/429/flowers_4",
+     "elysium:flora/429/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:cliffs/white/trees_small",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+  },
+  "elysium:eco/429/meadow": {
+   "parent": "minecraft:meadow",
+   "regions": [
+    "eco:429"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/429/trees_6",
+     "elysium:flora/429/shrubs_9",
+     "elysium:flora/429/ground_14",
+     "elysium:flora/429/flowers_4",
+     "elysium:flora/429/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_grass_meadow",
+    "minecraft:flower_meadow",
+    "minecraft:trees_meadow",
+    "minecraft:wildflowers_meadow"
+   ],
+   "why": "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+  },
+  "elysium:eco/429/windswept_forest": {
+   "parent": "minecraft:windswept_forest",
+   "regions": [
+    "eco:429"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/429/trees_9",
+     "elysium:flora/429/shrubs_10",
+     "elysium:flora/429/ground_12",
+     "elysium:flora/429/flowers_4",
+     "elysium:flora/429/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_forest",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+  },
+  "elysium:eco/429/windswept_gravelly_hills": {
+   "parent": "minecraft:windswept_gravelly_hills",
+   "regions": [
+    "eco:429"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/429/trees_7",
+     "elysium:flora/429/shrubs_9",
+     "elysium:flora/429/ground_14",
+     "elysium:flora/429/flowers_4",
+     "elysium:flora/429/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_hills",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
+  },
+  "elysium:eco/432/savanna_plateau": {
+   "parent": "minecraft:savanna_plateau",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_7",
+     "elysium:flora/432/shrubs_10",
+     "elysium:flora/432/ground_13",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/terralith_fractured_savanna": {
+   "parent": "terralith:fractured_savanna",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_7",
+     "elysium:flora/432/shrubs_10",
+     "elysium:flora/432/ground_13",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/shattered/trees_tall",
+    "terralith:savanna/shattered/med/trees_med",
+    "terralith:savanna/shattered/small/trees_small",
+    "terralith:savanna/shattered/tiny/trees_tiny",
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/windswept_savanna": {
+   "parent": "minecraft:windswept_savanna",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_7",
+     "elysium:flora/432/shrubs_10",
+     "elysium:flora/432/ground_13",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_savanna",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_normal",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/terralith_white_cliffs": {
+   "parent": "terralith:white_cliffs",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_7",
+     "elysium:flora/432/shrubs_10",
+     "elysium:flora/432/ground_13",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "terralith:cliffs/white/moss_patch",
+    "terralith:cliffs/white/trees_small",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/windswept_hills": {
+   "parent": "minecraft:windswept_hills",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_5",
+     "elysium:flora/432/shrubs_9",
+     "elysium:flora/432/ground_14",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_hills",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/wooded_badlands": {
+   "parent": "minecraft:wooded_badlands",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_5",
+     "elysium:flora/432/shrubs_9",
+     "elysium:flora/432/ground_14",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_badlands",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_dry_grass_badlands",
+    "minecraft:patch_dead_bush_badlands",
+    "minecraft:patch_cactus_decorated",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/terralith_highlands": {
+   "parent": "terralith:highlands",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_5",
+     "elysium:flora/432/shrubs_9",
+     "elysium:flora/432/ground_14",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/trees",
+    "terralith:highlands/flowers",
+    "terralith:highlands/tall_flowers",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/stony_peaks": {
+   "parent": "minecraft:stony_peaks",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_5",
+     "elysium:flora/432/shrubs_9",
+     "elysium:flora/432/ground_14",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/terralith_rocky_shrubland": {
+   "parent": "terralith:rocky_shrubland",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_8",
+     "elysium:flora/432/shrubs_11",
+     "elysium:flora/432/ground_12",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "terralith:shrubland/cold/bushes",
+    "terralith:shrubland/cold/small_trees",
+    "terralith:shrubland/cold/tiny_trees",
+    "terralith:shrubland/cold/cone_trees",
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/terralith_arid_highlands": {
+   "parent": "terralith:arid_highlands",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_7",
+     "elysium:flora/432/shrubs_10",
+     "elysium:flora/432/ground_13",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:flower_warm",
+    "terralith:highlands/arid/bushes",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_dead_bush",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/terralith_savanna_slopes": {
+   "parent": "terralith:savanna_slopes",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_7",
+     "elysium:flora/432/shrubs_10",
+     "elysium:flora/432/ground_13",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_granite",
+    "terralith:savanna/baobabs",
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/terralith_blooming_plateau": {
+   "parent": "terralith:blooming_plateau",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_5",
+     "elysium:flora/432/shrubs_9",
+     "elysium:flora/432/ground_14",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_meadow",
+    "minecraft:patch_grass_plain",
+    "terralith:canyon/blooming/flowers",
+    "terralith:canyon/blooming/flowers_white"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/terralith_yosemite_cliffs": {
+   "parent": "terralith:yosemite_cliffs",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_5",
+     "elysium:flora/432/shrubs_9",
+     "elysium:flora/432/ground_14",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "terralith:yosemite/grass",
+    "terralith:yosemite/waterfall",
+    "minecraft:patch_large_fern",
+    "minecraft:patch_grass_taiga_2",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/432/terralith_cloud_forest": {
+   "parent": "terralith:cloud_forest",
+   "regions": [
+    "eco:432"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/432/trees_8",
+     "elysium:flora/432/shrubs_11",
+     "elysium:flora/432/ground_12",
+     "elysium:flora/432/flowers_4",
+     "elysium:flora/432/cactus_8"
+    ]
+   },
+   "remove_features": [
+    "terralith:flower/white/trees",
+    "terralith:flower/white/flowers",
+    "minecraft:patch_large_fern",
+    "terralith:forest/vanilla/fallen_tree_spruce",
+    "minecraft:patch_bush",
+    "minecraft:patch_grass_taiga_2",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."
+  },
+  "elysium:eco/436/savanna": {
+   "parent": "minecraft:savanna",
+   "regions": [
+    "eco:436"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/436/trees_10",
+     "elysium:flora/436/shrubs_10",
+     "elysium:flora/436/ground_13",
+     "elysium:flora/436/flowers_5",
+     "elysium:flora/436/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Dense evergreen thornscrub at the foot of the Sierra Madre Oriental."
+  },
+  "elysium:eco/436/savanna_plateau": {
+   "parent": "minecraft:savanna_plateau",
+   "regions": [
+    "eco:436"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/436/trees_10",
+     "elysium:flora/436/shrubs_10",
+     "elysium:flora/436/ground_13",
+     "elysium:flora/436/flowers_5",
+     "elysium:flora/436/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Dense evergreen thornscrub at the foot of the Sierra Madre Oriental."
+  },
+  "elysium:eco/436/terralith_ashen_savanna": {
+   "parent": "terralith:ashen_savanna",
+   "regions": [
+    "eco:436"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/436/trees_11",
+     "elysium:flora/436/shrubs_10",
+     "elysium:flora/436/ground_11",
+     "elysium:flora/436/flowers_5",
+     "elysium:flora/436/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_gravel",
+    "terralith:shrubland/hot/small_trees",
+    "terralith:shrubland/hot/tiny_trees",
+    "terralith:shrubland/hot/cone_trees",
+    "terralith:savanna/baobabs",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Dense evergreen thornscrub at the foot of the Sierra Madre Oriental."
+  },
+  "elysium:eco/436/terralith_savanna_slopes": {
+   "parent": "terralith:savanna_slopes",
+   "regions": [
+    "eco:436"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/436/trees_10",
+     "elysium:flora/436/shrubs_10",
+     "elysium:flora/436/ground_13",
+     "elysium:flora/436/flowers_5",
+     "elysium:flora/436/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_granite",
+    "terralith:savanna/baobabs",
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Dense evergreen thornscrub at the foot of the Sierra Madre Oriental."
+  },
+  "elysium:eco/437/savanna": {
+   "parent": "minecraft:savanna",
+   "regions": [
+    "eco:437"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/437/trees_9",
+     "elysium:flora/437/shrubs_10",
+     "elysium:flora/437/ground_13",
+     "elysium:flora/437/flowers_7",
+     "elysium:flora/437/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
+  },
+  "elysium:eco/437/terralith_ashen_savanna": {
+   "parent": "terralith:ashen_savanna",
+   "regions": [
+    "eco:437"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/437/trees_11",
+     "elysium:flora/437/shrubs_10",
+     "elysium:flora/437/ground_11",
+     "elysium:flora/437/flowers_7",
+     "elysium:flora/437/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_gravel",
+    "terralith:shrubland/hot/small_trees",
+    "terralith:shrubland/hot/tiny_trees",
+    "terralith:shrubland/hot/cone_trees",
+    "terralith:savanna/baobabs",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
+  },
+  "elysium:eco/437/plains": {
+   "parent": "minecraft:plains",
+   "regions": [
+    "eco:437"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/437/trees_8",
+     "elysium:flora/437/shrubs_9",
+     "elysium:flora/437/ground_14",
+     "elysium:flora/437/flowers_7",
+     "elysium:flora/437/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
+  },
+  "elysium:eco/437/terralith_shrubland": {
+   "parent": "terralith:shrubland",
+   "regions": [
+    "eco:437"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/437/trees_11",
+     "elysium:flora/437/shrubs_10",
+     "elysium:flora/437/ground_11",
+     "elysium:flora/437/flowers_7",
+     "elysium:flora/437/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "terralith:shrubland/bushes",
+    "terralith:shrubland/small_trees",
+    "terralith:shrubland/cone_trees",
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_bush",
+    "minecraft:trees_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
+  },
+  "elysium:eco/437/sunflower_plains": {
+   "parent": "minecraft:sunflower_plains",
+   "regions": [
+    "eco:437"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/437/trees_8",
+     "elysium:flora/437/shrubs_9",
+     "elysium:flora/437/ground_14",
+     "elysium:flora/437/flowers_7",
+     "elysium:flora/437/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "minecraft:patch_sunflower",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
+  },
+  "elysium:eco/437/savanna_plateau": {
+   "parent": "minecraft:savanna_plateau",
+   "regions": [
+    "eco:437"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/437/trees_9",
+     "elysium:flora/437/shrubs_10",
+     "elysium:flora/437/ground_13",
+     "elysium:flora/437/flowers_7",
+     "elysium:flora/437/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
+  },
+  "elysium:eco/437/terralith_steppe": {
+   "parent": "terralith:steppe",
+   "regions": [
+    "eco:437"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/437/trees_8",
+     "elysium:flora/437/shrubs_9",
+     "elysium:flora/437/ground_14",
+     "elysium:flora/437/flowers_7",
+     "elysium:flora/437/cactus_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass_2",
+    "terralith:highlands/steppe/bush",
+    "terralith:highlands/grass",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
+  },
+  "elysium:eco/545/savanna": {
+   "parent": "minecraft:savanna",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_10",
+     "elysium:flora/545/shrubs_7",
+     "elysium:flora/545/ground_13",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
+  },
+  "elysium:eco/545/terralith_savanna_slopes": {
+   "parent": "terralith:savanna_slopes",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_10",
+     "elysium:flora/545/shrubs_7",
+     "elysium:flora/545/ground_13",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_granite",
+    "terralith:savanna/baobabs",
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
+  },
+  "elysium:eco/545/savanna_plateau": {
+   "parent": "minecraft:savanna_plateau",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_10",
+     "elysium:flora/545/shrubs_7",
+     "elysium:flora/545/ground_13",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
+  },
+  "elysium:eco/545/terralith_ashen_savanna": {
+   "parent": "terralith:ashen_savanna",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_12",
+     "elysium:flora/545/shrubs_8",
+     "elysium:flora/545/ground_11",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/badlands/grass_gravel",
+    "terralith:shrubland/hot/small_trees",
+    "terralith:shrubland/hot/tiny_trees",
+    "terralith:shrubland/hot/cone_trees",
+    "terralith:savanna/baobabs",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
+  },
+  "elysium:eco/545/terralith_fractured_savanna": {
+   "parent": "terralith:fractured_savanna",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_10",
+     "elysium:flora/545/shrubs_7",
+     "elysium:flora/545/ground_13",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:savanna/shattered/trees_tall",
+    "terralith:savanna/shattered/med/trees_med",
+    "terralith:savanna/shattered/small/trees_small",
+    "terralith:savanna/shattered/tiny/trees_tiny",
+    "minecraft:patch_tall_grass",
+    "minecraft:trees_savanna",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_savanna",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
+  },
+  "elysium:eco/545/terralith_cloud_forest": {
+   "parent": "terralith:cloud_forest",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_13",
+     "elysium:flora/545/shrubs_8",
+     "elysium:flora/545/ground_10",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:flower/white/trees",
+    "terralith:flower/white/flowers",
+    "minecraft:patch_large_fern",
+    "terralith:forest/vanilla/fallen_tree_spruce",
+    "minecraft:patch_bush",
+    "minecraft:patch_grass_taiga_2",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
+  },
+  "elysium:eco/545/forest": {
+   "parent": "minecraft:forest",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_13",
+     "elysium:flora/545/shrubs_8",
+     "elysium:flora/545/ground_10",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:forest_flowers",
+    "minecraft:trees_birch_and_oak_leaf_litter",
+    "minecraft:patch_bush",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_forest",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
+  },
+  "elysium:eco/545/terralith_jungle_mountains": {
+   "parent": "terralith:jungle_mountains",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_13",
+     "elysium:flora/545/shrubs_8",
+     "elysium:flora/545/ground_10",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:bamboo_light",
+    "minecraft:trees_jungle",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
+  },
+  "elysium:eco/545/bamboo_jungle": {
+   "parent": "minecraft:bamboo_jungle",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_13",
+     "elysium:flora/545/shrubs_8",
+     "elysium:flora/545/ground_10",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:bamboo",
+    "minecraft:bamboo_vegetation",
+    "minecraft:flower_warm",
+    "minecraft:patch_grass_jungle",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
+  },
+  "elysium:eco/545/windswept_savanna": {
+   "parent": "minecraft:windswept_savanna",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_11",
+     "elysium:flora/545/shrubs_8",
+     "elysium:flora/545/ground_12",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "minecraft:trees_windswept_savanna",
+    "minecraft:flower_default",
+    "minecraft:patch_grass_normal",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
+  },
+  "elysium:eco/545/terralith_rocky_shrubland": {
+   "parent": "terralith:rocky_shrubland",
+   "regions": [
+    "eco:545"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/545/trees_13",
+     "elysium:flora/545/shrubs_8",
+     "elysium:flora/545/ground_11",
+     "elysium:flora/545/flowers_5",
+     "elysium:flora/545/cactus_4"
+    ]
+   },
+   "remove_features": [
+    "terralith:shrubland/cold/bushes",
+    "terralith:shrubland/cold/small_trees",
+    "terralith:shrubland/cold/tiny_trees",
+    "terralith:shrubland/cold/cone_trees",
+    "minecraft:patch_tall_grass_2",
+    "minecraft:trees_plains",
+    "minecraft:flower_plains",
+    "minecraft:patch_grass_plain",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Tropical deciduous forest with columnar cacti on the Pacific slope."
   }
+ }
 }

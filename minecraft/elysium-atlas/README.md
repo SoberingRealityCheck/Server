@@ -151,12 +151,32 @@ Everything else comes from the parent at runtime, so other systems need no edits
 | Features | Parent's final list minus `remove`, plus `add` (copied placed features, appended, so order stays acyclic) |
 | Temperature, downfall, precipitation | Never changed, so seasons and snow behave the same |
 
-Definitions: `variants/biome_variants.py` (variants) and `variants/regions.py` (regions as RESOLVE
-Ecoregions 2017 groups). The script writes the biome files, copied placed features, names and
-`elysium_atlas/variants.json` into `src/main/resources`; `--check` reports stale output. The atlas
-stores regions separately (`bake/bake_regions.py`, 32-block cells, warped borders), so the base biome map
-does not change and regions can change without rebaking terrain. `/atlas variants` audits each variant
-against its parent (tags, spawns, features). `/atlas here` and F3 show the region.
+A variant normally inherits from the atlas biome it replaces. A profile's `rebase` makes it inherit from
+another biome instead (Blackland Prairie: atlas forest becomes a child of plains). It keeps the
+temperature, downfall and precipitation of the atlas biome.
+
+**Regions.** The atlas region layer (`bake/bake_regions.py`, `regions.bin.gz` format 2, u16, 32-block cells,
+warped borders) stores one unit per RESOLVE Ecoregions 2017 ecoregion, `eco:<ECO_ID>`, over the whole globe:
+838 units, 0.5 MB. Groups in `variants/regions.py` name sets of ecoregions and can split one along a
+meridian. The base biome map is unchanged, so regions change without rebaking terrain.
+
+**Profiles.** `variants/flora/*.py` holds one hand-written profile per ecoregion. Each profile sets:
+- grass and foliage colour;
+- tree cover;
+- weighted plant lists (trees, shrubs, ground cover, flowers, cacti) from the plant palette `variants/plants.py`.
+  The palette maps real plants to custom configured features built from vanilla blocks (Ashe juniper, live oak,
+  mesquite, loblolly pine, bluebonnet as cornflower), or to vanilla features.
+
+Every atlas biome covering at least 0.3% of a profiled ecoregion gets a variant. Its own plants are removed
+and the ecoregion's are added. Tree count is the profile's cover times a factor taken from the atlas biome's
+own tree count, so forest cells stay denser than plains cells. Ecoregions without a profile keep the atlas
+biome. Profiles so far cover 25 ecoregions in and around Texas (`flora/texas.py`); the 16 Alpine and
+Mediterranean variants are written directly in `biome_variants.py`.
+
+`variants/biome_variants.py SERVER_JAR TERRALITH_JAR` writes the biome files, features, names and
+`elysium_atlas/variants.json` into `src/main/resources`; `--check` reports stale output. `/atlas variants`
+audits every variant against its parent (tags, spawns, features) and lists only problems. `/atlas here` and
+F3 show the region.
 
 ## Distant Horizons SeedGen
 
