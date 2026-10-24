@@ -94,7 +94,7 @@ least about 36 blocks. Only L1 biome bytes and `atlas.json` change. Slice-5 = sl
 a lowland France window the share of `forest` falls from 41% to 17% and distinct biomes rise from 18
 to 28. Behind a TLS proxy set `GDAL_CURL_CA_BUNDLE`.
 
-**Biome placement (slice-8).** Every land cell takes the biome whose niche fits it best (`bake/placement.py`);
+**Biome placement (slice-8, prior since slice-9).** Every land cell takes the biome whose niche fits it best (`bake/placement.py`);
 no table maps a place or a climate class to a biome. Niches come from the biomes' own data in the pack's jars
 (`bake/biome_traits.py` -> `bake/data/biome_traits.json`, 158 surface biomes from vanilla, Terralith, Biomes O'
 Plenty, Wilder Wild and Terrestria): the c: climate tags (hot, temperate, cold, snowy) set a temperature band and
@@ -102,6 +102,10 @@ the JSON temperature orders biomes inside it; the c: wet/dry tags and downfall s
 biomes count as arid); trees per chunk come from the vegetal placed features; the landform from the mountain,
 plateau and hill tags and a few name tokens (cliffs, canyon, spires). The cell side is the warm-branch climate
 re-lapsed to the cell's elevation, the woody cover of its g3 formation, the atlas relief and the water mask.
+Since slice-9 the cover also takes a potential-vegetation prior: 75% of it comes from the cell's present-day
+RESOLVE biome type (`PNV_COVER`), because climate alone misses the fire, soils and seasonality that keep prairies,
+pampas and montane grasslands open. This makes `placement_check.py` partly circular; read its numbers as a
+consistency check, not an independent test.
 The score adds squared distances in temperature, moisture and cover, plus terms for landform, year-round snow,
 conifers in warm places, jungle where it frosts, and per-biome value noise so near-ties form patches. Terrain-feature
 biomes (glacial chasm, cliffs) need 900 m of relief; wetland biomes go only on the wetland mask (flat low land
@@ -195,8 +199,8 @@ meridian. The base biome map is unchanged, so regions change without rebaking te
 Every atlas biome covering at least 0.3% of a profiled ecoregion gets a variant. Its own plants are removed
 and the ecoregion's are added. Tree count is the profile's cover times a factor taken from the atlas biome's
 own tree count, so forest cells stay denser than plains cells. Ecoregions without a profile keep the atlas
-biome. Profiles so far cover 25 ecoregions in and around Texas (`flora/texas.py`); the 16 Alpine and
-Mediterranean variants are written directly in `biome_variants.py`.
+biome. Profiles so far cover 25 ecoregions in and around Texas (`flora/texas.py`) and 37 in Europe
+(`flora/europe.py`, from the spawn outwards; it replaced the earlier hand-written Alpine and Mediterranean variants).
 
 `variants/biome_variants.py SERVER_JAR TERRALITH_JAR` writes the biome files, features, names and
 `elysium_atlas/variants.json` into `src/main/resources`; `--check` reports stale output. `/atlas variants`

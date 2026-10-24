@@ -20,14 +20,16 @@ from PIL import Image
 from scipy import ndimage as ndi
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from placement import Placement, Wetland, FORMATION_COVER, value_noise  # noqa: E402
+from placement import Placement, Wetland, FORMATION_COVER, value_noise, resolve_grid  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 # Biome inputs (biome_ids_v1.json, biome_v2_global*) live in the project files, not in this repo.
 EXP = os.environ.get("ELYSIUM_WORLDGEN_EXPERIMENTS") or os.path.abspath(os.path.join(HERE, "..", "..", "worldgen-experiments"))
+# RESOLVE Ecoregions2017.shp (CC BY 4.0); read once into EXP/globe/resolve_biome_10m.npy
+ECO_SHP = os.environ.get("ELYSIUM_ECOREGIONS_SHP") or os.path.join(EXP, "eco", "Ecoregions2017.shp")
 
 # ---- frozen parameters (changing any of these changes terrain everywhere: bump ATLAS_VERSION)
-ATLAS_VERSION = "slice-8"
+ATLAS_VERSION = "slice-9"
 MPB = 150.0                  # metres per block (Medium preset)
 LON0 = 11.0; R = 6371008.8   # Equal Earth, metres
 SEA_Y = 63                   # Minecraft sea level
@@ -133,6 +135,7 @@ class Biomes:
         self.bio = bio[idx]; self.realm = d["realm"][idx]
         self.clim = {k: d[k][idx].astype(np.float32) for k in ("MI", "MAT", "Tcold", "Thot", "elev_wc", "dry_months")}
         self.clim["med"] = d["med"][idx]
+        self.clim["pnv"] = resolve_grid(ECO_SHP, os.path.join(EXP, "globe", "resolve_biome_10m.npy"))
         self.fcover = np.array([FORMATION_COVER[f] for f in self.form] + [0.0] * (256 - len(self.form)), np.float32)
         self.place = Placement(os.path.join(HERE, "data", "biome_traits.json"))
         self.wet = Wetland(os.path.join(EXP, "atlas", "hydro_v2_5km_warm.npz"), ee_fwd)
@@ -156,7 +159,7 @@ class Biomes:
             r, c = r10[land], c10[land]; cl = {k: v[r, c] for k, v in self.clim.items()}
             dT = -6.5e-3 * ((zr[land] + SEA_RISE) - cl["elev_wc"])            # re-lapse WorldClim to this cell's elevation
             ct = self.place.cell_terms(cl["MAT"] + dT, cl["Thot"] + dT, cl["Tcold"] + dT, cl["MI"], cl["dry_months"],
-                                       self.fcover[F[land]], cl["med"])
+                                       self.fcover[F[land]], cl["med"], cl["pnv"])
             ct.update({"relief": relief[land].astype(np.float32), "zr": zr[land].astype(np.float32), "realm": self.realm[r, c],
                        "xm": xm[land], "ym": ym[land],
                        "coast": (ndi.binary_dilation(sea, iterations=max(1, coast_cells)) & land)[land],

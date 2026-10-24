@@ -9,8 +9,8 @@ import gzip, json, math, os, struct, sys
 import numpy as np
 from scipy import ndimage as ndi
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from placement import Placement, Niche, FORMATION_COVER, Wetland
-from bake_atlas import ee_fwd, MPB
+from placement import Placement, Niche, FORMATION_COVER, Wetland, resolve_grid
+from bake_atlas import ee_fwd, MPB, ECO_SHP
 
 RESOLVE = {1: "Tropical moist broadleaf", 2: "Tropical dry broadleaf", 3: "Tropical conifer", 4: "Temperate broadleaf/mixed",
            5: "Temperate conifer", 6: "Boreal", 7: "Tropical grassland/savanna", 8: "Temperate grassland/savanna",
@@ -81,7 +81,8 @@ def main():
         meta = json.load(open(os.path.join(exp, "globe", "biome_v2_global.json"))); form = [b["id"] for b in meta["biomes"]]
         fc = np.array([FORMATION_COVER[f] for f in form] + [0.0] * (256 - len(form)), np.float32)[g["biome"]]
         ct = P.cell_terms(g["MAT"].astype(np.float32), g["Thot"].astype(np.float32), g["Tcold"].astype(np.float32),
-                          g["MI"].astype(np.float32), g["dry_months"], fc, g["med"])
+                          g["MI"].astype(np.float32), g["dry_months"], fc, g["med"],
+                          resolve_grid(ECO_SHP, os.path.join(exp, "globe", "resolve_biome_10m.npy")))
         c = {k: v[land] for k, v in ct.items()}
         c.update({"relief": relief[land], "zr": z[land], "wet": wet[land], "coast": coast[land], "realm": g["realm"][land], "xm": x[land], "ym": y[land]})
         arg = P.pick(c)

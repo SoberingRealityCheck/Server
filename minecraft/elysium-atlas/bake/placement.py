@@ -8,8 +8,8 @@ No table maps a place to a biome. Biomes themed on one small real place are left
 score = thermal + moisture + cover + conifer + landform + snow + extra - jitter     (lowest wins)
 
   thermal   (theta_cell - theta_biome)^2 / S_T^2   theta from mean annual temperature, -15..30 C -> 0..1
-  moisture  (mu_cell - mu_biome)^2 / S_M^2          mu from the moisture index, scaled down in cold cells
-  cover     (cover_cell - cover_biome)^2 / S_C^2    woody cover (formation physiognomy and MI) vs. trees per chunk
+  moisture  (mu_cell - mu_biome)^2 / S_M^2          mu from the moisture index, scaled down in cold cells; half where the cell is wetter
+  cover     (cover_cell - cover_biome)^2 / S_C^2    woody cover (formation physiognomy, MI and the RESOLVE prior) vs. trees per chunk
   conifer   conifer biomes pay where it is warm and not very wet
   landform  log-distance of relief outside the biome's range (peaks need relief, plains need none)
   snow      the biome lies under snow all year (temperature < 0.15) and the cell does not, or the reverse
@@ -17,7 +17,7 @@ score = thermal + moisture + cover + conifer + landform + snow + extra - jitter 
   water     wetland biomes only on the wetland mask, and wetland cells only take them
   jitter    per-biome value noise, so near-ties form coherent patches instead of one winner everywhere
 """
-import json, math
+import json, math, os
 import numpy as np
 from scipy import ndimage as ndi
 
@@ -91,12 +91,15 @@ class Placement:
         self.ids = [n.id for n in self.niches]
 
     @staticmethod
-    def cell_terms(MAT, Thot, Tcold, MI, dry_months, formation_cover, med):
+    def cell_terms(MAT, Thot, Tcold, MI, dry_months, formation_cover, med, pnv=None):
         theta = theta_of_mat(MAT); mu = mu_of_mi(MI); dry_months = np.asarray(dry_months, np.float32)
         cover = np.clip((MI - 0.45) / 0.7, 0, 1) * np.clip((Thot - 9.0) / 5.0, 0, 1)
         trop = Tcold >= 15
         cover = cover * np.where(trop, 1 - np.clip((dry_months - 4) / 6.0, 0, 0.6), 1)   # long dry season: fire savanna
         cover = 0.5 * cover + 0.5 * formation_cover
+        if pnv is not None:
+            pc = np.array([0.0] + [PNV_COVER[k] for k in range(1, 15)] + [0.0] * 241, np.float32)[pnv]
+            cover = np.where(pnv > 0, (1 - W_PNV) * cover + W_PNV * pc, cover)
         cover = np.where(med, np.maximum(cover, 0.35), cover)    # summer-dry: sclerophyll scrub and woodland, not open grass
         snow = ((Tcold < -6) & (MAT < 3) & (Thot < 16)) | ((Tcold < -15) & (MAT < -3)) | (Thot < 6)   # snow lies most of the year
         wm = np.clip((theta - 0.1) / 0.3, 0.2, 1.0)    # moisture matters little where it is too cold to evaporate
@@ -105,7 +108,8 @@ class Placement:
 
     def scores(self, n, c):
         """Score of niche n over the cells in dict c (arrays of one shape)."""
-        s = ((c["theta"] - n.theta) / S_T) ** 2 + c["wm"] * ((c["mu"] - n.mu) / S_M) ** 2 + ((c["cover"] - n.cover) / S_C) ** 2
+        dm = c["mu"] - n.mu         # a cell wetter than the niche shows less than a drier one (plains in rain still read as plains)
+        s = ((c["theta"] - n.theta) / S_T) ** 2 + c["wm"] * np.where(dm > 0, 0.5, 1.0) * (dm / S_M) ** 2 + ((c["cover"] - n.cover) / S_C) ** 2
         if n.conifer: s = s + W_CONIFER * c["conifer"]
         lo, hi = LANDFORM[n.landform]; r = c["relief"] + 50.0
         s = s + W_L * 4 * np.where(r < lo + 50, np.log((lo + 50) / r), np.where(r > hi + 50, np.log(r / (hi + 50)), 0)) ** 2
@@ -128,6 +132,25 @@ class Placement:
             c2 = {k: (v[bad] if isinstance(v, np.ndarray) and v.shape == bad.shape else v) for k, v in c.items()}
             c2["wet"] = np.zeros(int(bad.sum()), bool); arg[bad] = self.pick(c2)
         return arg
+
+# Potential natural vegetation prior: woody cover per RESOLVE biome type (BIOME_NUM). Climate alone misses fire,
+# soils and seasonality (prairies and pampas sit at MI ~1; montane and xeric shrublands stay open), so the cell's
+# present-day ecoregion type pulls its cover toward what grows there now. 0 = no prior (rock and ice, lakes, sea).
+PNV_COVER = {1: 0.9, 2: 0.6, 3: 0.75, 4: 0.8, 5: 0.75, 6: 0.65, 7: 0.25, 8: 0.1, 9: 0.1, 10: 0.08, 11: 0.03, 12: 0.4, 13: 0.08, 14: 0.85}
+W_PNV = 0.75
+
+def resolve_grid(shp, cache):
+    """RESOLVE BIOME_NUM on the 10' globe grid (1080 x 2160, row 0 at 90 N); land the polygons miss takes the nearest."""
+    if os.path.exists(cache): return np.load(cache)
+    import shapefile
+    from rasterio import features, transform
+    sf = shapefile.Reader(shp, encoding="latin-1")
+    shapes = [(sr.shape.__geo_interface__, int(sr.record["BIOME_NUM"])) for sr in sf.iterShapeRecords() if 1 <= int(sr.record["BIOME_NUM"]) <= 14]
+    g = features.rasterize(shapes, out_shape=(1080, 2160), transform=transform.from_origin(-180, 90, 1 / 6, 1 / 6), fill=0, dtype="uint8",
+                           all_touched=True)
+    idx = ndi.distance_transform_edt(g == 0, return_distances=False, return_indices=True)
+    g = g[tuple(idx)]
+    np.save(cache, g); return g
 
 class Wetland:
     """Rule 3: wetland = flat low land on a large river's floodplain or by a lake, or barely above the sea, in a moist
