@@ -302,16 +302,22 @@ class Flora:
     def cactus(self, eco, plants, n):
         key = f"flora/{eco}/cactus_{level(n)}"
         if f"data/elysium/worldgen/placed_feature/{key}.json" not in self.files:
-            items = [({"feature": self.plant_inline(p), "placement": []}, w) for p, w in plants.items()]
+            items = [({"feature": self.plant_inline(p), "placement": [{"type": "minecraft:block_predicate_filter", "predicate": {
+                "type": "minecraft:would_survive", "state": base_state(p)}}]}, w) for p, w in plants.items()]
             self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/cactus.json"] = selector(items)
             self.files[f"data/elysium/worldgen/placed_feature/{key}.json"] = {"feature": f"elysium:flora/{eco}/cactus",
-                "placement": scatter(LEVELS[level(n)], 6, 7, extra={"type": "minecraft:all_of", "predicates": [
-                    {"type": "minecraft:matching_block_tag", "tag": "minecraft:air"},
-                    {"type": "minecraft:would_survive", "state": {"Name": "minecraft:cactus", "Properties": {"age": "0"}}}]})}
+                "placement": scatter(LEVELS[level(n)], 6, 7, extra={"type": "minecraft:matching_block_tag", "tag": "minecraft:air"})}
         return f"elysium:{key}"
 
     def plant_inline(self, name):
         cid = f"elysium:plant/{name}"; self.files[f"data/elysium/worldgen/configured_feature/plant/{name}.json"] = PLANTS[name][1]; return cid
+
+
+def base_state(name):
+    """The block a cactus-layer plant puts on the ground, for its survival check."""
+    kind, feat = PLANTS[name][:2]
+    if kind == "cactus": return {"Name": "minecraft:cactus", "Properties": {"age": "0"}}
+    return feat["config"]["to_place"]["entries"][0]["data"]
 
 
 # ---------------------------------------------------------------- generation

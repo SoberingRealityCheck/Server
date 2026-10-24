@@ -9,7 +9,7 @@
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 work="$here/.build"
-version=0.5.1
+version=0.6.0
 out="$here/../server-overrides/mods/elysium_atlas.jar"
 
 if [ -n "${JAVA_HOME:-}" ]; then PATH="$JAVA_HOME/bin:$PATH"; fi

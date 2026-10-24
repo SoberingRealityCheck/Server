@@ -166,6 +166,56 @@ mods:
     env: both
     reason: "~95 realistic biomes, vanilla blocks/mobs only"
 
+  # Flora libraries for the atlas's regional variants (elysium_atlas depends on all three).
+  # Their own biomes and vanilla-biome changes are switched off in overrides/config:
+  # the atlas picks biomes; the variants place these mods' plants.
+  - name: "Biomes O' Plenty"
+    file: "BiomesOPlenty-fabric-26.2-26.2.0.0.28.jar"
+    url: "https://cdn.modrinth.com/data/HXF82T3G/versions/MNZPk6V0/BiomesOPlenty-fabric-26.2-26.2.0.0.28.jar"
+    sha512: "78308db65ecc3c75065adb227e678c8ee3edefe934cbe9e66a9887bab4fea40fd97f7be985dca144760371aee83cebb083cb799f21c3683adc972eb8384b71fa"
+    env: both
+    reason: >-
+      Plant and tree library for regional variants (goldenrod, sea oats;
+      pines, firs, palms later). All BOP biomes off in
+      overrides/config/biomesoplenty/biome_toggles.json, which also keeps
+      them out of the Nether and End. Beta.
+
+  - name: "TerraBlender"
+    file: "TerraBlender-fabric-26.2-26.2.0.0.2.jar"
+    url: "https://cdn.modrinth.com/data/kkmrDlKT/versions/KQix25Qc/TerraBlender-fabric-26.2-26.2.0.0.2.jar"
+    sha512: "2bc1200180e615afe0ba57a6f8cff9a1a46ccc6849fdcf4108cd6000bfccb4b8900b9e168786f69e7fe48ce40a31d95c6b1d9d711768e0e19413ae2c05ef8de0"
+    env: both
+    reason: "Required by Biomes O' Plenty (>=26.2.0.0.1). Beta."
+
+  - name: "Wilder Wild"
+    file: "WilderWild-4.3.3-mc26.2-fabric.jar"
+    url: "https://cdn.modrinth.com/data/AtHRJSUW/versions/k4YiRz8m/WilderWild-4.3.3-mc26.2-fabric.jar"
+    sha512: "335ed5bbbdd548a9f0c8960dbbbb978dffca49ac5b9c5a3bef83b202ab9c5ca4e8d80bb0f9695a7baa91b2c50722f1552863be47b49ff492ff8b90f0aa21d117"
+    env: both
+    reason: >-
+      Plant and tree library for regional variants (juniper, swamp
+      cypress, windmill palm, prickly pear, tumbleweed, phlox, lantana,
+      milkweed, datura, marigold). Every worldgen switch is off in
+      overrides/config/wilderwild/worldgen.json5: by default it rewrites
+      vanilla biomes, which the variants copy.
+
+  - name: "FrozenLib"
+    file: "FrozenLib-3.0.3-mc26.2-fabric.jar"
+    url: "https://cdn.modrinth.com/data/9KawNmQc/versions/DFsk0uXB/FrozenLib-3.0.3-mc26.2-fabric.jar"
+    sha512: "9b3160de76c2d83ff6626be1e0fe71ca181fcdd4eaee5718f155d7e9a89765dcede3d8dc34807b20d152fddd6726ddcd0b8358a2171e700b8a069351ae3c0d82"
+    env: both
+    reason: "Required by Wilder Wild (>=3.0)."
+
+  - name: "Terrestria"
+    file: "terrestria-8.1.0-beta.2.jar"
+    url: "https://cdn.modrinth.com/data/lsUDPMOT/versions/u43c9EQl/terrestria-8.1.0-beta.2.jar"
+    sha512: "02054d00958f3cf26d70ee0bd827411b8f85f6963a312258d40c8ca619b292627fd09c665cefac9432724c69b464cbdb49b3abbe318394d8ade314a3dc608353"
+    env: both
+    reason: >-
+      Plant and tree library for regional variants (agave, Indian
+      paintbrush, yucca palm). Embeds Biolith and the Terraform APIs.
+      Biomes and ocean volcanoes off in overrides/config/terrestria. Beta.
+
   - name: "Tectonic"
     file: "tectonic-3.0.28-fabric-26.2.jar"
     url: "https://cdn.modrinth.com/data/lWDHr9jE/versions/tGbplDzo/tectonic-3.0.28-fabric-26.2.jar"

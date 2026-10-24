@@ -39,8 +39,11 @@ Any change to them changes terrain in chunks not yet generated and leaves seams.
     ocean and mountain splines agree with the atlas.
   - `tectonic:terrain_spline/jaggedness/continents` -> scaled by atlas relief. Without this,
     Tectonic's erosion noise raised flat land by up to 40 blocks.
-  - `tectonic:terrain_spline/roughness` and `tectonic:terrain_spline/offset/depth_additive` -> scaled by
-    `calm`, which is 0 on water and rises to 1 away from it, so Tectonic's own noise cannot fill a channel.
+  - `tectonic:terrain_spline/roughness` -> scaled by atlas relief (0.75 x relief in km, clamped to
+    0.1..1). It is vanilla's 3D base noise; at full strength it stood 40-block knobs on the flat
+    Edwards Plateau (Hill Country, seed -1117184792348421700, near -65580 -25385).
+  - `roughness` and `tectonic:terrain_spline/offset/depth_additive` -> also scaled by `calm`, which is
+    0 on water and rises to 1 away from it, so Tectonic's own noise cannot fill a channel.
   Each `elysium_atlas:sample` has a `fallback`, used when the world is not an atlas world.
 - Biome source `elysium_atlas:atlas`: the baked palette ID per 4x4 column. Below the surface it
   asks the overworld multi_noise preset and keeps only cave biomes (Terralith `cave/*`, lush and
@@ -164,8 +167,12 @@ meridian. The base biome map is unchanged, so regions change without rebaking te
 - grass and foliage colour;
 - tree cover;
 - weighted plant lists (trees, shrubs, ground cover, flowers, cacti) from the plant palette `variants/plants.py`.
-  The palette maps real plants to custom configured features built from vanilla blocks (Ashe juniper, live oak,
-  mesquite, loblolly pine, bluebonnet as cornflower), or to vanilla features.
+  The palette maps real plants to custom configured features built from vanilla blocks (live oak, mesquite,
+  loblolly pine, bluebonnet as cornflower), to vanilla features, or to plants from the pack's flora mods
+  (Wilder Wild juniper, swamp cypress, windmill palm, prickly pear; Terrestria agave, Indian paintbrush,
+  yucca palm; BOP goldenrod, sea oats). The mod therefore depends on Biomes O' Plenty, Wilder Wild and
+  Terrestria. Their own biomes and vanilla-biome edits are switched off in `../overrides/config`, so the
+  atlas still picks every biome.
 
 Every atlas biome covering at least 0.3% of a profiled ecoregion gets a variant. Its own plants are removed
 and the ecoregion's are added. Tree count is the profile's cover times a factor taken from the atlas biome's

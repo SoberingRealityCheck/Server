@@ -1,10 +1,11 @@
-"""Pack plant palette: real plants mapped to Minecraft features made of vanilla blocks.
+"""Pack plant palette: real plants mapped to Minecraft features, from vanilla blocks or the pack's flora mods
+(Biomes O' Plenty, Wilder Wild, Terrestria).
 
 Flora profiles (flora/*.py) name these plants. Each entry is one of
   tree    a configured tree feature (custom JSON, or "ref" to an existing configured feature)
   shrub   the same, placed like trees but counted from shrub cover
   ground  a block or weighted set of blocks scattered in patches (grass, flowers, litter)
-  cactus  a block column on sand or dirt
+  cactus  a block column on sand or dirt (a profile's cactus list may also name ground plants)
 Leaves that take the biome foliage colour (oak, acacia, jungle, dark oak, mangrove) pick up the variant's
 measured canopy colour; spruce and birch leaves keep their fixed colours.
 """
@@ -79,14 +80,12 @@ PLANTS = {
                         "Open park-like pine of the dry western mountains."),
     "pinyon_pine":     ("tree", tree("minecraft:spruce_log", "minecraft:spruce_leaves", straight(2, 1, 0), blob(2, 3, 0)), "minecraft:spruce_sapling",
                         "Short, round, bushy nut pine of the high desert."),
-    "ashe_juniper":    ("tree", tree("minecraft:spruce_log", "minecraft:spruce_leaves", straight(2, 1, 0), sprucef(U(1, 2), U(0, 1), U(1, 1))), "minecraft:spruce_sapling",
-                        "Dense dark 'cedar' brakes of the Hill Country."),
+    "ashe_juniper":    ("ref", "wilderwild:juniper", "minecraft:oak_sapling", "Dense dark 'cedar' brakes of the Hill Country (Wilder Wild juniper)."),
     "one_seed_juniper": ("shrub", tree("minecraft:spruce_log", "minecraft:spruce_leaves", straight(1, 1, 0), bushf(2, 2, 1)), "minecraft:spruce_sapling",
                         "Low rounded juniper on desert slopes."),
     "eastern_red_cedar": ("tree", tree("minecraft:spruce_log", "minecraft:spruce_leaves", straight(4, 2, 0), sprucef(U(1, 2), U(0, 1), U(1, 2))), "minecraft:spruce_sapling",
                         "Narrow cone; spreads into old prairie and fields."),
-    "bald_cypress":    ("tree", tree("minecraft:spruce_log", "minecraft:oak_leaves", straight(12, 4, 0), pinef(2, U(4, 6)), decorators=[moss(0.35)]), "minecraft:spruce_sapling",
-                        "Swamp and river conifer, draped in moss."),
+    "bald_cypress":    ("ref", "wilderwild:swamp_cypress", "wilderwild:cypress_sapling", "Swamp and river conifer with vines (Wilder Wild swamp cypress)."),
     "douglas_fir":     ("ref", "minecraft:spruce", "minecraft:spruce_sapling", "Mountain fir (vanilla spruce)."),
     "spruce":          ("ref", "minecraft:spruce", "minecraft:spruce_sapling", "Vanilla spruce."),
     "mega_spruce":     ("ref", "minecraft:mega_spruce", "minecraft:spruce_sapling", "Vanilla giant spruce."),
@@ -126,14 +125,17 @@ PLANTS = {
     "huisache":        ("ref", "minecraft:acacia", "minecraft:acacia_sapling", "Flat-topped acacia of South Texas (vanilla acacia)."),
     "texas_ebony":     ("shrub", tree("minecraft:dark_oak_log", "minecraft:dark_oak_leaves", straight(2, 0, 0), bushf(2, 2, 1)), "minecraft:acacia_sapling",
                         "Dense dark thorn shrub of the Tamaulipan thornscrub."),
-    "sabal_palm":      ("tree", tree("minecraft:jungle_log", "minecraft:jungle_leaves", straight(5, 3, 0), acaciaf(2)), "minecraft:jungle_sapling",
-                        "Fan palm of the lower Rio Grande and the Gulf coast."),
+    "sabal_palm":      ("ref", "wilderwild:small_windmill_palm", "minecraft:dead_bush", "Fan palm of the lower Rio Grande and the Gulf coast (Wilder Wild windmill palm)."),
+    "yucca":           ("ref", "terrestria:yucca_palm_tree", "minecraft:dead_bush", "Tree yucca of the Trans-Pecos flats (Terrestria yucca palm)."),
     # ---- shrubs and succulents
     "creosote_bush":   ("ground", flowers("minecraft:bush"), None, "Evenly spaced green shrubs on desert flats (grass-tinted bush)."),
     "sagebrush":       ("ground", flowers("minecraft:bush", "minecraft:short_dry_grass", weights=[3, 1]), None, "Grey-green sage on high plains (grass-tinted bush)."),
     "dead_shrub":      ("ground", flowers("minecraft:dead_bush"), None, "Dry, leafless shrubs."),
+    "tumbleweed":      ("ground", flowers(("wilderwild:tumbleweed_plant", {"age": "2"}), ("wilderwild:tumbleweed_plant", {"age": "3"})), None, "Russian thistle that breaks off and rolls (Wilder Wild)."),
+    "agave":           ("ground", flowers("terrestria:agave"), None, "Lechuguilla and century plant on desert limestone (Terrestria agave)."),
     "yaupon":          ("ground", flowers("minecraft:bush", "minecraft:firefly_bush", weights=[4, 1]), None, "Evergreen holly understory of the Piney Woods."),
-    "prickly_pear":    ("cactus", column("minecraft:cactus", 1, 2, "minecraft:cactus_flower", 0.35), None, "Low pad cactus, often flowering."),
+    "prickly_pear":    ("ground", flowers(("wilderwild:prickly_pear", {"age": "0"}), ("wilderwild:prickly_pear", {"age": "1"}), ("wilderwild:prickly_pear", {"age": "2"}), weights=[5, 3, 2]), None,
+                        "Low pad cactus with fruit (Wilder Wild prickly pear)."),
     "cholla":          ("cactus", column("minecraft:cactus", 2, 3, "minecraft:cactus_flower", 0.1), None, "Taller column cactus of the Chihuahuan desert."),
     "sugar_cane_reeds": ("ground", flowers(("minecraft:tall_grass", {"half": "lower"}), "minecraft:short_grass", weights=[2, 1]), None, "Marsh grasses."),
     # ---- grasses
@@ -146,12 +148,18 @@ PLANTS = {
     "leaf_litter":     ("ground", segmented("minecraft:leaf_litter", "segment_amount", (1, 2, 3)), None, "Oak leaf litter."),
     # ---- flowers
     "bluebonnet":      ("ground", flowers("minecraft:cornflower"), None, "Texas bluebonnet: blue spring fields (cornflower)."),
-    "indian_paintbrush": ("ground", flowers("minecraft:poppy", "minecraft:red_tulip"), None, "Red paintbrush among the bluebonnets."),
+    "indian_paintbrush": ("ground", flowers("terrestria:indian_paintbrush"), None, "Red paintbrush among the bluebonnets (Terrestria)."),
     "indian_blanket":  ("ground", flowers("minecraft:orange_tulip", "minecraft:red_tulip", weights=[3, 1]), None, "Firewheel: red-orange roadside daisies."),
     "coreopsis":       ("ground", segmented("minecraft:wildflowers", "flower_amount"), None, "Yellow coreopsis and black-eyed Susan (wildflowers)."),
     "winecup":         ("ground", flowers("minecraft:allium", "minecraft:pink_tulip", weights=[2, 1]), None, "Magenta winecup and pink evening primrose."),
     "prairie_mix":     ("ground", flowers("minecraft:dandelion", "minecraft:oxeye_daisy", "minecraft:cornflower", "minecraft:azure_bluet", "minecraft:allium"), None, "Mixed prairie forbs."),
     "blue_flag":       ("ground", flowers("minecraft:blue_orchid"), None, "Iris and pickerelweed in marshes (blue orchid)."),
-    "desert_marigold": ("ground", flowers("minecraft:dandelion", "minecraft:short_dry_grass", weights=[1, 2]), None, "Sparse yellow desert daisies."),
+    "desert_marigold": ("ground", flowers("wilderwild:marigold", "minecraft:short_dry_grass", weights=[1, 2]), None, "Sparse yellow desert daisies (Wilder Wild marigold)."),
+    "phlox":           ("ground", segmented("wilderwild:phlox", "flower_amount"), None, "Drummond phlox: pink-red carpets on sandy East Texas ground (Wilder Wild)."),
+    "lantana":         ("ground", segmented("wilderwild:lantanas", "flower_amount"), None, "Texas lantana, orange and yellow, in brush and Hill Country (Wilder Wild)."),
+    "milkweed":        ("ground", flowers(("wilderwild:milkweed", {"age": "0", "half": "lower"})), None, "Antelope-horn milkweed of the prairies (Wilder Wild)."),
+    "goldenrod":       ("ground", flowers(("biomesoplenty:goldenrod", {"half": "lower"})), None, "Tall yellow autumn goldenrod (Biomes O' Plenty)."),
+    "sea_oats":        ("ground", flowers(("biomesoplenty:sea_oats", {"half": "lower"})), None, "Dune grass of the barrier islands (Biomes O' Plenty)."),
+    "datura":          ("ground", flowers(("wilderwild:datura", {"half": "lower"})), None, "Sacred datura, white trumpets on desert washes (Wilder Wild)."),
     "dogwood_bloom":   ("ground", flowers("minecraft:white_tulip", "minecraft:lily_of_the_valley"), None, "White spring blooms under the pines."),
 }
