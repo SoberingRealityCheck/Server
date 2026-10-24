@@ -3,7 +3,7 @@
   "minVersion": "0.8.0",
   "compatibilityLevel": "JAVA_25",
   "package": "dev.elysium.atlas.mixin.compat",
-  "mixins": ["SeedGenWaterMixin"],
+  "mixins": ["SeedGenWaterMixin", "JeiWorldGenSyncMixin"],
   "injectors": {
     "defaultRequire": 0
   }
