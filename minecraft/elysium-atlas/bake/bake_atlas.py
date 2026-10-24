@@ -19,12 +19,15 @@ import numpy as np
 from PIL import Image
 from scipy import ndimage as ndi
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from placement import Placement, Wetland, FORMATION_COVER, value_noise  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 # Biome inputs (biome_ids_v1.json, biome_v2_global*) live in the project files, not in this repo.
 EXP = os.environ.get("ELYSIUM_WORLDGEN_EXPERIMENTS") or os.path.abspath(os.path.join(HERE, "..", "..", "worldgen-experiments"))
 
 # ---- frozen parameters (changing any of these changes terrain everywhere: bump ATLAS_VERSION)
-ATLAS_VERSION = "slice-2"
+ATLAS_VERSION = "slice-8"
 MPB = 150.0                  # metres per block (Medium preset)
 LON0 = 11.0; R = 6371008.8   # Equal Earth, metres
 SEA_Y = 63                   # Minecraft sea level
@@ -35,7 +38,6 @@ TOP_KNEE, TOP_SPAN = 400.0, 120.0          # soft cap on land height
 TILE = 256
 LEVELS = [{"name": "L0", "cell": 32, "zoom": 5}, {"name": "L1", "cell": 4, "zoom": 10}]
 FEATHER_CELLS = 64           # L1 fades into L0 over this many cells at its edge
-BIOME_NOISE_M = 60000.0      # candidate-pick noise wavelength
 
 A1, A2, A3, A4 = 1.340264, -0.081106, 0.000893, 0.003796; M3 = math.sqrt(3) / 2
 def ee_fwd(lon, lat):
@@ -121,59 +123,45 @@ def cr_sample(grid, i0, j0, cell, xb, zb):
     return out
 
 # ---- biome assignment
-def value_noise(xm, ym, wave, seed):
-    gx = xm / wave; gy = ym / wave; ix = np.floor(gx).astype(np.int64); iy = np.floor(gy).astype(np.int64); fx = gx - ix; fy = gy - iy
-    def h(a, b):
-        k = (a * 73856093) ^ (b * 19349663) ^ seed; k = (k ^ (k >> 13)) * 1274126177; k = k ^ (k >> 16)
-        return (k & 0xFFFFFF) / float(0xFFFFFF)
-    sx = fx * fx * (3 - 2 * fx); sy = fy * fy * (3 - 2 * fy)
-    return (h(ix, iy) * (1 - sx) * (1 - sy) + h(ix + 1, iy) * sx * (1 - sy) + h(ix, iy + 1) * (1 - sx) * sy + h(ix + 1, iy + 1) * sx * sy)
-
 class Biomes:
+    """Land biomes by scored placement (placement.py, slice-8); oceans by latitude and depth; beaches on low coast."""
     def __init__(self):
-        m = json.load(open(os.path.join(EXP, "atlas", "biome_ids_v1.json")))
-        self.map, self.ovr, self.fb, self.classes = m["map"], m["realm_overrides"], m["fallback"], m["classes"]
         meta = json.load(open(os.path.join(EXP, "globe", "biome_v2_global.json")))
         self.form = [b["id"] for b in meta["biomes"]]; self.realms = meta["realms"]
         d = np.load(os.path.join(EXP, "globe", "biome_v2_global_10m.npz"))
-        bio = d["biome"]; idx = ndi.distance_transform_edt(bio == 255, return_distances=False, return_indices=True)
-        self.bio = bio[tuple(idx)]; self.realm = d["realm"][tuple(idx)]; self.MI = d["MI"].astype(np.float32)[tuple(idx)]
+        bio = d["biome"]; idx = tuple(ndi.distance_transform_edt(bio == 255, return_distances=False, return_indices=True))
+        self.bio = bio[idx]; self.realm = d["realm"][idx]
+        self.clim = {k: d[k][idx].astype(np.float32) for k in ("MI", "MAT", "Tcold", "Thot", "elev_wc", "dry_months")}
+        self.clim["med"] = d["med"][idx]
+        self.fcover = np.array([FORMATION_COVER[f] for f in self.form] + [0.0] * (256 - len(self.form)), np.float32)
+        self.place = Placement(os.path.join(HERE, "data", "biome_traits.json"))
+        self.wet = Wetland(os.path.join(EXP, "atlas", "hydro_v2_5km_warm.npz"), ee_fwd)
         self.palette = ["minecraft:warm_ocean", "minecraft:lukewarm_ocean", "minecraft:ocean", "minecraft:cold_ocean", "minecraft:frozen_ocean",
                         "minecraft:deep_lukewarm_ocean", "minecraft:deep_ocean", "minecraft:deep_cold_ocean", "minecraft:deep_frozen_ocean",
                         "minecraft:beach", "minecraft:snowy_beach", "minecraft:stony_shore"]
         self.pix = {k: i for i, k in enumerate(self.palette)}
+        self.pid_of = np.array([self.pid(k) for k in self.place.ids], np.uint8)
     def pid(self, k):
         if k not in self.pix: self.pix[k] = len(self.palette); self.palette.append(k)
         return self.pix[k]
-    def resolve(self, f, r, c):
-        while True:
-            o = self.ovr.get(f"{f}|{r}", {})
-            if c in o: return o[c]
-            if c in self.map[f]: return self.map[f][c]
-            c = self.fb[c]
     def assign(self, lon, lat, xm, ym, y, zr, relief, sea, coast_cells):
         H, W = y.shape; out = np.full((H, W), 255, np.uint8)
-        # warp the 10' lookup so formation borders do not follow the grid (cells are ~86 x 123 blocks in Europe)
+        # warp the 10' lookup so climate borders do not follow the grid (cells are ~86 x 123 blocks in Europe)
         wl = 0.3 * (value_noise(xm, ym, 14000.0, 11) + 0.5 * value_noise(xm, ym, 5000.0, 13) - 0.75)
         wo = 0.3 * (value_noise(xm, ym, 14000.0, 12) + 0.5 * value_noise(xm, ym, 5000.0, 14) - 0.75) / np.maximum(np.cos(np.radians(lat)), 0.2)
         r10 = np.clip(((90 - lat - wl) / 180 * 1080).astype(int), 0, 1079); c10 = np.clip(((lon + wo + 180) / 360 * 2160).astype(int) % 2160, 0, 2159)
-        F = self.bio[r10, c10]; RL = self.realm[r10, c10]; MI = self.MI[r10, c10]
-        cls = np.zeros((H, W), np.uint8)
-        cls[(relief < 60) & (zr < 150) & (MI >= 1.0)] = 1
-        cls[(relief >= 300) | (zr >= 700)] = 2
-        cls[(relief >= 1000) | (zr >= 2000)] = 3
-        cls[(zr >= 3500) | ((relief >= 1500) & (zr >= 2500))] = 4
-        nz = value_noise(xm, ym, BIOME_NOISE_M, 1337)
+        F = self.bio[r10, c10]
         land = ~sea
-        for fi in np.unique(F[land]):
-            for ri in np.unique(RL[land & (F == fi)]):
-                for ci in range(5):
-                    m = land & (F == fi) & (RL == ri) & (cls == ci)
-                    if not m.any(): continue
-                    cand = self.resolve(self.form[fi], self.realms[ri], self.classes[ci])
-                    cw = np.cumsum([w for _, w in cand]); cw = cw / cw[-1]
-                    k = np.searchsorted(cw, nz[m] * 0.99999)
-                    out[m] = np.array([self.pid(i) for i, _ in cand], np.uint8)[k]
+        if land.any():
+            r, c = r10[land], c10[land]; cl = {k: v[r, c] for k, v in self.clim.items()}
+            dT = -6.5e-3 * ((zr[land] + SEA_RISE) - cl["elev_wc"])            # re-lapse WorldClim to this cell's elevation
+            ct = self.place.cell_terms(cl["MAT"] + dT, cl["Thot"] + dT, cl["Tcold"] + dT, cl["MI"], cl["dry_months"],
+                                       self.fcover[F[land]], cl["med"])
+            ct.update({"relief": relief[land].astype(np.float32), "zr": zr[land].astype(np.float32), "realm": self.realm[r, c],
+                       "xm": xm[land], "ym": ym[land],
+                       "coast": (ndi.binary_dilation(sea, iterations=max(1, coast_cells)) & land)[land],
+                       "wet": self.wet.mask(xm[land] / MPB, -ym[land] / MPB, MPB, relief[land], zr[land], cl["MI"], xm[land], ym[land])})
+            out[land] = self.pid_of[self.place.pick(ct)]
         # oceans by latitude and depth
         al = np.abs(lat); deep = y < SEA_Y - 20
         oc = np.select([al < 23, al < 35, al < 50, al < 62], [0, 1, 2, 3], 4); dc = np.select([al < 23, al < 35, al < 50, al < 62], [5, 5, 6, 7], 8)
@@ -282,7 +270,7 @@ def main():
                     "cells": [i0, j0, i1, j1], "region_lonlat": a.region}],
         "biome_palette": biomes.palette,
         "spawn": {"x": int(round(sx / MPB)), "z": int(round(-sy / MPB)), "lon": a.spawn[0], "lat": a.spawn[1]},
-        "sources": "Terrarium (Mapzen/AWS open data) z5 and z10; biome_v2 formations and biome_ids_v1 mapping",
+        "sources": "Terrarium (Mapzen/AWS open data) z5 and z10; biome_v2 climate and scored placement (placement.py)",
     }
     json.dump(manifest, open(os.path.join(a.out, "atlas.json"), "w"), indent=1)
     print(json.dumps({k: manifest[k] for k in ("spawn", "levels")}, indent=0), "palette", len(biomes.palette))

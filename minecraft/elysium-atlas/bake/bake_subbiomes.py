@@ -17,6 +17,7 @@ from scipy import ndimage as ndi
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from bake_atlas import ee_inv, terrarium, MPB, SEA_RISE
+from placement import Placement
 
 # ---- frozen parameters (changing any changes biomes: bump the atlas version)
 LEG = 5            # land-use fractions smoothed over 5 cells (20 blocks)
@@ -243,6 +244,14 @@ def main():
     for g, ids in GROUPS.items():
         for k in ids:
             if k in pix: group[pix[k]] = gnames.index(g)
+    # biomes the scored placement adds (slice-8) join a group by their niche
+    niches = {n.id: n for n in Placement(os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "biome_traits.json")).niches}
+    for k, i in pix.items():
+        n = niches.get(k)
+        if group[i] >= 0 or n is None or n.wet or n.snow: continue
+        g = ("mountain" if n.landform in ("peak", "cliff", "mountain") and n.cover < 0.3 else "dry" if n.mu < 0.35
+             else "conifer" if n.conifer else "broadleaf")
+        group[i] = gnames.index(g)
     lut = np.full((len(gnames), len(SUB)), -1, np.int32)
     for gi, g in enumerate(gnames):
         for c, k in MAP[g].items(): lut[gi, S[c]] = pid(k)

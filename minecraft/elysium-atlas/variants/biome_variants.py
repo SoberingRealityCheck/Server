@@ -18,7 +18,7 @@ Data: data/unit_biomes.json and data/ecoregions.json (bake/bake_regions.py).
 Feature patch: "remove" names placed features of the parent; "add" names placed features (existing ones are
 copied under elysium:variant/<namespace>/<path>), appended to the step so feature order stays acyclic.
 """
-import colorsys, glob, importlib.util, json, math, os, shutil, sys, zipfile
+import colorsys, glob, importlib.util, json, math, os, re, shutil, sys, zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, "..", "src", "main", "resources")
@@ -138,6 +138,12 @@ PLANT_BLOCKS = {f"minecraft:{b}" for b in (
     "open_eyeblossom closed_eyeblossom").split()}
 
 
+# the flora mods' plant blocks, by name: their flowers, grasses, bushes and the like
+MOD_PLANT = re.compile(r"^(biomesoplenty|wilderwild|terrestria):.*(grass|flower|bloom|bush|fern|petal|lily|rose|tulip|daisy|clover|sprout|"
+                       r"lavender|goldenrod|oats|cattail|reed|weed|thistle|pear|cactus|agave|yucca|paintbrush|marigold|phlox|lantana|datura|"
+                       r"tumbleweed|shrub|bramble|sprout|dune|moss|seed|lupine|aster|violet|poppy|iris|orchid|hydrangea|wildflower)")
+
+
 class Plants:
     """Which of a parent's placed features are plants, and how many trees per chunk they make."""
     def __init__(self, src): self.src = src; self.memo = {}
@@ -148,7 +154,10 @@ class Plants:
         if isinstance(node, dict):
             t = node.get("type")
             if t in ("minecraft:tree", "minecraft:fallen_tree", "minecraft:bamboo"): plant = True; tree = t == "minecraft:tree"
-            if node.get("Name") in PLANT_BLOCKS: plant = True
+            elif isinstance(t, str) and "tree" in t:                     # the mods' own tree feature types
+                plant = True; tree = "fallen" not in t
+            n = node.get("Name")
+            if n in PLANT_BLOCKS or (isinstance(n, str) and MOD_PLANT.match(n)): plant = True
             for k, v in node.items():
                 if k == "feature" and isinstance(v, str):
                     p, tr = self.placed_ref(v, seen); plant |= p; tree |= tr

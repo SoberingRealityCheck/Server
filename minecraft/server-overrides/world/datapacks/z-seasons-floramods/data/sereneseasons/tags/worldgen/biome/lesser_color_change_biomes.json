@@ -1,0 +1,33 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "id": "biomesoplenty:bog",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:marsh",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:moor",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:muskeg",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:wetland",
+            "required": false
+        },
+        {
+            "id": "terrestria:cypress_swamp",
+            "required": false
+        },
+        {
+            "id": "wilderwild:cypress_wetlands",
+            "required": false
+        }
+    ]
+}

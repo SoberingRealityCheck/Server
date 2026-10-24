@@ -1,0 +1,53 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "id": "biomesoplenty:bayou",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:dryland",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:floodplain",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:lush_desert",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:lush_savanna",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:rainforest",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:rocky_rainforest",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:scrubland",
+            "required": false
+        },
+        {
+            "id": "biomesoplenty:tropics",
+            "required": false
+        },
+        {
+            "id": "terrestria:outback",
+            "required": false
+        },
+        {
+            "id": "wilderwild:arid_forest",
+            "required": false
+        },
+        {
+            "id": "wilderwild:arid_savanna",
+            "required": false
+        }
+    ]
+}
