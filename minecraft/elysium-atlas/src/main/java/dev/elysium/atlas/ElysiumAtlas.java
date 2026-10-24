@@ -37,6 +37,7 @@ public final class ElysiumAtlas implements ModInitializer {
         Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Identifier.fromNamespaceAndPath(MOD_ID, "sample"), AtlasDensityFunction.MAP_CODEC);
         Registry.register(BuiltInRegistries.BIOME_SOURCE, Identifier.fromNamespaceAndPath(MOD_ID, "atlas"), AtlasBiomeSource.CODEC);
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
+            Variants.bind(server.registryAccess());
             boolean on = usesAtlas(server);
             AtlasFluidPicker.atlasSettings = on && overworldGenerator(server) instanceof NoiseBasedChunkGenerator g ? g.generatorSettings().value() : null;
             Atlas.setActive(on);
@@ -46,6 +47,7 @@ public final class ElysiumAtlas implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registry, env) -> dispatcher.register(
                 Commands.literal("atlas").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                         .then(Commands.literal("here").executes(ElysiumAtlas::here))
+                        .then(Commands.literal("variants").executes(ElysiumAtlas::variants))
                         .then(Commands.literal("probe").then(Commands.argument("lat", DoubleArgumentType.doubleArg(-90, 90))
                                 .then(Commands.argument("lon", DoubleArgumentType.doubleArg(-180, 180))
                                         .then(Commands.argument("size", IntegerArgumentType.integer(16, 8192))
@@ -101,6 +103,33 @@ public final class ElysiumAtlas implements ModInitializer {
         }
     }
 
+    /** Audit: what each biome variant lacks compared with its parent (tags, spawns, carvers, features). */
+    private static int variants(CommandContext<CommandSourceStack> c) {
+        var reg = c.getSource().getServer().registryAccess().lookupOrThrow(Registries.BIOME);
+        int problems = 0;
+        for (Variants.Def d : Variants.DEFS.values()) {
+            var v = reg.get(d.id()).orElse(null); var p = reg.get(d.parent()).orElse(null);
+            if (v == null || p == null) { problems++; c.getSource().sendFailure(Component.literal(d.id() + ": not registered (or parent " + d.parent() + " missing)")); continue; }
+            var missing = p.tags().filter(t -> !v.is(t)).map(t -> t.location().toString()).toList();
+            boolean spawns = v.value().getMobSettings() == p.value().getMobSettings();
+            var pf = p.value().getGenerationSettings().features(); var vf = v.value().getGenerationSettings().features();
+            int lost = 0;
+            for (int s = 0; s < pf.size(); s++)
+                for (var f : pf.get(s)) {
+                    boolean removed = f.unwrapKey().map(k -> d.removeFeatures().contains(k.identifier())).orElse(false);
+                    if (!removed && (s >= vf.size() || !vf.get(s).contains(f))) lost++;
+                }
+            boolean ok = missing.isEmpty() && spawns && lost == 0;
+            if (!ok) problems++;
+            String msg = String.format("%s <- %s [%s]: tags %s, spawns %s, features %s", d.id(), d.parent(), String.join(" ", d.regions()),
+                    missing.isEmpty() ? "ok" : "missing " + missing, spawns ? "ok" : "DIFFER", lost == 0 ? "ok" : lost + " parent features missing");
+            if (ok) c.getSource().sendSuccess(() -> Component.literal(msg), false); else c.getSource().sendFailure(Component.literal(msg));
+        }
+        int n = problems;
+        c.getSource().sendSuccess(() -> Component.literal(Variants.DEFS.size() + " variants, " + n + " with problems"), false);
+        return n == 0 ? 1 : 0;
+    }
+
     private static int here(CommandContext<CommandSourceStack> c) {
         Atlas a = atlasOrFail(c);
         if (a == null) return 0;
@@ -110,7 +139,8 @@ public final class ElysiumAtlas implements ModInitializer {
         var col = a.column((int) Math.floor(pos.x), (int) Math.floor(pos.z));
         String msg = String.format("%.4f, %.4f | atlas Y %.1f | carved Y %.1f | water %s | relief %.0f m | atlas biome %s | %s",
                 ll[1], ll[0], a.heightOrOcean(pos.x, pos.z), col.height(), col.fluid() == Water.NO_FLUID ? "none" : "below Y " + col.fluid(),
-                a.relief(pos.x, pos.z), b >= 0 ? a.palette.get(b) : "none", a.version);
+                a.relief(pos.x, pos.z), b >= 0 ? a.palette.get(b) : "none", a.version)
+                + (a.regions == null ? "" : " | region " + a.regions.name(a.regions.at(pos.x, pos.z)));
         c.getSource().sendSuccess(() -> Component.literal(msg), false);
         return 1;
     }

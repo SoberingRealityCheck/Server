@@ -35,6 +35,8 @@ public final class Atlas {
     public final List<AtlasLevel> levels = new ArrayList<>();
     /** Rivers and lakes, or null for an atlas baked without water. */
     public final Water water;
+    /** Region layer that picks biome variants, or null. */
+    public final Regions regions;
 
     private Atlas(Path dir) throws IOException {
         this.dir = dir;
@@ -63,7 +65,13 @@ public final class Atlas {
         }
         levels.sort((a, c) -> Integer.compare(a.cell, c.cell));
         water = m.has("water") ? new Water(dir.resolve(m.getAsJsonObject("water").get("file").getAsString())) : null;
-        LOG.info("Atlas {} loaded from {}: {} levels, {} biomes, {} m/block", version, dir, levels.size(), palette.size(), metresPerBlock);
+        if (m.has("regions")) {
+            JsonObject rg = m.getAsJsonObject("regions");
+            List<String> names = new ArrayList<>();
+            for (JsonElement e : rg.getAsJsonArray("names")) names.add(e.getAsString());
+            regions = new Regions(dir.resolve(rg.get("file").getAsString()), names);
+        } else regions = null;
+        LOG.info("Atlas {} loaded from {}: {} levels, {} biomes, {} regions, {} m/block", version, dir, levels.size(), palette.size(), regions == null ? 0 : regions.names.size(), metresPerBlock);
     }
 
     private static volatile boolean active;

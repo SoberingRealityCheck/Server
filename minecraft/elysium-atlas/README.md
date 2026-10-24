@@ -136,6 +136,28 @@ On a non-atlas world they reply that the world does not use the atlas.
 `./build.sh` (plain javac, Java 25) writes `../server-overrides/mods/elysium_atlas.jar`.
 `build.py` does not build it. Fabric API modules needed at compile time: base, command, lifecycle events.
 
+## Regional biome variants
+
+A variant is a child of an existing biome, used in some pack regions: `elysium:larch_slopes` is
+`minecraft:windswept_forest` in the eastern Alps. It changes only colours, effects and a feature patch.
+Everything else comes from the parent at runtime, so other systems need no edits:
+
+| What | How the variant follows its parent |
+|---|---|
+| Biome tags (Serene Seasons, Naturalist, structures, mob variants, `c:` tags, any datapack) | `TagLoaderMixin` adds the variant to every biome tag that holds its parent, on load and `/reload` |
+| Lists of biome ids (surface rules, loot conditions, feature and structure lists) | `HolderSetDirectMixin`: a list that holds the parent holds the variant |
+| Code that checks a biome key (e.g. Ambient Creatures) | `HolderReferenceMixin`: `variant.is(parentKey)` is true; `parent.is(variant)` stays false |
+| Spawns and carvers, including ones mods add | `Variants.bind` copies the parent's final settings at server start |
+| Features | Parent's final list minus `remove`, plus `add` (copied placed features, appended, so order stays acyclic) |
+| Temperature, downfall, precipitation | Never changed, so seasons and snow behave the same |
+
+Definitions: `variants/biome_variants.py` (variants) and `variants/regions.py` (regions as RESOLVE
+Ecoregions 2017 groups). The script writes the biome files, copied placed features, names and
+`elysium_atlas/variants.json` into `src/main/resources`; `--check` reports stale output. The atlas
+stores regions separately (`bake/bake_regions.py`, 32-block cells, warped borders), so the base biome map
+does not change and regions can change without rebaking terrain. `/atlas variants` audits each variant
+against its parent (tags, spawns, features). `/atlas here` and F3 show the region.
+
 ## Distant Horizons SeedGen
 
 SeedGen (0.9.1) draws LODs from the world's density functions and biome source, so atlas terrain and
