@@ -128,6 +128,15 @@ On a non-atlas world they reply that the world does not use the atlas.
 `./build.sh` (plain javac, Java 25) writes `../server-overrides/mods/elysium_atlas.jar`.
 `build.py` does not build it. Fabric API modules needed at compile time: base, command, lifecycle events.
 
+## Distant Horizons SeedGen
+
+SeedGen (0.9.1) draws LODs from the world's density functions and biome source, so atlas terrain and
+biomes appear at a distance. It fills water only up to sea level. An optional mixin
+(`mixin/compat/SeedGenWaterMixin`, own mixin config, `required: false`) raises each LOD column's water
+level to the atlas fluid level, so lakes, rivers and streams above sea level show too. It does nothing
+without SeedGen, and nothing on a client joining a server, where the atlas is not loaded. Checked: the
+hook weaves into `SeedWorldGenerator.buildColumn` (mixin export). Not yet checked in a rendered LOD.
+
 ## Not done
 
 - Streams follow a 5 km drainage grid, so there are none in catchments under 150 km2 and their courses are
@@ -138,4 +147,4 @@ On a non-atlas world they reply that the world does not use the atlas.
 - Natural Earth lines are generalised (about 1 km), so a river can run beside its real valley floor.
 - Detail outside the Alps box (a global L1 is about 1-2 GB).
 - Sea-level rise is a 12 m placeholder.
-- Not tested with Distant Horizons or RoadWeaver.
+- Not tested with RoadWeaver.

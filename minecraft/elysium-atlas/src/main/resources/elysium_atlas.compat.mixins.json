@@ -1,0 +1,10 @@
+{
+  "required": false,
+  "minVersion": "0.8.0",
+  "compatibilityLevel": "JAVA_25",
+  "package": "dev.elysium.atlas.mixin.compat",
+  "mixins": ["SeedGenWaterMixin"],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
