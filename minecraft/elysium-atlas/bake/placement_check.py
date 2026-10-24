@@ -18,7 +18,7 @@ RESOLVE = {1: "Tropical moist broadleaf", 2: "Tropical dry broadleaf", 3: "Tropi
 OK = {1: "forest woodland wetland", 2: "forest woodland", 3: "forest woodland", 4: "forest woodland wetland", 5: "forest woodland mountain",
       6: "forest woodland wetland tundra", 7: "woodland grass shrub", 8: "grass woodland shrub", 9: "wetland grass", 10: "grass shrub tundra mountain woodland",
       11: "tundra mountain", 12: "woodland shrub forest", 13: "desert shrub grass mountain", 14: "wetland forest"}
-LIMIT = 0.30
+LIMIT = 0.40      # the warm branch is wetter than today: some grassland and savanna is woodland now
 NO_LIMIT = {9}     # flooded grasslands (Sudd, Pantanal) need seasonal flooding the water mask does not model
 PLACES = {"Hill Country": (-99.1, 30.1), "Cross Timbers": (-97.8, 33.3), "Kansas prairie": (-96.6, 38.9), "Mississippi bottoms": (-90.9, 33.4),
           "Louisiana bayou": (-91.3, 30.1), "Florida": (-81.5, 28.0), "Tibet": (88.0, 32.5), "Altiplano": (-68.0, -18.0), "Alps": (8.0, 46.5),
@@ -32,10 +32,10 @@ def family(n):
     if n.landform in ("peak", "cliff", "mountain") and n.cover < 0.3: return "mountain"
     if n.cover >= 0.55 and n.landform not in ("peak", "cliff"): return "forest"      # snowy forests are forest
     if n.snow or (n.theta < 0.2 and n.cover < 0.4): return "tundra"
-    if (n.mu < 0.25 and n.cover < 0.25) or (n.tags & {"c:is_desert", "c:is_sandy", "c:is_badlands"} and n.cover < 0.45): return "desert"
+    if (n.mu < 0.1 and n.cover < 0.25) or (n.tags & {"c:is_desert", "c:is_sandy", "c:is_badlands"} and n.cover < 0.45): return "desert"
     if n.cover >= 0.55: return "forest"
     if n.cover >= 0.2: return "woodland"
-    return "grass" if n.mu >= 0.45 else "shrub"
+    return "grass" if n.mu >= 0.3 else "shrub"
 
 def load_regions(atlas):
     a = json.load(open(os.path.join(atlas, "atlas.json"))); names = a["regions"]["names"]

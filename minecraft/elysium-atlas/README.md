@@ -94,6 +94,24 @@ least about 36 blocks. Only L1 biome bytes and `atlas.json` change. Slice-5 = sl
 a lowland France window the share of `forest` falls from 41% to 17% and distinct biomes rise from 18
 to 28. Behind a TLS proxy set `GDAL_CURL_CA_BUNDLE`.
 
+**Biome placement (slice-8).** Every land cell takes the biome whose niche fits it best (`bake/placement.py`);
+no table maps a place or a climate class to a biome. Niches come from the biomes' own data in the pack's jars
+(`bake/biome_traits.py` -> `bake/data/biome_traits.json`, 158 surface biomes from vanilla, Terralith, Biomes O'
+Plenty, Wilder Wild and Terrestria): the c: climate tags (hot, temperate, cold, snowy) set a temperature band and
+the JSON temperature orders biomes inside it; the c: wet/dry tags and downfall set moisture (sand and terracotta
+biomes count as arid); trees per chunk come from the vegetal placed features; the landform from the mountain,
+plateau and hill tags and a few name tokens (cliffs, canyon, spires). The cell side is the warm-branch climate
+re-lapsed to the cell's elevation, the woody cover of its g3 formation, the atlas relief and the water mask.
+The score adds squared distances in temperature, moisture and cover, plus terms for landform, year-round snow,
+conifers in warm places, jungle where it frosts, and per-biome value noise so near-ties form patches. Terrain-feature
+biomes (glacial chasm, cliffs) need 900 m of relief; wetland biomes go only on the wetland mask (flat low land
+on a large river's floodplain or by a lake, patchy, or within 4 m of the sea). Biomes themed on one small real
+place (sakura, redwoods, lavender, Bryce, Yosemite, bamboo) are left to the ecoregion profiles, which can use them
+through `rebase`. `bake/placement_check.py` compares the result with RESOLVE biome types (rule: under 40% of
+each type in the wrong vegetation family; flooded grasslands are exempt, the water mask has no seasonal floods).
+`bake/season_tags.py` writes the Serene Seasons tags for the flora mods' biomes
+(`server-overrides/world/datapacks/z-seasons-floramods`).
+
 `bake/bake_atlas.py OUT TILE_CACHE [--region LON0 LON1 LAT0 LAT1] [--spawn LON LAT]` builds it from
 Terrarium elevation tiles and the biome layers in the project's worldgen-experiments folder (set
 `ELYSIUM_WORLDGEN_EXPERIMENTS` to its path). Changing a frozen constant in it needs a new
