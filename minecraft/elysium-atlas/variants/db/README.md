@@ -63,6 +63,7 @@ uses an existing vanilla or flora-mod feature.
     rock: [stone, calcite]           # one or two blocks; steep ground and outcrops
     outcrops: some                   # none | few | some | many
     soil: {gravel: few}              # up to three patch blocks, each none | few | some | many
+    top: coarse_dirt                 # optional: the top block everywhere else (deserts: bare soil, no grass)
     subsoil: calcite                 # optional: replaces the dirt under the top block
   why: "One line on what the region is."
 ```
@@ -108,7 +109,8 @@ size).
 ## Ground surface
 
 `ground_surface` sets the top block on dry, non-snow, non-beach ground of the region's variants:
-steep ground and `outcrops` become `rock`, then `soil` patches, and `subsoil` replaces the dirt below the top.
+steep ground and `outcrops` become `rock`, then `soil` patches, then `top` (if given) everywhere else; `subsoil`
+replaces the dirt below the top.
 Shares: few 5 %, some 12 %, many 25 % of eligible ground, from normal noises with measured sd 0.31
 (`biome_variants.SURFACE_NOISES`). Outcrops are about 15-30 blocks across and soil patches 8-16, so a small area can sit
 above or below its share. Written as a Lithostitched surface rule,
@@ -121,7 +123,7 @@ For each ecoregion (`db.colours`):
 | colour | from |
 |---|---|
 | grass tint | weighted mean of the `colour` of the grasses in `ground` |
-| foliage tint | weighted mean of the `leaf` colour of all trees and shrubs |
+| foliage tint | weighted mean of the `leaf` colour of all trees and shrubs (the grass tint where there are none) |
 | each leaf block (spruce, oak, birch, BOP fir ...) | weighted mean of the `leaf` colour of the species that grow that block |
 
 The leaf colours are stored per variant biome as offsets from its foliage (`leaf_palettes.json`), so seasons still

@@ -165,17 +165,18 @@ def patches(eco):
 
 
 def surface(eco):
-    """ground_surface: {geology: text, rock: [blocks], outcrops: amount, soil: {block: amount}, subsoil: block}."""
+    """ground_surface: {geology: text, rock: [blocks], outcrops: amount, soil: {block: amount}, top: block, subsoil: block}."""
     g = eco.get("ground_surface")
     if not g: return None
     where = f"{eco['name']}: ground_surface"
-    if set(g) - {"geology", "rock", "outcrops", "soil", "subsoil"}: raise SystemExit(f"{where}: unknown key")
+    if set(g) - {"geology", "rock", "outcrops", "soil", "top", "subsoil"}: raise SystemExit(f"{where}: unknown key")
     if g.get("outcrops", "none") not in AMOUNTS: raise SystemExit(f"{where}: outcrops is one of {list(AMOUNTS)}")
     for b, a in (g.get("soil") or {}).items():
         if a not in AMOUNTS: raise SystemExit(f"{where}: soil {b}: amount is one of {list(AMOUNTS)}")
     return {"geology": g.get("geology", ""), "rock": [render._id(b) for b in (g.get("rock") or [])],
             "outcrops": AMOUNTS[g.get("outcrops", "none")],
             "soil": {render._id(b): AMOUNTS[a] for b, a in (g.get("soil") or {}).items()},
+            "top": render._id(g["top"]) if g.get("top") else None,
             "subsoil": render._id(g["subsoil"]) if g.get("subsoil") else None}
 
 
@@ -192,7 +193,7 @@ def colours(eco, leaf_blocks):
     P = plants()
     grass = _mean([(P[p]["colour"], w) for p, w in (eco.get("ground") or {}).items() if P[p]["form"] == "grass"])
     woody = [(p, w) for L in ("trees", "shrubs") for p, w in (eco.get(L) or {}).items() if P[p].get("leaf")]
-    foliage = _mean([(P[p]["leaf"], w) for p, w in woody])
+    foliage = _mean([(P[p]["leaf"], w) for p, w in woody]) or grass     # treeless (tundra): foliage follows the turf
     per = {}
     for p, w in woody:
         for b in leaf_blocks(p): per.setdefault(b, []).append((P[p]["leaf"], w))

@@ -1,0 +1,164 @@
+# The Tibetan Plateau and the high Himalaya: treeless alpine meadow, steppe and desert.
+# The placement puts fir clearings and hemlock treelines on parts of the plateau; these profiles keep it treeless.
+# Schema: see ../README.md.
+
+768:
+  name: Tibetan Alpine Meadow
+  resolve: "Tibetan Plateau alpine shrublands and meadows"
+  ground: {kobresia: 4, shrubby_cinquefoil: 1, dwarf_rhododendron: 0.5}
+  flowers: {tibetan_gentian: 1, blue_poppy: 0.5, tibetan_edelweiss: 0.5}
+  ground_surface:
+    geology: "Plateau sediments under thin turf."
+    rock: [stone]
+    outcrops: few
+    soil: {gravel: few, coarse_dirt: few}
+  why: "Kobresia turf grazed by yaks, cinquefoil shrubs and gentians; no trees."
+
+765:
+  name: Southeast Tibet Shrubland
+  resolve: "Southeast Tibet shrublands and meadows"
+  shrubs: {himalayan_juniper: 1}
+  ground: {kobresia: 3, dwarf_rhododendron: 2, shrubby_cinquefoil: 1}
+  flowers: {blue_poppy: 1, tibetan_gentian: 1, himalayan_primrose: 0.5}
+  shrub_cover: 0.1
+  ground_surface:
+    geology: "Granite and folded sediments."
+    rock: [stone, granite]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Rhododendron and juniper shrubland with meadows and blue poppies, above the gorges' forests."
+
+750:
+  name: Tibetan Alpine Steppe
+  resolve: "Central Tibetan Plateau alpine steppe"
+  ground: {purple_feather_grass: 4, kobresia: 1, caragana: 0.5}
+  flowers: {tibetan_edelweiss: 0.5}
+  flower_density: 0.4
+  ground_surface:
+    geology: "Lake basins and gravel plains."
+    rock: [stone]
+    outcrops: few
+    soil: {gravel: many, coarse_dirt: some}
+  why: "Sparse feather grass over gravel plains and salt lakes at 4,500-5,000 m."
+
+759:
+  name: Kunlun Alpine Desert
+  resolve: "North Tibetan Plateau-Kunlun Mountains alpine desert"
+  ground: {purple_feather_grass: 2, winterfat: 2, caragana: 1}
+  flower_density: 0.2
+  flowers: {tibetan_edelweiss: 1}
+  ground_surface:
+    geology: "Frost-shattered gravel and sand."
+    rock: [stone]
+    outcrops: some
+    soil: {gravel: many, sand: some}
+    top: coarse_dirt
+  why: "Cold desert of the Chang Tang and Kunlun: bare gravel with scattered cushions."
+
+754:
+  name: Karakoram Steppe
+  resolve: "Karakoram-West Tibetan Plateau alpine steppe"
+  ground: {purple_feather_grass: 3, caragana: 1, winterfat: 1}
+  flowers: {tibetan_edelweiss: 0.5}
+  flower_density: 0.3
+  ground_surface:
+    geology: "Granite and moraine."
+    rock: [granite, stone]
+    outcrops: many
+    soil: {gravel: many}
+  why: "Dry steppe and scree below the Karakoram glaciers."
+
+762:
+  name: Pamir Alpine Desert
+  resolve: "Pamir alpine desert and tundra"
+  ground: {purple_feather_grass: 2, winterfat: 2, kobresia: 1}
+  flowers: {tibetan_edelweiss: 0.5}
+  flower_density: 0.3
+  ground_surface:
+    geology: "Moraine, scree and loess."
+    rock: [stone]
+    outcrops: some
+    soil: {gravel: many, coarse_dirt: some}
+  why: "High cold desert of the Pamir, sedge meadows only along the streams."
+
+763:
+  name: Qilian Meadow
+  resolve: "Qilian Mountains subalpine meadows"
+  ground: {kobresia: 3, shrubby_cinquefoil: 1, purple_feather_grass: 1}
+  flowers: {tibetan_gentian: 1, tibetan_edelweiss: 0.5}
+  ground_surface:
+    geology: "Folded Palaeozoic sediments."
+    rock: [stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Subalpine meadow and shrub on the northeastern rim of the plateau."
+
+751:
+  name: Eastern Himalayan Meadow
+  resolve: "Eastern Himalayan alpine shrub and meadows"
+  shrubs: {himalayan_juniper: 1}
+  ground: {kobresia: 2, dwarf_rhododendron: 3}
+  flowers: {blue_poppy: 1, himalayan_primrose: 1, tibetan_gentian: 0.5}
+  shrub_cover: 0.15
+  ground_surface:
+    geology: "Gneiss and granite; moraine."
+    rock: [granite, stone]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Rhododendron heath and flower meadows above the treeline, the richest alpine flora on Earth."
+
+760:
+  name: Northwestern Himalayan Meadow
+  resolve: "Northwestern Himalayan alpine shrub and meadows"
+  shrubs: {himalayan_juniper: 2}
+  ground: {kobresia: 3, dwarf_rhododendron: 1, shrubby_cinquefoil: 1}
+  flowers: {himalayan_primrose: 1, tibetan_gentian: 0.5}
+  shrub_cover: 0.1
+  ground_surface:
+    geology: "Granite and schist."
+    rock: [granite, stone]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Juniper scrub and meadows above the Kashmir forests."
+
+769:
+  name: Western Himalayan Meadow
+  resolve: "Western Himalayan alpine shrub and meadows"
+  shrubs: {himalayan_juniper: 2}
+  ground: {kobresia: 3, dwarf_rhododendron: 1, shrubby_cinquefoil: 1}
+  flowers: {blue_poppy: 0.5, himalayan_primrose: 1}
+  shrub_cover: 0.1
+  ground_surface:
+    geology: "Gneiss and granite."
+    rock: [granite, stone]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Alpine meadow and juniper shrub between the forests and the glaciers."
+
+770:
+  name: Yarlung Tsangpo Steppe
+  resolve: "Yarlung Zanbo arid steppe"
+  shrubs: {himalayan_juniper: 1}
+  ground: {purple_feather_grass: 3, caragana: 1, shrubby_cinquefoil: 1}
+  flowers: {tibetan_edelweiss: 0.5}
+  shrub_cover: 0.05
+  ground_surface:
+    geology: "River terraces and wind-blown sand."
+    rock: [stone]
+    outcrops: few
+    soil: {sand: some, gravel: some}
+  why: "Dry valley steppe along the Yarlung Tsangpo, with sand dunes on the terraces."
+
+835:
+  name: Qaidam Basin
+  resolve: "Qaidam Basin semi-desert"
+  ground: {winterfat: 3, caragana: 1, purple_feather_grass: 1}
+  flower_density: 0.2
+  flowers: {tibetan_edelweiss: 0.5}
+  ground_surface:
+    geology: "Salt flats, sand and yardangs."
+    rock: [sandstone]
+    outcrops: few
+    soil: {sand: many, calcite: some}
+    top: coarse_dirt
+  why: "Salt-crusted basin desert below the plateau rim."

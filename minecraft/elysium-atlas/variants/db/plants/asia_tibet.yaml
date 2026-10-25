@@ -1,0 +1,88 @@
+# Plants of the Tibetan Plateau and the high Himalaya.
+# Schema: see ../README.md. Colours follow the species' usual description (colour_note); not measured.
+
+kobresia:
+  name: Kobresia sedge
+  latin: Kobresia pygmaea
+  form: grass
+  colour: "#8a9a58"
+  colour_note: Tiny olive-green sedge forming dense turf; brown much of the year.
+  range: The alpine meadows of the eastern and central Tibetan Plateau, 3,000-5,900 m.
+  render: 'flowers("short_grass", "biomesoplenty:dead_grass", weights=[2, 1])'
+
+purple_feather_grass:
+  name: Purple feather grass
+  latin: Stipa purpurea
+  form: grass
+  colour: "#a8a878"
+  colour_note: Sparse pale straw-green bunchgrass with purple awns.
+  range: Alpine steppe of the central and western plateau.
+  render: 'flowers("short_dry_grass", "short_grass", weights=[3, 1])'
+
+shrubby_cinquefoil:
+  name: Shrubby cinquefoil
+  latin: Dasiphora fruticosa
+  form: shrub_ground
+  range: Alpine shrubland of the eastern plateau and Himalaya.
+  render: 'flowers("bush", "dandelion", weights=[3, 1])'
+
+dwarf_rhododendron:
+  name: Dwarf rhododendron
+  latin: Rhododendron nivale
+  form: shrub_ground
+  clump: {size: 16, share: 0.35}
+  range: Alpine heath of the Himalaya and southeastern plateau.
+  render: 'flowers("bush", "allium", weights=[3, 1])'
+
+himalayan_juniper:
+  name: Himalayan juniper
+  latin: Juniperus indica
+  form: shrub
+  leaf: "#4e6a50"
+  leaf_note: Dark blue-green scale leaves.
+  range: Dry slopes of the Himalaya and southern plateau, to the shrub line.
+  render: 'tree("spruce_log", "spruce_leaves", straight(1, 0, 0), bushf(1, 2, 1))'
+  sapling: spruce_sapling
+
+caragana:
+  name: Pea shrub
+  latin: Caragana versicolor
+  form: shrub_ground
+  range: Cushions on the dry alpine steppe and desert of western Tibet.
+  render: 'flowers("dead_bush", "bush", weights=[1, 2])'
+
+winterfat:
+  name: Winterfat
+  latin: Krascheninnikovia ceratoides
+  form: shrub_ground
+  range: Alpine desert and the Qaidam basin.
+  render: 'flowers("dead_bush", "short_dry_grass", weights=[1, 2])'
+
+blue_poppy:
+  name: Prickly blue poppy
+  latin: Meconopsis horridula
+  form: flower
+  range: Scree and alpine meadows of the Himalaya and eastern plateau.
+  render: 'flowers("cornflower")'
+
+tibetan_gentian:
+  name: Tibetan gentian
+  latin: Gentiana straminea
+  form: flower
+  range: Alpine meadows of the eastern plateau.
+  render: 'flowers("azure_bluet", "cornflower", weights=[1, 1])'
+
+himalayan_primrose:
+  name: Himalayan primrose
+  latin: Primula sikkimensis
+  form: flower
+  niche: {water: wet}
+  range: Wet meadows and streams of the Himalaya.
+  render: 'flowers("dandelion")'
+
+tibetan_edelweiss:
+  name: Tibetan edelweiss
+  latin: Leontopodium nanum
+  form: flower
+  range: Dry alpine turf across the plateau.
+  render: 'flowers("oxeye_daisy")'

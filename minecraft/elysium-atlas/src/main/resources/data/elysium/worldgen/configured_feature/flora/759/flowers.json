@@ -1,0 +1,1 @@
+{"type":"elysium_atlas:niche_selector","config":{"entries":[{"feature":{"feature":{"type":"minecraft:simple_block","config":{"to_place":{"type":"minecraft:weighted_state_provider","entries":[{"data":{"Name":"minecraft:oxeye_daisy"},"weight":1}]}}},"placement":[]},"weight":1.0,"clump":{"size":12,"share":0.35,"outside":0.1,"key":"tibetan_edelweiss"}}]}}

@@ -198,8 +198,10 @@ vanilla-biome edits are switched off in `../overrides/config`, so the atlas stil
 Every atlas biome covering at least 0.3% of a listed ecoregion gets a variant. Its own plants are removed
 and the ecoregion's are added. Tree count is the ecoregion's cover times a factor taken from the atlas biome's
 own tree count, so forest cells stay denser than plains cells. Ecoregions without an entry keep the atlas
-biome. The database covers 25 ecoregions in and around Texas and 37 in Europe (from the spawn outwards), with
-147 plants. The built mod carries it as `elysium_atlas/ecoregions.json`; `/atlas here` prints the ecoregion,
+biome. The database covers 115 North American ecoregions (nearly all of the
+contiguous US, Canada and Alaska except Mexico and the Caribbean), 37 in Europe (from the spawn outwards) and 12 on
+the Tibetan Plateau and high Himalaya, with 252 plants: 164 ecoregions, 1,752 variants. The Tibet profiles are
+treeless meadow, steppe and desert, which replaces the fir and hemlock the placement puts on the plateau. The built mod carries it as `elysium_atlas/ecoregions.json`; `/atlas here` prints the ecoregion,
 its colours and its species.
 
 Niches and ground. Species can be limited by elevation, water and slope (`niche` on a plant, `niches` per
@@ -207,7 +209,7 @@ ecoregion for elevation belts): trees are picked per spot by `elysium_atlas:nich
 Rockies run ponderosa, Douglas fir and aspen, then spruce-fir, and stop at about 3,600 m; bald cypress, cottonwood,
 willow and alder keep to river banks; junipers, pinyon and creosote avoid them. Each ecoregion also has a
 `ground_surface` (rock on steep ground and outcrops, soil patches, subsoil), written as one Lithostitched surface
-rule: Edwards limestone in the Hill Country, red beds on the Rolling Plains, chalk under the English downs, karst in
+rule (`top` sets the surface block, as coarse dirt in the deserts): Edwards limestone in the Hill Country, red beds on the Rolling Plains, chalk under the English downs, karst in
 the Dinarides, podzol in the taiga, basalt and moss in Iceland.
 
 Clumping: species can grow in their own patches (`clump`: aspen groves, cedar brakes, bluebonnet fields) and whole

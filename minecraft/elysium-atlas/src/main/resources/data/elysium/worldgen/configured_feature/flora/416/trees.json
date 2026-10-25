@@ -1,0 +1,1 @@
+{"type":"elysium_atlas:niche_selector","config":{"entries":[{"feature":{"feature":"minecraft:spruce","placement":[{"type":"minecraft:block_predicate_filter","predicate":{"type":"minecraft:would_survive","state":{"Name":"minecraft:spruce_sapling","Properties":{"stage":"0"}}}}]},"weight":1.0,"niche":{"elevation":[0,1000]}}]}}

@@ -278,6 +278,7 @@ def surface_rule(vids, g):
         if g["outcrops"] > 0: top.append(cond(noise("outcrop", g["outcrops"]), rock))
     for i, (b, share) in enumerate(list(g["soil"].items())[:3]):
         if share > 0: top.append(cond(noise(f"soil_{i}", share), block(b)))
+    if g.get("top"): top.append(block(g["top"]))        # everything else (deserts: bare soil instead of grass)
     if not top and not g["subsoil"]: return None
     floor = {"type": "minecraft:stone_depth", "offset": 0, "add_surface_depth": False, "secondary_depth_range": 0, "surface_type": "floor"}
     under = {"type": "minecraft:stone_depth", "offset": 0, "add_surface_depth": True, "secondary_depth_range": 0, "surface_type": "floor"}
