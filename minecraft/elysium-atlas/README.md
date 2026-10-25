@@ -197,10 +197,13 @@ vanilla-biome edits are switched off in `../overrides/config`, so the atlas stil
 
 Every atlas biome covering at least 0.3% of a listed ecoregion gets a variant. Its own plants are removed
 and the ecoregion's are added. Tree count is the ecoregion's cover times a factor taken from the atlas biome's
-own tree count, so forest cells stay denser than plains cells. Ecoregions without an entry keep the atlas
+own tree count, so forest cells stay denser than plains cells. Parent counts read Terralith's paired noise-based counts jointly
+(its groves and wintry forests mask tree sizes with them) and are capped at 30 per chunk. Dune variants get a sand
+surface, since Terrestria builds its dune surface in code for `terrestria:dunes` only. Ecoregions without an entry keep the atlas
 biome. The database covers 115 North American ecoregions (nearly all of the
-contiguous US, Canada and Alaska except Mexico and the Caribbean), 37 in Europe (from the spawn outwards) and 12 on
-the Tibetan Plateau and high Himalaya, with 252 plants: 164 ecoregions, 1,752 variants. The Tibet profiles are
+contiguous US, Canada and Alaska except Mexico and the Caribbean), 37 in Europe (from the spawn outwards), 12 on
+the Tibetan Plateau and high Himalaya and 57 in East Asia (Mongolia, China, Korea, Japan, Taiwan, the Russian Far
+East), with 347 plants: 221 ecoregions, 2,383 variants. The Tibet profiles are
 treeless meadow, steppe and desert, which replaces the fir and hemlock the placement puts on the plateau. The built mod carries it as `elysium_atlas/ecoregions.json`; `/atlas here` prints the ecoregion,
 its colours and its species.
 

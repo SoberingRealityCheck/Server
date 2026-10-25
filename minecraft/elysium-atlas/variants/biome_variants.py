@@ -32,6 +32,7 @@ CLIMATE = ("temperature", "downfall", "has_precipitation", "temperature_modifier
 MIN_SHARE = 0.003                   # atlas biome share of a unit that gets a variant
 MIN_CELLS = 12
 TREES_PER_CHUNK_AT_FULL_COVER = 12.0
+TREE_COUNT_CAP = 30.0                # parent tree counts above this are attempts thinned by filters (Terralith dark forest: 155)
 # default tree and shrub cover by WWF habitat type (Ecoregions 2017 BIOME_NUM), when a profile gives none
 TREE_COVER = {1: 0.8, 2: 0.5, 3: 0.6, 4: 0.6, 5: 0.6, 6: 0.5, 7: 0.25, 8: 0.15, 9: 0.15, 10: 0.15, 11: 0.03, 12: 0.35, 13: 0.05, 14: 0.6}
 SHRUB_COVER = {7: 0.1, 8: 0.05, 10: 0.1, 12: 0.3, 13: 0.15}
@@ -155,7 +156,7 @@ class Plants:
             for f in step:
                 p, _, n = self.placed(f)
                 if p: ids.append(f); trees += n
-        return ids, trees
+        return ids, min(trees, TREE_COUNT_CAP)
 
 
 def _dist_mean(d):
@@ -170,15 +171,24 @@ def _dist_mean(d):
     return 1.0
 
 
+# the biome-info noise behind noise_based_count, as quantiles of a normal with sd 0.35 (assumed, not measured)
+_BIOME_NOISE = [0.35 * __import__("statistics").NormalDist().inv_cdf((i + 0.5) / 64) for i in range(64)]
+
+
 def expected_count(placement):
-    n = 1.0
+    """Mean placements per chunk. Successive noise_based_counts read the same smooth noise at nearly the same spot, so
+    they are taken jointly: Terralith masks tree sizes with pairs of them (count where noise > -1, then where noise < -0.5)."""
+    n = 1.0; nb = []
     for m in placement:
         t = m["type"]
         if t == "minecraft:count": n *= _dist_mean(m["count"])
         elif t == "minecraft:rarity_filter": n /= m["chance"]
         elif t == "minecraft:noise_threshold_count": n *= (m["above_noise"] + m["below_noise"]) / 2
-        elif t == "minecraft:noise_based_count": n *= m["noise_to_count_ratio"] / 2
+        elif t == "minecraft:noise_based_count": nb.append((m.get("noise_offset", 0.0), m["noise_to_count_ratio"]))
         elif t == "minecraft:count_on_every_layer": n *= _dist_mean(m["count"])
+    if nb:
+        import math
+        n *= sum(math.prod(max(0, math.ceil((v + o) * r)) for o, r in nb) for v in _BIOME_NOISE) / len(_BIOME_NOISE)
     return max(0.0, n)
 
 
@@ -219,7 +229,14 @@ def count_of(n):
     return {"type": "minecraft:weighted_list", "distribution": [{"data": lo, "weight": int(round((1 - f) * 100))}, {"data": lo + 1, "weight": int(round(f * 100))}]}
 
 
-def survive(sapling): return {"type": "minecraft:block_predicate_filter", "predicate": {"type": "minecraft:would_survive", "state": {"Name": sapling, **({"Properties": {"stage": "0"}} if "sapling" in sapling else {})}}}
+def survive(sapling):
+    """Where the sapling could grow; saplings also stand on snow blocks, as vanilla grove spruces do (snowy parents
+    such as grove have a snow-block surface on which no sapling survives)."""
+    p = {"type": "minecraft:would_survive", "state": {"Name": sapling, **({"Properties": {"stage": "0"}} if "sapling" in sapling else {})}}
+    if "sapling" in sapling:
+        p = {"type": "minecraft:any_of", "predicates": [p, {"type": "minecraft:matching_blocks", "offset": [0, -1, 0],
+                                                         "blocks": ["minecraft:snow_block", "minecraft:powder_snow"]}]}
+    return {"type": "minecraft:block_predicate_filter", "predicate": p}
 
 
 def selector(weighted):
@@ -465,7 +482,9 @@ def generate(src, check=False):
             lang[f"biome.elysium.{path.replace('/', '.')}"] = prof["name"] if a == main else f"{prof['name']} ({title(a)})"
             palettes[vid] = palette(f_hex, leaf_hex, leaf_table)
             n_flora += 1
-    rules = []
+    # Terrestria builds its dune surface in code for terrestria:dunes only, so variants of it came out as grass
+    dunes = [v for v, t in table.items() if t["parent"] == "terrestria:dunes"]
+    rules = [surface_rule(dunes, {"rock": [], "outcrops": 0, "soil": {}, "top": "sand", "subsoil": "sand"})] if dunes else []
     for eid, g in surfaces.items():
         vids = [v for v, t in table.items() if v.startswith(f"elysium:eco/{eid}/") and not NO_SURFACE.search(t["parent"])]
         r = surface_rule(vids, g) if vids else None

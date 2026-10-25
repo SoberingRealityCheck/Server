@@ -1,0 +1,1016 @@
+# Plants of East Asia: Mongolia and the Chinese deserts, northeast China and the Russian Far East, North and
+# South China, Korea, Japan and Taiwan.
+# Schema: see ../README.md. Colours follow the species' usual description (leaf_note / colour_note);
+# they are not measured from photographs. Circumboreal species (bluejoint, fireweed, ostrich fern, Scots pine,
+# shrubby cinquefoil ...) are reused from the North American, European and Tibetan files.
+
+# ---------------------------------------------------------------- northern conifers
+dahurian_larch:
+  name: Dahurian larch
+  latin: Larix gmelinii
+  form: tree
+  leaf: pale_yellow_green
+  leaf_note: Soft light-green deciduous needles in tufts; gold in autumn.
+  autumn: "#d0a83a"
+  range: Permafrost taiga of eastern Siberia, the Greater Khingan and the Amur.
+  render: 'tree("spruce_log", "birch_leaves", straight(7, 3, 0), sprucef(U(1, 2), U(0, 1), U(2, 3)))'
+  sapling: spruce_sapling
+  stand_in: Birch leaves on a spruce trunk for the pale deciduous needles.
+
+siberian_larch:
+  name: Siberian larch
+  latin: Larix sibirica
+  form: tree
+  leaf: "#86b050"
+  leaf_note: Light green deciduous needles in tufts.
+  autumn: "#d0a83a"
+  range: Altai, Sayan, Khangai and the north-facing slopes of the Mongolian forest steppe.
+  render: 'tree("spruce_log", "birch_leaves", straight(8, 3, 0), sprucef(U(1, 2), U(0, 1), U(2, 4)))'
+  sapling: spruce_sapling
+  stand_in: Birch leaves on a spruce trunk.
+
+japanese_larch:
+  name: Japanese larch
+  latin: Larix kaempferi
+  form: tree
+  leaf: "#7aa84e"
+  leaf_note: Blue-tinged light green deciduous needles.
+  autumn: "#c8902e"
+  range: Subalpine central Honshu; planted widely in Japan.
+  render: 'tree("spruce_log", "birch_leaves", straight(8, 3, 1), sprucef(U(1, 2), U(0, 1), U(2, 4)))'
+  sapling: spruce_sapling
+  stand_in: Birch leaves on a spruce trunk.
+
+siberian_pine:
+  name: Siberian pine
+  latin: Pinus sibirica
+  form: tree
+  leaf: "#3e6438"
+  leaf_note: Dark green needles in fives.
+  range: Altai, Sayan and Khangai mountain taiga.
+  render: 'tree("spruce_log", "spruce_leaves", straight(9, 3, 1), blob(2, 4, 0))'
+  sapling: spruce_sapling
+
+korean_pine:
+  name: Korean pine
+  latin: Pinus koraiensis
+  form: tree
+  leaf: "#3e6440"
+  leaf_note: Dark green needles in fives, blue-white below.
+  range: Mixed forests of Manchuria, the Ussuri, Changbai and Korea.
+  render: 'ref("biomesoplenty:pine_tree")'
+  sapling: spruce_sapling
+  stand_in: Biomes O' Plenty pine.
+
+siberian_spruce:
+  name: Siberian spruce
+  latin: Picea obovata
+  form: tree
+  leaf: dark_blue_green
+  leaf_note: Short dark green needles.
+  range: Taiga of Siberia, the Altai and the Khangai.
+  render: 'ref("spruce")'
+  sapling: spruce_sapling
+
+yezo_spruce:
+  name: Yezo spruce
+  latin: Picea jezoensis
+  form: tree
+  leaf: "#3a5e44"
+  leaf_note: Flat dark green needles, silver-white below.
+  range: Hokkaido, Sakhalin, the Sikhote-Alin and Changbai, subalpine.
+  render: 'ref("biomesoplenty:tall_spruce_tree")'
+  sapling: spruce_sapling
+  stand_in: Biomes O' Plenty tall spruce.
+
+khingan_fir:
+  name: Khingan fir
+  latin: Abies nephrolepis
+  form: tree
+  leaf: fir_green
+  leaf_note: Dark glossy needles.
+  range: Changbai, the Ussuri and northern Korea, with Korean pine and Yezo spruce.
+  render: 'ref("biomesoplenty:fir_tree")'
+  sapling: biomesoplenty:fir_sapling
+  stand_in: Biomes O' Plenty fir.
+
+sakhalin_fir:
+  name: Sakhalin fir
+  latin: Abies sachalinensis
+  form: tree
+  leaf: "#3a684c"
+  leaf_note: Dark glossy needles.
+  range: Hokkaido, Sakhalin and the southern Kurils.
+  render: 'ref("biomesoplenty:fir_tree_large")'
+  sapling: biomesoplenty:fir_sapling
+  stand_in: Biomes O' Plenty large fir.
+
+veitch_fir:
+  name: Veitch's fir
+  latin: Abies veitchii
+  form: tree
+  leaf: "#3c6a4c"
+  leaf_note: Dark green needles with chalk-white bands below.
+  range: Subalpine forest of Honshu and Shikoku, with Maries' fir.
+  render: 'ref("biomesoplenty:fir_tree_small")'
+  sapling: biomesoplenty:fir_sapling
+  stand_in: Biomes O' Plenty small fir.
+
+siberian_dwarf_pine:
+  name: Siberian dwarf pine
+  latin: Pinus pumila
+  form: shrub
+  clump: {size: 20, share: 0.5}
+  leaf: "#3e6a44"
+  leaf_note: Dark blue-green needles in fives on prostrate stems.
+  range: Above the treeline in Japan, Kamchatka, the Kurils and northeast Siberia; the Bald Mountains.
+  render: 'tree("spruce_log", "spruce_leaves", straight(1, 0, 0), bushf(2, 1, 0))'
+  sapling: spruce_sapling
+
+schrenk_spruce:
+  name: Schrenk's spruce
+  latin: Picea schrenkiana
+  form: tree
+  leaf: "#3a6048"
+  leaf_note: Blue-green needles on a narrow spire.
+  range: North slopes of the Tian Shan, 1,500-2,800 m.
+  look: Very narrow column.
+  render: 'ref("biomesoplenty:tall_spruce_tree")'
+  sapling: spruce_sapling
+  stand_in: Biomes O' Plenty tall spruce.
+
+qinghai_spruce:
+  name: Qinghai spruce
+  latin: Picea crassifolia
+  form: tree
+  leaf: "#4a6a58"
+  leaf_note: Thick blue-grey needles.
+  range: Shady slopes of the Qilian, Helan and eastern plateau ranges.
+  render: 'ref("spruce")'
+  sapling: spruce_sapling
+
+przewalski_juniper:
+  name: Qilian juniper
+  latin: Juniperus przewalskii
+  form: tree
+  leaf: glaucous_blue_green
+  leaf_note: Grey-green scale leaves.
+  range: Sunny slopes of the Qilian and northeastern plateau.
+  render: 'ref("wilderwild:juniper")'
+  sapling: spruce_sapling
+  stand_in: Wilder Wild juniper.
+
+balfour_spruce:
+  name: Likiang spruce
+  latin: Picea likiangensis
+  form: tree
+  leaf: "#3c6448"
+  leaf_note: Blue-green needles.
+  range: Hengduan Mountains and northwest Yunnan, 2,500-4,100 m.
+  render: 'ref("biomesoplenty:tall_spruce_tree")'
+  sapling: spruce_sapling
+  stand_in: Biomes O' Plenty tall spruce.
+
+faber_fir:
+  name: Faber's fir
+  latin: Abies fabri
+  form: tree
+  leaf: fir_green
+  leaf_note: Dark glossy needles, white below.
+  range: Subalpine Sichuan (Emei, Gongga, Wolong) to the treeline.
+  render: 'ref("biomesoplenty:fir_tree_large")'
+  sapling: biomesoplenty:fir_sapling
+  stand_in: Biomes O' Plenty large fir.
+
+chinese_pine:
+  name: Chinese pine
+  latin: Pinus tabuliformis
+  form: tree
+  leaf: deep_green_pine
+  leaf_note: Dark green needles in pairs; crown flattens with age.
+  range: Mountains of North China, the Loess Plateau and the Qinling.
+  render: 'tree("spruce_log", "spruce_leaves", forking(5, 2, 1), blob(2, 2, 0))'
+  sapling: spruce_sapling
+
+chinese_arborvitae:
+  name: Chinese arborvitae
+  latin: Platycladus orientalis
+  form: tree
+  leaf: "#3c5e34"
+  leaf_note: Flat vertical sprays of dark green scale leaves.
+  range: Dry limestone and loess slopes of North China.
+  render: 'tree("spruce_log", "spruce_leaves", straight(4, 2, 0), blob(2, 3, 0))'
+  sapling: spruce_sapling
+
+japanese_red_pine:
+  name: Japanese red pine
+  latin: Pinus densiflora
+  form: tree
+  leaf: "#4e7a3c"
+  leaf_note: Soft bright green needles in pairs.
+  range: Dry ridges and disturbed ground in Japan, Korea and northeast China.
+  look: Red-orange upper bark, leaning trunk.
+  render: 'tree("acacia_log", "spruce_leaves", forking(6, 2, 1), blob(2, 2, 0))'
+  sapling: spruce_sapling
+  stand_in: Acacia log for the orange bark.
+
+japanese_black_pine:
+  name: Japanese black pine
+  latin: Pinus thunbergii
+  form: tree
+  leaf: "#365a34"
+  leaf_note: Stiff dark green needles in pairs.
+  range: Coasts of Japan and southern Korea.
+  render: 'tree("dark_oak_log", "spruce_leaves", forking(4, 2, 1), acaciaf(2))'
+  sapling: spruce_sapling
+
+japanese_cedar:
+  name: Japanese cedar
+  latin: Cryptomeria japonica
+  form: tree
+  leaf: "#3e6a3a"
+  leaf_note: Dark green awl-shaped needles; bronze in winter.
+  range: Wet mountain slopes of Japan (Yakushima, Tohoku Sea of Japan side).
+  look: Tall straight red-brown trunk.
+  render: 'ref("terrestria:redwood_tree")'
+  sapling: terrestria:redwood_sapling
+  stand_in: Terrestria redwood, a related tree.
+
+hinoki:
+  name: Hinoki cypress
+  latin: Chamaecyparis obtusa
+  form: tree
+  leaf: "#3a6a3a"
+  leaf_note: Blunt dark green scale leaves with white Y marks below.
+  range: Montane forests of central and southern Japan.
+  render: 'ref("terrestria:cypress_tree")'
+  sapling: terrestria:cypress_sapling
+  stand_in: Terrestria cypress.
+
+taiwan_cypress:
+  name: Taiwan red cypress
+  latin: Chamaecyparis formosensis
+  form: tree
+  leaf: "#3e6a3e"
+  leaf_note: Pointed yellow-green to dark green scale leaves.
+  range: Cloud forest of the Taiwan Central Range, 1,500-2,500 m.
+  render: 'ref("terrestria:cypress_tree")'
+  sapling: terrestria:cypress_sapling
+  stand_in: Terrestria cypress.
+
+japanese_hemlock:
+  name: Japanese hemlock
+  latin: Tsuga sieboldii
+  form: tree
+  leaf: "#3a6444"
+  leaf_note: Short glossy needles.
+  range: Ridges of southern Honshu, Shikoku and Kyushu.
+  render: 'ref("terrestria:hemlock_tree")'
+  sapling: terrestria:hemlock_sapling
+  stand_in: Terrestria hemlock.
+
+chinese_fir:
+  name: Chinese fir
+  latin: Cunninghamia lanceolata
+  form: tree
+  leaf: "#4e7440"
+  leaf_note: Stiff lance-shaped glossy green needles.
+  range: Hills of southern China and northern Vietnam.
+  render: 'tree("spruce_log", "spruce_leaves", straight(9, 3, 0), sprucef(U(2, 3), U(0, 1), U(2, 4)))'
+  sapling: spruce_sapling
+
+masson_pine:
+  name: Masson's pine
+  latin: Pinus massoniana
+  form: tree
+  leaf: yellow_green_pine
+  leaf_note: Long slender light green needles in pairs.
+  range: Dry hills of central and southern China.
+  render: 'ref("biomesoplenty:pine_tree")'
+  sapling: spruce_sapling
+  stand_in: Biomes O' Plenty pine.
+
+yunnan_pine:
+  name: Yunnan pine
+  latin: Pinus yunnanensis
+  form: tree
+  leaf: "#5a7e44"
+  leaf_note: Long drooping needles in threes.
+  range: Yunnan-Guizhou Plateau and the lower Hengduan.
+  render: 'tree("spruce_log", "spruce_leaves", straight(9, 3, 1), pinef(2, U(4, 5)))'
+  sapling: spruce_sapling
+
+# ---------------------------------------------------------------- northern broadleaves
+mongolian_oak:
+  name: Mongolian oak
+  latin: Quercus mongolica
+  form: tree
+  leaf: deep_green
+  leaf_note: Large wavy-lobed leaves; brown and held in winter.
+  range: Northeast China, the Russian Far East, Korea and Hokkaido; dry ridges and forest steppe.
+  render: 'tree("oak_log", "oak_leaves", fancy(6, 3, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+liaodong_oak:
+  name: Liaodong oak
+  latin: Quercus wutaishanica
+  form: tree
+  leaf: "#4e8434"
+  leaf_note: Lobed dark green leaves.
+  range: Mountains of North China and the Loess Plateau.
+  render: 'tree("oak_log", "oak_leaves", forking(4, 2, 1), blob(3, 2, 0))'
+  sapling: oak_sapling
+
+konara_oak:
+  name: Konara oak
+  latin: Quercus serrata
+  form: tree
+  leaf: "#5a9a3a"
+  leaf_note: Toothed glossy leaves, silky below.
+  range: Lowland deciduous woods of Japan, Korea and eastern China.
+  render: 'tree("oak_log", "oak_leaves", straight(6, 3, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+japanese_beech:
+  name: Siebold's beech
+  latin: Fagus crenata
+  form: tree
+  clump: {size: 30, share: 0.55}
+  leaf: fresh_green
+  leaf_note: Thin bright green wavy-edged leaves.
+  range: Montane forest of Japan, especially the snowy Sea of Japan side.
+  render: 'tree("pale_oak_log", "oak_leaves", fancy(7, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+  stand_in: Pale oak log for the smooth grey bark.
+
+amur_linden:
+  name: Amur linden
+  latin: Tilia amurensis
+  form: tree
+  leaf: "#5a9a3c"
+  leaf_note: Heart-shaped mid-green leaves.
+  range: Mixed forests of Manchuria, the Ussuri and Korea.
+  render: 'tree("oak_log", "oak_leaves", fancy(7, 3, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+manchurian_ash:
+  name: Manchurian ash
+  latin: Fraxinus mandshurica
+  form: tree
+  niche: {water: riparian}
+  leaf: "#5a9440"
+  leaf_note: Large pinnate leaves.
+  range: Valley floors and river terraces of the Amur, Ussuri, Korea and Hokkaido.
+  render: 'tree("oak_log", "jungle_leaves", straight(9, 3, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+  stand_in: Jungle leaves for the compound leaf.
+
+mono_maple:
+  name: Painted maple
+  latin: Acer pictum
+  form: tree
+  leaf: "#5c9a3a"
+  leaf_note: Five- to seven-lobed bright green leaves; yellow in autumn.
+  autumn: "#e0b030"
+  range: Mixed and deciduous forests from the Amur to Japan.
+  render: 'tree("oak_log", "jungle_leaves", fancy(6, 3, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+  stand_in: Jungle leaves for the broad maple leaf; no permanent autumn leaf blocks.
+
+japanese_maple:
+  name: Japanese maple
+  latin: Acer palmatum
+  form: tree
+  clump: {size: 12, share: 0.3}
+  leaf: "#6aa43a"
+  leaf_note: Deeply cut light green leaves; scarlet in autumn.
+  autumn: "#c83a2a"
+  range: Understorey and stream sides in Japan, Korea and eastern China.
+  render: 'tree("oak_log", "jungle_leaves", forking(3, 1, 1), blob(2, 2, 0))'
+  sapling: oak_sapling
+  stand_in: Jungle leaves; no permanent red maple blocks.
+
+asian_white_birch:
+  name: Asian white birch
+  latin: Betula platyphylla
+  form: tree
+  clump: {size: 24, share: 0.45}
+  leaf: yellow_green
+  leaf_note: Triangular bright green leaves.
+  range: Burns and clearings from Siberia to Hokkaido; the forest steppe of Mongolia.
+  render: 'ref("birch")'
+  sapling: birch_sapling
+
+erman_birch:
+  name: Erman's birch
+  latin: Betula ermanii
+  form: tree
+  leaf: "#6a9e48"
+  leaf_note: Dark-veined green leaves; pinkish peeling bark.
+  range: The birch belt at the treeline in Japan, Changbai, Kamchatka and Sakhalin.
+  look: Low crooked trunks bent by snow.
+  render: 'ref("wilderwild:short_birch")'
+  sapling: birch_sapling
+  stand_in: Wilder Wild short birch.
+
+japanese_cherry:
+  name: Hill cherry
+  latin: Prunus jamasakura
+  form: tree
+  clump: {size: 10, share: 0.2}
+  leaf: "#5a8e3a"
+  leaf_note: Bronze-red young leaves turning green; pink-white blossom in April.
+  range: Hill forests of southern Honshu, Shikoku and Kyushu.
+  render: 'tree("cherry_log", "oak_leaves", straight(6, 2, 0), blob(3, 2, 0))'
+  sapling: cherry_sapling
+  stand_in: Cherry log with green leaves; no permanent blossom blocks.
+
+japanese_zelkova:
+  name: Japanese zelkova
+  latin: Zelkova serrata
+  form: tree
+  niche: {water: riparian}
+  leaf: "#5a9a3e"
+  leaf_note: Toothed mid-green leaves on a vase-shaped crown.
+  range: Valleys of Japan, Korea and eastern China.
+  render: 'tree("oak_log", "jungle_leaves", fancy(8, 3, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+siberian_elm:
+  name: Siberian elm
+  latin: Ulmus pumila
+  form: tree
+  leaf: "#5e9440"
+  leaf_note: Small rough dark green leaves.
+  range: Sandy plains, steppe valleys and the North China Plain.
+  render: 'tree("oak_log", "oak_leaves", forking(4, 2, 1), blob(2, 2, 0))'
+  sapling: oak_sapling
+
+chinese_scholar_tree:
+  name: Pagoda tree
+  latin: Styphnolobium japonicum
+  form: tree
+  leaf: "#5a9644"
+  leaf_note: Pinnate dark green leaflets.
+  range: The North China Plain and the Loess valleys.
+  render: 'tree("oak_log", "jungle_leaves", forking(5, 2, 1), blob(3, 2, 0))'
+  sapling: oak_sapling
+
+euphrates_poplar:
+  name: Euphrates poplar
+  latin: Populus euphratica
+  form: tree
+  niche: {water: riparian}
+  leaf: "#7a9a6a"
+  leaf_note: Grey-green leathery leaves, willow-like when young.
+  range: Tugai forests along the Tarim, Ejin and desert rivers.
+  look: Gnarled, half-dead trunks.
+  render: 'tree("oak_log", "acacia_leaves", forking(3, 1, 1), acaciaf(2))'
+  sapling: oak_sapling
+
+asian_willow:
+  name: Korean willow
+  latin: Salix koreensis
+  form: tree
+  niche: {water: riparian}
+  leaf: silvery_green
+  leaf_note: Narrow leaves, pale below.
+  range: Rivers of Korea, northeast China and the Ussuri.
+  render: 'ref("biomesoplenty:willow_tree")'
+  sapling: oak_sapling
+  stand_in: Biomes O' Plenty willow.
+
+japanese_alder:
+  name: Japanese alder
+  latin: Alnus japonica
+  form: tree
+  niche: {water: wet}
+  leaf: "#4e8a3a"
+  leaf_note: Dark glossy leaves.
+  range: Wetlands and paddy edges of Japan, Korea and the Ussuri.
+  render: 'tree("dark_oak_log", "oak_leaves", straight(6, 2, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+sweetgum_formosan:
+  name: Formosan sweetgum
+  latin: Liquidambar formosana
+  form: tree
+  leaf: "#5a9a3a"
+  leaf_note: Three-lobed leaves; red in autumn.
+  autumn: "#b8402a"
+  range: Secondary forest of central and southern China and Taiwan.
+  render: 'tree("oak_log", "jungle_leaves", fancy(8, 3, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+# ---------------------------------------------------------------- evergreen broadleaves
+castanopsis:
+  name: Chinquapin
+  latin: Castanopsis sieboldii
+  form: tree
+  leaf: dark_glossy_green
+  leaf_note: Leathery dark green leaves with golden-brown undersides.
+  range: Laurel forest of southern Japan, southern Korea and eastern China (C. eyrei, C. carlesii).
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(5, 2, 0), blob(3, 3, 0))'
+  sapling: oak_sapling
+
+ring_cup_oak:
+  name: Ring-cup oak
+  latin: Quercus glauca
+  form: tree
+  leaf: "#3a6a30"
+  leaf_note: Glossy dark leaves, grey-white below.
+  range: Evergreen forest from southern Japan to the Himalaya.
+  render: 'tree("dark_oak_log", "jungle_leaves", straight(6, 2, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+camphor_tree:
+  name: Camphor tree
+  latin: Cinnamomum camphora
+  form: tree
+  leaf: "#5a8a3a"
+  leaf_note: Glossy yellow-green leaves, pink-red when new.
+  range: Lowlands of southern China, Taiwan, southern Japan and Korea.
+  look: Broad dome, huge old trunks.
+  render: 'tree("oak_log", "jungle_leaves", fancy(7, 3, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+machilus:
+  name: Red machilus
+  latin: Machilus thunbergii
+  form: tree
+  leaf: "#34602e"
+  leaf_note: Thick glossy dark leaves.
+  range: Coastal laurel forest of Japan, Korea, Taiwan and eastern China.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", forking(4, 2, 1), blob(3, 2, 0))'
+  sapling: oak_sapling
+
+schima:
+  name: Schima
+  latin: Schima superba
+  form: tree
+  leaf: "#3e6e32"
+  leaf_note: Glossy dark green leaves; white camellia-like flowers.
+  range: Hills of southern China and Taiwan.
+  render: 'tree("oak_log", "dark_oak_leaves", straight(7, 3, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+chinese_banyan:
+  name: Chinese banyan
+  latin: Ficus microcarpa
+  form: tree
+  leaf: "#3e7030"
+  leaf_note: Small glossy dark leaves.
+  range: Lowlands of Hainan, Taiwan, Guangdong and Guangxi.
+  render: 'tree("jungle_log", "jungle_leaves", forking(5, 2, 1), blob(3, 3, 0), decorators=[moss(0.2)])'
+  sapling: jungle_sapling
+
+hainan_hopea:
+  name: Hainan hopea
+  latin: Hopea hainanensis
+  form: tree
+  leaf: "#3a6a30"
+  leaf_note: Leathery dark green leaves.
+  range: Lowland monsoon forest of Hainan and northern Vietnam.
+  look: Tall emergent dipterocarp.
+  render: 'ref("mega_jungle_tree")'
+  sapling: jungle_sapling
+  stand_in: Vanilla mega jungle tree.
+
+lychee:
+  name: Wild lychee
+  latin: Litchi chinensis
+  form: tree
+  leaf: "#3e6a30"
+  leaf_note: Glossy pinnate leaves.
+  range: Lowland forest of Hainan and Guangdong.
+  render: 'ref("jungle_tree")'
+  sapling: jungle_sapling
+  stand_in: Vanilla jungle tree.
+
+coconut_palm:
+  name: Coconut palm
+  latin: Cocos nucifera
+  form: tree
+  niche: {elevation: [0, 60]}
+  leaf: "#6a9a3a"
+  leaf_note: Yellow-green feather fronds.
+  range: Tropical coasts of Hainan and Taiwan.
+  render: 'ref("biomesoplenty:palm_tree")'
+  sapling: biomesoplenty:palm_sapling
+  stand_in: Biomes O' Plenty palm.
+
+moso_bamboo:
+  name: Moso bamboo
+  latin: Phyllostachys edulis
+  form: tree
+  clump: {size: 28, share: 0.35}
+  leaf: "#7aaa3a"
+  leaf_note: Small light green leaves on very tall culms.
+  range: Hills of the Yangtze basin, Fujian, Zhejiang and Jiangxi.
+  render: 'ref("bamboo_no_podzol")'
+  sapling: oak_sapling
+  stand_in: Vanilla bamboo.
+
+# ---------------------------------------------------------------- shrubs
+caragana_microphylla:
+  name: Littleleaf pea shrub
+  latin: Caragana microphylla
+  form: shrub_ground
+  clump: {size: 14, share: 0.35}
+  range: Sandy steppe of Inner Mongolia and Mongolia.
+  render: 'flowers("bush", "dead_bush", weights=[3, 1])'
+
+fringed_sagebrush:
+  name: Fringed sagewort
+  latin: Artemisia frigida
+  form: shrub_ground
+  range: Overgrazed and dry steppe from Mongolia to Kazakhstan.
+  render: 'flowers("short_dry_grass", "bush", weights=[2, 1])'
+
+ordos_sagebrush:
+  name: Ordos sagebrush
+  latin: Artemisia ordosica
+  form: shrub_ground
+  clump: {size: 20, share: 0.4}
+  range: Stabilised dunes of the Ordos and Mu Us sands.
+  render: 'flowers("bush", "short_dry_grass", weights=[2, 1])'
+
+saxaul:
+  name: Saxaul
+  latin: Haloxylon ammodendron
+  form: shrub
+  clump: {size: 30, share: 0.35}
+  leaf: "#7a8a5a"
+  leaf_note: Leafless jointed green twigs.
+  range: Gravel and sand deserts of the Gobi, Junggar and Alashan.
+  render: 'tree("acacia_log", "acacia_leaves", straight(1, 1, 0), bushf(2, 1, 0))'
+  sapling: dead_bush
+
+tamarisk:
+  name: Tamarisk
+  latin: Tamarix ramosissima
+  form: shrub
+  niche: {water: wet}
+  leaf: "#7a9a7a"
+  leaf_note: Scale-like grey-green leaves; pink flower plumes in summer.
+  range: Desert rivers, salt flats and dune margins of Central Asia and northern China.
+  render: 'tree("acacia_log", "acacia_leaves", straight(1, 0, 0), bushf(2, 2, 1))'
+  sapling: dead_bush
+
+reaumuria:
+  name: Reaumuria
+  latin: Reaumuria soongarica
+  form: shrub_ground
+  range: Gravel deserts of the Gobi, Alashan and Junggar.
+  render: 'flowers("dead_bush", "short_dry_grass", weights=[2, 1])'
+
+nitraria:
+  name: Siberian nitre bush
+  latin: Nitraria sibirica
+  form: shrub_ground
+  niche: {water: wet}
+  range: Salt flats and saline sand of the deserts and the Bohai coast.
+  render: 'flowers("bush", "dead_bush", weights=[2, 1])'
+
+sea_buckthorn:
+  name: Sea buckthorn
+  latin: Hippophae rhamnoides
+  form: shrub
+  clump: {size: 16, share: 0.4}
+  leaf: "#8a9a80"
+  leaf_note: Narrow silver-grey leaves; orange berries.
+  range: Gullies of the Loess Plateau, Qilian valleys and the Tian Shan.
+  render: 'tree("oak_log", "azalea_leaves", straight(1, 1, 0), bushf(2, 1, 0))'
+  sapling: oak_sapling
+
+hazel_siberian:
+  name: Siberian hazel
+  latin: Corylus heterophylla
+  form: shrub
+  leaf: "#5e9a40"
+  leaf_note: Broad truncate leaves.
+  range: Forest edges and oak scrub of North China, Manchuria and Korea.
+  render: 'tree("oak_log", "oak_leaves", straight(1, 0, 0), bushf(2, 1, 0))'
+  sapling: oak_sapling
+
+lespedeza:
+  name: Shrub bush clover
+  latin: Lespedeza bicolor
+  form: shrub_ground
+  range: Oak woods and clearings of northeast China, Korea and Japan.
+  render: 'flowers("bush", "allium", weights=[3, 1])'
+
+dahurian_rhododendron:
+  name: Dahurian rhododendron
+  latin: Rhododendron dauricum
+  form: shrub_ground
+  clump: {size: 14, share: 0.35}
+  range: Larch and pine forest floors from Mongolia to Hokkaido; pink in early spring.
+  render: 'flowers("flowering_azalea", "azalea", weights=[1, 2])'
+
+kirishima_azalea:
+  name: Kyushu azalea
+  latin: Rhododendron kaempferi
+  form: shrub_ground
+  clump: {size: 12, share: 0.3}
+  range: Open hill forest and pine woods of Japan.
+  render: 'flowers("flowering_azalea", "azalea", weights=[1, 1])'
+
+chinese_azalea:
+  name: Sims's azalea
+  latin: Rhododendron simsii
+  form: shrub_ground
+  clump: {size: 14, share: 0.35}
+  range: Hill slopes and pine woods of southern China and Taiwan.
+  render: 'flowers("flowering_azalea", "azalea", weights=[1, 1])'
+
+hengduan_rhododendron:
+  name: Hengduan rhododendrons
+  latin: Rhododendron spp. (R. phaeochrysum, R. rubiginosum)
+  form: shrub
+  clump: {size: 20, share: 0.4}
+  leaf: "#3a6438"
+  leaf_note: Leathery dark leaves with rusty scales below.
+  range: Under subalpine fir and above the treeline in the Hengduan and Yunnan.
+  render: 'tree("oak_log", "azalea_leaves", straight(1, 1, 0), bushf(2, 2, 1))'
+  sapling: oak_sapling
+
+camellia:
+  name: Wild camellia
+  latin: Camellia japonica
+  form: shrub
+  leaf: "#2e5a2a"
+  leaf_note: Thick glossy near-black-green leaves; red winter flowers.
+  range: Coastal laurel forest of Japan, Korea and Taiwan.
+  render: 'tree("oak_log", "dark_oak_leaves", straight(1, 1, 0), bushf(2, 2, 1))'
+  sapling: oak_sapling
+
+hydrangea:
+  name: Mountain hydrangea
+  latin: Hydrangea serrata
+  form: shrub_ground
+  niche: {water: wet}
+  range: Damp woods and streams of Japan and Korea.
+  render: 'flowers("biomesoplenty:blue_hydrangea", "bush", weights=[1, 2])'
+
+cotton_rose:
+  name: Cotton rose
+  latin: Hibiscus mutabilis
+  form: shrub_ground
+  range: Stream banks and hills of southern China.
+  render: 'flowers("wilderwild:pink_hibiscus", "bush", weights=[1, 2])'
+
+# ---------------------------------------------------------------- grasses and ferns
+stipa_grandis:
+  name: Large needle grass
+  latin: Stipa grandis
+  form: grass
+  colour: "#9aa070"
+  colour_note: Grey-green bunchgrass with long silvery awns.
+  range: Typical steppe of Inner Mongolia and eastern Mongolia.
+  render: 'flowers("short_grass", "short_dry_grass", ("tall_grass", {"half": "lower"}), weights=[3, 2, 1])'
+
+stipa_krylovii:
+  name: Krylov's needle grass
+  latin: Stipa krylovii
+  form: grass
+  colour: "#a4a676"
+  colour_note: Narrow pale grey-green leaves.
+  range: Dry and grazed steppe of Mongolia.
+  render: 'flowers("short_dry_grass", "short_grass", weights=[2, 1])'
+
+stipa_gobica:
+  name: Gobi needle grass
+  latin: Stipa gobica
+  form: grass
+  colour: "#b0aa7c"
+  colour_note: Sparse straw-coloured tufts.
+  range: Desert steppe of the Gobi.
+  render: 'flowers("short_dry_grass")'
+
+sheepgrass:
+  name: Sheepgrass
+  latin: Leymus chinensis
+  form: grass
+  colour: "#7c9a7a"
+  colour_note: Blue-grey rhizomatous wild rye.
+  range: Meadow steppe of Manchuria, the Songnen Plain and eastern Mongolia.
+  render: 'flowers("short_grass", ("tall_grass", {"half": "lower"}), weights=[3, 1])'
+
+splendid_needlegrass:
+  name: Splendid needlegrass
+  latin: Achnatherum splendens
+  form: grass
+  clump: {size: 10, share: 0.3}
+  niche: {water: wet}
+  colour: "#a0a070"
+  colour_note: Huge stiff grey-green tussocks.
+  range: Saline lowlands and lake margins from the Tian Shan to Inner Mongolia.
+  render: 'flowers(("tall_dry_grass"), ("tall_grass", {"half": "lower"}), weights=[2, 1])'
+
+cleistogenes:
+  name: Cleistogenes
+  latin: Cleistogenes squarrosa
+  form: grass
+  colour: "#9a9c66"
+  colour_note: Short wiry grass, red-brown in autumn.
+  range: Grazed steppe of Mongolia and North China.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[1, 1])'
+
+bothriochloa:
+  name: Bothriochloa
+  latin: Bothriochloa ischaemum
+  form: grass
+  colour: "#8a9a5a"
+  colour_note: Tufted grass turning red-purple in autumn.
+  range: Grassy slopes of the Loess Plateau and North China.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[2, 1])'
+
+miscanthus:
+  name: Japanese silver grass
+  latin: Miscanthus sinensis
+  form: grass
+  clump: {size: 16, share: 0.4}
+  colour: "#7e9e56"
+  colour_note: Arching green leaves with a white midrib; silver plumes in autumn.
+  range: Grassland, clearings and burned hills from Japan to southern China.
+  render: 'flowers(("tall_grass", {"half": "lower"}), "short_grass", weights=[2, 1])'
+
+forest_sedge:
+  name: Lance-leaved sedge
+  latin: Carex lanceolata
+  form: grass
+  colour: "#7a9a50"
+  colour_note: Fine soft green sedge.
+  range: Floors of oak and pine forest in northeast China, Korea and Japan.
+  render: 'flowers("short_grass")'
+
+sasa:
+  name: Kuril bamboo grass
+  latin: Sasa kurilensis
+  form: grass
+  clump: {size: 30, share: 0.55}
+  colour: "#5e8e3c"
+  colour_note: Broad glossy dark leaves on dense knee- to head-high canes.
+  range: Forest floors of Hokkaido, northern Honshu, Sakhalin and the Kurils; the snowy Sea of Japan side.
+  render: 'flowers(("tall_grass", {"half": "lower"}), "bush", "short_grass", weights=[2, 2, 1])'
+  stand_in: Tall grass and bushes.
+
+mondo_grass:
+  name: Mondo grass
+  latin: Ophiopogon japonicus
+  form: grass
+  colour: "#3e6a36"
+  colour_note: Dark green grass-like evergreen.
+  range: Floors of evergreen forest in southern China, Korea and Japan.
+  render: 'flowers("short_grass")'
+
+cogon_grass:
+  name: Cogon grass
+  latin: Imperata cylindrica
+  form: grass
+  colour: "#8aa654"
+  colour_note: Stiff yellow-green blades with white plumes.
+  range: Burned hills and clearings of southern China, Taiwan and Hainan.
+  render: 'flowers("short_grass", ("tall_grass", {"half": "lower"}), weights=[2, 1])'
+
+dicranopteris:
+  name: Old World forked fern
+  latin: Dicranopteris pedata
+  form: fern
+  clump: {size: 20, share: 0.45}
+  range: Thickets on poor acid hills of southern China, Taiwan and Japan.
+  render: 'flowers("fern", ("large_fern", {"half": "lower"}), weights=[2, 1])'
+
+# ---------------------------------------------------------------- flowers
+mongolian_pasqueflower:
+  name: Turczaninov's pasqueflower
+  latin: Pulsatilla turczaninovii
+  form: flower
+  range: Steppe and forest steppe of Mongolia and northeast China; spring.
+  render: 'flowers("wilderwild:pasqueflower")'
+
+leontopodium_leontopodioides:
+  name: Steppe edelweiss
+  latin: Leontopodium leontopodioides
+  form: flower
+  range: Steppe and dry meadow from Mongolia to North China.
+  render: 'flowers("oxeye_daisy")'
+
+mongolian_onion:
+  name: Mongolian onion
+  latin: Allium mongolicum
+  form: flower
+  range: Sandy desert steppe of the Gobi and Alashan.
+  render: 'flowers("allium")'
+
+white_iris:
+  name: White-flowered iris
+  latin: Iris lactea
+  form: flower
+  clump: {size: 14, share: 0.35}
+  range: Saline meadows and steppe valleys from Central Asia to the Bohai coast.
+  render: 'flowers("blue_orchid")'
+  stand_in: Blue orchid for the pale violet iris.
+
+lilium_pumilum:
+  name: Coral lily
+  latin: Lilium pumilum
+  form: flower
+  range: Steppe hills and forest edges of Mongolia, northeast China and Korea.
+  render: 'flowers("red_tulip")'
+
+daylily:
+  name: Small daylily
+  latin: Hemerocallis minor
+  form: flower
+  range: Meadow steppe and forest meadows of Manchuria, Mongolia and Korea.
+  render: 'flowers("orange_tulip")'
+
+globeflower:
+  name: Chinese globeflower
+  latin: Trollius chinensis
+  form: flower
+  niche: {water: wet}
+  range: Wet mountain meadows of North China and Manchuria.
+  render: 'flowers("biomesoplenty:orange_cosmos")'
+
+chinese_peony:
+  name: Chinese peony
+  latin: Paeonia lactiflora
+  form: flower
+  range: Forest steppe and meadows of Manchuria, Mongolia and Siberia.
+  render: 'flowers(("peony", {"half": "lower"}))'
+
+balloon_flower:
+  name: Balloon flower
+  latin: Platycodon grandiflorus
+  form: flower
+  range: Grassy slopes of Korea, Japan, northeast and North China.
+  render: 'flowers("cornflower")'
+
+chinese_pink:
+  name: Rainbow pink
+  latin: Dianthus chinensis
+  form: flower
+  range: Dry grassland and rock of North China, Korea and Mongolia.
+  render: 'flowers("wilderwild:carnation")'
+
+tatarian_aster:
+  name: Tatarian aster
+  latin: Aster tataricus
+  form: flower
+  range: Damp meadows of Siberia, Manchuria and Korea.
+  render: 'flowers("biomesoplenty:purple_wildflowers")'
+
+lily_of_the_valley_keiske:
+  name: Keiske's lily of the valley
+  latin: Convallaria keiskei
+  form: flower
+  clump: {size: 10, share: 0.3}
+  range: Oak and birch woods of northeast Asia and Japan.
+  render: 'flowers("lily_of_the_valley")'
+
+golden_rayed_lily:
+  name: Golden-rayed lily
+  latin: Lilium auratum
+  form: flower
+  range: Volcanic slopes and grassland of Honshu.
+  render: 'flowers("white_tulip")'
+
+gentiana_scabra:
+  name: Japanese gentian
+  latin: Gentiana scabra
+  form: flower
+  range: Autumn grassland of Japan, Korea and northeast China.
+  render: 'flowers("cornflower", "azure_bluet", weights=[2, 1])'
+
+chinese_primrose:
+  name: Chinese primrose
+  latin: Primula sieboldii
+  form: flower
+  niche: {water: wet}
+  range: Wet meadows and river flats of Japan, Korea and northeast China.
+  render: 'flowers("pink_tulip")'
+
+autumn_bellflower:
+  name: Chinese bellflower
+  latin: Adenophora triphylla
+  form: flower
+  range: Forest edges and grassy slopes from Japan to southern China.
+  render: 'flowers("azure_bluet")'
+
+taiwan_lily:
+  name: Formosa lily
+  latin: Lilium formosanum
+  form: flower
+  range: Open slopes of Taiwan from the coast to 3,500 m.
+  render: 'flowers("white_tulip")'
+
+ginger_lily:
+  name: Shell ginger
+  latin: Alpinia zerumbet
+  form: herb
+  niche: {water: wet}
+  range: Ravines of southern China, Taiwan and the Ryukyus.
+  render: 'flowers(("tall_grass", {"half": "lower"}), "fern", weights=[1, 1])'

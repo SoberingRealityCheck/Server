@@ -1,0 +1,957 @@
+# East Asia: Mongolia and the Chinese deserts, northeast China and the Russian Far East, North and South China,
+# the Hengduan Mountains, Korea, Japan and Taiwan. Potential natural vegetation: no farmland.
+# Schema: see ../README.md.
+
+# ---------------------------------------------------------------- Steppe and desert
+
+734:
+  name: Mongolian Steppe
+  resolve: "Mongolian-Manchurian grassland"
+  tree_cover: 0.01
+  trees: {siberian_elm: 1}
+  ground: {stipa_grandis: 4, sheepgrass: 2, cleistogenes: 1, fringed_sagebrush: 1, caragana_microphylla: 2}
+  flowers: {mongolian_pasqueflower: 1, leontopodium_leontopodioides: 1, chinese_pink: 0.5, lilium_pumilum: 0.5}
+  flower_density: 0.6
+  ground_surface:
+    geology: "Loess and sandy loam over Mesozoic rock."
+    rock: [stone]
+    outcrops: few
+    soil: {gravel: few, sand: few}
+  why: "Needle grass and sheepgrass steppe to the horizon, pea shrubs on sand; elm in the valleys."
+
+737:
+  name: Selenge Forest Steppe
+  resolve: "Selenge-Orkhon forest steppe"
+  tree_cover: 0.25
+  trees: {siberian_larch: 4, asian_white_birch: 1, scots_pine: 0.5}
+  ground: {stipa_krylovii: 2, sheepgrass: 2, fringed_sagebrush: 1, shrubby_cinquefoil: 0.5}
+  flowers: {mongolian_pasqueflower: 1, leontopodium_leontopodioides: 1, chinese_pink: 0.5, lilium_pumilum: 0.5, chinese_peony: 0.3}
+  patches:
+    trees: {size: 40, share: 0.4, outside: 0.05}
+  ground_surface:
+    geology: "Granite hills and loess valleys."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Larch on north slopes, feather-grass steppe on south slopes and in the valleys."
+
+726:
+  name: Daurian Forest Steppe
+  resolve: "Daurian forest steppe"
+  tree_cover: 0.25
+  trees: {dahurian_larch: 2, asian_white_birch: 3, scots_pine: 1}
+  ground: {sheepgrass: 3, stipa_grandis: 2, forest_sedge: 1, dahurian_rhododendron: 1}
+  flowers: {daylily: 1, chinese_peony: 0.5, tatarian_aster: 1, lilium_pumilum: 0.5, balloon_flower: 0.5}
+  patches:
+    trees: {size: 40, share: 0.4, outside: 0.05}
+  ground_surface:
+    geology: "Granite and volcanic hills."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Birch and larch groves among flowering meadow steppe east of Baikal."
+
+761:
+  name: Ordos Steppe
+  resolve: "Ordos Plateau steppe"
+  tree_cover: 0.0
+  ground: {ordos_sagebrush: 3, stipa_krylovii: 2, bothriochloa: 1, caragana_microphylla: 2}
+  flowers: {leontopodium_leontopodioides: 1, mongolian_onion: 0.5}
+  flower_density: 0.4
+  ground_surface:
+    geology: "Cretaceous sandstone under dunes and loess."
+    rock: [red_sandstone, sandstone]
+    outcrops: few
+    soil: {sand: many}
+  why: "Sagebrush on fixed dunes and needle grass on the loess of the Ordos and Mu Us sands."
+
+824:
+  name: Eastern Gobi Steppe
+  resolve: "Eastern Gobi desert steppe"
+  tree_cover: 0.0
+  ground: {stipa_gobica: 3, caragana_microphylla: 1, fringed_sagebrush: 1, reaumuria: 1}
+  flowers: {mongolian_onion: 1, leontopodium_leontopodioides: 0.3}
+  flower_density: 0.3
+  ground_surface:
+    geology: "Gravel plains and red-bed buttes."
+    rock: [red_sandstone, stone]
+    outcrops: some
+    soil: {gravel: many, sand: some}
+    top: coarse_dirt
+  why: "Desert steppe: sparse needle grass, onions and pea shrubs on gravel."
+
+825:
+  name: Gobi Lakes Valley
+  resolve: "Gobi Lakes Valley desert steppe"
+  shrub_cover: 0.04
+  shrubs: {saxaul: 1}
+  ground: {stipa_gobica: 3, reaumuria: 1, splendid_needlegrass: 1, nitraria: 0.5}
+  flowers: {mongolian_onion: 1, white_iris: 0.5}
+  flower_density: 0.3
+  ground_surface:
+    geology: "Alluvial fans and gravel."
+    rock: [stone]
+    outcrops: some
+    soil: {gravel: many, sand: few}
+    top: coarse_dirt
+  why: "Desert steppe between the Khangai and Gobi Altai, salt lakes and saxaul."
+
+826:
+  name: Great Lakes Basin Steppe
+  resolve: "Great Lakes Basin desert steppe"
+  shrub_cover: 0.03
+  shrubs: {saxaul: 0.5, tamarisk: 0.5}
+  ground: {stipa_gobica: 2, stipa_krylovii: 1, fringed_sagebrush: 1, reaumuria: 1}
+  flowers: {leontopodium_leontopodioides: 0.5, white_iris: 0.5}
+  flower_density: 0.3
+  ground_surface:
+    geology: "Lake terraces, dunes and gravel."
+    rock: [stone]
+    outcrops: few
+    soil: {gravel: some, sand: some}
+    top: coarse_dirt
+  why: "Dry steppe and dunes around the great lakes of western Mongolia."
+
+808:
+  name: Alashan Desert
+  resolve: "Alashan Plateau semi-desert"
+  shrub_cover: 0.04
+  shrubs: {saxaul: 2, tamarisk: 0.5}
+  ground: {reaumuria: 3, stipa_gobica: 1, nitraria: 1}
+  flowers: {mongolian_onion: 0.5}
+  flower_density: 0.15
+  ground_surface:
+    geology: "Dune sand and black desert gravel."
+    rock: [sandstone, stone]
+    outcrops: few
+    soil: {gravel: some, sand: many}
+    top: sand
+  why: "Gravel desert with saxaul and Reaumuria, megadunes of the Badain Jaran."
+
+827:
+  name: Junggar Desert
+  resolve: "Junggar Basin semi-desert"
+  shrub_cover: 0.08
+  shrubs: {saxaul: 3, tamarisk: 0.5}
+  ground: {reaumuria: 1, fringed_sagebrush: 2, stipa_gobica: 1, nitraria: 0.5}
+  flowers: {white_iris: 0.5, mongolian_onion: 0.5}
+  flower_density: 0.3
+  ground_surface:
+    geology: "Dunes and clay flats."
+    rock: [sandstone, stone]
+    outcrops: few
+    soil: {sand: many, gravel: few}
+    top: coarse_dirt
+  why: "Saxaul woodland on sand, sagebrush on clay; ephemeral grasses after snowmelt."
+
+843:
+  name: Taklimakan
+  resolve: "Taklimakan desert"
+  tree_cover: 0.005
+  shrub_cover: 0.01
+  trees: {euphrates_poplar: 1}
+  shrubs: {tamarisk: 1}
+  ground: {stipa_gobica: 1, common_reed: 1}
+  flower_density: 0.05
+  ground_surface:
+    geology: "Aeolian sand."
+    rock: [sandstone]
+    outcrops: few
+    soil: {sand: many}
+    top: sand
+  why: "Shifting sand sea; Euphrates poplar and tamarisk only along the rivers."
+
+684:
+  name: Tarim Tugai
+  resolve: "Tarim Basin deciduous forests and steppe"
+  tree_cover: 0.15
+  shrub_cover: 0.08
+  trees: {euphrates_poplar: 4, siberian_elm: 0.5}
+  shrubs: {tamarisk: 2}
+  ground: {common_reed: 2, splendid_needlegrass: 2, nitraria: 1}
+  flowers: {white_iris: 0.5}
+  niches:
+    euphrates_poplar: {water: any}
+  patches:
+    trees: {size: 36, share: 0.4}
+  ground_surface:
+    geology: "River silt and sand."
+    rock: [sandstone]
+    outcrops: none
+    soil: {sand: many}
+    top: coarse_dirt
+  why: "Euphrates poplar galleries, tamarisk and reed along the Tarim and its delta."
+
+767:
+  name: Tian Shan Meadow
+  resolve: "Tian Shan montane steppe and meadows"
+  shrub_cover: 0.05
+  shrubs: {common_juniper: 1}
+  ground: {kobresia: 2, stipa_krylovii: 1, shrubby_cinquefoil: 1, fringed_sagebrush: 0.5}
+  flowers: {globeflower: 1, leontopodium_leontopodioides: 1, tibetan_gentian: 0.5}
+  ground_surface:
+    geology: "Palaeozoic rock and moraine."
+    rock: [stone, granite]
+    outcrops: some
+    soil: {gravel: some}
+  why: "Alpine and subalpine meadow above the spruce belt; steppe on the inner basins."
+
+709:
+  name: Tian Shan Spruce Forest
+  resolve: "Tian Shan montane conifer forests"
+  tree_cover: 0.4
+  trees: {schrenk_spruce: 6, siberian_larch: 0.5, asian_white_birch: 0.5}
+  shrubs: {common_juniper: 1, sea_buckthorn: 0.5}
+  ground: {stipa_krylovii: 1, kobresia: 1, forest_mosses: 1}
+  flowers: {globeflower: 0.5}
+  niches:
+    schrenk_spruce: {elevation: [1500, 2800]}
+    siberian_larch: {elevation: [1500, 2700]}
+    asian_white_birch: {elevation: [1300, 2200]}
+  patches:
+    trees: {size: 50, share: 0.5}
+  ground_surface:
+    geology: "Palaeozoic rock."
+    rock: [stone, granite]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Narrow Schrenk's spruce on north slopes between steppe below and meadow above."
+
+728:
+  name: Emin Valley Steppe
+  resolve: "Emin Valley steppe"
+  tree_cover: 0.0
+  ground: {fringed_sagebrush: 2, stipa_krylovii: 2, cleistogenes: 1}
+  flowers: {leontopodium_leontopodioides: 0.5, white_iris: 0.5}
+  flower_density: 0.4
+  ground_surface:
+    geology: "Loess and gravel fans."
+    rock: [stone]
+    outcrops: few
+    soil: {gravel: some}
+  why: "Sagebrush and feather-grass steppe in the Dzungarian gate."
+
+690:
+  name: Altai Forest Steppe
+  resolve: "Altai montane forest and forest steppe"
+  tree_cover: 0.4
+  trees: {siberian_larch: 4, siberian_pine: 2, siberian_spruce: 1, asian_white_birch: 1}
+  ground: {stipa_krylovii: 1, sheepgrass: 1, forest_mosses: 1, shrubby_cinquefoil: 0.5}
+  flowers: {globeflower: 0.5, chinese_peony: 0.3, mongolian_pasqueflower: 0.5}
+  niches:
+    siberian_pine: {elevation: [1400, 2300]}
+    siberian_larch: {elevation: [800, 2400]}
+  patches:
+    trees: {size: 40, share: 0.4, outside: 0.05}
+  ground_surface:
+    geology: "Granite and schist."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Larch and Siberian pine on the slopes, steppe in the basins."
+
+749:
+  name: Altai Alpine Tundra
+  resolve: "Altai alpine meadow and tundra"
+  tree_cover: 0.0
+  ground: {kobresia: 3, dwarf_birch: 1, shrubby_cinquefoil: 1, reindeer_lichen: 0.5}
+  flowers: {globeflower: 0.5, mountain_avens: 0.5, leontopodium_leontopodioides: 0.5}
+  ground_surface:
+    geology: "Moraine and frost-shattered rock."
+    rock: [stone, granite]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Kobresia meadow, dwarf birch and fell-field above the larch."
+
+700:
+  name: Khangai Larch Forest
+  resolve: "Khangai Mountains conifer forests"
+  tree_cover: 0.35
+  trees: {siberian_larch: 6, siberian_pine: 1, asian_white_birch: 1}
+  ground: {stipa_krylovii: 1, kobresia: 1, forest_sedge: 1, shrubby_cinquefoil: 0.5}
+  flowers: {mongolian_pasqueflower: 0.5, leontopodium_leontopodioides: 0.5}
+  patches:
+    trees: {size: 40, share: 0.4, outside: 0.05}
+  ground_surface:
+    geology: "Granite and basalt."
+    rock: [granite, smooth_basalt]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Siberian larch on north slopes over steppe valleys in central Mongolia."
+
+755:
+  name: Khangai Alpine Meadow
+  resolve: "Khangai Mountains alpine meadow"
+  tree_cover: 0.0
+  ground: {kobresia: 3, shrubby_cinquefoil: 1, dwarf_birch: 0.5}
+  flowers: {leontopodium_leontopodioides: 1, globeflower: 0.5}
+  ground_surface:
+    geology: "Granite tors and scree."
+    rock: [granite, stone]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Sedge meadow and scree over the Khangai summits."
+
+# ---------------------------------------------------------------- Northeast China and the Russian Far East
+
+669:
+  name: Manchurian Mixed Forest
+  resolve: "Manchurian mixed forests"
+  tree_cover: 0.75
+  trees: {korean_pine: 3, mongolian_oak: 2, amur_linden: 2, mono_maple: 1, manchurian_ash: 1, asian_white_birch: 1, khingan_fir: 0.5, fallen_log: 0.3}
+  shrubs: {hazel_siberian: 1}
+  ground: {forest_sedge: 2, ostrich_fern: 1, bluejoint: 0.5, lespedeza: 0.5}
+  flowers: {lily_of_the_valley_keiske: 1, daylily: 0.3}
+  ground_surface:
+    geology: "Granite hills and basalt."
+    rock: [granite, stone]
+    outcrops: few
+    soil: {podzol: few}
+  why: "Korean pine with oak, linden, maple and ash; Siberian tigers' forest."
+
+685:
+  name: Ussuri Forest
+  resolve: "Ussuri broadleaf and mixed forests"
+  tree_cover: 0.8
+  trees: {korean_pine: 3, mongolian_oak: 2, amur_linden: 2, manchurian_ash: 1, mono_maple: 1, yezo_spruce: 1, khingan_fir: 1, fallen_log: 0.3}
+  shrubs: {hazel_siberian: 1}
+  ground: {forest_sedge: 2, ostrich_fern: 1, bluejoint: 0.5}
+  flowers: {lily_of_the_valley_keiske: 1}
+  niches:
+    yezo_spruce: {elevation: [600, 1600]}
+    khingan_fir: {elevation: [500, 1500]}
+    mongolian_oak: {elevation: [0, 700]}
+  ground_surface:
+    geology: "Folded sediments and granite."
+    rock: [stone, granite]
+    outcrops: few
+    soil: {podzol: few}
+  why: "Korean pine, oak, linden and ash with lianas; spruce-fir on the Sikhote-Alin."
+
+656:
+  name: Changbai Forest
+  resolve: "Changbai Mountains mixed forests"
+  tree_cover: 0.75
+  trees: {korean_pine: 3, amur_linden: 1, mono_maple: 1, mongolian_oak: 1, yezo_spruce: 2, khingan_fir: 2, dahurian_larch: 1, erman_birch: 1, fallen_log: 0.3}
+  shrubs: {siberian_dwarf_pine: 0.5}
+  ground: {forest_sedge: 1, forest_mosses: 2, ostrich_fern: 1, bluejoint: 0.5}
+  flowers: {globeflower: 0.5, lily_of_the_valley_keiske: 0.5}
+  niches:
+    korean_pine: {elevation: [0, 1200]}
+    amur_linden: {elevation: [0, 1000]}
+    mono_maple: {elevation: [0, 1100]}
+    mongolian_oak: {elevation: [0, 900]}
+    yezo_spruce: {elevation: [1000, 1800]}
+    khingan_fir: {elevation: [1000, 1800]}
+    dahurian_larch: {elevation: [900, 1900]}
+    erman_birch: {elevation: [1700, 2050]}
+    siberian_dwarf_pine: {elevation: [1900, 2300]}
+  ground_surface:
+    geology: "Basalt plateau and volcanic tuff."
+    rock: [smooth_basalt, tuff]
+    outcrops: some
+    soil: {podzol: few}
+  why: "Korean pine and broadleaves below, spruce-fir above, Erman's birch at the treeline."
+
+673:
+  name: Northeast China Plain
+  resolve: "Northeast China Plain deciduous forests"
+  tree_cover: 0.25
+  trees: {mongolian_oak: 3, siberian_elm: 2, asian_white_birch: 1, manchurian_ash: 0.5}
+  ground: {sheepgrass: 3, forest_sedge: 1, bluejoint: 1}
+  flowers: {daylily: 1, chinese_peony: 0.5, tatarian_aster: 1, lilium_pumilum: 0.5, balloon_flower: 0.5}
+  patches:
+    trees: {size: 40, share: 0.4, outside: 0.05}
+  ground_surface:
+    geology: "Black soil over loess."
+    rock: [stone]
+    outcrops: none
+    soil: {mud: few}
+  why: "Oak woods, elm and meadow steppe on the black soils of the Songliao plain."
+
+743:
+  name: Nenjiang Grassland
+  resolve: "Nenjiang River grassland"
+  tree_cover: 0.02
+  trees: {siberian_elm: 1}
+  ground: {sheepgrass: 4, bluejoint: 1, common_reed: 1, splendid_needlegrass: 0.5}
+  flowers: {daylily: 1, white_iris: 1, tatarian_aster: 0.5}
+  ground_surface:
+    geology: "Alluvium, saline patches."
+    rock: [stone]
+    outcrops: none
+    soil: {mud: few, sand: few}
+  why: "Sheepgrass meadow steppe with reed marsh and alkaline flats."
+
+741:
+  name: Amur Meadow Steppe
+  resolve: "Amur meadow steppe"
+  tree_cover: 0.2
+  trees: {mongolian_oak: 2, asian_white_birch: 2, dahurian_larch: 1}
+  ground: {bluejoint: 3, sheepgrass: 1, forest_sedge: 1, lespedeza: 1}
+  flowers: {daylily: 1, chinese_peony: 0.5, tatarian_aster: 1, lilium_pumilum: 0.5, balloon_flower: 0.5, globeflower: 0.5}
+  patches:
+    trees: {size: 40, share: 0.4, outside: 0.05}
+  ground_surface:
+    geology: "Alluvium."
+    rock: [stone]
+    outcrops: none
+    soil: {mud: few}
+  why: "Wet meadow and oak-birch groves on the Amur and Zeya plains."
+
+746:
+  name: Khanka Meadows
+  resolve: "Suiphun-Khanka meadows and forest meadows"
+  tree_cover: 0.08
+  trees: {mongolian_oak: 1, asian_willow: 1}
+  ground: {bluejoint: 3, common_reed: 2, forest_sedge: 1}
+  flowers: {tatarian_aster: 1, chinese_primrose: 0.5, daylily: 0.5}
+  ground_surface:
+    geology: "Lake clays."
+    rock: [stone]
+    outcrops: none
+    soil: {mud: some}
+  why: "Sedge and reed meadows around Lake Khanka, oak on the rises."
+
+693:
+  name: Greater Khingan Larch Forest
+  resolve: "Da Hinggan-Dzhagdy Mountains conifer forests"
+  tree_cover: 0.6
+  trees: {dahurian_larch: 6, asian_white_birch: 2, scots_pine: 1}
+  shrubs: {siberian_dwarf_pine: 0.3}
+  ground: {forest_mosses: 2, labrador_tea: 1, forest_sedge: 1, bluejoint: 0.5, dahurian_rhododendron: 1}
+  flowers: {fireweed: 0.5}
+  ground_surface:
+    geology: "Volcanic and granite uplands."
+    rock: [granite, stone]
+    outcrops: few
+    soil: {podzol: some}
+  why: "Dahurian larch taiga with birch, Mongolian Scots pine on sand and rock."
+
+715:
+  name: Okhotsk-Manchurian Taiga
+  resolve: "Okhotsk-Manchurian taiga"
+  tree_cover: 0.55
+  trees: {dahurian_larch: 5, yezo_spruce: 2, khingan_fir: 1, asian_white_birch: 2}
+  shrubs: {siberian_dwarf_pine: 0.5}
+  ground: {forest_mosses: 2, labrador_tea: 1, sphagnum: 1, bluejoint: 1, dahurian_rhododendron: 0.5}
+  flowers: {fireweed: 0.5}
+  niches:
+    siberian_dwarf_pine: {elevation: [900, 2000]}
+  ground_surface:
+    geology: "Folded sediments and granite."
+    rock: [stone, granite]
+    outcrops: few
+    soil: {podzol: some}
+  why: "Dahurian larch on permafrost, spruce and fir on the ranges, birch after fire."
+
+716:
+  name: Sakhalin Taiga
+  resolve: "Sakhalin Island taiga"
+  tree_cover: 0.65
+  trees: {yezo_spruce: 4, sakhalin_fir: 3, dahurian_larch: 1, erman_birch: 1}
+  shrubs: {siberian_dwarf_pine: 0.5}
+  ground: {sasa: 3, forest_mosses: 1, bluejoint: 1}
+  flowers: {fireweed: 0.5}
+  niches:
+    dahurian_larch: {water: wet}
+  ground_surface:
+    geology: "Tertiary sediments."
+    rock: [stone]
+    outcrops: few
+    soil: {podzol: few}
+  why: "Yezo spruce and Sakhalin fir with bamboo grass; larch on the bogs."
+
+782:
+  name: Bald Mountain Tundra
+  resolve: "Trans-Baikal Bald Mountain tundra"
+  tree_cover: 0.0
+  shrub_cover: 0.15
+  shrubs: {siberian_dwarf_pine: 3}
+  ground: {reindeer_lichen: 2, dwarf_birch: 1, bigelow_sedge: 1}
+  flowers: {mountain_avens: 0.5}
+  ground_surface:
+    geology: "Frost-shattered granite."
+    rock: [granite, stone]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Dwarf pine thickets, lichen and dwarf birch on the bald summits."
+
+# ---------------------------------------------------------------- North China
+
+667:
+  name: Huang He Plain
+  resolve: "Huang He Plain mixed forests"
+  tree_cover: 0.25
+  trees: {siberian_elm: 2, chinese_scholar_tree: 2, konara_oak: 1, asian_willow: 1}
+  ground: {bothriochloa: 2, forest_sedge: 1, common_reed: 1}
+  flowers: {chinese_pink: 1, balloon_flower: 0.5}
+  patches:
+    trees: {size: 40, share: 0.4, outside: 0.05}
+  ground_surface:
+    geology: "Yellow River silt."
+    rock: [stone]
+    outcrops: none
+    soil: {mud: few, sand: few}
+  why: "Elm, pagoda tree and oak on the loess flood plain of the Yellow River; reed in the hollows."
+
+653:
+  name: Loess Plateau
+  resolve: "Central China Loess Plateau mixed forests"
+  tree_cover: 0.15
+  shrub_cover: 0.08
+  trees: {chinese_pine: 2, liaodong_oak: 2, chinese_arborvitae: 1, asian_white_birch: 0.5}
+  shrubs: {sea_buckthorn: 2, hazel_siberian: 0.5}
+  ground: {bothriochloa: 3, stipa_krylovii: 1, fringed_sagebrush: 1}
+  flowers: {chinese_pink: 1, leontopodium_leontopodioides: 0.5}
+  patches:
+    trees: {size: 40, share: 0.4, outside: 0.05}
+  ground_surface:
+    geology: "Thick loess; gully walls of bare silt."
+    rock: [smooth_sandstone, packed_mud]
+    outcrops: some
+    soil: {coarse_dirt: few}
+  why: "Grassy loess hills cut by gullies; pine, arborvitae and oak in the uplands, sea buckthorn in the gullies."
+
+696:
+  name: Helan Shan Forest
+  resolve: "Helanshan montane conifer forests"
+  tree_cover: 0.3
+  trees: {qinghai_spruce: 3, chinese_pine: 2, przewalski_juniper: 1}
+  ground: {stipa_krylovii: 2, cleistogenes: 1, forest_mosses: 0.5, caragana_microphylla: 0.5}
+  niches:
+    qinghai_spruce: {elevation: [2000, 3100]}
+    chinese_pine: {elevation: [1500, 2400]}
+  ground_surface:
+    geology: "Limestone and sandstone."
+    rock: [stone, calcite]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Qinghai spruce and Chinese pine on a desert range."
+
+705:
+  name: Qilian Forest
+  resolve: "Qilian Mountains conifer forests"
+  tree_cover: 0.3
+  trees: {qinghai_spruce: 4, przewalski_juniper: 2}
+  shrubs: {sea_buckthorn: 1}
+  ground: {kobresia: 2, stipa_krylovii: 1, forest_mosses: 1, shrubby_cinquefoil: 1}
+  flowers: {tibetan_gentian: 0.5}
+  niches:
+    qinghai_spruce: {elevation: [2400, 3300]}
+    przewalski_juniper: {elevation: [2500, 3600]}
+  patches:
+    trees: {size: 50, share: 0.45}
+  ground_surface:
+    geology: "Palaeozoic rock."
+    rock: [stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Qinghai spruce on shady slopes, juniper and steppe on sunny ones."
+
+677:
+  name: Qinling Forest
+  resolve: "Qin Ling Mountains deciduous forests"
+  tree_cover: 0.75
+  trees: {liaodong_oak: 2, konara_oak: 1, mono_maple: 1, chinese_pine: 1, asian_white_birch: 1, faber_fir: 1, ring_cup_oak: 0.5}
+  shrubs: {hengduan_rhododendron: 0.5}
+  ground: {forest_sedge: 2, miscanthus: 1, bracken: 1}
+  flowers: {balloon_flower: 0.5, autumn_bellflower: 0.5}
+  niches:
+    ring_cup_oak: {elevation: [0, 900]}
+    faber_fir: {elevation: [2300, 3400]}
+    asian_white_birch: {elevation: [1700, 2700]}
+    hengduan_rhododendron: {elevation: [2500, 3600]}
+    liaodong_oak: {elevation: [800, 2200]}
+  ground_surface:
+    geology: "Granite and gneiss."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Oak and maple below, birch and fir above; the watershed between north and south China."
+
+742:
+  name: Bohai Saline Meadow
+  resolve: "Bohai Sea saline meadow"
+  tree_cover: 0.01
+  shrub_cover: 0.04
+  trees: {asian_willow: 0.5}
+  shrubs: {tamarisk: 1}
+  ground: {common_reed: 4, splendid_needlegrass: 1, nitraria: 1}
+  flowers: {white_iris: 1}
+  ground_surface:
+    geology: "Tidal silt."
+    rock: [stone]
+    outcrops: none
+    soil: {mud: many}
+  why: "Reed beds, sea blite and salt meadow on the Yellow River delta."
+
+# ---------------------------------------------------------------- Korea and Japan
+
+655:
+  name: Central Korean Forest
+  resolve: "Central Korean deciduous forests"
+  tree_cover: 0.75
+  trees: {mongolian_oak: 2, konara_oak: 2, japanese_red_pine: 2, mono_maple: 1, amur_linden: 1, korean_pine: 0.5}
+  ground: {forest_sedge: 2, miscanthus: 1, dahurian_rhododendron: 1, lespedeza: 1}
+  flowers: {balloon_flower: 1, lilium_pumilum: 0.5}
+  ground_surface:
+    geology: "Granite and gneiss."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {coarse_dirt: few}
+  why: "Oak and red pine hills, maple and linden in the valleys."
+
+681:
+  name: Southern Korean Forest
+  resolve: "Southern Korea evergreen forests"
+  tree_cover: 0.75
+  trees: {castanopsis: 2, machilus: 2, japanese_black_pine: 1, camphor_tree: 1, konara_oak: 1}
+  shrubs: {camellia: 2}
+  ground: {mondo_grass: 2, forest_sedge: 1}
+  flowers: {autumn_bellflower: 0.5}
+  ground_surface:
+    geology: "Granite and volcanic rock."
+    rock: [granite, andesite]
+    outcrops: few
+    soil: {coarse_dirt: few}
+  why: "Laurel forest with camellia on the coast and islands, black pine on the shore."
+
+666:
+  name: Hokkaido Deciduous Forest
+  resolve: "Hokkaido deciduous forests"
+  tree_cover: 0.75
+  trees: {mongolian_oak: 2, amur_linden: 2, manchurian_ash: 1, mono_maple: 1, sakhalin_fir: 2, asian_white_birch: 1}
+  ground: {sasa: 4, forest_sedge: 1}
+  flowers: {lily_of_the_valley_keiske: 0.5, chinese_primrose: 0.3}
+  ground_surface:
+    geology: "Volcanic ash and andesite."
+    rock: [andesite, tuff]
+    outcrops: few
+    soil: {podzol: few}
+  why: "Mongolian oak, linden and ash with Sakhalin fir; bamboo grass beneath."
+
+698:
+  name: Hokkaido Montane Forest
+  resolve: "Hokkaido montane conifer forests"
+  tree_cover: 0.7
+  trees: {sakhalin_fir: 4, yezo_spruce: 3, erman_birch: 1, mongolian_oak: 0.5}
+  shrubs: {siberian_dwarf_pine: 1}
+  ground: {sasa: 4, forest_mosses: 1}
+  niches:
+    erman_birch: {elevation: [800, 1600]}
+    siberian_dwarf_pine: {elevation: [1300, 2300]}
+    mongolian_oak: {elevation: [0, 600]}
+  ground_surface:
+    geology: "Volcanic rock."
+    rock: [andesite, tuff]
+    outcrops: some
+    soil: {podzol: few}
+  why: "Sakhalin fir and Yezo spruce over bamboo grass; Erman's birch and dwarf pine at the top."
+
+671:
+  name: Nihonkai Beech Forest
+  resolve: "Nihonkai montane deciduous forests"
+  tree_cover: 0.85
+  trees: {japanese_beech: 6, mono_maple: 1, japanese_cedar: 0.4, konara_oak: 0.5}
+  ground: {sasa: 4, forest_sedge: 1}
+  flowers: {lily_of_the_valley_keiske: 0.3}
+  ground_surface:
+    geology: "Volcanic and Tertiary rock."
+    rock: [andesite, stone]
+    outcrops: few
+    soil: {podzol: few}
+  why: "Pure Siebold's beech over bamboo grass on the snowy Sea of Japan side."
+
+683:
+  name: Taiheiyo Beech Forest
+  resolve: "Taiheiyo montane deciduous forests"
+  tree_cover: 0.8
+  trees: {japanese_beech: 4, hinoki: 1, japanese_hemlock: 1, konara_oak: 1, japanese_maple: 1}
+  ground: {sasa: 2, forest_sedge: 2}
+  flowers: {autumn_bellflower: 0.5}
+  ground_surface:
+    geology: "Granite and metamorphic rock."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {podzol: few}
+  why: "Beech, fir and hemlock on the Pacific side mountains."
+
+682:
+  name: Taiheiyo Laurel Forest
+  resolve: "Taiheiyo evergreen forests"
+  tree_cover: 0.8
+  trees: {castanopsis: 3, ring_cup_oak: 2, machilus: 1, camphor_tree: 1, japanese_cedar: 1, hinoki: 1, japanese_red_pine: 0.5, japanese_cherry: 0.3}
+  shrubs: {camellia: 1}
+  ground: {mondo_grass: 2, forest_sedge: 1, miscanthus: 0.5, kirishima_azalea: 1}
+  flowers: {autumn_bellflower: 0.5, gentiana_scabra: 0.3}
+  niches:
+    japanese_cedar: {elevation: [200, 1200]}
+    hinoki: {elevation: [200, 1200]}
+  ground_surface:
+    geology: "Granite, sandstone and volcanic rock."
+    rock: [granite, andesite]
+    outcrops: few
+    soil: {coarse_dirt: few}
+  why: "Evergreen chinquapin, ring-cup oak and camphor; cedar and cypress on the slopes."
+
+670:
+  name: Nihonkai Laurel Forest
+  resolve: "Nihonkai evergreen forests"
+  tree_cover: 0.75
+  trees: {castanopsis: 2, machilus: 2, ring_cup_oak: 1, japanese_black_pine: 1, konara_oak: 1}
+  shrubs: {camellia: 2}
+  ground: {mondo_grass: 2, forest_sedge: 1}
+  ground_surface:
+    geology: "Volcanic rock."
+    rock: [andesite, tuff]
+    outcrops: few
+    soil: {coarse_dirt: few}
+  why: "Evergreen oaks and camellia on the warm Sea of Japan coast."
+
+699:
+  name: Honshu Subalpine Forest
+  resolve: "Honshu alpine conifer forests"
+  tree_cover: 0.55
+  trees: {veitch_fir: 4, japanese_larch: 1, japanese_hemlock: 1, erman_birch: 1}
+  shrubs: {siberian_dwarf_pine: 2}
+  ground: {sasa: 1, forest_mosses: 2, kobresia: 1}
+  flowers: {golden_rayed_lily: 0.3, gentiana_scabra: 0.5, globeflower: 0.5}
+  niches:
+    veitch_fir: {elevation: [1500, 2500]}
+    japanese_larch: {elevation: [1200, 2600]}
+    japanese_hemlock: {elevation: [1200, 2200]}
+    erman_birch: {elevation: [1800, 2600]}
+    siberian_dwarf_pine: {elevation: [2400, 3100]}
+  ground_surface:
+    geology: "Volcanic and granite peaks."
+    rock: [andesite, granite]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Veitch's fir, hemlock and larch to the treeline, dwarf pine and flower meadows above."
+
+# ---------------------------------------------------------------- South China and Taiwan
+
+657:
+  name: Yangtze Plain Forest
+  resolve: "Changjiang Plain evergreen forests"
+  tree_cover: 0.6
+  trees: {ring_cup_oak: 2, camphor_tree: 2, sweetgum_formosan: 1, asian_willow: 1, masson_pine: 1, moso_bamboo: 0.5}
+  ground: {miscanthus: 2, mondo_grass: 1, common_reed: 1}
+  flowers: {autumn_bellflower: 0.5, chinese_azalea: 0.5}
+  ground_surface:
+    geology: "Yangtze alluvium and red soil hills."
+    rock: [stone]
+    outcrops: none
+    soil: {mud: few, red_sand: few}
+  why: "Evergreen oak and camphor with sweetgum, willow and reed on the lake plains."
+
+659:
+  name: Daba Mountains Forest
+  resolve: "Daba Mountains evergreen forests"
+  tree_cover: 0.8
+  trees: {castanopsis: 2, ring_cup_oak: 2, chinese_fir: 1, masson_pine: 1, konara_oak: 1, faber_fir: 0.5}
+  shrubs: {hengduan_rhododendron: 0.5}
+  ground: {forest_sedge: 2, dicranopteris: 1, mondo_grass: 1}
+  flowers: {chinese_azalea: 0.5}
+  niches:
+    faber_fir: {elevation: [2000, 3000]}
+    castanopsis: {elevation: [0, 1400]}
+  ground_surface:
+    geology: "Limestone and shale."
+    rock: [stone, calcite]
+    outcrops: some
+    soil: {coarse_dirt: few}
+  why: "Evergreen oaks and chinquapin below, beech and birch with fir above."
+
+680:
+  name: Sichuan Basin Forest
+  resolve: "Sichuan Basin evergreen broadleaf forests"
+  tree_cover: 0.7
+  trees: {castanopsis: 2, machilus: 2, chinese_fir: 2, camphor_tree: 1, moso_bamboo: 1, masson_pine: 1}
+  ground: {dicranopteris: 2, mondo_grass: 1, miscanthus: 1}
+  flowers: {cotton_rose: 0.5, chinese_azalea: 0.5}
+  ground_surface:
+    geology: "Jurassic red sandstone."
+    rock: [red_sandstone, stone]
+    outcrops: some
+    soil: {red_sand: few}
+  why: "Evergreen laurels, Chinese fir and bamboo on the red hills."
+
+236:
+  name: Jiangnan Evergreen Forest
+  resolve: "Jian Nan subtropical evergreen forests"
+  tree_cover: 0.8
+  trees: {castanopsis: 3, schima: 2, chinese_fir: 2, masson_pine: 1, sweetgum_formosan: 1, camphor_tree: 1, moso_bamboo: 2}
+  ground: {dicranopteris: 3, mondo_grass: 1, miscanthus: 1, cogon_grass: 0.5, chinese_azalea: 1}
+  flowers: {autumn_bellflower: 0.5, cotton_rose: 0.3}
+  ground_surface:
+    geology: "Granite and red Cretaceous sandstone."
+    rock: [granite, red_sandstone]
+    outcrops: some
+    soil: {red_sand: few}
+  why: "Chinquapin and Schima forest, moso bamboo groves and Chinese fir; red Danxia cliffs."
+
+642:
+  name: Guizhou Karst Forest
+  resolve: "Guizhou Plateau broadleaf and mixed forests"
+  tree_cover: 0.6
+  trees: {ring_cup_oak: 2, castanopsis: 1, masson_pine: 1, chinese_fir: 1, sweetgum_formosan: 1, chinese_arborvitae: 0.5}
+  ground: {miscanthus: 2, dicranopteris: 1, mondo_grass: 1, chinese_azalea: 0.5}
+  flowers: {cotton_rose: 0.3}
+  niches:
+    chinese_arborvitae: {slope: steep}
+  ground_surface:
+    geology: "Permian and Triassic limestone karst."
+    rock: [stone, calcite]
+    outcrops: many
+    soil: {red_sand: few}
+  why: "Evergreen and deciduous mixed forest on karst towers and sinkholes."
+
+643:
+  name: Yunnan Plateau Forest
+  resolve: "Yunnan Plateau subtropical evergreen forests"
+  tree_cover: 0.5
+  trees: {yunnan_pine: 4, ring_cup_oak: 2, castanopsis: 1}
+  shrubs: {hengduan_rhododendron: 1}
+  ground: {cogon_grass: 1, miscanthus: 1, bothriochloa: 1, dicranopteris: 1, chinese_azalea: 0.5}
+  flowers: {autumn_bellflower: 0.5}
+  ground_surface:
+    geology: "Red soils over limestone and basalt."
+    rock: [stone, calcite]
+    outcrops: some
+    soil: {red_sand: some}
+  why: "Yunnan pine and evergreen oaks on a high red plateau; rhododendrons in the hills."
+
+268:
+  name: South China Monsoon Forest
+  resolve: "South China-Vietnam subtropical evergreen forests"
+  tree_cover: 0.75
+  trees: {castanopsis: 2, schima: 2, camphor_tree: 1, chinese_banyan: 1, masson_pine: 1, lychee: 0.5, moso_bamboo: 0.5}
+  ground: {dicranopteris: 3, cogon_grass: 1, ginger_lily: 0.5, chinese_azalea: 0.5}
+  flowers: {cotton_rose: 0.5}
+  ground_surface:
+    geology: "Granite and karst limestone."
+    rock: [granite, calcite]
+    outcrops: some
+    soil: {red_sand: few}
+  why: "Evergreen laurels, Schima and banyan in the warm hills; pine and fern on burned slopes."
+
+232:
+  name: Hainan Rainforest
+  resolve: "Hainan Island monsoon rain forests"
+  tree_cover: 0.85
+  trees: {hainan_hopea: 2, lychee: 2, chinese_banyan: 2, castanopsis: 1, coconut_palm: 1}
+  ground: {ginger_lily: 1, dicranopteris: 1, cogon_grass: 1}
+  flowers: {cotton_rose: 0.5}
+  ground_surface:
+    geology: "Granite and basalt."
+    rock: [granite, smooth_basalt]
+    outcrops: few
+    soil: {red_sand: few}
+  why: "Monsoon rainforest with tall dipterocarps; coconut palms on the coast."
+
+283:
+  name: Taiwan Forest
+  resolve: "Taiwan subtropical evergreen forests"
+  tree_cover: 0.8
+  trees: {castanopsis: 2, camphor_tree: 2, machilus: 1, taiwan_cypress: 2, japanese_hemlock: 1, faber_fir: 1}
+  shrubs: {hengduan_rhododendron: 0.5}
+  ground: {dicranopteris: 2, miscanthus: 1, mondo_grass: 1, ginger_lily: 0.5}
+  flowers: {taiwan_lily: 1}
+  niches:
+    castanopsis: {elevation: [0, 1500]}
+    camphor_tree: {elevation: [0, 1200]}
+    machilus: {elevation: [0, 1500]}
+    taiwan_cypress: {elevation: [1300, 2600]}
+    japanese_hemlock: {elevation: [2000, 3200]}
+    faber_fir: {elevation: [2800, 3600]}
+    hengduan_rhododendron: {elevation: [2800, 3800]}
+  ground_surface:
+    geology: "Slate and sandstone."
+    rock: [stone, deepslate]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Laurel forest below, red cypress cloud forest above, fir and Formosa lilies near the summits."
+
+# ---------------------------------------------------------------- Hengduan Mountains
+
+697:
+  name: Hengduan Subalpine Forest
+  resolve: "Hengduan Mountains subalpine conifer forests"
+  tree_cover: 0.65
+  trees: {faber_fir: 3, balfour_spruce: 3, yunnan_pine: 1, erman_birch: 0.5}
+  shrubs: {hengduan_rhododendron: 2}
+  ground: {kobresia: 1, forest_mosses: 2, forest_sedge: 1}
+  flowers: {blue_poppy: 0.5, himalayan_primrose: 0.5}
+  niches:
+    yunnan_pine: {elevation: [1800, 3200]}
+    faber_fir: {elevation: [3000, 4300]}
+    balfour_spruce: {elevation: [2500, 4100]}
+    hengduan_rhododendron: {elevation: [3000, 4600]}
+  ground_surface:
+    geology: "Granite and metamorphic rock."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Fir and spruce over rhododendron thickets, larch and alpine meadow at the top."
+
+706:
+  name: Qionglai-Minshan Forest
+  resolve: "Qionglai-Minshan conifer forests"
+  tree_cover: 0.75
+  trees: {faber_fir: 3, japanese_hemlock: 1, balfour_spruce: 1, ring_cup_oak: 1, mono_maple: 1, moso_bamboo: 1}
+  shrubs: {hengduan_rhododendron: 1}
+  ground: {sasa: 2, forest_mosses: 1, forest_sedge: 1}
+  flowers: {blue_poppy: 0.3, himalayan_primrose: 0.5}
+  niches:
+    ring_cup_oak: {elevation: [0, 1800]}
+    mono_maple: {elevation: [800, 2400]}
+    moso_bamboo: {elevation: [0, 1400]}
+    faber_fir: {elevation: [2400, 3900]}
+    balfour_spruce: {elevation: [2400, 3800]}
+  ground_surface:
+    geology: "Limestone and granite."
+    rock: [stone, granite]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Giant panda country: bamboo under fir and hemlock, oak and maple lower down."
+
+704:
+  name: Nujiang-Lancang Gorge Forest
+  resolve: "Nujiang Langcang Gorge alpine conifer and mixed forests"
+  tree_cover: 0.5
+  trees: {yunnan_pine: 3, ring_cup_oak: 2, balfour_spruce: 2, faber_fir: 1}
+  shrubs: {hengduan_rhododendron: 1}
+  ground: {cogon_grass: 1, kobresia: 1, forest_mosses: 1}
+  flowers: {blue_poppy: 0.3}
+  niches:
+    yunnan_pine: {elevation: [1500, 3200]}
+    ring_cup_oak: {elevation: [1200, 2800]}
+    balfour_spruce: {elevation: [2800, 4100]}
+    faber_fir: {elevation: [3000, 4300]}
+  ground_surface:
+    geology: "Granite and schist gorge walls."
+    rock: [granite, stone]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Pine and oak in the dry gorges, fir forest on the walls, meadows on top."
+
+702:
+  name: Northeast Himalayan Fir Forest
+  resolve: "Northeast Himalayan subalpine conifer forests"
+  tree_cover: 0.6
+  trees: {faber_fir: 3, balfour_spruce: 2}
+  shrubs: {hengduan_rhododendron: 3}
+  ground: {forest_mosses: 2, kobresia: 1}
+  flowers: {blue_poppy: 0.5, himalayan_primrose: 0.5}
+  niches:
+    faber_fir: {elevation: [3000, 4300]}
+    balfour_spruce: {elevation: [2800, 4100]}
+    hengduan_rhododendron: {elevation: [3000, 4700]}
+  ground_surface:
+    geology: "Granite and gneiss."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Fir and rhododendron above the gorges of southeast Tibet."
