@@ -78,7 +78,7 @@ class Sources:
     def __init__(self, *jars): self.z = [zipfile.ZipFile(j) for j in jars]
     def get(self, kind, ident):
         ns, path = ident.split(":")
-        for z in self.z:
+        for z in reversed(self.z):      # later jars win, as in game: Terralith replaces vanilla biomes such as grove
             try: return json.loads(z.read(f"data/{ns}/worldgen/{kind}/{path}.json"))
             except KeyError: pass
         raise SystemExit(f"no {kind} {ident} in the given jars")
@@ -412,9 +412,13 @@ def generate(src, check=False):
         shrub_cover = prof.get("shrub_cover", SHRUB_COVER.get(habitat, 0.03))
         open_cover = max(0.0, 1.0 - tree_cover)
         main = max(pick, key=lambda an: an[1])[0]
+        # per atlas biome factor on the tree count, rescaled so its area-weighted mean is 1: the ecoregion's cover
+        # sets its mean density, the atlas biomes only vary it (a few dense parents no longer thin the rest)
+        raw = {a: max(0.25, min(1.6, ((tcount[a] + 0.5) / (tmean + 0.5)) ** 0.5)) for a, _ in pick}
+        norm = sum(raw[a] * n for a, n in pick) / sum(n for _, n in pick)
         for a, n in pick:
             base_id = rebase.get(a, a); base = biome(base_id); atlas = biome(a)
-            m = max(0.25, min(1.6, ((tcount[a] + 0.5) / (tmean + 0.5)) ** 0.5))
+            m = raw[a] / norm
             vid = f"elysium:eco/{eid}/{base_id.split(':')[1] if base_id.startswith('minecraft:') else base_id.replace(':', '_')}"
             if a != base_id: vid += f"_from_{a.split(':')[1]}"
             claim(vid, unit, a)

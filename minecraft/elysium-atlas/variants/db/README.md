@@ -81,7 +81,8 @@ range, so they go in the ecoregion's `niches`, which override the plant's per ke
 (pecan grows across the whole Mississippi floodplain, not only on banks).
 
 At each spot every species' weight is multiplied by how well the spot suits it. The plant count thins with the
-square root of the suited share, so ground that suits no listed tree (above the treeline) gets none.
+best suitability of any listed species: where one fits fully the density is full, and ground that suits
+none (above the treeline) gets nothing.
 Elevation is read from the ground height through the atlas vertical scale (`Atlas.elevationMetres`, 18.75 m per
 block above sea level). Placement: `elysium_atlas:niche_selector` (`NicheSelectorFeature.java`).
 

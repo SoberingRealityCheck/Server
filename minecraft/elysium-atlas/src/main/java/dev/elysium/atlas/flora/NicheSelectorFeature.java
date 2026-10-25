@@ -25,8 +25,8 @@ import java.util.stream.Stream;
  *   elevation  [low, high] metres, soft edges of EDGE_M (Atlas.elevationMetres of the ground height, so treelines follow the actual terrain)
  *   water      riparian (near rivers and lakes), wet (riparian or waterlogged ground), dry (away from water)
  *   slope      flat or steep (terrain slope around the spot)
- * Weight at a spot = base weight x suitability. The plant count thins with sqrt(suited weight / total weight), so a
- * spot that suits nothing gets nothing, which is how treelines and bare ridges appear. Without the atlas every niche counts as fully suitable.
+ * Weight at a spot = base weight x suitability. The plant count scales with the best suitability of any entry, so the
+ * species that fit share the full density and a spot that suits none gets nothing (treelines, bare ridges). Without the atlas every niche counts as fully suitable.
  */
 public class NicheSelectorFeature extends Feature<NicheSelectorFeature.Config> {
     static final double EDGE_M = 150;
@@ -104,14 +104,15 @@ public class NicheSelectorFeature extends Feature<NicheSelectorFeature.Config> {
         if (es.isEmpty()) return false;
         Spot s = spot(ctx.level(), ctx.origin());
         double[] w = new double[es.size()];
-        double tot = 0;
-        for (int i = 0; i < w.length; i++) { w[i] = es.get(i).weight() * es.get(i).niche().suit(s); tot += w[i]; }
-        // the plant count thins with sqrt(suitable weight / all weight): a few unsuited species barely matter,
-        // a spot that suits nothing (above the treeline, a bare ridge) gets nothing
-        double base = 0;
-        for (Entry e : es) base += e.weight();
+        double tot = 0, best = 0;
+        for (int i = 0; i < w.length; i++) {
+            double f = es.get(i).niche().suit(s);
+            w[i] = es.get(i).weight() * f; tot += w[i]; best = Math.max(best, f);
+        }
+        // the plant count follows the best-suited species: where any listed species fits fully, density is full
+        // (the others give way); where none fits (above the treeline, a bare ridge) it fades to nothing
         RandomSource r = ctx.random();
-        if (tot <= 0 || r.nextDouble() > Math.sqrt(Math.min(1, tot / base))) return false;
+        if (tot <= 0 || r.nextDouble() > best) return false;
         double pick = r.nextDouble() * tot;
         for (int i = 0; i < w.length; i++) {
             pick -= w[i];

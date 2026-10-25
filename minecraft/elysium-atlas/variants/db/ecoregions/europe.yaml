@@ -207,7 +207,7 @@
 689:
   name: Alpine Forest
   resolve: "Alps conifer and mixed forests"
-  tree_cover: 0.5
+  tree_cover: 0.8
   trees: {norway_spruce: 4, silver_fir: 2, european_larch: 2, arolla_pine: 1, european_beech: 1, sessile_oak: 0.5}
   shrubs: {mountain_pine: 2, green_alder: 1}
   ground: {bilberry: 1, blue_moor_grass: 1.5, mat_grass: 1.5}
