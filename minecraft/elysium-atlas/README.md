@@ -202,6 +202,14 @@ biome. The database covers 25 ecoregions in and around Texas and 37 in Europe (f
 147 plants. The built mod carries it as `elysium_atlas/ecoregions.json`; `/atlas here` prints the ecoregion,
 its colours and its species.
 
+Niches and ground. Species can be limited by elevation, water and slope (`niche` on a plant, `niches` per
+ecoregion for elevation belts): trees are picked per spot by `elysium_atlas:niche_selector`, so the Southern
+Rockies run ponderosa, Douglas fir and aspen, then spruce-fir, and stop at about 3,600 m; bald cypress, cottonwood,
+willow and alder keep to river banks; junipers, pinyon and creosote avoid them. Each ecoregion also has a
+`ground_surface` (rock on steep ground and outcrops, soil patches, subsoil), written as one Lithostitched surface
+rule: Edwards limestone in the Hill Country, red beds on the Rolling Plains, chalk under the English downs, karst in
+the Dinarides, podzol in the taiga, basalt and moss in Iceland.
+
 `variants/biome_variants.py SERVER_JAR TERRALITH_JAR` writes the biome files, features, names and
 `elysium_atlas/variants.json` into `src/main/resources`; `--check` reports stale output. `/atlas variants`
 audits every variant against its parent (tags, spawns, features) and lists only problems. `/atlas here` and

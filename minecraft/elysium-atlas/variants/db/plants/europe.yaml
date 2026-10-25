@@ -64,6 +64,7 @@ black_poplar:
   name: Black poplar
   latin: Populus nigra
   form: tree
+  niche: {water: riparian}
   leaf: fresh_green
   leaf_note: Glossy bright green triangular leaves.
   range: Floodplains of the large rivers.
@@ -75,6 +76,7 @@ lombardy_poplar:
   name: Lombardy poplar
   latin: Populus nigra 'Italica'
   form: tree
+  niche: {water: riparian}
   leaf: fresh_green
   leaf_note: As black poplar.
   range: Field and road lines of the Po plain and Pannonia.
@@ -86,6 +88,7 @@ white_willow:
   name: White willow
   latin: Salix alba
   form: tree
+  niche: {water: riparian}
   leaf: silvery_green
   leaf_note: Narrow leaves with silky white undersides; the crown looks silver-grey.
   range: Riverbanks across Europe.
@@ -97,6 +100,7 @@ black_alder:
   name: Black alder
   latin: Alnus glutinosa
   form: tree
+  niche: {water: riparian}
   leaf: "#3c7a34"
   leaf_note: Round, sticky, dark green leaves that fall green.
   range: Wet woods and stream banks.
@@ -376,6 +380,7 @@ lavender:
   name: True lavender
   latin: Lavandula angustifolia
   form: shrub_ground
+  niche: {water: dry}
   range: Provence and Iberian limestone.
   render: 'flowers("biomesoplenty:lavender", ("biomesoplenty:tall_lavender", {"half": "lower"}), weights=[2, 1])'
   stand_in: Biomes O' Plenty lavender.
@@ -384,6 +389,7 @@ common_thyme:
   name: Common thyme
   latin: Thymus vulgaris
   form: shrub_ground
+  niche: {water: dry}
   range: Garrigue of the western Mediterranean.
   render: 'flowers("bush")'
   stand_in: Grass-tinted bush.
@@ -392,6 +398,7 @@ rosemary:
   name: Rosemary
   latin: Salvia rosmarinus
   form: shrub_ground
+  niche: {water: dry}
   range: Garrigue and coastal scrub.
   render: 'flowers("biomesoplenty:white_lavender")'
   stand_in: Biomes O' Plenty white lavender (pale flowers).
@@ -400,6 +407,7 @@ grey_leaved_cistus:
   name: Grey-leaved cistus
   latin: Cistus albidus
   form: shrub_ground
+  niche: {water: dry}
   range: Garrigue on limestone, Iberia to Provence.
   render: 'flowers("bush", "short_dry_grass", weights=[3, 1])'
   stand_in: Bush.
@@ -624,6 +632,7 @@ ragged_robin:
   name: Ragged robin
   latin: Silene flos-cuculi
   form: flower
+  niche: {water: wet}
   range: Wet meadows.
   render: 'flowers("pink_tulip")'
   stand_in: Pink tulip.
@@ -648,6 +657,7 @@ edelweiss:
   name: Edelweiss
   latin: Leontopodium nivale subsp. alpinum
   form: flower
+  niche: {slope: steep}
   range: Alpine limestone grassland.
   render: 'flowers("oxeye_daisy")'
   stand_in: Oxeye daisy (white).

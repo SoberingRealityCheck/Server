@@ -36,6 +36,8 @@ public final class ElysiumAtlas implements ModInitializer {
     public void onInitialize() {
         Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Identifier.fromNamespaceAndPath(MOD_ID, "sample"), AtlasDensityFunction.MAP_CODEC);
         Registry.register(BuiltInRegistries.BIOME_SOURCE, Identifier.fromNamespaceAndPath(MOD_ID, "atlas"), AtlasBiomeSource.CODEC);
+        Registry.register(BuiltInRegistries.FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "niche_selector"),
+                new dev.elysium.atlas.flora.NicheSelectorFeature(dev.elysium.atlas.flora.NicheSelectorFeature.Config.CODEC));
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
             Variants.bind(server.registryAccess());
             boolean on = usesAtlas(server);

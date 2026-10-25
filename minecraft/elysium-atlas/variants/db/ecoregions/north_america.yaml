@@ -10,6 +10,10 @@
   flowers: {flowering_dogwood: 1, drummond_phlox: 1}
   flower_density: 0.5
   rebase: {minecraft:swamp: minecraft:forest}
+  ground_surface:
+    geology: "Sandy loam over red clay."
+    soil: {podzol: few, coarse_dirt: few}
+    subsoil: terracotta
   why: "Loblolly and shortleaf pine over sweetgum and oak, yaupon understory. The atlas maps most of it to swamp; it inherits forest."
 
 332:
@@ -22,6 +26,10 @@
   flowers: {plains_coreopsis: 2, indian_blanket: 2, drummond_phlox: 2, winecup: 1, texas_bluebonnet: 1}
   flower_density: 1.5
   rebase: {minecraft:swamp: minecraft:plains}
+  ground_surface:
+    geology: "Sandy soils of the Post Oak Belt."
+    soil: {coarse_dirt: few}
+    subsoil: sand
   why: "Post oak and blackjack oak mottes in little bluestem grassland."
 
 401:
@@ -34,6 +42,11 @@
   flowers: {texas_bluebonnet: 4, texas_paintbrush: 2, winecup: 1, plains_coreopsis: 1, antelope_horn_milkweed: 0.5, tall_goldenrod: 0.5}
   flower_density: 4
   rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands, minecraft:swamp: minecraft:plains}
+  ground_surface:
+    geology: "Austin Chalk under black vertisols."
+    rock: [calcite]
+    outcrops: few
+    soil: {mud: few}
   why: "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks."
 
 391:
@@ -49,6 +62,11 @@
   flower_density: 2
   cactus_density: 0.4
   rebase: {minecraft:birch_forest: minecraft:savanna, minecraft:forest: minecraft:savanna, minecraft:sunflower_plains: minecraft:plains}
+  ground_surface:
+    geology: "Edwards limestone, thin rocky soils."
+    rock: [calcite]
+    outcrops: many
+    soil: {coarse_dirt: some}
   why: "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring."
 
 390:
@@ -60,6 +78,12 @@
   ground: {leaf_litter: 1, little_bluestem: 3}
   flowers: {black_eyed_susan: 0.4, purple_coneflower: 0.4, prairie_bluets: 0.2, indian_blanket: 1, tall_goldenrod: 1}
   flower_density: 0.8
+  ground_surface:
+    geology: "Sandstone ridges and sandy soils."
+    rock: [sandstone]
+    outcrops: few
+    soil: {coarse_dirt: few}
+    subsoil: sand
   why: "A belt of stunted post oak and blackjack oak woodland between the prairies."
 
 389:
@@ -74,6 +98,12 @@
   flower_density: 1.2
   cactus_density: 0.3
   rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands}
+  ground_surface:
+    geology: "Permian red beds."
+    rock: [red_sandstone]
+    outcrops: some
+    soil: {red_sand: few}
+    subsoil: red_terracotta
   why: "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar."
 
 384:
@@ -86,6 +116,9 @@
   flowers: {virginia_iris: 1, texas_paintbrush: 1, plains_coreopsis: 1}
   flower_density: 1.5
   rebase: {minecraft:savanna: minecraft:plains, terralith:ashen_savanna: minecraft:plains, minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains}
+  ground_surface:
+    geology: "Coastal clay and sand."
+    soil: {mud: few}
   why: "Coastal tallgrass prairie and marsh, mossy live oak mottes on old dunes."
 
 402:
@@ -100,6 +133,11 @@
   flower_density: 0.6
   cactus_density: 0.2
   rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands}
+  ground_surface:
+    geology: "Caliche caprock under the Llano Estacado."
+    rock: [calcite]
+    outcrops: few
+    soil: {coarse_dirt: few}
   why: "Llano Estacado and the High Plains: buffalograss and grama to the horizon, trees only at playas and draws."
 
 428:
@@ -113,6 +151,17 @@
   cactus: {texas_prickly_pear: 2, tree_cholla: 1, lechuguilla: 2}
   flower_density: 0.4
   cactus_density: 1.2
+  niches:
+    pinyon_pine: {elevation: [1500, 2600]}
+    one_seed_juniper: {elevation: [1300, 2400]}
+    honey_mesquite: {elevation: [0, 1700]}
+    faxon_yucca: {elevation: [600, 1800]}
+    creosote_bush: {elevation: [0, 1600]}
+  ground_surface:
+    geology: "Limestone ranges and gravel bajadas."
+    rock: [calcite, stone]
+    outcrops: some
+    soil: {coarse_dirt: many, gravel: few}
   why: "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
 
 437:
@@ -126,6 +175,9 @@
   cactus: {texas_prickly_pear: 1}
   flower_density: 1
   cactus_density: 1.0
+  ground_surface:
+    geology: "Sandy and caliche soils."
+    soil: {coarse_dirt: some, sand: few}
   why: "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
 
 436:
@@ -139,6 +191,11 @@
   cactus: {texas_prickly_pear: 2, lechuguilla: 0.5}
   flower_density: 0.5
   cactus_density: 1.2
+  ground_surface:
+    geology: "Limestone and caliche."
+    rock: [calcite]
+    outcrops: few
+    soil: {coarse_dirt: some}
   why: "Dense evergreen thornscrub at the foot of the Sierra Madre Oriental."
 
 388:
@@ -151,6 +208,8 @@
   flowers: {black_eyed_susan: 0.8, purple_coneflower: 0.8, prairie_bluets: 0.4, plains_coreopsis: 1, tall_goldenrod: 1, antelope_horn_milkweed: 0.5}
   flower_density: 1.8
   rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands}
+  ground_surface:
+    geology: "Loess and glacial till under deep mollisols."
   why: "Big bluestem prairie of Iowa, Missouri and Kansas: the atlas plants forest on it; it inherits plains."
 
 392:
@@ -163,6 +222,11 @@
   flowers: {black_eyed_susan: 0.8, purple_coneflower: 0.8, prairie_bluets: 0.4, tall_goldenrod: 1}
   flower_density: 1.5
   rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands}
+  ground_surface:
+    geology: "Cherty Permian limestone."
+    rock: [stone, calcite]
+    outcrops: some
+    soil: {gravel: few}
   why: "The largest surviving tallgrass prairie, on flinty limestone hills."
 
 340:
@@ -174,6 +238,12 @@
   flowers: {flowering_dogwood: 1}
   flower_density: 0.6
   rebase: {minecraft:swamp: minecraft:forest}
+  ground_surface:
+    geology: "Cherty limestone and dolomite over red clay."
+    rock: [stone, calcite]
+    outcrops: few
+    soil: {gravel: few}
+    subsoil: terracotta
   why: "Oak-hickory forest with cedar glades on the dolomite plateaus."
 
 341:
@@ -185,6 +255,11 @@
   flowers: {flowering_dogwood: 1}
   flower_density: 0.6
   rebase: {minecraft:swamp: minecraft:forest}
+  ground_surface:
+    geology: "Boston Mountains sandstone."
+    rock: [sandstone, stone]
+    outcrops: some
+    soil: {gravel: few}
   why: "Boston and Ouachita Mountains: oak-hickory with more shortleaf pine on the ridges."
 
 337:
@@ -195,6 +270,12 @@
   ground: {christmas_fern: 1, common_reed: 1, eastern_woodland_sedge: 1, switchgrass: 1}
   flowers: {virginia_iris: 1}
   flower_density: 0.6
+  niches:
+    pecan: {water: any}
+    virginia_iris: {water: any}
+  ground_surface:
+    geology: "River alluvium and backswamp clay."
+    soil: {mud: some}
   why: "Bottomland hardwoods and cypress sloughs of the lower Mississippi."
 
 399:
@@ -205,6 +286,10 @@
   ground: {christmas_fern: 1, yaupon: 1, wiregrass: 3}
   flowers: {plains_coreopsis: 1, drummond_phlox: 1, tall_goldenrod: 0.5}
   flower_density: 0.8
+  ground_surface:
+    geology: "Sandhills."
+    soil: {sand: few}
+    subsoil: sand
   why: "Open longleaf pine over wiregrass on the Gulf coastal plain."
 
 400:
@@ -216,6 +301,10 @@
   flowers: {flowering_dogwood: 1}
   flower_density: 0.6
   rebase: {minecraft:swamp: minecraft:forest}
+  ground_surface:
+    geology: "Sandy loam over red clay."
+    soil: {podzol: few}
+    subsoil: terracotta
   why: "Piedmont pine-oak-hickory woodland."
 
 346:
@@ -227,6 +316,17 @@
   ground: {mountain_muhly: 2, blue_grama: 1}
   flowers: {desert_marigold: 1}
   flower_density: 0.4
+  niches:
+    ponderosa_pine: {elevation: [1800, 2700]}
+    douglas_fir: {elevation: [2200, 3000]}
+    quaking_aspen: {elevation: [2300, 3300]}
+    pinyon_pine: {elevation: [1300, 2200]}
+    gambel_oak: {elevation: [1700, 2700]}
+  ground_surface:
+    geology: "Coconino sandstone and basalt flows."
+    rock: [sandstone, smooth_basalt]
+    outcrops: some
+    soil: {coarse_dirt: few}
   why: "The world's largest ponderosa forest, with Gambel oak; pinyon at its lower edge."
 
 353:
@@ -238,6 +338,18 @@
   ground: {christmas_fern: 1, thurber_fescue: 1.33, mountain_muhly: 0.67}
   flowers: {black_eyed_susan: 0.4, purple_coneflower: 0.4, prairie_bluets: 0.2}
   flower_density: 0.6
+  niches:
+    ponderosa_pine: {elevation: [1800, 2700]}
+    douglas_fir: {elevation: [2100, 3000]}
+    quaking_aspen: {elevation: [2400, 3300]}
+    engelmann_spruce: {elevation: [2700, 3500]}
+    subalpine_fir: {elevation: [2800, 3550]}
+    gambel_oak: {elevation: [1800, 2700]}
+  ground_surface:
+    geology: "Granite and gneiss; talus above the treeline."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few}
   why: "Spruce-fir and aspen above ponderosa and Gambel oak foothills."
 
 429:
@@ -251,6 +363,15 @@
   cactus: {texas_prickly_pear: 1}
   flower_density: 0.3
   cactus_density: 0.3
+  niches:
+    pinyon_pine: {elevation: [1400, 2300]}
+    one_seed_juniper: {elevation: [1200, 2200]}
+    ponderosa_pine: {elevation: [2100, 2800]}
+  ground_surface:
+    geology: "Red Colorado Plateau sandstone."
+    rock: [red_sandstone]
+    outcrops: some
+    soil: {red_sand: some}
   why: "Colorado Plateau: pinyon-juniper woodland and sagebrush on red rock."
 
 326:
@@ -262,6 +383,17 @@
   ground: {mountain_muhly: 3}
   flowers: {plains_coreopsis: 1}
   flower_density: 0.5
+  niches:
+    live_oak: {elevation: [1000, 2400]}
+    post_oak: {elevation: [1000, 2200]}
+    ponderosa_pine: {elevation: [1800, 3000]}
+    douglas_fir: {elevation: [2400, 3200]}
+    one_seed_juniper: {elevation: [800, 2200]}
+  ground_surface:
+    geology: "Rhyolite ignimbrite (tuff)."
+    rock: [tuff]
+    outcrops: some
+    soil: {coarse_dirt: few}
   why: "Madrean pine-oak forest over the barrancas."
 
 327:
@@ -273,6 +405,16 @@
   ground: {mountain_muhly: 1.5, sideoats_grama: 1.5}
   flowers: {indian_blanket: 1}
   flower_density: 0.5
+  niches:
+    ashe_juniper: {elevation: [500, 2000]}
+    live_oak: {elevation: [600, 2300]}
+    post_oak: {elevation: [800, 2000]}
+    ponderosa_pine: {elevation: [1700, 3000]}
+  ground_surface:
+    geology: "Folded limestone."
+    rock: [calcite]
+    outcrops: some
+    soil: {coarse_dirt: few}
   why: "Pine-oak and juniper on the limestone ranges above Monterrey."
 
 545:
@@ -286,6 +428,11 @@
   cactus: {tree_cholla: 1}
   flower_density: 0.5
   cactus_density: 0.4
+  ground_surface:
+    geology: "Volcanic tuff and andesite."
+    rock: [tuff, andesite]
+    outcrops: few
+    soil: {coarse_dirt: few}
   why: "Tropical deciduous forest with columnar cacti on the Pacific slope."
 
 432:
@@ -299,4 +446,9 @@
   cactus: {texas_prickly_pear: 3, tree_cholla: 1, lechuguilla: 1}
   flower_density: 0.4
   cactus_density: 1.5
+  ground_surface:
+    geology: "Volcanic tuff and limestone."
+    rock: [tuff, calcite]
+    outcrops: few
+    soil: {coarse_dirt: some}
   why: "Meseta Central scrub: nopal, mesquite and thorn shrubs on the high plateau."

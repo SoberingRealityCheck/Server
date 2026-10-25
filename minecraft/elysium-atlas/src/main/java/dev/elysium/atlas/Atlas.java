@@ -39,6 +39,8 @@ public final class Atlas {
     public final Regions regions;
     /** Per-biome local relief, or null for an atlas baked without a detail table. */
     public final Detail detail;
+    /** Vertical transfer of the bake (atlas.json "vertical"): broad-scale metres per metre, and the soft cap on height. */
+    private final double eLow, topKnee, topSpan;
 
     private Atlas(Path dir) throws IOException {
         this.dir = dir;
@@ -74,6 +76,10 @@ public final class Atlas {
             regions = new Regions(dir.resolve(rg.get("file").getAsString()), names);
         } else regions = null;
         detail = m.has("detail") ? new Detail(m.getAsJsonObject("detail"), palette) : null;
+        JsonObject v = m.has("vertical") ? m.getAsJsonObject("vertical") : new JsonObject();
+        eLow = v.has("e_low") ? v.get("e_low").getAsDouble() : 8.0;
+        topKnee = v.has("top_knee") ? v.get("top_knee").getAsDouble() : 400.0;
+        topSpan = v.has("top_span") ? v.get("top_span").getAsDouble() : 120.0;
         LOG.info("Atlas {} loaded from {}: {} levels, {} biomes, {} regions, {} m/block", version, dir, levels.size(), palette.size(), regions == null ? 0 : regions.names.size(), metresPerBlock);
     }
 
@@ -158,6 +164,19 @@ public final class Atlas {
         boolean fine = levels.size() > 1 && levels.get(0).biome(x, z) >= 0;
         return detail.blocks(this, x, z, c.calm(), c.height(), fine);
     }
+
+    /**
+     * Real-world elevation (metres above the atlas sea) estimated from an atlas height in blocks: the bake's vertical
+     * transfer inverted for its broad band. Peaks are amplified less than plains in the bake, so this reads the
+     * regional elevation, not the exact height of a summit; that is what treelines and elevation belts follow.
+     */
+    public double elevationMetres(double y) {
+        double yl = y;
+        if (yl > topKnee) yl = topKnee + topSpan * atanh(Math.min(0.999, (yl - topKnee) / topSpan));
+        return Math.max(0, (yl - seaLevelY - 0.5) * metresPerBlock / eLow);
+    }
+
+    private static double atanh(double t) { return 0.5 * Math.log((1 + t) / (1 - t)); }
 
     /** Local relief in metres (8 km window), or 0. */
     public double relief(double x, double z) {

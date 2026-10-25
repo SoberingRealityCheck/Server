@@ -35,7 +35,7 @@ TREES_PER_CHUNK_AT_FULL_COVER = 12.0
 # default tree and shrub cover by WWF habitat type (Ecoregions 2017 BIOME_NUM), when a profile gives none
 TREE_COVER = {1: 0.8, 2: 0.5, 3: 0.6, 4: 0.6, 5: 0.6, 6: 0.5, 7: 0.25, 8: 0.15, 9: 0.15, 10: 0.15, 11: 0.03, 12: 0.35, 13: 0.05, 14: 0.6}
 SHRUB_COVER = {7: 0.1, 8: 0.05, 10: 0.1, 12: 0.3, 13: 0.15}
-GENERATED_DIRS = ("data/elysium/worldgen/biome/eco", "data/elysium/worldgen/placed_feature/flora",
+GENERATED_DIRS = ("data/elysium/worldgen/biome/eco", "data/elysium/worldgen/noise/surface", "data/elysium/worldgen/placed_feature/flora",
                   "data/elysium/worldgen/configured_feature/flora", "data/elysium/worldgen/configured_feature/plant")
 
 VARIANTS = {}     # hand-written variants; none since the ecoregion database took over (slice-9)
@@ -231,6 +231,52 @@ def selector(weighted):
     return {"type": "minecraft:random_selector", "config": {"default": items[-1][0], "features": feats}}
 
 
+def niche_selector(weighted):
+    """elysium_atlas:niche_selector over (placed feature json, weight, niche) triples (NicheSelectorFeature.java)."""
+    return {"type": "elysium_atlas:niche_selector", "config": {"entries": [
+        {"feature": f, "weight": round(float(w), 4), **({"niche": n} if n else {})} for f, w, n in weighted if w > 0]}}
+
+
+# ---------------------------------------------------------------- regional ground surface
+# parents whose own surface is the point (snow, ice, sand beaches, badlands bands, water): no regional surface
+NO_SURFACE = re.compile(r"snow|frozen|ice|glacier|peak|beach|shore|ocean|river|badlands|mesa|lake|dune")
+SURFACE_NOISES = {"outcrop": (-6, [1.0, 1.0, 1.0]), "rock_mix": (-7, [1.0, 1.0]),
+                  "soil_0": (-5, [1.0, 1.0, 1.0]), "soil_1": (-5, [1.0, 1.0, 1.0]), "soil_2": (-5, [1.0, 1.0, 1.0])}
+NOISE_SD = 0.31     # standard deviation of these normal noises (measured: 0.31 for 2 and 3 octaves); share s of ground lies above SD * z(1 - s)
+
+
+def above(share):
+    """noise threshold above which about `share` of positions lie."""
+    from statistics import NormalDist
+    return round(NOISE_SD * NormalDist().inv_cdf(1 - share), 4)
+
+
+def block(b): return {"type": "minecraft:block", "result_state": {"Name": b, **({"Properties": {"axis": "y"}} if b.endswith(("basalt", "_log")) else {})}}
+def cond(c, then): return {"type": "minecraft:condition", "if_true": c, "then_run": then}
+def seq(*rs): return {"type": "minecraft:sequence", "sequence": [r for r in rs if r]}
+def noise(name, share): return {"type": "minecraft:noise_threshold", "noise": f"elysium:surface/{name}", "min_threshold": above(share), "max_threshold": 1e6}
+
+
+def surface_rule(vids, g):
+    """A surface rule for one ecoregion's variants: rock on steep ground and outcrops, soil patches, subsoil."""
+    rock = None
+    if g["rock"]:
+        rock = block(g["rock"][0]) if len(g["rock"]) == 1 else seq(cond(noise("rock_mix", 0.5), block(g["rock"][1])), block(g["rock"][0]))
+    top = []
+    if rock:
+        top.append(cond({"type": "minecraft:steep"}, rock))
+        if g["outcrops"] > 0: top.append(cond(noise("outcrop", g["outcrops"]), rock))
+    for i, (b, share) in enumerate(list(g["soil"].items())[:3]):
+        if share > 0: top.append(cond(noise(f"soil_{i}", share), block(b)))
+    if not top and not g["subsoil"]: return None
+    floor = {"type": "minecraft:stone_depth", "offset": 0, "add_surface_depth": False, "secondary_depth_range": 0, "surface_type": "floor"}
+    under = {"type": "minecraft:stone_depth", "offset": 0, "add_surface_depth": True, "secondary_depth_range": 0, "surface_type": "floor"}
+    dry = {"type": "minecraft:water", "offset": -1, "surface_depth_multiplier": 0, "add_stone_depth": False}
+    return cond({"type": "minecraft:biome", "biome_is": sorted(vids)}, cond({"type": "minecraft:above_preliminary_surface"}, seq(
+        cond(floor, cond(dry, seq(*top))) if top else None,
+        cond({"type": "minecraft:not", "invert": floor}, cond(under, block(g["subsoil"]))) if g["subsoil"] else None)))
+
+
 def scatter(count, tries, spread, heightmap="MOTION_BLOCKING", extra=None):
     p = [{"type": "minecraft:count", "count": count_of(count)}] if count != 1 else []
     return p + [{"type": "minecraft:in_square"}, {"type": "minecraft:heightmap", "heightmap": heightmap}, {"type": "minecraft:biome"},
@@ -251,31 +297,25 @@ class Flora:
         self.files[f"data/elysium/worldgen/configured_feature/plant/{name}.json"] = feat
         return cid, sapling
 
-    def trees(self, eco, layer, plants, n):
+    def trees(self, eco, layer, plants, niches, n):
         key = f"flora/{eco}/{layer}_{level(n)}"
         if f"data/elysium/worldgen/placed_feature/{key}.json" not in self.files:
             items = []
             for p, w in plants.items():
                 cid, sap = self.plant(p)
-                items.append(({"feature": cid, "placement": [survive(sap)]}, w))
-            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = selector(items)
+                items.append(({"feature": cid, "placement": [survive(sap)]}, w, niches.get(p)))
+            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = niche_selector(items)
             self.files[f"data/elysium/worldgen/placed_feature/{key}.json"] = {"feature": f"elysium:flora/{eco}/{layer}", "placement": [
                 {"type": "minecraft:count", "count": count_of(LEVELS[level(n)])}, {"type": "minecraft:in_square"},
                 {"type": "minecraft:surface_water_depth_filter", "max_water_depth": 0},
                 {"type": "minecraft:heightmap", "heightmap": "OCEAN_FLOOR"}, {"type": "minecraft:biome"}]}
         return f"elysium:{key}"
 
-    def blocks(self, eco, layer, plants, n, tries, spread):
+    def blocks(self, eco, layer, plants, niches, n, tries, spread):
         key = f"flora/{eco}/{layer}_{level(n)}"
         if f"data/elysium/worldgen/placed_feature/{key}.json" not in self.files:
-            entries = {}
-            for p, w in plants.items():
-                es = PLANTS[p][1]["config"]["to_place"]["entries"]; tot = sum(e["weight"] for e in es)
-                for e in es:
-                    k = json.dumps(e["data"], sort_keys=True); entries[k] = entries.get(k, 0) + w * e["weight"] / tot
-            scale = 1000 / max(entries.values())
-            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = {"type": "minecraft:simple_block", "config": {"to_place": {
-                "type": "minecraft:weighted_state_provider", "entries": [{"data": json.loads(k), "weight": max(1, int(round(w * scale)))} for k, w in entries.items()]}}}
+            items = [({"feature": PLANTS[p][1], "placement": []}, w, niches.get(p)) for p, w in plants.items()]
+            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = niche_selector(items)
             self.files[f"data/elysium/worldgen/placed_feature/{key}.json"] = {"feature": f"elysium:flora/{eco}/{layer}",
                                                                                "placement": scatter(LEVELS[level(n)], tries, spread)}
         return f"elysium:{key}"
@@ -307,7 +347,7 @@ def title(ident):
 
 
 def generate(src, check=False):
-    flora_db = db.ecoregions(); leaves_of = leaf_blocks(src); P = db.plants(); species_db = {}
+    flora_db = db.ecoregions(); leaves_of = leaf_blocks(src); P = db.plants(); species_db = {}; surfaces = {}
     data = os.path.join(HERE, "data")
     unit_biomes = json.load(open(os.path.join(data, "unit_biomes.json")))
     ecos = json.load(open(os.path.join(data, "ecoregions.json")))
@@ -356,6 +396,8 @@ def generate(src, check=False):
         if not prof: continue
         total = sum(counts.values()); habitat = ecos.get(eid, {}).get("biome_num", 4)
         g_hex, f_hex, leaf_hex = db.colours(prof, leaves_of)
+        niches = db.niches(prof)
+        if db.surface(prof): surfaces[eid] = db.surface(prof)
         grass, foliage = rgb(g_hex), rgb(f_hex)
         species_db[eid] = {"name": prof["name"], "resolve": prof.get("resolve"), "grass": g_hex, "foliage": f_hex, "leaves": leaf_hex,
                            **{L: {P[p]["name"]: w for p, w in (prof.get(L) or {}).items()} for L in db.LAYERS if prof.get(L)},
@@ -381,13 +423,13 @@ def generate(src, check=False):
             remove, _ = plants.of_biome(base)
             add = []
             if prof.get("trees"):
-                add.append(flora.trees(eid, "trees", prof["trees"], TREES_PER_CHUNK_AT_FULL_COVER * tree_cover * m * prof.get("tree_density", 1.0)))
+                add.append(flora.trees(eid, "trees", prof["trees"], niches, TREES_PER_CHUNK_AT_FULL_COVER * tree_cover * m * prof.get("tree_density", 1.0)))
             if prof.get("shrubs"):
-                add.append(flora.trees(eid, "shrubs", prof["shrubs"], (1.0 + 12 * shrub_cover) * prof.get("shrub_density", 1.0) * min(1.5, m ** 0.5)))
+                add.append(flora.trees(eid, "shrubs", prof["shrubs"], niches, (1.0 + 12 * shrub_cover) * prof.get("shrub_density", 1.0) * min(1.5, m ** 0.5)))
             if prof.get("ground"):
-                add.append(flora.blocks(eid, "ground", prof["ground"], (1 + 6 * open_cover) * max(0.5, min(1.5, 1.5 - 0.5 * m)), 32, 7))
+                add.append(flora.blocks(eid, "ground", prof["ground"], niches, (1 + 6 * open_cover) * max(0.5, min(1.5, 1.5 - 0.5 * m)), 32, 7))
             if prof.get("flowers"):
-                add.append(flora.blocks(eid, "flowers", prof["flowers"], prof.get("flower_density", 1.0), 24, 6))
+                add.append(flora.blocks(eid, "flowers", prof["flowers"], niches, prof.get("flower_density", 1.0), 24, 6))
             if prof.get("cactus"):
                 add.append(flora.cactus(eid, prof["cactus"], prof.get("cactus_density", 0.5)))
             b = dict(base)
@@ -406,7 +448,16 @@ def generate(src, check=False):
             lang[f"biome.elysium.{path.replace('/', '.')}"] = prof["name"] if a == main else f"{prof['name']} ({title(a)})"
             palettes[vid] = palette(f_hex, leaf_hex, leaf_table)
             n_flora += 1
-    files = {**out, **placed, **flora.files,
+    rules = []
+    for eid, g in surfaces.items():
+        vids = [v for v, t in table.items() if v.startswith(f"elysium:eco/{eid}/") and not NO_SURFACE.search(t["parent"])]
+        r = surface_rule(vids, g) if vids else None
+        if r: rules.append(r)
+    surface_files = {f"data/elysium/worldgen/noise/surface/{n}.json": {"firstOctave": o, "amplitudes": a} for n, (o, a) in SURFACE_NOISES.items()}
+    surface_files["data/elysium_atlas/lithostitched/worldgen_modifier/regional_surface.json"] = {
+        "type": "lithostitched:add_surface_rule", "levels": ["minecraft:overworld"], "injection_type": "prepend",
+        "surface_rule": seq(*rules)}
+    files = {**out, **placed, **flora.files, **surface_files,
              "assets/elysium/lang/en_us.json": lang,
              "elysium_atlas/variants.json": {"format": 2, "generated_by": "variants/biome_variants.py", "variants": table},
              "elysium_atlas/leaf_palettes.json": {"generated_by": "variants/biome_variants.py (leaf colours of each ecoregion's species)", "palettes": palettes},

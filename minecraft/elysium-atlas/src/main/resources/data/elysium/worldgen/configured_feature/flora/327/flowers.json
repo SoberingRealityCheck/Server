@@ -1,1 +1,1 @@
-{"type":"minecraft:simple_block","config":{"to_place":{"type":"minecraft:weighted_state_provider","entries":[{"data":{"Name":"minecraft:orange_tulip"},"weight":1000},{"data":{"Name":"minecraft:red_tulip"},"weight":333}]}}}
+{"type":"elysium_atlas:niche_selector","config":{"entries":[{"feature":{"feature":{"type":"minecraft:simple_block","config":{"to_place":{"type":"minecraft:weighted_state_provider","entries":[{"data":{"Name":"minecraft:orange_tulip"},"weight":3},{"data":{"Name":"minecraft:red_tulip"},"weight":1}]}}},"placement":[]},"weight":1.0}]}}

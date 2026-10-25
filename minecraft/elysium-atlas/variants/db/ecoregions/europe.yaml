@@ -10,6 +10,10 @@
   ground: {bracken: 2, gorse: 1, heather: 1, forest_mosses: 0.5, red_fescue: 1, common_bent: 1}
   flowers: {bluebell: 2, common_poppy: 0.43, cornflower: 0.29, oxeye_daisy: 0.29}
   flower_density: 1
+  ground_surface:
+    geology: "Chalk, loess and sands of the Paris and Belgian basins."
+    rock: [stone]
+    soil: {coarse_dirt: few}
   why: "Oceanic oak woods, bracken and gorse heath from Brittany to Flanders."
 
 663:
@@ -21,6 +25,12 @@
   ground: {leaf_litter: 2, bracken: 1, wood_sedge: 1, red_fescue: 1}
   flowers: {bluebell: 3, wood_anemone: 1, oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 1.5
+  ground_surface:
+    geology: "Chalk downs under thin rendzina soils."
+    rock: [calcite]
+    outcrops: few
+    soil: {coarse_dirt: few}
+    subsoil: calcite
   why: "Chalk beech hangers and oak-hazel coppice with bluebell floors."
 
 651:
@@ -32,6 +42,11 @@
   ground: {bracken: 2, forest_mosses: 1, heather: 1, gorse: 1, common_bent: 2, red_fescue: 1}
   flowers: {bluebell: 1, oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 0.8
+  ground_surface:
+    geology: "Slate, shale and granite of Wales, Cornwall and Ireland."
+    rock: [deepslate, granite]
+    outcrops: few
+    soil: {podzol: few}
   why: "Rain-soaked sessile oak and birch in Wales and Ireland, mossy to the branch tips."
 
 672:
@@ -43,6 +58,11 @@
   ground: {heather: 3, bracken: 1, forest_mosses: 1, purple_moor_grass: 1.33, mat_grass: 0.67}
   flowers: {spring_gentian: 0.21, alpine_pasqueflower: 0.14, edelweiss: 0.07, wild_chives: 0.07}
   flower_density: 0.4
+  ground_surface:
+    geology: "Granite tors and gritstone under blanket peat."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {mud: some, podzol: few}
   why: "Wind-cut moor and blanket bog on the Atlantic fringe: heather, birch in the glens."
 
 691:
@@ -54,6 +74,14 @@
   ground: {heather: 4, bilberry: 2, bracken: 1, wavy_hair_grass: 1}
   flowers: {spring_gentian: 0.13, alpine_pasqueflower: 0.09, edelweiss: 0.04, wild_chives: 0.04}
   flower_density: 0.3
+  niches:
+    scots_pine: {elevation: [0, 650]}
+    downy_birch: {elevation: [0, 700]}
+  ground_surface:
+    geology: "Granite and schist under podzols."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {podzol: some}
   why: "Old Scots pine over heather and juniper in the Highlands."
 
 686:
@@ -65,6 +93,17 @@
   ground: {leaf_litter: 3, male_fern: 1, wood_sedge: 0.5, false_oat_grass: 0.5}
   flowers: {wood_anemone: 2, bluebell: 1, oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 1
+  niches:
+    european_beech: {elevation: [0, 1300]}
+    silver_fir: {elevation: [400, 1500]}
+    norway_spruce: {elevation: [600, 1500]}
+    hornbeam: {elevation: [0, 600]}
+    sessile_oak: {elevation: [0, 800]}
+  ground_surface:
+    geology: "Jura limestone; Vosges and Black Forest sandstone and granite."
+    rock: [stone, calcite]
+    outcrops: few
+    soil: {coarse_dirt: few}
   why: "Jura, Vosges, Black Forest and the Swiss Plateau: beech and fir over deep leaf litter, hay meadows in the clearings."
 
 654:
@@ -75,6 +114,10 @@
   ground: {leaf_litter: 2, bilberry: 1, wood_sedge: 1, false_oat_grass: 1}
   flowers: {wood_anemone: 1, oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 0.8
+  ground_surface:
+    geology: "Glacial till and loess."
+    rock: [stone]
+    soil: {coarse_dirt: few}
   why: "Continental oak-hornbeam and pine on the sands of Germany and Poland."
 
 647:
@@ -85,6 +128,11 @@
   ground: {bilberry: 2, leaf_litter: 1, heather: 1, wavy_hair_grass: 1, false_oat_grass: 1}
   flowers: {wood_anemone: 1}
   flower_density: 0.6
+  ground_surface:
+    geology: "Glacial sands, moraines and eskers."
+    rock: [stone]
+    soil: {podzol: few, gravel: few}
+    subsoil: sand
   why: "Beech and pine along the southern Baltic coast and Denmark."
 
 679:
@@ -95,6 +143,9 @@
   ground: {bilberry: 2, forest_mosses: 1, wavy_hair_grass: 1, false_oat_grass: 1}
   flowers: {wood_anemone: 0.5}
   flower_density: 0.4
+  ground_surface:
+    geology: "Outwash sands and peat bogs."
+    soil: {podzol: few, mud: few}
   why: "Spruce, pine and birch where broadleaf Europe gives way to the taiga."
 
 661:
@@ -105,6 +156,10 @@
   ground: {feather_grass: 1, upright_brome: 1.5, false_oat_grass: 1.5}
   flowers: {oxeye_daisy: 1.15, meadow_buttercup: 0.57, maiden_pink: 0.29, ragged_robin: 0.29, common_poppy: 0.43, cornflower: 0.29}
   flower_density: 1.2
+  ground_surface:
+    geology: "Loess under chernozem."
+    soil: {coarse_dirt: few}
+    subsoil: packed_mud
   why: "Oak groves and birch islands in a sea of grass across Ukraine and southern Russia."
 
 735:
@@ -116,6 +171,10 @@
   ground: {feather_grass: 4, valais_fescue: 2}
   flowers: {common_poppy: 0.43, cornflower: 0.29, oxeye_daisy: 0.5, meadow_buttercup: 0.14, maiden_pink: 0.07, ragged_robin: 0.07}
   flower_density: 0.8
+  ground_surface:
+    geology: "Loess under chernozem and chestnut soils."
+    soil: {coarse_dirt: few}
+    subsoil: packed_mud
   why: "Feather grass steppe north of the Black Sea; trees only in the gullies."
 
 674:
@@ -126,6 +185,10 @@
   ground: {leaf_litter: 1, valais_fescue: 1.5, false_oat_grass: 1.5}
   flowers: {common_poppy: 0.86, cornflower: 0.57, oxeye_daisy: 1.0, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 1.2
+  ground_surface:
+    geology: "Loess and blown sand."
+    soil: {sand: few}
+    subsoil: packed_mud
   why: "Oak woods and sandy grassland of the Hungarian plain, willow and poplar along the Danube."
 
 675:
@@ -136,17 +199,41 @@
   ground: {common_reed: 1, false_oat_grass: 1.5, perennial_ryegrass: 1.5}
   flowers: {common_poppy: 0.86, cornflower: 0.57, oxeye_daisy: 0.57}
   flower_density: 1
+  ground_surface:
+    geology: "River alluvium."
+    soil: {mud: few}
   why: "Former rice and poplar country: lines of poplars on the old field grid, wet meadows, riverside willow."
 
 689:
   name: Alpine Forest
   resolve: "Alps conifer and mixed forests"
   tree_cover: 0.5
-  trees: {norway_spruce: 4, silver_fir: 2, european_larch: 2, arolla_pine: 1, european_beech: 1}
+  trees: {norway_spruce: 4, silver_fir: 2, european_larch: 2, arolla_pine: 1, european_beech: 1, sessile_oak: 0.5}
   shrubs: {mountain_pine: 2, green_alder: 1}
   ground: {bilberry: 1, blue_moor_grass: 1.5, mat_grass: 1.5}
   flowers: {spring_gentian: 0.86, alpine_pasqueflower: 0.57, edelweiss: 0.29, wild_chives: 0.29, oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 1.2
+  niches:
+    european_beech: {elevation: [0, 1500]}
+    sessile_oak: {elevation: [0, 900]}
+    silver_fir: {elevation: [500, 1750]}
+    norway_spruce: {elevation: [800, 2050]}
+    european_larch: {elevation: [1300, 2400]}
+    arolla_pine: {elevation: [1600, 2450]}
+    mountain_pine: {elevation: [1700, 2500]}
+    green_alder: {elevation: [1300, 2200]}
+    edelweiss: {elevation: [1800, 3200]}
+    alpine_pasqueflower: {elevation: [1400, 2900]}
+    spring_gentian: {elevation: [1000, 2900]}
+    oxeye_daisy: {elevation: [0, 2000]}
+    meadow_buttercup: {elevation: [0, 2000]}
+    maiden_pink: {elevation: [0, 1800]}
+    ragged_robin: {elevation: [0, 1500]}
+  ground_surface:
+    geology: "Crystalline core and limestone ranges; scree below cliffs."
+    rock: [stone, calcite]
+    outcrops: some
+    soil: {gravel: few}
   why: "Beech-fir on the outer slopes, spruce higher up, larch and stone pine at the treeline, then krummholz and flowered turf."
 
 644:
@@ -157,6 +244,20 @@
   ground: {leaf_litter: 3, upright_brome: 0.5, blue_moor_grass: 0.5}
   flowers: {wood_anemone: 1, spring_gentian: 0.21, alpine_pasqueflower: 0.14, edelweiss: 0.07, wild_chives: 0.07}
   flower_density: 0.6
+  niches:
+    european_beech: {elevation: [900, 1900]}
+    sweet_chestnut: {elevation: [0, 1000]}
+    sessile_oak: {elevation: [0, 1100]}
+    silver_fir: {elevation: [700, 1700]}
+    spring_gentian: {elevation: [1300, 3000]}
+    alpine_pasqueflower: {elevation: [1500, 3000]}
+    edelweiss: {elevation: [1700, 3000]}
+    wild_chives: {elevation: [1300, 3000]}
+  ground_surface:
+    geology: "Mesozoic limestone."
+    rock: [calcite, stone]
+    outcrops: some
+    soil: {coarse_dirt: few}
   why: "Montane beech belt of the Apennines, chestnut coppice below."
 
 660:
@@ -167,6 +268,16 @@
   ground: {leaf_litter: 2, male_fern: 1, blue_moor_grass: 0.5, upright_brome: 0.5}
   flowers: {wood_anemone: 1}
   flower_density: 0.5
+  niches:
+    european_beech: {elevation: [0, 1700]}
+    silver_fir: {elevation: [600, 1600]}
+    norway_spruce: {elevation: [900, 1900]}
+    black_pine: {elevation: [200, 1500]}
+  ground_surface:
+    geology: "Dinaric karst limestone."
+    rock: [calcite]
+    outcrops: many
+    soil: {coarse_dirt: few}
   why: "Dense beech and fir on the karst of Slovenia, Croatia and Bosnia."
 
 692:
@@ -177,6 +288,23 @@
   ground: {bilberry: 2, male_fern: 1, mat_grass: 1, red_fescue: 1}
   flowers: {oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14, spring_gentian: 0.21, alpine_pasqueflower: 0.14, edelweiss: 0.07, wild_chives: 0.07}
   flower_density: 0.6
+  niches:
+    european_beech: {elevation: [0, 1300]}
+    silver_fir: {elevation: [500, 1400]}
+    norway_spruce: {elevation: [900, 1750]}
+    spring_gentian: {elevation: [1300, 2600]}
+    alpine_pasqueflower: {elevation: [1500, 2600]}
+    edelweiss: {elevation: [1600, 2600]}
+    wild_chives: {elevation: [1300, 2600]}
+    oxeye_daisy: {elevation: [0, 1600]}
+    meadow_buttercup: {elevation: [0, 1600]}
+    maiden_pink: {elevation: [0, 1400]}
+    ragged_robin: {elevation: [0, 1200]}
+  ground_surface:
+    geology: "Flysch sandstone; andesite of the volcanic arc."
+    rock: [stone, andesite]
+    outcrops: few
+    soil: {podzol: few}
   why: "Europe's largest old-growth beech and spruce, bear country."
 
 678:
@@ -187,6 +315,17 @@
   ground: {leaf_litter: 1, bilberry: 1, mat_grass: 1, upright_brome: 1}
   flowers: {oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 0.6
+  niches:
+    european_beech: {elevation: [0, 1500]}
+    silver_fir: {elevation: [800, 1700]}
+    norway_spruce: {elevation: [1100, 2000]}
+    scots_pine: {elevation: [900, 2100]}
+    black_pine: {elevation: [300, 1500]}
+  ground_surface:
+    geology: "Granite, gneiss and marble."
+    rock: [granite, diorite]
+    outcrops: some
+    soil: {coarse_dirt: few}
   why: "Pine, spruce and beech on the Rhodope and Rila massifs."
 
 646:
@@ -197,6 +336,11 @@
   ground: {leaf_litter: 2, upright_brome: 1, valais_fescue: 1}
   flowers: {oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 0.6
+  ground_surface:
+    geology: "Mixed sediments and crystalline rock."
+    rock: [stone]
+    outcrops: few
+    soil: {coarse_dirt: few}
   why: "Oak and hornbeam hills of Serbia and Bulgaria."
 
 676:
@@ -208,6 +352,22 @@
   ground: {heather: 1, mat_grass: 1, red_fescue: 1}
   flowers: {spring_gentian: 0.43, alpine_pasqueflower: 0.29, edelweiss: 0.14, wild_chives: 0.14}
   flower_density: 0.8
+  niches:
+    european_beech: {elevation: [400, 1600]}
+    silver_fir: {elevation: [800, 1800]}
+    scots_pine: {elevation: [600, 1900]}
+    black_pine: {elevation: [300, 1300]}
+    mountain_pine: {elevation: [1600, 2500]}
+    common_juniper: {elevation: [900, 2600]}
+    spring_gentian: {elevation: [1300, 3000]}
+    alpine_pasqueflower: {elevation: [1500, 3000]}
+    edelweiss: {elevation: [1800, 3000]}
+    wild_chives: {elevation: [1300, 3000]}
+  ground_surface:
+    geology: "Granite core and limestone sierras; scree."
+    rock: [stone, calcite]
+    outcrops: some
+    soil: {gravel: few}
   why: "Beech-fir on the wet French side, pines on the dry Spanish side, mountain pine at the top."
 
 801:
@@ -218,6 +378,20 @@
   ground: {upright_brome: 1.5, sheeps_fescue: 1.5}
   flowers: {spring_gentian: 0.21, alpine_pasqueflower: 0.14, edelweiss: 0.07, wild_chives: 0.07, common_poppy: 0.21, cornflower: 0.14, oxeye_daisy: 0.14}
   flower_density: 0.5
+  niches:
+    black_pine: {elevation: [500, 1800]}
+    silver_fir: {elevation: [800, 1900]}
+    european_beech: {elevation: [700, 1800]}
+    sessile_oak: {elevation: [0, 1100]}
+    spring_gentian: {elevation: [1500, 2700]}
+    alpine_pasqueflower: {elevation: [1600, 2700]}
+    edelweiss: {elevation: [1800, 2700]}
+    wild_chives: {elevation: [1500, 2700]}
+  ground_surface:
+    geology: "Limestone and ophiolite."
+    rock: [calcite, stone]
+    outcrops: some
+    soil: {coarse_dirt: few}
   why: "Black pine and Greek fir on the limestone spine of Greece."
 
 648:
@@ -228,6 +402,16 @@
   ground: {bracken: 2, gorse: 1, heather: 1, common_bent: 1, red_fescue: 1}
   flowers: {bluebell: 1}
   flower_density: 0.5
+  niches:
+    european_beech: {elevation: [500, 1700]}
+    pedunculate_oak: {elevation: [0, 900]}
+    sweet_chestnut: {elevation: [0, 900]}
+    silver_birch: {elevation: [700, 1800]}
+  ground_surface:
+    geology: "Picos de Europa limestone."
+    rock: [calcite, stone]
+    outcrops: some
+    soil: {podzol: few}
   why: "Green Spain: Atlantic beech, oak and chestnut above the Biscay coast."
 
 800:
@@ -238,6 +422,11 @@
   ground: {heather: 2, gorse: 2, bracken: 1, common_bent: 0.5, red_fescue: 0.5}
   flowers: {common_poppy: 0.21, cornflower: 0.14, oxeye_daisy: 0.14}
   flower_density: 0.4
+  ground_surface:
+    geology: "Granite."
+    rock: [granite]
+    outcrops: some
+    soil: {podzol: few}
   why: "Oak and pine over heath and gorse in northwest Iberia."
 
 792:
@@ -249,6 +438,15 @@
   ground: {common_thyme: 0.5, grey_leaved_cistus: 0.25, rosemary: 0.25, lavender: 1, sheeps_fescue: 1, retuse_false_brome: 1}
   flowers: {common_poppy: 0.13, cornflower: 0.09, oxeye_daisy: 0.09}
   flower_density: 0.3
+  niches:
+    black_pine: {elevation: [800, 1700]}
+    scots_pine: {elevation: [1200, 2100]}
+    maritime_pine: {elevation: [400, 1300]}
+  ground_surface:
+    geology: "Limestone and red Rodeno sandstone of the Iberian System."
+    rock: [calcite, red_sandstone]
+    outcrops: some
+    soil: {coarse_dirt: some}
   why: "Pine and juniper on the high sierras of central and eastern Spain."
 
 793:
@@ -260,6 +458,11 @@
   ground: {common_thyme: 1, grey_leaved_cistus: 0.5, rosemary: 0.5, lavender: 1, slender_wild_oat: 1, retuse_false_brome: 1}
   flowers: {common_poppy: 0.21, cornflower: 0.14, oxeye_daisy: 0.14}
   flower_density: 0.4
+  ground_surface:
+    geology: "Granite and slate of the Meseta."
+    rock: [granite]
+    outcrops: few
+    soil: {coarse_dirt: some}
   why: "Holm oak and dry grass on the Meseta."
 
 805:
@@ -271,6 +474,11 @@
   ground: {common_thyme: 0.5, grey_leaved_cistus: 0.25, rosemary: 0.25, slender_wild_oat: 3}
   flowers: {common_poppy: 0.43, cornflower: 0.29, oxeye_daisy: 0.29}
   flower_density: 0.8
+  ground_surface:
+    geology: "Granite boulder fields (berrocales) and slate."
+    rock: [granite]
+    outcrops: few
+    soil: {coarse_dirt: some}
   why: "Wood pasture of cork and holm oak in southwest Iberia, gone back to scrub between the trees."
 
 803:
@@ -284,6 +492,11 @@
   cactus: {lechuguilla: 1, texas_prickly_pear: 1}
   flower_density: 0.3
   cactus_density: 0.3
+  ground_surface:
+    geology: "Marl, gypsum and limestone badlands."
+    rock: [calcite, sandstone]
+    outcrops: some
+    soil: {coarse_dirt: many, red_sand: few}
   why: "Almeria and Murcia: esparto grass, scattered Aleppo pine, naturalised agave and prickly pear."
 
 799:
@@ -295,6 +508,11 @@
   ground: {common_thyme: 1.5, grey_leaved_cistus: 0.75, rosemary: 0.75, lavender: 2, retuse_false_brome: 1}
   flowers: {common_poppy: 0.21, cornflower: 0.14, oxeye_daisy: 0.14}
   flower_density: 0.4
+  ground_surface:
+    geology: "Limestone garrigue with terra rossa."
+    rock: [calcite]
+    outcrops: some
+    soil: {coarse_dirt: some, red_sand: few}
   why: "Holm oak, Aleppo pine and lavender garrigue on the limestone of Provence and Catalonia."
 
 806:
@@ -306,6 +524,11 @@
   ground: {common_thyme: 1, grey_leaved_cistus: 0.5, rosemary: 0.5, lavender: 0.5, retuse_false_brome: 0.5, slender_wild_oat: 0.5}
   flowers: {common_poppy: 0.43, cornflower: 0.29, oxeye_daisy: 0.29}
   flower_density: 0.6
+  ground_surface:
+    geology: "Limestone and volcanic tuff."
+    rock: [calcite, tuff]
+    outcrops: few
+    soil: {coarse_dirt: few}
   why: "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
 
 795:
@@ -317,6 +540,11 @@
   ground: {common_thyme: 0.5, grey_leaved_cistus: 0.25, rosemary: 0.25, upright_brome: 1, slender_wild_oat: 1}
   flowers: {common_poppy: 0.86, cornflower: 0.57, oxeye_daisy: 0.57}
   flower_density: 1
+  ground_surface:
+    geology: "Limestone, clay hills and tuff."
+    rock: [calcite, tuff]
+    outcrops: few
+    soil: {coarse_dirt: few}
   why: "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
 
 794:
@@ -328,6 +556,11 @@
   ground: {common_thyme: 0.25, grey_leaved_cistus: 0.12, rosemary: 0.12, upright_brome: 1.5, blue_moor_grass: 1.5}
   flowers: {common_poppy: 0.43, cornflower: 0.29, oxeye_daisy: 0.29}
   flower_density: 0.6
+  ground_surface:
+    geology: "Bare karst limestone with terra rossa."
+    rock: [calcite]
+    outcrops: many
+    soil: {coarse_dirt: some, red_sand: few}
   why: "Thin soil on limestone: oak-hornbeam scrub, black pine and juniper."
 
 788:
@@ -339,6 +572,20 @@
   ground: {common_thyme: 0.5, grey_leaved_cistus: 0.25, rosemary: 0.25, retuse_false_brome: 1, sheeps_fescue: 1}
   flowers: {spring_gentian: 0.21, alpine_pasqueflower: 0.14, edelweiss: 0.07, wild_chives: 0.07}
   flower_density: 0.4
+  niches:
+    holm_oak: {elevation: [0, 800]}
+    sweet_chestnut: {elevation: [400, 1100]}
+    black_pine: {elevation: [800, 1800]}
+    european_beech: {elevation: [1000, 1800]}
+    spring_gentian: {elevation: [1500, 2800]}
+    alpine_pasqueflower: {elevation: [1500, 2800]}
+    edelweiss: {elevation: [1800, 2800]}
+    wild_chives: {elevation: [1500, 2800]}
+  ground_surface:
+    geology: "Granite."
+    rock: [granite]
+    outcrops: some
+    soil: {coarse_dirt: few}
   why: "Laricio pine forests over maquis on Corsica and Sardinia."
 
 785:
@@ -350,6 +597,11 @@
   ground: {common_thyme: 1.5, grey_leaved_cistus: 0.75, rosemary: 0.75, slender_wild_oat: 1, retuse_false_brome: 1}
   flowers: {common_poppy: 0.21, cornflower: 0.14, oxeye_daisy: 0.14}
   flower_density: 0.4
+  ground_surface:
+    geology: "Limestone and marble."
+    rock: [calcite, stone]
+    outcrops: some
+    soil: {coarse_dirt: some, red_sand: few}
   why: "Phrygana, olive and pine on the islands and coasts of the Aegean."
 
 708:
@@ -359,6 +611,11 @@
   trees: {norway_spruce: 4, scots_pine: 2, downy_birch: 2}
   ground: {bilberry: 3, forest_mosses: 1, male_fern: 1, heather: 1, wavy_hair_grass: 1}
   flower_density: 0.2
+  ground_surface:
+    geology: "Gneiss under thin podzols and moss."
+    rock: [stone, diorite]
+    outcrops: some
+    soil: {podzol: few, moss_block: few}
   why: "Rainy fjord-side spruce and pine with a deep moss floor."
 
 717:
@@ -368,6 +625,11 @@
   trees: {norway_spruce: 4, scots_pine: 4, downy_birch: 2}
   ground: {bilberry: 3, forest_mosses: 2, heather: 1, wavy_hair_grass: 1}
   flower_density: 0.2
+  ground_surface:
+    geology: "Shield granite under podzols."
+    rock: [granite, stone]
+    outcrops: few
+    soil: {podzol: many}
   why: "Spruce, pine and birch from Sweden to the Urals."
 
 780:
@@ -379,6 +641,13 @@
   ground: {heather: 2, bilberry: 2, sheeps_fescue: 1, wavy_hair_grass: 1}
   flowers: {spring_gentian: 0.43, alpine_pasqueflower: 0.29, edelweiss: 0.14, wild_chives: 0.14}
   flower_density: 0.5
+  niches:
+    downy_birch: {elevation: [0, 1050]}
+  ground_surface:
+    geology: "Gneiss and granite above the treeline."
+    rock: [stone, granite]
+    outcrops: some
+    soil: {podzol: some}
   why: "Mountain birch below the bare fjell of Scandinavia."
 
 711:
@@ -390,4 +659,9 @@
   ground: {forest_mosses: 2, heather: 1, sheeps_fescue: 3}
   flowers: {spring_gentian: 0.21, alpine_pasqueflower: 0.14, edelweiss: 0.07, wild_chives: 0.07}
   flower_density: 0.3
+  ground_surface:
+    geology: "Basalt and hyaloclastite under moss and gravel."
+    rock: [smooth_basalt, tuff]
+    outcrops: some
+    soil: {moss_block: some, gravel: few}
   why: "Moss, grass and dwarf birch on young lava."

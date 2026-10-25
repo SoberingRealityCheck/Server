@@ -13,6 +13,7 @@ common_reed:
   name: Common reed
   latin: Phragmites australis
   form: grass
+  niche: {water: wet}
   colour: "#7a9f5a"
   colour_note: Grey-green broad leaf blades on tall stems.
   range: Marshes, ditches and lake shores worldwide.

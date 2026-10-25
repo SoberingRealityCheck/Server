@@ -3,6 +3,8 @@
   plants()      {plant id: entry}, every plant with its render evaluated (entry["feature"]) and its kind
                 (tree, ref, ground, cactus) for the feature writer
   ecoregions()  {ecoregion id: entry} with layers as {plant id: weight}
+  niches(eco)   {plant id: niche} for one ecoregion: the plant's own niche, overridden by the ecoregion's
+  surface(eco)  the ecoregion's ground_surface, checked
   colours(eco, leaf_blocks)
                 grass, foliage and per-leaf-block colours of an ecoregion, all derived from its species:
                   grass    weighted mean of the `colour` of its grasses (form grass, ground layer)
@@ -73,6 +75,7 @@ def plants():
             else: e["kind"], e["feature"] = "ground", f
             if e["kind"] in ("tree", "ref") and "sapling" not in e: raise SystemExit(f"{where}: trees need a sapling (survival check)")
             if "sapling" in e: e["sapling"] = render._id(e["sapling"])
+            if e.get("niche"): _check_niche(e["niche"], where)
             out[pid] = e
     _cache["plants"] = out
     return out
@@ -94,9 +97,52 @@ def ecoregions():
                         raise SystemExit(f"{where}: {L}: {pid} is not a tree feature")
             if not any(P[p]["form"] == "grass" for p in (e.get("ground") or {})):
                 raise SystemExit(f"{where}: name at least one grass in ground (it sets the grass colour)")
+            for pid in (e.get("niches") or {}):
+                if not any(pid in (e.get(L) or {}) for L in LAYERS): raise SystemExit(f"{where}: niches: {pid} is not listed in a layer")
             out[eid] = dict(e, file=os.path.basename(p))
     _cache["ecoregions"] = out
     return out
+
+
+NICHE_WATER = {"riparian", "wet", "dry", "any"}     # "any" in an ecoregion lifts a species' own niche there
+NICHE_SLOPE = {"flat", "steep", "any"}
+AMOUNTS = {"none": 0.0, "few": 0.08, "some": 0.2, "many": 0.4}     # share of gentle ground (surface patches)
+
+
+def _check_niche(n, where):
+    if not isinstance(n, dict) or set(n) - {"elevation", "water", "slope"}: raise SystemExit(f"{where}: niche keys are elevation, water, slope")
+    if "elevation" in n and not (isinstance(n["elevation"], list) and len(n["elevation"]) == 2 and n["elevation"][0] < n["elevation"][1]):
+        raise SystemExit(f"{where}: elevation is [low, high] metres")
+    if n.get("water", "riparian") not in NICHE_WATER: raise SystemExit(f"{where}: water is one of {sorted(NICHE_WATER)}")
+    if n.get("slope", "flat") not in NICHE_SLOPE: raise SystemExit(f"{where}: slope is one of {sorted(NICHE_SLOPE)}")
+    return n
+
+
+def niches(eco):
+    P = plants(); out = {}
+    for L in LAYERS:
+        for p in (eco.get(L) or {}):
+            n = dict(P[p].get("niche") or {})
+            n.update((eco.get("niches") or {}).get(p) or {})
+            _check_niche(n, f"{eco['name']}: {p}")
+            n = {k: v for k, v in n.items() if v != "any"}
+            if n: out[p] = n
+    return out
+
+
+def surface(eco):
+    """ground_surface: {geology: text, rock: [blocks], outcrops: amount, soil: {block: amount}, subsoil: block}."""
+    g = eco.get("ground_surface")
+    if not g: return None
+    where = f"{eco['name']}: ground_surface"
+    if set(g) - {"geology", "rock", "outcrops", "soil", "subsoil"}: raise SystemExit(f"{where}: unknown key")
+    if g.get("outcrops", "none") not in AMOUNTS: raise SystemExit(f"{where}: outcrops is one of {list(AMOUNTS)}")
+    for b, a in (g.get("soil") or {}).items():
+        if a not in AMOUNTS: raise SystemExit(f"{where}: soil {b}: amount is one of {list(AMOUNTS)}")
+    return {"geology": g.get("geology", ""), "rock": [render._id(b) for b in (g.get("rock") or [])],
+            "outcrops": AMOUNTS[g.get("outcrops", "none")],
+            "soil": {render._id(b): AMOUNTS[a] for b, a in (g.get("soil") or {}).items()},
+            "subsoil": render._id(g["subsoil"]) if g.get("subsoil") else None}
 
 
 def _mean(pairs):

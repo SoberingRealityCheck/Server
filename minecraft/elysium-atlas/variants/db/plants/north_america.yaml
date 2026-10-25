@@ -51,6 +51,7 @@ pinyon_pine:
   name: Two-needle pinyon
   latin: Pinus edulis
   form: tree
+  niche: {water: dry}
   leaf: "#557552"
   leaf_note: Short stiff dark green needles with a bluish cast.
   range: Colorado Plateau, southern Rockies foothills, Trans-Pecos mountains.
@@ -62,6 +63,7 @@ ashe_juniper:
   name: Ashe juniper
   latin: Juniperus ashei
   form: tree
+  niche: {water: dry}
   leaf: "#4a6040"
   leaf_note: Dark green to grey-green scale leaves.
   range: Edwards Plateau (Hill Country), Ozark glades.
@@ -74,6 +76,7 @@ one_seed_juniper:
   name: One-seed juniper
   latin: Juniperus monosperma
   form: shrub
+  niche: {water: dry}
   leaf: "#6a7d58"
   leaf_note: Yellow-green to grey-green scale leaves.
   range: Desert and plateau slopes, Trans-Pecos to the southern Rockies.
@@ -97,6 +100,7 @@ bald_cypress:
   name: Bald cypress
   latin: Taxodium distichum
   form: tree
+  niche: {water: wet}
   leaf: "#6a9a4a"
   leaf_note: Soft, flat, light green needles; deciduous, rusty orange in autumn.
   autumn: "#a8662a"
@@ -167,6 +171,7 @@ post_oak:
   name: Post oak
   latin: Quercus stellata
   form: tree
+  niche: {water: dry}
   leaf: "#4f7f30"
   leaf_note: Thick, leathery, cross-shaped leaves, dark green and rough above.
   range: Cross Timbers, Post Oak Savanna, Piney Woods uplands.
@@ -178,6 +183,7 @@ blackjack_oak:
   name: Blackjack oak
   latin: Quercus marilandica
   form: shrub
+  niche: {water: dry}
   leaf: "#3f6a2e"
   leaf_note: Broad, bell-shaped, leathery leaves, glossy dark green.
   range: Cross Timbers and sandy oak savanna.
@@ -268,6 +274,7 @@ pecan:
   name: Pecan
   latin: Carya illinoinensis
   form: tree
+  niche: {water: riparian}
   leaf: mid_green
   leaf_note: Compound leaves of narrow yellow-green leaflets.
   range: River bottoms of central Texas and the Mississippi valley.
@@ -289,6 +296,7 @@ cottonwood:
   name: Plains cottonwood
   latin: Populus deltoides
   form: tree
+  niche: {water: riparian}
   leaf: "#5aa83a"
   leaf_note: Glossy bright green triangular leaves; yellow in autumn.
   autumn: "#c8b03a"
@@ -359,6 +367,7 @@ sabal_palm:
   name: Rio Grande palmetto
   latin: Sabal mexicana
   form: tree
+  niche: {water: riparian}
   leaf: "#4f7a3a"
   leaf_note: Large fan leaves, green to slightly grey-green.
   range: Lower Rio Grande and the Gulf coast.
@@ -383,6 +392,7 @@ creosote_bush:
   name: Creosote bush
   latin: Larrea tridentata
   form: shrub_ground
+  niche: {water: dry, slope: flat}
   range: Chihuahuan desert flats.
   look: Evenly spaced resinous green shrubs.
   render: 'flowers("bush")'
@@ -409,6 +419,7 @@ lechuguilla:
   name: Lechuguilla
   latin: Agave lechuguilla
   form: succulent
+  niche: {slope: steep}
   range: Chihuahuan desert limestone.
   render: 'flowers("terrestria:agave")'
   stand_in: Terrestria agave.
@@ -426,6 +437,7 @@ texas_prickly_pear:
   name: Texas prickly pear
   latin: Opuntia engelmannii var. lindheimeri
   form: succulent
+  niche: {water: dry}
   range: South and central Texas, brush country, desert.
   render: 'flowers(("wilderwild:prickly_pear", {"age": "0"}), ("wilderwild:prickly_pear", {"age": "1"}), ("wilderwild:prickly_pear", {"age": "2"}), weights=[5, 3, 2])'
   stand_in: Wilder Wild prickly pear.
@@ -434,6 +446,7 @@ tree_cholla:
   name: Tree cholla
   latin: Cylindropuntia imbricata
   form: cactus
+  niche: {water: dry}
   range: Chihuahuan desert and plateau grassland.
   render: 'column("cactus", 2, 3, "cactus_flower", 0.1)'
   stand_in: Cactus column.
@@ -651,6 +664,7 @@ virginia_iris:
   name: Virginia blue flag
   latin: Iris virginica
   form: flower
+  niche: {water: wet}
   range: Marshes and bottomland swamps.
   render: 'flowers("blue_orchid")'
   stand_in: Blue orchid.
