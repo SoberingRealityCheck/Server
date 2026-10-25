@@ -30,6 +30,7 @@ loblolly_pine:                       # id, used in ecoregion lists
   sapling: spruce_sapling            # trees: the sapling whose survival rule decides where it may grow
   stand_in: Vanilla spruce.          # when the blocks stand for something they are not
   niche: {water: dry}                # optional, see Niches
+  clump: {size: 40, share: 0.5}      # optional, see Clumping
 ```
 
 Grasses use `colour` / `colour_note` instead of `leaf`: the colour of the turf, which becomes the grass tint.
@@ -54,6 +55,9 @@ uses an existing vanilla or flora-mod feature.
   niches:                            # optional: where in this region each species grows, see Niches
     norway_spruce: {elevation: [800, 2050]}
     european_larch: {elevation: [1300, 2400]}
+  clumps: {live_oak: {size: 20, share: 0.4}, heather: none}    # optional: override plant clumps here
+  patches:                           # optional: whole layers in patches with open ground between
+    trees: {size: 48, share: 0.65}
   ground_surface:                    # optional: rock and soil, see Ground surface
     geology: "Crystalline core and limestone ranges; scree below cliffs."
     rock: [stone, calcite]           # one or two blocks; steep ground and outcrops
@@ -86,12 +90,27 @@ none (above the treeline) gets nothing.
 Elevation is read from the ground height through the atlas vertical scale (`Atlas.elevationMetres`, 18.75 m per
 block above sea level). Placement: `elysium_atlas:niche_selector` (`NicheSelectorFeature.java`).
 
+## Clumping
+
+Plants grow in patches. A clump is `{size, share, outside}`: patches about `size` blocks across cover `share` of
+the ground, and `outside` (default 0.1) is how much of the plant grows between them.
+
+- `clump` on a plant (or `clumps` in an ecoregion) moves that species' weight into its own patches without changing
+  its total: aspen groves, cedar brakes, bluebonnet fields, bluebell carpets. Flowers default to
+  `{size: 12, share: 0.35}`, so each drift is mostly one species; `none` turns a clump off.
+- `patches` in an ecoregion gathers a whole layer (trees, shrubs, ground or flowers) into patches with open ground
+  between: oak mottes in the Hill Country, forest and meadow in the Alps, groves in the forest steppe. The
+  placement count rises by 1 / (outside + (1 - outside) x share) so the mean density stays the same.
+
+Each species and layer has its own noise pattern (`Clump.java`, two octaves of value noise; `share` is exact for any
+size).
+
 ## Ground surface
 
 `ground_surface` sets the top block on dry, non-snow, non-beach ground of the region's variants:
 steep ground and `outcrops` become `rock`, then `soil` patches, and `subsoil` replaces the dirt below the top.
-Shares: few 8 %, some 20 %, many 40 % of eligible ground, from normal noises with measured sd 0.31
-(`biome_variants.SURFACE_NOISES`). Patches are 30-60 blocks across, so a single 200-block area can sit well
+Shares: few 5 %, some 12 %, many 25 % of eligible ground, from normal noises with measured sd 0.31
+(`biome_variants.SURFACE_NOISES`). Outcrops are about 15-30 blocks across and soil patches 8-16, so a small area can sit
 above or below its share. Written as a Lithostitched surface rule,
 `data/elysium_atlas/lithostitched/worldgen_modifier/regional_surface.json`.
 

@@ -5,6 +5,8 @@
   ecoregions()  {ecoregion id: entry} with layers as {plant id: weight}
   niches(eco)   {plant id: niche} for one ecoregion: the plant's own niche, overridden by the ecoregion's
   surface(eco)  the ecoregion's ground_surface, checked
+  clumps(eco)   {plant id: clump} for one ecoregion: the plant's clump (or its form's default), overridden by the ecoregion's
+  patches(eco)  {layer: clump}: layers that grow in patches with open ground between
   colours(eco, leaf_blocks)
                 grass, foliage and per-leaf-block colours of an ecoregion, all derived from its species:
                   grass    weighted mean of the `colour` of its grasses (form grass, ground layer)
@@ -76,6 +78,7 @@ def plants():
             if e["kind"] in ("tree", "ref") and "sapling" not in e: raise SystemExit(f"{where}: trees need a sapling (survival check)")
             if "sapling" in e: e["sapling"] = render._id(e["sapling"])
             if e.get("niche"): _check_niche(e["niche"], where)
+            if e.get("clump"): _check_clump(e["clump"], where)
             out[pid] = e
     _cache["plants"] = out
     return out
@@ -99,6 +102,12 @@ def ecoregions():
                 raise SystemExit(f"{where}: name at least one grass in ground (it sets the grass colour)")
             for pid in (e.get("niches") or {}):
                 if not any(pid in (e.get(L) or {}) for L in LAYERS): raise SystemExit(f"{where}: niches: {pid} is not listed in a layer")
+            for pid, c in (e.get("clumps") or {}).items():
+                if not any(pid in (e.get(L) or {}) for L in LAYERS): raise SystemExit(f"{where}: clumps: {pid} is not listed in a layer")
+                if c != "none": _check_clump(c, f"{where}: clumps: {pid}")
+            for L, c in (e.get("patches") or {}).items():
+                if L not in LAYERS or L == "cactus" or not e.get(L): raise SystemExit(f"{where}: patches: {L} is not a layer of this ecoregion")
+                _check_clump(c, f"{where}: patches: {L}")
             out[eid] = dict(e, file=os.path.basename(p))
     _cache["ecoregions"] = out
     return out
@@ -106,7 +115,7 @@ def ecoregions():
 
 NICHE_WATER = {"riparian", "wet", "dry", "any"}     # "any" in an ecoregion lifts a species' own niche there
 NICHE_SLOPE = {"flat", "steep", "any"}
-AMOUNTS = {"none": 0.0, "few": 0.08, "some": 0.2, "many": 0.4}     # share of gentle ground (surface patches)
+AMOUNTS = {"none": 0.0, "few": 0.05, "some": 0.12, "many": 0.25}     # share of gentle ground (surface patches); steep ground adds rock
 
 
 def _check_niche(n, where):
@@ -128,6 +137,31 @@ def niches(eco):
             n = {k: v for k, v in n.items() if v != "any"}
             if n: out[p] = n
     return out
+
+
+FORM_CLUMP = {"flower": {"size": 12, "share": 0.35}}    # single-species drifts unless a plant or ecoregion says otherwise
+
+
+def _check_clump(c, where):
+    if not isinstance(c, dict) or set(c) - {"size", "share", "outside"} or not {"size", "share"} <= set(c):
+        raise SystemExit(f"{where}: clump is {{size: blocks, share: 0-1, outside: 0-1 (optional)}} or none")
+    if not (2 <= c["size"] <= 256 and 0 < c["share"] < 1 and 0 <= c.get("outside", 0.1) <= 1):
+        raise SystemExit(f"{where}: clump size 2-256 blocks, share and outside between 0 and 1")
+    return c
+
+
+def clumps(eco):
+    P = plants(); out = {}
+    for L in LAYERS:
+        if L == "cactus": continue
+        for p in (eco.get(L) or {}):
+            c = (eco.get("clumps") or {}).get(p, P[p].get("clump") or FORM_CLUMP.get(P[p]["form"]))
+            if c and c != "none": out[p] = {"outside": 0.1, **c}
+    return out
+
+
+def patches(eco):
+    return {L: {"outside": 0.1, **c} for L, c in (eco.get("patches") or {}).items()}
 
 
 def surface(eco):

@@ -5,6 +5,7 @@ bracken:
   name: Bracken
   latin: Pteridium aquilinum
   form: fern
+  clump: {size: 18, share: 0.4}
   range: Acid soils, heaths and wood edges in Europe and North America.
   render: 'flowers(("large_fern", {"half": "lower"}), "fern", weights=[2, 1])'
   stand_in: Large fern and fern.
@@ -13,6 +14,7 @@ common_reed:
   name: Common reed
   latin: Phragmites australis
   form: grass
+  clump: {size: 10, share: 0.4}
   niche: {water: wet}
   colour: "#7a9f5a"
   colour_note: Grey-green broad leaf blades on tall stems.

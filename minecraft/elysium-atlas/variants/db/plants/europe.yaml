@@ -111,6 +111,7 @@ silver_birch:
   name: Silver birch
   latin: Betula pendula
   form: tree
+  clump: {size: 18, share: 0.4}
   leaf: yellow_green
   leaf_note: Small light green triangular leaves; yellow in autumn.
   autumn: "#d0b840"
@@ -124,6 +125,7 @@ downy_birch:
   name: Downy birch
   latin: Betula pubescens
   form: tree
+  clump: {size: 18, share: 0.5}
   leaf: "#6f9f48"
   leaf_note: Duller, darker green than silver birch.
   range: Wet uplands, the north and the subarctic.
@@ -202,6 +204,7 @@ european_larch:
   name: European larch
   latin: Larix decidua
   form: tree
+  clump: {size: 20, share: 0.45}
   leaf: pale_yellow_green
   leaf_note: Soft bright light green needles in tufts; gold in autumn.
   autumn: "#d8a830"
@@ -355,6 +358,7 @@ heather:
   name: Heather (ling)
   latin: Calluna vulgaris
   form: shrub_ground
+  clump: {size: 20, share: 0.5}
   range: Atlantic heaths and moors, pine and birch woods.
   render: 'segmented("biomesoplenty:purple_wildflowers", "flower_amount")'
   stand_in: Biomes O' Plenty purple wildflowers.
@@ -363,6 +367,7 @@ gorse:
   name: Gorse
   latin: Ulex europaeus
   form: shrub_ground
+  clump: {size: 10, share: 0.3, outside: 0.05}
   range: Atlantic heaths and coasts.
   look: Green bushes flecked with yellow.
   render: 'flowers("bush", ("wildflowers", {"facing": "north", "flower_amount": "4"}), weights=[2, 1])'
@@ -380,6 +385,7 @@ lavender:
   name: True lavender
   latin: Lavandula angustifolia
   form: shrub_ground
+  clump: {size: 12, share: 0.35, outside: 0.05}
   niche: {water: dry}
   range: Provence and Iberian limestone.
   render: 'flowers("biomesoplenty:lavender", ("biomesoplenty:tall_lavender", {"half": "lower"}), weights=[2, 1])'
@@ -571,6 +577,7 @@ bluebell:
   name: Bluebell
   latin: Hyacinthoides non-scripta
   form: flower
+  clump: {size: 16, share: 0.35, outside: 0.05}
   range: Atlantic beech and oak woods.
   render: 'flowers("biomesoplenty:violet")'
   stand_in: Biomes O' Plenty violet.
@@ -579,6 +586,7 @@ wood_anemone:
   name: Wood anemone
   latin: Anemone nemorosa
   form: flower
+  clump: {size: 14, share: 0.4}
   range: Spring floor of deciduous woods.
   render: 'segmented("biomesoplenty:white_petals", "flower_amount")'
   stand_in: Biomes O' Plenty white petals.

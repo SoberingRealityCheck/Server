@@ -30,6 +30,8 @@
     geology: "Sandy soils of the Post Oak Belt."
     soil: {coarse_dirt: few}
     subsoil: sand
+  patches:
+    trees: {size: 30, share: 0.5, outside: 0.1}
   why: "Post oak and blackjack oak mottes in little bluestem grassland."
 
 401:
@@ -47,13 +49,14 @@
     rock: [calcite]
     outcrops: few
     soil: {mud: few}
+  patches:
+    trees: {size: 40, share: 0.3, outside: 0.1}
   why: "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks."
 
 391:
   name: Hill Country
   resolve: "Edwards Plateau savanna"
   tree_cover: 0.4
-  tree_density: 0.6
   trees: {ashe_juniper: 6, live_oak: 4, post_oak: 1, cedar_elm: 1}
   shrubs: {shin_oak: 2, one_seed_juniper: 1}
   ground: {sideoats_grama: 1.6, little_bluestem: 1.6, curly_mesquite: 0.8}
@@ -67,6 +70,9 @@
     rock: [calcite]
     outcrops: many
     soil: {coarse_dirt: some}
+  patches:
+    trees: {size: 28, share: 0.4, outside: 0.04}
+    flowers: {size: 32, share: 0.4}
   why: "Edwards Plateau: Ashe juniper brakes and live oak mottes on limestone, bluebonnets in spring."
 
 390:
@@ -84,6 +90,8 @@
     outcrops: few
     soil: {coarse_dirt: few}
     subsoil: sand
+  patches:
+    trees: {size: 40, share: 0.55, outside: 0.15}
   why: "A belt of stunted post oak and blackjack oak woodland between the prairies."
 
 389:
@@ -104,6 +112,8 @@
     outcrops: some
     soil: {red_sand: few}
     subsoil: red_terracotta
+  patches:
+    trees: {size: 30, share: 0.5, outside: 0.1}
   why: "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar."
 
 384:
@@ -119,6 +129,8 @@
   ground_surface:
     geology: "Coastal clay and sand."
     soil: {mud: few}
+  patches:
+    trees: {size: 30, share: 0.3, outside: 0.05}
   why: "Coastal tallgrass prairie and marsh, mossy live oak mottes on old dunes."
 
 402:
@@ -178,6 +190,9 @@
   ground_surface:
     geology: "Sandy and caliche soils."
     soil: {coarse_dirt: some, sand: few}
+  patches:
+    trees: {size: 16, share: 0.5, outside: 0.15}
+    shrubs: {size: 16, share: 0.5, outside: 0.15}
   why: "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
 
 436:
@@ -210,6 +225,8 @@
   rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands}
   ground_surface:
     geology: "Loess and glacial till under deep mollisols."
+  patches:
+    trees: {size: 40, share: 0.25, outside: 0.05}
   why: "Big bluestem prairie of Iowa, Missouri and Kansas: the atlas plants forest on it; it inherits plains."
 
 392:
@@ -227,6 +244,8 @@
     rock: [stone, calcite]
     outcrops: some
     soil: {gravel: few}
+  patches:
+    trees: {size: 40, share: 0.3, outside: 0.05}
   why: "The largest surviving tallgrass prairie, on flinty limestone hills."
 
 340:

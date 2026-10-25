@@ -210,6 +210,10 @@ willow and alder keep to river banks; junipers, pinyon and creosote avoid them. 
 rule: Edwards limestone in the Hill Country, red beds on the Rolling Plains, chalk under the English downs, karst in
 the Dinarides, podzol in the taiga, basalt and moss in Iceland.
 
+Clumping: species can grow in their own patches (`clump`: aspen groves, cedar brakes, bluebonnet fields) and whole
+layers can gather into patches with open ground between (`patches`: oak mottes in the Hill Country, meadows between
+Alpine forest). Schema in `variants/db/README.md`.
+
 `variants/biome_variants.py SERVER_JAR TERRALITH_JAR` writes the biome files, features, names and
 `elysium_atlas/variants.json` into `src/main/resources`; `--check` reports stale output. `/atlas variants`
 audits every variant against its parent (tags, spawns, features) and lists only problems. `/atlas here` and

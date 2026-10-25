@@ -63,6 +63,8 @@
     rock: [granite, stone]
     outcrops: some
     soil: {mud: some, podzol: few}
+  patches:
+    trees: {size: 30, share: 0.2, outside: 0.03}
   why: "Wind-cut moor and blanket bog on the Atlantic fringe: heather, birch in the glens."
 
 691:
@@ -82,6 +84,8 @@
     rock: [granite, stone]
     outcrops: some
     soil: {podzol: some}
+  patches:
+    trees: {size: 40, share: 0.6, outside: 0.1}
   why: "Old Scots pine over heather and juniper in the Highlands."
 
 686:
@@ -160,6 +164,8 @@
     geology: "Loess under chernozem."
     soil: {coarse_dirt: few}
     subsoil: packed_mud
+  patches:
+    trees: {size: 48, share: 0.35, outside: 0.05}
   why: "Oak groves and birch islands in a sea of grass across Ukraine and southern Russia."
 
 735:
@@ -175,6 +181,8 @@
     geology: "Loess under chernozem and chestnut soils."
     soil: {coarse_dirt: few}
     subsoil: packed_mud
+  patches:
+    trees: {size: 48, share: 0.25, outside: 0.03}
   why: "Feather grass steppe north of the Black Sea; trees only in the gullies."
 
 674:
@@ -189,6 +197,8 @@
     geology: "Loess and blown sand."
     soil: {sand: few}
     subsoil: packed_mud
+  patches:
+    trees: {size: 40, share: 0.3, outside: 0.05}
   why: "Oak woods and sandy grassland of the Hungarian plain, willow and poplar along the Danube."
 
 675:
@@ -234,6 +244,8 @@
     rock: [stone, calcite]
     outcrops: some
     soil: {gravel: few}
+  patches:
+    trees: {size: 48, share: 0.65, outside: 0.15}
   why: "Beech-fir on the outer slopes, spruce higher up, larch and stone pine at the treeline, then krummholz and flowered turf."
 
 644:
@@ -479,6 +491,8 @@
     rock: [granite]
     outcrops: few
     soil: {coarse_dirt: some}
+  patches:
+    flowers: {size: 32, share: 0.4}
   why: "Wood pasture of cork and holm oak in southwest Iberia, gone back to scrub between the trees."
 
 803:
@@ -648,6 +662,8 @@
     rock: [stone, granite]
     outcrops: some
     soil: {podzol: some}
+  patches:
+    trees: {size: 30, share: 0.5, outside: 0.1}
   why: "Mountain birch below the bare fjell of Scandinavia."
 
 711:

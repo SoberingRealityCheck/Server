@@ -26,7 +26,9 @@ import java.util.stream.Stream;
  *   water      riparian (near rivers and lakes), wet (riparian or waterlogged ground), dry (away from water)
  *   slope      flat or steep (terrain slope around the spot)
  * Weight at a spot = base weight x suitability. The plant count scales with the best suitability of any entry, so the
- * species that fit share the full density and a spot that suits none gets nothing (treelines, bare ridges). Without the atlas every niche counts as fully suitable.
+ * species that fit share the full density and a spot that suits none gets nothing (treelines, bare ridges).
+ * An entry's clump moves its weight into its own patches (aspen groves, bluebonnet fields) without changing its total;
+ * the config's patches gather the whole layer into patches with open ground between (Clump). Without the atlas every niche counts as fully suitable.
  */
 public class NicheSelectorFeature extends Feature<NicheSelectorFeature.Config> {
     static final double EDGE_M = 150;
@@ -65,16 +67,19 @@ public class NicheSelectorFeature extends Feature<NicheSelectorFeature.Config> {
         }
     }
 
-    public record Entry(Holder<PlacedFeature> feature, float weight, Niche niche) {
+    public record Entry(Holder<PlacedFeature> feature, float weight, Niche niche, Optional<Clump> clump) {
         public static final Codec<Entry> CODEC = RecordCodecBuilder.create(i -> i.group(
                 PlacedFeature.CODEC.fieldOf("feature").forGetter(Entry::feature),
                 Codec.FLOAT.fieldOf("weight").forGetter(Entry::weight),
-                Niche.CODEC.optionalFieldOf("niche", Niche.ANY).forGetter(Entry::niche)).apply(i, Entry::new));
+                Niche.CODEC.optionalFieldOf("niche", Niche.ANY).forGetter(Entry::niche),
+                Clump.CODEC.optionalFieldOf("clump").forGetter(Entry::clump)).apply(i, Entry::new));
     }
 
-    public record Config(List<Entry> entries) implements FeatureConfiguration {
+    /** patches: the whole layer grows in patches (mottes, groves, flower drifts); its placement count is raised to match. */
+    public record Config(List<Entry> entries, Optional<Clump> patches) implements FeatureConfiguration {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(i -> i.group(
-                Entry.CODEC.listOf().fieldOf("entries").forGetter(Config::entries)).apply(i, Config::new));
+                Entry.CODEC.listOf().fieldOf("entries").forGetter(Config::entries),
+                Clump.CODEC.optionalFieldOf("patches").forGetter(Config::patches)).apply(i, Config::new));
 
         @Override
         public Stream<Holder<ConfiguredFeature<?, ?>>> getSubFeatures() {
@@ -102,16 +107,22 @@ public class NicheSelectorFeature extends Feature<NicheSelectorFeature.Config> {
     public boolean place(FeaturePlaceContext<Config> ctx) {
         List<Entry> es = ctx.config().entries();
         if (es.isEmpty()) return false;
-        Spot s = spot(ctx.level(), ctx.origin());
+        RandomSource r = ctx.random();
+        BlockPos o = ctx.origin();
+        long seed = ctx.level().getSeed();
+        Optional<Clump> patches = ctx.config().patches();
+        if (patches.isPresent() && r.nextDouble() > patches.get().presence(seed, o.getX(), o.getZ())) return false;
+        Spot s = spot(ctx.level(), o);
         double[] w = new double[es.size()];
         double tot = 0, best = 0;
         for (int i = 0; i < w.length; i++) {
             double f = es.get(i).niche().suit(s);
-            w[i] = es.get(i).weight() * f; tot += w[i]; best = Math.max(best, f);
+            Optional<Clump> c = es.get(i).clump();
+            double clump = c.isPresent() ? c.get().presence(seed, o.getX(), o.getZ()) / c.get().mean() : 1;
+            w[i] = es.get(i).weight() * f * clump; tot += w[i]; best = Math.max(best, f);
         }
         // the plant count follows the best-suited species: where any listed species fits fully, density is full
         // (the others give way); where none fits (above the treeline, a bare ridge) it fades to nothing
-        RandomSource r = ctx.random();
         if (tot <= 0 || r.nextDouble() > best) return false;
         double pick = r.nextDouble() * tot;
         for (int i = 0; i < w.length; i++) {

@@ -231,17 +231,27 @@ def selector(weighted):
     return {"type": "minecraft:random_selector", "config": {"default": items[-1][0], "features": feats}}
 
 
-def niche_selector(weighted):
-    """elysium_atlas:niche_selector over (placed feature json, weight, niche) triples (NicheSelectorFeature.java)."""
+def niche_selector(weighted, patches=None):
+    """elysium_atlas:niche_selector over (placed feature json, weight, niche, clump) tuples (NicheSelectorFeature.java)."""
     return {"type": "elysium_atlas:niche_selector", "config": {"entries": [
-        {"feature": f, "weight": round(float(w), 4), **({"niche": n} if n else {})} for f, w, n in weighted if w > 0]}}
+        {"feature": f, "weight": round(float(w), 4), **({"niche": n} if n else {}), **({"clump": c} if c else {})}
+        for f, w, n, c in weighted if w > 0], **({"patches": patches} if patches else {})}}
+
+
+def clump_json(c, key): return {"size": c["size"], "share": c["share"], "outside": c["outside"], "key": key} if c else None
+
+
+def patch_gain(c):
+    """placement count factor for a layer in patches: the count rises so that the mean density is kept."""
+    return 1.0 / (c["outside"] + (1 - c["outside"]) * c["share"]) if c else 1.0
 
 
 # ---------------------------------------------------------------- regional ground surface
 # parents whose own surface is the point (snow, ice, sand beaches, badlands bands, water): no regional surface
 NO_SURFACE = re.compile(r"snow|frozen|ice|glacier|peak|beach|shore|ocean|river|badlands|mesa|lake|dune")
-SURFACE_NOISES = {"outcrop": (-6, [1.0, 1.0, 1.0]), "rock_mix": (-7, [1.0, 1.0]),
-                  "soil_0": (-5, [1.0, 1.0, 1.0]), "soil_1": (-5, [1.0, 1.0, 1.0]), "soil_2": (-5, [1.0, 1.0, 1.0])}
+# outcrops about 15-30 blocks across with ragged edges, soil patches about 8-16; all have sd 0.31 (measured)
+SURFACE_NOISES = {"outcrop": (-5, [1.0, 1.0, 1.0, 1.0]), "rock_mix": (-7, [1.0, 1.0]),
+                  "soil_0": (-4, [1.0, 1.0, 1.0]), "soil_1": (-4, [1.0, 1.0, 1.0]), "soil_2": (-4, [1.0, 1.0, 1.0])}
 NOISE_SD = 0.31     # standard deviation of these normal noises (measured: 0.31 for 2 and 3 octaves); share s of ground lies above SD * z(1 - s)
 
 
@@ -297,27 +307,29 @@ class Flora:
         self.files[f"data/elysium/worldgen/configured_feature/plant/{name}.json"] = feat
         return cid, sapling
 
-    def trees(self, eco, layer, plants, niches, n):
+    def trees(self, eco, layer, plants, niches, clumps, patches, n):
         key = f"flora/{eco}/{layer}_{level(n)}"
         if f"data/elysium/worldgen/placed_feature/{key}.json" not in self.files:
             items = []
             for p, w in plants.items():
                 cid, sap = self.plant(p)
-                items.append(({"feature": cid, "placement": [survive(sap)]}, w, niches.get(p)))
-            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = niche_selector(items)
+                items.append(({"feature": cid, "placement": [survive(sap)]}, w, niches.get(p), clump_json(clumps.get(p), p)))
+            pt = patches.get(layer)
+            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = niche_selector(items, clump_json(pt, f"{eco}/{layer}"))
             self.files[f"data/elysium/worldgen/placed_feature/{key}.json"] = {"feature": f"elysium:flora/{eco}/{layer}", "placement": [
-                {"type": "minecraft:count", "count": count_of(LEVELS[level(n)])}, {"type": "minecraft:in_square"},
+                {"type": "minecraft:count", "count": count_of(LEVELS[level(n)] * patch_gain(pt))}, {"type": "minecraft:in_square"},
                 {"type": "minecraft:surface_water_depth_filter", "max_water_depth": 0},
                 {"type": "minecraft:heightmap", "heightmap": "OCEAN_FLOOR"}, {"type": "minecraft:biome"}]}
         return f"elysium:{key}"
 
-    def blocks(self, eco, layer, plants, niches, n, tries, spread):
+    def blocks(self, eco, layer, plants, niches, clumps, patches, n, tries, spread):
         key = f"flora/{eco}/{layer}_{level(n)}"
         if f"data/elysium/worldgen/placed_feature/{key}.json" not in self.files:
-            items = [({"feature": PLANTS[p][1], "placement": []}, w, niches.get(p)) for p, w in plants.items()]
-            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = niche_selector(items)
+            items = [({"feature": PLANTS[p][1], "placement": []}, w, niches.get(p), clump_json(clumps.get(p), p)) for p, w in plants.items()]
+            pt = patches.get(layer)
+            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = niche_selector(items, clump_json(pt, f"{eco}/{layer}"))
             self.files[f"data/elysium/worldgen/placed_feature/{key}.json"] = {"feature": f"elysium:flora/{eco}/{layer}",
-                                                                               "placement": scatter(LEVELS[level(n)], tries, spread)}
+                                                                               "placement": scatter(LEVELS[level(n)] * patch_gain(pt), tries, spread)}
         return f"elysium:{key}"
 
     def cactus(self, eco, plants, n):
@@ -396,7 +408,7 @@ def generate(src, check=False):
         if not prof: continue
         total = sum(counts.values()); habitat = ecos.get(eid, {}).get("biome_num", 4)
         g_hex, f_hex, leaf_hex = db.colours(prof, leaves_of)
-        niches = db.niches(prof)
+        niches = db.niches(prof); clumps = db.clumps(prof); patches = db.patches(prof)
         if db.surface(prof): surfaces[eid] = db.surface(prof)
         grass, foliage = rgb(g_hex), rgb(f_hex)
         species_db[eid] = {"name": prof["name"], "resolve": prof.get("resolve"), "grass": g_hex, "foliage": f_hex, "leaves": leaf_hex,
@@ -427,13 +439,13 @@ def generate(src, check=False):
             remove, _ = plants.of_biome(base)
             add = []
             if prof.get("trees"):
-                add.append(flora.trees(eid, "trees", prof["trees"], niches, TREES_PER_CHUNK_AT_FULL_COVER * tree_cover * m * prof.get("tree_density", 1.0)))
+                add.append(flora.trees(eid, "trees", prof["trees"], niches, clumps, patches, TREES_PER_CHUNK_AT_FULL_COVER * tree_cover * m * prof.get("tree_density", 1.0)))
             if prof.get("shrubs"):
-                add.append(flora.trees(eid, "shrubs", prof["shrubs"], niches, (1.0 + 12 * shrub_cover) * prof.get("shrub_density", 1.0) * min(1.5, m ** 0.5)))
+                add.append(flora.trees(eid, "shrubs", prof["shrubs"], niches, clumps, patches, (1.0 + 12 * shrub_cover) * prof.get("shrub_density", 1.0) * min(1.5, m ** 0.5)))
             if prof.get("ground"):
-                add.append(flora.blocks(eid, "ground", prof["ground"], niches, (1 + 6 * open_cover) * max(0.5, min(1.5, 1.5 - 0.5 * m)), 32, 7))
+                add.append(flora.blocks(eid, "ground", prof["ground"], niches, clumps, patches, (1 + 6 * open_cover) * max(0.5, min(1.5, 1.5 - 0.5 * m)), 32, 7))
             if prof.get("flowers"):
-                add.append(flora.blocks(eid, "flowers", prof["flowers"], niches, prof.get("flower_density", 1.0), 24, 6))
+                add.append(flora.blocks(eid, "flowers", prof["flowers"], niches, clumps, patches, prof.get("flower_density", 1.0), 24, 6))
             if prof.get("cactus"):
                 add.append(flora.cactus(eid, prof["cactus"], prof.get("cactus_density", 0.5)))
             b = dict(base)

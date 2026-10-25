@@ -63,6 +63,7 @@ ashe_juniper:
   name: Ashe juniper
   latin: Juniperus ashei
   form: tree
+  clump: {size: 40, share: 0.5}
   niche: {water: dry}
   leaf: "#4a6040"
   leaf_note: Dark green to grey-green scale leaves.
@@ -100,6 +101,7 @@ bald_cypress:
   name: Bald cypress
   latin: Taxodium distichum
   form: tree
+  clump: {size: 12, share: 0.4}
   niche: {water: wet}
   leaf: "#6a9a4a"
   leaf_note: Soft, flat, light green needles; deciduous, rusty orange in autumn.
@@ -149,6 +151,7 @@ live_oak:
   name: Southern live oak
   latin: Quercus virginiana (incl. Q. fusiformis, plateau live oak)
   form: tree
+  clump: {size: 16, share: 0.4}
   leaf: dark_glossy_green
   leaf_note: Leathery evergreen leaves, glossy dark green above.
   range: Gulf coast, Hill Country, Blackland and South Texas.
@@ -195,6 +198,7 @@ shin_oak:
   name: Shin oak
   latin: Quercus sinuata var. breviloba
   form: shrub
+  clump: {size: 12, share: 0.35, outside: 0.05}
   leaf: "#5e8a46"
   leaf_note: Small blue-green to grey-green leaves.
   range: Limestone of the Hill Country and north-central Texas.
@@ -309,6 +313,7 @@ gambel_oak:
   name: Gambel oak
   latin: Quercus gambelii
   form: shrub
+  clump: {size: 14, share: 0.35, outside: 0.05}
   leaf: deep_green
   leaf_note: Lobed, glossy dark green above.
   range: Foothills of the southern Rockies and Mogollon Rim.
@@ -320,6 +325,7 @@ quaking_aspen:
   name: Quaking aspen
   latin: Populus tremuloides
   form: tree
+  clump: {size: 24, share: 0.3, outside: 0.03}
   leaf: yellow_green
   leaf_note: Round bright green leaves on flat stalks; gold in autumn.
   autumn: "#d8b030"
@@ -367,6 +373,7 @@ sabal_palm:
   name: Rio Grande palmetto
   latin: Sabal mexicana
   form: tree
+  clump: {size: 14, share: 0.3, outside: 0.05}
   niche: {water: riparian}
   leaf: "#4f7a3a"
   leaf_note: Large fan leaves, green to slightly grey-green.
@@ -428,6 +435,7 @@ yaupon:
   name: Yaupon holly
   latin: Ilex vomitoria
   form: shrub_ground
+  clump: {size: 12, share: 0.4}
   range: Piney Woods and Gulf coast understory.
   look: Evergreen holly thickets with red berries.
   render: 'flowers("bush", "firefly_bush", weights=[4, 1])'
@@ -600,6 +608,7 @@ texas_bluebonnet:
   name: Texas bluebonnet
   latin: Lupinus texensis
   form: flower
+  clump: {size: 20, share: 0.3, outside: 0.05}
   range: Blackland Prairie, Hill Country, Post Oak Savanna.
   render: 'flowers("cornflower")'
   stand_in: Cornflower.
@@ -616,6 +625,7 @@ indian_blanket:
   name: Indian blanket (firewheel)
   latin: Gaillardia pulchella
   form: flower
+  clump: {size: 18, share: 0.3, outside: 0.05}
   range: Sandy prairies and roadsides across Texas.
   render: 'flowers("orange_tulip", "red_tulip", weights=[3, 1])'
   stand_in: Orange and red tulips.
@@ -713,6 +723,7 @@ sea_oats:
   name: Sea oats
   latin: Uniola paniculata
   form: flower
+  clump: {size: 10, share: 0.4}
   range: Dunes of the Gulf barrier islands.
   render: 'flowers(("biomesoplenty:sea_oats", {"half": "lower"}))'
   stand_in: Biomes O' Plenty sea oats.
