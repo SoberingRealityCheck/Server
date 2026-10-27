@@ -144,20 +144,6 @@ mods:
       only because Xaero's Maps: Multiplayer+ hard-depended on it on the
       server, and that mod is gone.
 
-  - name: "Architectury API"
-    file: "architectury-fabric-21.1.11.jar"
-    url: "https://cdn.modrinth.com/data/lhGA9TYQ/versions/w3CUWoxd/architectury-fabric-21.1.11.jar"
-    sha512: "b4c74ce1c0bb47e8ba54cbdd9b24fe8cc7cfc2ed7194f1e451e369adb1f1ae9ac37afc4612124b9793cb5fd7705ebce5634caa80c2825bd23d3dba8eb0bcc53d"
-    env: both
-    reason: "Library required by Terrain Slabs, which runs on both sides"
-
-  - name: "MidnightLib"
-    file: "midnightlib-fabric-1.9.3+26.2.jar"
-    url: "https://cdn.modrinth.com/data/codAaoxh/versions/3uBvRFE9/midnightlib-fabric-1.9.3%2B26.2.jar"
-    sha512: "46a0959737bb54431f0ae0a7dfa2467f26211d27ea2cd1ef7a7750c9a97425f481db46bab6cc861cd3b77accb7dfef3653dc5c683d7dfc07fa7f76824351ce22"
-    env: both
-    reason: "Config library required by Terrain Slabs, which runs on both sides"
-
   # --- Worldgen -------------------------------------------------------
   - name: "Terralith"
     file: "Terralith_26.2_v2.6.4.jar"
@@ -283,18 +269,6 @@ mods:
       server is enough. CAUTION: it only changes chunks generated after
       install. An End that already exists keeps its old terrain until
       it is reset. Does not mix with other End worldgen mods.
-
-  - name: "Terrain Slabs"
-    file: "Terrain Slabs v3.3.3-26.2.jar"
-    url: "https://cdn.modrinth.com/data/SJu6sklj/versions/ghb8NWuP/Terrain%20Slabs%20v3.3.3-26.2.jar"
-    sha512: "5c25fcf8196878c543491819d4fc79c075e743d00e5c84b516ac5723ca67a78112a139cd0115c64822687749f26f6c15712df562531a509c70d6ec1b2500b9e1"
-    env: both
-    reason: >-
-      Generates slabs on the surface and in caves to smooth slopes, so
-      hills are walkable without jumping. Adds real blocks, so both
-      sides. Needs Architectury API and MidnightLib, above. Its page
-      doesn't mention Terralith, so check for odd steps on Terralith
-      cliffs. Distant Horizons will not draw the slabs at range.
 
   # --- Server performance ---------------------------------------------
   - name: "Lithium"
