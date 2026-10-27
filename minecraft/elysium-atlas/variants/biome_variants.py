@@ -305,6 +305,16 @@ def surface_rule(vids, g):
         cond({"type": "minecraft:not", "invert": floor}, cond(under, block(g["subsoil"]))) if g["subsoil"] else None)))
 
 
+def nest(rules, group=16):
+    """The ecoregion rules behind one biome test for all of them, then in groups of `group` behind one test each:
+    every surface block outside the variants passes one test instead of one per ecoregion (the regional rule is
+    prepended, so it runs for every block of the overworld)."""
+    if not rules: return seq()
+    ids = lambda rs: sorted({v for r in rs for v in r["if_true"]["biome_is"]})
+    groups = [rules[i:i + group] for i in range(0, len(rules), group)]
+    return cond({"type": "minecraft:biome", "biome_is": ids(rules)}, seq(*(cond({"type": "minecraft:biome", "biome_is": ids(g)}, seq(*g)) for g in groups)))
+
+
 def scatter(count, tries, spread, heightmap="MOTION_BLOCKING", extra=None):
     p = [{"type": "minecraft:count", "count": count_of(count)}] if count != 1 else []
     return p + [{"type": "minecraft:in_square"}, {"type": "minecraft:heightmap", "heightmap": heightmap}, {"type": "minecraft:biome"},
@@ -492,7 +502,7 @@ def generate(src, check=False):
     surface_files = {f"data/elysium/worldgen/noise/surface/{n}.json": {"firstOctave": o, "amplitudes": a} for n, (o, a) in SURFACE_NOISES.items()}
     surface_files["data/elysium_atlas/lithostitched/worldgen_modifier/regional_surface.json"] = {
         "type": "lithostitched:add_surface_rule", "levels": ["minecraft:overworld"], "injection_type": "prepend",
-        "surface_rule": seq(*rules)}
+        "surface_rule": nest(rules)}
     files = {**out, **placed, **flora.files, **surface_files,
              "assets/elysium/lang/en_us.json": lang,
              "elysium_atlas/variants.json": {"format": 2, "generated_by": "variants/biome_variants.py", "variants": table},
