@@ -38,6 +38,8 @@ public final class ElysiumAtlas implements ModInitializer {
         Registry.register(BuiltInRegistries.BIOME_SOURCE, Identifier.fromNamespaceAndPath(MOD_ID, "atlas"), AtlasBiomeSource.CODEC);
         Registry.register(BuiltInRegistries.FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "niche_selector"),
                 new dev.elysium.atlas.flora.NicheSelectorFeature(dev.elysium.atlas.flora.NicheSelectorFeature.Config.CODEC));
+        dev.elysium.atlas.flora.ScaledCountPlacement.TYPE = Registry.register(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE,
+                Identifier.fromNamespaceAndPath(MOD_ID, "scaled_count"), () -> dev.elysium.atlas.flora.ScaledCountPlacement.CODEC);
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
             Variants.bind(server.registryAccess());
             boolean on = usesAtlas(server);

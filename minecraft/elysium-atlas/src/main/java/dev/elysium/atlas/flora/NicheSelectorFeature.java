@@ -69,16 +69,18 @@ public class NicheSelectorFeature extends Feature<NicheSelectorFeature.Config> {
 
     public record Entry(Holder<PlacedFeature> feature, float weight, Niche niche, Optional<Clump> clump) {
         public static final Codec<Entry> CODEC = RecordCodecBuilder.create(i -> i.group(
-                PlacedFeature.CODEC.fieldOf("feature").forGetter(Entry::feature),
+                PlacedFeature.CODEC.fieldOf("data").forGetter(Entry::feature),
                 Codec.FLOAT.fieldOf("weight").forGetter(Entry::weight),
                 Niche.CODEC.optionalFieldOf("niche", Niche.ANY).forGetter(Entry::niche),
                 Clump.CODEC.optionalFieldOf("clump").forGetter(Entry::clump)).apply(i, Entry::new));
     }
 
-    /** patches: the whole layer grows in patches (mottes, groves, flower drifts); its placement count is raised to match. */
+    /** patches: the whole layer grows in patches (mottes, groves, flower drifts); its placement count is raised to match.
+     *  The JSON keeps the shape of vanilla weighted lists ("features": [{"data": placed feature, "weight": w}]) so that
+     *  Distant Horizons SeedGen, which models trees from biome features, reads the species and their shares. */
     public record Config(List<Entry> entries, Optional<Clump> patches) implements FeatureConfiguration {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(i -> i.group(
-                Entry.CODEC.listOf().fieldOf("entries").forGetter(Config::entries),
+                Entry.CODEC.listOf().fieldOf("features").forGetter(Config::entries),
                 Clump.CODEC.optionalFieldOf("patches").forGetter(Config::patches)).apply(i, Config::new));
 
         @Override

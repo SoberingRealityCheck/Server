@@ -250,12 +250,17 @@ def selector(weighted):
 
 def niche_selector(weighted, patches=None):
     """elysium_atlas:niche_selector over (placed feature json, weight, niche, clump) tuples (NicheSelectorFeature.java)."""
-    return {"type": "elysium_atlas:niche_selector", "config": {"entries": [
-        {"feature": f, "weight": round(float(w), 4), **({"niche": n} if n else {}), **({"clump": c} if c else {})}
+    return {"type": "elysium_atlas:niche_selector", "config": {"features": [
+        {"data": f, "weight": round(float(w), 4), **({"niche": n} if n else {}), **({"clump": c} if c else {})}
         for f, w, n, c in weighted if w > 0], **({"patches": patches} if patches else {})}}
 
 
 def clump_json(c, key): return {"size": c["size"], "share": c["share"], "outside": c["outside"], "key": key} if c else None
+
+
+def scaled(factor):
+    """elysium_atlas:scaled_count for a patch gain (ScaledCountPlacement.java); none when there is nothing to scale."""
+    return [{"type": "elysium_atlas:scaled_count", "factor": round(factor, 4)}] if factor != 1.0 else []
 
 
 def patch_gain(c):
@@ -345,7 +350,7 @@ class Flora:
             pt = patches.get(layer)
             self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = niche_selector(items, clump_json(pt, f"{eco}/{layer}"))
             self.files[f"data/elysium/worldgen/placed_feature/{key}.json"] = {"feature": f"elysium:flora/{eco}/{layer}", "placement": [
-                {"type": "minecraft:count", "count": count_of(LEVELS[level(n)] * patch_gain(pt))}, {"type": "minecraft:in_square"},
+                {"type": "minecraft:count", "count": count_of(LEVELS[level(n)])}, *scaled(patch_gain(pt)), {"type": "minecraft:in_square"},
                 {"type": "minecraft:surface_water_depth_filter", "max_water_depth": 0},
                 {"type": "minecraft:heightmap", "heightmap": "OCEAN_FLOOR"}, {"type": "minecraft:biome"}]}
         return f"elysium:{key}"
