@@ -247,6 +247,14 @@ block takes the mean colour of the species that grow it there, stored relative t
 (`leaf_palettes.json`) so seasons still shift it. `docs/ecoregion_colours.png` in the project folder shows every
 ecoregion.
 
+Season palettes (client, art direction ask 20): `variants/seasons.py` gives every region an explicit colour for
+grass and each leaf block in each Serene Seasons subseason (`season_palettes.json`). It averages species and grass
+phenology tracks (`variants/db/seasons/`) mapped onto subseasons by the region's phase class
+(`region_climate.yaml`); hand palettes (`season_palettes.yaml`) win per block. Where these exist they replace the
+foliage offset and the Serene Seasons overlay; "bare" crowns show a twig grey-brown. Where an evergreen shares a leaf
+block with deciduous species in a region, the evergreen is moved to an evergreen-only block there
+(`<plant>__<block>` features). Cherry leaves stay untinted. Without Serene Seasons the palettes show mid summer.
+
 ## Distant Horizons SeedGen
 
 SeedGen (0.9.1) draws LODs from the world's density functions and biome source, so atlas terrain and

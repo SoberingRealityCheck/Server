@@ -1,0 +1,94 @@
+# Species phenology: leaf colour through the year for every deciduous tree/shrub used in a profile (2026-10-28).
+# Region leaf palettes are derived from this (weighted by the region's species weights per leaf block), so a region
+# needs a hand-written leaf palette only where it departs from its species. Grass palettes are per region
+# (region_grass.yaml), because grass colour follows climate rather than species.
+# Keys: spring = leaf-out flush, summer, early_autumn, autumn = peak, late_autumn, winter.
+# "bare" = leafless (hold until next key). "marcescent" values = dead leaves kept on the tree over winter.
+# summer omitted = keep the db `leaf` colour. Sources: field guides and phenology records (USA-NPN, PEP725,
+# Japan Meteorological Agency kōyō records); colours are estimates of the canopy as seen from a distance.
+
+evergreen_flag_fixes:   # marked deciduous in the db but evergreen in reality: they currently turn red in autumn
+  [coast_live_oak, chamise, coconut_palm, joshua_tree, faxon_yucca, hainan_hopea, lychee, manzanita, pacific_madrone,
+   schima, moso_bamboo, rosebay_rhododendron, hengduan_rhododendron, chinese_banyan]
+special:                # neither: hold colour, no autumn shift, but not a true evergreen canopy
+  palo_verde: {all: "#8ab040"}          # green bark; leaflets drop in drought but the tree stays green
+  saxaul: {all: "#8a9a6a"}              # leafless green twigs
+  tamarisk: {spring: "#9ab890", summer: "#8aa880", autumn: "#b08850", winter: bare}
+
+# --- Europe
+european_beech:   {spring: "#9cd060", summer: "#62a83c", early_autumn: "#a8a038", autumn: "#b8642a", late_autumn: "#9a5a2e", winter: bare}
+pedunculate_oak:  {spring: "#a0c050", early_autumn: "#7a8a34", autumn: "#9a7a34", late_autumn: "#7a5a30", winter: bare}
+sessile_oak:      {spring: "#a0c050", autumn: "#a08038", late_autumn: "#7a5a30", winter: bare}
+downy_oak:        {spring: "#9ab860", autumn: "#9a7034", late_autumn: "#8a5a30", winter: "#7a5a3a"}       # marcescent
+turkey_oak:       {spring: "#9ab860", autumn: "#9a7a34", late_autumn: "#7a5a30", winter: bare}
+hornbeam:         {spring: "#9ad060", autumn: "#c0a038", late_autumn: "#9a8040", winter: "#8a6a3a"}       # young hornbeam marcescent
+sweet_chestnut:   {spring: "#a8c858", autumn: "#c09a30", late_autumn: "#8a6a30", winter: bare}
+silver_birch:     {spring: "#a8d860", autumn: "#d8c040", late_autumn: "#c0a040", winter: bare}
+downy_birch:      {spring: "#a0d060", autumn: "#d0b840", winter: bare}
+hazel:            {spring: "#a0d060", autumn: "#c8b040", winter: bare}
+black_alder:      {spring: "#5a9a3a", autumn: "#4a7a34", late_autumn: "#5a6a3a", winter: bare}           # drops leaves green
+green_alder:      {spring: "#7ab848", autumn: "#a09030", winter: bare}
+black_poplar:     {spring: "#a0c858", autumn: "#d8c040", winter: bare}
+lombardy_poplar:  {spring: "#a0c858", autumn: "#e0c838", winter: bare}
+white_willow:     {spring: "#b0d080", summer: "#9ab478", autumn: "#c8c060", winter: bare}               # silver-green
+european_larch:   {spring: "#b0d070", summer: "#9cc060", early_autumn: "#c0b040", autumn: "#d9a030", late_autumn: "#b88030", winter: bare}
+sea_buckthorn:    {spring: "#a8b890", summer: "#9aaa88", autumn: "#a8a070", winter: "#b06a2a"}           # orange berries on bare twigs
+
+# --- North America
+white_oak:        {spring: "#b0c870", autumn: "#8a3a30", late_autumn: "#7a4a30", winter: "#8a6a4a"}       # wine-red, marcescent
+red_oak:          {spring: "#b0b860", autumn: "#a03a24", late_autumn: "#7a3a28", winter: bare}
+shumard_oak:      {spring: "#a8c060", autumn: "#b0382a", winter: bare}
+southern_red_oak: {spring: "#a8c060", autumn: "#8a4a2a", winter: "#7a5a3a"}
+post_oak:         {spring: "#a0c060", autumn: "#8a5a30", winter: "#7a5a3a"}
+blackjack_oak:    {spring: "#90b058", autumn: "#7a3a28", winter: "#6a4a34"}
+bur_oak:          {spring: "#a0c060", autumn: "#9a7a40", winter: bare}
+chestnut_oak:     {spring: "#a8c060", autumn: "#a06a30", winter: "#7a5a3a"}
+shin_oak:         {spring: "#90b858", autumn: "#8a6a3a", winter: "#7a5a3a"}
+scrub_oak:        {spring: "#90b858", autumn: "#9a6a34", winter: "#7a5a3a"}
+gambel_oak:       {spring: "#90c058", autumn: "#c06a2a", late_autumn: "#9a4a2a", winter: bare}           # orange-red slopes in the Rockies
+valley_oak:       {spring: "#a0c070", autumn: "#a08a50", winter: bare}
+blue_oak:         {spring: "#a8c090", summer: "#8aa088", autumn: "#a09a70", winter: bare}               # blue-grey, summer-dry
+oregon_white_oak: {spring: "#a0c070", autumn: "#a08040", winter: bare}
+mockernut_hickory: {spring: "#a8d060", autumn: "#d8b030", winter: bare}
+pecan:            {spring: "#a0c858", autumn: "#b09030", winter: bare}
+cedar_elm:        {spring: "#90c058", autumn: "#c0a838", winter: bare}
+american_basswood: {spring: "#a8d060", autumn: "#c8b040", winter: bare}
+american_beech:   {spring: "#b0d870", autumn: "#c8a038", late_autumn: "#b08a50", winter: "#c0a878"}      # pale marcescent leaves glow in winter woods
+sugar_maple:      {spring: "#a8d060", early_autumn: "#e0a030", autumn: "#e06020", late_autumn: "#c04020", winter: bare}
+red_maple:        {spring: "#b06a50", summer: "#5a9a3a", early_autumn: "#d04a2a", autumn: "#c82a24", winter: bare}    # red flowers before leaves
+bigleaf_maple:    {spring: "#a0d060", autumn: "#d8b030", winter: bare}
+yellow_birch:     {spring: "#a8d060", autumn: "#d8c040", winter: bare}
+paper_birch:      {spring: "#a8d860", autumn: "#e0c040", winter: bare}
+quaking_aspen:    {spring: "#b0e070", early_autumn: "#e0d040", autumn: "#e8b830", winter: bare}
+balsam_poplar:    {spring: "#a0c858", autumn: "#d8c040", winter: bare}
+cottonwood:       {spring: "#a0c858", autumn: "#e0c038", winter: bare}
+red_alder:        {spring: "#7ab048", autumn: "#7a8a40", winter: bare}
+black_cherry:     {spring: "#a0c858", autumn: "#d0a030", winter: bare}
+tulip_tree:       {spring: "#a8d860", autumn: "#e0c038", winter: bare}
+sweetgum:         {spring: "#90c858", early_autumn: "#b0a030", autumn: "#8a2c40", late_autumn: "#a04a2a", winter: bare}
+flowering_dogwood_tree: {spring: "#f2f0e8", summer: "#4a8a34", autumn: "#8a2a30", winter: bare}
+bald_cypress:     {spring: "#a8d070", summer: "#7aa048", autumn: "#a0522d", winter: bare}
+tamarack:         {spring: "#a8d070", summer: "#7a9a48", autumn: "#d0a838", winter: bare}
+western_larch:    {spring: "#b0d070", autumn: "#d8a030", winter: bare}
+
+# --- East Asia
+japanese_beech:   {spring: "#a8d868", autumn: "#c89a38", late_autumn: "#a07a40", winter: bare}
+konara_oak:       {spring: "#b0c870", autumn: "#b08a3a", winter: bare}
+mongolian_oak:    {spring: "#a8c060", autumn: "#a06a30", winter: "#8a6a40"}
+liaodong_oak:     {spring: "#a8c060", autumn: "#a06a30", winter: "#8a6a40"}
+japanese_maple:   {spring: "#a0c858", summer: "#6aa43a", early_autumn: "#b0a030", autumn: "#d04020", late_autumn: "#c8321e", winter: bare}
+mono_maple:       {spring: "#a8d060", autumn: "#e0b030", winter: bare}
+japanese_cherry:  {spring: "#f2c8d8", summer: "#5a8a3a", autumn: "#c06030", winter: bare}            # only if the cherry is not the chosen vanilla pink
+japanese_larch:   {spring: "#b0d070", autumn: "#d8a030", winter: bare}
+siberian_larch:   {spring: "#b0d070", autumn: "#d8a030", winter: bare}
+dahurian_larch:   {spring: "#b0d070", autumn: "#d89a30", winter: bare}
+asian_white_birch: {spring: "#a8d860", autumn: "#e0c040", winter: bare}
+erman_birch:      {spring: "#a8d860", autumn: "#d8c040", winter: bare}
+hazel_siberian:   {spring: "#a0d060", autumn: "#c8a040", winter: bare}
+amur_linden:      {spring: "#a8d060", autumn: "#d0b040", winter: bare}
+manchurian_ash:   {spring: "#a0c858", autumn: "#c8b040", winter: bare}
+siberian_elm:     {spring: "#a0c858", autumn: "#c8b040", winter: bare}
+chinese_scholar_tree: {spring: "#a0c858", autumn: "#c0b040", winter: bare}
+asian_willow:     {spring: "#b0d870", autumn: "#c8c060", winter: bare}
+euphrates_poplar: {spring: "#a0b870", autumn: "#e8b030", winter: bare}                           # Tarim tugai: famous gold October
+sweetgum_formosan: {spring: "#90c858", autumn: "#c8402a", winter: bare}

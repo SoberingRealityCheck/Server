@@ -19,4 +19,11 @@ public class BlockColorsMixin {
         List<BlockTintSource> s = LeafTints.of(state.getBlock());
         if (s != null) cir.setReturnValue(s);
     }
+
+    /** Grass colours from the regions' explicit season palettes, over vanilla's (and Serene Seasons') grass colour. */
+    @Inject(method = "getTintSources", at = @At("RETURN"), cancellable = true)
+    private void elysium$grassSeasons(BlockState state, CallbackInfoReturnable<List<BlockTintSource>> cir) {
+        List<BlockTintSource> s = LeafTints.grass(state.getBlock(), cir.getReturnValue());
+        if (s != null) cir.setReturnValue(s);
+    }
 }

@@ -551,6 +551,7 @@ machilus:
 schima:
   name: Schima
   latin: Schima superba
+  evergreen: true
   form: tree
   leaf: "#3e6e32"
   leaf_note: Glossy dark green leaves; white camellia-like flowers.
@@ -561,6 +562,7 @@ schima:
 chinese_banyan:
   name: Chinese banyan
   latin: Ficus microcarpa
+  evergreen: true
   form: tree
   leaf: "#3e7030"
   leaf_note: Small glossy dark leaves.
@@ -571,6 +573,7 @@ chinese_banyan:
 hainan_hopea:
   name: Hainan hopea
   latin: Hopea hainanensis
+  evergreen: true
   form: tree
   leaf: "#3a6a30"
   leaf_note: Leathery dark green leaves.
@@ -583,6 +586,7 @@ hainan_hopea:
 lychee:
   name: Wild lychee
   latin: Litchi chinensis
+  evergreen: true
   form: tree
   leaf: "#3e6a30"
   leaf_note: Glossy pinnate leaves.
@@ -594,6 +598,7 @@ lychee:
 coconut_palm:
   name: Coconut palm
   latin: Cocos nucifera
+  evergreen: true
   form: tree
   niche: {elevation: [0, 60]}
   leaf: "#6a9a3a"
@@ -606,6 +611,7 @@ coconut_palm:
 moso_bamboo:
   name: Moso bamboo
   latin: Phyllostachys edulis
+  evergreen: true
   form: tree
   clump: {size: 28, share: 0.35}
   leaf: "#7aaa3a"
@@ -731,6 +737,7 @@ chinese_azalea:
 hengduan_rhododendron:
   name: Hengduan rhododendrons
   latin: Rhododendron spp. (R. phaeochrysum, R. rubiginosum)
+  evergreen: true
   form: shrub
   clump: {size: 20, share: 0.4}
   leaf: "#3a6438"

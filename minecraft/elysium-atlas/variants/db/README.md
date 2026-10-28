@@ -139,6 +139,11 @@ shift them. Species that share a leaf block in game share its colour in a region
 
 Colours are taken from each species' usual description (`leaf_note`, `colour_note`), not measured from photographs.
 
+Season colours come from `seasons/` (see `variants/seasons.py`): `species_phenology.yaml` (leaf tracks of deciduous
+species; evergreens keep `leaf` all year), `grass_phenology.yaml`, `region_climate.yaml` (phase and winter class per
+region; add `grass: summer_dry` where perennial grass cures in summer under a snowy winter) and the hand-authored
+`season_palettes.yaml`. These are copies of the art direction files in the project folder; edit them here.
+
 ## Checks
 
 `db.py` stops the build on: an unknown plant id, a species without `latin`, a tree or shrub without a leaf colour,

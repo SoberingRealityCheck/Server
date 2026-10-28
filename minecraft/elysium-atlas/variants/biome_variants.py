@@ -25,7 +25,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, "..", "src", "main", "resources")
 sys.path.insert(0, HERE)
 from regions import REGIONS, unit_names
-import db
+import db, seasons
+BARE = 0x7a6c5c     # leafless crowns read as grey-brown twigs until leaf blocks can be swapped out (art direction ask 2)
 
 FOREST_ATTRS = "minecraft:forest"   # plain overworld sky, fog and music, for variants of stylized parents
 CLIMATE = ("temperature", "downfall", "has_precipitation", "temperature_modifier")
@@ -383,19 +384,23 @@ class Flora:
     """Writes the configured and placed features of ecoregion plant lists."""
     def __init__(self): self.files = {}; self.plant_ids = {}
 
-    def plant(self, name):
+    def plant(self, name, move=None):
+        """A plant's configured feature; move = (leaf block, replacement) writes a copy on another leaf block."""
         kind, feat, sapling, _ = PLANTS[name]
         if kind == "ref": return feat, sapling
+        if move:
+            feat = json.loads(json.dumps(feat).replace(f'"Name": "{move[0]}"', f'"Name": "{move[1]}"'))
+            name = f"{name}__{move[1].split(':')[1]}"
         cid = f"elysium:plant/{name}"
         self.files[f"data/elysium/worldgen/configured_feature/plant/{name}.json"] = feat
         return cid, sapling
 
-    def trees(self, eco, layer, plants, niches, clumps, patches, n):
+    def trees(self, eco, layer, plants, niches, clumps, patches, n, moves={}):
         key = f"flora/{eco}/{layer}_{level(n)}"
         if f"data/elysium/worldgen/placed_feature/{key}.json" not in self.files:
             items = []
             for p, w in plants.items():
-                cid, sap = self.plant(p)
+                cid, sap = self.plant(p, moves.get(p))
                 items.append(({"feature": cid, "placement": [survive(sap)]}, w, niches.get(p), clump_json(clumps.get(p), p)))
             pt = patches.get(layer)
             self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = niche_selector(items, clump_json(pt, f"{eco}/{layer}"))
@@ -452,7 +457,7 @@ def generate(src, check=False):
         if ident not in biome_cache: biome_cache[ident] = src.get("biome", ident)
         return biome_cache[ident]
 
-    out = {}; placed = {}; lang = {}; table = {}; claims = {}; palettes = {}
+    out = {}; placed = {}; lang = {}; table = {}; claims = {}; palettes = {}; season_out = {}
     leaf_table = json.load(open(os.path.join(RES, "elysium_atlas", "leaf_tints.json")))["leaves"]
 
     def claim(vid, unit, atlas_biome):
@@ -490,7 +495,12 @@ def generate(src, check=False):
         eid = unit.split(":")[1]; prof = flora_db.get(int(eid))
         if not prof: continue
         total = sum(counts.values()); habitat = ecos.get(eid, {}).get("biome_num", 4)
-        g_hex, f_hex, leaf_hex = db.colours(prof, leaves_of)
+        spal, tropical, moves = seasons.palettes(int(eid), prof, leaves_of)
+        leaves_here = (lambda p, mv=moves: {mv[p][1]} if p in mv else leaves_of(p))
+        if eid not in season_out:
+            season_out[eid] = {"tropical": tropical, "blocks": {b: [-1 if c == "bare" else int(c[1:], 16) for c in v]
+                                                               for b, v in spal.items() if b == "grass" or b in leaf_table}}
+        g_hex, f_hex, leaf_hex = db.colours(prof, leaves_here)
         niches = db.niches(prof); clumps = db.clumps(prof); patches = db.patches(prof)
         if db.surface(prof): surfaces[eid] = db.surface(prof)
         grass, foliage = rgb(g_hex), rgb(f_hex)
@@ -522,9 +532,9 @@ def generate(src, check=False):
             remove, _ = plants.of_biome(base)
             add = []
             if prof.get("trees"):
-                add.append(flora.trees(eid, "trees", prof["trees"], niches, clumps, patches, TREES_PER_CHUNK_AT_FULL_COVER * tree_cover * m * prof.get("tree_density", 1.0)))
+                add.append(flora.trees(eid, "trees", prof["trees"], niches, clumps, patches, TREES_PER_CHUNK_AT_FULL_COVER * tree_cover * m * prof.get("tree_density", 1.0), moves))
             if prof.get("shrubs"):
-                add.append(flora.trees(eid, "shrubs", prof["shrubs"], niches, clumps, patches, (1.0 + 12 * shrub_cover) * prof.get("shrub_density", 1.0) * min(1.5, m ** 0.5)))
+                add.append(flora.trees(eid, "shrubs", prof["shrubs"], niches, clumps, patches, (1.0 + 12 * shrub_cover) * prof.get("shrub_density", 1.0) * min(1.5, m ** 0.5), moves))
             if prof.get("ground"):
                 add.append(flora.blocks(eid, "ground", prof["ground"], niches, clumps, patches, (1 + 6 * open_cover) * max(0.5, min(1.5, 1.5 - 0.5 * m)), 32, 7))
             if prof.get("flowers"):
@@ -545,7 +555,7 @@ def generate(src, check=False):
                           "why": prof["why"]}
             if a != base_id: table[vid]["replaces"] = [a]
             lang[f"biome.elysium.{path.replace('/', '.')}"] = prof["name"] if a == main else f"{prof['name']} ({title(a)})"
-            palettes[vid] = palette(f_hex, leaf_hex, leaf_table, db.evergreen_blocks(prof, leaves_of))
+            palettes[vid] = palette(f_hex, leaf_hex, leaf_table, db.evergreen_blocks(prof, leaves_here))
             n_flora += 1
     # Terrestria builds its dune surface in code for terrestria:dunes only, so variants of it came out as grass
     dunes = [v for v, t in table.items() if t["parent"] == "terrestria:dunes"]
@@ -566,6 +576,8 @@ def generate(src, check=False):
              "assets/elysium/lang/en_us.json": lang,
              "elysium_atlas/variants.json": {"format": 2, "generated_by": "variants/biome_variants.py", "variants": table},
              "elysium_atlas/leaf_palettes.json": {"generated_by": "variants/biome_variants.py (leaf colours of each ecoregion's species)", "palettes": palettes},
+             "elysium_atlas/season_palettes.json": {"generated_by": "variants/seasons.py via biome_variants.py (art direction ask 20)",
+                 "bare": BARE, "temperate": seasons.SUB, "tropical": seasons.TROP, "regions": season_out},
              "elysium_atlas/ecoregions.json": {"generated_by": "variants/biome_variants.py from variants/db", "ecoregions": species_db}}
     if check:
         stale = [p for p, d in files.items() if not os.path.exists(os.path.join(RES, p)) or json.load(open(os.path.join(RES, p))) != d]

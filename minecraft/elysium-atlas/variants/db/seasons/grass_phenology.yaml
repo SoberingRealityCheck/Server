@@ -1,0 +1,66 @@
+# Grass phenology (2026-10-28): turf colour through the year for each grass in the db.
+# summer = the db colour. Other keys come from the growth type (see grass_tracks.py) with species overrides.
+# Region grass palettes = weighted mean of these over the region's grasses, mapped onto subseasons by the
+# region's phase class (region_grass.yaml). Sources: USDA Plants / Fire Effects Information System species
+# accounts, Flora of China, European grassland phenology (PEP725 grassland stations).
+
+purple_needlegrass: {type: annual, spring: "#7aa850", summer: "#aca868", early_autumn: "#c8b070", autumn: "#c0ac74", late_autumn: "#a9a86e", winter: "#86a858"}
+retuse_false_brome: {type: annual, spring: "#7aa850", summer: "#b8ac66", early_autumn: "#c8b070", autumn: "#c0ac74", late_autumn: "#a9a86e", winter: "#86a858"}
+slender_wild_oat: {type: annual, spring: "#7aa850", summer: "#beae6c", early_autumn: "#c8b070", autumn: "#c0ac74", late_autumn: "#a9a86e", winter: "#86a858"}
+wild_oats: {type: annual, spring: "#7aa850", summer: "#bcac6c", early_autumn: "#c8b070", autumn: "#c0ac74", late_autumn: "#a9a86e", winter: "#86a858"}
+blue_moor_grass: {type: c3, spring: "#80b65c", summer: "#6aa45a", early_autumn: "#6aa45a", autumn: "#7da05a", late_autumn: "#84995d", winter: "#8f8c66"}
+common_bent: {type: c3, spring: "#84bb54", summer: "#70ac4e", early_autumn: "#70ac4e", autumn: "#81a652", late_autumn: "#879d58", winter: "#8f8c66"}
+eastern_woodland_sedge: {type: c3, spring: "#80b952", summer: "#6aa84a", early_autumn: "#6aa84a", autumn: "#7da350", late_autumn: "#849b56", winter: "#8f8c66"}
+false_oat_grass: {type: c3, spring: "#89c15a", summer: "#78b456", early_autumn: "#78b456", autumn: "#86ab57", late_autumn: "#8ba05c", winter: "#8f8c66"}
+forest_sedge: {type: c3, spring: "#8ab056", summer: "#7a9a50", early_autumn: "#7a9a50", autumn: "#879a54", late_autumn: "#8c9459", winter: "#8f8c66"}
+pennsylvania_sedge: {type: c3, spring: "#83b050", summer: "#6f9a48", early_autumn: "#6f9a48", autumn: "#809a4e", late_autumn: "#879455", winter: "#8f8c66"}
+perennial_ryegrass: {type: c3, spring: "#78be52", summer: "#5eb04a", early_autumn: "#5eb04a", autumn: "#75a850", late_autumn: "#7f9e56", winter: "#8f8c66"}
+red_fescue: {type: c3, spring: "#7dbe53", summer: "#66b04c", early_autumn: "#66b04c", autumn: "#7aa851", late_autumn: "#839e57", winter: "#8f8c66"}
+thurber_fescue: {type: c3, spring: "#8ab95c", summer: "#7aa85a", early_autumn: "#7aa85a", autumn: "#87a35a", late_autumn: "#8c9b5d", winter: "#8f8c66"}
+wavy_hair_grass: {type: c3, spring: "#8bb059", summer: "#7c9a55", early_autumn: "#7c9a55", autumn: "#899a57", late_autumn: "#8c945b", winter: "#8f8c66"}
+wood_sedge: {type: c3, spring: "#78b952", summer: "#5ea84a", early_autumn: "#5ea84a", autumn: "#75a350", late_autumn: "#7f9b56", winter: "#8f8c66"}
+big_bluestem: {type: c4, spring: "#8f9f5e", summer: "#76a650", early_autumn: "#76a650", autumn: "#9a5a3a", late_autumn: "#9a6a4a", winter: "#a08060"}
+blue_grama: {type: c4, spring: "#a29e6a", summer: "#a0a46a", early_autumn: "#a0a46a", autumn: "#b0905a", late_autumn: "#b09669", winter: "#b0a080"}
+bothriochloa: {type: c4, spring: "#989a63", summer: "#8a9a5a", early_autumn: "#8a9a5a", autumn: "#9a5a50", late_autumn: "#b09669", winter: "#b0a080"}
+broomsedge: {type: c4, spring: "#b09060", summer: "#9aa560", early_autumn: "#9aa560", autumn: "#c08a4a", late_autumn: "#c08a4a", winter: "#c09058"}
+buffalograss: {type: c4, spring: "#a0a06a", summer: "#9ba86a", early_autumn: "#9ba86a", autumn: "#b0905a", late_autumn: "#b09669", winter: "#b0a080"}
+cogon_grass: {type: c4, spring: "#989f60", summer: "#8aa654", early_autumn: "#8aa654", autumn: "#b0a060", late_autumn: "#b09669", winter: "#b0a080"}
+curly_mesquite: {type: c4, spring: "#9fa065", summer: "#98a85e", early_autumn: "#98a85e", autumn: "#b0905a", late_autumn: "#b09669", winter: "#b0a080"}
+gulf_cordgrass: {type: c4, spring: "#969e63", summer: "#86a45a", early_autumn: "#86a45a", autumn: "#b0905a", late_autumn: "#b09669", winter: "#b0a080"}
+indiangrass: {type: c4, spring: "#919d61", summer: "#7aa055", early_autumn: "#7aa055", autumn: "#c09040", late_autumn: "#b09669", winter: "#b89a6a"}
+little_bluestem: {type: c4, spring: "#98a063", summer: "#8aa85a", early_autumn: "#8aa85a", autumn: "#b0603a", late_autumn: "#a8684a", winter: "#a87a5a"}
+miscanthus: {type: c4, spring: "#939c61", summer: "#7e9e56", early_autumn: "#7e9e56", autumn: "#b8b090", late_autumn: "#c0b898", winter: "#c0b498"}
+mountain_muhly: {type: c4, spring: "#989e65", summer: "#8aa45e", early_autumn: "#8aa45e", autumn: "#b0905a", late_autumn: "#b09669", winter: "#b0a080"}
+prairie_sandreed: {type: c4, spring: "#a0a06d", summer: "#9aa870", early_autumn: "#9aa870", autumn: "#b0905a", late_autumn: "#b09669", winter: "#b0a080"}
+sideoats_grama: {type: c4, spring: "#9a9e63", summer: "#8ea45a", early_autumn: "#8ea45a", autumn: "#b0905a", late_autumn: "#b09669", winter: "#b0a080"}
+switchgrass: {type: c4, spring: "#91a061", summer: "#7aa856", early_autumn: "#7aa856", autumn: "#c0a050", late_autumn: "#b09669", winter: "#c0b080"}
+wiregrass: {type: c4, spring: "#9b9f64", summer: "#8fa55c", early_autumn: "#8fa55c", autumn: "#b0905a", late_autumn: "#b09669", winter: "#b0a080"}
+big_galleta: {type: desert, spring: "#b0a878", summer: "#a4a87a", early_autumn: "#a4a87a", autumn: "#b0a979", late_autumn: "#b8aa78", winter: "#b4a880"}
+black_grama: {type: desert, spring: "#b0a878", summer: "#b0aa6a", early_autumn: "#b0aa6a", autumn: "#b5aa72", late_autumn: "#b8aa78", winter: "#b4a880"}
+tobosa: {type: desert, spring: "#b0a878", summer: "#a9a866", early_autumn: "#a9a866", autumn: "#b2a971", late_autumn: "#b8aa78", winter: "#b4a880"}
+esparto: {type: evergreen, spring: "#a5ab62", summer: "#b0aa6a", early_autumn: "#b0aa6a", autumn: "#b0aa6a", late_autumn: "#b0aa6a", winter: "#b0aa6a"}
+mondo_grass: {type: evergreen, spring: "#4a7838", summer: "#3e6a36", early_autumn: "#3e6a36", autumn: "#3e6a36", late_autumn: "#3e6a36", winter: "#3e6a36"}
+sasa: {type: evergreen, spring: "#64953d", summer: "#5e8e3c", early_autumn: "#5e8e3c", autumn: "#5e8e3c", late_autumn: "#7a9a58", winter: "#8a9a6a"}
+bluebunch_wheatgrass: {type: steppe, spring: "#8aa762", summer: "#8aa070", early_autumn: "#a3a474", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+cleistogenes: {type: steppe, spring: "#93a55c", summer: "#9a9c66", early_autumn: "#aaa370", autumn: "#9a6a4a", late_autumn: "#b0a279", winter: "#a89c7a"}
+feather_grass: {type: steppe, spring: "#a0ae5a", summer: "#b2ad62", early_autumn: "#b5aa6e", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+idaho_fescue: {type: steppe, spring: "#83a463", summer: "#7e9a72", early_autumn: "#8a9a72", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+indian_ricegrass: {type: steppe, spring: "#96ac66", summer: "#a0a878", early_autumn: "#ada878", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+mat_grass: {type: steppe, spring: "#8ba658", summer: "#8c9e5e", early_autumn: "#b0aa78", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#c0b48a"}
+needle_and_thread: {type: steppe, spring: "#92a85e", summer: "#98a26a", early_autumn: "#aaa572", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+purple_feather_grass: {type: steppe, spring: "#9aac66", summer: "#a8a878", early_autumn: "#b1a878", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+rough_fescue: {type: steppe, spring: "#84a45e", summer: "#7f9a6a", early_autumn: "#9ea272", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+sheepgrass: {type: steppe, spring: "#82a467", summer: "#7c9a7a", early_autumn: "#9da279", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+sheeps_fescue: {type: steppe, spring: "#84a556", summer: "#7f9c5a", early_autumn: "#9ea36a", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+splendid_needlegrass: {type: steppe, spring: "#96a762", summer: "#a0a070", early_autumn: "#ada474", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+stipa_gobica: {type: steppe, spring: "#9fad68", summer: "#b0aa7c", early_autumn: "#b4a97a", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+stipa_grandis: {type: steppe, spring: "#93a762", summer: "#9aa070", early_autumn: "#aaa474", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+stipa_krylovii: {type: steppe, spring: "#98aa65", summer: "#a4a676", early_autumn: "#afa777", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+upright_brome: {type: steppe, spring: "#8bac56", summer: "#8ca85a", early_autumn: "#a4a86a", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+valais_fescue: {type: steppe, spring: "#97ac5a", summer: "#a2a862", early_autumn: "#aea86e", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+western_wheatgrass: {type: steppe, spring: "#83a466", summer: "#7d9a78", early_autumn: "#8a9a78", autumn: "#b8a878", late_autumn: "#b0a279", winter: "#a89c7a"}
+bigelow_sedge: {type: tundra, spring: "#8a8a60", summer: "#8a9a60", early_autumn: "#a89a50", autumn: "#9a7a4a", late_autumn: "#927a52", winter: "#8a7a5a"}
+kobresia: {type: tundra, spring: "#8a8460", summer: "#8a9a58", early_autumn: "#979453", autumn: "#9a7a4a", late_autumn: "#927a52", winter: "#8a7a5a"}
+bluejoint: {type: wetland, spring: "#84a258", summer: "#6f9450", early_autumn: "#6f9450", autumn: "#b8a060", late_autumn: "#c0aa7d", winter: "#a89a70"}
+common_reed: {type: wetland, spring: "#8aa85d", summer: "#7a9f5a", early_autumn: "#7a9f5a", autumn: "#b8a070", late_autumn: "#c0aa7d", winter: "#c8b48a"}
+purple_moor_grass: {type: wetland, spring: "#9a9a68", summer: "#8a9f5a", early_autumn: "#8a9f5a", autumn: "#c0a060", late_autumn: "#c0aa7d", winter: "#c8b080"}

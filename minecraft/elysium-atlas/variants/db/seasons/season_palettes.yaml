@@ -1,0 +1,161 @@
+# Explicit season palettes (ask 20), hand-authored from the briefs, 2026-10-28.
+# Keys: Serene Seasons subseasons. Temperate: early_spring .. late_winter; tropical: early_wet .. late_dry.
+# Give at least the mid subseasons; the client lerps between the ones given. A leaf block not listed keeps today's
+# behaviour (biome foliage + Serene Seasons overlay). "bare" means the block should read as leafless: a grey-brown
+# twig colour here, or a leaf-block swap to nothing once ask 2 exists.
+# Values are estimates from knowledge of each place, to be replaced by eyedropper picks from reference photos.
+
+391:  # Hill Country (parent savanna: tropical regime today; proposed temperate, see ask 21)
+  regime: temperate
+  grass:        {mid_spring: "#8fa65a", mid_summer: "#a8a666", late_summer: "#b3a274", mid_autumn: "#a8a070", mid_winter: "#a89c74"}
+  wilderwild:cypress_leaves: {all: "#36463a", mid_winter: "#3a4636"}             # Ashe juniper, slightly browner in winter (pollen)
+  minecraft:oak_leaves:      {all: "#42602e", early_spring: "#6a8a3a"}           # live oak: evergreen, brief flush in March
+  minecraft:acacia_leaves:   {mid_spring: "#5b7f3c", mid_summer: "#56783a", mid_autumn: "#8a6a3a", mid_winter: "#7a5a3a"}   # shin/Texas oak
+  biomesoplenty:cypress_leaves: {mid_spring: "#86b04a", mid_summer: "#7aa048", mid_autumn: "#a0522d", mid_winter: bare}       # bald cypress: rust, then bare
+  minecraft:jungle_leaves:   {mid_spring: "#6aa83c", mid_summer: "#5e9a3c", mid_autumn: "#b09030", mid_winter: bare}       # pecan, sycamore: yellow
+
+682:  # Japan, Taiheiyo laurel forest
+  regime: temperate
+  grass:        {mid_spring: "#7aa848", mid_summer: "#6a9e3c", mid_autumn: "#9aa058", mid_winter: "#a09a70"}
+  minecraft:dark_oak_leaves: {all: "#2f4a2c", mid_spring: "#4a6a30"}              # laurel canopy; new leaves in May are bronze-green
+  terrestria:redwood_leaves: {all: "#2f4c36", mid_winter: "#4a4a34"}              # sugi browns in winter
+  minecraft:oak_leaves:      {mid_spring: "#7ab040", mid_summer: "#6a9e3c", mid_autumn: "#b08a3a", mid_winter: bare}       # konara oak
+  minecraft:jungle_leaves:   {mid_spring: "#7ab040", mid_summer: "#6aa43a", late_autumn: "#c8321e", mid_winter: bare}      # maple: red peaks LATE autumn (Nov)
+
+686:  # Swiss Plateau and Jura
+  regime: temperate
+  grass:        {mid_spring: "#78b048", mid_summer: "#6a9e4c", mid_autumn: "#86984c", mid_winter: "#8a9070"}
+  minecraft:oak_leaves:      {early_spring: "#9cd060", mid_spring: "#7cc04a", mid_summer: "#62a83c", early_autumn: "#a8a038", mid_autumn: "#b8642a", late_autumn: "#9a5a2e", mid_winter: "#8a5a34"}   # beech: lime flush, copper; young beech keeps brown leaves in winter
+  minecraft:dark_oak_leaves: {mid_spring: "#5a9a3a", mid_summer: "#3f7a2e", mid_autumn: "#8a7034", mid_winter: bare}       # sessile oak
+  biomesoplenty:fir_leaves:  {all: "#2f5a40"}
+  minecraft:spruce_leaves:   {all: "#2e5238"}
+
+689:  # Alps
+  regime: temperate
+  grass:        {mid_spring: "#86b050", mid_summer: "#78a05a", mid_autumn: "#a09a5a", mid_winter: "#9a9a80"}
+  minecraft:spruce_leaves:   {all: "#2c4c34"}
+  biomesoplenty:fir_leaves:  {all: "#305a42"}
+  biomesoplenty:pine_leaves: {all: "#3e6650"}
+  minecraft:birch_leaves:    {mid_spring: "#b0d070", mid_summer: "#9cc060", early_autumn: "#c0b040", mid_autumn: "#d9a030", late_autumn: "#b88030", mid_winter: bare}   # larch
+  minecraft:oak_leaves:      {mid_summer: "#5e9e3a", mid_autumn: "#a09030", mid_winter: bare}                               # green alder
+
+332:  # Post Oak Savanna
+  regime: temperate
+  grass:        {mid_spring: "#8fae5a", mid_summer: "#9aa860", mid_autumn: "#b09868", mid_winter: "#aa9a74"}
+  minecraft:oak_leaves:      {mid_spring: "#6a9a40", mid_summer: "#55873a", mid_autumn: "#8a5a30", mid_winter: "#7a5a3a"}   # post oak: rusty brown, holds dead leaves
+  minecraft:dark_oak_leaves: {mid_summer: "#3f6a2e", mid_autumn: "#7a3a28", mid_winter: "#6a4a34"}                        # blackjack: dark red
+  minecraft:azalea_leaves:   {all: "#3a5a30"}                                                                                # yaupon
+  minecraft:spruce_leaves:   {all: "#4d7a3c"}                                                                                # Lost Pines loblolly
+
+390:  # Cross Timbers
+  regime: temperate
+  grass:        {mid_spring: "#94a85a", mid_summer: "#a2a85e", mid_autumn: "#b0886a", mid_winter: "#a8906c"}   # little bluestem goes russet
+  minecraft:dark_oak_leaves: {mid_spring: "#4a6e34", mid_summer: "#3b5e2c", mid_autumn: "#6a4028", mid_winter: "#5a4434"}
+  minecraft:spruce_leaves:   {all: "#3d5838", mid_winter: "#4a5434"}                                                       # red cedar bronzes in winter
+
+363:  # Piney Woods
+  regime: temperate
+  grass:        {mid_spring: "#86a44e", mid_summer: "#7a9a48", mid_autumn: "#9a9458", mid_winter: "#9a8a60"}
+  minecraft:spruce_leaves:   {all: "#5f8a3a"}
+  minecraft:jungle_leaves:   {mid_spring: "#6aa840", mid_summer: "#4f9634", mid_autumn: "#8a2c40", late_autumn: "#a04a2a", mid_winter: bare}   # sweetgum: wine to orange
+  minecraft:oak_leaves:      {mid_summer: "#4c8434", mid_autumn: "#8a4a2a", mid_winter: "#7a5a3a"}
+  biomesoplenty:snowblossom_leaves: {early_spring: "#f2f0e8", mid_spring: "#e8eee0", mid_summer: "#4a8a34", mid_autumn: "#8a2a30", mid_winter: bare}   # dogwood: white bracts, red autumn
+  biomesoplenty:cypress_leaves: {mid_summer: "#7aa048", mid_autumn: "#a0522d", mid_winter: bare}
+
+437:  # Brush Country
+  regime: tropical
+  grass:        {mid_wet: "#9aa888", mid_dry: "#cab180"}
+  minecraft:acacia_leaves:   {mid_wet: "#9aae6a", mid_dry: "#a4a678"}             # mesquite: stays grey-green; drops leaves only in hard freezes
+  minecraft:dark_oak_leaves: {all: "#34552a"}
+  minecraft:oak_leaves:      {mid_wet: "#9aa88c", late_wet: "#a08ab0", mid_dry: "#a0aa94"}                                 # cenizo: purple bloom after rain
+
+401:  # Blackland Prairie
+  regime: temperate
+  grass:        {early_spring: "#8aa850", mid_spring: "#7fa24a", mid_summer: "#8a9a50", early_autumn: "#9a8a50", mid_autumn: "#a0603a", late_autumn: "#9a6a44", mid_winter: "#a08a68"}   # big bluestem copper in October
+  minecraft:jungle_leaves:   {mid_summer: "#5e9a3c", mid_autumn: "#b09030", mid_winter: bare}
+  minecraft:oak_leaves:      {mid_summer: "#55803a", mid_autumn: "#a08a3a", mid_winter: bare}                               # cedar elm: yellow
+  minecraft:birch_leaves:    {mid_summer: "#86b04a", mid_autumn: "#d0b040", mid_winter: bare}                               # cottonwood: bright gold
+
+384:  # Gulf Coast Prairie
+  regime: temperate
+  grass:        {mid_spring: "#8cae58", mid_summer: "#86a850", mid_autumn: "#a0a060", mid_winter: "#c8b27a"}
+  minecraft:oak_leaves:      {all: "#3e5e2e"}
+  minecraft:acacia_leaves:   {mid_summer: "#7fae3e", mid_autumn: "#9a8a3a", mid_winter: "#8a8a50"}
+
+389:  # Rolling Plains
+  regime: temperate
+  grass:        {mid_spring: "#94a860", mid_summer: "#9aa66a", mid_autumn: "#b0a070", mid_winter: "#b0a07a"}
+  minecraft:acacia_leaves:   {mid_spring: "#a0c060", mid_summer: "#8fb058", mid_autumn: "#a0a050", mid_winter: bare}       # mesquite leafs out late (April) and drops in winter
+  minecraft:spruce_leaves:   {all: "#3a5636"}
+  minecraft:birch_leaves:    {mid_summer: "#86b04a", mid_autumn: "#d0b040", mid_winter: bare}
+
+428:  # Chihuahuan Desert (monsoon = wet)
+  regime: tropical
+  grass:        {mid_wet: "#a8a470", mid_dry: "#c0b088"}
+  minecraft:dark_oak_leaves: {mid_wet: "#4e6634", mid_dry: "#5a663e"}             # creosote: darker and glossier after rain
+  minecraft:acacia_leaves:   {mid_wet: "#8fb058", mid_dry: "#9aa070"}
+  minecraft:jungle_leaves:   {mid_wet: "#5e9a3c", early_dry: "#c0a030", mid_dry: bare}                                      # cottonwood along the river
+
+654:  # Central European Mixed Forest
+  regime: temperate
+  grass:        {mid_spring: "#80aa4e", mid_summer: "#7aa04e", mid_autumn: "#8a944c", mid_winter: "#8a8a6a"}
+  biomesoplenty:pine_leaves: {all: "#3e6a3a"}
+  minecraft:oak_leaves:      {mid_spring: "#6aa040", mid_summer: "#4f8a34", mid_autumn: "#9a7a34", late_autumn: "#7a5a30", mid_winter: bare}
+  minecraft:dark_oak_leaves: {mid_spring: "#7ab048", mid_summer: "#5a9a3e", mid_autumn: "#b09a38", mid_winter: bare}      # hornbeam: yellow
+  minecraft:birch_leaves:    {mid_spring: "#a0d060", mid_summer: "#8ab850", mid_autumn: "#d8c040", mid_winter: bare}
+
+# Mediterranean set: green winter, tan summer, evergreen canopy holds (ask 12 folded into 20)
+799:
+  regime: temperate
+  grass:        {mid_winter: "#8aa058", mid_spring: "#94a854", early_summer: "#a8a670", mid_summer: "#bcae7a", mid_autumn: "#a8a670"}
+  minecraft:dark_oak_leaves: {all: "#3a4e2e"}
+  biomesoplenty:pine_leaves: {all: "#6e9a48"}
+  minecraft:acacia_leaves:   {all: "#3f6436"}
+  minecraft:oak_leaves:      {all: "#8a9a78", mid_spring: "#90a070"}
+793:
+  regime: temperate
+  grass:        {mid_winter: "#90a060", mid_spring: "#9cac58", early_summer: "#c0b070", mid_summer: "#c8b47a", mid_autumn: "#b8a868"}
+  minecraft:dark_oak_leaves: {all: "#56664a"}
+  minecraft:spruce_leaves:   {all: "#4a5e48"}
+805:
+  regime: temperate
+  grass:        {mid_winter: "#80a050", mid_spring: "#7aa848", early_summer: "#b8aa6a", mid_summer: "#c8b47a", mid_autumn: "#a8a866"}
+  minecraft:dark_oak_leaves: {all: "#4e6438"}
+  minecraft:oak_leaves:      {all: "#5a7440"}
+806:
+  regime: temperate
+  grass:        {mid_winter: "#80a050", mid_spring: "#8aa850", mid_summer: "#a8a26a", mid_autumn: "#98a060"}
+  minecraft:dark_oak_leaves: {all: "#34502c"}
+  minecraft:acacia_leaves:   {all: "#3f6436"}
+  minecraft:mangrove_leaves: {all: "#9aa88a"}
+795:
+  regime: temperate
+  grass:        {mid_winter: "#7aa04c", mid_spring: "#86b04c", mid_summer: "#a8a464", mid_autumn: "#8fa858"}
+  minecraft:oak_leaves:      {mid_spring: "#7aaa48", mid_summer: "#5a8a3c", mid_autumn: "#9a7034", late_autumn: "#8a5a30", mid_winter: "#7a5a3a"}   # downy oak keeps dead leaves in winter
+  terrestria:cypress_leaves: {all: "#2e4c2c"}
+  minecraft:mangrove_leaves: {all: "#9aa88a"}
+  minecraft:dark_oak_leaves: {all: "#3e5430"}
+
+545:  # Sinaloan dry forest
+  regime: tropical
+  grass:        {early_wet: "#90b050", mid_wet: "#7aa448", late_wet: "#8aa450", early_dry: "#a8a068", mid_dry: "#b4a47c", late_dry: "#b8a47a"}
+  minecraft:jungle_leaves:   {early_wet: "#7ab840", mid_wet: "#5aa038", late_wet: "#6a9a3a", early_dry: "#a09040", mid_dry: "#9a8e7a", late_dry: "#9a8e7a"}
+  minecraft:acacia_leaves:   {early_wet: "#80b848", mid_wet: "#6aa040", early_dry: "#a8a050", mid_dry: "#a09484", late_dry: "#a09484"}
+  minecraft:dark_oak_leaves: {all: "#3e6a2e"}
+
+# Boreal sub-types (applied to each sub-biome variant; regions inherit by share)
+boreal_muskeg:
+  regime: temperate
+  grass:        {mid_spring: "#7a8a52", mid_summer: "#7a9a48", mid_autumn: "#9a7a4a", mid_winter: "#8a8a70"}
+  minecraft:spruce_leaves:   {all: "#2a3e30"}
+  minecraft:birch_leaves:    {mid_summer: "#7a9a48", mid_autumn: "#d0a838", mid_winter: bare}   # tamarack
+boreal_mixedwood:
+  regime: temperate
+  grass:        {mid_spring: "#7aa048", mid_summer: "#6f9a48", mid_autumn: "#9a9048", mid_winter: "#8a8a74"}
+  minecraft:spruce_leaves:   {all: "#2c4c34"}
+  biomesoplenty:fir_leaves:  {all: "#2f5a40"}
+  minecraft:birch_leaves:    {mid_spring: "#a8d060", mid_summer: "#8cb84c", early_autumn: "#d8c040", mid_autumn: "#e0b030", mid_winter: bare}
+boreal_larch:
+  regime: temperate
+  grass:        {mid_spring: "#8a9a5a", mid_summer: "#8a9a5a", mid_autumn: "#a8904a", mid_winter: "#9a9a88"}
+  minecraft:birch_leaves:    {mid_spring: "#a8d070", mid_summer: "#8ab050", early_autumn: "#d0b040", mid_autumn: "#d89a30", late_autumn: bare, mid_winter: bare}

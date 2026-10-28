@@ -182,6 +182,7 @@ blue_oak:
 coast_live_oak:
   name: Coast live oak
   latin: Quercus agrifolia
+  evergreen: true
   form: tree
   clump: {size: 16, share: 0.4}
   leaf: "#3e6830"
@@ -193,6 +194,7 @@ coast_live_oak:
 pacific_madrone:
   name: Pacific madrone
   latin: Arbutus menziesii
+  evergreen: true
   form: tree
   leaf: "#3e6a34"
   leaf_note: Thick glossy dark green leaves.
@@ -228,6 +230,7 @@ utah_juniper:
 chamise:
   name: Chamise
   latin: Adenostoma fasciculatum
+  evergreen: true
   form: shrub
   leaf: "#4a6a3a"
   leaf_note: Tiny needle-like dark green leaves in bundles.
@@ -238,6 +241,7 @@ chamise:
 manzanita:
   name: Manzanita
   latin: Arctostaphylos glauca
+  evergreen: true
   form: shrub
   leaf: "#6c8a68"
   leaf_note: Stiff upright grey-green leaves.
@@ -325,6 +329,7 @@ brittlebush:
 joshua_tree:
   name: Joshua tree
   latin: Yucca brevifolia
+  evergreen: true
   form: tree
   clump: {size: 24, share: 0.35}
   leaf: "#7a8a5a"
@@ -889,6 +894,7 @@ northern_white_cedar:
 rosebay_rhododendron:
   name: Rosebay rhododendron
   latin: Rhododendron maximum
+  evergreen: true
   form: shrub
   clump: {size: 16, share: 0.35, outside: 0.05}
   niche: {slope: steep}

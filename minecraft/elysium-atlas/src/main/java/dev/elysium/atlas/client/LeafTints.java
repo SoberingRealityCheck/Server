@@ -103,9 +103,12 @@ public final class LeafTints {
             ClientLevel cl = Minecraft.getInstance().level;
             if (cl == null) return shift(foliage, offset[0], offset[1], offset[2]);
             float dh = 0, ds = 0, dv = 0, ev = 0, r = 0, g = 0, b = 0;
+            int ex = 0, er = 0, eg = 0, eb = 0;     // explicit season palette colours on the stencil
             BlockPos.MutableBlockPos q = new BlockPos.MutableBlockPos();
             for (int[] p : STENCIL) {
                 Holder<Biome> h = cl.getBiome(q.set(pos.getX() + p[0], pos.getY(), pos.getZ() + p[1]));
+                Integer c0 = SeasonPalettes.colour(h, block, cl);
+                if (c0 != null) { ex++; er += (c0 >> 16) & 255; eg += (c0 >> 8) & 255; eb += c0 & 255; continue; }
                 Optional<ResourceKey<Biome>> k = h.unwrapKey();
                 Map<Block, float[]> pal = k.isPresent() && !palettes.isEmpty() ? palettes.get(k.get().identifier()) : null;
                 float[] o = pal != null ? pal.getOrDefault(block, offset) : offset;
@@ -115,14 +118,20 @@ public final class LeafTints {
                     ev += 1; r += (c >> 16) & 255; g += (c >> 8) & 255; b += c & 255;
                 }
             }
-            int n = STENCIL.length;
+            int n = STENCIL.length - ex;
+            if (n == 0) return 0xFF000000 | (er / ex) << 16 | (eg / ex) << 8 | eb / ex;
             if (ev > 0) {
                 float w = ev / n;     // evergreen share of the stencil; the rest keeps the seasonal colour
                 int fr = Math.round(((foliage >> 16) & 255) * (1 - w) + r / ev * w), fg = Math.round(((foliage >> 8) & 255) * (1 - w) + g / ev * w),
                     fb = Math.round((foliage & 255) * (1 - w) + b / ev * w);
                 foliage = fr << 16 | fg << 8 | fb;
             }
-            return shift(foliage, dh / n, ds / n, dv / n);
+            int c = shift(foliage, dh / n, ds / n, dv / n);
+            return ex == 0 ? c : blend(c, er / ex, eg / ex, eb / ex, ex / (float) STENCIL.length);
+        }
+        static int blend(int c, int r, int g, int b, float w) {
+            return 0xFF000000 | Math.round(((c >> 16) & 255) * (1 - w) + r * w) << 16 | Math.round(((c >> 8) & 255) * (1 - w) + g * w) << 8
+                    | Math.round((c & 255) * (1 - w) + b * w);
         }
         static int shift(int rgb, float dh, float ds, float dv) {
             // HSV by hand: no java.awt on the client (it fights GLFW on macOS)
@@ -146,6 +155,41 @@ public final class LeafTints {
             return 0xFF000000 | Math.round((rr + m) * 255) << 16 | Math.round((gg + m) * 255) << 8 | Math.round((bb + m) * 255);
         }
     }
+
+    /** Grass, ferns and tall grass: a region's explicit season palette where it has one, else the source underneath. */
+    public record Grass(BlockTintSource under) implements BlockTintSource {
+        @Override public int color(BlockState state) { return under.color(state); }
+        @Override public java.util.Set<net.minecraft.world.level.block.state.properties.Property<?>> relevantProperties() { return under.relevantProperties(); }
+        @Override public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
+            ClientLevel cl = Minecraft.getInstance().level;
+            if (cl == null) return under.colorInWorld(state, level, pos);
+            int ex = 0, r = 0, g = 0, b = 0;
+            BlockPos.MutableBlockPos q = new BlockPos.MutableBlockPos();
+            for (int[] p : STENCIL) {
+                Integer c = SeasonPalettes.colour(cl.getBiome(q.set(pos.getX() + p[0], pos.getY(), pos.getZ() + p[1])), null, cl);
+                if (c != null) { ex++; r += (c >> 16) & 255; g += (c >> 8) & 255; b += c & 255; }
+            }
+            if (ex == 0) return under.colorInWorld(state, level, pos);
+            if (ex == STENCIL.length) return 0xFF000000 | (r / ex) << 16 | (g / ex) << 8 | b / ex;
+            return Species.blend(under.colorInWorld(state, level, pos), r / ex, g / ex, b / ex, ex / (float) STENCIL.length);
+        }
+    }
+
+    private static final java.util.Set<Block> GRASSES = java.util.Set.of(net.minecraft.world.level.block.Blocks.GRASS_BLOCK,
+            net.minecraft.world.level.block.Blocks.SHORT_GRASS, net.minecraft.world.level.block.Blocks.TALL_GRASS,
+            net.minecraft.world.level.block.Blocks.FERN, net.minecraft.world.level.block.Blocks.LARGE_FERN);
+
+    /** Vanilla's tint sources for a grass block with the first (the grass colour) wrapped in Grass, or null if not grass. */
+    public static List<BlockTintSource> grass(Block b, List<BlockTintSource> vanilla) {
+        if (!GRASSES.contains(b) || vanilla == null || vanilla.isEmpty() || vanilla.get(0) instanceof Grass) return null;
+        return WRAPPED.computeIfAbsent(vanilla, v -> {
+            List<BlockTintSource> o = new java.util.ArrayList<>(v);
+            o.set(0, new Grass(v.get(0)));
+            return List.copyOf(o);
+        });
+    }
+
+    private static final Map<List<BlockTintSource>, List<BlockTintSource>> WRAPPED = new java.util.concurrent.ConcurrentHashMap<>();
 
     private LeafTints() {}
 }

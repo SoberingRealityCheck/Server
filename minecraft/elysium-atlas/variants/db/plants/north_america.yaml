@@ -430,6 +430,7 @@ sabal_palm:
 faxon_yucca:
   name: Faxon yucca
   latin: Yucca faxoniana
+  evergreen: true
   form: tree
   leaf: "#6f8a5a"
   leaf_note: Stiff, grey-green to yellow-green dagger leaves.
