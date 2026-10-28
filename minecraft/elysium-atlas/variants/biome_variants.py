@@ -198,7 +198,7 @@ def hexc(c): return "#%02x%02x%02x" % c
 
 
 
-def palette(foliage, leaves, leaf_table):
+def palette(foliage, leaves, leaf_table, evergreen=frozenset()):
     """An ecoregion's leaf colours ({leaf block: hex}, the summer colour of that leaf type there, from its species) as
     (hue shift, saturation ratio, value ratio) against its foliage colour, so the season moves them too. Leaf blocks
     without a regional tint (pale oak, cherry, the mods' coloured leaves) are left out."""
@@ -207,7 +207,7 @@ def palette(foliage, leaves, leaf_table):
     for b, c in sorted(leaves.items()):
         if b not in leaf_table: continue
         h, sat, v = colorsys.rgb_to_hsv(*(x / 255 for x in rgb(c)))
-        out[b] = [round((h - h0 + 0.5) % 1.0 - 0.5, 4), round(sat / s0, 4), round(v / v0, 4)]
+        out[b] = [round((h - h0 + 0.5) % 1.0 - 0.5, 4), round(sat / s0, 4), round(v / v0, 4)] + ([1] if b in evergreen else [])
     return out
 
 
@@ -509,7 +509,7 @@ def generate(src, check=False):
                           "why": prof["why"]}
             if a != base_id: table[vid]["replaces"] = [a]
             lang[f"biome.elysium.{path.replace('/', '.')}"] = prof["name"] if a == main else f"{prof['name']} ({title(a)})"
-            palettes[vid] = palette(f_hex, leaf_hex, leaf_table)
+            palettes[vid] = palette(f_hex, leaf_hex, leaf_table, db.evergreen_blocks(prof, leaves_of))
             n_flora += 1
     # Terrestria builds its dune surface in code for terrestria:dunes only, so variants of it came out as grass
     dunes = [v for v, t in table.items() if t["parent"] == "terrestria:dunes"]

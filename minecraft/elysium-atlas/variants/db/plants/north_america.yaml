@@ -151,6 +151,7 @@ live_oak:
   name: Southern live oak
   latin: Quercus virginiana (incl. Q. fusiformis, plateau live oak)
   form: tree
+  evergreen: true
   clump: {size: 16, share: 0.4}
   leaf: dark_glossy_green
   leaf_note: Leathery evergreen leaves, glossy dark green above.
@@ -205,6 +206,32 @@ shin_oak:
   look: Knee-high thickets.
   render: 'tree("oak_log", "oak_leaves", straight(1, 0, 0), bushf(2, 1, 0))'
   sapling: oak_sapling
+
+cenizo:
+  name: Cenizo
+  latin: Leucophyllum frutescens
+  form: shrub
+  evergreen: true
+  clump: {size: 10, share: 0.35, outside: 0.1}
+  leaf: "#9aa88c"
+  leaf_note: Felted silver-grey leaves; purple bloom after rain.
+  range: Caliche hills and brush of South and West Texas.
+  look: Rounded silver shrubs, the only silver in the brush.
+  render: 'tree("oak_log", "birch_leaves", straight(1, 0, 0), bushf(2, 1, 0))'
+  sapling: oak_sapling
+  stand_in: Birch leaves, so its silver tint does not average with the oaks on oak leaves.
+
+flowering_dogwood_tree:
+  name: Flowering dogwood
+  latin: Cornus florida
+  form: tree
+  leaf: "#5a9a3a"
+  leaf_note: Mid-green, red in autumn; white bracts in March.
+  range: Understory of the Piney Woods and Ozarks.
+  look: Small, flat-topped understory tree.
+  render: 'tree("oak_log", "oak_leaves", straight(3, 1, 0), blob(2, 2, 0))'
+  sapling: oak_sapling
+  stand_in: Green crown; the spring white is not modelled (no seasonal block swap).
 
 white_oak:
   name: White oak
@@ -339,6 +366,7 @@ honey_mesquite:
   name: Honey mesquite
   latin: Prosopis glandulosa
   form: tree
+  evergreen: true
   leaf: feathery_light_green
   leaf_note: Feathery bipinnate leaves, light bright green.
   range: Brush country, Rolling Plains, Chihuahuan desert.
@@ -350,6 +378,7 @@ huisache:
   name: Huisache
   latin: Vachellia farnesiana
   form: tree
+  evergreen: true
   leaf: "#7fae3e"
   leaf_note: Fine bipinnate leaves, bright green.
   range: South Texas and the Gulf coast prairie.
@@ -362,6 +391,7 @@ texas_ebony:
   name: Texas ebony
   latin: Ebenopsis ebano
   form: shrub
+  evergreen: true
   leaf: "#355a2a"
   leaf_note: Small leathery leaflets, very dark glossy green.
   range: Lower Rio Grande valley, Tamaulipan thornscrub.
@@ -373,6 +403,7 @@ sabal_palm:
   name: Rio Grande palmetto
   latin: Sabal mexicana
   form: tree
+  evergreen: true
   clump: {size: 14, share: 0.3, outside: 0.05}
   niche: {water: riparian}
   leaf: "#4f7a3a"

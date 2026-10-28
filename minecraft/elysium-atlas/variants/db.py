@@ -54,6 +54,13 @@ def hexcolour(v, where):
     return v
 
 
+# conifer genera whose species keep their leaves; larch, bald cypress, dawn redwood and ginkgo drop theirs. A plant's
+# own `evergreen` overrides (broadleaf evergreens: live oak, laurels).
+EVERGREEN_GENERA = {"Abies", "Picea", "Pinus", "Tsuga", "Pseudotsuga", "Juniperus", "Cupressus", "Chamaecyparis", "Thuja",
+                    "Platycladus", "Cryptomeria", "Sequoia", "Sequoiadendron", "Taxus", "Cedrus", "Calocedrus", "Callitropsis",
+                    "Podocarpus", "Araucaria", "Torreya", "Cunninghamia", "Keteleeria", "Cephalotaxus", "Sciadopitys"}
+
+
 def plants():
     if "plants" in _cache: return _cache["plants"]
     out = {}
@@ -70,6 +77,8 @@ def plants():
             e = dict(e, id=pid, file=os.path.basename(p))
             e["leaf"] = hexcolour(e.get("leaf"), where); e["colour"] = hexcolour(e.get("colour"), where)
             e["autumn"] = hexcolour(e.get("autumn"), where)
+            if "evergreen" in e and not isinstance(e["evergreen"], bool): raise SystemExit(f"{where}: evergreen is true or false")
+            e["evergreen"] = e.get("evergreen", e.get("latin", "").split(" ")[0] in EVERGREEN_GENERA)
             f = evaluate(e["render"], where)
             if isinstance(f, render.Ref): e["kind"], e["feature"] = "ref", str(f)
             elif f.get("type") == "minecraft:tree": e["kind"], e["feature"] = "tree", f
@@ -209,3 +218,13 @@ def colours(eco, leaf_blocks):
     for p, w in woody:
         for b in leaf_blocks(p): per.setdefault(b, []).append((P[p]["leaf"], w))
     return grass, foliage, {b: _mean(v) for b, v in per.items()}
+
+
+def evergreen_blocks(eco, leaf_blocks):
+    """Leaf blocks on which every woody species of the ecoregion is evergreen: they keep the summer colour all year."""
+    P = plants(); per = {}
+    for L in ("trees", "shrubs"):
+        for p, w in (eco.get(L) or {}).items():
+            if w <= 0 or not P[p].get("leaf"): continue
+            for b in leaf_blocks(p): per.setdefault(b, []).append(P[p]["evergreen"])
+    return {b for b, v in per.items() if all(v)}

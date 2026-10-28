@@ -37,6 +37,10 @@ FOLLOW = ["minecraft:oak_leaves", "minecraft:dark_oak_leaves", "minecraft:acacia
 CHARACTER = {"terrestria:hemlock_leaves": (0.04, 0.70, 0.85), "terrestria:redwood_leaves": (0.02, 0.75, 0.85),
              "wilderwild:cypress_leaves": (0.03, 0.75, 0.9), "terrestria:cypress_leaves": (0.04, 0.8, 0.75),
              "biomesoplenty:pine_leaves": (0.03, 0.8, 0.9)}
+# leaf blocks of evergreen trees: outside a regional palette they keep the summer colour (no seasonal overlay)
+EVERGREEN = ["minecraft:spruce_leaves", "minecraft:mangrove_leaves", "biomesoplenty:fir_leaves", "biomesoplenty:pine_leaves",
+             "biomesoplenty:redwood_leaves", "biomesoplenty:palm_leaves", "terrestria:hemlock_leaves", "terrestria:redwood_leaves",
+             "terrestria:cypress_leaves", "terrestria:jungle_palm_leaves", "terrestria:yucca_palm_leaves", "wilderwild:cypress_leaves"]
 GREY = 0.15               # mean HSV saturation under which a texture counts as greyscale (tinted by its own mod)
 # mod leaves (model parent minecraft:block/leaves, so tint index 0 is already there): pre-coloured textures are
 # made greyscale; greyscale ones are kept and only take the regional tint
@@ -105,7 +109,7 @@ def main():
                         "description": "Elysium: regional colours for spruce, birch and the flora mods' green leaves"}},
               open(os.path.join(PACK, "pack.mcmeta"), "w"), indent=1)
     os.makedirs(os.path.join(RES, "elysium_atlas"), exist_ok=True)
-    json.dump({"foliage_default": FOLIAGE_DEFAULT, "leaves": table}, open(os.path.join(RES, "elysium_atlas", "leaf_tints.json"), "w"), indent=1)
+    json.dump({"foliage_default": FOLIAGE_DEFAULT, "leaves": table, "evergreen": EVERGREEN}, open(os.path.join(RES, "elysium_atlas", "leaf_tints.json"), "w"), indent=1)
     print(f"{len(table)} leaf types: {len(VANILLA) + len(FOLLOW)} vanilla or foliage-following, {n_grey} greyscale mod leaves, "
           f"{len(table) - len(VANILLA) - len(FOLLOW) - n_grey} retextured")
 

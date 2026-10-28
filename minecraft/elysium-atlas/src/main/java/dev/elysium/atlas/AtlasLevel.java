@@ -9,11 +9,14 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.zip.GZIPInputStream;
 
 /**
- * One resolution level of the atlas: square tiles of cells, loaded on first use.
- * Tile layout matches bake_atlas.py write_tiles().
+ * One resolution level of the atlas: square tiles of cells, loaded on first use and dropped least recently used
+ * first once the level holds more than its cap (system property elysium_atlas.tileCacheMB, default 512, per level;
+ * a tile is 256 KB). Tile layout matches bake_atlas.py write_tiles().
  */
 public final class AtlasLevel {
     private static final short NO_HEIGHT = Short.MIN_VALUE;
@@ -21,7 +24,16 @@ public final class AtlasLevel {
     public final String name;
     public final Path dir;
     public final int cell, tileSize;
-    private final ConcurrentHashMap<Long, Tile> tiles = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Long, Slot> tiles = new ConcurrentHashMap<>();
+    private final int cap;
+    private final AtomicLong clock = new AtomicLong();
+    private final AtomicBoolean evicting = new AtomicBoolean();
+
+    private static final class Slot {
+        final Tile tile;
+        volatile long used;
+        Slot(Tile t, long used) { tile = t; this.used = used; }
+    }
 
     record Tile(int tx, int tz, short[] h, byte[] relief, byte[] biome) {
         static final Tile EMPTY = new Tile(Integer.MIN_VALUE, Integer.MIN_VALUE, null, null, null);
@@ -31,16 +43,38 @@ public final class AtlasLevel {
 
     AtlasLevel(String name, Path dir, int cell, int tileSize) {
         this.name = name; this.dir = dir; this.cell = cell; this.tileSize = tileSize;
+        long mb = Long.getLong("elysium_atlas.tileCacheMB", 512);
+        cap = (int) Math.max(8, mb * 1024 * 1024 / Math.max(1, (long) tileSize * tileSize * 4));
     }
+
+    /** Tiles held now (for /atlas and tests). */
+    public int cachedTiles() { return tiles.size(); }
 
     private Tile tile(int tx, int tz) {
         Tile t = last.get();
         if (t.tx == tx && t.tz == tz) return t;
-        long key = ((long) tx << 32) ^ (tz & 0xffffffffL);
-        t = tiles.computeIfAbsent(key, k -> load(tx, tz));
+        long key = ((long) tx << 32) ^ (tz & 0xffffffffL), now = clock.incrementAndGet();
+        Slot slot = tiles.computeIfAbsent(key, k -> new Slot(load(tx, tz), now));
+        slot.used = now;
+        t = slot.tile;
+        if (tiles.size() > cap) evict();
         // EMPTY keeps its sentinel coordinates, so remember the miss under this key instead
         last.set(t == Tile.EMPTY ? new Tile(tx, tz, null, null, null) : t);
         return t;
+    }
+
+    /** Drops the least recently used eighth of the cap; one thread at a time, the others carry on. */
+    private void evict() {
+        if (!evicting.compareAndSet(false, true)) return;
+        try {
+            int drop = tiles.size() - cap + cap / 8;
+            if (drop <= 0) return;
+            long[] stamps = tiles.values().stream().mapToLong(sl -> sl.used).sorted().toArray();
+            long cut = stamps[Math.min(drop, stamps.length) - 1];
+            tiles.values().removeIf(sl -> sl.used <= cut);
+        } finally {
+            evicting.set(false);
+        }
     }
 
     private Tile load(int tx, int tz) {

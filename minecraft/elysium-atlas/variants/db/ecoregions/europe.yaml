@@ -91,7 +91,7 @@
 686:
   name: Western European Beech Forest
   resolve: "Western European broadleaf forests"
-  tree_cover: 0.6
+  tree_cover: 0.74
   trees: {european_beech: 6, sessile_oak: 2, silver_fir: 2, hornbeam: 1, norway_spruce: 1}
   shrubs: {hazel: 1}
   ground: {leaf_litter: 3, male_fern: 1, wood_sedge: 0.5, false_oat_grass: 0.5}
@@ -99,15 +99,19 @@
   flower_density: 1
   niches:
     european_beech: {elevation: [0, 1300]}
-    silver_fir: {elevation: [400, 1500]}
+    silver_fir: {elevation: [400, 1500], slope: steep}
     norway_spruce: {elevation: [600, 1500]}
     hornbeam: {elevation: [0, 600]}
     sessile_oak: {elevation: [0, 800]}
   ground_surface:
-    geology: "Jura limestone; Vosges and Black Forest sandstone and granite."
-    rock: [stone, calcite]
+    geology: "Jura limestone, bedded crests; Vosges and Black Forest sandstone and granite."
+    rock: [diorite, calcite]
     outcrops: few
+    strata: [diorite, calcite, stone, diorite]
+    banks: {blocks: [gravel], distance: 1}
     soil: {coarse_dirt: few}
+  patches:
+    trees: {size: 40, share: 0.78}
   why: "Jura, Vosges, Black Forest and the Swiss Plateau: beech and fir over deep leaf litter, hay meadows in the clearings."
 
 654:
@@ -218,7 +222,7 @@
   name: Alpine Forest
   resolve: "Alps conifer and mixed forests"
   tree_cover: 0.8
-  trees: {norway_spruce: 4, silver_fir: 2, european_larch: 2, arolla_pine: 1, european_beech: 1, sessile_oak: 0.5}
+  trees: {norway_spruce: 4, silver_fir: 2, european_larch: 2, arolla_pine: 1, european_beech: 0.3, sessile_oak: 0.3}
   shrubs: {mountain_pine: 2, green_alder: 1}
   ground: {bilberry: 1, blue_moor_grass: 1.5, mat_grass: 1.5}
   flowers: {spring_gentian: 0.86, alpine_pasqueflower: 0.57, edelweiss: 0.29, wild_chives: 0.29, oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
@@ -241,7 +245,7 @@
     ragged_robin: {elevation: [0, 1500]}
   ground_surface:
     geology: "Crystalline core and limestone ranges; scree below cliffs."
-    rock: [stone, calcite]
+    rock: [stone, andesite]
     outcrops: some
     soil: {gravel: few}
   patches:

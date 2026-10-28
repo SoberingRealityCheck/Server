@@ -116,5 +116,19 @@
    0.8294,
    0.9259
   ]
- }
+ },
+ "evergreen": [
+  "minecraft:spruce_leaves",
+  "minecraft:mangrove_leaves",
+  "biomesoplenty:fir_leaves",
+  "biomesoplenty:pine_leaves",
+  "biomesoplenty:redwood_leaves",
+  "biomesoplenty:palm_leaves",
+  "terrestria:hemlock_leaves",
+  "terrestria:redwood_leaves",
+  "terrestria:cypress_leaves",
+  "terrestria:jungle_palm_leaves",
+  "terrestria:yucca_palm_leaves",
+  "wilderwild:cypress_leaves"
+ ]
 }

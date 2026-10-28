@@ -5,33 +5,33 @@
   name: Piney Woods
   resolve: "Piney Woods"
   tree_cover: 0.6
-  trees: {loblolly_pine: 6, shortleaf_pine: 2, sweetgum: 2, southern_red_oak: 1, post_oak: 1, bald_cypress: 0.5, fallen_log: 0.2}
+  trees: {loblolly_pine: 6, shortleaf_pine: 2, sweetgum: 2, southern_red_oak: 1, post_oak: 1, bald_cypress: 0.5, fallen_log: 0.2, flowering_dogwood_tree: 0.4}
   ground: {leaf_litter: 2, yaupon: 2, christmas_fern: 1, eastern_woodland_sedge: 1.33, broomsedge: 0.67}
-  flowers: {flowering_dogwood: 1, drummond_phlox: 1}
+  flowers: {drummond_phlox: 1}
   flower_density: 0.5
   rebase: {minecraft:swamp: minecraft:forest}
   ground_surface:
     geology: "Sandy loam over red clay."
-    soil: {podzol: few, coarse_dirt: few}
+    soil: {podzol: some, coarse_dirt: few}
     subsoil: terracotta
   why: "Loblolly and shortleaf pine over sweetgum and oak, yaupon understory. The atlas maps most of it to swamp; it inherits forest."
 
 332:
   name: Post Oak Savanna
   resolve: "East Central Texas forests"
-  tree_cover: 0.35
-  trees: {post_oak: 6, blackjack_oak: 0, eastern_red_cedar: 1, cedar_elm: 1, loblolly_pine: 0.5}
+  tree_cover: 0.32
+  trees: {post_oak: 6, blackjack_oak: 0, eastern_red_cedar: 1, cedar_elm: 1, loblolly_pine: 0.7}
   shrubs: {blackjack_oak: 3, shin_oak: 1}
-  ground: {leaf_litter: 1, little_bluestem: 3}
+  ground: {leaf_litter: 1, little_bluestem: 3, yaupon: 2}
   flowers: {plains_coreopsis: 2, indian_blanket: 2, drummond_phlox: 2, winecup: 1, texas_bluebonnet: 1}
   flower_density: 1.5
   rebase: {minecraft:swamp: minecraft:plains}
   ground_surface:
-    geology: "Sandy soils of the Post Oak Belt."
-    soil: {coarse_dirt: few}
+    geology: "Sandy soils of the Post Oak Belt (Carrizo sand)."
+    soil: {sand: few, coarse_dirt: few}
     subsoil: sand
   patches:
-    trees: {size: 30, share: 0.5, outside: 0.1}
+    trees: {size: 26, share: 0.45, outside: 0.1}
   why: "Post oak and blackjack oak mottes in little bluestem grassland."
 
 401:
@@ -83,20 +83,21 @@
 390:
   name: Cross Timbers
   resolve: "Cross-Timbers savanna-woodland"
-  tree_cover: 0.35
+  tree_cover: 0.42
   trees: {post_oak: 7, eastern_red_cedar: 1, cedar_elm: 1, shumard_oak: 0.5}
   shrubs: {blackjack_oak: 3}
   ground: {leaf_litter: 1, little_bluestem: 3}
   flowers: {black_eyed_susan: 0.4, purple_coneflower: 0.4, prairie_bluets: 0.2, indian_blanket: 1, tall_goldenrod: 1}
   flower_density: 0.8
   ground_surface:
-    geology: "Sandstone ridges and sandy soils."
+    geology: "Sandstone ridges and red sandy soils; ledges along the ridges."
     rock: [sandstone]
     outcrops: few
-    soil: {coarse_dirt: few}
+    ledges: {every: 4, keep: 0.6}
+    soil: {coarse_dirt: few, red_sand: few}
     subsoil: sand
   patches:
-    trees: {size: 40, share: 0.55, outside: 0.15}
+    trees: {size: 44, share: 0.55, outside: 0.02}
   why: "A belt of stunted post oak and blackjack oak woodland between the prairies."
 
 389:
@@ -186,7 +187,7 @@
   resolve: "Tamaulipan mezquital"
   tree_cover: 0.2
   trees: {honey_mesquite: 6, huisache: 2, live_oak: 1, sabal_palm: 0.2}
-  shrubs: {texas_ebony: 3}
+  shrubs: {texas_ebony: 3, cenizo: 2}
   ground: {curly_mesquite: 2, sideoats_grama: 1}
   flowers: {indian_blanket: 2, plains_coreopsis: 1, texas_lantana: 1}
   cactus: {texas_prickly_pear: 1}
@@ -194,10 +195,10 @@
   cactus_density: 1.0
   ground_surface:
     geology: "Sandy and caliche soils."
-    soil: {coarse_dirt: some, sand: few}
+    soil: {coarse_dirt: some, sand: few, calcite: few}
   patches:
-    trees: {size: 16, share: 0.5, outside: 0.15}
-    shrubs: {size: 16, share: 0.5, outside: 0.15}
+    trees: {size: 14, share: 0.5, outside: 0.15}
+    shrubs: {size: 14, share: 0.5, outside: 0.15}
   why: "Tamaulipan mezquital: mesquite, huisache and thorn brush with prickly pear."
 
 436:

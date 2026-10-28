@@ -507,6 +507,7 @@ castanopsis:
   name: Chinquapin
   latin: Castanopsis sieboldii
   form: tree
+  evergreen: true
   leaf: dark_glossy_green
   leaf_note: Leathery dark green leaves with golden-brown undersides.
   range: Laurel forest of southern Japan, southern Korea and eastern China (C. eyrei, C. carlesii).
@@ -517,6 +518,7 @@ ring_cup_oak:
   name: Ring-cup oak
   latin: Quercus glauca
   form: tree
+  evergreen: true
   leaf: "#3a6a30"
   leaf_note: Glossy dark leaves, grey-white below.
   range: Evergreen forest from southern Japan to the Himalaya.
@@ -527,6 +529,7 @@ camphor_tree:
   name: Camphor tree
   latin: Cinnamomum camphora
   form: tree
+  evergreen: true
   leaf: "#5a8a3a"
   leaf_note: Glossy yellow-green leaves, pink-red when new.
   range: Lowlands of southern China, Taiwan, southern Japan and Korea.
@@ -538,6 +541,7 @@ machilus:
   name: Red machilus
   latin: Machilus thunbergii
   form: tree
+  evergreen: true
   leaf: "#34602e"
   leaf_note: Thick glossy dark leaves.
   range: Coastal laurel forest of Japan, Korea, Taiwan and eastern China.
@@ -739,6 +743,7 @@ camellia:
   name: Wild camellia
   latin: Camellia japonica
   form: shrub
+  evergreen: true
   leaf: "#2e5a2a"
   leaf_note: Thick glossy near-black-green leaves; red winter flowers.
   range: Coastal laurel forest of Japan, Korea and Taiwan.

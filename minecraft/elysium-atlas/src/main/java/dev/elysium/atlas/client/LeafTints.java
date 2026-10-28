@@ -35,7 +35,9 @@ import java.util.Optional;
  * distinct and all of them follow the region and the season. A regional variant can set its own colour per leaf
  * type (elysium_atlas/leaf_palettes.json, from the flora profiles' "leaves"), stored the same way against the
  * variant's foliage colour; it replaces the species offset there and is averaged over 5 points 6 blocks apart so
- * biome borders do not step. Client only.
+ * biome borders do not step. Evergreen leaves (a palette entry's fourth value, or the "evergreen" leaf blocks outside
+ * palettes) take the biome's own foliage colour instead of the seasonal one, so Serene Seasons does not turn conifers
+ * and live oaks red in autumn; the share of evergreen stencil points blends the two at borders. Client only.
  */
 public final class LeafTints {
     private static final Logger LOG = LoggerFactory.getLogger("elysium_atlas");
@@ -55,11 +57,15 @@ public final class LeafTints {
         try (InputStream in = LeafTints.class.getResourceAsStream("/elysium_atlas/leaf_tints.json")) {
             JsonObject j = JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
             int base = j.get("foliage_default").getAsInt();
+            java.util.Set<String> evergreen = new java.util.HashSet<>();
+            if (j.has("evergreen")) j.getAsJsonArray("evergreen").forEach(x -> evergreen.add(x.getAsString()));
             for (Map.Entry<String, JsonElement> e : j.getAsJsonObject("leaves").entrySet()) {
                 Identifier id = Identifier.parse(e.getKey());
                 if (!BuiltInRegistries.BLOCK.containsKey(id)) continue;
                 Block b = BuiltInRegistries.BLOCK.getValue(id);
-                m.put(b, List.of(new Species(b, vec(e.getValue()), base)));
+                float[] o = vec(e.getValue());
+                if (evergreen.contains(e.getKey())) o = new float[]{o[0], o[1], o[2], 1};
+                m.put(b, List.of(new Species(b, o, base)));
             }
         } catch (Exception ex) {
             LOG.error("Leaf tints not loaded", ex);
@@ -87,7 +93,7 @@ public final class LeafTints {
 
     private static float[] vec(JsonElement e) {
         JsonArray o = e.getAsJsonArray();
-        return new float[]{o.get(0).getAsFloat(), o.get(1).getAsFloat(), o.get(2).getAsFloat()};
+        return new float[]{o.get(0).getAsFloat(), o.get(1).getAsFloat(), o.get(2).getAsFloat(), o.size() > 3 ? o.get(3).getAsFloat() : 0};
     }
 
     record Species(Block block, float[] offset, int base) implements BlockTintSource {
@@ -95,17 +101,27 @@ public final class LeafTints {
         @Override public int colorInWorld(BlockState state, BlockAndTintGetter level, BlockPos pos) {
             int foliage = BiomeColors.getAverageFoliageColor(level, pos);
             ClientLevel cl = Minecraft.getInstance().level;
-            if (cl == null || palettes.isEmpty()) return shift(foliage, offset[0], offset[1], offset[2]);
-            float dh = 0, ds = 0, dv = 0;
+            if (cl == null) return shift(foliage, offset[0], offset[1], offset[2]);
+            float dh = 0, ds = 0, dv = 0, ev = 0, r = 0, g = 0, b = 0;
             BlockPos.MutableBlockPos q = new BlockPos.MutableBlockPos();
             for (int[] p : STENCIL) {
                 Holder<Biome> h = cl.getBiome(q.set(pos.getX() + p[0], pos.getY(), pos.getZ() + p[1]));
                 Optional<ResourceKey<Biome>> k = h.unwrapKey();
-                Map<Block, float[]> pal = k.isPresent() ? palettes.get(k.get().identifier()) : null;
+                Map<Block, float[]> pal = k.isPresent() && !palettes.isEmpty() ? palettes.get(k.get().identifier()) : null;
                 float[] o = pal != null ? pal.getOrDefault(block, offset) : offset;
                 dh += o[0]; ds += o[1]; dv += o[2];
+                if (o[3] > 0) {       // evergreen here: the biome's own (unseasoned) foliage colour
+                    int c = h.value().getFoliageColor();
+                    ev += 1; r += (c >> 16) & 255; g += (c >> 8) & 255; b += c & 255;
+                }
             }
             int n = STENCIL.length;
+            if (ev > 0) {
+                float w = ev / n;     // evergreen share of the stencil; the rest keeps the seasonal colour
+                int fr = Math.round(((foliage >> 16) & 255) * (1 - w) + r / ev * w), fg = Math.round(((foliage >> 8) & 255) * (1 - w) + g / ev * w),
+                    fb = Math.round((foliage & 255) * (1 - w) + b / ev * w);
+                foliage = fr << 16 | fg << 8 | fb;
+            }
             return shift(foliage, dh / n, ds / n, dv / n);
         }
         static int shift(int rgb, float dh, float ds, float dv) {
