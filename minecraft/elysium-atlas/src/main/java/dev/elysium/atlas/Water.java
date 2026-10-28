@@ -12,9 +12,11 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 /**
- * Rivers and lakes from water.bin.gz (bake_water.py). Vector data, evaluated per block column:
+ * Rivers and lakes (bake_water.py, tiled by tile_water.py). Vector data, evaluated per block column:
  * river channels are carved to a bed below the river's water level with a levee at the edge, lakes get a
- * bed that deepens away from the shore, and both report the fluid level the generator should fill to.
+ * bed that deepens away from the shore, and both report the fluid level the generator should fill to. Format 3 keeps
+ * the data in tiles of 4096 blocks, each holding everything that reaches into it, loaded on first use and dropped
+ * least recently used first past elysium_atlas.waterCacheMB (default 96); formats 1 and 2 are one file loaded whole.
  */
 public final class Water {
     public static final int NO_FLUID = Integer.MIN_VALUE;
@@ -28,16 +30,83 @@ public final class Water {
      */
     public record Column(double height, int fluid, double calm, boolean wet, boolean river) {}
 
-    private final int bucket, lakeReach, riverCount;
-    private final float[] seg;
-    private final int[] lakeLevel;
-    private final float[] lakeDepth;
-    private final float[] edge;
-    private final int[] edgeLake;
-    private final Index riverIdx, edgeIdx;
-    private final Map<Long, Integer> interior = new HashMap<>();
+    private final int bucket, lakeReach, tileBlocks;
+    private int[] lakeLevel;
+    private float[] lakeDepth;
+    /** The whole water set (formats 1 and 2), or null when it is tiled (format 3). */
+    private final Part whole;
+    private final Path dir;
+    private final java.util.Set<Long> present = new java.util.HashSet<>();
+    private final java.util.concurrent.ConcurrentHashMap<Long, Slot> tiles = new java.util.concurrent.ConcurrentHashMap<>();
+    private final java.util.concurrent.atomic.AtomicLong clock = new java.util.concurrent.atomic.AtomicLong(), held = new java.util.concurrent.atomic.AtomicLong();
+    private final java.util.concurrent.atomic.AtomicBoolean evicting = new java.util.concurrent.atomic.AtomicBoolean();
+    private final long capBytes = Long.getLong("elysium_atlas.waterCacheMB", 96) << 20;
+    private final ThreadLocal<Part> last = new ThreadLocal<>();
+    private static final Part NONE = new Part();
 
+    /** Segments, lake shore edges and lake-interior buckets of one tile (or of the whole atlas), with their index. */
+    private static final class Part {
+        final long key;
+        final int riverCount;
+        final float[] seg, edge;
+        final int[] edgeLake;
+        final Index riverIdx, edgeIdx;
+        final Map<Long, Integer> interior = new HashMap<>();
+        final long bytes;
+
+        private Part() {
+            key = Long.MIN_VALUE; riverCount = 0; seg = edge = new float[0]; edgeLake = new int[0];
+            riverIdx = edgeIdx = new Index(new long[0], 0); bytes = 64;
+        }
+
+        /** seg and riverCount already read; b is at the shore edges. */
+        Part(long key, float[] seg, int riverCount, ByteBuffer b, Water w) {
+            this.key = key; this.seg = seg; this.riverCount = riverCount;
+            int ne = b.getInt();
+            edge = new float[ne * 4]; edgeLake = new int[ne];
+            b.asFloatBuffer().get(edge); b.position(b.position() + edge.length * 4);
+            b.asIntBuffer().get(edgeLake); b.position(b.position() + ne * 4);
+            int ni = b.getInt();
+            for (int i = 0; i < ni; i++) interior.put(Water.key(b.getInt(), b.getInt()), b.getInt());
+            Index.Builder ri = new Index.Builder(), ei = new Index.Builder();
+            for (int s = 0; s < seg.length / SEG; s++) {
+                int o = s * SEG;
+                double r = 2 * Math.max(seg[o + 6], seg[o + 7]) + BANK_MIN + CALM_EXTRA;
+                w.index(ri, seg[o], seg[o + 1], seg[o + 2], seg[o + 3], r, s);
+            }
+            for (int e = 0; e < ne; e++) w.index(ei, edge[e * 4], edge[e * 4 + 1], edge[e * 4 + 2], edge[e * 4 + 3], w.lakeReach, e);
+            riverIdx = ri.build(); edgeIdx = ei.build();
+            bytes = 4L * (seg.length + edge.length + edgeLake.length) + riverIdx.bytes() + edgeIdx.bytes() + 80L * ni + 256;
+        }
+    }
+
+    private static final class Slot {
+        final Part part;
+        volatile long used;
+        Slot(Part p, long used) { part = p; this.used = used; }
+    }
+
+    private static float[] floats(ByteBuffer b, int n) {
+        float[] f = new float[n];
+        b.asFloatBuffer().get(f); b.position(b.position() + n * 4);
+        return f;
+    }
+
+    /** atlas.json's "water": a format 1 or 2 file loaded whole, or a format 3 directory of tiles loaded on use. */
     Water(Path file) throws IOException {
+        if (Files.isDirectory(file)) {
+            ByteBuffer b = ByteBuffer.wrap(Files.readAllBytes(file.resolve("index.bin"))).order(ByteOrder.LITTLE_ENDIAN);
+            if (b.getInt() != 0x49545745 /* "EWTI" */) throw new IOException("bad water index header");
+            int format = b.getShort();
+            if (format != 3) throw new IOException("unknown water index format " + format);
+            bucket = b.getShort(); lakeReach = b.getInt(); tileBlocks = b.getInt();
+            readLakes(b);
+            int nt = b.getInt();
+            for (int i = 0; i < nt; i++) present.add(key(b.getInt(), b.getInt()));
+            dir = file; whole = null;
+            Atlas.LOG.info("Water: {} tiles of {} blocks, {} lakes; tiles load on use (cache {} MB)", nt, tileBlocks, lakeLevel.length, capBytes >> 20);
+            return;
+        }
         byte[] raw;
         try (InputStream in = new GZIPInputStream(Files.newInputStream(file), 1 << 16)) {
             raw = new DataInputStream(in).readAllBytes();
@@ -46,30 +115,70 @@ public final class Water {
         if (b.getInt() != 0x54415745 /* "EWAT" */) throw new IOException("bad water header");
         int format = b.getShort();
         if (format != 1 && format != 2) throw new IOException("unknown water format " + format);
-        bucket = b.getShort(); lakeReach = b.getInt();
+        bucket = b.getShort(); lakeReach = b.getInt(); tileBlocks = 0; dir = null;
         int ns = b.getInt();
-        riverCount = format >= 2 ? b.getInt() : ns;   // segments past riverCount are streams
-        seg = new float[ns * SEG];
-        b.asFloatBuffer().get(seg); b.position(b.position() + seg.length * 4);
+        int rc = format >= 2 ? b.getInt() : ns;   // segments past the river count are streams
+        float[] seg = floats(b, ns * SEG);
+        readLakes(b);
+        whole = new Part(0, seg, rc, b, this);
+        Atlas.LOG.info("Water: {} river and {} stream segments, {} lakes, {} shore edges, loaded whole", rc, ns - rc, lakeLevel.length, whole.edge.length / 4);
+    }
+
+    private void readLakes(ByteBuffer b) {
         int nl = b.getInt();
         lakeLevel = new int[nl]; lakeDepth = new float[nl];
         for (int i = 0; i < nl; i++) { lakeLevel[i] = b.getInt(); lakeDepth[i] = b.getFloat(); }
-        int ne = b.getInt();
-        edge = new float[ne * 4]; edgeLake = new int[ne];
-        b.asFloatBuffer().get(edge); b.position(b.position() + edge.length * 4);
-        b.asIntBuffer().get(edgeLake); b.position(b.position() + ne * 4);
-        int ni = b.getInt();
-        for (int i = 0; i < ni; i++) interior.put(key(b.getInt(), b.getInt()), b.getInt());
+    }
 
-        Index.Builder ri = new Index.Builder(), ei = new Index.Builder();
-        for (int s = 0; s < seg.length / SEG; s++) {
-            int o = s * SEG;
-            double r = 2 * Math.max(seg[o + 6], seg[o + 7]) + BANK_MIN + CALM_EXTRA;
-            index(ri, seg[o], seg[o + 1], seg[o + 2], seg[o + 3], r, s);
+    /** Tiles held now and their estimated bytes (for /atlas). */
+    public String cacheInfo() { return whole != null ? "whole" : tiles.size() + " tiles, " + (held.get() >> 20) + " MB"; }
+
+    /** The part holding a column: the whole set, or its tile (loaded on first use, least recently used dropped past the cap). */
+    private Part part(double x, double z) {
+        if (whole != null) return whole;
+        int tx = Math.floorDiv((int) Math.floor(x), tileBlocks), tz = Math.floorDiv((int) Math.floor(z), tileBlocks);
+        long k = key(tx, tz);
+        Part p = last.get();
+        if (p != null && p.key == k) return p;
+        if (!present.contains(k)) { p = NONE; last.set(p); return p; }
+        long now = clock.incrementAndGet();
+        Slot s = tiles.computeIfAbsent(k, kk -> {
+            Slot n = new Slot(load(tx, tz, kk), now);
+            held.addAndGet(n.part.bytes);
+            return n;
+        });
+        s.used = now;
+        if (held.get() > capBytes) evict();
+        last.set(s.part);
+        return s.part;
+    }
+
+    private Part load(int tx, int tz, long k) {
+        Path f = dir.resolve(tx + "_" + tz + ".bin.gz");
+        try (InputStream in = new GZIPInputStream(Files.newInputStream(f), 1 << 16)) {
+            ByteBuffer b = ByteBuffer.wrap(new DataInputStream(in).readAllBytes()).order(ByteOrder.LITTLE_ENDIAN);
+            if (b.getInt() != 0x54545745 /* "EWTT" */) throw new IOException("bad water tile header");
+            int ns = b.getInt(), rc = b.getInt();
+            return new Part(k, floats(b, ns * SEG), rc, b, this);
+        } catch (IOException e) {
+            Atlas.LOG.error("Water tile {} unreadable, treating as dry", f, e);
+            return new Part();
         }
-        for (int e = 0; e < ne; e++) index(ei, edge[e * 4], edge[e * 4 + 1], edge[e * 4 + 2], edge[e * 4 + 3], lakeReach, e);
-        riverIdx = ri.build(); edgeIdx = ei.build();
-        Atlas.LOG.info("Water: {} river and {} stream segments, {} lakes, {} shore edges", riverCount, seg.length / SEG - riverCount, nl, ne);
+    }
+
+    /** Drops the least recently used tiles down to three quarters of the cap; one thread at a time. */
+    private void evict() {
+        if (!evicting.compareAndSet(false, true)) return;
+        try {
+            Slot[] all = tiles.values().toArray(new Slot[0]);
+            java.util.Arrays.sort(all, java.util.Comparator.comparingLong(sl -> sl.used));
+            for (Slot sl : all) {
+                if (held.get() <= capBytes * 3 / 4 || tiles.size() <= 4) break;
+                if (tiles.remove(sl.part.key, sl)) held.addAndGet(-sl.part.bytes);
+            }
+        } finally {
+            evicting.set(false);
+        }
     }
 
     private static long key(int bx, int bz) { return ((long) bx << 32) ^ (bz & 0xffffffffL); }
@@ -90,7 +199,7 @@ public final class Water {
         /** Bucket coordinates fit 16 bits each: the globe is under 2^21 blocks across. */
         static int key(int bx, int bz) { return bx << 16 | (bz & 0xffff); }
 
-        private Index(long[] pairs, int n) {
+        Index(long[] pairs, int n) {
             java.util.Arrays.sort(pairs, 0, n);
             int buckets = 0;
             for (int i = 0; i < n; i++) if (i == 0 || (int) (pairs[i] >> 32) != (int) (pairs[i - 1] >> 32)) buckets++;
@@ -102,6 +211,8 @@ public final class Water {
             }
             start[buckets] = n;
         }
+
+        long bytes() { return 4L * (keys.length + start.length + ids.length); }
 
         /** Index range [from, to) in ids for a bucket, packed as from << 32 | to; 0 if absent. */
         long range(int key) {
@@ -129,6 +240,9 @@ public final class Water {
 
     /** Distance from (x, z) to the edge of the nearest river or stream channel in its bucket, negative inside; +inf if none. */
     public double channelEdge(double x, double z) {
+        Part p = part(x, z);
+        float[] seg = p.seg;
+        Index riverIdx = p.riverIdx;
         int k = Index.key(Math.floorDiv((int) Math.floor(x), bucket), Math.floorDiv((int) Math.floor(z), bucket));
         long rr = riverIdx.range(k);
         double best = Double.POSITIVE_INFINITY;
@@ -146,6 +260,11 @@ public final class Water {
 
     /** Applies rivers and lakes to the terrain height H at a column. */
     public Column column(double x, double z, double H) {
+        Part p = part(x, z);
+        float[] seg = p.seg, edge = p.edge;
+        int[] edgeLake = p.edgeLake;
+        Index riverIdx = p.riverIdx, edgeIdx = p.edgeIdx;
+        int riverCount = p.riverCount;
         int bx = Math.floorDiv((int) Math.floor(x), bucket), bz = Math.floorDiv((int) Math.floor(z), bucket);
         int k = Index.key(bx, bz);
         double h = H, calm = 1;
@@ -207,7 +326,7 @@ public final class Water {
             if (best > lakeReach) lake = -1;
         }
         if (lake < 0) {
-            Integer in = interior.get(key(bx, bz));
+            Integer in = p.interior.get(key(bx, bz));
             if (in != null) { lake = in; sd = lakeReach; }
         }
         if (lake >= 0) {

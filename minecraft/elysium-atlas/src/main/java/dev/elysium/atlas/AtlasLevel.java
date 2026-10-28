@@ -15,7 +15,7 @@ import java.util.zip.GZIPInputStream;
 
 /**
  * One resolution level of the atlas: square tiles of cells, loaded on first use and dropped least recently used
- * first once the level holds more than its cap (system property elysium_atlas.tileCacheMB, default 512, per level;
+ * first once the level holds more than its cap (system property elysium_atlas.tileCacheMB, default 256, per level;
  * a tile is 256 KB). Tile layout matches bake_atlas.py write_tiles().
  */
 public final class AtlasLevel {
@@ -43,7 +43,7 @@ public final class AtlasLevel {
 
     AtlasLevel(String name, Path dir, int cell, int tileSize) {
         this.name = name; this.dir = dir; this.cell = cell; this.tileSize = tileSize;
-        long mb = Long.getLong("elysium_atlas.tileCacheMB", 512);
+        long mb = Long.getLong("elysium_atlas.tileCacheMB", 256);
         cap = (int) Math.max(8, mb * 1024 * 1024 / Math.max(1, (long) tileSize * tileSize * 4));
     }
 

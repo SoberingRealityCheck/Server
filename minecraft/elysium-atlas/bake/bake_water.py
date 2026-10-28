@@ -10,6 +10,7 @@ Usage: python3 bake_water.py ATLAS_DIR NE_DIR HYDRO_NPZ [ATLAS_VERSION]
 Water changes terrain, so give the atlas a new version (the mod warns when a world's atlas changes).
 """
 import gzip, json, math, os, struct, sys, time
+import tile_water
 import numpy as np
 import shapely
 from shapely.geometry import shape, LineString, Polygon, MultiPolygon
@@ -271,8 +272,10 @@ def main():
     m["water"] = {"file": "water.bin.gz", "format": WATER_FORMAT, "rivers": len(rivers), "streams": len(segs) - len(rivers), "lakes": len(lakes),
                   "sources": "Natural Earth 10m rivers, lakes and Europe supplements; hydro_v2 warm Q and A; streams from the hydro_v2 network"}
     json.dump(m, open(os.path.join(atlas_dir, "atlas.json"), "w"), indent=1)
+    summary_bytes = os.path.getsize(out)
+    tile_water.convert(atlas_dir)       # the mod reads tiles (format 3); this removes water.bin.gz
     summary = {"segments": len(segs), "streams": len(segs) - len(rivers), "lakes": len(lakes), "edges": len(edges), "interior_buckets": len(interior),
-               "bytes": os.path.getsize(out)}
+               "bytes": summary_bytes}
     for l in lakes:
         if l["name"] in ("Lake Geneva", "Bodensee", "Lago di Garda", "Lake Superior"): summary[l["name"]] = {"level": l["level"], "depth": round(l["depth"], 1)}
     print(json.dumps(summary, indent=1))

@@ -49,7 +49,7 @@ Any change to them changes terrain in chunks not yet generated and leaves seams.
   asks the overworld multi_noise preset and keeps only cave biomes (Terralith `cave/*`, lush and
   dripstone caves). Deep dark is left out.
 - World preset `elysium_atlas:globe`. Nether and End are vanilla.
-- Water (`Water.java`, `water.bin.gz`): river centrelines as segments with water level, half-width and
+- Water (`Water.java`, `water/`): river centrelines as segments with water level, half-width and
   depth; lake outlines as edges with a level and depth per lake. Per block column: a river channel is
   carved to `level - 1 - depth*(1 - (d/w)^2)` with a levee 1.2 blocks above the water at its edge; a
   lake bed deepens 0.3 blocks per block from the shore up to the lake's depth; a 1.2-block lip outside
@@ -85,6 +85,13 @@ Each 5 km cell drains to its neighbour with the largest drainage area; cell cent
 atlas point within 12 blocks, then the chains are smoothed and given a meander (5 blocks, 80-block
 wavelength) that fades out at both ends. A stream's level never drops below the river, lake, sea or
 downstream stream it joins. Slice-4: 3.1M stream segments, `water.bin.gz` 40 MB (format 2).
+
+`bake/tile_water.py ATLAS_DIR` (run by bake_water.py at the end) splits that file into `water/`: 4096-block tiles,
+each holding every segment, shore edge and lake-interior bucket that reaches into it (1.04x duplication), plus
+`index.bin` with the lake table and tile list (format 3). The mod loads a tile when a column first needs it and drops
+least recently used tiles past `-Delysium_atlas.waterCacheMB` (default 96). On the globe atlas this replaced a 7 s,
+233 MB load at startup; a chunk-gen sample of 1.4M columns gave identical results, holding 58 tiles (25 MB).
+Formats 1 and 2 still load whole. Height tiles have their own cap, `-Delysium_atlas.tileCacheMB` (default 256 per level).
 
 Sub-biomes (`bake/bake_subbiomes.py ATLAS_DIR TILE_CACHE WC_CACHE`, about 1 min, run last): on the
 4-block detail level, each cell gets one of 17 classes from terrain (slope, aspect, hollows, ridges,
