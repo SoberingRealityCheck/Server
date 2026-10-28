@@ -1,0 +1,160 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_arm_north"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "south": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_north_end"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "south": "false"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_north_bark"
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_arm_south"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "north": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_south_end"
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "north": "false"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_south_bark"
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_arm_east"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_east_end"
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_east_bark"
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_arm_west"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "east": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_west_end"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "east": "false"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_west_bark"
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_arm_up"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "down": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_up_end"
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "down": "false"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_up_bark"
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_arm_down"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "up": "true"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_down_end"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "up": "false"
+      },
+      "apply": {
+        "model": "elysium_flora:block/thin_stripped_spruce_log_cap_down_bark"
+      }
+    }
+  ]
+}

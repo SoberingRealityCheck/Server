@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "thin_logs",
+  "key": {
+    "#": "minecraft:oak_log"
+  },
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "result": {
+    "id": "elysium_flora:thin_oak_log",
+    "count": 2
+  }
+}

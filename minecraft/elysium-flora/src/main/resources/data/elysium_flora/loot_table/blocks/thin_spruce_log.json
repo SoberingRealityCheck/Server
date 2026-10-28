@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "elysium_flora:blocks/thin_spruce_log",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "elysium_flora:thin_spruce_log"
+        }
+      ]
+    }
+  ]
+}

@@ -370,6 +370,15 @@ coasts, relief, surface biomes, rivers and lakes) by feeding it into Tectonic. V
   `"max_y": 576` in `config/tectonic.json`. Set both only for the new world; see the mod's README.
 - In game: `/atlas here`, `goto`, `probe`.
 
+### elysium-flora/
+
+Thin logs (6 px, six-way connected) for the vanilla woods, craftable 1:1 from logs, plus a trunk placer and
+tree decorators for thin-trunk trees. Client + server.
+
+- Source and docs: `elysium-flora/`. Start with its `README.md`.
+- Rebuild with `elysium-flora/build.sh` (plain javac, needs Java 25). Writes `overrides/mods/elysium_flora.jar`.
+  Not built yet: see its README.
+
 ### Resource packs
 
 Resource packs declared in `pack.yaml` are installed for clients under

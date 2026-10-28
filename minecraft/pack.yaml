@@ -258,6 +258,11 @@ mods:
   # instead of silently breaking. Re-check the mixin targets, rebuild,
   # and change the version in its fabric.mod.json when bumping DH.
 
+  # Elysium Flora is NOT listed here either. It is our own mod (thin logs
+  # and thin-trunk tree pieces), built from elysium-flora/ with its
+  # build.sh and shipped as overrides/mods/elysium_flora.jar (both sides:
+  # it adds blocks). Same hack: --check-deps and MODLIST.md don't see it.
+
   - name: "Nullscape"
     file: "Nullscape_26.2_v1.2.20.jar"
     url: "https://cdn.modrinth.com/data/LPjGiSO4/versions/lpsdO6Sg/Nullscape_26.2_v1.2.20.jar"
