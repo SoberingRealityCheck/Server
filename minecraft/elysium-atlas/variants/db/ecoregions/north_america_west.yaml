@@ -1,0 +1,665 @@
+# North America west of the plains: Pacific coast, California, deserts, Great Basin, Rockies.
+# Schema: see ../README.md.
+
+349:
+  name: Coast Rainforest
+  resolve: "British Columbia coastal conifer forests"
+  tree_cover: 0.85
+  trees: {western_hemlock: 4, western_red_cedar: 3, sitka_spruce: 2, coast_douglas_fir: 2, red_alder: 1, fallen_log: 0.3}
+  ground: {sword_fern: 2, salal: 2, forest_mosses: 2, bluejoint: 0.5}
+  flowers: {fireweed: 0.5}
+  niches:
+    sitka_spruce: {elevation: [0, 600]}
+    western_red_cedar: {elevation: [0, 900]}
+    western_hemlock: {elevation: [0, 1100]}
+    coast_douglas_fir: {elevation: [0, 900]}
+  ground_surface:
+    geology: "Coast Mountains granite and diorite."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {podzol: some}
+  why: "Hemlock, cedar, Sitka spruce and Douglas fir under constant rain; ferns and salal below."
+
+351:
+  name: Pacific Coast Forest
+  resolve: "Central Pacific Northwest coastal forests"
+  tree_cover: 0.85
+  trees: {sitka_spruce: 3, western_hemlock: 3, coast_douglas_fir: 3, western_red_cedar: 2, red_alder: 1.5, bigleaf_maple: 0.5, fallen_log: 0.3}
+  ground: {sword_fern: 3, salal: 2, forest_mosses: 2, bluejoint: 0.5}
+  flowers: {lupine: 0.3, fireweed: 0.3}
+  niches:
+    sitka_spruce: {elevation: [0, 500]}
+  ground_surface:
+    geology: "Coast Range sandstone and basalt."
+    rock: [stone, smooth_basalt]
+    outcrops: few
+    soil: {podzol: few}
+  why: "Sitka spruce in the fog belt, Douglas fir and hemlock inland; alder along streams."
+
+360:
+  name: Alaskan Coast Forest
+  resolve: "Northern Pacific Alaskan coastal forests"
+  tree_cover: 0.7
+  trees: {sitka_spruce: 5, western_hemlock: 4, red_alder: 1}
+  ground: {salal: 1, forest_mosses: 2, bluejoint: 1, sphagnum: 0.5}
+  flowers: {fireweed: 0.5, lupine: 0.3}
+  niches:
+    sitka_spruce: {elevation: [0, 700]}
+    western_hemlock: {elevation: [0, 800]}
+    red_alder: {elevation: [0, 500]}
+  ground_surface:
+    geology: "Granite and metamorphic rock, glacial gravel."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few, podzol: few}
+  why: "Sitka spruce and western hemlock from the shore to the treeline, then alpine heath."
+
+365:
+  name: Haida Gwaii Forest
+  resolve: "Queen Charlotte Islands conifer forests"
+  tree_cover: 0.8
+  trees: {sitka_spruce: 4, western_hemlock: 3, western_red_cedar: 3, fallen_log: 0.3}
+  ground: {forest_mosses: 3, salal: 1, sword_fern: 1, bluejoint: 0.5}
+  ground_surface:
+    geology: "Volcanic and sedimentary rock."
+    rock: [stone, smooth_basalt]
+    outcrops: few
+    soil: {moss_block: few}
+  why: "Sitka spruce, western hemlock and red cedar on the islands; deep moss."
+
+359:
+  name: Redwood Coast
+  resolve: "Northern California coastal forests"
+  tree_cover: 0.85
+  trees: {coast_redwood: 6, coast_douglas_fir: 2, red_alder: 1, bigleaf_maple: 0.5, fallen_log: 0.3}
+  ground: {sword_fern: 3, salal: 1, forest_mosses: 1, bluejoint: 0.5}
+  niches:
+    coast_redwood: {elevation: [0, 900]}
+  ground_surface:
+    geology: "Franciscan sandstone and shale."
+    rock: [stone]
+    outcrops: few
+    soil: {coarse_dirt: few}
+  why: "Coast redwood groves in the fog belt, Douglas fir behind them."
+
+364:
+  name: Puget Lowland
+  resolve: "Puget lowland forests"
+  tree_cover: 0.75
+  trees: {coast_douglas_fir: 5, western_hemlock: 2, western_red_cedar: 2, red_alder: 2, bigleaf_maple: 1, oregon_white_oak: 0.5}
+  ground: {sword_fern: 2, salal: 2, bluejoint: 1}
+  flowers: {lupine: 0.3}
+  ground_surface:
+    geology: "Glacial outwash and till."
+    soil: {gravel: few}
+  why: "Douglas fir, hemlock and cedar on glacial plains, oak prairies on gravel."
+
+403:
+  name: Willamette Savanna
+  resolve: "Willamette Valley oak savanna"
+  tree_cover: 0.3
+  trees: {oregon_white_oak: 6, coast_douglas_fir: 2, pacific_madrone: 0.5}
+  ground: {idaho_fescue: 1, wild_oats: 1}
+  flowers: {lupine: 1, california_poppy: 0.3}
+  patches:
+    trees: {size: 32, share: 0.4}
+  ground_surface:
+    geology: "Valley alluvium and Missoula flood silts."
+    soil: {coarse_dirt: few}
+  why: "Oregon white oak savanna and prairie on the valley floor."
+
+352:
+  name: Cascade Forest
+  resolve: "Central-Southern Cascades Forests"
+  tree_cover: 0.75
+  trees: {coast_douglas_fir: 4, western_hemlock: 3, western_red_cedar: 1, white_fir: 1, lodgepole_pine: 1, sugar_pine: 0.5}
+  ground: {sword_fern: 1, salal: 1, forest_mosses: 1, bluejoint: 1}
+  flowers: {lupine: 0.5, fireweed: 0.5}
+  niches:
+    coast_douglas_fir: {elevation: [0, 1500]}
+    western_hemlock: {elevation: [0, 1600]}
+    western_red_cedar: {elevation: [0, 1100]}
+    white_fir: {elevation: [800, 1900]}
+    lodgepole_pine: {elevation: [1200, 2200]}
+    sugar_pine: {elevation: [600, 1700]}
+    lupine: {elevation: [1200, 2600]}
+  ground_surface:
+    geology: "Andesite and pumice of the Cascade volcanoes."
+    rock: [andesite, tuff]
+    outcrops: some
+    soil: {podzol: few, gravel: few}
+  why: "Douglas fir and hemlock low, true firs and lodgepole high, on volcanic slopes."
+
+358:
+  name: North Cascades
+  resolve: "North Cascades conifer forests"
+  tree_cover: 0.7
+  trees: {coast_douglas_fir: 3, western_hemlock: 3, western_red_cedar: 1, white_fir: 1, lodgepole_pine: 1, western_larch: 0.5}
+  ground: {forest_mosses: 1, salal: 1, sword_fern: 1, bluejoint: 1}
+  flowers: {lupine: 0.5}
+  niches:
+    coast_douglas_fir: {elevation: [0, 1300]}
+    western_hemlock: {elevation: [0, 1400]}
+    western_red_cedar: {elevation: [0, 1000]}
+    white_fir: {elevation: [700, 1800]}
+    lodgepole_pine: {elevation: [1100, 2000]}
+    western_larch: {elevation: [1500, 2100]}
+  ground_surface:
+    geology: "Granite, gneiss and andesite."
+    rock: [granite, andesite]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Wet conifer forest up glaciated valleys to heather and ice."
+
+354:
+  name: Eastern Cascades
+  resolve: "Eastern Cascades forests"
+  tree_cover: 0.4
+  trees: {ponderosa_pine: 5, douglas_fir: 2, western_larch: 1, lodgepole_pine: 1}
+  ground: {bitterbrush: 1, bluebunch_wheatgrass: 1, idaho_fescue: 1}
+  flowers: {arrowleaf_balsamroot: 1, lupine: 0.5}
+  niches:
+    ponderosa_pine: {elevation: [0, 1500]}
+    douglas_fir: {elevation: [600, 1800]}
+    western_larch: {elevation: [700, 1900]}
+    lodgepole_pine: {elevation: [1100, 2200]}
+  ground_surface:
+    geology: "Basalt flows and andesite."
+    rock: [smooth_basalt, andesite]
+    outcrops: some
+    soil: {coarse_dirt: few}
+  why: "Open ponderosa pine and larch in the Cascades' rain shadow, bunchgrass below."
+
+357:
+  name: Klamath Mountains
+  resolve: "Klamath-Siskiyou forests"
+  tree_cover: 0.65
+  trees: {coast_douglas_fir: 4, pacific_madrone: 1.5, sugar_pine: 1, white_fir: 1, coast_live_oak: 1, ponderosa_pine: 1}
+  shrubs: {manzanita: 1}
+  ground: {sword_fern: 1, salal: 1, purple_needlegrass: 1}
+  niches:
+    white_fir: {elevation: [900, 2100]}
+  ground_surface:
+    geology: "Serpentinite and granite."
+    rock: [deepslate, granite]
+    outcrops: some
+    soil: {coarse_dirt: few}
+  why: "The most varied conifer forest in the West: Douglas fir, sugar pine and madrone on serpentine and granite."
+
+366:
+  name: Sierra Nevada
+  resolve: "Sierra Nevada forests"
+  tree_cover: 0.55
+  trees: {ponderosa_pine: 3, sugar_pine: 2, white_fir: 2, giant_sequoia: 0.5, lodgepole_pine: 2, blue_oak: 1}
+  shrubs: {manzanita: 1}
+  ground: {purple_needlegrass: 1, wild_oats: 1, bitterbrush: 0.5}
+  flowers: {lupine: 1}
+  niches:
+    blue_oak: {elevation: [0, 900]}
+    ponderosa_pine: {elevation: [600, 2100]}
+    sugar_pine: {elevation: [1000, 2200]}
+    white_fir: {elevation: [1100, 2400]}
+    giant_sequoia: {elevation: [1400, 2100]}
+    lodgepole_pine: {elevation: [2000, 3200]}
+    manzanita: {elevation: [500, 2500]}
+    wild_oats: {elevation: [0, 1200]}
+  ground_surface:
+    geology: "Sierra Nevada batholith granite."
+    rock: [granite, diorite]
+    outcrops: many
+    soil: {gravel: few}
+  why: "Blue oak foothills, pine and fir belt with sequoia groves, lodgepole high up, granite above."
+
+356:
+  name: Great Basin Ranges
+  resolve: "Great Basin montane forests"
+  tree_cover: 0.3
+  trees: {singleleaf_pinyon: 3, utah_juniper: 2, white_fir: 1, lodgepole_pine: 1}
+  ground: {big_sagebrush: 2, idaho_fescue: 1}
+  flowers: {indian_paintbrush_west: 0.5}
+  niches:
+    singleleaf_pinyon: {elevation: [1500, 2600]}
+    utah_juniper: {elevation: [1400, 2400]}
+    white_fir: {elevation: [2200, 3000]}
+    lodgepole_pine: {elevation: [2600, 3500]}
+  ground_surface:
+    geology: "Limestone and quartzite ranges."
+    rock: [stone, calcite]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Pinyon and juniper on the lower slopes, fir and limber pine above, sagebrush between ranges."
+
+423:
+  name: California Oak Woodland
+  resolve: "California interior chaparral and woodlands"
+  tree_cover: 0.3
+  shrub_cover: 0.15
+  trees: {blue_oak: 4, valley_oak: 2, coast_live_oak: 2}
+  shrubs: {chamise: 2, manzanita: 1, scrub_oak: 1}
+  ground: {wild_oats: 3, purple_needlegrass: 1}
+  flowers: {california_poppy: 2, lupine: 1}
+  patches:
+    trees: {size: 32, share: 0.45}
+    shrubs: {size: 24, share: 0.35}
+  ground_surface:
+    geology: "Sandstone and serpentinite foothills."
+    rock: [stone, sandstone]
+    outcrops: few
+    soil: {coarse_dirt: few}
+  why: "Blue and valley oaks over golden grass, chaparral on the steeper ground."
+
+422:
+  name: Coastal Sage Scrub
+  resolve: "California coastal sage and chaparral"
+  tree_cover: 0.08
+  shrub_cover: 0.3
+  trees: {coast_live_oak: 2}
+  shrubs: {chamise: 2, scrub_oak: 1}
+  ground: {california_sagebrush: 3, black_sage: 2, wild_oats: 1, purple_needlegrass: 1}
+  flowers: {california_poppy: 1, lupine: 1}
+  niches:
+    coast_live_oak: {water: riparian}
+  ground_surface:
+    geology: "Marine sandstone terraces."
+    rock: [sandstone]
+    outcrops: few
+    soil: {coarse_dirt: some}
+  why: "Soft grey sage scrub on the coastal hills, chaparral higher, oaks in the canyons."
+
+424:
+  name: California Mountain Chaparral
+  resolve: "California montane chaparral and woodlands"
+  tree_cover: 0.15
+  shrub_cover: 0.4
+  trees: {ponderosa_pine: 2, coast_live_oak: 1}
+  shrubs: {chamise: 2, manzanita: 2, scrub_oak: 2}
+  ground: {ceanothus: 2, purple_needlegrass: 1}
+  ground_surface:
+    geology: "Granite of the Transverse and Peninsular Ranges."
+    rock: [granite]
+    outcrops: some
+    soil: {coarse_dirt: some}
+  why: "Dense chamise, manzanita and scrub oak with pines on the ridges."
+
+425:
+  name: Santa Lucia Range
+  resolve: "Santa Lucia Montane Chaparral & Woodlands"
+  tree_cover: 0.35
+  trees: {coast_live_oak: 2, coast_redwood: 1, ponderosa_pine: 1}
+  shrubs: {chamise: 1, manzanita: 1}
+  ground: {ceanothus: 1, purple_needlegrass: 1, wild_oats: 1}
+  flowers: {california_poppy: 1}
+  niches:
+    coast_redwood: {water: riparian}
+  ground_surface:
+    geology: "Granite and Franciscan rock."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {coarse_dirt: few}
+  why: "Oak woodland and chaparral on the slopes, redwoods in the canyons."
+
+385:
+  name: Central Valley
+  resolve: "California Central Valley grasslands"
+  tree_cover: 0.08
+  trees: {valley_oak: 3, cottonwood: 1}
+  ground: {wild_oats: 3, purple_needlegrass: 1}
+  flowers: {california_poppy: 2, lupine: 1}
+  patches:
+    trees: {size: 40, share: 0.3}
+  ground_surface:
+    geology: "Deep alluvium."
+    soil: {coarse_dirt: few}
+  why: "Grassland gone gold, valley oaks scattered and cottonwood along the rivers."
+
+433:
+  name: Mojave Desert
+  resolve: "Mojave desert"
+  tree_cover: 0.03
+  trees: {joshua_tree: 2}
+  ground: {creosote_bush: 3, white_bursage: 2, big_galleta: 1, dead_brush: 0.5}
+  flowers: {desert_marigold: 1}
+  cactus: {tree_cholla: 1, texas_prickly_pear: 1}
+  cactus_density: 0.4
+  niches:
+    joshua_tree: {elevation: [400, 1900]}
+  ground_surface:
+    geology: "Gravel bajadas, granite and basalt."
+    rock: [stone, smooth_basalt]
+    outcrops: few
+    soil: {gravel: some, sand: some}
+    top: coarse_dirt
+  why: "Creosote and bursage flats, Joshua tree woodland on the higher bajadas."
+
+435:
+  name: Sonoran Desert
+  resolve: "Sonoran desert"
+  tree_cover: 0.08
+  trees: {saguaro: 3, palo_verde: 2, honey_mesquite: 1}
+  ground: {creosote_bush: 2, brittlebush: 2, white_bursage: 1, big_galleta: 1}
+  flowers: {desert_marigold: 1}
+  cactus: {tree_cholla: 2, texas_prickly_pear: 1}
+  cactus_density: 0.6
+  ground_surface:
+    geology: "Granite ranges and gravel bajadas."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: some, sand: some}
+    top: coarse_dirt
+  why: "Saguaro forest on rocky slopes, palo verde and creosote on the flats."
+
+426:
+  name: Baja Desert
+  resolve: "Baja California desert"
+  tree_cover: 0.05
+  trees: {palo_verde: 2, saguaro: 1, faxon_yucca: 1}
+  ground: {brittlebush: 2, white_bursage: 2, big_galleta: 1}
+  cactus: {tree_cholla: 2}
+  cactus_density: 0.5
+  ground_surface:
+    geology: "Granite and volcanic mesas."
+    rock: [granite, tuff]
+    outcrops: some
+    soil: {sand: some}
+    top: coarse_dirt
+  why: "Cardon cactus, palo verde and elephant trees over fog-fed desert scrub."
+
+431:
+  name: Gulf of California Scrub
+  resolve: "Gulf of California xeric scrub"
+  tree_cover: 0.06
+  trees: {saguaro: 2, palo_verde: 2}
+  ground: {brittlebush: 1, creosote_bush: 1, white_bursage: 1, big_galleta: 1}
+  cactus: {tree_cholla: 1, texas_prickly_pear: 1}
+  cactus_density: 0.5
+  ground_surface:
+    geology: "Volcanic rock and coastal gravel."
+    rock: [tuff, stone]
+    outcrops: some
+    soil: {gravel: few}
+    top: coarse_dirt
+  why: "Columnar cactus and palo verde on hot rocky coasts."
+
+324:
+  name: Sonoran-Sinaloan Thornforest
+  resolve: "Sonoran-Sinaloan subtropical dry forest"
+  tree_cover: 0.3
+  trees: {palo_verde: 2, honey_mesquite: 2, huisache: 2, texas_ebony: 1}
+  ground: {brittlebush: 1, sideoats_grama: 1}
+  cactus: {tree_cholla: 1}
+  ground_surface:
+    geology: "Volcanic hills."
+    rock: [tuff, andesite]
+    outcrops: few
+    soil: {coarse_dirt: few}
+  why: "Dry thornforest of palo verde, mesquite and acacia that greens in the summer rains."
+
+427:
+  name: Central Mexican Matorral
+  resolve: "Central Mexican matorral"
+  tree_cover: 0.08
+  trees: {honey_mesquite: 2, faxon_yucca: 2, huisache: 1}
+  ground: {lechuguilla: 2, black_grama: 1, blue_grama: 1}
+  cactus: {texas_prickly_pear: 3, tree_cholla: 1}
+  cactus_density: 0.6
+  ground_surface:
+    geology: "Volcanic tuff and limestone."
+    rock: [tuff, calcite]
+    outcrops: few
+    soil: {sand: some}
+    top: coarse_dirt
+  why: "Mesquite, yucca and prickly pear on the high plateau."
+
+430:
+  name: Sagebrush Steppe
+  resolve: "Great Basin shrub steppe"
+  tree_cover: 0.04
+  trees: {utah_juniper: 1, singleleaf_pinyon: 1}
+  ground: {big_sagebrush: 5, rabbitbrush: 1, bluebunch_wheatgrass: 1, indian_ricegrass: 1, shadscale: 1}
+  flowers: {indian_paintbrush_west: 0.5, lupine: 0.5}
+  niches:
+    utah_juniper: {elevation: [1500, 2400]}
+    singleleaf_pinyon: {elevation: [1700, 2600]}
+  ground_surface:
+    geology: "Basin fill and volcanic ranges."
+    rock: [stone, smooth_basalt]
+    outcrops: few
+    soil: {coarse_dirt: many}
+  why: "Silver-grey sagebrush in every basin, pinyon and juniper on the range foothills."
+
+434:
+  name: Snake-Columbia Steppe
+  resolve: "Snake-Columbia shrub steppe"
+  tree_cover: 0.02
+  trees: {utah_juniper: 0.5}
+  ground: {big_sagebrush: 4, bitterbrush: 1, bluebunch_wheatgrass: 2, idaho_fescue: 1}
+  flowers: {arrowleaf_balsamroot: 1, lupine: 0.5}
+  ground_surface:
+    geology: "Columbia River basalt."
+    rock: [smooth_basalt]
+    outcrops: some
+    soil: {coarse_dirt: few}
+  why: "Sagebrush and bunchgrass on the Columbia basalt."
+
+438:
+  name: Wyoming Basin
+  resolve: "Wyoming Basin shrub steppe"
+  tree_cover: 0.02
+  trees: {utah_juniper: 0.5}
+  ground: {big_sagebrush: 4, rabbitbrush: 1, western_wheatgrass: 1, needle_and_thread: 1, shadscale: 0.5}
+  flowers: {indian_paintbrush_west: 0.5}
+  ground_surface:
+    geology: "Tertiary sandstone and shale."
+    rock: [sandstone]
+    outcrops: some
+    soil: {coarse_dirt: many}
+  why: "Sagebrush and wheatgrass on wind-swept basins."
+
+398:
+  name: Palouse
+  resolve: "Palouse prairie"
+  tree_cover: 0.03
+  trees: {ponderosa_pine: 1}
+  ground: {bluebunch_wheatgrass: 3, idaho_fescue: 3}
+  flowers: {arrowleaf_balsamroot: 1, lupine: 1}
+  ground_surface:
+    geology: "Wind-blown loess over basalt."
+    rock: [smooth_basalt]
+    outcrops: few
+    subsoil: packed_mud
+  why: "Rolling loess hills of bunchgrass and balsamroot."
+
+394:
+  name: Montana Valleys
+  resolve: "Montana Valley and Foothill grasslands"
+  tree_cover: 0.06
+  trees: {douglas_fir: 1, ponderosa_pine: 1}
+  ground: {rough_fescue: 2, bluebunch_wheatgrass: 2, idaho_fescue: 1, needle_and_thread: 1}
+  flowers: {arrowleaf_balsamroot: 0.5, lupine: 0.5, prairie_crocus: 0.3}
+  patches:
+    trees: {size: 40, share: 0.25}
+  ground_surface:
+    geology: "Valley gravels and sedimentary rock."
+    rock: [stone]
+    outcrops: few
+    soil: {gravel: few}
+  why: "Fescue and wheatgrass valleys between the ranges, Douglas fir on the slopes."
+
+361:
+  name: Northern Rockies
+  resolve: "Northern Rockies conifer forests"
+  tree_cover: 0.65
+  trees: {douglas_fir: 3, western_larch: 2, lodgepole_pine: 2, western_red_cedar: 1, western_hemlock: 1, engelmann_spruce: 1, subalpine_fir: 1, ponderosa_pine: 1}
+  ground: {bluejoint: 1, idaho_fescue: 1, forest_mosses: 1}
+  flowers: {fireweed: 0.5, lupine: 0.5}
+  niches:
+    ponderosa_pine: {elevation: [0, 1300]}
+    douglas_fir: {elevation: [500, 1900]}
+    western_larch: {elevation: [600, 1900]}
+    western_red_cedar: {elevation: [0, 1300]}
+    western_hemlock: {elevation: [0, 1400]}
+    lodgepole_pine: {elevation: [900, 2200]}
+    engelmann_spruce: {elevation: [1400, 2400]}
+    subalpine_fir: {elevation: [1500, 2500]}
+  ground_surface:
+    geology: "Belt Supergroup sediments and granite."
+    rock: [stone, granite]
+    outcrops: some
+    soil: {podzol: few}
+  why: "Cedar-hemlock in the wet valleys, larch and Douglas fir on the slopes, spruce-fir to the treeline."
+
+367:
+  name: Middle Rockies
+  resolve: "South Central Rockies forests"
+  tree_cover: 0.55
+  trees: {lodgepole_pine: 4, douglas_fir: 2, engelmann_spruce: 2, subalpine_fir: 2, quaking_aspen: 2, ponderosa_pine: 1}
+  ground: {idaho_fescue: 1, bluebunch_wheatgrass: 1}
+  flowers: {lupine: 1, indian_paintbrush_west: 0.5}
+  niches:
+    ponderosa_pine: {elevation: [1500, 2300]}
+    douglas_fir: {elevation: [1800, 2800]}
+    lodgepole_pine: {elevation: [2000, 3000]}
+    quaking_aspen: {elevation: [2000, 3000]}
+    engelmann_spruce: {elevation: [2600, 3300]}
+    subalpine_fir: {elevation: [2700, 3350]}
+  ground_surface:
+    geology: "Granite and gneiss cores."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Lodgepole pine and aspen, spruce-fir higher up, bare granite above the treeline."
+
+368:
+  name: Wasatch and Uinta
+  resolve: "Wasatch and Uinta montane forests"
+  tree_cover: 0.5
+  trees: {douglas_fir: 2, quaking_aspen: 3, subalpine_fir: 2, engelmann_spruce: 2, utah_juniper: 1, lodgepole_pine: 1}
+  shrubs: {gambel_oak: 2}
+  ground: {bluebunch_wheatgrass: 1, big_sagebrush: 1}
+  flowers: {lupine: 0.5, indian_paintbrush_west: 0.5}
+  niches:
+    gambel_oak: {elevation: [1500, 2400]}
+    utah_juniper: {elevation: [1300, 2100]}
+    douglas_fir: {elevation: [1900, 2800]}
+    quaking_aspen: {elevation: [2000, 3000]}
+    lodgepole_pine: {elevation: [2400, 3100]}
+    engelmann_spruce: {elevation: [2600, 3350]}
+    subalpine_fir: {elevation: [2700, 3400]}
+    big_sagebrush: {elevation: [1300, 2500]}
+  ground_surface:
+    geology: "Wasatch limestone and Uinta quartzite."
+    rock: [calcite, stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Gambel oak and maple foothills, aspen and Douglas fir, spruce-fir on the Uinta crest."
+
+348:
+  name: Blue Mountains
+  resolve: "Blue Mountains forests"
+  tree_cover: 0.5
+  trees: {ponderosa_pine: 3, douglas_fir: 2, western_larch: 2, white_fir: 1, lodgepole_pine: 1}
+  ground: {bluebunch_wheatgrass: 1, idaho_fescue: 1, bitterbrush: 0.5}
+  flowers: {arrowleaf_balsamroot: 0.5}
+  niches:
+    ponderosa_pine: {elevation: [0, 1500]}
+    douglas_fir: {elevation: [700, 1900]}
+    western_larch: {elevation: [800, 1900]}
+    white_fir: {elevation: [1000, 2000]}
+    lodgepole_pine: {elevation: [1300, 2300]}
+  ground_surface:
+    geology: "Columbia River basalt."
+    rock: [smooth_basalt, stone]
+    outcrops: some
+    soil: {coarse_dirt: few}
+  why: "Ponderosa pine and larch on basalt plateaus, fir in the cooler draws."
+
+362:
+  name: Okanogan Dry Forest
+  resolve: "Okanogan dry forests"
+  tree_cover: 0.4
+  trees: {ponderosa_pine: 4, douglas_fir: 3, western_larch: 1}
+  ground: {bluebunch_wheatgrass: 2, idaho_fescue: 1, bitterbrush: 1}
+  flowers: {arrowleaf_balsamroot: 1}
+  ground_surface:
+    geology: "Granite and gneiss of the Okanogan Highlands."
+    rock: [granite]
+    outcrops: some
+    soil: {coarse_dirt: few}
+  why: "Park-like ponderosa pine and Douglas fir over bunchgrass."
+
+350:
+  name: Interior BC Mountains
+  resolve: "Central British Columbia Mountain forests"
+  tree_cover: 0.6
+  trees: {engelmann_spruce: 3, subalpine_fir: 3, lodgepole_pine: 2, douglas_fir: 1, paper_birch: 0.5}
+  ground: {bluejoint: 1, forest_mosses: 1}
+  flowers: {fireweed: 1}
+  niches:
+    lodgepole_pine: {elevation: [0, 1500]}
+    douglas_fir: {elevation: [0, 1200]}
+    paper_birch: {elevation: [0, 1100]}
+    engelmann_spruce: {elevation: [700, 2000]}
+    subalpine_fir: {elevation: [900, 2100]}
+  ground_surface:
+    geology: "Granite and metamorphic rock."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {podzol: few}
+  why: "Spruce-fir and lodgepole across the interior ranges."
+
+345:
+  name: Rocky Mountain Foothills
+  resolve: "Alberta-British Columbia foothills forests"
+  tree_cover: 0.6
+  trees: {lodgepole_pine: 4, white_spruce: 2, quaking_aspen: 2, subalpine_fir: 1, engelmann_spruce: 1}
+  ground: {rough_fescue: 1, bluejoint: 1}
+  flowers: {fireweed: 0.5, lupine: 0.5}
+  niches:
+    quaking_aspen: {elevation: [0, 1500]}
+    white_spruce: {elevation: [0, 1600]}
+    lodgepole_pine: {elevation: [800, 2000]}
+    engelmann_spruce: {elevation: [1300, 2200]}
+    subalpine_fir: {elevation: [1400, 2300]}
+  ground_surface:
+    geology: "Sandstone and shale of the foothills."
+    rock: [stone, sandstone]
+    outcrops: few
+    soil: {gravel: few}
+  why: "Lodgepole and aspen on the foothills, spruce and fir up toward the Rockies."
+
+355:
+  name: Fraser Plateau
+  resolve: "Fraser Plateau and Basin conifer forests"
+  tree_cover: 0.5
+  trees: {douglas_fir: 3, lodgepole_pine: 3, white_spruce: 1, quaking_aspen: 1}
+  ground: {bluebunch_wheatgrass: 1, rough_fescue: 1}
+  flowers: {arrowleaf_balsamroot: 0.5}
+  patches:
+    trees: {size: 48, share: 0.6}
+  ground_surface:
+    geology: "Plateau basalt and glacial till."
+    rock: [smooth_basalt]
+    outcrops: few
+    soil: {gravel: few}
+  why: "Dry Douglas fir and lodgepole forest broken by grassland."
+
+380:
+  name: Northern Cordillera
+  resolve: "Northern Cordillera forests"
+  tree_cover: 0.45
+  trees: {white_spruce: 3, subalpine_fir: 2, lodgepole_pine: 2, black_spruce: 1, quaking_aspen: 1}
+  ground: {bluejoint: 1, dwarf_birch: 1, reindeer_lichen: 0.5}
+  flowers: {fireweed: 1}
+  niches:
+    white_spruce: {elevation: [0, 1400]}
+    lodgepole_pine: {elevation: [0, 1300]}
+    subalpine_fir: {elevation: [600, 1600]}
+    quaking_aspen: {elevation: [0, 1100]}
+    black_spruce: {elevation: [0, 1100]}
+    dwarf_birch: {elevation: [900, 2200]}
+  ground_surface:
+    geology: "Folded sediments and granite."
+    rock: [stone, granite]
+    outcrops: some
+    soil: {gravel: few}
+  why: "White spruce and subalpine fir in the northern ranges, shrub tundra above."

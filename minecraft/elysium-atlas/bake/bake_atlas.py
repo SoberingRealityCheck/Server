@@ -1,0 +1,308 @@
+"""Bake the runtime atlas read by the elysium_atlas mod.
+
+Output (a folder the server reads from config/elysium_atlas/):
+  atlas.json            manifest: projection, scale, sea level, levels, biome palette, spawn
+  L0/<tx>_<tz>.bin.gz   global level, 32 blocks per cell (Terrarium z5)
+  L1/<tx>_<tz>.bin.gz   detail level, 4 blocks per cell, test region only (Terrarium z10)
+
+Tile = 256 x 256 cells, row-major (z then x), little-endian:
+  b"EATL", u16 version, u16 size, i16 height[size*size] (Y * 8), u8 relief[...] (metres / 20), u8 biome[...] (palette index, 255 = none)
+
+World coordinates: block x = Equal Earth x (m) / MPB, block z = -Equal Earth y (m) / MPB. Origin = 11 E, 0 N.
+Vertical: split scaling (doc section 10, E5). Broad band (> ~12 km) x8, fine band x1, then metres -> blocks at MPB.
+
+usage: python3 bake_atlas.py OUT_DIR TILE_CACHE [--profile NAME] [--no-l0]
+(scale, levels, extents and spawn come from bake/profiles/NAME.json; default dev-globe)
+"""
+import argparse, gzip, json, math, os, struct, sys, time
+from concurrent.futures import ThreadPoolExecutor
+import numpy as np
+from PIL import Image
+from scipy import ndimage as ndi
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from placement import Placement, Wetland, FORMATION_COVER, value_noise, resolve_grid  # noqa: E402
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+# Biome inputs (biome_ids_v1.json, biome_v2_global*) live in the project files, not in this repo.
+EXP = os.environ.get("ELYSIUM_WORLDGEN_EXPERIMENTS") or os.path.abspath(os.path.join(HERE, "..", "..", "worldgen-experiments"))
+# RESOLVE Ecoregions2017.shp (CC BY 4.0); read once into EXP/globe/resolve_biome_10m.npy
+ECO_SHP = os.environ.get("ELYSIUM_ECOREGIONS_SHP") or os.path.join(EXP, "eco", "Ecoregions2017.shp")
+
+# ---- scale profile (bake/profiles/<name>.json; see profile.py). Every number that depends on scale comes from it.
+import profile  # noqa: E402
+P = profile.load()
+ATLAS_VERSION = P["atlas_version"]
+MPB = float(P["metres_per_block"])         # profile: metres per block
+LON0 = 11.0; R = 6371008.8                 # m: Equal Earth central meridian and radius (fixed for every profile)
+SEA_Y = int(P["sea_level_y"])              # blocks: Minecraft sea level
+SEA_RISE = float(P["sea_rise_m"])          # m: warm branch (placeholder until the rise is chosen)
+_V = P["vertical"]
+E_LOW, E_HIGH, CUT_M = _V["e_low"], _V["e_high"], _V["cut_m"]   # m per m (broad, fine band) and band split in m
+OCEAN_DEPTH_BLOCKS = _V["ocean_depth_blocks"]                     # blocks: soft cap on ocean depth below sea level
+TOP_KNEE, TOP_SPAN = _V["top_knee"], _V["top_span"]               # blocks (Y): soft cap on land height
+TILE = int(P["tile"])                      # cells per tile side
+LEVELS = P["levels"]                       # cell_m (m), cell (blocks, derived), zoom, extent, feather_cells (cells)
+EDGE_OCEAN_Y = SEA_Y - 24.0                # blocks (Y): sea floor a windowed L0 fades into at its edge
+
+A1, A2, A3, A4 = 1.340264, -0.081106, 0.000893, 0.003796; M3 = math.sqrt(3) / 2
+def ee_fwd(lon, lat):
+    lam = np.radians((np.asarray(lon) - LON0 + 180) % 360 - 180); th = np.arcsin(M3 * np.sin(np.radians(lat))); t2 = th * th; t6 = t2 ** 3
+    x = 2 * math.sqrt(3) * lam * np.cos(th) / (3 * (9 * A4 * t6 * t2 + 7 * A3 * t6 + 3 * A2 * t2 + A1))
+    return R * x, R * th * (A4 * t6 * t2 + A3 * t6 + A2 * t2 + A1)
+def ee_inv(x, y):
+    x, y = x / R, y / R; th = y.copy()
+    for _ in range(12):
+        t2 = th * th; t6 = t2 ** 3
+        th -= (th * (A4 * t6 * t2 + A3 * t6 + A2 * t2 + A1) - y) / (9 * A4 * t6 * t2 + 7 * A3 * t6 + 3 * A2 * t2 + A1)
+    t2 = th * th; t6 = t2 ** 3; d = 9 * A4 * t6 * t2 + 7 * A3 * t6 + 3 * A2 * t2 + A1
+    lam = 3 * x * d / (2 * math.sqrt(3) * np.cos(th)); lon = np.degrees(lam)
+    return (lon + LON0 + 180) % 360 - 180, np.degrees(np.arcsin(np.clip(np.sin(th) / M3, -1, 1))), np.abs(lon) <= 180
+XM = float(ee_fwd(LON0 + 179.999, 0.0)[0]); YM = float(ee_fwd(0.0, 90.0)[1])
+def box_blocks(ext):
+    """Block bounds (xmin, xmax, zmin, zmax) of a lon/lat box, or of the globe."""
+    if ext == "globe": return -XM / MPB, XM / MPB, -YM / MPB, YM / MPB
+    lo0, lo1, la0, la1 = ext; xs, zs = [], []
+    for lo in np.linspace(lo0, lo1, 40):
+        for la in np.linspace(la0, la1, 40):
+            x, y = ee_fwd(lo, la); xs.append(float(x) / MPB); zs.append(-float(y) / MPB)
+    return min(xs), max(xs), min(zs), max(zs)
+_bb = box_blocks(P["extent"])
+BOUNDS = {"xmin": _bb[0], "xmax": _bb[1], "zmin": _bb[2], "zmax": _bb[3]}
+
+# ---- Terrarium sampling (bilinear, parallel tile fetch)
+def fetch(z, x, y, cache):
+    p = os.path.join(cache, f"{z}_{x}_{y}.png")
+    if not os.path.exists(p):
+        import urllib.request
+        u = f"https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
+        for i in range(4):
+            try:
+                data = urllib.request.urlopen(u, timeout=60).read(); open(p + ".part", "wb").write(data); os.replace(p + ".part", p); break
+            except Exception as e:
+                if i == 3: raise
+                time.sleep(2 ** i)
+    return p
+def load_tile(p):
+    a = np.asarray(Image.open(p).convert("RGB"), dtype=np.float32)
+    return a[..., 0] * 256 + a[..., 1] + a[..., 2] / 256 - 32768
+def terrarium(lon, lat, z, cache):
+    n = 2 ** z; latc = np.clip(lat, -85.05, 85.05)
+    fx = (lon + 180) / 360 * n * 256 - 0.5
+    fy = (1 - np.log(np.tan(np.radians(latc)) + 1 / np.cos(np.radians(latc))) / math.pi) / 2 * n * 256 - 0.5
+    fy = np.clip(fy, 0, n * 256 - 1.001)
+    x0 = np.floor(fx).astype(np.int64); y0 = np.floor(fy).astype(np.int64); wx = (fx - x0).astype(np.float32); wy = (fy - y0).astype(np.float32)
+    need = set()
+    for dx in (0, 1):
+        for dy in (0, 1):
+            t = np.unique(((((x0 + dx) // 256) % n) * n + (y0 + dy) // 256).ravel()); need.update(t.tolist())
+    need = sorted(need)
+    with ThreadPoolExecutor(32) as ex:
+        paths = dict(zip(need, ex.map(lambda t: fetch(z, t // n, t % n, cache), need)))
+    out = np.zeros(lon.shape, np.float32); acc = {}
+    def px(xx, yy):
+        xx = xx.ravel(); yy = np.clip(yy.ravel(), 0, n * 256 - 1)
+        tx = (xx // 256) % n; ty = yy // 256; key = tx * n + ty; v = np.empty(xx.shape, np.float32)
+        order = np.argsort(key, kind="stable"); ks, start = np.unique(key[order], return_index=True); end = list(start[1:]) + [key.size]
+        for k, s0, e0 in zip(ks.tolist(), start, end):
+            idx = order[s0:e0]
+            if k not in acc:
+                acc[k] = load_tile(paths[k]) if k in paths else np.zeros((256, 256), np.float32)
+                if len(acc) > 2048: acc.pop(next(iter(acc)))
+            v[idx] = acc[k][yy[idx] % 256, xx[idx] % 256]
+        return v.reshape(lon.shape)
+    out = (px(x0, y0) * (1 - wx) * (1 - wy) + px(x0 + 1, y0) * wx * (1 - wy) + px(x0, y0 + 1) * (1 - wx) * wy + px(x0 + 1, y0 + 1) * wx * wy)
+    return out
+
+# ---- vertical transfer
+def to_y(zr, low):
+    E = E_LOW * low + E_HIGH * (zr - low)
+    land = zr > 0
+    yl = SEA_Y + 0.5 + np.maximum(E, 0) / MPB
+    yl = np.where(yl > TOP_KNEE, TOP_KNEE + TOP_SPAN * np.tanh((yl - TOP_KNEE) / TOP_SPAN), yl)
+    ys = SEA_Y - 0.5 - OCEAN_DEPTH_BLOCKS * np.tanh(np.maximum(-E, 0) / MPB / OCEAN_DEPTH_BLOCKS)
+    return np.where(land, yl, ys)
+
+# ---- Catmull-Rom, identical to AtlasLevel.sample() in the mod
+def cr_weights(t):
+    t2, t3 = t * t, t * t * t
+    return [(-t3 + 2 * t2 - t) / 2, (3 * t3 - 5 * t2 + 2) / 2, (-3 * t3 + 4 * t2 + t) / 2, (t3 - t2) / 2]
+def cr_sample(grid, i0, j0, cell, xb, zb):
+    """grid[z, x] covers cells starting at (i0, j0); xb, zb in blocks."""
+    u = xb / cell - 0.5 - i0; v = zb / cell - 0.5 - j0
+    iu = np.floor(u).astype(int); iv = np.floor(v).astype(int); wu = cr_weights(u - iu); wv = cr_weights(v - iv)
+    out = np.zeros(np.shape(xb), np.float64)
+    for a in range(4):
+        for b in range(4):
+            out += wu[a] * wv[b] * grid[np.clip(iv + b - 1, 0, grid.shape[0] - 1), np.clip(iu + a - 1, 0, grid.shape[1] - 1)]
+    return out
+
+# ---- biome assignment
+class Biomes:
+    """Land biomes by scored placement (placement.py, slice-8); oceans by latitude and depth; beaches on low coast."""
+    def __init__(self):
+        meta = json.load(open(os.path.join(EXP, "globe", "biome_v2_global.json")))
+        self.form = [b["id"] for b in meta["biomes"]]; self.realms = meta["realms"]
+        d = np.load(os.path.join(EXP, "globe", "biome_v2_global_10m.npz"))
+        bio = d["biome"]; idx = tuple(ndi.distance_transform_edt(bio == 255, return_distances=False, return_indices=True))
+        self.bio = bio[idx]; self.realm = d["realm"][idx]
+        self.clim = {k: d[k][idx].astype(np.float32) for k in ("MI", "MAT", "Tcold", "Thot", "elev_wc", "dry_months")}
+        self.clim["med"] = d["med"][idx]
+        self.clim["pnv"] = resolve_grid(ECO_SHP, os.path.join(EXP, "globe", "resolve_biome_10m.npy"))
+        self.fcover = np.array([FORMATION_COVER[f] for f in self.form] + [0.0] * (256 - len(self.form)), np.float32)
+        self.place = Placement(os.path.join(HERE, "data", "biome_traits.json"))
+        self.wet = Wetland(os.path.join(EXP, "atlas", "hydro_v2_5km_warm.npz"), ee_fwd)
+        self.palette = ["minecraft:warm_ocean", "minecraft:lukewarm_ocean", "minecraft:ocean", "minecraft:cold_ocean", "minecraft:frozen_ocean",
+                        "minecraft:deep_lukewarm_ocean", "minecraft:deep_ocean", "minecraft:deep_cold_ocean", "minecraft:deep_frozen_ocean",
+                        "minecraft:beach", "minecraft:snowy_beach", "minecraft:stony_shore"]
+        self.pix = {k: i for i, k in enumerate(self.palette)}
+        self.pid_of = np.array([self.pid(k) for k in self.place.ids], np.uint8)
+    def pid(self, k):
+        if k not in self.pix: self.pix[k] = len(self.palette); self.palette.append(k)
+        return self.pix[k]
+    def assign(self, lon, lat, xm, ym, y, zr, relief, sea, coast_cells):
+        H, W = y.shape; out = np.full((H, W), 255, np.uint8)
+        # warp the 10' lookup so climate borders do not follow the grid (cells are ~86 x 123 blocks in Europe)
+        wl = 0.3 * (value_noise(xm, ym, 14000.0, 11) + 0.5 * value_noise(xm, ym, 5000.0, 13) - 0.75)
+        wo = 0.3 * (value_noise(xm, ym, 14000.0, 12) + 0.5 * value_noise(xm, ym, 5000.0, 14) - 0.75) / np.maximum(np.cos(np.radians(lat)), 0.2)
+        r10 = np.clip(((90 - lat - wl) / 180 * 1080).astype(int), 0, 1079); c10 = np.clip(((lon + wo + 180) / 360 * 2160).astype(int) % 2160, 0, 2159)
+        F = self.bio[r10, c10]
+        land = ~sea
+        if land.any():
+            r, c = r10[land], c10[land]; cl = {k: v[r, c] for k, v in self.clim.items()}
+            dT = -6.5e-3 * ((zr[land] + SEA_RISE) - cl["elev_wc"])            # re-lapse WorldClim to this cell's elevation
+            ct = self.place.cell_terms(cl["MAT"] + dT, cl["Thot"] + dT, cl["Tcold"] + dT, cl["MI"], cl["dry_months"],
+                                       self.fcover[F[land]], cl["med"], cl["pnv"])
+            ct.update({"relief": relief[land].astype(np.float32), "zr": zr[land].astype(np.float32), "realm": self.realm[r, c],
+                       "xm": xm[land], "ym": ym[land],
+                       "coast": (ndi.binary_dilation(sea, iterations=max(1, coast_cells)) & land)[land],
+                       "wet": self.wet.mask(xm[land] / MPB, -ym[land] / MPB, MPB, relief[land], zr[land], cl["MI"], xm[land], ym[land])})
+            out[land] = self.pid_of[self.place.pick(ct)]
+        # oceans by latitude and depth
+        al = np.abs(lat); deep = y < SEA_Y - 20
+        oc = np.select([al < 23, al < 35, al < 50, al < 62], [0, 1, 2, 3], 4); dc = np.select([al < 23, al < 35, al < 50, al < 62], [5, 5, 6, 7], 8)
+        out[sea] = np.where(deep, dc, oc)[sea]
+        # beaches: low land next to sea (detail levels only)
+        if coast_cells > 0:
+            near = ndi.binary_dilation(sea, iterations=coast_cells) & land & (y < SEA_Y + 3.5)
+            cold = np.isin(F, [self.form.index(f) for f in ("ice_sheet", "polar_desert", "arctic_tundra")])
+            out[near] = np.where(relief[near] > 300, 11, np.where(cold[near], 10, 9))
+        return out
+
+# ---- one level
+def bake_level(lv, i0, i1, j0, j1, cache, biomes, l0=None, feather=0):
+    c = lv["cell"]; t0 = time.time()
+    pad = int(math.ceil(3 * CUT_M / 2 / MPB / c)) + 2           # margin for the low-pass and relief
+    I = np.arange(i0 - pad, i1 + pad); J = np.arange(j0 - pad, j1 + pad)
+    xb = (I + 0.5) * c; zb = (J + 0.5) * c
+    XB, ZB = np.meshgrid(xb, zb); xm = XB * MPB; ym = -ZB * MPB
+    lon, lat, ok = ee_inv(xm, ym)
+    sub = max(1, int(round(c * MPB / (156543.0 / 2 ** lv["zoom"] * max(math.cos(math.radians(min(abs(float(np.median(lat))), 80))), 0.2)))))
+    sub = min(sub, 4)
+    if sub > 1:   # area-average sub-samples so a cell is not aliased from one pixel
+        acc = np.zeros(XB.shape, np.float64)
+        for a in range(sub):
+            for b in range(sub):
+                lo2, la2, _ = ee_inv(((I[None, :] + (a + 0.5) / sub) * c) * MPB + 0 * ZB, -((J[:, None] + (b + 0.5) / sub) * c) * MPB + 0 * XB)
+                acc += terrarium(lo2, la2, lv["zoom"], cache)
+        z = (acc / sub / sub).astype(np.float32)
+    else:
+        z = terrarium(lon, lat, lv["zoom"], cache)
+    z = np.where(ok, z, -6000.0).astype(np.float32)
+    zr = z - SEA_RISE
+    low = ndi.gaussian_filter(zr.astype(np.float64), CUT_M / 2 / MPB / c, mode="nearest")
+    y = to_y(zr, low)
+    win = max(3, int(round(8000 / MPB / c)) | 1)
+    relief = ndi.maximum_filter(zr, win) - ndi.minimum_filter(zr, win)
+    sea = zr <= 0
+    s = (slice(pad, pad + (j1 - j0)), slice(pad, pad + (i1 - i0)))
+    y, zr, relief, sea, lon, lat, xm, ym, XB, ZB = (a[s] for a in (y, zr, relief, sea, lon, lat, xm, ym, XB, ZB))
+    if feather and l0 is not None:
+        g, gi0, gj0, gc = l0
+        y0 = cr_sample(g, gi0, gj0, gc, XB, ZB)
+        H, W = y.shape; jj, ii = np.mgrid[0:H, 0:W]
+        d = np.minimum(np.minimum(ii, W - 1 - ii), np.minimum(jj, H - 1 - jj)).astype(np.float64)
+        w = np.clip(d / feather, 0, 1); w = w * w * (3 - 2 * w)
+        y = w * y + (1 - w) * y0
+        sea = y < SEA_Y
+    b = biomes.assign(lon, lat, xm, ym, y, zr, relief, sea, 2 if c <= 8 else 0)
+    print(f"{lv['name']}: {y.shape[1]}x{y.shape[0]} cells, sub {sub}, {time.time() - t0:.0f} s, Y {y.min():.0f}..{y.max():.0f}", flush=True)
+    return y, relief, b
+
+def write_tiles(outdir, name, i0, j0, y, relief, b):
+    d = os.path.join(outdir, name); os.makedirs(d, exist_ok=True)
+    H, W = y.shape; hq = np.clip(np.round(y * 8), -32768, 32767).astype("<i2"); rq = np.clip(relief / 20, 0, 255).astype(np.uint8)
+    n = 0
+    for tz in range(j0 // TILE, (j0 + H - 1) // TILE + 1):
+        for tx in range(i0 // TILE, (i0 + W - 1) // TILE + 1):
+            a0, a1 = max(tz * TILE, j0), min((tz + 1) * TILE, j0 + H); b0, b1 = max(tx * TILE, i0), min((tx + 1) * TILE, i0 + W)
+            if a0 >= a1 or b0 >= b1: continue
+            h = np.full((TILE, TILE), -32768, "<i2"); r = np.zeros((TILE, TILE), np.uint8); bb = np.full((TILE, TILE), 255, np.uint8)
+            sl = (slice(a0 - tz * TILE, a1 - tz * TILE), slice(b0 - tx * TILE, b1 - tx * TILE)); src = (slice(a0 - j0, a1 - j0), slice(b0 - i0, b1 - i0))
+            h[sl] = hq[src]; r[sl] = rq[src]; bb[sl] = b[src]
+            with gzip.open(os.path.join(d, f"{tx}_{tz}.bin.gz"), "wb", compresslevel=6) as f:
+                f.write(b"EATL" + struct.pack("<HH", 1, TILE) + h.tobytes() + r.tobytes() + bb.tobytes())
+            n += 1
+    return n
+
+def level_cells(lv):
+    """Cell range (i0, i1, j0, j1) of a level, snapped outward to whole tiles."""
+    c = lv["cell"]; xmin, xmax, zmin, zmax = box_blocks(lv["extent"])
+    if lv["extent"] == "globe":   # slice-9 snapped the globe after rounding to cells; boxes snap in one step
+        i0, i1 = int(math.floor(xmin / c)), int(math.ceil(xmax / c)); j0, j1 = int(math.floor(zmin / c)), int(math.ceil(zmax / c))
+        return (i0 // TILE) * TILE, -(-i1 // TILE) * TILE, (j0 // TILE) * TILE, -(-j1 // TILE) * TILE
+    return (int(math.floor(xmin / c / TILE)) * TILE, int(math.ceil(xmax / c / TILE)) * TILE,
+            int(math.floor(zmin / c / TILE)) * TILE, int(math.ceil(zmax / c / TILE)) * TILE)
+
+def edge_fade(y, feather, floor_y):
+    """Fade a windowed base level into flat sea floor over its last `feather` cells (blocks out: Y)."""
+    H, W = y.shape; jj, ii = np.mgrid[0:H, 0:W]
+    d = np.minimum(np.minimum(ii, W - 1 - ii), np.minimum(jj, H - 1 - jj)).astype(np.float64)
+    w = np.clip(d / feather, 0, 1); w = w * w * (3 - 2 * w)
+    return w * y + (1 - w) * floor_y
+
+def main():
+    ap = argparse.ArgumentParser(); ap.add_argument("out"); ap.add_argument("cache")
+    ap.add_argument("--no-l0", action="store_true")
+    a = ap.parse_args(); os.makedirs(a.out, exist_ok=True); os.makedirs(a.cache, exist_ok=True)
+    biomes = Biomes()
+    # L0: in strips to bound memory
+    L0, L1 = LEVELS[0], LEVELS[1]; c0 = L0["cell"]
+    gi0, gi1, gj0, gj1 = level_cells(L0)
+    l0_npz = os.path.join(a.out, "_l0_cache.npz")
+    if not a.no_l0 or not os.path.exists(l0_npz):
+        Y0 = np.zeros((gj1 - gj0, gi1 - gi0), np.float64); R0 = np.zeros(Y0.shape, np.float32); B0 = np.zeros(Y0.shape, np.uint8)   # tiles quantise the float64 heights
+        for js in range(gj0, gj1, TILE * 2):
+            je = min(js + TILE * 2, gj1)
+            y, r, b = bake_level(L0, gi0, gi1, js, je, a.cache, biomes)
+            Y0[js - gj0:je - gj0] = y; R0[js - gj0:je - gj0] = r; B0[js - gj0:je - gj0] = b
+        if L0.get("feather_cells"):   # windowed world: the edge becomes sea, so the box ends in a shore, not a cliff
+            Y0 = edge_fade(Y0, L0["feather_cells"], EDGE_OCEAN_Y)
+            sea = Y0 < SEA_Y; B0[sea & (B0 > 8)] = 2   # land biomes under the faded edge become ocean
+        n = write_tiles(a.out, "L0", gi0, gj0, Y0, R0, B0)
+        np.savez_compressed(l0_npz, Y0=Y0.astype(np.float32), gi0=gi0, gj0=gj0); print("L0 tiles", n)
+    d = np.load(l0_npz); Y0, gi0, gj0 = d["Y0"], int(d["gi0"]), int(d["gj0"])
+    # L1: detail box, snapped to tiles
+    c1 = L1["cell"]; i0, i1, j0, j1 = level_cells(L1)
+    y1, r1, b1 = bake_level(L1, i0, i1, j0, j1, a.cache, biomes, l0=(Y0, gi0, gj0, c0), feather=L1["feather_cells"])
+    n1 = write_tiles(a.out, "L1", i0, j0, y1, r1, b1); print("L1 tiles", n1)
+    spawn = P["spawn_lonlat"]; sx, sy = ee_fwd(spawn[0], spawn[1])
+    manifest = {
+        "format": 1, "atlas_version": ATLAS_VERSION,
+        "profile": {"name": P["name"], "hash": P["hash"], "min_y": P["min_y"], "max_y": P["max_y"]},
+        "projection": {"type": "equal_earth", "lon0": LON0, "radius_m": R},
+        "metres_per_block": MPB, "sea_level_y": SEA_Y, "sea_rise_m": SEA_RISE,
+        "vertical": {"e_low": E_LOW, "e_high": E_HIGH, "cut_m": CUT_M, "ocean_depth_blocks": OCEAN_DEPTH_BLOCKS, "top_knee": TOP_KNEE, "top_span": TOP_SPAN},
+        "bounds_blocks": BOUNDS, "tile_size": TILE,
+        "levels": [{"name": "L0", "cell": c0, "dir": "L0"}, {"name": "L1", "cell": c1, "dir": "L1",
+                    "cells": [i0, j0, i1, j1], "region_lonlat": L1["extent"]}],
+        "biome_palette": biomes.palette,
+        "spawn": {"x": int(round(sx / MPB)), "z": int(round(-sy / MPB)), "lon": spawn[0], "lat": spawn[1]},
+        "sources": f"Terrarium (Mapzen/AWS open data) z{L0['zoom']} and z{L1['zoom']}; biome_v2 climate and scored placement (placement.py)",
+    }
+    json.dump(manifest, open(os.path.join(a.out, "atlas.json"), "w"), indent=1)
+    print(json.dumps({k: manifest[k] for k in ("spawn", "levels", "profile")}, indent=0), "palette", len(biomes.palette))
+    assert len(biomes.palette) < 255
+
+if __name__ == "__main__":
+    main()

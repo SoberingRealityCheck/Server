@@ -1,0 +1,18 @@
+# Coast types: surface bands by horizontal distance from the atlas sea (blocks, inland), from the art-direction coastal
+# pass (briefs page, section "Coasts"; mocks in art-direction/coasts.py). Each band is [width, {block: weight}];
+# "grass" leaves the column to the region's own surface. low: the bands apply only up to this many blocks above sea
+# level (beaches, marsh); without it they also crown cliffs. Regions pick types in coasts.yaml; several types alternate
+# along the shore in stretches of a few hundred blocks.
+sandy:      {low: 6, bands: [[9, {sand: 1}], [7, {sand: 3, grass: 1}], [4, {grass: 2, sand: 1}]]}
+chalk:      {bands: [[2, {gravel: 3, calcite: 1}], [5, {calcite: 3, diorite: 1}], [2, {grass: 3, coarse_dirt: 1}]]}
+granite:    {bands: [[3, {sand: 2, granite: 2, andesite: 1}], [3, {grass: 3, granite: 1}]]}
+limestone:  {bands: [[3, {calcite: 3, diorite: 2, gravel: 1}], [3, {calcite: 1, grass: 2}]]}
+marsh:      {low: 3, bands: [[10, {mud: 3, grass: 1}], [10, {grass: 2, mud: 1}]]}
+shingle:    {low: 6, bands: [[5, {gravel: 3, cobblestone: 1}], [2, {grass: 2, gravel: 1}]]}
+fjord:      {bands: [[3, {stone: 2, andesite: 2, tuff: 1}]]}
+volcanic:   {low: 8, bands: [[7, {"biomesoplenty:black_sand": 1}], [3, {smooth_basalt: 1, "biomesoplenty:black_sand": 1}]]}
+white_sand: {low: 6, bands: [[8, {"biomesoplenty:white_sand": 1}]]}
+desert:     {low: 10, bands: [[8, {sand: 2, red_sand: 1}], [6, {sand: 1, sandstone: 1}], [16, {sand: 1}]]}
+sandstone:  {bands: [[4, {"biomesoplenty:orange_sand": 2, sand: 1}], [4, {"biomesoplenty:orange_sandstone": 2, red_sandstone: 1}], [2, {grass: 3, coarse_dirt: 1}]]}
+arctic:     {low: 6, bands: [[6, {gravel: 3, snow_block: 1}], [6, {gravel: 1, grass: 2, snow_block: 1}]]}
+pacific:    {low: 8, bands: [[7, {sand: 2, gravel: 1}], [3, {grass: 3, smooth_basalt: 1}]]}

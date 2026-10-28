@@ -1,0 +1,298 @@
+# North American plains, Great Lakes, Appalachians and the eastern seaboard.
+# Schema: see ../README.md.
+
+396:
+  name: Northern Plains
+  resolve: "Northern Shortgrass prairie"
+  tree_cover: 0.02
+  trees: {cottonwood: 1}
+  ground: {western_wheatgrass: 3, blue_grama: 2, needle_and_thread: 2, sand_sagebrush: 0.5}
+  flowers: {prairie_crocus: 0.5, sunflower: 0.3, purple_coneflower: 0.3}
+  ground_surface:
+    geology: "Glacial till and Cretaceous shale."
+    soil: {coarse_dirt: few}
+  why: "Wheatgrass, grama and needlegrass to the horizon; cottonwood only along creeks."
+
+397:
+  name: Northern Tallgrass
+  resolve: "Northern Tallgrass prairie"
+  tree_cover: 0.04
+  trees: {bur_oak: 2, cottonwood: 1}
+  ground: {big_bluestem: 3, indiangrass: 2, little_bluestem: 1, switchgrass: 1}
+  flowers: {purple_coneflower: 1, black_eyed_susan: 1, wild_bergamot: 1, prairie_crocus: 0.5, sunflower: 0.5}
+  patches:
+    trees: {size: 40, share: 0.25}
+  ground_surface:
+    geology: "Lake Agassiz clays and glacial till."
+    soil: {mud: few}
+  why: "Big bluestem and indiangrass prairie with bur oak groves."
+
+395:
+  name: Sand Hills
+  resolve: "Nebraska Sand Hills mixed grasslands"
+  tree_cover: 0.01
+  trees: {cottonwood: 1}
+  ground: {prairie_sandreed: 2, little_bluestem: 2, sand_sagebrush: 1, blue_grama: 1}
+  flowers: {sunflower: 0.3, black_eyed_susan: 0.3}
+  ground_surface:
+    geology: "Stabilised dune sand."
+    soil: {sand: some}
+    subsoil: sand
+  why: "Grass-covered dunes, the largest in the Americas, with lakes between them."
+
+387:
+  name: Prairie-Forest Border
+  resolve: "Central US forest-grasslands transition"
+  tree_cover: 0.25
+  trees: {bur_oak: 3, post_oak: 2, blackjack_oak: 1, eastern_red_cedar: 1, mockernut_hickory: 1}
+  ground: {big_bluestem: 2, little_bluestem: 2, indiangrass: 1}
+  flowers: {purple_coneflower: 1, black_eyed_susan: 1, wild_bergamot: 1}
+  patches:
+    trees: {size: 40, share: 0.4}
+  ground_surface:
+    geology: "Loess and limestone."
+    rock: [calcite]
+    outcrops: few
+    soil: {coarse_dirt: few}
+  why: "Oak savanna and woodland where the prairie gives way to forest."
+
+386:
+  name: Aspen Parkland
+  resolve: "Canadian Aspen forests and parklands"
+  tree_cover: 0.3
+  trees: {quaking_aspen: 5, balsam_poplar: 1, bur_oak: 0.5, white_spruce: 0.5}
+  ground: {rough_fescue: 3, western_wheatgrass: 1}
+  flowers: {prairie_crocus: 1, wild_bergamot: 0.5, fireweed: 0.3}
+  patches:
+    trees: {size: 28, share: 0.35, outside: 0.03}
+  ground_surface:
+    geology: "Glacial till under black chernozem."
+    soil: {coarse_dirt: few}
+  why: "Aspen bluffs in rough fescue prairie."
+
+343:
+  name: Oak Savanna
+  resolve: "Upper Midwest US forest-savanna transition"
+  tree_cover: 0.4
+  trees: {bur_oak: 3, white_oak: 2, red_oak: 1, american_basswood: 1, sugar_maple: 1}
+  ground: {pennsylvania_sedge: 2, big_bluestem: 1, little_bluestem: 1}
+  flowers: {wild_bergamot: 1, purple_coneflower: 0.5, black_eyed_susan: 0.5, new_england_aster: 0.5}
+  patches:
+    trees: {size: 40, share: 0.5}
+  ground_surface:
+    geology: "Glacial drift; driftless sandstone bluffs."
+    rock: [sandstone]
+    outcrops: few
+    soil: {coarse_dirt: few}
+  why: "Bur and white oak savanna between prairie and the northern hardwoods."
+
+344:
+  name: Northwoods
+  resolve: "Western Great Lakes forests"
+  tree_cover: 0.75
+  trees: {sugar_maple: 2, quaking_aspen: 2, paper_birch: 2, balsam_fir: 2, eastern_white_pine: 1, red_pine: 1, jack_pine: 1, eastern_hemlock: 1, yellow_birch: 1, northern_white_cedar: 0.5, black_spruce: 0.5, tamarack: 0.5}
+  ground: {pennsylvania_sedge: 1, bracken: 1, lowbush_blueberry: 1, forest_mosses: 0.5}
+  flowers: {trillium: 0.5, fireweed: 0.3}
+  ground_surface:
+    geology: "Canadian Shield granite under glacial sand."
+    rock: [granite]
+    outcrops: few
+    soil: {podzol: few}
+    subsoil: sand
+  why: "Pine, aspen, birch and maple around countless lakes; bogs of spruce and tamarack."
+
+338:
+  name: New England Forest
+  resolve: "New England-Acadian forests"
+  tree_cover: 0.8
+  trees: {sugar_maple: 2, american_beech: 2, yellow_birch: 2, red_maple: 1, balsam_fir: 2, white_spruce: 2, eastern_hemlock: 1, eastern_white_pine: 1, paper_birch: 1}
+  ground: {forest_mosses: 1, christmas_fern: 1, pennsylvania_sedge: 1, leaf_litter: 1}
+  flowers: {trillium: 0.5}
+  niches:
+    sugar_maple: {elevation: [0, 800]}
+    american_beech: {elevation: [0, 800]}
+    red_maple: {elevation: [0, 800]}
+    eastern_white_pine: {elevation: [0, 700]}
+    eastern_hemlock: {elevation: [0, 800]}
+    yellow_birch: {elevation: [0, 1000]}
+    paper_birch: {elevation: [0, 1300]}
+    balsam_fir: {elevation: [200, 1450]}
+    white_spruce: {elevation: [300, 1450]}
+  ground_surface:
+    geology: "Granite and schist under stony till."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few, podzol: few}
+  why: "Maple, beech and birch low, red spruce and balsam fir on the mountains."
+
+333:
+  name: Boreal Transition
+  resolve: "Eastern Canadian Forest-Boreal transition"
+  tree_cover: 0.75
+  trees: {balsam_fir: 3, white_spruce: 2, paper_birch: 2, quaking_aspen: 1, yellow_birch: 1, sugar_maple: 1, black_spruce: 1}
+  ground: {forest_mosses: 2, bluejoint: 1, lowbush_blueberry: 1}
+  flowers: {fireweed: 0.5}
+  ground_surface:
+    geology: "Shield granite and Appalachian sediments."
+    rock: [granite, stone]
+    outcrops: few
+    soil: {podzol: some}
+  why: "Balsam fir and spruce with birch, aspen and the last sugar maples."
+
+335:
+  name: St Lawrence Lowland
+  resolve: "Gulf of St. Lawrence lowland forests"
+  tree_cover: 0.75
+  trees: {balsam_fir: 3, white_spruce: 2, paper_birch: 2, red_maple: 1, northern_white_cedar: 1}
+  ground: {forest_mosses: 2, bluejoint: 1, lowbush_blueberry: 1}
+  flowers: {fireweed: 0.3}
+  ground_surface:
+    geology: "Carboniferous sandstone."
+    rock: [sandstone, stone]
+    outcrops: few
+    soil: {podzol: some}
+  why: "Fir, spruce and birch on the gulf coast lowlands."
+
+342:
+  name: Beech-Maple Forest
+  resolve: "Southern Great Lakes forests"
+  tree_cover: 0.7
+  trees: {sugar_maple: 3, american_beech: 3, red_oak: 1, white_oak: 1, american_basswood: 1, tulip_tree: 0.5}
+  ground: {leaf_litter: 2, pennsylvania_sedge: 1, christmas_fern: 0.5}
+  flowers: {trillium: 1, new_england_aster: 0.3}
+  ground_surface:
+    geology: "Glacial till."
+    soil: {gravel: few}
+  why: "Sugar maple and beech on rich glacial soils, spring wildflowers before the canopy closes."
+
+334:
+  name: Great Lakes Lowland
+  resolve: "Eastern Great Lakes lowland forests"
+  tree_cover: 0.7
+  trees: {sugar_maple: 3, american_beech: 2, eastern_hemlock: 1, eastern_white_pine: 1, red_maple: 1, northern_white_cedar: 0.5}
+  ground: {leaf_litter: 2, pennsylvania_sedge: 1, christmas_fern: 1}
+  flowers: {trillium: 1}
+  ground_surface:
+    geology: "Limestone plain under till."
+    rock: [calcite]
+    outcrops: few
+    soil: {gravel: few}
+  why: "Maple and beech with hemlock and white pine around the lower lakes."
+
+329:
+  name: Appalachian Cove Forest
+  resolve: "Appalachian mixed mesophytic forests"
+  tree_cover: 0.8
+  trees: {tulip_tree: 3, sugar_maple: 2, american_beech: 2, american_basswood: 1, white_oak: 1, red_oak: 1, eastern_hemlock: 1, yellow_birch: 0.5, fallen_log: 0.3}
+  shrubs: {rosebay_rhododendron: 1}
+  ground: {leaf_litter: 2, christmas_fern: 1, pennsylvania_sedge: 0.5}
+  flowers: {trillium: 1, flowering_dogwood: 0.5}
+  ground_surface:
+    geology: "Plateau sandstone and coal-bearing shale."
+    rock: [stone, sandstone]
+    outcrops: few
+    soil: {coarse_dirt: few}
+  why: "The richest temperate hardwood forest on Earth: tulip tree, maple, beech and basswood in the coves."
+
+331:
+  name: Blue Ridge
+  resolve: "Appalachian-Blue Ridge forests"
+  tree_cover: 0.8
+  trees: {chestnut_oak: 3, red_oak: 2, tulip_tree: 2, red_maple: 1, eastern_hemlock: 1, pitch_pine: 0.5, eastern_white_pine: 1, yellow_birch: 0.5, balsam_fir: 0.5, white_spruce: 0.5}
+  shrubs: {rosebay_rhododendron: 1.5}
+  ground: {leaf_litter: 2, mountain_laurel: 1, pennsylvania_sedge: 1}
+  flowers: {flowering_dogwood: 0.5, trillium: 0.5}
+  niches:
+    balsam_fir: {elevation: [1500, 2100]}
+    white_spruce: {elevation: [1400, 2100]}
+    yellow_birch: {elevation: [900, 1800]}
+    tulip_tree: {elevation: [0, 1200]}
+    chestnut_oak: {elevation: [300, 1400]}
+    pitch_pine: {elevation: [300, 1300]}
+  ground_surface:
+    geology: "Granite and gneiss."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {coarse_dirt: few}
+  why: "Oak on the ridges, cove hardwoods below, rhododendron thickets, spruce-fir on the highest peaks."
+
+330:
+  name: Piedmont
+  resolve: "Appalachian Piedmont forests"
+  tree_cover: 0.7
+  trees: {tulip_tree: 2, white_oak: 2, southern_red_oak: 1, loblolly_pine: 2, shortleaf_pine: 1, red_maple: 1, mockernut_hickory: 1, sweetgum: 1}
+  ground: {leaf_litter: 2, broomsedge: 1, christmas_fern: 0.5}
+  flowers: {flowering_dogwood: 1}
+  ground_surface:
+    geology: "Weathered granite and schist; red clay."
+    rock: [granite]
+    outcrops: few
+    soil: {coarse_dirt: few}
+    subsoil: terracotta
+  why: "Oak-hickory and tulip tree with loblolly pine on old fields, over red clay."
+
+328:
+  name: Allegheny Highlands
+  resolve: "Allegheny Highlands forests"
+  tree_cover: 0.8
+  trees: {black_cherry: 2, sugar_maple: 2, american_beech: 2, red_maple: 1, eastern_hemlock: 1, yellow_birch: 1}
+  ground: {forest_mosses: 1, christmas_fern: 1, leaf_litter: 1, pennsylvania_sedge: 1}
+  flowers: {trillium: 0.5}
+  ground_surface:
+    geology: "Pottsville sandstone."
+    rock: [sandstone, stone]
+    outcrops: few
+    soil: {podzol: few}
+  why: "Black cherry, maple and beech on the high plateau, hemlock in the hollows."
+
+336:
+  name: Interior Plateau
+  resolve: "Interior Plateau US Hardwood Forests"
+  tree_cover: 0.7
+  trees: {white_oak: 3, red_oak: 2, mockernut_hickory: 2, sugar_maple: 1, tulip_tree: 1, eastern_red_cedar: 0.5}
+  ground: {leaf_litter: 2, christmas_fern: 1, eastern_woodland_sedge: 1}
+  flowers: {flowering_dogwood: 1}
+  ground_surface:
+    geology: "Mississippian limestone karst."
+    rock: [calcite, stone]
+    outcrops: few
+    soil: {coarse_dirt: few}
+  why: "Oak-hickory forest on karst limestone."
+
+339:
+  name: Northeast Coastal Forest
+  resolve: "Northeast US Coastal forests"
+  tree_cover: 0.7
+  trees: {white_oak: 2, red_oak: 2, chestnut_oak: 1, red_maple: 1, pitch_pine: 1, mockernut_hickory: 1}
+  ground: {leaf_litter: 2, lowbush_blueberry: 1, pennsylvania_sedge: 1}
+  flowers: {flowering_dogwood: 0.5}
+  ground_surface:
+    geology: "Glacial moraine and outwash sand."
+    soil: {gravel: few}
+    subsoil: sand
+  why: "Oak forest with pitch pine on the sandy coastal plain."
+
+347:
+  name: Pine Barrens
+  resolve: "Atlantic coastal pine barrens"
+  tree_cover: 0.6
+  trees: {pitch_pine: 6, white_oak: 1, blackjack_oak: 1}
+  ground: {lowbush_blueberry: 2, broomsedge: 1, pennsylvania_sedge: 1}
+  ground_surface:
+    geology: "Cohansey sand."
+    soil: {sand: few}
+    subsoil: sand
+  why: "Pitch pine and scrub oak on sterile sand, blueberry below."
+
+393:
+  name: Mid-Atlantic Coastal Savanna
+  resolve: "Mid-Atlantic US coastal savannas"
+  tree_cover: 0.35
+  trees: {longleaf_pine: 3, loblolly_pine: 2, bald_cypress: 1}
+  ground: {wiregrass: 2, broomsedge: 1}
+  flowers: {black_eyed_susan: 0.5}
+  ground_surface:
+    geology: "Coastal plain sand."
+    soil: {sand: few}
+    subsoil: sand
+  why: "Longleaf and loblolly pine savanna with cypress in the swamps."

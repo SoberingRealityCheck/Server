@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8.0",
+  "compatibilityLevel": "JAVA_25",
+  "package": "dev.elysium.atlas.mixin",
+  "mixins": ["NoiseBasedChunkGeneratorMixin", "NoiseBasedAquiferMixin", "BiomeAccessor", "HolderReferenceMixin", "HolderSetDirectMixin", "TagLoaderMixin", "SurfaceContextAccessor"],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixinextras": {
+    "minVersion": "0.5.0"
+  }
+}

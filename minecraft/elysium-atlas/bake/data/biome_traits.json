@@ -1,0 +1,3338 @@
+{
+ "biomesoplenty:bayou": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_swamp",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.95,
+  "terrain": "flat",
+  "trees": 2.2,
+  "wet": true
+ },
+ "biomesoplenty:bog": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_swamp",
+   "c:is_taiga",
+   "c:is_tree/coniferous",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.2,
+  "terrain": "flat",
+  "trees": 10.2,
+  "wet": true
+ },
+ "biomesoplenty:cold_desert": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/snowy",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 0.25,
+  "terrain": "flat",
+  "trees": 0.0,
+  "wet": false
+ },
+ "biomesoplenty:coniferous_forest": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/pale",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.45,
+  "terrain": "flat",
+  "trees": 10.1,
+  "wet": false
+ },
+ "biomesoplenty:crag": {
+  "downfall": 0.6,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_mountain",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_wasteland"
+  ],
+  "temperature": 0.6,
+  "terrain": "peak",
+  "trees": 0.0,
+  "wet": false
+ },
+ "biomesoplenty:dryland": {
+  "downfall": 0.05,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/striped",
+   "c:is_desert",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sandy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 0.85,
+  "terrain": "flat",
+  "trees": 2.1,
+  "wet": false
+ },
+ "biomesoplenty:field": {
+  "downfall": 0.7,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.4,
+  "terrain": "flat",
+  "trees": 1.008,
+  "wet": false
+ },
+ "biomesoplenty:fir_clearing": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/pale",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.45,
+  "terrain": "flat",
+  "trees": 1.1,
+  "wet": false
+ },
+ "biomesoplenty:floodplain": {
+  "downfall": 2.0,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/rusty",
+   "c:is_aquatic",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_jungle",
+   "c:is_lush",
+   "c:is_overworld",
+   "c:is_swamp",
+   "c:is_tree/jungle",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 1.2,
+  "terrain": "flat",
+  "trees": 1.0,
+  "wet": true
+ },
+ "biomesoplenty:forested_field": {
+  "downfall": 0.7,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_tree/coniferous",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.4,
+  "terrain": "flat",
+  "trees": 7.394,
+  "wet": false
+ },
+ "biomesoplenty:highland": {
+  "downfall": 0.6,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_hill",
+   "c:is_mountain",
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 0.6,
+  "terrain": "mountain",
+  "trees": 0.0,
+  "wet": false
+ },
+ "biomesoplenty:lavender_field": {
+  "downfall": 0.7,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Palearctic"
+  ],
+  "tags": [
+   "c:is_lush",
+   "c:is_overworld",
+   "c:is_plains"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 1.8,
+  "wet": false
+ },
+ "biomesoplenty:lush_desert": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_desert",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_lush",
+   "c:is_overworld",
+   "c:is_sandy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 0.9,
+  "terrain": "flat",
+  "trees": 1.12,
+  "wet": false
+ },
+ "biomesoplenty:lush_savanna": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_lush",
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/savanna"
+  ],
+  "temperature": 0.9,
+  "terrain": "flat",
+  "trees": 1.0,
+  "wet": false
+ },
+ "biomesoplenty:marsh": {
+  "downfall": 0.4,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_swamp",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.65,
+  "terrain": "flat",
+  "trees": 0.0,
+  "wet": true
+ },
+ "biomesoplenty:mediterranean_forest": {
+  "downfall": 0.275,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": [
+   "Palearctic"
+  ],
+  "tags": [
+   "c:is_forest",
+   "c:is_overworld"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 1.706,
+  "wet": false
+ },
+ "biomesoplenty:moor": {
+  "downfall": 0.6,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": [
+   "Palearctic"
+  ],
+  "tags": [
+   "c:is_mountain",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_swamp",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.6,
+  "terrain": "mountain",
+  "trees": 0.0,
+  "wet": true
+ },
+ "biomesoplenty:muskeg": {
+  "downfall": 0.6,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_rare",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_swamp",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.0,
+  "terrain": "flat",
+  "trees": 0.625,
+  "wet": true
+ },
+ "biomesoplenty:old_growth_woodland": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_overworld"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 12.1,
+  "wet": false
+ },
+ "biomesoplenty:pasture": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_overworld",
+   "c:is_plains"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 0.0,
+  "wet": false
+ },
+ "biomesoplenty:prairie": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": [
+   "Nearctic",
+   "Neotropic",
+   "Palearctic"
+  ],
+  "tags": [
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 0.4,
+  "wet": false
+ },
+ "biomesoplenty:rainforest": {
+  "downfall": 2.0,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/rusty",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_jungle",
+   "c:is_lush",
+   "c:is_overworld",
+   "c:is_tree/jungle",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 1.2,
+  "terrain": "flat",
+  "trees": 12.2,
+  "wet": false
+ },
+ "biomesoplenty:redwood_forest": {
+  "downfall": 0.6,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:has_wolf_variant/rusty",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_forest",
+   "c:is_overworld"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 12.2,
+  "wet": false
+ },
+ "biomesoplenty:rocky_rainforest": {
+  "downfall": 2.0,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/rusty",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_jungle",
+   "c:is_lush",
+   "c:is_overworld",
+   "c:is_plateau",
+   "c:is_tree/jungle",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 1.2,
+  "terrain": "highland",
+  "trees": 13.383,
+  "wet": false
+ },
+ "biomesoplenty:rocky_shrubland": {
+  "downfall": 0.05,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_plains"
+  ],
+  "temperature": 0.6,
+  "terrain": "flat",
+  "trees": 1.525,
+  "wet": false
+ },
+ "biomesoplenty:scrubland": {
+  "downfall": 0.15,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/savanna"
+  ],
+  "temperature": 1.1,
+  "terrain": "flat",
+  "trees": 1.2,
+  "wet": false
+ },
+ "biomesoplenty:shrubland": {
+  "downfall": 0.05,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 0.6,
+  "terrain": "flat",
+  "trees": 0.512,
+  "wet": false
+ },
+ "biomesoplenty:snowy_coniferous_forest": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/ashen",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": -0.25,
+  "terrain": "flat",
+  "trees": 6.1,
+  "wet": false
+ },
+ "biomesoplenty:snowy_fir_clearing": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/ashen",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": -0.25,
+  "terrain": "flat",
+  "trees": 1.1,
+  "wet": false
+ },
+ "biomesoplenty:subtropics": {
+  "downfall": 0.7,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_lush",
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.6,
+  "terrain": "flat",
+  "trees": 1.4,
+  "wet": false
+ },
+ "biomesoplenty:tropics": {
+  "downfall": 1.0,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_lush",
+   "c:is_overworld",
+   "c:is_rare",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.95,
+  "terrain": "flat",
+  "trees": 9.2,
+  "wet": false
+ },
+ "biomesoplenty:tundra": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/chestnut",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.2,
+  "terrain": "flat",
+  "trees": 1.1,
+  "wet": false
+ },
+ "biomesoplenty:wetland": {
+  "downfall": 0.7,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_swamp",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.6,
+  "terrain": "flat",
+  "trees": 7.1,
+  "wet": true
+ },
+ "biomesoplenty:woodland": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_forest",
+   "c:is_overworld"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 6.1,
+  "wet": false
+ },
+ "minecraft:badlands": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/striped",
+   "c:is_badlands",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sandy"
+  ],
+  "temperature": 2.0,
+  "terrain": "mesa",
+  "trees": 0.0,
+  "wet": false
+ },
+ "minecraft:bamboo_jungle": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Indomalayan",
+   "Palearctic"
+  ],
+  "tags": [
+   "c:has_wolf_variant/rusty",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_jungle",
+   "c:is_overworld",
+   "c:is_rare",
+   "c:is_tree/jungle",
+   "c:is_wet",
+   "c:is_wet/overworld",
+   "c:primary_wood_type",
+   "c:primary_wood_type/bamboo"
+  ],
+  "temperature": 0.95,
+  "terrain": "flat",
+  "trees": 23.704,
+  "wet": false
+ },
+ "minecraft:birch_forest": {
+  "downfall": 0.6,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_birch_forest",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous",
+   "c:primary_wood_type",
+   "c:primary_wood_type/birch"
+  ],
+  "temperature": 0.6,
+  "terrain": "flat",
+  "trees": 30.178,
+  "wet": false
+ },
+ "minecraft:cherry_grove": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Palearctic",
+   "Indomalayan"
+  ],
+  "tags": [
+   "c:is_floral",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_overworld",
+   "c:is_plateau",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:primary_wood_type",
+   "c:primary_wood_type/cherry"
+  ],
+  "temperature": 0.5,
+  "terrain": "mountain",
+  "trees": 10.225,
+  "wet": false
+ },
+ "minecraft:dark_forest": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dark_forest",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_spooky",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous",
+   "c:primary_wood_type",
+   "c:primary_wood_type/dark_oak"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 155.0,
+  "wet": false
+ },
+ "minecraft:desert": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_desert",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sandy"
+  ],
+  "temperature": 2.0,
+  "terrain": "flat",
+  "trees": 0.0,
+  "wet": false
+ },
+ "minecraft:eroded_badlands": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/striped",
+   "c:is_badlands",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_rare",
+   "c:is_sandy"
+  ],
+  "temperature": 2.0,
+  "terrain": "mesa",
+  "trees": 0.0,
+  "wet": false
+ },
+ "minecraft:flower_forest": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_floral",
+   "c:is_flower_forest",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_rare",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous",
+   "c:primary_wood_type",
+   "c:primary_wood_type/oak"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 4.0,
+  "wet": false
+ },
+ "minecraft:forest": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/woods",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous",
+   "c:primary_wood_type",
+   "c:primary_wood_type/oak"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 8.0,
+  "wet": false
+ },
+ "minecraft:frozen_peaks": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_icy",
+   "c:is_mountain",
+   "c:is_mountain/peak",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": -0.7,
+  "terrain": "peak",
+  "trees": 0.0,
+  "wet": false
+ },
+ "minecraft:grove": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/snowy",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_forest",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_tree/coniferous",
+   "c:primary_wood_type",
+   "c:primary_wood_type/spruce"
+  ],
+  "temperature": -0.2,
+  "terrain": "mountain",
+  "trees": 14.178,
+  "wet": false
+ },
+ "minecraft:jagged_peaks": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_mountain",
+   "c:is_mountain/peak",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": -0.7,
+  "terrain": "peak",
+  "trees": 0.0,
+  "wet": false
+ },
+ "minecraft:jungle": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/rusty",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_jungle",
+   "c:is_overworld",
+   "c:is_tree/jungle",
+   "c:is_wet",
+   "c:is_wet/overworld",
+   "c:primary_wood_type",
+   "c:primary_wood_type/jungle"
+  ],
+  "temperature": 0.95,
+  "terrain": "flat",
+  "trees": 42.585,
+  "wet": false
+ },
+ "minecraft:mangrove_swamp": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_overworld",
+   "c:is_swamp",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_wet",
+   "c:is_wet/overworld",
+   "c:primary_wood_type",
+   "c:primary_wood_type/mangrove"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 25.0,
+  "wet": true
+ },
+ "minecraft:meadow": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_floral",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_overworld",
+   "c:is_plateau",
+   "c:is_temperate",
+   "c:is_temperate/overworld"
+  ],
+  "temperature": 0.5,
+  "terrain": "mountain",
+  "trees": 0.01,
+  "wet": false
+ },
+ "minecraft:old_growth_birch_forest": {
+  "downfall": 0.6,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_birch_forest",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_forest",
+   "c:is_old_growth",
+   "c:is_overworld",
+   "c:is_rare",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous",
+   "c:primary_wood_type",
+   "c:primary_wood_type/birch"
+  ],
+  "temperature": 0.6,
+  "terrain": "flat",
+  "trees": 10.1,
+  "wet": false
+ },
+ "minecraft:old_growth_pine_taiga": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/black",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_old_growth",
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous",
+   "c:primary_wood_type",
+   "c:primary_wood_type/spruce"
+  ],
+  "temperature": 0.3,
+  "terrain": "flat",
+  "trees": 9.974,
+  "wet": false
+ },
+ "minecraft:old_growth_spruce_taiga": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/chestnut",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_old_growth",
+   "c:is_overworld",
+   "c:is_rare",
+   "c:is_taiga",
+   "c:is_tree/coniferous",
+   "c:primary_wood_type",
+   "c:primary_wood_type/spruce"
+  ],
+  "temperature": 0.25,
+  "terrain": "flat",
+  "trees": 9.974,
+  "wet": false
+ },
+ "minecraft:plains": {
+  "downfall": 0.4,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_temperate",
+   "c:is_temperate/overworld"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 0.049,
+  "wet": false
+ },
+ "minecraft:savanna": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/savanna",
+   "c:primary_wood_type",
+   "c:primary_wood_type/acacia"
+  ],
+  "temperature": 1.2,
+  "terrain": "flat",
+  "trees": 1.086,
+  "wet": false
+ },
+ "minecraft:savanna_plateau": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_plateau",
+   "c:is_rare",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/savanna",
+   "c:primary_wood_type",
+   "c:primary_wood_type/acacia"
+  ],
+  "temperature": 1.0,
+  "terrain": "highland",
+  "trees": 1.086,
+  "wet": false
+ },
+ "minecraft:snowy_plains": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_snowy_plains"
+  ],
+  "temperature": 0.0,
+  "terrain": "flat",
+  "trees": 0.099,
+  "wet": false
+ },
+ "minecraft:snowy_slopes": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": -0.3,
+  "terrain": "mountain",
+  "trees": 0.0,
+  "wet": false
+ },
+ "minecraft:snowy_taiga": {
+  "downfall": 0.4,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/ashen",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_taiga",
+   "c:is_tree/coniferous",
+   "c:primary_wood_type",
+   "c:primary_wood_type/spruce"
+  ],
+  "temperature": -0.5,
+  "terrain": "flat",
+  "trees": 18.956,
+  "wet": false
+ },
+ "minecraft:sparse_jungle": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/rusty",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_jungle",
+   "c:is_overworld",
+   "c:is_rare",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/jungle",
+   "c:is_wet",
+   "c:is_wet/overworld",
+   "c:primary_wood_type",
+   "c:primary_wood_type/jungle"
+  ],
+  "temperature": 0.95,
+  "terrain": "flat",
+  "trees": 1.286,
+  "wet": false
+ },
+ "minecraft:stony_peaks": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_mountain",
+   "c:is_mountain/peak",
+   "c:is_overworld"
+  ],
+  "temperature": 1.0,
+  "terrain": "peak",
+  "trees": 0.0,
+  "wet": false
+ },
+ "minecraft:sunflower_plains": {
+  "downfall": 0.4,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_floral",
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_rare",
+   "c:is_temperate",
+   "c:is_temperate/overworld"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 0.049,
+  "wet": false
+ },
+ "minecraft:swamp": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_swamp",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_wet",
+   "c:is_wet/overworld",
+   "c:primary_wood_type",
+   "c:primary_wood_type/oak"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 4.0,
+  "wet": true
+ },
+ "minecraft:taiga": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/pale",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous",
+   "c:primary_wood_type",
+   "c:primary_wood_type/spruce"
+  ],
+  "temperature": 0.25,
+  "terrain": "flat",
+  "trees": 18.956,
+  "wet": false
+ },
+ "minecraft:windswept_forest": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_hill",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/deciduous",
+   "c:is_windswept"
+  ],
+  "temperature": 0.2,
+  "terrain": "hill",
+  "trees": 2.056,
+  "wet": false
+ },
+ "minecraft:windswept_gravelly_hills": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_hill",
+   "c:is_overworld",
+   "c:is_rare",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_windswept"
+  ],
+  "temperature": 0.2,
+  "terrain": "hill",
+  "trees": 0.098,
+  "wet": false
+ },
+ "minecraft:windswept_hills": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_hill",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_windswept"
+  ],
+  "temperature": 0.2,
+  "terrain": "hill",
+  "trees": 0.098,
+  "wet": false
+ },
+ "minecraft:windswept_savanna": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_rare",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/savanna",
+   "c:is_windswept",
+   "c:primary_wood_type",
+   "c:primary_wood_type/acacia"
+  ],
+  "temperature": 2.0,
+  "terrain": "hill",
+  "trees": 2.074,
+  "wet": false
+ },
+ "minecraft:wooded_badlands": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/striped",
+   "c:is_badlands",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_plateau",
+   "c:is_sandy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:primary_wood_type",
+   "c:primary_wood_type/oak"
+  ],
+  "temperature": 2.0,
+  "terrain": "mesa",
+  "trees": 5.036,
+  "wet": false
+ },
+ "terralith:alpine_grove": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_icy",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_old_growth",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": -0.2,
+  "terrain": "mountain",
+  "trees": 2.375,
+  "wet": false
+ },
+ "terralith:alpine_highlands": {
+  "downfall": 0.1,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/black",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_plains"
+  ],
+  "temperature": 0.45,
+  "terrain": "highland",
+  "trees": 1.01,
+  "wet": false
+ },
+ "terralith:ancient_sands": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_desert",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sandy"
+  ],
+  "temperature": 2.0,
+  "terrain": "flat",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terralith:arid_highlands": {
+  "downfall": 0.1,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/savanna"
+  ],
+  "temperature": 1.6,
+  "terrain": "highland",
+  "trees": 1.0,
+  "wet": false
+ },
+ "terralith:ashen_savanna": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_dead",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_overworld",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/savanna",
+   "c:is_wasteland"
+  ],
+  "temperature": 1.0,
+  "terrain": "mountain",
+  "trees": 1.0,
+  "wet": false
+ },
+ "terralith:basalt_cliffs": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld"
+  ],
+  "temperature": 0.5,
+  "terrain": "cliff",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terralith:birch_taiga": {
+  "downfall": 0.2,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/black",
+   "c:is_birch_forest",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/coniferous",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.22,
+  "terrain": "flat",
+  "trees": 8.0,
+  "wet": false
+ },
+ "terralith:blooming_plateau": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_floral",
+   "c:is_overworld",
+   "c:is_plateau",
+   "c:is_temperate",
+   "c:is_temperate/overworld"
+  ],
+  "temperature": 0.5,
+  "terrain": "highland",
+  "trees": 0.01,
+  "wet": false
+ },
+ "terralith:blooming_valley": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_floral",
+   "c:is_flower_forest",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 25.916,
+  "wet": false
+ },
+ "terralith:brushland": {
+  "downfall": 0.2,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_plains"
+  ],
+  "temperature": 1.2,
+  "terrain": "flat",
+  "trees": 0.843,
+  "wet": false
+ },
+ "terralith:bryce_canyon": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": true,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:has_wolf_variant/striped",
+   "c:is_badlands",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 2.0,
+  "terrain": "cliff",
+  "trees": 9.974,
+  "wet": false
+ },
+ "terralith:cloud_forest": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/woods",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_floral",
+   "c:is_flower_forest",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.25,
+  "terrain": "flat",
+  "trees": 14.1,
+  "wet": false
+ },
+ "terralith:cold_shrubland": {
+  "downfall": 0.0,
+  "frozen": true,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/black",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_icy",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 0.14,
+  "terrain": "flat",
+  "trees": 1.321,
+  "wet": false
+ },
+ "terralith:desert_canyon": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_desert",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sandy"
+  ],
+  "temperature": 2.0,
+  "terrain": "cliff",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terralith:desert_spires": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_desert",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sandy"
+  ],
+  "temperature": 2.0,
+  "terrain": "peak",
+  "trees": 6.784,
+  "wet": false
+ },
+ "terralith:forested_highlands": {
+  "downfall": 0.2,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/chestnut",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.36,
+  "terrain": "highland",
+  "trees": 9.441,
+  "wet": false
+ },
+ "terralith:fractured_savanna": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hill",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/savanna",
+   "c:is_windswept"
+  ],
+  "temperature": 1.1,
+  "terrain": "hill",
+  "trees": 5.745,
+  "wet": false
+ },
+ "terralith:frozen_cliffs": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_icy",
+   "c:is_overworld",
+   "c:is_snowy"
+  ],
+  "temperature": 0.0,
+  "terrain": "cliff",
+  "trees": 0.099,
+  "wet": false
+ },
+ "terralith:glacial_chasm": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_icy",
+   "c:is_overworld",
+   "c:is_snowy"
+  ],
+  "temperature": 0.0,
+  "terrain": "cliff",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terralith:granite_cliffs": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld"
+  ],
+  "temperature": 0.4,
+  "terrain": "cliff",
+  "trees": 2.0,
+  "wet": false
+ },
+ "terralith:gravel_desert": {
+  "downfall": 0.5,
+  "frozen": true,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/pale",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dead",
+   "c:is_icy",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_wasteland"
+  ],
+  "temperature": 0.14,
+  "terrain": "flat",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terralith:haze_mountain": {
+  "downfall": 0.6,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_hill",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_windswept"
+  ],
+  "temperature": 0.3,
+  "terrain": "peak",
+  "trees": 115.923,
+  "wet": false
+ },
+ "terralith:highlands": {
+  "downfall": 0.4,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_temperate",
+   "c:is_temperate/overworld"
+  ],
+  "temperature": 0.4,
+  "terrain": "highland",
+  "trees": 0.1,
+  "wet": false
+ },
+ "terralith:hot_shrubland": {
+  "downfall": 0.4,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 1.618,
+  "wet": false
+ },
+ "terralith:ice_marsh": {
+  "downfall": 0.9,
+  "frozen": true,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_icy",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_swamp",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.14,
+  "terrain": "flat",
+  "trees": 2.279,
+  "wet": true
+ },
+ "terralith:jungle_mountains": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/rusty",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_jungle",
+   "c:is_overworld",
+   "c:is_tree/jungle",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.95,
+  "terrain": "flat",
+  "trees": 30.686,
+  "wet": false
+ },
+ "terralith:lush_desert": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_desert",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sandy"
+  ],
+  "temperature": 2.0,
+  "terrain": "flat",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terralith:lush_valley": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld"
+  ],
+  "temperature": 0.4,
+  "terrain": "flat",
+  "trees": 4.909,
+  "wet": false
+ },
+ "terralith:orchid_swamp": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_swamp",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 0.438,
+  "wet": true
+ },
+ "terralith:rocky_jungle": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/rusty",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_jungle",
+   "c:is_overworld",
+   "c:is_tree/jungle",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.95,
+  "terrain": "flat",
+  "trees": 30.686,
+  "wet": false
+ },
+ "terralith:rocky_mountains": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_mountain",
+   "c:is_mountain/peak",
+   "c:is_overworld",
+   "c:is_snowy"
+  ],
+  "temperature": 0.3,
+  "terrain": "peak",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terralith:rocky_shrubland": {
+  "downfall": 0.0,
+  "frozen": true,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/black",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_icy",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 0.14,
+  "terrain": "flat",
+  "trees": 1.321,
+  "wet": false
+ },
+ "terralith:sakura_grove": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Palearctic",
+   "Indomalayan"
+  ],
+  "tags": [
+   "c:is_floral",
+   "c:is_flower_forest",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 9.412,
+  "wet": false
+ },
+ "terralith:sakura_valley": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Palearctic",
+   "Indomalayan"
+  ],
+  "tags": [
+   "c:is_floral",
+   "c:is_flower_forest",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 9.412,
+  "wet": false
+ },
+ "terralith:sandstone_valley": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_desert",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sandy"
+  ],
+  "temperature": 2.0,
+  "terrain": "flat",
+  "trees": 6.784,
+  "wet": false
+ },
+ "terralith:savanna_badlands": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:has_wolf_variant/striped",
+   "c:is_badlands",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_plateau",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/savanna"
+  ],
+  "temperature": 1.0,
+  "terrain": "mesa",
+  "trees": 1.086,
+  "wet": false
+ },
+ "terralith:savanna_slopes": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_overworld",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/savanna"
+  ],
+  "temperature": 1.0,
+  "terrain": "mountain",
+  "trees": 1.086,
+  "wet": false
+ },
+ "terralith:shield": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:has_wolf_variant/chestnut",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_old_growth",
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.4,
+  "terrain": "flat",
+  "trees": 4.909,
+  "wet": false
+ },
+ "terralith:shield_clearing": {
+  "downfall": -0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld"
+  ],
+  "temperature": 0.4,
+  "terrain": "flat",
+  "trees": 0.006,
+  "wet": false
+ },
+ "terralith:shrubland": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld"
+  ],
+  "temperature": 1.2,
+  "terrain": "flat",
+  "trees": 0.999,
+  "wet": false
+ },
+ "terralith:siberian_grove": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": [
+   "Palearctic"
+  ],
+  "tags": [
+   "c:has_wolf_variant/snowy",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_icy",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.13,
+  "terrain": "mountain",
+  "trees": 16.084,
+  "wet": false
+ },
+ "terralith:siberian_taiga": {
+  "downfall": 1.2,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": [
+   "Palearctic"
+  ],
+  "tags": [
+   "c:has_wolf_variant/ashen",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_icy",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.13,
+  "terrain": "flat",
+  "trees": 16.084,
+  "wet": false
+ },
+ "terralith:snowy_badlands": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/striped",
+   "c:is_badlands",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_icy",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 0.0,
+  "terrain": "mesa",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terralith:snowy_maple_forest": {
+  "downfall": 0.2,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/snowy",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_icy",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.1,
+  "terrain": "mountain",
+  "trees": 9.441,
+  "wet": false
+ },
+ "terralith:snowy_shield": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:has_wolf_variant/snowy",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_icy",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.1,
+  "terrain": "mountain",
+  "trees": 4.909,
+  "wet": false
+ },
+ "terralith:steppe": {
+  "downfall": -0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_plains",
+   "c:is_temperate",
+   "c:is_temperate/overworld"
+  ],
+  "temperature": 0.4,
+  "terrain": "flat",
+  "trees": 0.006,
+  "wet": false
+ },
+ "terralith:stony_spires": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_hill",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_windswept"
+  ],
+  "temperature": 0.7,
+  "terrain": "peak",
+  "trees": 7.125,
+  "wet": false
+ },
+ "terralith:temperate_highlands": {
+  "downfall": 0.2,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/woods",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.5,
+  "terrain": "highland",
+  "trees": 12.295,
+  "wet": false
+ },
+ "terralith:tropical_jungle": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/rusty",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_jungle",
+   "c:is_mountain",
+   "c:is_mountain/slope",
+   "c:is_overworld",
+   "c:is_tree/jungle",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.95,
+  "terrain": "mountain",
+  "trees": 9.438,
+  "wet": false
+ },
+ "terralith:valley_clearing": {
+  "downfall": -0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld"
+  ],
+  "temperature": 0.4,
+  "terrain": "flat",
+  "trees": 0.006,
+  "wet": false
+ },
+ "terralith:white_cliffs": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld"
+  ],
+  "temperature": 0.4,
+  "terrain": "cliff",
+  "trees": 2.0,
+  "wet": false
+ },
+ "terralith:white_mesa": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/striped",
+   "c:is_badlands",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_plateau",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld"
+  ],
+  "temperature": 2.0,
+  "terrain": "mesa",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terralith:windswept_spires": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_hill",
+   "c:is_overworld",
+   "c:is_windswept"
+  ],
+  "temperature": 0.2,
+  "terrain": "peak",
+  "trees": 1.0,
+  "wet": false
+ },
+ "terralith:wintry_forest": {
+  "downfall": 0.4,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/ashen",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_icy",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": -0.5,
+  "terrain": "flat",
+  "trees": 5.955,
+  "wet": false
+ },
+ "terralith:wintry_lowlands": {
+  "downfall": 0.4,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/ashen",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_icy",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": -0.5,
+  "terrain": "flat",
+  "trees": 5.955,
+  "wet": false
+ },
+ "terralith:yosemite_cliffs": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_plateau"
+  ],
+  "temperature": 0.375,
+  "terrain": "cliff",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terralith:yosemite_lowlands": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.25,
+  "terrain": "flat",
+  "trees": 7.5,
+  "wet": false
+ },
+ "terrestria:cypress_forest": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 19.011,
+  "wet": false
+ },
+ "terrestria:cypress_swamp": {
+  "downfall": 0.7,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:is_overworld",
+   "c:is_swamp",
+   "c:is_temperate",
+   "c:is_temperate/overworld"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 6.3,
+  "wet": true
+ },
+ "terrestria:dense_woodlands": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/coniferous",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.9,
+  "terrain": "flat",
+  "trees": 7.424,
+  "wet": false
+ },
+ "terrestria:dunes": {
+  "downfall": 0.1,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dead",
+   "c:is_desert",
+   "c:is_overworld"
+  ],
+  "temperature": 0.9,
+  "terrain": "flat",
+  "trees": 0.0,
+  "wet": false
+ },
+ "terrestria:hemlock_rainforest": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.6,
+  "terrain": "flat",
+  "trees": 17.3,
+  "wet": false
+ },
+ "terrestria:hemlock_treeline": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.6,
+  "terrain": "highland",
+  "trees": 2.2,
+  "wet": false
+ },
+ "terrestria:lush_redwood_forest": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.9,
+  "terrain": "flat",
+  "trees": 12.4,
+  "wet": false
+ },
+ "terrestria:outback": {
+  "downfall": 0.3,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": [
+   "Australasian"
+  ],
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_savanna",
+   "c:is_tree/savanna"
+  ],
+  "temperature": 1.8,
+  "terrain": "flat",
+  "trees": 1.0,
+  "wet": false
+ },
+ "terrestria:redwood_forest": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": 0.9,
+  "terrain": "flat",
+  "trees": 8.2,
+  "wet": false
+ },
+ "terrestria:sakura_forest": {
+  "downfall": 1.0,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Palearctic"
+  ],
+  "tags": [
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 6.875,
+  "wet": false
+ },
+ "terrestria:snowy_hemlock_forest": {
+  "downfall": 1.0,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": -0.5,
+  "terrain": "flat",
+  "trees": 17.3,
+  "wet": false
+ },
+ "terrestria:snowy_hemlock_treeline": {
+  "downfall": 1.0,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_taiga",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": -0.5,
+  "terrain": "highland",
+  "trees": 2.2,
+  "wet": false
+ },
+ "terrestria:windswept_redwood_forest": {
+  "downfall": 0.9,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": true,
+  "realms": [
+   "Nearctic"
+  ],
+  "tags": [
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous",
+   "c:is_windswept"
+  ],
+  "temperature": 0.9,
+  "terrain": "hill",
+  "trees": 4.4,
+  "wet": false
+ },
+ "wilderwild:arid_forest": {
+  "downfall": 0.05,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_forest",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 1.75,
+  "terrain": "flat",
+  "trees": 4.488,
+  "wet": false
+ },
+ "wilderwild:arid_savanna": {
+  "downfall": 0.0,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:has_wolf_variant/spotted",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_hot",
+   "c:is_hot/overworld",
+   "c:is_overworld",
+   "c:is_savanna",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/deciduous",
+   "c:is_tree/savanna"
+  ],
+  "temperature": 2.0,
+  "terrain": "flat",
+  "trees": 1.0,
+  "wet": false
+ },
+ "wilderwild:birch_taiga": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_birch_forest",
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.45,
+  "terrain": "flat",
+  "trees": 13.097,
+  "wet": false
+ },
+ "wilderwild:cypress_wetlands": {
+  "downfall": 0.7,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": [
+   "Nearctic",
+   "Neotropic"
+  ],
+  "tags": [
+   "c:is_aquatic",
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_floral",
+   "c:is_overworld",
+   "c:is_river",
+   "c:is_swamp",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/coniferous",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.6,
+  "terrain": "flat",
+  "trees": 50.34,
+  "wet": true
+ },
+ "wilderwild:dark_birch_forest": {
+  "downfall": 0.7,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_birch_forest",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.65,
+  "terrain": "flat",
+  "trees": 23.086,
+  "wet": false
+ },
+ "wilderwild:dark_taiga": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/coniferous",
+   "c:is_tree/deciduous",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.45,
+  "terrain": "flat",
+  "trees": 29.224,
+  "wet": false
+ },
+ "wilderwild:dying_forest": {
+  "downfall": 0.65,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dead",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.35,
+  "terrain": "flat",
+  "trees": 5.1,
+  "wet": false
+ },
+ "wilderwild:dying_mixed_forest": {
+  "downfall": 0.55,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dead",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/coniferous",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.35,
+  "terrain": "flat",
+  "trees": 12.655,
+  "wet": false
+ },
+ "wilderwild:flower_field": {
+  "downfall": 0.5,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_floral",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld"
+  ],
+  "temperature": 0.8,
+  "terrain": "flat",
+  "trees": 0.215,
+  "wet": false
+ },
+ "wilderwild:mixed_forest": {
+  "downfall": 0.7,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/coniferous",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.5,
+  "terrain": "flat",
+  "trees": 20.389,
+  "wet": false
+ },
+ "wilderwild:old_growth_birch_taiga": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_taiga",
+   "c:is_tree/coniferous",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.45,
+  "terrain": "flat",
+  "trees": 14.792,
+  "wet": false
+ },
+ "wilderwild:old_growth_dark_forest": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 54.358,
+  "wet": false
+ },
+ "wilderwild:parched_forest": {
+  "downfall": 0.2,
+  "frozen": false,
+  "precipitation": false,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous",
+   "c:is_tree/savanna"
+  ],
+  "temperature": 1.35,
+  "terrain": "flat",
+  "trees": 6.134,
+  "wet": false
+ },
+ "wilderwild:rainforest": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_floral",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 18.114,
+  "wet": false
+ },
+ "wilderwild:semi_birch_forest": {
+  "downfall": 0.7,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_birch_forest",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.65,
+  "terrain": "flat",
+  "trees": 9.1,
+  "wet": false
+ },
+ "wilderwild:snowy_dying_forest": {
+  "downfall": 0.575,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dead",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.05,
+  "terrain": "flat",
+  "trees": 4.21,
+  "wet": false
+ },
+ "wilderwild:snowy_dying_mixed_forest": {
+  "downfall": 0.425,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_dead",
+   "c:is_dry",
+   "c:is_dry/overworld",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/coniferous",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": -0.4,
+  "terrain": "flat",
+  "trees": 11.154,
+  "wet": false
+ },
+ "wilderwild:snowy_old_growth_pine_taiga": {
+  "downfall": 0.4,
+  "frozen": true,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld",
+   "c:is_snowy",
+   "c:is_tree/coniferous"
+  ],
+  "temperature": -0.5,
+  "terrain": "flat",
+  "trees": 8.1,
+  "wet": false
+ },
+ "wilderwild:sparse_forest": {
+  "downfall": 0.6,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_sparse_vegetation",
+   "c:is_sparse_vegetation/overworld",
+   "c:is_tree/deciduous"
+  ],
+  "temperature": 0.75,
+  "terrain": "flat",
+  "trees": 4.2,
+  "wet": false
+ },
+ "wilderwild:temperate_rainforest": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_dense_vegetation",
+   "c:is_dense_vegetation/overworld",
+   "c:is_floral",
+   "c:is_forest",
+   "c:is_overworld",
+   "c:is_temperate",
+   "c:is_temperate/overworld",
+   "c:is_tree/coniferous",
+   "c:is_tree/deciduous",
+   "c:is_wet",
+   "c:is_wet/overworld"
+  ],
+  "temperature": 0.7,
+  "terrain": "flat",
+  "trees": 29.527,
+  "wet": false
+ },
+ "wilderwild:tundra": {
+  "downfall": 0.8,
+  "frozen": false,
+  "precipitation": true,
+  "profile_only": false,
+  "realms": null,
+  "tags": [
+   "c:is_cold",
+   "c:is_cold/overworld",
+   "c:is_overworld"
+  ],
+  "temperature": 0.25,
+  "terrain": "flat",
+  "trees": 0.0,
+  "wet": false
+ }
+}

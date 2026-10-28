@@ -1,0 +1,44 @@
+{
+  "type": "lithostitched:wrap_density_function",
+  "target_function": "tectonic:terrain_spline/roughness",
+  "wrapper_function": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "lithostitched:original_marker"
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": {
+        "type": "minecraft:flat_cache",
+        "argument": {
+          "type": "minecraft:cache_2d",
+          "argument": {
+            "type": "minecraft:clamp",
+            "input": {
+              "type": "minecraft:mul",
+              "argument1": 0.75,
+              "argument2": {
+                "type": "elysium_atlas:sample",
+                "channel": "relief",
+                "fallback": 1.75
+              }
+            },
+            "min": 0.1,
+            "max": 1
+          }
+        }
+      },
+      "argument2": {
+        "type": "minecraft:flat_cache",
+        "argument": {
+          "type": "minecraft:cache_2d",
+          "argument": {
+            "type": "elysium_atlas:sample",
+            "channel": "calm",
+            "fallback": 1.0
+          }
+        }
+      }
+    }
+  }
+}

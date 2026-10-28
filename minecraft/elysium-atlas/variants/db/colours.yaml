@@ -1,0 +1,26 @@
+# Named summer leaf colours. A plant's `leaf:` may name one of these or give a hex value.
+#
+# Units: tint colours, i.e. the colour the game multiplies onto a greyscale leaf texture (vanilla oak
+# leaves average 0.57 grey, so a tint shows at about 57 % of its brightness). Vanilla's default foliage
+# tint is #48b518. Each name says which kind of leaf it stands for; the plant entries say which species
+# use it and why.
+
+fresh_green:          "#6fb83a"   # thin bright broadleaves in full leaf: beech, poplar
+mid_green:            "#5aa035"   # ordinary deciduous broadleaves: hornbeam, hickory, pecan
+deep_green:           "#4c8a32"   # thicker, darker summer leaves: most oaks, elms
+dark_glossy_green:    "#3c6a2c"   # leathery evergreen broadleaves: live oak, strawberry tree
+olive_green:          "#4b6436"   # evergreen oaks with grey-felted undersides: holm oak, cork oak
+grey_green:           "#6c8458"   # small waxy or hairy leaves: kermes oak, creosote
+silvery_green:        "#8aa478"   # leaves with white-silky undersides: white willow
+yellow_green:         "#78ac48"   # light thin leaves: birches, aspen, hazel
+pale_yellow_green:    "#8cba5c"   # soft deciduous needles: larch
+feathery_light_green: "#8db450"   # fine bipinnate leaflets: mesquite, huisache
+yellow_green_pine:    "#5a8a3a"   # southern yellow pines
+grey_green_pine:      "#5a7a4a"   # long grey-green needles: maritime pine, ponderosa
+light_grey_green_pine: "#7a8c4e"  # sparse pale needles: Aleppo pine
+deep_green_pine:      "#3e6638"   # stone pine, Austrian black pine
+blue_green_needle:    "#4e7444"   # Douglas fir
+dark_blue_green:      "#36603e"   # spruces
+fir_green:            "#3c6a4a"   # firs: dark, glossy, slightly blue
+glaucous_blue_green:  "#557a62"   # waxy-blue needles and scales: Scots pine, junipers
+near_black_green:     "#2e4c2c"   # Italian cypress

@@ -1,0 +1,468 @@
+# North American boreal forest, taiga and Arctic tundra.
+# Schema: see ../README.md.
+
+377:
+  name: Shield Forest
+  resolve: "Midwest Canadian Shield forests"
+  tree_cover: 0.6
+  trees: {black_spruce: 3, jack_pine: 3, white_spruce: 1, quaking_aspen: 2, paper_birch: 1, balsam_fir: 1, tamarack: 0.5}
+  ground: {forest_mosses: 2, reindeer_lichen: 1, lowbush_blueberry: 1, labrador_tea: 1, bluejoint: 1}
+  flowers: {fireweed: 0.5}
+  niches:
+    black_spruce: {water: any}
+  ground_surface:
+    geology: "Canadian Shield granite."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {podzol: some}
+  why: "Black spruce and jack pine on granite and muskeg, aspen and birch after fire."
+
+374:
+  name: Labrador Taiga
+  resolve: "Eastern Canadian Shield taiga"
+  tree_cover: 0.35
+  trees: {black_spruce: 5, white_spruce: 1, balsam_fir: 1, tamarack: 1, paper_birch: 0.5}
+  ground: {reindeer_lichen: 3, labrador_tea: 2, dwarf_birch: 1, bigelow_sedge: 1, forest_mosses: 1}
+  flowers: {cottongrass: 0.5}
+  niches:
+    black_spruce: {water: any, elevation: [0, 650]}
+    white_spruce: {elevation: [0, 600]}
+    balsam_fir: {elevation: [0, 550]}
+    tamarack: {elevation: [0, 600]}
+    paper_birch: {elevation: [0, 500]}
+  patches:
+    trees: {size: 40, share: 0.5}
+  ground_surface:
+    geology: "Shield gneiss and boulder till."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {podzol: some, gravel: few}
+  why: "Open black spruce and lichen woodland over the Labrador plateau."
+
+379:
+  name: Northern Taiga
+  resolve: "Northern Canadian Shield taiga"
+  tree_cover: 0.25
+  trees: {black_spruce: 5, white_spruce: 1, tamarack: 1, jack_pine: 1}
+  ground: {reindeer_lichen: 3, dwarf_birch: 1, labrador_tea: 1, bigelow_sedge: 1}
+  flowers: {cottongrass: 0.5}
+  niches:
+    black_spruce: {water: any}
+  patches:
+    trees: {size: 48, share: 0.4}
+  ground_surface:
+    geology: "Shield granite and eskers."
+    rock: [granite]
+    outcrops: some
+    soil: {gravel: few, podzol: few}
+  why: "Lichen woodland thinning toward the treeline."
+
+376:
+  name: Boreal Plains
+  resolve: "Mid-Canada Boreal Plains forests"
+  tree_cover: 0.6
+  trees: {quaking_aspen: 3, white_spruce: 3, balsam_poplar: 1, black_spruce: 1, jack_pine: 1, paper_birch: 1}
+  ground: {bluejoint: 2, forest_mosses: 1, labrador_tea: 0.5}
+  flowers: {fireweed: 1}
+  ground_surface:
+    geology: "Glacial till and lake clays."
+    soil: {podzol: few}
+  why: "Aspen and white spruce mixedwood with black spruce in the wetlands."
+
+373:
+  name: Eastern Boreal Forest
+  resolve: "Eastern Canadian forests"
+  tree_cover: 0.75
+  trees: {balsam_fir: 4, black_spruce: 2, white_spruce: 2, paper_birch: 2}
+  ground: {forest_mosses: 2, bluejoint: 1, lowbush_blueberry: 1}
+  flowers: {fireweed: 0.3}
+  niches:
+    black_spruce: {water: any}
+  ground_surface:
+    geology: "Shield granite and anorthosite."
+    rock: [granite, diorite]
+    outcrops: some
+    soil: {podzol: some}
+  why: "Balsam fir and spruce with paper birch, cut by rivers."
+
+375:
+  name: Yukon-Alaska Taiga
+  resolve: "Interior Alaska-Yukon lowland taiga"
+  tree_cover: 0.5
+  trees: {black_spruce: 3, white_spruce: 3, paper_birch: 2, quaking_aspen: 1, balsam_poplar: 1, tamarack: 0.5}
+  ground: {forest_mosses: 2, bluejoint: 1, labrador_tea: 1, reindeer_lichen: 0.5}
+  flowers: {fireweed: 1}
+  niches:
+    black_spruce: {elevation: [0, 900]}
+    white_spruce: {elevation: [0, 1000]}
+    paper_birch: {elevation: [0, 900]}
+  ground_surface:
+    geology: "River silts and loess over permafrost."
+    soil: {podzol: few, mud: few}
+  why: "Black spruce on permafrost flats, white spruce and birch on the river terraces."
+
+382:
+  name: Hudson Bay Lowlands
+  resolve: "Southern Hudson Bay taiga"
+  tree_cover: 0.3
+  trees: {black_spruce: 4, tamarack: 2, white_spruce: 1}
+  ground: {sphagnum: 3, labrador_tea: 1, bigelow_sedge: 1, dwarf_birch: 0.5}
+  flowers: {cottongrass: 1}
+  niches:
+    black_spruce: {water: any}
+    tamarack: {water: any}
+    sphagnum: {water: any}
+  patches:
+    trees: {size: 32, share: 0.45}
+  ground_surface:
+    geology: "Peat over marine clay."
+    soil: {mud: some}
+  why: "The world's largest peatland: black spruce and tamarack islands in bog and fen."
+
+381:
+  name: Northwest Taiga
+  resolve: "Northwest Territories taiga"
+  tree_cover: 0.4
+  trees: {black_spruce: 4, white_spruce: 2, jack_pine: 1, paper_birch: 1, tamarack: 0.5}
+  ground: {reindeer_lichen: 2, labrador_tea: 1, forest_mosses: 1, bluejoint: 1}
+  niches:
+    black_spruce: {water: any}
+  ground_surface:
+    geology: "Limestone plateau and glacial lake beds."
+    rock: [calcite, stone]
+    outcrops: few
+    soil: {podzol: few}
+  why: "Black and white spruce across the Mackenzie lowlands."
+
+378:
+  name: Slave Lake Taiga
+  resolve: "Muskwa-Slave Lake taiga"
+  tree_cover: 0.55
+  trees: {white_spruce: 3, black_spruce: 2, quaking_aspen: 2, jack_pine: 1, paper_birch: 1}
+  ground: {forest_mosses: 1, bluejoint: 1, labrador_tea: 1}
+  flowers: {fireweed: 1}
+  ground_surface:
+    geology: "Glacial till over limestone."
+    rock: [calcite]
+    outcrops: few
+    soil: {podzol: few}
+  why: "White spruce and aspen mixedwood toward Great Slave Lake."
+
+370:
+  name: Central Shield Forest
+  resolve: "Central Canadian Shield forests"
+  tree_cover: 0.6
+  trees: {black_spruce: 3, jack_pine: 2, balsam_fir: 1, white_spruce: 1, paper_birch: 1, quaking_aspen: 1}
+  ground: {forest_mosses: 2, reindeer_lichen: 1, lowbush_blueberry: 1, bluejoint: 1}
+  niches:
+    black_spruce: {water: any}
+  ground_surface:
+    geology: "Canadian Shield granite and greenstone."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {podzol: some}
+  why: "Black spruce and jack pine on rock ridges, fir and birch on better ground."
+
+383:
+  name: Watson Highlands
+  resolve: "Watson Highlands taiga"
+  tree_cover: 0.35
+  trees: {white_spruce: 3, subalpine_fir: 1, black_spruce: 2, paper_birch: 1}
+  ground: {dwarf_birch: 2, reindeer_lichen: 1, bigelow_sedge: 1}
+  flowers: {fireweed: 0.5}
+  niches:
+    white_spruce: {elevation: [0, 1300]}
+    subalpine_fir: {elevation: [0, 1400]}
+    black_spruce: {water: any, elevation: [0, 1100]}
+    paper_birch: {elevation: [0, 1000]}
+  ground_surface:
+    geology: "Granite and folded sediments."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Spruce in the valleys, shrub tundra on the plateaus."
+
+369:
+  name: Alaska Peninsula Taiga
+  resolve: "Alaska Peninsula montane taiga"
+  tree_cover: 0.3
+  trees: {white_spruce: 3, paper_birch: 1, balsam_poplar: 1}
+  ground: {bluejoint: 2, dwarf_birch: 1}
+  flowers: {fireweed: 1, lupine: 0.5}
+  niches:
+    white_spruce: {elevation: [0, 500]}
+    paper_birch: {elevation: [0, 450]}
+    balsam_poplar: {elevation: [0, 400]}
+  ground_surface:
+    geology: "Volcanic ash and andesite."
+    rock: [andesite, tuff]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Scattered white spruce and birch below grassy volcanic slopes."
+
+371:
+  name: Cook Inlet Taiga
+  resolve: "Cook Inlet taiga"
+  tree_cover: 0.6
+  trees: {white_spruce: 2, black_spruce: 1, paper_birch: 2, quaking_aspen: 1, balsam_poplar: 1}
+  ground: {bluejoint: 2, forest_mosses: 1}
+  flowers: {fireweed: 1}
+  niches:
+    white_spruce: {elevation: [0, 700]}
+    black_spruce: {elevation: [0, 600]}
+    paper_birch: {elevation: [0, 600]}
+    quaking_aspen: {elevation: [0, 500]}
+  ground_surface:
+    geology: "Glacial till and outwash."
+    soil: {gravel: few}
+  why: "Spruce, birch and aspen around Cook Inlet."
+
+372:
+  name: Copper Plateau Taiga
+  resolve: "Copper Plateau taiga"
+  tree_cover: 0.35
+  trees: {black_spruce: 4, white_spruce: 1, quaking_aspen: 0.5}
+  ground: {forest_mosses: 1, dwarf_birch: 1, reindeer_lichen: 1, bigelow_sedge: 0.5}
+  niches:
+    black_spruce: {water: any}
+  ground_surface:
+    geology: "Glacial lake silts."
+    soil: {mud: few}
+  why: "Black spruce over permafrost on an old glacial lake bed."
+
+413:
+  name: Low Arctic Tundra
+  resolve: "Canadian Low Arctic tundra"
+  ground: {bigelow_sedge: 3, dwarf_birch: 2, arctic_willow: 1, reindeer_lichen: 1}
+  flowers: {cottongrass: 1, mountain_avens: 0.5, purple_saxifrage: 0.5}
+  ground_surface:
+    geology: "Shield granite under frost-shattered boulders."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Dwarf birch and sedge tundra with lichen on the ridges."
+
+414:
+  name: Middle Arctic Tundra
+  resolve: "Canadian Middle Arctic Tundra"
+  ground: {bigelow_sedge: 3, arctic_willow: 2, reindeer_lichen: 1, dwarf_birch: 0.5}
+  flowers: {mountain_avens: 1, purple_saxifrage: 1, arctic_poppy: 0.5}
+  ground_surface:
+    geology: "Shield rock and frost-sorted gravel."
+    rock: [granite, stone]
+    outcrops: some
+    soil: {gravel: some}
+  why: "Sedge and willow tundra with bare frost-heaved gravel."
+
+412:
+  name: High Arctic Tundra
+  resolve: "Canadian High Arctic tundra"
+  ground: {bigelow_sedge: 2, arctic_willow: 1}
+  flowers: {arctic_poppy: 1, purple_saxifrage: 1}
+  flower_density: 0.4
+  ground_surface:
+    geology: "Arctic platform limestone."
+    rock: [stone, calcite]
+    outcrops: some
+    soil: {gravel: many}
+  why: "Polar desert: sparse sedge and poppies on limestone gravel."
+
+417:
+  name: Greenland Coast
+  resolve: "Kalaallit Nunaat Arctic steppe"
+  ground: {bigelow_sedge: 2, dwarf_birch: 1, arctic_willow: 1}
+  flowers: {mountain_avens: 1, purple_saxifrage: 0.5}
+  ground_surface:
+    geology: "Precambrian gneiss."
+    rock: [stone, diorite]
+    outcrops: some
+    soil: {gravel: some}
+  why: "Willow and dwarf birch tundra on the ice-free coast."
+
+418:
+  name: High Arctic Greenland
+  resolve: "Kalaallit Nunaat High Arctic tundra"
+  ground: {bigelow_sedge: 1, arctic_willow: 1}
+  flowers: {arctic_poppy: 1, purple_saxifrage: 1}
+  flower_density: 0.4
+  ground_surface:
+    geology: "Gneiss and frost-shattered gravel."
+    rock: [stone, diorite]
+    outcrops: some
+    soil: {gravel: many}
+  why: "Bare gneiss and gravel with poppies and saxifrage."
+
+419:
+  name: Ogilvie-Mackenzie Tundra
+  resolve: "Ogilvie-MacKenzie alpine tundra"
+  tree_cover: 0.1
+  trees: {white_spruce: 1}
+  ground: {bigelow_sedge: 2, dwarf_birch: 2, arctic_willow: 1, reindeer_lichen: 1}
+  flowers: {mountain_avens: 1, lupine: 0.3}
+  niches:
+    white_spruce: {elevation: [0, 1000]}
+  ground_surface:
+    geology: "Limestone and shale ranges."
+    rock: [stone, calcite]
+    outcrops: some
+    soil: {gravel: some}
+  why: "Alpine tundra above spruce valleys."
+
+405:
+  name: Alaska Range Tundra
+  resolve: "Alaska-St. Elias Range tundra"
+  tree_cover: 0.08
+  trees: {white_spruce: 1}
+  ground: {bigelow_sedge: 2, dwarf_birch: 1, arctic_willow: 1}
+  flowers: {mountain_avens: 1, lupine: 0.3}
+  niches:
+    white_spruce: {elevation: [0, 900]}
+  ground_surface:
+    geology: "Granite and schist; moraine."
+    rock: [granite, stone]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Alpine tundra and ice in the highest ranges of North America."
+
+411:
+  name: Brooks Range Tundra
+  resolve: "Brooks-British Range tundra"
+  ground: {bigelow_sedge: 2, dwarf_birch: 1, arctic_willow: 1, reindeer_lichen: 1}
+  flowers: {mountain_avens: 1, purple_saxifrage: 0.5}
+  ground_surface:
+    geology: "Limestone and shale."
+    rock: [stone, calcite]
+    outcrops: some
+    soil: {gravel: some}
+  why: "Treeless mountains of sedge, avens and scree."
+
+416:
+  name: Yukon Alpine Tundra
+  resolve: "Interior Yukon-Alaska alpine tundra"
+  tree_cover: 0.1
+  trees: {white_spruce: 1}
+  ground: {bigelow_sedge: 2, dwarf_birch: 2, reindeer_lichen: 1}
+  flowers: {mountain_avens: 1, fireweed: 0.3}
+  niches:
+    white_spruce: {elevation: [0, 1000]}
+  ground_surface:
+    geology: "Metamorphic rock and loess."
+    rock: [stone]
+    outcrops: some
+    soil: {gravel: few}
+  why: "Shrub tundra over spruce-lined valleys."
+
+408:
+  name: Arctic Foothills
+  resolve: "Arctic foothills tundra"
+  ground: {bigelow_sedge: 3, dwarf_birch: 2, reindeer_lichen: 1}
+  flowers: {cottongrass: 2}
+  ground_surface:
+    geology: "Shale and sandstone under permafrost."
+    rock: [stone]
+    outcrops: few
+    soil: {gravel: few}
+  why: "Tussock tundra of cottongrass and dwarf birch."
+
+409:
+  name: Beringia Lowland Tundra
+  resolve: "Beringia lowland tundra"
+  ground: {bigelow_sedge: 2, sphagnum: 1, dwarf_birch: 1, arctic_willow: 1}
+  flowers: {cottongrass: 1.5}
+  niches:
+    sphagnum: {water: any}
+  ground_surface:
+    geology: "Delta silts and peat."
+    soil: {mud: few}
+  why: "Wet sedge tundra of thaw lakes and polygons."
+
+410:
+  name: Beringia Upland Tundra
+  resolve: "Beringia upland tundra"
+  ground: {bigelow_sedge: 3, dwarf_birch: 2, reindeer_lichen: 1}
+  flowers: {cottongrass: 1.5, mountain_avens: 0.5}
+  ground_surface:
+    geology: "Volcanic and sedimentary uplands."
+    rock: [stone, smooth_basalt]
+    outcrops: few
+    soil: {gravel: few}
+  why: "Tussock tundra on rolling uplands."
+
+404:
+  name: Ahklun Tundra
+  resolve: "Ahklun and Kilbuck Upland Tundra"
+  ground: {bigelow_sedge: 2, dwarf_birch: 2, arctic_willow: 1}
+  flowers: {cottongrass: 1, mountain_avens: 0.5}
+  ground_surface:
+    geology: "Greywacke and glacial gravel."
+    rock: [stone]
+    outcrops: some
+    soil: {gravel: some}
+  why: "Shrub tundra on glaciated mountains."
+
+407:
+  name: Arctic Coastal Plain
+  resolve: "Arctic coastal tundra"
+  ground: {bigelow_sedge: 3, sphagnum: 1, arctic_willow: 1}
+  flowers: {cottongrass: 2}
+  niches:
+    sphagnum: {water: any}
+  ground_surface:
+    geology: "Marine silts and peat."
+    soil: {mud: some}
+  why: "Flat wet sedge tundra with thaw lakes on permafrost."
+
+406:
+  name: Aleutian Islands
+  resolve: "Aleutian Islands tundra"
+  ground: {bluejoint: 3, arctic_willow: 1, dwarf_birch: 1}
+  flowers: {lupine: 0.5, fireweed: 0.3}
+  ground_surface:
+    geology: "Basalt and andesite volcanoes."
+    rock: [smooth_basalt, tuff]
+    outcrops: some
+    soil: {moss_block: few}
+  why: "Windswept grass and crowberry heath on volcanoes."
+
+415:
+  name: Baffin Highlands
+  resolve: "Davis Highlands tundra"
+  ground: {bigelow_sedge: 2, arctic_willow: 1}
+  flowers: {purple_saxifrage: 1, arctic_poppy: 0.5}
+  flower_density: 0.5
+  ground_surface:
+    geology: "Shield granite."
+    rock: [granite, stone]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Bare granite plateau with saxifrage and sedge."
+
+421:
+  name: Torngat Mountains
+  resolve: "Torngat Mountain tundra"
+  ground: {bigelow_sedge: 2, arctic_willow: 1, dwarf_birch: 0.5}
+  flowers: {purple_saxifrage: 1, mountain_avens: 0.5}
+  flower_density: 0.5
+  ground_surface:
+    geology: "Archaean gneiss."
+    rock: [stone, diorite]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Bare rock mountains above fjords; tundra in the valleys."
+
+420:
+  name: Coast Mountain Icefields
+  resolve: "Pacific Coastal Mountain icefields and tundra"
+  tree_cover: 0.15
+  trees: {sitka_spruce: 1, western_hemlock: 1}
+  ground: {bigelow_sedge: 1, dwarf_birch: 1, arctic_willow: 1}
+  flowers: {lupine: 0.5, mountain_avens: 0.5}
+  niches:
+    sitka_spruce: {elevation: [0, 700]}
+    western_hemlock: {elevation: [0, 700]}
+  ground_surface:
+    geology: "Coast Mountains granite."
+    rock: [granite]
+    outcrops: many
+    soil: {gravel: some}
+  why: "Ice and rock with tundra on the nunataks, rainforest at the fjord heads."

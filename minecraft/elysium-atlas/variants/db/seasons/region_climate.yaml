@@ -1,0 +1,227 @@
+# Per-region season classes for the derived palettes (2026-10-28). Edit here, then rerun derive.py.
+# phase: when the year's keys fall on SS subseasons (cold = late green-up, early autumn; warm = early spring,
+# autumn peak in late autumn/early winter; tropical = wet/dry subseasons). This is also the proposed season
+# class for ask 21 (tropical vs temperate from climate, not from the parent biome).
+# winter: snow | mild (C3 grass stays green) | summer_dry (grass cures in summer, greens with winter rain) | dry.
+
+734: {phase: cold, winter: snow}   # Mongolian Steppe: short season: green-up in late spring, early autumn
+737: {phase: cold, winter: snow}   # Selenge Forest Steppe: short season: green-up in late spring, early autumn
+726: {phase: cold, winter: snow}   # Daurian Forest Steppe: short season: green-up in late spring, early autumn
+761: {phase: cold, winter: snow}   # Ordos Steppe: default for WWF biome 10
+824: {phase: cold, winter: snow}   # Eastern Gobi Steppe: short season: green-up in late spring, early autumn
+825: {phase: cold, winter: snow}   # Gobi Lakes Valley: short season: green-up in late spring, early autumn
+826: {phase: cold, winter: snow}   # Great Lakes Basin Steppe: short season: green-up in late spring, early autumn
+808: {phase: cold, winter: snow}   # Alashan Desert: short season: green-up in late spring, early autumn
+827: {phase: cold, winter: snow}   # Junggar Desert: short season: green-up in late spring, early autumn
+843: {phase: mid, winter: snow}   # Taklimakan: continental interior with a full summer
+684: {phase: mid, winter: snow}   # Tarim Tugai: continental interior with a full summer
+767: {phase: cold, winter: snow}   # Tian Shan Meadow: short season: green-up in late spring, early autumn
+709: {phase: cold, winter: snow}   # Tian Shan Spruce Forest: short season: green-up in late spring, early autumn
+728: {phase: cold, winter: snow}   # Emin Valley Steppe: short season: green-up in late spring, early autumn
+690: {phase: cold, winter: snow}   # Altai Forest Steppe: short season: green-up in late spring, early autumn
+749: {phase: cold, winter: snow}   # Altai Alpine Tundra: short season: green-up in late spring, early autumn
+700: {phase: cold, winter: snow}   # Khangai Larch Forest: short season: green-up in late spring, early autumn
+755: {phase: cold, winter: snow}   # Khangai Alpine Meadow: short season: green-up in late spring, early autumn
+669: {phase: mid, winter: snow}   # Manchurian Mixed Forest: default for WWF biome 4
+685: {phase: mid, winter: snow}   # Ussuri Forest: default for WWF biome 4
+656: {phase: mid, winter: snow}   # Changbai Forest: default for WWF biome 4
+673: {phase: mid, winter: snow}   # Northeast China Plain: default for WWF biome 4
+743: {phase: mid, winter: snow}   # Nenjiang Grassland: default for WWF biome 9
+741: {phase: mid, winter: snow}   # Amur Meadow Steppe: default for WWF biome 9
+746: {phase: mid, winter: snow}   # Khanka Meadows: default for WWF biome 9
+693: {phase: cold, winter: snow}   # Greater Khingan Larch Forest: short season: green-up in late spring, early autumn
+715: {phase: cold, winter: snow}   # Okhotsk-Manchurian Taiga: short season: green-up in late spring, early autumn
+716: {phase: cold, winter: snow}   # Sakhalin Taiga: short season: green-up in late spring, early autumn
+782: {phase: cold, winter: snow}   # Bald Mountain Tundra: short season: green-up in late spring, early autumn
+667: {phase: mid, winter: snow}   # Huang He Plain: default for WWF biome 4
+653: {phase: mid, winter: snow}   # Loess Plateau: default for WWF biome 4
+696: {phase: mid, winter: snow}   # Helan Shan Forest: default for WWF biome 5
+705: {phase: cold, winter: snow}   # Qilian Forest: short season: green-up in late spring, early autumn
+677: {phase: mid, winter: snow}   # Qinling Forest: default for WWF biome 4
+742: {phase: mid, winter: snow}   # Bohai Saline Meadow: default for WWF biome 9
+655: {phase: mid, winter: snow}   # Central Korean Forest: default for WWF biome 4
+681: {phase: warm, winter: mild}   # Southern Korean Forest: subtropical China, southern Korea and Japan laurel belt
+666: {phase: mid, winter: snow}   # Hokkaido Deciduous Forest: default for WWF biome 4
+698: {phase: cold, winter: snow}   # Hokkaido Montane Forest: short season: green-up in late spring, early autumn
+671: {phase: mid, winter: snow}   # Nihonkai Beech Forest: default for WWF biome 4
+683: {phase: mid, winter: snow}   # Taiheiyo Beech Forest: default for WWF biome 4
+682: {phase: warm, winter: mild}   # Taiheiyo Laurel Forest: subtropical China, southern Korea and Japan laurel belt
+670: {phase: warm, winter: mild}   # Nihonkai Laurel Forest: subtropical China, southern Korea and Japan laurel belt
+699: {phase: cold, winter: snow}   # Honshu Subalpine Forest: short season: green-up in late spring, early autumn
+657: {phase: warm, winter: mild}   # Yangtze Plain Forest: subtropical China, southern Korea and Japan laurel belt
+659: {phase: warm, winter: mild}   # Daba Mountains Forest: subtropical China, southern Korea and Japan laurel belt
+680: {phase: warm, winter: mild}   # Sichuan Basin Forest: subtropical China, southern Korea and Japan laurel belt
+236: {phase: warm, winter: mild}   # Jiangnan Evergreen Forest: subtropical China, southern Korea and Japan laurel belt
+642: {phase: warm, winter: mild}   # Guizhou Karst Forest: subtropical China, southern Korea and Japan laurel belt
+643: {phase: warm, winter: mild}   # Yunnan Plateau Forest: subtropical China, southern Korea and Japan laurel belt
+268: {phase: warm, winter: mild}   # South China Monsoon Forest: subtropical China, southern Korea and Japan laurel belt
+232: {phase: tropical, winter: mild}   # Hainan Rainforest: Hainan: tropical wet-dry
+283: {phase: warm, winter: mild}   # Taiwan Forest: subtropical China, southern Korea and Japan laurel belt
+697: {phase: cold, winter: snow}   # Hengduan Subalpine Forest: short season: green-up in late spring, early autumn
+706: {phase: cold, winter: snow}   # Qionglai-Minshan Forest: short season: green-up in late spring, early autumn
+704: {phase: cold, winter: snow}   # Nujiang-Lancang Gorge Forest: short season: green-up in late spring, early autumn
+702: {phase: cold, winter: snow}   # Northeast Himalayan Fir Forest: short season: green-up in late spring, early autumn
+768: {phase: cold, winter: snow}   # Tibetan Alpine Meadow: default for WWF biome 10
+765: {phase: cold, winter: snow}   # Southeast Tibet Shrubland: default for WWF biome 10
+750: {phase: cold, winter: snow}   # Tibetan Alpine Steppe: default for WWF biome 10
+759: {phase: cold, winter: snow}   # Kunlun Alpine Desert: default for WWF biome 10
+754: {phase: cold, winter: snow}   # Karakoram Steppe: default for WWF biome 10
+762: {phase: cold, winter: snow}   # Pamir Alpine Desert: default for WWF biome 10
+763: {phase: cold, winter: snow}   # Qilian Meadow: default for WWF biome 10
+751: {phase: cold, winter: snow}   # Eastern Himalayan Meadow: default for WWF biome 10
+760: {phase: cold, winter: snow}   # Northwestern Himalayan Meadow: default for WWF biome 10
+769: {phase: cold, winter: snow}   # Western Himalayan Meadow: default for WWF biome 10
+770: {phase: cold, winter: snow}   # Yarlung Tsangpo Steppe: default for WWF biome 10
+835: {phase: cold, winter: snow}   # Qaidam Basin: short season: green-up in late spring, early autumn
+664: {phase: mid, winter: mild}   # Atlantic Mixed Forest: oceanic: fields stay green in winter
+663: {phase: mid, winter: mild}   # English Lowland Beechwood: oceanic: fields stay green in winter
+651: {phase: mid, winter: mild}   # Celtic Oakwood: oceanic: fields stay green in winter
+672: {phase: mid, winter: mild}   # Atlantic Moorland: oceanic: fields stay green in winter
+691: {phase: cold, winter: snow}   # Caledonian Pinewood: short season: green-up in late spring, early autumn
+686: {phase: mid, winter: snow}   # Western European Beech Forest: default for WWF biome 4
+654: {phase: mid, winter: snow}   # Central European Mixed Forest: default for WWF biome 4
+647: {phase: mid, winter: snow}   # Baltic Mixed Forest: default for WWF biome 4
+679: {phase: mid, winter: snow}   # Sarmatic Mixed Forest: default for WWF biome 4
+661: {phase: mid, winter: snow}   # Forest Steppe: default for WWF biome 4
+735: {phase: mid, winter: snow}   # Pontic Steppe: default for WWF biome 8
+674: {phase: mid, winter: snow}   # Pannonian Plain: default for WWF biome 4
+675: {phase: warm, winter: mild}   # Po Valley: Po Valley: late autumn, foggy mild winter
+689: {phase: mid, winter: snow}   # Alpine Forest: default for WWF biome 5
+644: {phase: mid, winter: snow}   # Apennine Beech Forest: default for WWF biome 4
+660: {phase: mid, winter: snow}   # Dinaric Fir-Beech Forest: default for WWF biome 4
+692: {phase: cold, winter: snow}   # Carpathian Forest: short season: green-up in late spring, early autumn
+678: {phase: mid, winter: snow}   # Rhodope Forest: default for WWF biome 4
+646: {phase: mid, winter: snow}   # Balkan Oak Forest: default for WWF biome 4
+676: {phase: mid, winter: snow}   # Pyrenean Forest: default for WWF biome 4
+801: {phase: mid, winter: snow, grass: summer_dry}   # Pindus Forest: Sierra Nevada and Mediterranean mountains: snow, but dry summers on the grass
+648: {phase: mid, winter: mild}   # Cantabrian Forest: oceanic: fields stay green in winter
+800: {phase: mid, winter: summer_dry}   # Galician Uplands: summer-dry edge of the oceanic belt (Galicia, Willamette, Klamath)
+792: {phase: warm, winter: summer_dry}   # Iberian Pine Uplands: default for WWF biome 12
+793: {phase: warm, winter: summer_dry}   # Iberian Holm Oak Woodland: default for WWF biome 12
+805: {phase: warm, winter: summer_dry}   # Dehesa: default for WWF biome 12
+803: {phase: warm, winter: summer_dry}   # Iberian Semi-desert: default for WWF biome 12
+799: {phase: warm, winter: summer_dry}   # Provence and Catalonia: default for WWF biome 12
+806: {phase: warm, winter: summer_dry}   # Tyrrhenian Coast: default for WWF biome 12
+795: {phase: warm, winter: summer_dry}   # Italian Hills: default for WWF biome 12
+794: {phase: mid, winter: snow, grass: summer_dry}   # Illyrian Karst: Sierra Nevada and Mediterranean mountains: snow, but dry summers on the grass
+788: {phase: mid, winter: snow, grass: summer_dry}   # Corsican Mountains: Sierra Nevada and Mediterranean mountains: snow, but dry summers on the grass
+785: {phase: warm, winter: summer_dry}   # Aegean Coast: default for WWF biome 12
+708: {phase: mid, winter: snow}   # Norwegian Coast Forest: default for WWF biome 5
+717: {phase: cold, winter: snow}   # Taiga: short season: green-up in late spring, early autumn
+780: {phase: cold, winter: snow}   # Fjell Birch Woods: short season: green-up in late spring, early autumn
+711: {phase: cold, winter: snow}   # Icelandic Heath: short season: green-up in late spring, early autumn
+363: {phase: warm, winter: mild}   # Piney Woods: US South: grass stays green-ish under C3, no lasting snow
+332: {phase: warm, winter: mild}   # Post Oak Savanna: US South: grass stays green-ish under C3, no lasting snow
+401: {phase: warm, winter: snow}   # Blackland Prairie: southern interior: late leaf peak, occasional snow
+391: {phase: warm, winter: snow}   # Hill Country: southern interior: late leaf peak, occasional snow
+390: {phase: warm, winter: snow}   # Cross Timbers: southern interior: late leaf peak, occasional snow
+389: {phase: warm, winter: snow}   # Rolling Plains: southern interior: late leaf peak, occasional snow
+384: {phase: warm, winter: mild}   # Gulf Coast Prairie: US South: grass stays green-ish under C3, no lasting snow
+402: {phase: warm, winter: snow}   # High Plains: southern interior: late leaf peak, occasional snow
+428: {phase: tropical, winter: dry}   # Chihuahuan Desert: hand palette uses the tropical regime
+437: {phase: tropical, winter: dry}   # Brush Country: hand palette uses the tropical regime
+436: {phase: warm, winter: dry}   # Tamaulipan Thornscrub: hot deserts and thornscrub
+388: {phase: mid, winter: snow}   # Tallgrass Prairie: default for WWF biome 8
+392: {phase: mid, winter: snow}   # Flint Hills: default for WWF biome 8
+340: {phase: warm, winter: snow}   # Ozark Highlands: southern interior: late leaf peak, occasional snow
+341: {phase: warm, winter: snow}   # Ozark Mountains: southern interior: late leaf peak, occasional snow
+337: {phase: warm, winter: mild}   # Mississippi Bottomlands: US South: grass stays green-ish under C3, no lasting snow
+399: {phase: warm, winter: mild}   # Longleaf Savanna: US South: grass stays green-ish under C3, no lasting snow
+400: {phase: warm, winter: mild}   # Southern Mixed Woods: US South: grass stays green-ish under C3, no lasting snow
+346: {phase: warm, winter: snow}   # Mogollon Rim: southern interior: late leaf peak, occasional snow
+353: {phase: cold, winter: snow}   # Southern Rockies: short season: green-up in late spring, early autumn
+429: {phase: warm, winter: snow}   # Pinyon-Juniper Plateau: southern interior: late leaf peak, occasional snow
+326: {phase: tropical, winter: dry}   # Sierra Madre Occidental: monsoon dry forest: dry winter-spring, wet summer
+327: {phase: tropical, winter: dry}   # Sierra Madre Oriental: monsoon dry forest: dry winter-spring, wet summer
+545: {phase: tropical, winter: dry}   # Sinaloan Dry Forest: hand palette uses the tropical regime
+432: {phase: warm, winter: dry}   # Mexican Plateau Matorral: hot deserts and thornscrub
+377: {phase: cold, winter: snow}   # Shield Forest: default for WWF biome 6
+374: {phase: cold, winter: snow}   # Labrador Taiga: default for WWF biome 6
+379: {phase: cold, winter: snow}   # Northern Taiga: default for WWF biome 6
+376: {phase: cold, winter: snow}   # Boreal Plains: default for WWF biome 6
+373: {phase: cold, winter: snow}   # Eastern Boreal Forest: default for WWF biome 6
+375: {phase: cold, winter: snow}   # Yukon-Alaska Taiga: default for WWF biome 6
+382: {phase: cold, winter: snow}   # Hudson Bay Lowlands: default for WWF biome 6
+381: {phase: cold, winter: snow}   # Northwest Taiga: default for WWF biome 6
+378: {phase: cold, winter: snow}   # Slave Lake Taiga: default for WWF biome 6
+370: {phase: cold, winter: snow}   # Central Shield Forest: default for WWF biome 6
+383: {phase: cold, winter: snow}   # Watson Highlands: default for WWF biome 6
+369: {phase: cold, winter: snow}   # Alaska Peninsula Taiga: default for WWF biome 6
+371: {phase: cold, winter: snow}   # Cook Inlet Taiga: default for WWF biome 6
+372: {phase: cold, winter: snow}   # Copper Plateau Taiga: default for WWF biome 6
+413: {phase: cold, winter: snow}   # Low Arctic Tundra: default for WWF biome 11
+414: {phase: cold, winter: snow}   # Middle Arctic Tundra: default for WWF biome 11
+412: {phase: cold, winter: snow}   # High Arctic Tundra: default for WWF biome 11
+417: {phase: cold, winter: snow}   # Greenland Coast: default for WWF biome 11
+418: {phase: cold, winter: snow}   # High Arctic Greenland: default for WWF biome 11
+419: {phase: cold, winter: snow}   # Ogilvie-Mackenzie Tundra: default for WWF biome 11
+405: {phase: cold, winter: snow}   # Alaska Range Tundra: default for WWF biome 11
+411: {phase: cold, winter: snow}   # Brooks Range Tundra: default for WWF biome 11
+416: {phase: cold, winter: snow}   # Yukon Alpine Tundra: default for WWF biome 11
+408: {phase: cold, winter: snow}   # Arctic Foothills: default for WWF biome 11
+409: {phase: cold, winter: snow}   # Beringia Lowland Tundra: default for WWF biome 11
+410: {phase: cold, winter: snow}   # Beringia Upland Tundra: default for WWF biome 11
+404: {phase: cold, winter: snow}   # Ahklun Tundra: default for WWF biome 11
+407: {phase: cold, winter: snow}   # Arctic Coastal Plain: default for WWF biome 11
+406: {phase: cold, winter: snow}   # Aleutian Islands: default for WWF biome 11
+415: {phase: cold, winter: snow}   # Baffin Highlands: default for WWF biome 11
+421: {phase: cold, winter: snow}   # Torngat Mountains: default for WWF biome 11
+420: {phase: cold, winter: snow}   # Coast Mountain Icefields: default for WWF biome 11
+396: {phase: cold, winter: snow}   # Northern Plains: short season: green-up in late spring, early autumn
+397: {phase: mid, winter: snow}   # Northern Tallgrass: default for WWF biome 8
+395: {phase: mid, winter: snow}   # Sand Hills: default for WWF biome 8
+387: {phase: mid, winter: snow}   # Prairie-Forest Border: default for WWF biome 8
+386: {phase: cold, winter: snow}   # Aspen Parkland: short season: green-up in late spring, early autumn
+343: {phase: mid, winter: snow}   # Oak Savanna: default for WWF biome 4
+344: {phase: mid, winter: snow}   # Northwoods: default for WWF biome 4
+338: {phase: mid, winter: snow}   # New England Forest: default for WWF biome 4
+333: {phase: mid, winter: snow}   # Boreal Transition: default for WWF biome 4
+335: {phase: mid, winter: snow}   # St Lawrence Lowland: default for WWF biome 4
+342: {phase: mid, winter: snow}   # Beech-Maple Forest: default for WWF biome 4
+334: {phase: mid, winter: snow}   # Great Lakes Lowland: default for WWF biome 4
+329: {phase: mid, winter: snow}   # Appalachian Cove Forest: default for WWF biome 4
+331: {phase: mid, winter: snow}   # Blue Ridge: default for WWF biome 4
+330: {phase: warm, winter: mild}   # Piedmont: US South: grass stays green-ish under C3, no lasting snow
+328: {phase: mid, winter: snow}   # Allegheny Highlands: default for WWF biome 4
+336: {phase: warm, winter: snow}   # Interior Plateau: southern interior: late leaf peak, occasional snow
+339: {phase: mid, winter: snow}   # Northeast Coastal Forest: default for WWF biome 4
+347: {phase: mid, winter: snow}   # Pine Barrens: default for WWF biome 5
+393: {phase: warm, winter: mild}   # Mid-Atlantic Coastal Savanna: US South: grass stays green-ish under C3, no lasting snow
+349: {phase: mid, winter: mild}   # Coast Rainforest: oceanic: fields stay green in winter
+351: {phase: mid, winter: mild}   # Pacific Coast Forest: oceanic: fields stay green in winter
+360: {phase: mid, winter: snow}   # Alaskan Coast Forest: continental interior with a full summer
+365: {phase: mid, winter: mild}   # Haida Gwaii Forest: oceanic: fields stay green in winter
+359: {phase: mid, winter: mild}   # Redwood Coast: oceanic: fields stay green in winter
+364: {phase: mid, winter: mild}   # Puget Lowland: oceanic: fields stay green in winter
+403: {phase: mid, winter: summer_dry}   # Willamette Savanna: summer-dry edge of the oceanic belt (Galicia, Willamette, Klamath)
+352: {phase: mid, winter: snow}   # Cascade Forest: continental interior with a full summer
+358: {phase: mid, winter: snow}   # North Cascades: continental interior with a full summer
+354: {phase: mid, winter: snow}   # Eastern Cascades: continental interior with a full summer
+357: {phase: mid, winter: summer_dry}   # Klamath Mountains: summer-dry edge of the oceanic belt (Galicia, Willamette, Klamath)
+366: {phase: mid, winter: snow, grass: summer_dry}   # Sierra Nevada: Sierra Nevada and Mediterranean mountains: snow, but dry summers on the grass
+356: {phase: cold, winter: snow}   # Great Basin Ranges: short season: green-up in late spring, early autumn
+423: {phase: warm, winter: summer_dry}   # California Oak Woodland: California
+422: {phase: warm, winter: summer_dry}   # Coastal Sage Scrub: California
+424: {phase: warm, winter: summer_dry}   # California Mountain Chaparral: California
+425: {phase: warm, winter: summer_dry}   # Santa Lucia Range: California
+385: {phase: warm, winter: summer_dry}   # Central Valley: California
+433: {phase: warm, winter: dry}   # Mojave Desert: hot deserts and thornscrub
+435: {phase: warm, winter: dry}   # Sonoran Desert: hot deserts and thornscrub
+426: {phase: warm, winter: dry}   # Baja Desert: hot deserts and thornscrub
+431: {phase: warm, winter: dry}   # Gulf of California Scrub: hot deserts and thornscrub
+324: {phase: tropical, winter: dry}   # Sonoran-Sinaloan Thornforest: monsoon dry forest: dry winter-spring, wet summer
+427: {phase: warm, winter: dry}   # Central Mexican Matorral: hot deserts and thornscrub
+430: {phase: cold, winter: snow}   # Sagebrush Steppe: short season: green-up in late spring, early autumn
+434: {phase: mid, winter: snow}   # Snake-Columbia Steppe: continental interior with a full summer
+438: {phase: cold, winter: snow}   # Wyoming Basin: short season: green-up in late spring, early autumn
+398: {phase: mid, winter: snow}   # Palouse: continental interior with a full summer
+394: {phase: mid, winter: snow}   # Montana Valleys: continental interior with a full summer
+361: {phase: cold, winter: snow}   # Northern Rockies: short season: green-up in late spring, early autumn
+367: {phase: cold, winter: snow}   # Middle Rockies: short season: green-up in late spring, early autumn
+368: {phase: cold, winter: snow}   # Wasatch and Uinta: short season: green-up in late spring, early autumn
+348: {phase: mid, winter: snow}   # Blue Mountains: continental interior with a full summer
+362: {phase: mid, winter: snow}   # Okanogan Dry Forest: continental interior with a full summer
+350: {phase: cold, winter: snow}   # Interior BC Mountains: short season: green-up in late spring, early autumn
+345: {phase: cold, winter: snow}   # Rocky Mountain Foothills: short season: green-up in late spring, early autumn
+355: {phase: mid, winter: snow}   # Fraser Plateau: continental interior with a full summer
+380: {phase: cold, winter: snow}   # Northern Cordillera: short season: green-up in late spring, early autumn

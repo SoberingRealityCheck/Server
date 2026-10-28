@@ -1,0 +1,919 @@
+# North American plants beyond Texas: the Pacific coast, the interior West, the northern plains, the eastern
+# forests, the boreal forest and the Arctic.
+# Schema: see ../README.md. Colours follow the species' usual description (leaf_note / colour_note);
+# they are not measured from photographs.
+
+# ---------------------------------------------------------------- Pacific conifers
+coast_douglas_fir:
+  name: Coast Douglas fir
+  latin: Pseudotsuga menziesii var. menziesii
+  form: tree
+  leaf: "#3f6a3a"
+  leaf_note: Flat dark yellow-green needles, 2-3 cm.
+  range: Pacific Northwest lowlands and the Cascades, Coast Ranges to the Sierra.
+  look: Very tall, straight trunk, deep furrowed bark.
+  render: 'ref("biomesoplenty:fir_tree_large")'
+  sapling: biomesoplenty:fir_sapling
+  stand_in: Biomes O' Plenty large fir.
+
+western_hemlock:
+  name: Western hemlock
+  latin: Tsuga heterophylla
+  form: tree
+  leaf: "#3a6444"
+  leaf_note: Short flat glossy dark green needles with white bands below.
+  range: Wet coastal forest from Alaska to northern California.
+  look: Drooping leader, feathery sprays.
+  render: 'ref("terrestria:hemlock_tree")'
+  sapling: terrestria:hemlock_sapling
+  stand_in: Terrestria hemlock.
+
+western_red_cedar:
+  name: Western red cedar
+  latin: Thuja plicata
+  form: tree
+  clump: {size: 14, share: 0.4}
+  niche: {water: wet}
+  leaf: "#4e7a3a"
+  leaf_note: Glossy yellow-green scale leaves in flat sprays.
+  range: Wet lowlands and stream bottoms of the Pacific Northwest and the interior wet belt.
+  look: Buttressed, fluted trunk, drooping sprays.
+  render: 'tree("spruce_log", "spruce_leaves", straight(12, 4, 2), sprucef(U(2, 3), U(0, 1), U(2, 4)))'
+  sapling: spruce_sapling
+
+sitka_spruce:
+  name: Sitka spruce
+  latin: Picea sitchensis
+  form: tree
+  leaf: "#4a7a62"
+  leaf_note: Stiff sharp blue-green needles.
+  range: Fog belt of the Pacific coast, Kodiak to northern California.
+  render: 'ref("biomesoplenty:tall_spruce_tree")'
+  sapling: spruce_sapling
+  stand_in: Biomes O' Plenty tall spruce.
+
+coast_redwood:
+  name: Coast redwood
+  latin: Sequoia sempervirens
+  form: tree
+  niche: {slope: flat}
+  leaf: "#3c5e3c"
+  leaf_note: Flat dark green needles in two ranks.
+  range: Fog belt of northern California and southwestern Oregon.
+  look: The tallest trees on Earth; red fibrous bark.
+  render: 'ref("terrestria:redwood_tree")'
+  sapling: terrestria:redwood_sapling
+  stand_in: Terrestria redwood.
+
+giant_sequoia:
+  name: Giant sequoia
+  latin: Sequoiadendron giganteum
+  form: tree
+  clump: {size: 24, share: 0.15, outside: 0.02}
+  leaf: "#5d7d55"
+  leaf_note: Awl-shaped blue-green scale leaves.
+  range: Groves on the western slope of the Sierra Nevada, 1,400-2,000 m.
+  look: Enormous red trunk.
+  render: 'ref("terrestria:mega_redwood_tree")'
+  sapling: terrestria:redwood_sapling
+  stand_in: Terrestria mega redwood.
+
+sugar_pine:
+  name: Sugar pine
+  latin: Pinus lambertiana
+  form: tree
+  leaf: "#4f7454"
+  leaf_note: Blue-green needles in fives.
+  range: Sierra Nevada, Klamath and southern Cascades.
+  look: Tallest pine; long level branches with very long cones.
+  render: 'tree("spruce_log", "spruce_leaves", straight(14, 4, 2), pinef(2, U(4, 6)))'
+  sapling: spruce_sapling
+
+lodgepole_pine:
+  name: Lodgepole pine
+  latin: Pinus contorta var. latifolia
+  form: tree
+  leaf: "#55743e"
+  leaf_note: Yellow-green to dark green needles in twos.
+  range: Rockies, Cascades and the interior plateaus, after fire.
+  look: Dense stands of thin straight trunks.
+  render: 'tree("spruce_log", "spruce_leaves", straight(9, 3, 1), pinef(1, U(3, 4)))'
+  sapling: spruce_sapling
+
+western_larch:
+  name: Western larch
+  latin: Larix occidentalis
+  form: tree
+  clump: {size: 20, share: 0.45}
+  leaf: "#86ad4e"
+  leaf_note: Soft light green needles in clusters; deciduous, gold in autumn.
+  autumn: "#c8a032"
+  range: "Interior Northwest: northern Rockies, Blue Mountains, eastern Cascades."
+  render: 'tree("spruce_log", "birch_leaves", straight(9, 3, 0), sprucef(U(1, 2), U(0, 1), U(2, 3)))'
+  sapling: spruce_sapling
+
+white_fir:
+  name: White fir
+  latin: Abies concolor
+  form: tree
+  leaf: "#6a8a7a"
+  leaf_note: Long flat silvery blue-green needles.
+  range: Sierra Nevada, southern Cascades, Great Basin and southern Rocky Mountain ranges.
+  render: 'ref("biomesoplenty:fir_tree")'
+  sapling: biomesoplenty:fir_sapling
+  stand_in: Biomes O' Plenty fir.
+
+red_alder:
+  name: Red alder
+  latin: Alnus rubra
+  form: tree
+  clump: {size: 16, share: 0.4}
+  niche: {water: riparian}
+  leaf: "#4e7a36"
+  leaf_note: Dark green toothed leaves with rolled edges.
+  range: Streams and clearings of the Pacific coast.
+  look: Smooth pale grey bark.
+  render: 'tree("birch_log", "oak_leaves", straight(6, 2, 1), blob(2, 3, 0))'
+  sapling: birch_sapling
+
+bigleaf_maple:
+  name: Bigleaf maple
+  latin: Acer macrophyllum
+  form: tree
+  leaf: "#5b8c34"
+  leaf_note: Very large five-lobed mid-green leaves.
+  autumn: "#c8a032"
+  range: Pacific coast lowlands, moss-hung.
+  render: 'tree("oak_log", "jungle_leaves", straight(6, 3, 1), blob(3, 3, 0), decorators=[trunk_vine()])'
+  sapling: oak_sapling
+
+oregon_white_oak:
+  name: Oregon white oak
+  latin: Quercus garryana
+  form: tree
+  leaf: "#4e7a34"
+  leaf_note: Glossy dark green lobed leaves.
+  range: Willamette Valley, Puget lowlands, dry Cascade foothills.
+  render: 'tree("oak_log", "oak_leaves", forking(4, 2, 1), blob(3, 2, 0))'
+  sapling: oak_sapling
+
+valley_oak:
+  name: Valley oak
+  latin: Quercus lobata
+  form: tree
+  leaf: "#6a8a48"
+  leaf_note: Deeply lobed dull green leaves, paler below.
+  range: Valley floors and foothills of California.
+  look: Huge spreading crown on deep soils.
+  render: 'tree("oak_log", "oak_leaves", fancy(6, 3, 2), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+blue_oak:
+  name: Blue oak
+  latin: Quercus douglasii
+  form: tree
+  niche: {water: dry}
+  leaf: "#7d9a7a"
+  leaf_note: Small blue-grey leaves.
+  range: Dry foothills around the Central Valley.
+  render: 'tree("oak_log", "dark_oak_leaves", forking(3, 1, 1), blob(2, 2, 0))'
+  sapling: oak_sapling
+
+coast_live_oak:
+  name: Coast live oak
+  latin: Quercus agrifolia
+  evergreen: true
+  form: tree
+  clump: {size: 16, share: 0.4}
+  leaf: "#3e6830"
+  leaf_note: Holly-like, convex, glossy dark green leaves.
+  range: California coast ranges and valleys.
+  render: 'tree("oak_log", "oak_leaves", forking(3, 1, 1), acaciaf(3))'
+  sapling: oak_sapling
+
+pacific_madrone:
+  name: Pacific madrone
+  latin: Arbutus menziesii
+  evergreen: true
+  form: tree
+  leaf: "#3e6a34"
+  leaf_note: Thick glossy dark green leaves.
+  range: Coast ranges, Klamath, Puget lowlands.
+  look: Peeling red-orange bark.
+  render: 'tree("acacia_log", "jungle_leaves", forking(5, 2, 1), blob(2, 3, 0))'
+  sapling: oak_sapling
+  stand_in: Acacia log for the red bark.
+
+singleleaf_pinyon:
+  name: Singleleaf pinyon
+  latin: Pinus monophylla
+  form: tree
+  niche: {water: dry}
+  leaf: "#6a7d6a"
+  leaf_note: Single stout grey-green needles.
+  range: Great Basin ranges, Mojave mountains.
+  render: 'tree("spruce_log", "spruce_leaves", straight(2, 1, 0), blob(2, 3, 0))'
+  sapling: spruce_sapling
+
+utah_juniper:
+  name: Utah juniper
+  latin: Juniperus osteosperma
+  form: tree
+  niche: {water: dry}
+  leaf: "#7a8a5e"
+  leaf_note: Yellow-green scale leaves.
+  range: Great Basin and Colorado Plateau.
+  render: 'tree("spruce_log", "spruce_leaves", forking(2, 1, 1), blob(2, 2, 0))'
+  sapling: spruce_sapling
+
+# ---------------------------------------------------------------- Pacific and western shrubs
+chamise:
+  name: Chamise
+  latin: Adenostoma fasciculatum
+  evergreen: true
+  form: shrub
+  leaf: "#4a6a3a"
+  leaf_note: Tiny needle-like dark green leaves in bundles.
+  range: California chaparral.
+  render: 'tree("oak_log", "dark_oak_leaves", straight(1, 0, 0), bushf(2, 1, 0))'
+  sapling: oak_sapling
+
+manzanita:
+  name: Manzanita
+  latin: Arctostaphylos glauca
+  evergreen: true
+  form: shrub
+  leaf: "#6c8a68"
+  leaf_note: Stiff upright grey-green leaves.
+  range: Chaparral and pine forest edges of California and Oregon.
+  look: Smooth twisting red bark.
+  render: 'tree("acacia_log", "dark_oak_leaves", straight(1, 1, 0), bushf(2, 1, 0))'
+  sapling: oak_sapling
+  stand_in: Acacia log for the red bark.
+
+scrub_oak:
+  name: Scrub oak
+  latin: Quercus berberidifolia
+  form: shrub
+  leaf: "#4c6c3c"
+  leaf_note: Small spiny dull green leaves.
+  range: California chaparral.
+  render: 'tree("oak_log", "oak_leaves", straight(1, 0, 0), bushf(2, 1, 0))'
+  sapling: oak_sapling
+
+california_sagebrush:
+  name: California sagebrush
+  latin: Artemisia californica
+  form: shrub_ground
+  range: Coastal sage scrub of southern and central California.
+  render: 'flowers("bush", "short_dry_grass", weights=[3, 1])'
+
+black_sage:
+  name: Black sage
+  latin: Salvia mellifera
+  form: shrub_ground
+  range: Coastal sage scrub.
+  render: 'flowers("bush", "allium", weights=[4, 1])'
+
+ceanothus:
+  name: Wild lilac
+  latin: Ceanothus cuneatus
+  form: shrub_ground
+  range: Chaparral; blue flowers in spring.
+  render: 'flowers("bush", "biomesoplenty:blue_hydrangea", weights=[3, 1])'
+
+big_sagebrush:
+  name: Big sagebrush
+  latin: Artemisia tridentata
+  form: shrub_ground
+  range: Great Basin, Snake-Columbia, Wyoming Basin.
+  look: Silver-grey aromatic shrub covering whole valleys.
+  render: 'flowers("bush", "short_dry_grass", weights=[4, 1])'
+
+rabbitbrush:
+  name: Rubber rabbitbrush
+  latin: Ericameria nauseosa
+  form: shrub_ground
+  range: Disturbed ground across the interior West; yellow in autumn.
+  render: 'flowers("bush", ("biomesoplenty:goldenrod", {"half": "lower"}), weights=[2, 1])'
+
+shadscale:
+  name: Shadscale
+  latin: Atriplex confertifolia
+  form: shrub_ground
+  range: Salt flats and basins of the Great Basin.
+  render: 'flowers("dead_bush", "bush", weights=[1, 2])'
+
+bitterbrush:
+  name: Antelope bitterbrush
+  latin: Purshia tridentata
+  form: shrub_ground
+  range: Sagebrush steppe and pine edges of the interior West.
+  render: 'flowers("bush")'
+
+white_bursage:
+  name: White bursage
+  latin: Ambrosia dumosa
+  form: shrub_ground
+  range: Mojave and Sonoran deserts, with creosote.
+  render: 'flowers("dead_bush", "bush", weights=[1, 1])'
+
+brittlebush:
+  name: Brittlebush
+  latin: Encelia farinosa
+  form: shrub_ground
+  range: Sonoran desert slopes; yellow flowers in spring.
+  render: 'flowers("bush", "dandelion", weights=[3, 1])'
+
+# ---------------------------------------------------------------- deserts
+joshua_tree:
+  name: Joshua tree
+  latin: Yucca brevifolia
+  evergreen: true
+  form: tree
+  clump: {size: 24, share: 0.35}
+  leaf: "#7a8a5a"
+  leaf_note: Stiff dagger leaves, grey-green.
+  range: Mojave desert, 400-1,800 m.
+  render: 'ref("terrestria:yucca_palm_tree")'
+  sapling: terrestria:yucca_palm_sapling
+  stand_in: Terrestria yucca palm.
+
+saguaro:
+  name: Saguaro
+  latin: Carnegiea gigantea
+  form: cactus
+  niche: {water: dry}
+  range: Sonoran desert slopes and bajadas.
+  render: 'ref("terrestria:saguaro_cactus")'
+  sapling: terrestria:saguaro_cactus_sapling
+  stand_in: Terrestria saguaro.
+
+palo_verde:
+  name: Foothill palo verde
+  latin: Parkinsonia microphylla
+  form: tree
+  leaf: "#8aa860"
+  leaf_note: Tiny leaflets; the green bark does most of the work.
+  range: Sonoran desert.
+  render: 'tree("oak_log", "acacia_leaves", forking(2, 1, 1), acaciaf(2))'
+  sapling: acacia_sapling
+
+big_galleta:
+  name: Big galleta
+  latin: Pleuraphis rigida
+  form: grass
+  colour: "#a4a87a"
+  colour_note: Coarse pale grey-green bunchgrass.
+  range: Mojave and Sonoran deserts.
+  render: 'flowers("short_dry_grass", "tall_dry_grass", weights=[3, 1])'
+
+# ---------------------------------------------------------------- western and northern grasses
+bluebunch_wheatgrass:
+  name: Bluebunch wheatgrass
+  latin: Pseudoroegneria spicata
+  form: grass
+  colour: "#8aa070"
+  colour_note: Blue-green bunchgrass, straw-coloured in late summer.
+  range: Palouse, Snake-Columbia, Montana valleys, Great Basin.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[2, 1])'
+
+idaho_fescue:
+  name: Idaho fescue
+  latin: Festuca idahoensis
+  form: grass
+  colour: "#7e9a72"
+  colour_note: Fine blue-green tufts.
+  range: Palouse and mountain grasslands of the interior Northwest.
+  render: 'flowers("short_grass")'
+
+indian_ricegrass:
+  name: Indian ricegrass
+  latin: Achnatherum hymenoides
+  form: grass
+  colour: "#a0a878"
+  colour_note: Pale green bunchgrass with airy seed heads.
+  range: Sandy basins of the Great Basin and Colorado Plateau.
+  render: 'flowers("short_dry_grass", "tall_dry_grass", weights=[3, 1])'
+
+western_wheatgrass:
+  name: Western wheatgrass
+  latin: Pascopyrum smithii
+  form: grass
+  colour: "#7d9a78"
+  colour_note: Strongly blue-green sod grass.
+  range: Northern shortgrass and mixed-grass prairie.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[3, 1])'
+
+needle_and_thread:
+  name: Needle-and-thread
+  latin: Hesperostipa comata
+  form: grass
+  colour: "#98a26a"
+  colour_note: Fine light green bunchgrass with long twisted awns.
+  range: Northern plains, Montana valleys, sagebrush steppe.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[2, 2])'
+
+rough_fescue:
+  name: Rough fescue
+  latin: Festuca campestris
+  form: grass
+  colour: "#7f9a6a"
+  colour_note: Large grey-green tussocks.
+  range: Aspen parkland and foothill prairie of Alberta and Montana.
+  render: 'flowers("short_grass", ("tall_grass", {"half": "lower"}), weights=[3, 1])'
+
+indiangrass:
+  name: Indiangrass
+  latin: Sorghastrum nutans
+  form: grass
+  colour: "#7aa055"
+  colour_note: Tall blue-green blades, golden plumes in autumn.
+  range: Tallgrass prairie.
+  render: 'flowers(("tall_grass", {"half": "lower"}), "short_grass", weights=[3, 1])'
+
+prairie_sandreed:
+  name: Prairie sandreed
+  latin: Calamovilfa longifolia
+  form: grass
+  colour: "#9aa870"
+  colour_note: Tall pale green grass of sandy soils.
+  range: Nebraska Sand Hills, sandy plains.
+  render: 'flowers(("tall_grass", {"half": "lower"}), "short_dry_grass", weights=[2, 1])'
+
+purple_needlegrass:
+  name: Purple needlegrass
+  latin: Stipa pulchra
+  form: grass
+  colour: "#8fa060"
+  colour_note: Fine green bunchgrass, purple awns in spring.
+  range: California grasslands.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[2, 1])'
+
+wild_oats:
+  name: Wild oats
+  latin: Avena fatua
+  form: grass
+  colour: "#b0a868"
+  colour_note: Annual grass that cures to gold by early summer; the colour of California hills most of the year.
+  range: California grasslands and oak savanna (naturalised).
+  render: 'flowers("short_dry_grass", "tall_dry_grass", "short_grass", weights=[3, 2, 1])'
+
+pennsylvania_sedge:
+  name: Pennsylvania sedge
+  latin: Carex pensylvanica
+  form: grass
+  colour: "#6f9a48"
+  colour_note: Fine bright green carpet of dry woodlands.
+  range: Eastern and Great Lakes forests, oak savanna.
+  render: 'flowers("short_grass")'
+
+bigelow_sedge:
+  name: Bigelow's sedge
+  latin: Carex bigelowii
+  form: grass
+  colour: "#8a9a60"
+  colour_note: Yellowish green tundra sedge, brown early in autumn.
+  range: Arctic and alpine tundra around the pole.
+  render: 'flowers("short_grass", "biomesoplenty:dead_grass", weights=[3, 1])'
+
+bluejoint:
+  name: Bluejoint
+  latin: Calamagrostis canadensis
+  form: grass
+  colour: "#6f9450"
+  colour_note: Tall green reedgrass of wet meadows and burns.
+  range: Boreal forest and taiga across Canada and Alaska.
+  render: 'flowers(("tall_grass", {"half": "lower"}), "short_grass", weights=[1, 2])'
+
+# ---------------------------------------------------------------- flowers of the West and North
+california_poppy:
+  name: California poppy
+  latin: Eschscholzia californica
+  form: flower
+  clump: {size: 24, share: 0.3, outside: 0.05}
+  range: California grasslands and coast.
+  render: 'flowers("biomesoplenty:orange_cosmos")'
+
+lupine:
+  name: Lupine
+  latin: Lupinus spp.
+  form: flower
+  range: Western meadows, grassland and sagebrush.
+  render: 'flowers("cornflower", "allium", weights=[3, 1])'
+
+arrowleaf_balsamroot:
+  name: Arrowleaf balsamroot
+  latin: Balsamorhiza sagittata
+  form: flower
+  range: Sagebrush hills and pine edges of the interior Northwest.
+  render: 'flowers("dandelion", "wilderwild:marigold", weights=[2, 1])'
+
+indian_paintbrush_west:
+  name: Wyoming paintbrush
+  latin: Castilleja linariifolia
+  form: flower
+  range: Sagebrush steppe and mountain meadows.
+  render: 'flowers("terrestria:indian_paintbrush")'
+
+fireweed:
+  name: Fireweed
+  latin: Chamerion angustifolium
+  form: flower
+  clump: {size: 20, share: 0.3, outside: 0.05}
+  range: Burns, clearings and river bars across the boreal forest.
+  render: 'flowers(("lilac", {"half": "lower"}))'
+
+prairie_crocus:
+  name: Prairie crocus
+  latin: Pulsatilla nuttalliana
+  form: flower
+  range: Northern plains and aspen parkland, first flower of spring.
+  render: 'flowers("wilderwild:pasqueflower")'
+
+wild_bergamot:
+  name: Wild bergamot
+  latin: Monarda fistulosa
+  form: flower
+  range: Prairies and savannas from the plains to the east.
+  render: 'flowers("allium")'
+
+sunflower:
+  name: Maximilian sunflower
+  latin: Helianthus maximiliani
+  form: flower
+  range: Tallgrass and mixed prairie.
+  render: 'flowers(("sunflower", {"half": "lower"}))'
+
+new_england_aster:
+  name: New England aster
+  latin: Symphyotrichum novae-angliae
+  form: flower
+  range: Meadows and prairie edges of the Midwest and Northeast.
+  render: 'flowers("allium", "biomesoplenty:violet", weights=[1, 1])'
+
+trillium:
+  name: Large-flowered trillium
+  latin: Trillium grandiflorum
+  form: flower
+  clump: {size: 14, share: 0.35, outside: 0.05}
+  range: Rich deciduous woods of the Great Lakes and Appalachians.
+  render: 'flowers("lily_of_the_valley", "white_tulip", weights=[2, 1])'
+
+mountain_avens:
+  name: Mountain avens
+  latin: Dryas octopetala
+  form: flower
+  range: Arctic and alpine tundra on lime-rich gravel.
+  render: 'flowers("oxeye_daisy")'
+
+arctic_poppy:
+  name: Arctic poppy
+  latin: Papaver radicatum
+  form: flower
+  range: High Arctic gravel and tundra.
+  render: 'flowers("dandelion")'
+
+purple_saxifrage:
+  name: Purple saxifrage
+  latin: Saxifraga oppositifolia
+  form: flower
+  range: Arctic rock and gravel; the first flower after snowmelt.
+  render: 'flowers("allium")'
+
+cottongrass:
+  name: Cottongrass
+  latin: Eriophorum vaginatum
+  form: flower
+  clump: {size: 16, share: 0.4}
+  range: Tussock tundra and bogs.
+  render: 'flowers("wilderwild:seeding_dandelion")'
+
+# ---------------------------------------------------------------- boreal and Arctic ground
+labrador_tea:
+  name: Labrador tea
+  latin: Rhododendron groenlandicum
+  form: shrub_ground
+  range: Bogs and black spruce forest across the boreal zone.
+  render: 'flowers("bush")'
+
+dwarf_birch:
+  name: Dwarf birch
+  latin: Betula nana
+  form: shrub_ground
+  clump: {size: 14, share: 0.4}
+  range: Low Arctic tundra and subalpine.
+  render: 'flowers("biomesoplenty:tundra_shrub", "bush", weights=[2, 1])'
+
+arctic_willow:
+  name: Arctic willow
+  latin: Salix arctica
+  form: shrub_ground
+  range: Arctic tundra; creeping, knee-high at most.
+  render: 'flowers("biomesoplenty:tundra_shrub")'
+
+reindeer_lichen:
+  name: Reindeer lichen
+  latin: Cladonia rangiferina
+  form: herb
+  evergreen: true
+  leaf: "#b8bcb0"
+  leaf_note: Pale grey-green mats, near white when dry.
+  clump: {size: 16, share: 0.45}
+  range: Dry open taiga and tundra; caribou forage.
+  render: 'flowers("elysium_atlas:tinted_moss_carpet")'
+  stand_in: The mod's tinted moss carpet, coloured per region from this leaf colour.
+
+sphagnum:
+  name: Peat moss
+  latin: Sphagnum spp.
+  form: herb
+  niche: {water: wet}
+  range: Bogs and muskeg across the boreal zone.
+  render: 'flowers("moss_carpet")'
+
+ostrich_fern:
+  name: Ostrich fern
+  latin: Matteuccia struthiopteris
+  form: fern
+  clump: {size: 12, share: 0.3}
+  range: Floodplains and rich woods of the north.
+  render: 'flowers(("large_fern", {"half": "lower"}), "fern", weights=[2, 1])'
+
+sword_fern:
+  name: Western sword fern
+  latin: Polystichum munitum
+  form: fern
+  range: Pacific coast forest floor.
+  render: 'flowers("fern", ("large_fern", {"half": "lower"}), weights=[3, 1])'
+
+salal:
+  name: Salal
+  latin: Gaultheria shallon
+  form: shrub_ground
+  range: Pacific coast forest understory.
+  render: 'flowers("bush", "fern", weights=[3, 1])'
+
+# ---------------------------------------------------------------- boreal trees
+white_spruce:
+  name: White spruce
+  latin: Picea glauca
+  form: tree
+  leaf: "#4e7062"
+  leaf_note: Blue-green needles with a whitish bloom.
+  range: Boreal forest from Alaska to Newfoundland, on better-drained ground.
+  render: 'ref("spruce")'
+  sapling: spruce_sapling
+  stand_in: Vanilla spruce.
+
+black_spruce:
+  name: Black spruce
+  latin: Picea mariana
+  form: tree
+  niche: {water: wet}
+  leaf: "#3a5a3e"
+  leaf_note: Short dull dark blue-green needles.
+  range: Bogs and permafrost across the boreal forest.
+  look: Thin spindly spire with a club of branches at the top.
+  render: 'tree("spruce_log", "spruce_leaves", straight(6, 3, 0), sprucef(1, U(0, 1), U(1, 2)))'
+  sapling: spruce_sapling
+
+balsam_fir:
+  name: Balsam fir
+  latin: Abies balsamea
+  form: tree
+  leaf: "#2f5a3a"
+  leaf_note: Flat dark green needles, silver below; fragrant.
+  range: Eastern boreal forest, Great Lakes, New England and Acadia.
+  render: 'ref("biomesoplenty:fir_tree_small")'
+  sapling: biomesoplenty:fir_sapling
+  stand_in: Biomes O' Plenty small fir.
+
+jack_pine:
+  name: Jack pine
+  latin: Pinus banksiana
+  form: tree
+  niche: {water: dry}
+  leaf: "#6a8a48"
+  leaf_note: Short twisted yellow-green needles in twos.
+  range: Sandy and rocky ground of the Canadian Shield, after fire.
+  render: 'tree("spruce_log", "spruce_leaves", straight(7, 3, 0), blob(2, 3, 0))'
+  sapling: spruce_sapling
+
+tamarack:
+  name: Tamarack
+  latin: Larix laricina
+  form: tree
+  niche: {water: wet}
+  leaf: "#8db450"
+  leaf_note: Soft light blue-green needles in tufts; deciduous, gold in autumn.
+  autumn: "#d0a83a"
+  range: Bogs and fens across the boreal forest.
+  render: 'tree("spruce_log", "birch_leaves", straight(6, 3, 0), sprucef(U(1, 2), U(0, 1), U(2, 3)))'
+  sapling: spruce_sapling
+
+paper_birch:
+  name: Paper birch
+  latin: Betula papyrifera
+  form: tree
+  clump: {size: 18, share: 0.4}
+  leaf: "#6a9a48"
+  leaf_note: Mid-green ovate leaves; yellow in autumn.
+  range: Boreal forest and northern hardwoods.
+  look: White peeling bark.
+  render: 'ref("birch")'
+  sapling: birch_sapling
+
+balsam_poplar:
+  name: Balsam poplar
+  latin: Populus balsamifera
+  form: tree
+  niche: {water: riparian}
+  leaf: "#4a7a3a"
+  leaf_note: Shiny dark green leaves, rusty and resinous below.
+  range: River flats across the boreal forest.
+  render: 'tree("birch_log", "oak_leaves", straight(9, 3, 0), blob(2, 3, 0))'
+  sapling: birch_sapling
+
+# ---------------------------------------------------------------- eastern hardwoods and conifers
+sugar_maple:
+  name: Sugar maple
+  latin: Acer saccharum
+  form: tree
+  leaf: "#5a8c3a"
+  leaf_note: Five-lobed mid-green leaves; orange to scarlet in autumn.
+  autumn: "#e0782a"
+  range: Northern hardwoods of the Great Lakes, New England and the Appalachians.
+  render: 'tree("oak_log", "jungle_leaves", fancy(7, 3, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+  stand_in: Jungle leaves for the broad maple leaf; no permanent autumn leaf blocks.
+
+red_maple:
+  name: Red maple
+  latin: Acer rubrum
+  form: tree
+  leaf: "#5e8e40"
+  leaf_note: Three-lobed light green leaves with red stalks; red in autumn.
+  autumn: "#c8302a"
+  range: Wet to dry ground across the whole East.
+  render: 'tree("oak_log", "jungle_leaves", straight(6, 3, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+american_beech:
+  name: American beech
+  latin: Fagus grandifolia
+  form: tree
+  leaf: "#6a9a40"
+  leaf_note: Glossy blue-green to mid-green toothed leaves; bronze in winter.
+  range: Northern hardwoods and Appalachian coves.
+  look: Smooth grey bark.
+  render: 'tree("terrestria:rubber_log", "oak_leaves", fancy(6, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+yellow_birch:
+  name: Yellow birch
+  latin: Betula alleghaniensis
+  form: tree
+  leaf: "#6a9440"
+  leaf_note: Dull dark green toothed leaves; yellow in autumn.
+  range: Northern hardwoods and Appalachian highlands.
+  render: 'tree("birch_log", "birch_leaves", fancy(6, 3, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: birch_sapling
+
+tulip_tree:
+  name: Tulip tree
+  latin: Liriodendron tulipifera
+  form: tree
+  leaf: "#6a9e3e"
+  leaf_note: Square four-lobed bright green leaves.
+  range: Appalachian coves and Piedmont.
+  look: Tall straight trunk, one of the tallest eastern hardwoods.
+  render: 'tree("oak_log", "oak_leaves", straight(12, 4, 0), blob(2, 4, 0))'
+  sapling: oak_sapling
+
+american_basswood:
+  name: American basswood
+  latin: Tilia americana
+  form: tree
+  leaf: "#5e9238"
+  leaf_note: Large heart-shaped dark green leaves.
+  range: Rich woods of the Great Lakes and Midwest.
+  render: 'tree("oak_log", "jungle_leaves", fancy(6, 3, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+chestnut_oak:
+  name: Chestnut oak
+  latin: Quercus montana
+  form: tree
+  niche: {water: dry}
+  leaf: "#4e7a34"
+  leaf_note: Wavy-toothed glossy dark green leaves.
+  range: Dry Appalachian ridges.
+  render: 'tree("oak_log", "oak_leaves", straight(6, 3, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+bur_oak:
+  name: Bur oak
+  latin: Quercus macrocarpa
+  form: tree
+  clump: {size: 24, share: 0.4}
+  leaf: "#4c7a30"
+  leaf_note: Large fiddle-shaped glossy dark green leaves.
+  range: Oak savanna of the Midwest and the prairie edge to Manitoba.
+  look: Thick corky bark, broad open crown; fire-hardy.
+  render: 'tree("oak_log", "oak_leaves", forking(4, 2, 1), blob(3, 3, 0))'
+  sapling: oak_sapling
+
+black_cherry:
+  name: Black cherry
+  latin: Prunus serotina
+  form: tree
+  leaf: "#3e7030"
+  leaf_note: Glossy dark green lance-shaped leaves.
+  range: Allegheny plateau and eastern forests.
+  render: 'tree("cherry_log", "oak_leaves", straight(7, 3, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+  stand_in: Cherry log, green oak leaves.
+
+eastern_hemlock:
+  name: Eastern hemlock
+  latin: Tsuga canadensis
+  form: tree
+  niche: {slope: steep}
+  leaf: "#3d5f40"
+  leaf_note: Short flat dark green needles, two white lines below.
+  range: Cool ravines and north slopes, Great Lakes to the Appalachians.
+  render: 'ref("terrestria:hemlock_tree")'
+  sapling: terrestria:hemlock_sapling
+  stand_in: Terrestria hemlock.
+
+eastern_white_pine:
+  name: Eastern white pine
+  latin: Pinus strobus
+  form: tree
+  leaf: "#4f7a5a"
+  leaf_note: Soft slender blue-green needles in fives.
+  range: Great Lakes, New England, Appalachians.
+  look: Tall, layered, plume-like crown above the hardwoods.
+  render: 'tree("spruce_log", "spruce_leaves", straight(13, 4, 2), pinef(2, U(4, 6)))'
+  sapling: spruce_sapling
+
+red_pine:
+  name: Red pine
+  latin: Pinus resinosa
+  form: tree
+  niche: {water: dry}
+  leaf: "#3e6a38"
+  leaf_note: Long dark green needles in twos.
+  range: Sandy plains of the Great Lakes.
+  render: 'tree("spruce_log", "spruce_leaves", straight(10, 3, 0), blob(2, 3, 0))'
+  sapling: spruce_sapling
+
+pitch_pine:
+  name: Pitch pine
+  latin: Pinus rigida
+  form: tree
+  niche: {water: dry}
+  leaf: "#5e7e3e"
+  leaf_note: Stiff yellow-green needles in threes.
+  range: Pine barrens of New Jersey and Long Island, Appalachian ridges.
+  render: 'tree("spruce_log", "spruce_leaves", forking(4, 2, 1), blob(2, 2, 0))'
+  sapling: spruce_sapling
+
+northern_white_cedar:
+  name: Northern white cedar
+  latin: Thuja occidentalis
+  form: tree
+  niche: {water: wet}
+  leaf: "#5a7e44"
+  leaf_note: Flat sprays of yellow-green scale leaves.
+  range: Swamps and limestone shores of the Great Lakes and St Lawrence.
+  render: 'tree("spruce_log", "spruce_leaves", straight(5, 2, 0), sprucef(U(1, 2), U(0, 1), U(1, 2)))'
+  sapling: spruce_sapling
+
+rosebay_rhododendron:
+  name: Rosebay rhododendron
+  latin: Rhododendron maximum
+  evergreen: true
+  form: shrub
+  clump: {size: 16, share: 0.35, outside: 0.05}
+  niche: {slope: steep}
+  leaf: "#3a5e30"
+  leaf_note: Long leathery dark green evergreen leaves.
+  range: Appalachian stream valleys and coves; 'laurel hells'.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(1, 1, 0), bushf(2, 2, 1))'
+  sapling: oak_sapling
+
+mountain_laurel:
+  name: Mountain laurel
+  latin: Kalmia latifolia
+  form: shrub_ground
+  range: Appalachian ridges and oak woods.
+  render: 'flowers("bush", "pink_tulip", weights=[4, 1])'
+
+lowbush_blueberry:
+  name: Lowbush blueberry
+  latin: Vaccinium angustifolium
+  form: shrub_ground
+  range: Barrens, burns and pine woods of the Northeast and the Shield.
+  render: 'flowers("bush", "sweet_berry_bush", weights=[3, 1])'

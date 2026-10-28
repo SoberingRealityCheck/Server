@@ -1,0 +1,18 @@
+{
+ "name": "dev-globe",
+ "notes": "Local dev world: whole globe at 150 m per block (Medium). Reproduces slice-9 bit for bit.",
+ "atlas_version": "slice-9",
+ "metres_per_block": 150.0,
+ "sea_level_y": 63,
+ "min_y": -64,
+ "max_y": 576,
+ "sea_rise_m": 12.0,
+ "vertical": {"e_low": 8.0, "e_high": 1.0, "cut_m": 12000.0, "ocean_depth_blocks": 48.0, "top_knee": 400.0, "top_span": 120.0},
+ "tile": 256,
+ "extent": "globe",
+ "levels": [
+  {"name": "L0", "cell_m": 4800.0, "zoom": 5, "extent": "globe"},
+  {"name": "L1", "cell_m": 600.0, "zoom": 10, "extent": [4.0, 13.5, 43.5, 48.5], "feather_cells": 64}
+ ],
+ "spawn_lonlat": [6.63, 46.53]
+}

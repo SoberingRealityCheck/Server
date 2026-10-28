@@ -1,0 +1,791 @@
+# North American plants: Texas and the ecoregions around it.
+# Schema: see ../README.md. Colours follow the species' usual description (leaf_note / colour_note);
+# they are not measured from photographs.
+
+# ---------------------------------------------------------------- pines and other conifers
+loblolly_pine:
+  name: Loblolly pine
+  latin: Pinus taeda
+  form: tree
+  leaf: yellow_green_pine
+  leaf_note: Yellow-green needles in threes, 15-23 cm.
+  range: Piney Woods, Gulf coastal plain.
+  look: Tall bare trunk, rounded crown at the top.
+  render: 'tree("spruce_log", "spruce_leaves", straight(11, 4, 2), blob(2, 3, 0))'
+  sapling: spruce_sapling
+
+shortleaf_pine:
+  name: Shortleaf pine
+  latin: Pinus echinata
+  form: tree
+  leaf: "#527f3a"
+  leaf_note: Dark yellow-green needles, short (7-11 cm), in twos and threes.
+  range: Ozarks, drier ridges of the Piney Woods.
+  look: Smaller pine with a narrow, pointed crown.
+  render: 'tree("spruce_log", "spruce_leaves", straight(8, 3, 1), pinef(2, U(3, 4)))'
+  sapling: spruce_sapling
+
+longleaf_pine:
+  name: Longleaf pine
+  latin: Pinus palustris
+  form: tree
+  leaf: "#5e8f3f"
+  leaf_note: Bright green needles up to 45 cm, in tufts at the branch ends.
+  range: Longleaf savanna of the Gulf coastal plain.
+  look: Very tall, thin, open crown over grass.
+  render: 'tree("spruce_log", "spruce_leaves", straight(13, 4, 0), blob(2, 2, 0))'
+  sapling: spruce_sapling
+
+ponderosa_pine:
+  name: Ponderosa pine
+  latin: Pinus ponderosa
+  form: tree
+  leaf: grey_green_pine
+  leaf_note: Long (12-25 cm) yellowish to grey-green needles in threes.
+  range: Mogollon Rim, Rockies, Sierra Madre.
+  look: Open park-like pine with orange plated bark.
+  render: 'tree("spruce_log", "spruce_leaves", straight(10, 4, 2), pinef(2, U(4, 5)))'
+  sapling: spruce_sapling
+
+pinyon_pine:
+  name: Two-needle pinyon
+  latin: Pinus edulis
+  form: tree
+  niche: {water: dry}
+  leaf: "#557552"
+  leaf_note: Short stiff dark green needles with a bluish cast.
+  range: Colorado Plateau, southern Rockies foothills, Trans-Pecos mountains.
+  look: Short, round, bushy nut pine.
+  render: 'tree("spruce_log", "spruce_leaves", straight(2, 1, 0), blob(2, 3, 0))'
+  sapling: spruce_sapling
+
+ashe_juniper:
+  name: Ashe juniper
+  latin: Juniperus ashei
+  form: tree
+  clump: {size: 40, share: 0.5}
+  niche: {water: dry}
+  leaf: "#4a6040"
+  leaf_note: Dark green to grey-green scale leaves.
+  range: Edwards Plateau (Hill Country), Ozark glades.
+  look: Dense dark 'cedar' brakes.
+  render: 'ref("wilderwild:juniper")'
+  sapling: oak_sapling
+  stand_in: Wilder Wild juniper.
+
+one_seed_juniper:
+  name: One-seed juniper
+  latin: Juniperus monosperma
+  form: shrub
+  niche: {water: dry}
+  leaf: "#6a7d58"
+  leaf_note: Yellow-green to grey-green scale leaves.
+  range: Desert and plateau slopes, Trans-Pecos to the southern Rockies.
+  look: Low rounded juniper.
+  render: 'tree("spruce_log", "spruce_leaves", straight(1, 1, 0), bushf(2, 2, 1))'
+  sapling: spruce_sapling
+
+eastern_red_cedar:
+  name: Eastern red cedar
+  latin: Juniperus virginiana
+  form: tree
+  leaf: "#4c6a3a"
+  leaf_note: Dark green scale leaves, bronze-brown in winter.
+  autumn: "#6a6a3a"
+  range: Prairies, old fields and glades across the eastern half.
+  look: Narrow cone that spreads into old prairie.
+  render: 'tree("spruce_log", "spruce_leaves", straight(4, 2, 0), sprucef(U(1, 2), U(0, 1), U(1, 2)))'
+  sapling: spruce_sapling
+
+bald_cypress:
+  name: Bald cypress
+  latin: Taxodium distichum
+  form: tree
+  clump: {size: 12, share: 0.4}
+  niche: {water: wet}
+  leaf: "#6a9a4a"
+  leaf_note: Soft, flat, light green needles; deciduous, rusty orange in autumn.
+  autumn: "#a8662a"
+  range: Swamps and rivers of the Gulf coast and the Mississippi valley, Hill Country rivers.
+  look: Buttressed swamp conifer.
+  render: 'ref("wilderwild:swamp_cypress")'
+  sapling: wilderwild:cypress_sapling
+  stand_in: Wilder Wild swamp cypress.
+
+douglas_fir:
+  name: Rocky Mountain Douglas fir
+  latin: Pseudotsuga menziesii var. glauca
+  form: tree
+  leaf: blue_green_needle
+  leaf_note: Flat needles, dark green to blue-green in the interior variety.
+  range: Rockies, Mogollon Rim, Sierra Madre Occidental.
+  render: 'ref("spruce")'
+  sapling: spruce_sapling
+  stand_in: Vanilla spruce.
+
+engelmann_spruce:
+  name: Engelmann spruce
+  latin: Picea engelmannii
+  form: tree
+  leaf: "#41664a"
+  leaf_note: Sharp blue-green needles.
+  range: Subalpine forest of the Rockies.
+  render: 'ref("spruce")'
+  sapling: spruce_sapling
+  stand_in: Vanilla spruce.
+
+subalpine_fir:
+  name: Subalpine fir
+  latin: Abies lasiocarpa
+  form: tree
+  leaf: "#3b6244"
+  leaf_note: Dark blue-green flat needles with white stomatal lines.
+  range: Treeline of the Rockies.
+  look: Narrow spire.
+  render: 'ref("pine")'
+  sapling: spruce_sapling
+  stand_in: Vanilla pine.
+
+# ---------------------------------------------------------------- oaks and broadleaves
+live_oak:
+  name: Southern live oak
+  latin: Quercus virginiana (incl. Q. fusiformis, plateau live oak)
+  form: tree
+  evergreen: true
+  clump: {size: 16, share: 0.4}
+  leaf: dark_glossy_green
+  leaf_note: Leathery evergreen leaves, glossy dark green above.
+  range: Gulf coast, Hill Country, Blackland and South Texas.
+  look: Low, very wide crown on spreading limbs.
+  render: 'tree("oak_log", "oak_leaves", forking(3, 1, 1), acaciaf(3))'
+  sapling: oak_sapling
+
+live_oak_mossy:
+  name: Southern live oak with Spanish moss
+  latin: Quercus virginiana, Tillandsia usneoides
+  form: tree
+  evergreen: true
+  leaf: dark_glossy_green
+  leaf_note: As live oak; the moss is grey.
+  range: Humid Gulf coast and river bottoms.
+  render: 'tree("oak_log", "oak_leaves", forking(3, 1, 1), acaciaf(3), decorators=[hang("biomesoplenty:spanish_moss", 0.3)])'
+  sapling: oak_sapling
+  stand_in: Pale hanging moss for Spanish moss.
+
+post_oak:
+  name: Post oak
+  latin: Quercus stellata
+  form: tree
+  niche: {water: dry}
+  leaf: "#4f7f30"
+  leaf_note: Thick, leathery, cross-shaped leaves, dark green and rough above.
+  range: Cross Timbers, Post Oak Savanna, Piney Woods uplands.
+  look: Gnarled medium oak.
+  render: 'tree("oak_log", "oak_leaves", straight(3, 2, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+blackjack_oak:
+  name: Blackjack oak
+  latin: Quercus marilandica
+  form: shrub
+  niche: {water: dry}
+  leaf: "#3f6a2e"
+  leaf_note: Broad, bell-shaped, leathery leaves, glossy dark green.
+  range: Cross Timbers and sandy oak savanna.
+  look: Scrubby understory oak.
+  render: 'tree("oak_log", "dark_oak_leaves", straight(2, 1, 0), bushf(2, 2, 1))'
+  sapling: oak_sapling
+
+shin_oak:
+  name: Shin oak
+  latin: Quercus sinuata var. breviloba
+  form: shrub
+  clump: {size: 12, share: 0.35, outside: 0.05}
+  leaf: "#5e8a46"
+  leaf_note: Small blue-green to grey-green leaves.
+  range: Limestone of the Hill Country and north-central Texas.
+  look: Knee-high thickets.
+  render: 'tree("oak_log", "oak_leaves", straight(1, 0, 0), bushf(2, 1, 0))'
+  sapling: oak_sapling
+
+cenizo:
+  name: Cenizo
+  latin: Leucophyllum frutescens
+  form: shrub
+  evergreen: true
+  clump: {size: 10, share: 0.35, outside: 0.1}
+  leaf: "#9aa88c"
+  leaf_note: Felted silver-grey leaves; purple bloom after rain.
+  range: Caliche hills and brush of South and West Texas.
+  look: Rounded silver shrubs, the only silver in the brush.
+  render: 'tree("oak_log", "birch_leaves", straight(1, 0, 0), bushf(2, 1, 0))'
+  sapling: oak_sapling
+  stand_in: Birch leaves, so its silver tint does not average with the oaks on oak leaves.
+
+flowering_dogwood_tree:
+  name: Flowering dogwood
+  latin: Cornus florida
+  form: tree
+  leaf: "#5a9a3a"
+  leaf_note: Mid-green, red in autumn; white bracts in March.
+  range: Understory of the Piney Woods and Ozarks.
+  look: Small, flat-topped understory tree.
+  render: 'tree("oak_log", "oak_leaves", straight(3, 1, 0), blob(2, 2, 0))'
+  sapling: oak_sapling
+  stand_in: Green crown; the spring white is not modelled (no seasonal block swap).
+
+creosote_shrub:
+  name: Creosote bush
+  latin: Larrea tridentata
+  form: shrub
+  evergreen: true
+  leaf: "#6b7a3a"
+  leaf_note: Small resinous olive leaves, held all year.
+  range: Chihuahuan, Sonoran and Mojave deserts.
+  look: Evenly spaced knee-to-waist-high shrubs on bare gravel.
+  render: 'tree("oak_log", "oak_leaves", straight(1, 0, 0), bushf(1, 1, 0))'
+  sapling: oak_sapling
+  stand_in: Woody-shrub version of creosote_bush (the ground form), so it can be a shrub layer.
+
+white_oak:
+  name: White oak
+  latin: Quercus alba
+  form: tree
+  leaf: deep_green
+  leaf_note: Rounded lobes, bright to deep green above, whitish beneath.
+  range: Ozarks, eastern tallgrass margins.
+  look: Big rounded upland oak.
+  render: 'ref("fancy_oak")'
+  sapling: oak_sapling
+  stand_in: Vanilla fancy oak.
+
+red_oak:
+  name: Northern red oak
+  latin: Quercus rubra
+  form: tree
+  leaf: "#4a8a32"
+  leaf_note: Pointed lobes, dull to glossy mid-dark green.
+  range: Ozarks and the eastern tallgrass margins.
+  render: 'ref("oak")'
+  sapling: oak_sapling
+  stand_in: Vanilla oak.
+
+southern_red_oak:
+  name: Southern red oak
+  latin: Quercus falcata
+  form: tree
+  leaf: "#4c8434"
+  leaf_note: Lobed, glossy dark green above, grey-hairy beneath.
+  range: Piney Woods and Gulf coastal plain uplands.
+  render: 'ref("oak")'
+  sapling: oak_sapling
+  stand_in: Vanilla oak.
+
+shumard_oak:
+  name: Shumard oak
+  latin: Quercus shumardii
+  form: tree
+  leaf: "#4a8a32"
+  leaf_note: Deeply lobed, glossy dark green.
+  range: Creeks and limestone slopes of the Cross Timbers and Blackland.
+  render: 'ref("oak")'
+  sapling: oak_sapling
+  stand_in: Vanilla oak.
+
+mockernut_hickory:
+  name: Mockernut hickory
+  latin: Carya tomentosa
+  form: tree
+  leaf: mid_green
+  leaf_note: Large compound leaves, yellow-green above.
+  range: Oak-hickory forest of the Ozarks and the southern mixed woods.
+  look: Tall straight broadleaf.
+  render: 'tree("oak_log", "oak_leaves", fancy(6, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+sweetgum:
+  name: Sweetgum
+  latin: Liquidambar styraciflua
+  form: tree
+  leaf: "#4f9a34"
+  leaf_note: Glossy star-shaped leaves, deep green; red to purple in autumn.
+  autumn: "#a03a2a"
+  range: Piney Woods, southern bottomlands.
+  look: Tall narrow-crowned hardwood.
+  render: 'tree("oak_log", "oak_leaves", straight(7, 3, 0), blob(2, 4, 0))'
+  sapling: oak_sapling
+
+pecan:
+  name: Pecan
+  latin: Carya illinoinensis
+  form: tree
+  niche: {water: riparian}
+  leaf: mid_green
+  leaf_note: Compound leaves of narrow yellow-green leaflets.
+  range: River bottoms of central Texas and the Mississippi valley.
+  look: Large riverbottom hickory with dark bark.
+  render: 'tree("dark_oak_log", "oak_leaves", fancy(7, 5, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+cedar_elm:
+  name: Cedar elm
+  latin: Ulmus crassifolia
+  form: tree
+  leaf: deep_green
+  leaf_note: Small, stiff, rough dark green leaves.
+  range: Creek bottoms of central and north Texas.
+  render: 'tree("oak_log", "oak_leaves", straight(4, 2, 0), blob(2, 3, 0))'
+  sapling: oak_sapling
+
+cottonwood:
+  name: Plains cottonwood
+  latin: Populus deltoides
+  form: tree
+  niche: {water: riparian}
+  leaf: "#5aa83a"
+  leaf_note: Glossy bright green triangular leaves; yellow in autumn.
+  autumn: "#c8b03a"
+  range: Prairie and desert rivers.
+  look: Pale-barked giant.
+  render: 'tree("birch_log", "oak_leaves", fancy(8, 5, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  sapling: oak_sapling
+
+gambel_oak:
+  name: Gambel oak
+  latin: Quercus gambelii
+  form: shrub
+  clump: {size: 14, share: 0.35, outside: 0.05}
+  leaf: deep_green
+  leaf_note: Lobed, glossy dark green above.
+  range: Foothills of the southern Rockies and Mogollon Rim.
+  look: Thicket-forming oak.
+  render: 'tree("oak_log", "oak_leaves", straight(2, 1, 0), bushf(2, 2, 1))'
+  sapling: oak_sapling
+
+quaking_aspen:
+  name: Quaking aspen
+  latin: Populus tremuloides
+  form: tree
+  clump: {size: 24, share: 0.3, outside: 0.03}
+  leaf: yellow_green
+  leaf_note: Round bright green leaves on flat stalks; gold in autumn.
+  autumn: "#d8b030"
+  range: Montane forest of the Rockies and Mogollon Rim.
+  render: 'ref("birch_tall")'
+  sapling: birch_sapling
+  stand_in: Vanilla tall birch.
+
+# ---------------------------------------------------------------- dryland trees and palms
+honey_mesquite:
+  name: Honey mesquite
+  latin: Prosopis glandulosa
+  form: tree
+  evergreen: true
+  leaf: feathery_light_green
+  leaf_note: Feathery bipinnate leaves, light bright green.
+  range: Brush country, Rolling Plains, Chihuahuan desert.
+  look: Small dark-barked multi-stemmed tree.
+  render: 'tree("dark_oak_log", "acacia_leaves", forking(2, 1, 1), acaciaf(2))'
+  sapling: acacia_sapling
+
+huisache:
+  name: Huisache
+  latin: Vachellia farnesiana
+  form: tree
+  evergreen: true
+  leaf: "#7fae3e"
+  leaf_note: Fine bipinnate leaves, bright green.
+  range: South Texas and the Gulf coast prairie.
+  look: Flat-topped acacia.
+  render: 'ref("acacia")'
+  sapling: acacia_sapling
+  stand_in: Vanilla acacia.
+
+texas_ebony:
+  name: Texas ebony
+  latin: Ebenopsis ebano
+  form: shrub
+  evergreen: true
+  leaf: "#355a2a"
+  leaf_note: Small leathery leaflets, very dark glossy green.
+  range: Lower Rio Grande valley, Tamaulipan thornscrub.
+  look: Dense dark thorn shrub.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(2, 0, 0), bushf(2, 2, 1))'
+  sapling: acacia_sapling
+
+sabal_palm:
+  name: Rio Grande palmetto
+  latin: Sabal mexicana
+  form: tree
+  evergreen: true
+  clump: {size: 14, share: 0.3, outside: 0.05}
+  niche: {water: riparian}
+  leaf: "#4f7a3a"
+  leaf_note: Large fan leaves, green to slightly grey-green.
+  range: Lower Rio Grande and the Gulf coast.
+  render: 'ref("wilderwild:small_windmill_palm")'
+  sapling: dead_bush
+  stand_in: Wilder Wild windmill palm.
+
+faxon_yucca:
+  name: Faxon yucca
+  latin: Yucca faxoniana
+  evergreen: true
+  form: tree
+  leaf: "#6f8a5a"
+  leaf_note: Stiff, grey-green to yellow-green dagger leaves.
+  range: Trans-Pecos flats and bajadas.
+  look: Tree yucca with a shaggy trunk.
+  render: 'ref("terrestria:yucca_palm_tree")'
+  sapling: dead_bush
+  stand_in: Terrestria yucca palm.
+
+# ---------------------------------------------------------------- shrubs and succulents
+creosote_bush:
+  name: Creosote bush
+  latin: Larrea tridentata
+  form: shrub_ground
+  niche: {water: dry, slope: flat}
+  range: Chihuahuan desert flats.
+  look: Evenly spaced resinous green shrubs.
+  render: 'flowers("bush")'
+  stand_in: Grass-tinted bush.
+
+sand_sagebrush:
+  name: Sand sagebrush
+  latin: Artemisia filifolia
+  form: shrub_ground
+  range: Sandy High Plains and Rolling Plains.
+  look: Silvery grey threadlike foliage.
+  render: 'flowers("bush", "short_dry_grass", weights=[3, 1])'
+  stand_in: Grass-tinted bush and dry grass.
+
+russian_thistle:
+  name: Russian thistle (tumbleweed)
+  latin: Salsola tragus
+  form: herb
+  range: Disturbed dry plains; introduced in the 1870s.
+  render: 'flowers(("wilderwild:tumbleweed_plant", {"age": "2"}), ("wilderwild:tumbleweed_plant", {"age": "3"}))'
+  stand_in: Wilder Wild tumbleweed.
+
+lechuguilla:
+  name: Lechuguilla
+  latin: Agave lechuguilla
+  form: succulent
+  niche: {slope: steep}
+  range: Chihuahuan desert limestone.
+  render: 'flowers("terrestria:agave")'
+  stand_in: Terrestria agave.
+
+yaupon:
+  name: Yaupon holly
+  latin: Ilex vomitoria
+  form: shrub_ground
+  clump: {size: 12, share: 0.4}
+  range: Piney Woods and Gulf coast understory.
+  look: Evergreen holly thickets with red berries.
+  render: 'flowers("bush", "firefly_bush", weights=[4, 1])'
+  stand_in: Bush and firefly bush.
+
+texas_prickly_pear:
+  name: Texas prickly pear
+  latin: Opuntia engelmannii var. lindheimeri
+  form: succulent
+  niche: {water: dry}
+  range: South and central Texas, brush country, desert.
+  render: 'flowers(("wilderwild:prickly_pear", {"age": "0"}), ("wilderwild:prickly_pear", {"age": "1"}), ("wilderwild:prickly_pear", {"age": "2"}), weights=[5, 3, 2])'
+  stand_in: Wilder Wild prickly pear.
+
+tree_cholla:
+  name: Tree cholla
+  latin: Cylindropuntia imbricata
+  form: cactus
+  niche: {water: dry}
+  range: Chihuahuan desert and plateau grassland.
+  render: 'column("cactus", 2, 3, "cactus_flower", 0.1)'
+  stand_in: Cactus column.
+
+# ---------------------------------------------------------------- grasses (colour sets the grass tint)
+little_bluestem:
+  name: Little bluestem
+  latin: Schizachyrium scoparium
+  form: grass
+  colour: "#8aa85a"
+  colour_note: Blue-green in summer, coppery red in autumn.
+  range: Mixed-grass and tallgrass prairie, oak savanna.
+  render: 'flowers("short_grass", ("tall_grass", {"half": "lower"}), "short_dry_grass", weights=[4, 2, 1])'
+
+big_bluestem:
+  name: Big bluestem
+  latin: Andropogon gerardii
+  form: grass
+  colour: "#76a650"
+  colour_note: Tall, blue-green stems and leaves.
+  range: Tallgrass prairie.
+  render: 'flowers(("tall_grass", {"half": "lower"}), "short_grass", weights=[3, 1])'
+
+switchgrass:
+  name: Switchgrass
+  latin: Panicum virgatum
+  form: grass
+  colour: "#7aa856"
+  colour_note: Tall, green to blue-green.
+  range: Tallgrass prairie and moist bottoms.
+  render: 'flowers(("tall_grass", {"half": "lower"}), "short_grass", weights=[3, 1])'
+
+sideoats_grama:
+  name: Sideoats grama
+  latin: Bouteloua curtipendula
+  form: grass
+  colour: "#8ea45a"
+  colour_note: Grey-green to blue-green bunches.
+  range: Hill Country, Rolling Plains, rocky slopes.
+  render: 'flowers("short_grass", ("tall_grass", {"half": "lower"}), "short_dry_grass", weights=[4, 1, 2])'
+
+buffalograss:
+  name: Buffalograss
+  latin: Bouteloua dactyloides
+  form: grass
+  colour: "#9ba86a"
+  colour_note: Short, curly, grey-green sod.
+  range: Shortgrass prairie of the High and Rolling Plains.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[2, 3])'
+
+blue_grama:
+  name: Blue grama
+  latin: Bouteloua gracilis
+  form: grass
+  colour: "#a0a46a"
+  colour_note: Fine, curly, grey-green leaves.
+  range: Shortgrass prairie and plateau grassland.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[2, 3])'
+
+curly_mesquite:
+  name: Curly-mesquite
+  latin: Hilaria belangeri
+  form: grass
+  colour: "#98a85e"
+  colour_note: Short curly green to grey-green turf.
+  range: Hill Country, South Texas, Mexican plateau.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[2, 3])'
+
+black_grama:
+  name: Black grama
+  latin: Bouteloua eriopoda
+  form: grass
+  colour: "#b0aa6a"
+  colour_note: Wiry grey-green desert grass.
+  range: Chihuahuan desert flats.
+  render: 'flowers("short_dry_grass", "tall_dry_grass", weights=[2, 1])'
+
+tobosa:
+  name: Tobosa
+  latin: Pleuraphis mutica
+  form: grass
+  colour: "#a9a866"
+  colour_note: Coarse grey-green, straw-coloured when dormant.
+  range: Desert flats and playas, Chihuahuan desert.
+  render: 'flowers("short_dry_grass", "tall_dry_grass", weights=[2, 1])'
+
+wiregrass:
+  name: Wiregrass
+  latin: Aristida beyrichiana
+  form: grass
+  colour: "#8fa55c"
+  colour_note: Fine wiry green tussocks.
+  range: Longleaf pine savanna.
+  render: 'flowers("short_grass", ("tall_grass", {"half": "lower"}), "short_dry_grass", weights=[4, 2, 1])'
+
+broomsedge:
+  name: Broomsedge bluestem
+  latin: Andropogon virginicus
+  form: grass
+  colour: "#9aa560"
+  colour_note: Green in summer, orange-tan most of the year.
+  range: Openings and old fields of the Piney Woods and southern mixed woods.
+  render: 'flowers("short_grass", ("tall_grass", {"half": "lower"}), "short_dry_grass", weights=[3, 1, 2])'
+
+eastern_woodland_sedge:
+  name: Eastern woodland sedge
+  latin: Carex blanda
+  form: grass
+  colour: "#6aa84a"
+  colour_note: Soft mid-green tufts.
+  range: Forest floors of the eastern woods, Ozarks to east Texas.
+  render: 'flowers("short_grass")'
+
+gulf_cordgrass:
+  name: Gulf cordgrass
+  latin: Spartina spartinae
+  form: grass
+  colour: "#86a45a"
+  colour_note: Coarse grey-green clumps.
+  range: Coastal prairie and salt flats of the Gulf coast.
+  render: 'flowers(("tall_grass", {"half": "lower"}), "short_grass", weights=[3, 1])'
+
+thurber_fescue:
+  name: Thurber fescue
+  latin: Festuca thurberi
+  form: grass
+  colour: "#7aa85a"
+  colour_note: Bright green bunchgrass.
+  range: Subalpine parks of the southern Rockies.
+  render: 'flowers("short_grass", ("tall_grass", {"half": "lower"}), weights=[3, 1])'
+
+mountain_muhly:
+  name: Mountain muhly
+  latin: Muhlenbergia montana
+  form: grass
+  colour: "#8aa45e"
+  colour_note: Fine grey-green bunchgrass.
+  range: Ponderosa pine parks, Mogollon Rim, Sierra Madre.
+  render: 'flowers("short_grass", "short_dry_grass", weights=[3, 1])'
+
+# ---------------------------------------------------------------- ferns and flowers
+christmas_fern:
+  name: Christmas fern
+  latin: Polystichum acrostichoides
+  form: fern
+  range: Shaded slopes and ravines, Ozarks to east Texas.
+  render: 'flowers("fern", "short_grass", weights=[3, 1])'
+  stand_in: Fern.
+
+texas_bluebonnet:
+  name: Texas bluebonnet
+  latin: Lupinus texensis
+  form: flower
+  clump: {size: 20, share: 0.3, outside: 0.05}
+  range: Blackland Prairie, Hill Country, Post Oak Savanna.
+  render: 'flowers("cornflower")'
+  stand_in: Cornflower.
+
+texas_paintbrush:
+  name: Texas paintbrush
+  latin: Castilleja indivisa
+  form: flower
+  range: Among the bluebonnets in central and east Texas.
+  render: 'flowers("terrestria:indian_paintbrush")'
+  stand_in: Terrestria Indian paintbrush.
+
+indian_blanket:
+  name: Indian blanket (firewheel)
+  latin: Gaillardia pulchella
+  form: flower
+  clump: {size: 18, share: 0.3, outside: 0.05}
+  range: Sandy prairies and roadsides across Texas.
+  render: 'flowers("orange_tulip", "red_tulip", weights=[3, 1])'
+  stand_in: Orange and red tulips.
+
+plains_coreopsis:
+  name: Plains coreopsis
+  latin: Coreopsis tinctoria
+  form: flower
+  range: Moist prairie and roadsides.
+  render: 'segmented("wildflowers", "flower_amount")'
+  stand_in: Wildflowers.
+
+winecup:
+  name: Winecup
+  latin: Callirhoe involucrata
+  form: flower
+  range: Prairies and open oak woods.
+  render: 'flowers("allium", "pink_tulip", weights=[2, 1])'
+  stand_in: Allium and pink tulip.
+
+black_eyed_susan:
+  name: Black-eyed Susan
+  latin: Rudbeckia hirta
+  form: flower
+  range: Tallgrass and mixed-grass prairie.
+  render: 'flowers("dandelion")'
+  stand_in: Dandelion.
+
+purple_coneflower:
+  name: Narrow-leaf purple coneflower
+  latin: Echinacea angustifolia
+  form: flower
+  range: Flint Hills and tallgrass prairie.
+  render: 'flowers("allium")'
+  stand_in: Allium.
+
+prairie_bluets:
+  name: Prairie bluets
+  latin: Houstonia nigricans
+  form: flower
+  range: Limestone prairie, Flint Hills to the Hill Country.
+  render: 'flowers("azure_bluet")'
+  stand_in: Azure bluet.
+
+virginia_iris:
+  name: Virginia blue flag
+  latin: Iris virginica
+  form: flower
+  niche: {water: wet}
+  range: Marshes and bottomland swamps.
+  render: 'flowers("blue_orchid")'
+  stand_in: Blue orchid.
+
+desert_marigold:
+  name: Desert marigold
+  latin: Baileya multiradiata
+  form: flower
+  range: Chihuahuan desert and plateau washes.
+  render: 'flowers("wilderwild:marigold", "short_dry_grass", weights=[1, 2])'
+  stand_in: Wilder Wild marigold.
+
+drummond_phlox:
+  name: Drummond phlox
+  latin: Phlox drummondii
+  form: flower
+  range: Sandy ground of east and south-central Texas.
+  render: 'segmented("wilderwild:phlox", "flower_amount")'
+  stand_in: Wilder Wild phlox.
+
+texas_lantana:
+  name: Texas lantana
+  latin: Lantana urticoides
+  form: flower
+  range: Brush country and Hill Country.
+  render: 'segmented("wilderwild:lantanas", "flower_amount")'
+  stand_in: Wilder Wild lantana.
+
+antelope_horn_milkweed:
+  name: Antelope-horn milkweed
+  latin: Asclepias asperula
+  form: flower
+  range: Prairies and Hill Country.
+  render: 'flowers(("wilderwild:milkweed", {"age": "0", "half": "lower"}))'
+  stand_in: Wilder Wild milkweed.
+
+tall_goldenrod:
+  name: Tall goldenrod
+  latin: Solidago altissima
+  form: flower
+  range: Prairie, old fields, bottomland edges.
+  render: 'flowers(("biomesoplenty:goldenrod", {"half": "lower"}))'
+  stand_in: Biomes O' Plenty goldenrod.
+
+sea_oats:
+  name: Sea oats
+  latin: Uniola paniculata
+  form: flower
+  clump: {size: 10, share: 0.4}
+  range: Dunes of the Gulf barrier islands.
+  render: 'flowers(("biomesoplenty:sea_oats", {"half": "lower"}))'
+  stand_in: Biomes O' Plenty sea oats.
+
+sacred_datura:
+  name: Sacred datura
+  latin: Datura wrightii
+  form: flower
+  range: Desert washes and roadsides.
+  render: 'flowers(("wilderwild:datura", {"half": "lower"}))'
+  stand_in: Wilder Wild datura.
+
+flowering_dogwood:
+  name: Flowering dogwood (blossom)
+  latin: Cornus florida
+  form: flower
+  range: Understory of the Piney Woods and Ozarks.
+  render: 'flowers("white_tulip", "lily_of_the_valley")'
+  stand_in: White spring blooms on the ground; the dogwood itself is not modelled.
