@@ -41,6 +41,9 @@ CHARACTER = {"terrestria:hemlock_leaves": (0.04, 0.70, 0.85), "terrestria:redwoo
 EVERGREEN = ["minecraft:spruce_leaves", "minecraft:mangrove_leaves", "biomesoplenty:fir_leaves", "biomesoplenty:pine_leaves",
              "biomesoplenty:redwood_leaves", "biomesoplenty:palm_leaves", "terrestria:hemlock_leaves", "terrestria:redwood_leaves",
              "terrestria:cypress_leaves", "terrestria:jungle_palm_leaves", "terrestria:yucca_palm_leaves", "wilderwild:cypress_leaves"]
+# the mod's tinted copies of untinted ground blocks: coloured per region like leaves, never seasonal (moss, lichen)
+TINTED = ["elysium_atlas:tinted_moss_carpet", "elysium_atlas:tinted_moss_block"]
+EVERGREEN += TINTED
 GREY = 0.15               # mean HSV saturation under which a texture counts as greyscale (tinted by its own mod)
 # mod leaves (model parent minecraft:block/leaves, so tint index 0 is already there): pre-coloured textures are
 # made greyscale; greyscale ones are kept and only take the regional tint
@@ -104,6 +107,14 @@ def main():
                   open(item, "w"), indent=1)
         meta = read(f"assets/{tns}/textures/{tpath}.png.mcmeta")
         if meta is not None: open(dst + ".mcmeta", "wb").write(meta)
+    # the mod's own tinted ground blocks (TintedBlocks.java): greyscale moss texture, default colour = vanilla moss
+    png = read("assets/minecraft/textures/block/moss_block.png")
+    im = np.asarray(Image.open(io.BytesIO(png)).convert("RGBA")).astype(np.float64) / 255
+    lum = im[..., :3] @ np.array([0.299, 0.587, 0.114]); g = np.clip(lum / lum.mean() * GREY_MEAN, 0, 1)
+    dst = os.path.join(RES, "assets", "elysium_atlas", "textures", "block", "tinted_moss.png"); os.makedirs(os.path.dirname(dst), exist_ok=True)
+    Image.fromarray((np.dstack([g, g, g, im[..., 3]]) * 255).round().astype(np.uint8), "RGBA").save(dst)
+    moss = offset(tuple(np.clip(im[..., :3].reshape(-1, 3).mean(0) / GREY_MEAN, 0, 1)))
+    for b in TINTED: table[b] = moss
     os.makedirs(PACK, exist_ok=True)
     json.dump({"pack": {"min_format": [82], "max_format": [32767],
                         "description": "Elysium: regional colours for spruce, birch and the flora mods' green leaves"}},

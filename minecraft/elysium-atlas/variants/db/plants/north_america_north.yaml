@@ -144,7 +144,7 @@ bigleaf_maple:
   leaf_note: Very large five-lobed mid-green leaves.
   autumn: "#c8a032"
   range: Pacific coast lowlands, moss-hung.
-  render: 'tree("oak_log", "jungle_leaves", straight(6, 3, 1), blob(3, 3, 0), decorators=[moss(0.2)])'
+  render: 'tree("oak_log", "jungle_leaves", straight(6, 3, 1), blob(3, 3, 0), decorators=[trunk_vine()])'
   sapling: oak_sapling
 
 oregon_white_oak:
@@ -611,10 +611,13 @@ reindeer_lichen:
   name: Reindeer lichen
   latin: Cladonia rangiferina
   form: herb
+  evergreen: true
+  leaf: "#b8bcb0"
+  leaf_note: Pale grey-green mats, near white when dry.
   clump: {size: 16, share: 0.45}
   range: Dry open taiga and tundra; caribou forage.
-  render: 'flowers("pale_moss_carpet")'
-  stand_in: Pale moss carpet.
+  render: 'flowers("elysium_atlas:tinted_moss_carpet")'
+  stand_in: The mod's tinted moss carpet, coloured per region from this leaf colour.
 
 sphagnum:
   name: Peat moss
@@ -759,7 +762,7 @@ american_beech:
   leaf_note: Glossy blue-green to mid-green toothed leaves; bronze in winter.
   range: Northern hardwoods and Appalachian coves.
   look: Smooth grey bark.
-  render: 'tree("pale_oak_log", "oak_leaves", fancy(6, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  render: 'tree("terrestria:rubber_log", "oak_leaves", fancy(6, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
   sapling: oak_sapling
 
 yellow_birch:

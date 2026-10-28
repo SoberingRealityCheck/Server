@@ -13,7 +13,7 @@
                   foliage  weighted mean of the `leaf` colour of its trees and shrubs
                   leaves   for each leaf block, the weighted mean over the species that grow that block
 """
-import ast, glob, os
+import ast, glob, json, os, re
 import yaml
 import render
 
@@ -61,6 +61,13 @@ EVERGREEN_GENERA = {"Abies", "Picea", "Pinus", "Tsuga", "Pseudotsuga", "Juniperu
                     "Podocarpus", "Araucaria", "Torreya", "Cunninghamia", "Keteleeria", "Cephalotaxus", "Sciadopitys"}
 
 
+# pale garden parts belong to the pale garden biome only (Clay, 2026-10-28)
+PALE = re.compile(r"minecraft:pale_(oak_\w+|moss\w*|hanging_moss)|pale_moss")
+# the mod's tinted ground blocks: a plant using one is coloured per region from its leaf colour, like a leaf block
+TINTED_BLOCK = re.compile(r"elysium_atlas:tinted_\w+")
+TINT_LAYERS = ("ground", "flowers")
+
+
 def plants():
     if "plants" in _cache: return _cache["plants"]
     out = {}
@@ -80,6 +87,9 @@ def plants():
             if "evergreen" in e and not isinstance(e["evergreen"], bool): raise SystemExit(f"{where}: evergreen is true or false")
             e["evergreen"] = e.get("evergreen", e.get("latin", "").split(" ")[0] in EVERGREEN_GENERA)
             f = evaluate(e["render"], where)
+            pale = PALE.search(json.dumps(f) if isinstance(f, dict) else str(f))
+            if pale: raise SystemExit(f"{where}: {pale.group(0)} is a pale garden block; real regions use real trees' parts")
+            if TINTED_BLOCK.search(e["render"]) and not e["leaf"]: raise SystemExit(f"{where}: a tinted ground block needs a leaf colour")
             if isinstance(f, render.Ref): e["kind"], e["feature"] = "ref", str(f)
             elif f.get("type") == "minecraft:tree": e["kind"], e["feature"] = "tree", f
             elif f.get("type") == "minecraft:block_column": e["kind"], e["feature"] = "cactus", f
@@ -215,7 +225,8 @@ def colours(eco, leaf_blocks):
     woody = [(p, w) for L in ("trees", "shrubs") for p, w in (eco.get(L) or {}).items() if P[p].get("leaf")]
     foliage = _mean([(P[p]["leaf"], w) for p, w in woody]) or grass     # treeless (tundra): foliage follows the turf
     per = {}
-    for p, w in woody:
+    tinted = [(p, w) for L in TINT_LAYERS for p, w in (eco.get(L) or {}).items() if P[p].get("leaf")]
+    for p, w in woody + tinted:
         for b in leaf_blocks(p): per.setdefault(b, []).append((P[p]["leaf"], w))
     return grass, foliage, {b: _mean(v) for b, v in per.items()}
 
@@ -223,7 +234,7 @@ def colours(eco, leaf_blocks):
 def evergreen_blocks(eco, leaf_blocks):
     """Leaf blocks on which every woody species of the ecoregion is evergreen: they keep the summer colour all year."""
     P = plants(); per = {}
-    for L in ("trees", "shrubs"):
+    for L in ("trees", "shrubs") + TINT_LAYERS:
         for p, w in (eco.get(L) or {}).items():
             if w <= 0 or not P[p].get("leaf"): continue
             for b in leaf_blocks(p): per.setdefault(b, []).append(P[p]["evergreen"])

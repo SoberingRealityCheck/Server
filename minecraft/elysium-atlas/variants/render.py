@@ -44,8 +44,12 @@ def acaciaf(r, off=0): return {"type": "minecraft:acacia_foliage_placer", "radiu
 def pinef(r, h, off=1): return {"type": "minecraft:pine_foliage_placer", "radius": r, "offset": off, "height": h}
 def sprucef(r, off, th): return {"type": "minecraft:spruce_foliage_placer", "radius": r, "offset": off, "trunk_height": th}
 def fancyf(r=2, h=4, off=4): return {"type": "minecraft:fancy_foliage_placer", "radius": r, "offset": off, "height": h}
-def moss(leaves=0.25, trunk=0.0, ground=0.0):
-    return {"type": "minecraft:pale_moss", "leaves_probability": leaves, "trunk_probability": trunk, "ground_probability": ground}
+def hang(block, p=0.25):
+    """One block hung under leaves (vanilla attached_to_leaves decorator), e.g. Spanish moss."""
+    return {"type": "minecraft:attached_to_leaves", "probability": p, "exclusion_radius_xz": 0, "exclusion_radius_y": 0,
+            "block_provider": {"type": "minecraft:simple_state_provider", "state": {"Name": _id(block)}}, "required_empty_blocks": 1, "directions": ["down"]}
+def trunk_vine(): return {"type": "minecraft:trunk_vine"}
+def leave_vine(p=0.25): return {"type": "minecraft:leave_vine", "probability": p}
 FANCY_SIZE = {"type": "minecraft:two_layers_feature_size", "limit": 0, "upper_size": 0, "min_clipped_height": 4}
 
 
@@ -82,6 +86,6 @@ class Ref(str):
 def ref(ident): return Ref(_id(ident))
 
 
-NAMES = {f.__name__: f for f in (tree, straight, forking, fancy, blob, bushf, acaciaf, pinef, sprucef, fancyf, moss, U,
+NAMES = {f.__name__: f for f in (tree, straight, forking, fancy, blob, bushf, acaciaf, pinef, sprucef, fancyf, hang, trunk_vine, leave_vine, U,
                                  flowers, segmented, column, ref)}
 NAMES["FANCY_SIZE"] = FANCY_SIZE

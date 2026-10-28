@@ -18,7 +18,7 @@ import numpy as np
 from scipy import ndimage as ndi
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from bake_atlas import ee_inv, value_noise, MPB, BOUNDS, LEVELS
+from bake_atlas import ee_inv, value_noise, MPB, BOUNDS, LEVELS, P
 
 CELL = LEVELS[0]["cell"]   # blocks (profile): same as L0
 RES = 0.02         # degrees, polygon raster
@@ -130,6 +130,9 @@ def main():
     for (u, b), c in detail_pairs(adir, out, i0, j0).items():
         if b < len(pal):
             d = stats.setdefault(names[u - 1], {}); d[pal[b]] = d.get(pal[b], 0) + int(round(c))
+    if P["extent"] != "globe":   # the variant set is defined by the globe; a window must not overwrite it
+        print(f"{len(names)} units on {int(sel.sum())} land cells at {CELL} blocks (window: variants/data left as is); {time.time() - t0:.0f} s")
+        np.save(os.path.join(adir, "_regions_preview.npy"), out); return
     os.makedirs(os.path.join(vdir, "data"), exist_ok=True)
     with open(os.path.join(vdir, "data", "ecoregions.json"), "w") as f: json.dump({str(k): meta[k] for k in sorted(meta)}, f, indent=0, ensure_ascii=False)
     with open(os.path.join(vdir, "data", "unit_biomes.json"), "w") as f:

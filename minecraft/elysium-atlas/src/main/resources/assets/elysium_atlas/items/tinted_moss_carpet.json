@@ -1,0 +1,12 @@
+{
+ "model": {
+  "type": "minecraft:model",
+  "model": "elysium_atlas:block/tinted_moss_carpet",
+  "tints": [
+   {
+    "type": "minecraft:constant",
+    "value": -8212086
+   }
+  ]
+ }
+}

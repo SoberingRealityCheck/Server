@@ -168,7 +168,7 @@ live_oak_mossy:
   leaf: dark_glossy_green
   leaf_note: As live oak; the moss is grey.
   range: Humid Gulf coast and river bottoms.
-  render: 'tree("oak_log", "oak_leaves", forking(3, 1, 1), acaciaf(3), decorators=[moss(0.3)])'
+  render: 'tree("oak_log", "oak_leaves", forking(3, 1, 1), acaciaf(3), decorators=[hang("biomesoplenty:spanish_moss", 0.3)])'
   sapling: oak_sapling
   stand_in: Pale hanging moss for Spanish moss.
 

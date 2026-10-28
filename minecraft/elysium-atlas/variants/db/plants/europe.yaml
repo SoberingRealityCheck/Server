@@ -12,7 +12,7 @@ european_beech:
   autumn: "#b0702a"
   range: Western and Central Europe, montane belt of the southern mountains.
   look: Smooth grey trunk, dense high canopy.
-  render: 'tree("pale_oak_log", "oak_leaves", fancy(6, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  render: 'tree("terrestria:rubber_log", "oak_leaves", fancy(6, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
   sapling: oak_sapling
 
 pedunculate_oak:
@@ -46,7 +46,7 @@ hornbeam:
   leaf_note: Pleated, toothed mid-green leaves.
   range: Oak-hornbeam woods of Central and Eastern Europe.
   look: Grey fluted trunk under the oaks.
-  render: 'tree("pale_oak_log", "oak_leaves", straight(5, 2, 0), blob(2, 3, 0))'
+  render: 'tree("acacia_log", "oak_leaves", straight(5, 2, 0), blob(2, 3, 0))'
   sapling: oak_sapling
 
 sweet_chestnut:
@@ -324,9 +324,9 @@ olive:
   leaf: "#9aa88a"
   leaf_note: Narrow leaves, grey-green above, silvery beneath.
   range: Mediterranean lowlands; gone wild from the old groves.
-  render: 'tree("pale_oak_log", "pale_oak_leaves", forking(2, 1, 1), blob(2, 2, 0))'
+  render: 'tree("acacia_log", "mangrove_leaves", forking(2, 1, 1), blob(2, 2, 0))'
   sapling: oak_sapling
-  stand_in: Pale oak leaves (untinted silver-grey).
+  stand_in: Acacia log (grey bark) and mangrove leaves tinted silver-grey.
 
 strawberry_tree:
   name: Strawberry tree

@@ -51,7 +51,7 @@ def leaf_blocks(src):
     def walk(node, seen, out):
         if isinstance(node, dict):
             n = node.get("Name")
-            if isinstance(n, str) and n.endswith("_leaves"): out.add(n)
+            if isinstance(n, str) and (n.endswith("_leaves") or db.TINTED_BLOCK.fullmatch(n)): out.add(n)
             for k, v in node.items():
                 if k == "feature" and isinstance(v, str): ref(v, seen, out)
                 else: walk(v, seen, out)
@@ -70,6 +70,7 @@ def leaf_blocks(src):
             kind, feat = PLANTS[pid][:2]; out = set()
             if kind == "ref": ref(feat, set(), out)
             elif kind == "tree": walk(feat, set(), out)
+            elif kind == "ground": walk(feat, set(), out); out = {n for n in out if db.TINTED_BLOCK.fullmatch(n)}
             memo[pid] = out
         return memo[pid]
     return of

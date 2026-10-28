@@ -35,6 +35,7 @@ public final class ElysiumAtlas implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        TintedBlocks.register();
         Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Identifier.fromNamespaceAndPath(MOD_ID, "sample"), AtlasDensityFunction.MAP_CODEC);
         Registry.register(BuiltInRegistries.MATERIAL_CONDITION, Identifier.fromNamespaceAndPath(MOD_ID, "rise"), net.minecraft.world.level.levelgen.ElysiumSurfaceConditions.Rise.CODEC);
         Registry.register(BuiltInRegistries.MATERIAL_CONDITION, Identifier.fromNamespaceAndPath(MOD_ID, "y_band"), net.minecraft.world.level.levelgen.ElysiumSurfaceConditions.YBand.CODEC);

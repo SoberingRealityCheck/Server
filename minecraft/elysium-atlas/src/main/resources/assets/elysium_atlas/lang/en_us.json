@@ -1,1 +1,5 @@
-{ "generator.elysium_atlas.globe": "Elysium Globe" }
+{
+ "generator.elysium_atlas.globe": "Elysium Globe",
+ "block.elysium_atlas.tinted_moss_carpet": "Lichen Carpet",
+ "block.elysium_atlas.tinted_moss_block": "Regional Moss Block"
+}

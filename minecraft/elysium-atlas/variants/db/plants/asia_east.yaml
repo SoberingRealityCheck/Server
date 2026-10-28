@@ -339,7 +339,7 @@ japanese_beech:
   leaf: fresh_green
   leaf_note: Thin bright green wavy-edged leaves.
   range: Montane forest of Japan, especially the snowy Sea of Japan side.
-  render: 'tree("pale_oak_log", "oak_leaves", fancy(7, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
+  render: 'tree("terrestria:rubber_log", "oak_leaves", fancy(7, 4, 0), fancyf(2, 4, 4), size=FANCY_SIZE)'
   sapling: oak_sapling
   stand_in: Pale oak log for the smooth grey bark.
 
@@ -565,7 +565,7 @@ chinese_banyan:
   leaf: "#3e7030"
   leaf_note: Small glossy dark leaves.
   range: Lowlands of Hainan, Taiwan, Guangdong and Guangxi.
-  render: 'tree("jungle_log", "jungle_leaves", forking(5, 2, 1), blob(3, 3, 0), decorators=[moss(0.2)])'
+  render: 'tree("jungle_log", "jungle_leaves", forking(5, 2, 1), blob(3, 3, 0), decorators=[leave_vine(0.25)])'
   sapling: jungle_sapling
 
 hainan_hopea:
