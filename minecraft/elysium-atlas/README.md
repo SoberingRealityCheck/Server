@@ -196,9 +196,8 @@ oats). The mod therefore depends on Biomes O' Plenty, Wilder Wild and Terrestria
 vanilla-biome edits are switched off in `../overrides/config`, so the atlas still picks every biome.
 
 Every atlas biome covering at least 0.3% of a listed ecoregion gets a variant. Its own plants are removed
-and the ecoregion's are added. Tree count is the ecoregion's cover times a factor taken from the atlas biome's
-own tree count, so forest cells stay denser than plains cells. Parent counts read Terralith's paired noise-based counts jointly
-(its groves and wintry forests mask tree sizes with them) and are capped at 30 per chunk. Dune variants get a sand
+and the ecoregion's are added. Tree count is the ecoregion's `tree_cover` times `tree_density`, the same in every
+atlas biome of the ecoregion; a parent without trees of its own (peaks, dunes, tundra) gets none. Dune variants get a sand
 surface, since Terrestria builds its dune surface in code for `terrestria:dunes` only. Ecoregions without an entry keep the atlas
 biome. The database covers 115 North American ecoregions (nearly all of the
 contiguous US, Canada and Alaska except Mexico and the Caribbean), 37 in Europe (from the spawn outwards), 12 on
@@ -207,17 +206,16 @@ East), with 347 plants: 221 ecoregions, 2,383 variants. The Tibet profiles are
 treeless meadow, steppe and desert, which replaces the fir and hemlock the placement puts on the plateau. The built mod carries it as `elysium_atlas/ecoregions.json`; `/atlas here` prints the ecoregion,
 its colours and its species.
 
-Niches and ground. Species can be limited by elevation, water and slope (`niche` on a plant, `niches` per
-ecoregion for elevation belts): trees are picked per spot by `elysium_atlas:niche_selector`, so the Southern
-Rockies run ponderosa, Douglas fir and aspen, then spruce-fir, and stop at about 3,600 m; bald cypress, cottonwood,
-willow and alder keep to river banks; junipers, pinyon and creosote avoid them. Each ecoregion also has a
+Ground. Each ecoregion has a
 `ground_surface` (rock on steep ground and outcrops, soil patches, subsoil), written as one Lithostitched surface
 rule (`top` sets the surface block, as coarse dirt in the deserts): Edwards limestone in the Hill Country, red beds on the Rolling Plains, chalk under the English downs, karst in
 the Dinarides, podzol in the taiga, basalt and moss in Iceland.
 
-Clumping: species can grow in their own patches (`clump`: aspen groves, cedar brakes, bluebonnet fields) and whole
-layers can gather into patches with open ground between (`patches`: oak mottes in the Hill Country, meadows between
-Alpine forest). Schema in `variants/db/README.md`.
+Plant features are vanilla only: a weighted `minecraft:random_selector` over the species, a count, and for layers
+with `patches` a `minecraft:noise_threshold_count` (biome-info noise, about 200 blocks across: twice the count on half
+the ground, none on the other). Distant Horizons SeedGen reads all of it, so LOD trees show the same species and
+density. Species are not limited by elevation, water or slope (no treelines or riverbank trees inside a variant), and
+single species do not form their own groves. Schema in `variants/db/README.md`.
 
 `variants/biome_variants.py SERVER_JAR TERRALITH_JAR` writes the biome files, features, names and
 `elysium_atlas/variants.json` into `src/main/resources`; `--check` reports stale output. `/atlas variants`

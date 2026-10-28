@@ -32,7 +32,6 @@ CLIMATE = ("temperature", "downfall", "has_precipitation", "temperature_modifier
 MIN_SHARE = 0.003                   # atlas biome share of a unit that gets a variant
 MIN_CELLS = 12
 TREES_PER_CHUNK_AT_FULL_COVER = 12.0
-TREE_COUNT_CAP = 30.0                # parent tree counts above this are attempts thinned by filters (Terralith dark forest: 155)
 # default tree and shrub cover by WWF habitat type (Ecoregions 2017 BIOME_NUM), when a profile gives none
 TREE_COVER = {1: 0.8, 2: 0.5, 3: 0.6, 4: 0.6, 5: 0.6, 6: 0.5, 7: 0.25, 8: 0.15, 9: 0.15, 10: 0.15, 11: 0.03, 12: 0.35, 13: 0.05, 14: 0.6}
 SHRUB_COVER = {7: 0.1, 8: 0.05, 10: 0.1, 12: 0.3, 13: 0.15}
@@ -145,51 +144,17 @@ class Plants:
         self.memo[ident] = r; return r
 
     def placed(self, ident):
-        j = self.src.get("placed_feature", ident); f = j["feature"]
-        plant, tree = self.configured(f) if isinstance(f, str) else self._walk(f, frozenset())
-        return plant, tree, expected_count(j["placement"]) if tree else 0.0
+        f = self.src.get("placed_feature", ident)["feature"]
+        return self.configured(f) if isinstance(f, str) else self._walk(f, frozenset())
 
     def of_biome(self, biome_json):
-        """(plant feature ids in the parent, expected trees per chunk)."""
-        ids, trees = [], 0.0
+        """(plant feature ids in the parent, whether the parent grows trees)."""
+        ids, trees = [], False
         for step in biome_json.get("features", []):
             for f in step:
-                p, _, n = self.placed(f)
-                if p: ids.append(f); trees += n
-        return ids, min(trees, TREE_COUNT_CAP)
-
-
-def _dist_mean(d):
-    if isinstance(d, (int, float)): return float(d)
-    t = d.get("type")
-    if t == "minecraft:constant": return float(d["value"])
-    if t == "minecraft:uniform": return (d["min_inclusive"] + d["max_inclusive"]) / 2
-    if t == "minecraft:weighted_list":
-        w = sum(e["weight"] for e in d["distribution"]); return sum(_dist_mean(e["data"]) * e["weight"] for e in d["distribution"]) / w
-    if t in ("minecraft:clamped", "minecraft:clamped_normal"): return _dist_mean(d.get("source", d.get("mean", 1)))
-    if t in ("minecraft:biased_to_bottom", "minecraft:very_biased_to_bottom"): return (d["min_inclusive"] + d["max_inclusive"]) / 3
-    return 1.0
-
-
-# the biome-info noise behind noise_based_count, as quantiles of a normal with sd 0.35 (assumed, not measured)
-_BIOME_NOISE = [0.35 * __import__("statistics").NormalDist().inv_cdf((i + 0.5) / 64) for i in range(64)]
-
-
-def expected_count(placement):
-    """Mean placements per chunk. Successive noise_based_counts read the same smooth noise at nearly the same spot, so
-    they are taken jointly: Terralith masks tree sizes with pairs of them (count where noise > -1, then where noise < -0.5)."""
-    n = 1.0; nb = []
-    for m in placement:
-        t = m["type"]
-        if t == "minecraft:count": n *= _dist_mean(m["count"])
-        elif t == "minecraft:rarity_filter": n /= m["chance"]
-        elif t == "minecraft:noise_threshold_count": n *= (m["above_noise"] + m["below_noise"]) / 2
-        elif t == "minecraft:noise_based_count": nb.append((m.get("noise_offset", 0.0), m["noise_to_count_ratio"]))
-        elif t == "minecraft:count_on_every_layer": n *= _dist_mean(m["count"])
-    if nb:
-        import math
-        n *= sum(math.prod(max(0, math.ceil((v + o) * r)) for o, r in nb) for v in _BIOME_NOISE) / len(_BIOME_NOISE)
-    return max(0.0, n)
+                p, t = self.placed(f)
+                if p: ids.append(f); trees = trees or t
+        return ids, trees
 
 
 # ---------------------------------------------------------------- colours
@@ -210,9 +175,6 @@ def palette(foliage, leaves, leaf_table):
         out[b] = [round((h - h0 + 0.5) % 1.0 - 0.5, 4), round(sat / s0, 4), round(v / v0, 4)]
     return out
 
-
-def shade(c, f):
-    h, s, v = colorsys.rgb_to_hsv(*[x / 255 for x in c]); return tuple(int(round(x * 255)) for x in colorsys.hsv_to_rgb(h, s, max(0, min(1, v * f))))
 
 
 # ---------------------------------------------------------------- flora features
@@ -248,24 +210,11 @@ def selector(weighted):
     return {"type": "minecraft:random_selector", "config": {"default": items[-1][0], "features": feats}}
 
 
-def niche_selector(weighted, patches=None):
-    """elysium_atlas:niche_selector over (placed feature json, weight, niche, clump) tuples (NicheSelectorFeature.java)."""
-    return {"type": "elysium_atlas:niche_selector", "config": {"features": [
-        {"data": f, "weight": round(float(w), 4), **({"niche": n} if n else {}), **({"clump": c} if c else {})}
-        for f, w, n, c in weighted if w > 0], **({"patches": patches} if patches else {})}}
-
-
-def clump_json(c, key): return {"size": c["size"], "share": c["share"], "outside": c["outside"], "key": key} if c else None
-
-
-def scaled(factor):
-    """elysium_atlas:scaled_count for a patch gain (ScaledCountPlacement.java); none when there is nothing to scale."""
-    return [{"type": "elysium_atlas:scaled_count", "factor": round(factor, 4)}] if factor != 1.0 else []
-
-
-def patch_gain(c):
-    """placement count factor for a layer in patches: the count rises so that the mean density is kept."""
-    return 1.0 / (c["outside"] + (1 - c["outside"]) * c["share"]) if c else 1.0
+def patches(c):
+    """Vanilla patches for a layer: the biome-info noise (features about 200 blocks across) halves the ground, all of
+    the layer goes on the upper half at twice the count, so the mean density is kept. Layers whose profile keeps more
+    than a quarter outside its patches stay even."""
+    return [{"type": "minecraft:noise_threshold_count", "noise_level": 0.0, "below_noise": 0, "above_noise": 2}] if c and c["outside"] < 0.25 else []
 
 
 # ---------------------------------------------------------------- regional ground surface
@@ -320,9 +269,9 @@ def nest(rules, group=16):
     return cond({"type": "minecraft:biome", "biome_is": ids(rules)}, seq(*(cond({"type": "minecraft:biome", "biome_is": ids(g)}, seq(*g)) for g in groups)))
 
 
-def scatter(count, tries, spread, heightmap="MOTION_BLOCKING", extra=None):
+def scatter(count, tries, spread, heightmap="MOTION_BLOCKING", extra=None, patch=()):
     p = [{"type": "minecraft:count", "count": count_of(count)}] if count != 1 else []
-    return p + [{"type": "minecraft:in_square"}, {"type": "minecraft:heightmap", "heightmap": heightmap}, {"type": "minecraft:biome"},
+    return p + [*patch, {"type": "minecraft:in_square"}, {"type": "minecraft:heightmap", "heightmap": heightmap}, {"type": "minecraft:biome"},
                 {"type": "minecraft:count", "count": tries},
                 {"type": "minecraft:random_offset", "xz_spread": {"type": "minecraft:trapezoid", "min": -spread, "max": spread, "plateau": 0},
                  "y_spread": {"type": "minecraft:trapezoid", "min": -3, "max": 3, "plateau": 0}},
@@ -340,29 +289,27 @@ class Flora:
         self.files[f"data/elysium/worldgen/configured_feature/plant/{name}.json"] = feat
         return cid, sapling
 
-    def trees(self, eco, layer, plants, niches, clumps, patches, n):
+    def trees(self, eco, layer, plants, patch, n):
         key = f"flora/{eco}/{layer}_{level(n)}"
         if f"data/elysium/worldgen/placed_feature/{key}.json" not in self.files:
             items = []
             for p, w in plants.items():
                 cid, sap = self.plant(p)
-                items.append(({"feature": cid, "placement": [survive(sap)]}, w, niches.get(p), clump_json(clumps.get(p), p)))
-            pt = patches.get(layer)
-            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = niche_selector(items, clump_json(pt, f"{eco}/{layer}"))
+                items.append(({"feature": cid, "placement": [survive(sap)]}, w))
+            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = selector(items)
             self.files[f"data/elysium/worldgen/placed_feature/{key}.json"] = {"feature": f"elysium:flora/{eco}/{layer}", "placement": [
-                {"type": "minecraft:count", "count": count_of(LEVELS[level(n)])}, *scaled(patch_gain(pt)), {"type": "minecraft:in_square"},
+                {"type": "minecraft:count", "count": count_of(LEVELS[level(n)])}, *patches(patch), {"type": "minecraft:in_square"},
                 {"type": "minecraft:surface_water_depth_filter", "max_water_depth": 0},
                 {"type": "minecraft:heightmap", "heightmap": "OCEAN_FLOOR"}, {"type": "minecraft:biome"}]}
         return f"elysium:{key}"
 
-    def blocks(self, eco, layer, plants, niches, clumps, patches, n, tries, spread):
+    def blocks(self, eco, layer, plants, patch, n, tries, spread):
         key = f"flora/{eco}/{layer}_{level(n)}"
         if f"data/elysium/worldgen/placed_feature/{key}.json" not in self.files:
-            items = [({"feature": PLANTS[p][1], "placement": []}, w, niches.get(p), clump_json(clumps.get(p), p)) for p, w in plants.items()]
-            pt = patches.get(layer)
-            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = niche_selector(items, clump_json(pt, f"{eco}/{layer}"))
+            items = [({"feature": PLANTS[p][1], "placement": []}, w) for p, w in plants.items()]
+            self.files[f"data/elysium/worldgen/configured_feature/flora/{eco}/{layer}.json"] = selector(items)
             self.files[f"data/elysium/worldgen/placed_feature/{key}.json"] = {"feature": f"elysium:flora/{eco}/{layer}",
-                                                                               "placement": scatter(LEVELS[level(n)] * patch_gain(pt), tries, spread)}
+                                                                               "placement": scatter(LEVELS[level(n)], tries, spread, patch=patches(patch))}
         return f"elysium:{key}"
 
     def cactus(self, eco, plants, n):
@@ -441,7 +388,7 @@ def generate(src, check=False):
         if not prof: continue
         total = sum(counts.values()); habitat = ecos.get(eid, {}).get("biome_num", 4)
         g_hex, f_hex, leaf_hex = db.colours(prof, leaves_of)
-        niches = db.niches(prof); clumps = db.clumps(prof); patches = db.patches(prof)
+        patch = db.patches(prof)
         if db.surface(prof): surfaces[eid] = db.surface(prof)
         grass, foliage = rgb(g_hex), rgb(f_hex)
         species_db[eid] = {"name": prof["name"], "resolve": prof.get("resolve"), "grass": g_hex, "foliage": f_hex, "leaves": leaf_hex,
@@ -449,36 +396,29 @@ def generate(src, check=False):
                            "latin": {P[p]["name"]: P[p]["latin"] for L in db.LAYERS for p in (prof.get(L) or {}) if "latin" in P[p]}}
         pick = [(a, n) for a, n in counts.items() if (unit, a) not in claims and "ocean" not in a and n >= MIN_CELLS and n / total >= MIN_SHARE]
         if not pick: continue
-        # plant list: tree counts follow the profile's cover, varied between atlas biomes by their own tree counts
+        # plant list: densities follow the profile alone; a parent without trees (peaks, dunes, tundra) gets none
         rebase = prof.get("rebase", {})
-        tcount = {a: plants.of_biome(biome(a))[1] for a, _ in pick}
-        tmean = sum(tcount[a] * n for a, n in pick) / sum(n for _, n in pick)
         tree_cover = prof.get("tree_cover", TREE_COVER.get(habitat, 0.3))
         shrub_cover = prof.get("shrub_cover", SHRUB_COVER.get(habitat, 0.03))
         open_cover = max(0.0, 1.0 - tree_cover)
         main = max(pick, key=lambda an: an[1])[0]
-        # per atlas biome factor on the tree count, rescaled so its area-weighted mean is 1: the ecoregion's cover
-        # sets its mean density, the atlas biomes only vary it (a few dense parents no longer thin the rest)
-        raw = {a: max(0.25, min(1.6, ((tcount[a] + 0.5) / (tmean + 0.5)) ** 0.5)) for a, _ in pick}
-        norm = sum(raw[a] * n for a, n in pick) / sum(n for _, n in pick)
         for a, n in pick:
             base_id = rebase.get(a, a); base = biome(base_id); atlas = biome(a)
-            m = raw[a] / norm
             vid = f"elysium:eco/{eid}/{base_id.split(':')[1] if base_id.startswith('minecraft:') else base_id.replace(':', '_')}"
             if a != base_id: vid += f"_from_{a.split(':')[1]}"
             claim(vid, unit, a)
             if vid in table:          # an ecoregion split into several units (regions.py groups) shares one variant
                 table[vid]["regions"].append(unit); continue
-            remove, _ = plants.of_biome(base)
+            remove, wooded = plants.of_biome(base)
             add = []
-            if prof.get("trees"):
-                add.append(flora.trees(eid, "trees", prof["trees"], niches, clumps, patches, TREES_PER_CHUNK_AT_FULL_COVER * tree_cover * m * prof.get("tree_density", 1.0)))
+            if prof.get("trees") and wooded:
+                add.append(flora.trees(eid, "trees", prof["trees"], patch.get("trees"), TREES_PER_CHUNK_AT_FULL_COVER * tree_cover * prof.get("tree_density", 1.0)))
             if prof.get("shrubs"):
-                add.append(flora.trees(eid, "shrubs", prof["shrubs"], niches, clumps, patches, (1.0 + 12 * shrub_cover) * prof.get("shrub_density", 1.0) * min(1.5, m ** 0.5)))
+                add.append(flora.trees(eid, "shrubs", prof["shrubs"], patch.get("shrubs"), (1.0 + 12 * shrub_cover) * prof.get("shrub_density", 1.0)))
             if prof.get("ground"):
-                add.append(flora.blocks(eid, "ground", prof["ground"], niches, clumps, patches, (1 + 6 * open_cover) * max(0.5, min(1.5, 1.5 - 0.5 * m)), 32, 7))
+                add.append(flora.blocks(eid, "ground", prof["ground"], patch.get("ground"), 1 + 6 * open_cover, 32, 7))
             if prof.get("flowers"):
-                add.append(flora.blocks(eid, "flowers", prof["flowers"], niches, clumps, patches, prof.get("flower_density", 1.0), 24, 6))
+                add.append(flora.blocks(eid, "flowers", prof["flowers"], patch.get("flowers"), prof.get("flower_density", 1.0), 24, 6))
             if prof.get("cactus"):
                 add.append(flora.cactus(eid, prof["cactus"], prof.get("cactus_density", 0.5)))
             b = dict(base)
@@ -486,7 +426,7 @@ def generate(src, check=False):
                 if k in atlas: b[k] = atlas[k]
                 else: b.pop(k, None)
             eff = dict(base.get("effects", {}))
-            eff["grass_color"] = hexc(shade(grass, 1.0 - 0.06 * (m - 1))); eff["foliage_color"] = hexc(foliage)
+            eff["grass_color"] = hexc(grass); eff["foliage_color"] = hexc(foliage)
             if eff.get("grass_color_modifier") == "swamp" and a != base_id: eff.pop("grass_color_modifier")
             b["effects"] = eff
             path = vid.split(":")[1]

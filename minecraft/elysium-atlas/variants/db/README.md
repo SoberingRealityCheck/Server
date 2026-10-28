@@ -68,43 +68,16 @@ uses an existing vanilla or flora-mod feature.
   why: "One line on what the region is."
 ```
 
-Numbers in a layer are relative weights. How many trees a chunk gets comes from `tree_cover`, the atlas biome's
-own tree count and `tree_density`.
+Numbers in a layer are relative weights. How many trees a chunk gets comes from `tree_cover` and `tree_density`;
+variants of parents without trees (peaks, dunes, tundra) get none.
 
-## Niches
+## Niches and clumps (not placed)
 
-A niche says where a species grows within its ecoregion. Keys:
-
-| key | values | effect |
-|---|---|---|
-| `elevation` | `[low, high]` metres | full weight inside the band, fading to zero over 150 m past each edge |
-| `water` | `riparian`, `wet`, `dry`, `any` | riparian: river and lake banks (about 25 blocks); wet: banks or waterlogged ground; dry: avoids banks |
-| `slope` | `flat`, `steep`, `any` | steep: cliffs and scarps; flat: level ground |
-
-A plant's own `niche` holds what is true everywhere (bald cypress is wet). Elevation belts differ by latitude and
-range, so they go in the ecoregion's `niches`, which override the plant's per key; `any` lifts a key in one region
-(pecan grows across the whole Mississippi floodplain, not only on banks).
-
-At each spot every species' weight is multiplied by how well the spot suits it. The plant count thins with the
-best suitability of any listed species: where one fits fully the density is full, and ground that suits
-none (above the treeline) gets nothing.
-Elevation is read from the ground height through the atlas vertical scale (`Atlas.elevationMetres`, 18.75 m per
-block above sea level). Placement: `elysium_atlas:niche_selector` (`NicheSelectorFeature.java`).
-
-## Clumping
-
-Plants grow in patches. A clump is `{size, share, outside}`: patches about `size` blocks across cover `share` of
-the ground, and `outside` (default 0.1) is how much of the plant grows between them.
-
-- `clump` on a plant (or `clumps` in an ecoregion) moves that species' weight into its own patches without changing
-  its total: aspen groves, cedar brakes, bluebonnet fields, bluebell carpets. Flowers default to
-  `{size: 12, share: 0.35}`, so each drift is mostly one species; `none` turns a clump off.
-- `patches` in an ecoregion gathers a whole layer (trees, shrubs, ground or flowers) into patches with open ground
-  between: oak mottes in the Hill Country, forest and meadow in the Alps, groves in the forest steppe. The
-  placement count rises by 1 / (outside + (1 - outside) x share) so the mean density stays the same.
-
-Each species and layer has its own noise pattern (`Clump.java`, two octaves of value noise; `share` is exact for any
-size).
+`niche`, `niches` and `clump`, `clumps` are kept in the data but not placed: the generator writes vanilla features
+only (`minecraft:random_selector`), which Distant Horizons can read. `patches` on a layer is placed: a
+`minecraft:noise_threshold_count` on the biome-info noise puts the layer at twice its count on half the ground and none
+on the other, keeping the mean. `size` and `share` are ignored (the noise is about 200 blocks across, the split
+50/50); a layer with `outside` of 0.25 or more stays even.
 
 ## Ground surface
 
