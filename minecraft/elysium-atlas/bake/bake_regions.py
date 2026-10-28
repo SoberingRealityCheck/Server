@@ -25,6 +25,7 @@ RES = 0.02         # degrees, polygon raster
 WARP_DEG = 0.12    # degrees: border warp amplitude
 WARP_WAVE_M = 40000.0
 ROCK_REACH = 40    # cells
+SHORE_CELLS = 24   # cells: units reach this far over the sea, so flat coasts the bake flooded but the game keeps dry have a region
 BAND = 256         # rows per projection band
 
 
@@ -97,8 +98,9 @@ def main():
     dist, idx = ndi.distance_transform_edt(~known, return_indices=True)
     near = e[tuple(idx)]; del idx
     e = np.where((e == 0) & (dist < ROCK_REACH), near, e)
-    e = np.where((e == -1) & land, near, e)
-    e = np.where(land, e, -1)          # units only where the atlas has land (lakes and rivers included)
+    shore = ~land & (ndi.distance_transform_edt(~land) <= SHORE_CELLS)
+    e = np.where((e == -1) & (land | shore), near, e)
+    e = np.where(land | shore, e, -1)  # units on atlas land (lakes and rivers included) and the near shore
     del near, dist
     # units
     names = []; out = np.zeros((h, w), np.uint16)
@@ -120,7 +122,7 @@ def main():
     json.dump(m, open(mpath + ".part", "w"), indent=1); os.replace(mpath + ".part", mpath)
     # generator data
     stats = {}
-    flat_u = out.ravel(); flat_b = l0.ravel(); sel = flat_u > 0
+    flat_u = out.ravel(); flat_b = l0.ravel(); sel = (flat_u > 0) & land.ravel()   # variants come from land cells only
     pair = flat_u[sel].astype(np.int64) * 256 + flat_b[sel]
     vals, cnt = np.unique(pair, return_counts=True)
     for v, c in zip(vals, cnt):
@@ -130,6 +132,7 @@ def main():
     for (u, b), c in detail_pairs(adir, out, i0, j0).items():
         if b < len(pal):
             d = stats.setdefault(names[u - 1], {}); d[pal[b]] = d.get(pal[b], 0) + int(round(c))
+    stats = {u: {b: c for b, c in s.items() if "ocean" not in b} for u, s in stats.items()}   # shore cells add no ocean variants
     if P["extent"] != "globe":   # the variant set is defined by the globe; a window must not overwrite it
         print(f"{len(names)} units on {int(sel.sum())} land cells at {CELL} blocks (window: variants/data left as is); {time.time() - t0:.0f} s")
         np.save(os.path.join(adir, "_regions_preview.npy"), out); return

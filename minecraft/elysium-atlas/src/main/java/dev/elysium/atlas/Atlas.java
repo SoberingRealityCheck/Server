@@ -170,6 +170,76 @@ public final class Atlas {
         return water != null ? water.channelEdge(x + 0.5, z + 0.5) : Double.POSITIVE_INFINITY;
     }
 
+    /** How far coast surface rules look for the sea, in blocks. */
+    public static final int SEA_REACH = 40;
+    private static final int SEA_STEP = 4;
+    private final java.util.concurrent.ConcurrentHashMap<Long, float[]> seaCache = new java.util.concurrent.ConcurrentHashMap<>();
+
+    /**
+     * Horizontal distance in blocks from a column to the nearest sea, capped at SEA_REACH. Sea is a 4-block lattice
+     * point where the generator's final density leaves both Y sea-2 and Y sea+2 open: the water the game actually
+     * builds, not the atlas estimate (which misplaces flat and steep shores by up to a cell) or the preliminary surface
+     * (which reads flat coastal plains as sea). Lattice points are shared between chunks and cached; chunks with no low
+     * atlas ground within reach skip the fine pass.
+     */
+    public float seaDistance(int x, int z, net.minecraft.world.level.levelgen.RandomState rs) {
+        int cx = x >> 4, cz = z >> 4;
+        long k = (long) cx << 32 ^ (cz & 0xffffffffL);
+        float[] d = seaCache.get(k);
+        if (d == null) {
+            d = seaChunk(cx << 4, cz << 4, rs);
+            if (seaCache.size() > 16384) seaCache.clear();
+            seaCache.put(k, d);
+        }
+        return d[(z & 15) << 4 | (x & 15)];
+    }
+
+    private final java.util.concurrent.ConcurrentHashMap<Long, Boolean> seaPoints = new java.util.concurrent.ConcurrentHashMap<>();
+
+    private boolean seaPoint(int px, int pz, net.minecraft.world.level.levelgen.DensityFunction f) {
+        long k = (long) (px >> 2) << 32 ^ ((pz >> 2) & 0xffffffffL);
+        Boolean v = seaPoints.get(k);
+        if (v == null) {
+            int sea = (int) Math.floor(seaLevelY);
+            v = heightOrOcean(px + 0.5, pz + 0.5) < seaLevelY + 4
+                    && f.compute(new net.minecraft.world.level.levelgen.DensityFunction.SinglePointContext(px, sea - 2, pz)) <= 0
+                    && f.compute(new net.minecraft.world.level.levelgen.DensityFunction.SinglePointContext(px, sea + 2, pz)) <= 0;
+            if (seaPoints.size() > 262144) seaPoints.clear();
+            seaPoints.put(k, v);
+        }
+        return v;
+    }
+
+    private float[] seaChunk(int x0, int z0, net.minecraft.world.level.levelgen.RandomState rs) {
+        float[] out = new float[256];
+        java.util.Arrays.fill(out, SEA_REACH);
+        double sea = seaLevelY;
+        // coarse pass (8 blocks): nothing near sea level within reach means no sea worth a fine pass
+        boolean near = false;
+        for (int dz = -SEA_REACH; dz <= 16 + SEA_REACH && !near; dz += 8)
+            for (int dx = -SEA_REACH; dx <= 16 + SEA_REACH; dx += 8)
+                if (heightOrOcean(x0 + dx, z0 + dz) < sea + 6) { near = true; break; }
+        if (!near) return out;
+        net.minecraft.world.level.levelgen.DensityFunction f = rs.router().finalDensity();
+        int n = (16 + 2 * SEA_REACH) / SEA_STEP + 1;
+        int[] sx = new int[n * n], sz = new int[n * n]; int m = 0;
+        for (int j = 0; j < n; j++)
+            for (int i = 0; i < n; i++) {
+                int px = x0 - SEA_REACH + i * SEA_STEP, pz = z0 - SEA_REACH + j * SEA_STEP;
+                if (seaPoint(px, pz, f)) { sx[m] = px; sz[m] = pz; m++; }
+            }
+        if (m == 0) return out;
+        for (int c = 0; c < 256; c++) {
+            int x = x0 + (c & 15), z = z0 + (c >> 4); long best = (long) SEA_REACH * SEA_REACH;
+            for (int q = 0; q < m; q++) {
+                long ddx = sx[q] - x, ddz = sz[q] - z, dd = ddx * ddx + ddz * ddz;
+                if (dd < best) best = dd;
+            }
+            out[c] = (float) Math.max(0, Math.sqrt(best) - 1.5);   // samples stand for 4-block cells
+        }
+        return out;
+    }
+
     /** Per-biome local relief in blocks at a column (Detail), or 0. Finer levels carry real relief there, so it is damped. */
     public double hills(int x, int z) {
         if (detail == null) return 0;

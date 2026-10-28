@@ -41,6 +41,21 @@ public final class AtlasBiomeSource extends BiomeSource {
     private final Holder<Biome> fallback, river, frozenRiver;
     /** Per palette index: cold enough that its rivers freeze. Resolved with the palette. */
     private volatile boolean[] cold;
+    /** Per palette index: an ocean biome (the bake gives a whole 32-block cell one biome, so its land edge can be ocean). */
+    private volatile boolean[] ocean;
+    /** Offsets searched for the land biome and region of a coastal column in an ocean cell, nearest first (blocks). */
+    private static final int[][] SHORE = shoreOffsets(16, 32, 64, 96, 128, 192, 256, 384, 512, 768);
+
+    /** Eight directions at each radius (blocks), nearest first: flat coasts the bake flooded can be several cells wide. */
+    private static int[][] shoreOffsets(int... radii) {
+        int[][] o = new int[radii.length * 8][];
+        int i = 0;
+        for (int r : radii) {
+            int d = (int) Math.round(r * 0.7071);
+            for (int[] v : new int[][]{{r, 0}, {-r, 0}, {0, r}, {0, -r}, {d, d}, {-d, d}, {d, -d}, {-d, -d}}) o[i++] = v;
+        }
+        return o;
+    }
     /** [region][palette index] -> regional variant, or null. Resolved with the palette. */
     private volatile Holder<Biome>[][] variants;
 
@@ -62,6 +77,9 @@ public final class AtlasBiomeSource extends BiomeSource {
             boolean[] c = new boolean[p.size()];
             for (int i = 0; i < c.length; i++) c[i] = p.get(i).value().getBaseTemperature() < 0.15f;
             cold = c;
+            boolean[] o = new boolean[p.size()];
+            for (int i = 0; i < o.length; i++) o[i] = Atlas.get().palette.get(i).contains("ocean");
+            ocean = o;
             variants = resolveVariants(Atlas.get(), p);
             palette = p = List.copyOf(p);
         }
@@ -115,8 +133,19 @@ public final class AtlasBiomeSource extends BiomeSource {
         int b = a.biome(x, z);
         if (a.column(qx << 2 | 2, qz << 2 | 2).river()) return b >= 0 && b < p.size() && cold[b] ? frozenRiver : river;
         if (b < 0 || b >= p.size()) return fallback;
-        if (a.regions != null) {
-            Holder<Biome>[] row = variants[a.regions.at(x, z)];
+        int r = a.regions != null ? a.regions.at(x, z) : 0;
+        if ((ocean[b] || r == 0) && a.heightOrOcean(x, z) >= a.seaLevelY - 3) {
+            // land at the edge of an ocean cell, or outside the region raster: take the nearest land cell's biome and region
+            for (int[] d : SHORE) {
+                int b2 = a.biome(x + d[0], z + d[1]);
+                if (b2 < 0 || b2 >= p.size() || ocean[b2]) continue;
+                int r2 = a.regions != null ? a.regions.at(x + d[0], z + d[1]) : 0;
+                if (ocean[b]) { b = b2; if (r == 0) r = r2; break; }
+                if (r2 > 0) { r = r2; break; }
+            }
+        }
+        if (r > 0) {
+            Holder<Biome>[] row = variants[r];
             if (row != null && row[b] != null) return row[b];
         }
         return p.get(b);

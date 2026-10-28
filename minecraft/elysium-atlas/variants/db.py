@@ -239,3 +239,33 @@ def evergreen_blocks(eco, leaf_blocks):
             if w <= 0 or not P[p].get("leaf"): continue
             for b in leaf_blocks(p): per.setdefault(b, []).append(P[p]["evergreen"])
     return {b for b, v in per.items() if all(v)}
+
+
+def coast_types():
+    """{type: {"low": blocks or None, "bands": [(width, {block id: weight})]}} from coast_types.yaml."""
+    if "coast_types" in _cache: return _cache["coast_types"]
+    out = {}
+    for t, e in _yaml(os.path.join(DB, "coast_types.yaml")).items():
+        if set(e) - {"low", "bands"}: raise SystemExit(f"coast_types.yaml:{t}: keys are low, bands")
+        bands = []
+        for w, mix in e["bands"]:
+            if w <= 0 or not mix: raise SystemExit(f"coast_types.yaml:{t}: a band is [width > 0, {{block: weight}}]")
+            bands.append((w, {("grass" if b == "grass" else render._id(b)): float(x) for b, x in mix.items()}))
+        out[t] = {"low": e.get("low"), "bands": bands}
+    _cache["coast_types"] = out
+    return out
+
+
+def coasts():
+    """{ecoregion id: {"coast": {type: share}, "sea": {...}}} from coasts.yaml (hand-authored coastal pass)."""
+    if "coasts" in _cache: return _cache["coasts"]
+    T = coast_types(); out = {}
+    for group, regions in _yaml(os.path.join(DB, "coasts.yaml")).items():
+        for eid, e in regions.items():
+            where = f"coasts.yaml:{group}:{eid}"
+            for t, sh in e["coast"].items():
+                if t not in T: raise SystemExit(f"{where}: unknown coast type {t}")
+            if abs(sum(e["coast"].values()) - 1) > 0.02: raise SystemExit(f"{where}: coast shares must add up to 1")
+            out[int(eid)] = e
+    _cache["coasts"] = out
+    return out

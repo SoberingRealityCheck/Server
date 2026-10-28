@@ -274,6 +274,7 @@ def patch_gain(c):
 NO_SURFACE = re.compile(r"snow|frozen|ice|glacier|peak|beach|shore|ocean|river|badlands|mesa|lake|dune")
 # outcrops about 15-30 blocks across with ragged edges, soil patches about 8-16; all have sd 0.31 (measured)
 SURFACE_NOISES = {"outcrop": (-5, [1.0, 1.0, 1.0, 1.0]), "rock_mix": (-7, [1.0, 1.0]), "fragment": (-2, [1.0, 1.0]), "ledge": (-4, [1.0, 1.0]),
+                  "coast": (-9, [1.0, 1.0]), "coast_mix": (-1, [1.0, 1.0]),
                   "soil_0": (-4, [1.0, 1.0, 1.0]), "soil_1": (-4, [1.0, 1.0, 1.0]), "soil_2": (-4, [1.0, 1.0, 1.0])}
 NOISE_SD = 0.31     # standard deviation of these normal noises (measured: 0.31 for 2 and 3 octaves); share s of ground lies above SD * z(1 - s)
 
@@ -323,6 +324,40 @@ def surface_rule(vids, g):
         cond(floor, cond(dry, seq(*top))) if top else None,
         cond({"type": "minecraft:not", "invert": floor}, cond(under, seq(cond(riser, strata) if strata else None,
                                                                         block(g["subsoil"]) if g["subsoil"] else None))) if g["subsoil"] or strata else None)))
+
+
+def between(name, lo, hi):
+    """Noise test for the share band [lo, hi) of positions (shares counted from the top of the noise)."""
+    t = lambda s: 1e6 if s <= 0 else (-1e6 if s >= 1 else above(s))
+    return {"type": "minecraft:noise_threshold", "noise": f"elysium:surface/{name}", "min_threshold": t(hi), "max_threshold": t(lo)}
+
+
+COAST_SKIP = re.compile(r"ocean|river|lake")
+
+
+def coast_rule(vids, coast, types):
+    """Coast bands for one ecoregion: by distance from the atlas sea, one coast type per stretch of shore."""
+    by_type, c = [], 0.0
+    for t, share in coast.items():
+        spec = types[t]; bands, d = [], 0.0
+        for w, mix in spec["bands"]:
+            tot = sum(mix.values()); picks, m = [], 0.0
+            for b, x in mix.items():
+                lo, m = m, m + x / tot
+                if b != "grass": picks.append(cond(between("coast_mix", lo, m), block(b)) if (lo, m) != (0.0, 1.0) else block(b))
+            if picks: bands.append(cond({"type": "elysium_atlas:sea_distance", "min": d, "max": d + w}, seq(*picks)))
+            d += w
+        rule = seq(*bands)
+        if spec["low"] is not None:
+            rule = cond({"type": "minecraft:not", "invert": {"type": "minecraft:y_above", "anchor": {"absolute": 63 + spec["low"]},
+                                                             "surface_depth_multiplier": 0, "add_stone_depth": False}}, rule)
+        lo, c = c, c + share
+        by_type.append(cond(between("coast", lo, c), rule) if len(coast) > 1 else rule)
+    floor = {"type": "minecraft:stone_depth", "offset": 0, "add_surface_depth": False, "secondary_depth_range": 0, "surface_type": "floor"}
+    dry = {"type": "minecraft:water", "offset": -1, "surface_depth_multiplier": 0, "add_stone_depth": False}
+    near = {"type": "elysium_atlas:sea_distance", "min": 0, "max": max(sum(w for w, _ in types[t]["bands"]) for t in coast)}
+    return cond({"type": "minecraft:biome", "biome_is": sorted(vids)}, cond({"type": "minecraft:above_preliminary_surface"},
+                cond(floor, cond(dry, cond(near, seq(*by_type))))))
 
 
 def nest(rules, group=16):
@@ -515,6 +550,10 @@ def generate(src, check=False):
     # Terrestria builds its dune surface in code for terrestria:dunes only, so variants of it came out as grass
     dunes = [v for v, t in table.items() if t["parent"] == "terrestria:dunes"]
     rules = [surface_rule(dunes, {"rock": [], "outcrops": 0, "soil": {}, "top": "sand", "subsoil": "sand", "strata": [], "ledges": None, "banks": None, "small_outcrops": False})] if dunes else []
+    coasts, ctypes = db.coasts(), db.coast_types()
+    for eid in sorted(coasts):   # coast bands first: near the sea they win over the region's rock and soil
+        vids = [v for v, t in table.items() if v.startswith(f"elysium:eco/{eid}/") and not COAST_SKIP.search(t["parent"])]
+        if vids: rules.append(coast_rule(vids, coasts[eid]["coast"], ctypes))
     for eid, g in surfaces.items():
         vids = [v for v, t in table.items() if v.startswith(f"elysium:eco/{eid}/") and not NO_SURFACE.search(t["parent"])]
         r = surface_rule(vids, g) if vids else None

@@ -11,4 +11,5 @@ public interface SurfaceContextAccessor {
     @Accessor("blockZ") int elysium$blockZ();
     @Accessor("blockY") int elysium$blockY();
     @Accessor("chunk") ChunkAccess elysium$chunk();
+    @Accessor("randomState") net.minecraft.world.level.levelgen.RandomState elysium$randomState();
 }

@@ -33120,7 +33120,7 @@
    "add_features": {
     "vegetal_decoration": [
      "elysium:flora/675/trees_10",
-     "elysium:flora/675/ground_13",
+     "elysium:flora/675/ground_12",
      "elysium:flora/675/flowers_7"
     ]
    },
@@ -33365,6 +33365,25 @@
    ],
    "why": "Former rice and poplar country: lines of poplars on the old field grid, wet meadows, riverside willow."
   },
+  "elysium:eco/675/beach": {
+   "parent": "minecraft:beach",
+   "regions": [
+    "eco:675"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/675/trees_7",
+     "elysium:flora/675/ground_14",
+     "elysium:flora/675/flowers_7"
+    ]
+   },
+   "remove_features": [
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
+   ],
+   "why": "Former rice and poplar country: lines of poplars on the old field grid, wet meadows, riverside willow."
+  },
   "elysium:eco/675/swamp": {
    "parent": "minecraft:swamp",
    "regions": [
@@ -33431,25 +33450,6 @@
     "minecraft:patch_grass_forest",
     "minecraft:patch_firefly_bush_near_water",
     "wilderwild:trees_sparse_forest"
-   ],
-   "why": "Former rice and poplar country: lines of poplars on the old field grid, wet meadows, riverside willow."
-  },
-  "elysium:eco/675/beach": {
-   "parent": "minecraft:beach",
-   "regions": [
-    "eco:675"
-   ],
-   "add_features": {
-    "vegetal_decoration": [
-     "elysium:flora/675/trees_7",
-     "elysium:flora/675/ground_14",
-     "elysium:flora/675/flowers_7"
-    ]
-   },
-   "remove_features": [
-    "minecraft:flower_default",
-    "minecraft:patch_grass_badlands",
-    "minecraft:patch_firefly_bush_near_water"
    ],
    "why": "Former rice and poplar country: lines of poplars on the old field grid, wet meadows, riverside willow."
   },
@@ -50290,7 +50290,7 @@
    "add_features": {
     "vegetal_decoration": [
      "elysium:flora/795/trees_13",
-     "elysium:flora/795/shrubs_12",
+     "elysium:flora/795/shrubs_13",
      "elysium:flora/795/ground_11",
      "elysium:flora/795/flowers_9"
     ]
@@ -50462,6 +50462,26 @@
     "minecraft:patch_grass_forest",
     "minecraft:patch_firefly_bush_near_water",
     "wilderwild:trees_semi_birch_and_oak"
+   ],
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
+  },
+  "elysium:eco/795/beach": {
+   "parent": "minecraft:beach",
+   "regions": [
+    "eco:795"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/795/trees_8",
+     "elysium:flora/795/shrubs_10",
+     "elysium:flora/795/ground_13",
+     "elysium:flora/795/flowers_9"
+    ]
+   },
+   "remove_features": [
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
    ],
    "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
@@ -50778,7 +50798,7 @@
    "add_features": {
     "vegetal_decoration": [
      "elysium:flora/799/trees_13",
-     "elysium:flora/799/shrubs_12",
+     "elysium:flora/799/shrubs_13",
      "elysium:flora/799/ground_11",
      "elysium:flora/799/flowers_4"
     ]
@@ -51544,6 +51564,26 @@
     "minecraft:trees_meadow",
     "minecraft:wildflowers_meadow",
     "minecraft:patch_grass_plain"
+   ],
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
+  },
+  "elysium:eco/806/stony_shore": {
+   "parent": "minecraft:stony_shore",
+   "regions": [
+    "eco:806"
+   ],
+   "add_features": {
+    "vegetal_decoration": [
+     "elysium:flora/806/trees_9",
+     "elysium:flora/806/shrubs_10",
+     "elysium:flora/806/ground_12",
+     "elysium:flora/806/flowers_5"
+    ]
+   },
+   "remove_features": [
+    "minecraft:flower_default",
+    "minecraft:patch_grass_badlands",
+    "minecraft:patch_firefly_bush_near_water"
    ],
    "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },

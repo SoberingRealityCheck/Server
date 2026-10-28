@@ -17,6 +17,8 @@ import net.minecraft.world.level.chunk.ChunkAccess;
  * <li>{@code elysium_atlas:y_band} {period, from, to}: (Y mod period) is within [from, to]: rows of bedded rock.</li>
  * <li>{@code elysium_atlas:near_channel} {distance}: within that many blocks of an atlas river or stream channel
  *     (inside it counts): river beds and banks.</li>
+ * <li>{@code elysium_atlas:sea_distance} {min, max}: the horizontal distance in blocks to the atlas sea is in [min, max)
+ *     (looked up to Atlas.SEA_REACH): coast bands at every atlas level.</li>
  * </ul>
  */
 public final class ElysiumSurfaceConditions {
@@ -91,6 +93,23 @@ public final class ElysiumSurfaceConditions {
             return new PerColumn(ctx) {
                 @Override boolean compute(int x, int z) {
                     return Atlas.active() && Atlas.get().channelEdge(x, z) <= distance;
+                }
+            };
+        }
+    }
+
+    public record SeaDistance(double min, double max) implements SurfaceRules.ConditionSource {
+        public static final MapCodec<SeaDistance> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+                Codec.DOUBLE.fieldOf("min").forGetter(SeaDistance::min), Codec.DOUBLE.fieldOf("max").forGetter(SeaDistance::max)).apply(i, SeaDistance::new));
+
+        @Override public MapCodec<SeaDistance> codec() { return CODEC; }
+
+        @Override public SurfaceRules.Condition apply(SurfaceRules.Context ctx) {
+            return new PerColumn(ctx) {
+                @Override boolean compute(int x, int z) {
+                    if (!Atlas.active()) return false;
+                    float d = Atlas.get().seaDistance(x, z, a.elysium$randomState());
+                    return d >= min && d < max;
                 }
             };
         }

@@ -1,0 +1,107 @@
+# Coast assignments for profiled ecoregions (art-direction coastal pass, 2026-10-28).
+# Hand-authored. A region lists one or more coast types with a share. Where a region has several,
+# they should alternate along the shore in stretches of hundreds of blocks (noise), not mix block by block.
+# sea: nearshore water colour (shallow) and offshore (sea). Estimates, to be replaced by photo picks.
+# Types (see the briefs page, section "Coasts"):
+#   sandy       A  sandy barrier, beach, dune ridge with grass, back-barrier lagoon or marsh
+#   chalk       B  white chalk cliffs over a narrow flint-gravel beach
+#   granite     C  granite boulders, skerries and small sandy coves
+#   limestone   D  white limestone cliffs and ledges, pebble coves, very clear water
+#   marsh       E  salt marsh, mudflats, tidal creeks; no beach
+#   shingle     F  steep gravel and cobble beach
+#   fjord       G  steep rock straight into deep dark water; forest to the waterline
+#   volcanic    H  black sand and basalt
+#   white_sand  I  tropical white sand, turquoise shallows
+#   desert      J  sand and dunes running into clear sea, sparse or no plants
+#   sandstone   K  orange or red sandstone cliffs with sea stacks and golden coves
+#   arctic      L  gravel beach ridges, snow, sea ice offshore
+#   pacific     M  dark sand, basalt headlands and stacks, driftwood logs, forest behind
+
+europe:
+  664: {name: Atlantic Mixed Forest, coast: {granite: 0.5, sandy: 0.5}, sea: {shallow: "#4f8a84", sea: "#2c5e70"}, note: "Brittany granite (pink at Ploumanac'h); Landes and Flanders dunes with marram"}
+  663: {name: English Lowland Beechwood, coast: {chalk: 0.6, shingle: 0.4}, sea: {shallow: "#5a8a80", sea: "#3a6670"}, note: "Seven Sisters, Dover; Chesil-type shingle"}
+  651: {name: Celtic Oakwood, coast: {granite: 0.7, sandy: 0.3}, sea: {shallow: "#4a9090", sea: "#2a5e70"}, note: "Cornwall, Pembrokeshire, west Ireland; slate and granite"}
+  672: {name: Atlantic Moorland, coast: {granite: 0.6, white_sand: 0.4}, sea: {shallow: "#56b4aa", sea: "#2a5a6e"}, note: "Hebridean machair: white shell sand behind gneiss; colder light than the tropics"}
+  691: {name: Caledonian Pinewood, coast: {fjord: 1.0}, sea: {shallow: "#2e5c64", sea: "#1e4250"}, note: "sea lochs"}
+  647: {name: Baltic Mixed Forest, coast: {sandy: 0.6, shingle: 0.3, chalk: 0.1}, sea: {shallow: "#4f7a6a", sea: "#36564e"}, note: "brackish green-brown water; Rügen and Møns Klint chalk; Curonian Spit dunes"}
+  717: {name: Taiga, coast: {granite: 0.7, fjord: 0.3}, sea: {shallow: "#3a6060", sea: "#2a4a50"}, note: "Baltic skerries: smooth glacier-polished granite slabs, pine to the water"}
+  708: {name: Norwegian Coast Forest, coast: {fjord: 0.8, granite: 0.2}, sea: {shallow: "#2e6068", sea: "#1c4252"}}
+  780: {name: Fjell Birch Woods, coast: {fjord: 0.6, arctic: 0.4}, sea: {shallow: "#2e5c66", sea: "#1c4050"}}
+  711: {name: Icelandic Heath, coast: {volcanic: 0.8, arctic: 0.2}, sea: {shallow: "#2f6a78", sea: "#1e4458"}, note: "Reynisfjara black sand and basalt columns"}
+  675: {name: Po Valley, coast: {marsh: 0.6, sandy: 0.4}, sea: {shallow: "#5a8a74", sea: "#3a6a74"}, note: "Venice lagoon, Po delta; Adriatic sand beaches"}
+  799: {name: Provence and Catalonia, coast: {limestone: 0.7, marsh: 0.3}, sea: {shallow: "#3cc0c0", sea: "#1f6a98"}, note: "Calanques; Camargue and Ebro delta salt marsh with salt pans"}
+  806: {name: Tyrrhenian Coast, coast: {limestone: 0.5, sandy: 0.3, volcanic: 0.2}, sea: {shallow: "#3cc0c0", sea: "#1f6a98"}, note: "Amalfi, Maremma dunes backed by umbrella pine, Phlegraean tuff"}
+  795: {name: Italian Hills, coast: {limestone: 0.6, sandy: 0.4}, sea: {shallow: "#40b8b8", sea: "#22709a"}, note: "Gargano, Salento; Adriatic sand"}
+  794: {name: Illyrian Karst, coast: {limestone: 1.0}, sea: {shallow: "#3cc4c4", sea: "#1e6a9a"}, note: "Dalmatian islands; bare white karst to the water"}
+  785: {name: Aegean Coast, coast: {limestone: 0.7, granite: 0.3}, sea: {shallow: "#40c8c8", sea: "#1c5e98"}, note: "marble and schist; Cycladic white"}
+  788: {name: Corsican Mountains, coast: {granite: 0.7, limestone: 0.3}, sea: {shallow: "#40c8c0", sea: "#1e6898"}, note: "red granite at Piana, white limestone at Bonifacio"}
+  800: {name: Galician Uplands, coast: {granite: 0.8, sandy: 0.2}, sea: {shallow: "#4a9a98", sea: "#245a70"}, note: "rías"}
+  648: {name: Cantabrian Forest, coast: {granite: 0.6, sandy: 0.4}, sea: {shallow: "#4a9a98", sea: "#245a70"}, note: "grey flysch and limestone cliffs (use stone, tuff, calcite strata instead of granite)"}
+  805: {name: Dehesa, coast: {sandstone: 0.6, sandy: 0.4}, sea: {shallow: "#3fb0b0", sea: "#1e6a92"}, note: "Algarve golden cliffs and stacks"}
+  803: {name: Iberian Semi-desert, coast: {desert: 0.6, volcanic: 0.4}, sea: {shallow: "#40c0c0", sea: "#1e6a98"}, note: "Cabo de Gata"}
+  801: {name: Pindus Forest, coast: {limestone: 1.0}, sea: {shallow: "#40c8c8", sea: "#1c5e98"}}
+  646: {name: Balkan Oak Forest, coast: {sandy: 0.7, limestone: 0.3}, sea: {shallow: "#4a8a80", sea: "#2a5a6a"}, note: "Black Sea"}
+  735: {name: Pontic Steppe, coast: {marsh: 0.5, sandy: 0.5}, sea: {shallow: "#5a8a78", sea: "#3a6070"}, note: "limans, sand spits of the Azov Sea"}
+
+north_america:
+  384: {name: Gulf Coast Prairie, coast: {sandy: 0.5, marsh: 0.5}, sea: {shallow: "#6a9a84", sea: "#3f7a74"}, note: "Galveston, Matagorda barrier islands; turbid green-brown Gulf"}
+  437: {name: Brush Country, coast: {sandy: 1.0}, sea: {shallow: "#5aa898", sea: "#2f7a88"}, note: "Padre Island: long barrier, hypersaline Laguna Madre behind"}
+  436: {name: Tamaulipan Thornscrub, coast: {sandy: 0.7, desert: 0.3}, sea: {shallow: "#5aa898", sea: "#2f7a88"}}
+  337: {name: Mississippi Bottomlands, coast: {marsh: 1.0}, sea: {shallow: "#7a8a6a", sea: "#4a6a64"}, note: "delta: brown water"}
+  399: {name: Longleaf Savanna, coast: {white_sand: 0.6, marsh: 0.4}, sea: {shallow: "#4ac0b0", sea: "#2a7a90"}, note: "Florida panhandle quartz sand is near-white; emerald water"}
+  400: {name: Southern Mixed Woods, coast: {sandy: 0.6, marsh: 0.4}, sea: {shallow: "#5a9a88", sea: "#2f6a80"}}
+  393: {name: Mid-Atlantic Coastal Savanna, coast: {marsh: 0.5, sandy: 0.5}, sea: {shallow: "#5a8a78", sea: "#2f5e70"}, note: "Lowcountry spartina marsh, Outer Banks"}
+  347: {name: Pine Barrens, coast: {sandy: 1.0}, sea: {shallow: "#4f8a84", sea: "#2c5a70"}}
+  339: {name: Northeast Coastal Forest, coast: {sandy: 0.5, granite: 0.3, marsh: 0.2}, sea: {shallow: "#4f8a84", sea: "#2c5a70"}, note: "Cape Cod dunes, Boston harbour granite"}
+  338: {name: New England Forest, coast: {granite: 0.7, fjord: 0.3}, sea: {shallow: "#3a6e70", sea: "#22485a"}, note: "Maine: pink granite, spruce to the tideline"}
+  333: {name: Boreal Transition, coast: {granite: 0.5, sandstone: 0.5}, sea: {shallow: "#3a6e70", sea: "#22485a"}, note: "Nova Scotia granite; PEI red sandstone and red sand"}
+  335: {name: St Lawrence Lowland, coast: {marsh: 0.5, granite: 0.5}, sea: {shallow: "#5a7a70", sea: "#34505a"}}
+  373: {name: Eastern Boreal Forest, coast: {fjord: 0.6, granite: 0.4}, sea: {shallow: "#2e5c66", sea: "#1c4050"}, note: "Newfoundland"}
+  374: {name: Labrador Taiga, coast: {fjord: 0.5, arctic: 0.5}, sea: {shallow: "#2e5866", sea: "#1c3e50"}}
+  382: {name: Hudson Bay Lowlands, coast: {arctic: 0.6, marsh: 0.4}, sea: {shallow: "#4a6a6a", sea: "#2a4a5a"}, note: "raised gravel beach ridges in parallel lines"}
+  407: {name: Arctic Coastal Plain, coast: {arctic: 1.0}, sea: {shallow: "#4a6870", sea: "#2a4a5e"}}
+  409: {name: Beringia Lowland Tundra, coast: {arctic: 0.7, marsh: 0.3}, sea: {shallow: "#4a6870", sea: "#2a4a5e"}}
+  413: {name: Low Arctic Tundra, coast: {arctic: 1.0}, sea: {shallow: "#3a6070", sea: "#24445a"}}
+  414: {name: Middle Arctic Tundra, coast: {arctic: 1.0}, sea: {shallow: "#3a6070", sea: "#24445a"}}
+  412: {name: High Arctic Tundra, coast: {arctic: 1.0}, sea: {shallow: "#3a6070", sea: "#24445a"}}
+  415: {name: Baffin Highlands, coast: {fjord: 0.7, arctic: 0.3}, sea: {shallow: "#2e5866", sea: "#1c3e50"}}
+  417: {name: Greenland Coast, coast: {fjord: 0.8, arctic: 0.2}, sea: {shallow: "#2e5866", sea: "#1c3e50"}, note: "icebergs offshore"}
+  418: {name: High Arctic Greenland, coast: {arctic: 1.0}, sea: {shallow: "#3a6070", sea: "#24445a"}}
+  421: {name: Torngat Mountains, coast: {fjord: 1.0}, sea: {shallow: "#2e5866", sea: "#1c3e50"}}
+  404: {name: Ahklun Tundra, coast: {arctic: 0.6, volcanic: 0.4}, sea: {shallow: "#3a6070", sea: "#24445a"}}
+  406: {name: Aleutian Islands, coast: {volcanic: 1.0}, sea: {shallow: "#2f6070", sea: "#1e4458"}}
+  369: {name: Alaska Peninsula Taiga, coast: {volcanic: 0.5, fjord: 0.5}, sea: {shallow: "#2f6070", sea: "#1e4458"}}
+  371: {name: Cook Inlet Taiga, coast: {marsh: 0.6, fjord: 0.4}, sea: {shallow: "#6a7a74", sea: "#3a5a64"}, note: "glacial silt: grey water"}
+  360: {name: Alaskan Coast Forest, coast: {fjord: 1.0}, sea: {shallow: "#4a7a80", sea: "#24485a"}, note: "glacial fjords are milky green near the ice"}
+  349: {name: Coast Rainforest, coast: {fjord: 0.8, shingle: 0.2}, sea: {shallow: "#2e5c64", sea: "#1c4250"}}
+  365: {name: Haida Gwaii Forest, coast: {pacific: 0.6, fjord: 0.4}, sea: {shallow: "#2e5c64", sea: "#1c4250"}}
+  364: {name: Puget Lowland, coast: {shingle: 0.7, marsh: 0.3}, sea: {shallow: "#3a6a6a", sea: "#24485a"}}
+  351: {name: Pacific Coast Forest, coast: {pacific: 1.0}, sea: {shallow: "#3a6a70", sea: "#2a5468"}, note: "Cannon Beach stacks, driftwood"}
+  359: {name: Redwood Coast, coast: {pacific: 1.0}, sea: {shallow: "#3a6a70", sea: "#2a5468"}}
+  423: {name: California Oak Woodland, coast: {granite: 0.5, sandy: 0.5}, sea: {shallow: "#3a7078", sea: "#24506a"}}
+  425: {name: Santa Lucia Range, coast: {granite: 1.0}, sea: {shallow: "#3a8a90", sea: "#22506a"}, note: "Big Sur: high cliffs, kelp offshore"}
+  422: {name: Coastal Sage Scrub, coast: {sandy: 0.6, sandstone: 0.4}, sea: {shallow: "#3a8a90", sea: "#22587a"}, note: "Southern California bluffs"}
+  426: {name: Baja Desert, coast: {desert: 1.0}, sea: {shallow: "#3aa8b8", sea: "#1e6a9a"}}
+  431: {name: Gulf of California Scrub, coast: {desert: 0.7, volcanic: 0.3}, sea: {shallow: "#3ac0c0", sea: "#1e6a98"}, note: "Sea of Cortez: very clear"}
+  435: {name: Sonoran Desert, coast: {desert: 1.0}, sea: {shallow: "#3ac0c0", sea: "#1e6a98"}}
+  324: {name: Sonoran-Sinaloan Thornforest, coast: {desert: 0.5, sandy: 0.5}, sea: {shallow: "#3aa8b0", sea: "#1e6a98"}, note: "mangrove esteros: existing mangrove placement"}
+  545: {name: Sinaloan Dry Forest, coast: {sandy: 0.6, marsh: 0.4}, sea: {shallow: "#3aa8b0", sea: "#1e6a98"}}
+
+asia_east:
+  742: {name: Bohai Saline Meadow, coast: {marsh: 1.0}, sea: {shallow: "#7a8a70", sea: "#4a6a6a"}, note: "Panjin red beach: Suaeda seepweed turns the flats crimson in autumn; needs a region-tinted ground plant (ask 15)"}
+  667: {name: Huang He Plain, coast: {marsh: 1.0}, sea: {shallow: "#8a8a6a", sea: "#4a6a6a"}, note: "Yellow River delta: ochre water"}
+  657: {name: Yangtze Plain Forest, coast: {marsh: 1.0}, sea: {shallow: "#7a826a", sea: "#4a6a6a"}}
+  236: {name: Jiangnan Evergreen Forest, coast: {granite: 0.7, marsh: 0.3}, sea: {shallow: "#4a8a80", sea: "#2a6070"}}
+  268: {name: South China Monsoon Forest, coast: {granite: 0.6, sandy: 0.4}, sea: {shallow: "#4aa8a0", sea: "#2a6a80"}, note: "Hong Kong granite; mangrove in bays"}
+  232: {name: Hainan Rainforest, coast: {white_sand: 1.0}, sea: {shallow: "#48d0c8", sea: "#1e78a8"}}
+  283: {name: Taiwan Forest, coast: {granite: 0.5, marsh: 0.5}, sea: {shallow: "#40a8b0", sea: "#1e5e90"}, note: "east: cliffs (Qingshui); west: tidal flats"}
+  655: {name: Central Korean Forest, coast: {marsh: 0.6, sandy: 0.4}, sea: {shallow: "#6a8278", sea: "#3a5e6a"}, note: "Yellow Sea getbol mudflats; east coast sand"}
+  681: {name: Southern Korean Forest, coast: {granite: 1.0}, sea: {shallow: "#4a9a98", sea: "#245a78"}, note: "archipelago"}
+  682: {name: Taiheiyo Laurel Forest, coast: {granite: 0.5, volcanic: 0.3, sandy: 0.2}, sea: {shallow: "#3a9aa8", sea: "#1e5888"}}
+  670: {name: Nihonkai Laurel Forest, coast: {sandy: 0.5, granite: 0.5}, sea: {shallow: "#3a8a98", sea: "#1e5070"}, note: "Tottori dunes"}
+  671: {name: Nihonkai Beech Forest, coast: {shingle: 0.6, granite: 0.4}, sea: {shallow: "#3a7a88", sea: "#1e4a68"}}
+  683: {name: Taiheiyo Beech Forest, coast: {granite: 0.6, fjord: 0.4}, sea: {shallow: "#3a8a98", sea: "#1e5070"}, note: "Sanriku ria coast"}
+  666: {name: Hokkaido Deciduous Forest, coast: {volcanic: 0.5, shingle: 0.5}, sea: {shallow: "#3a7080", sea: "#1e4860"}}
+  716: {name: Sakhalin Taiga, coast: {shingle: 0.6, arctic: 0.4}, sea: {shallow: "#3a6470", sea: "#22445a"}}
+  715: {name: Okhotsk-Manchurian Taiga, coast: {shingle: 0.5, fjord: 0.5}, sea: {shallow: "#3a6470", sea: "#22445a"}}
+  685: {name: Ussuri Forest, coast: {granite: 1.0}, sea: {shallow: "#3a7a80", sea: "#1e4a68"}, note: "Primorye"}
