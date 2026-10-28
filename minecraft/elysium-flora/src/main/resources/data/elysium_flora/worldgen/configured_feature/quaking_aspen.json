@@ -1,0 +1,80 @@
+{
+  "type": "minecraft:tree",
+  "config": {
+    "below_trunk_provider": {
+      "type": "minecraft:rule_based_state_provider",
+      "rules": [
+        {
+          "if_true": {
+            "type": "minecraft:not",
+            "predicate": {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:cannot_replace_below_tree_trunk"
+            }
+          },
+          "then": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "minecraft:dirt"
+            }
+          }
+        }
+      ]
+    },
+    "trunk_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "elysium_flora:thin_birch_log"
+      }
+    },
+    "trunk_placer": {
+      "type": "elysium_flora:multi_stem",
+      "base_height": 8,
+      "height_rand_a": 4,
+      "height_rand_b": 0,
+      "stems": 1,
+      "spread": 0,
+      "lean": 0.08,
+      "fork_chance": 0.0
+    },
+    "foliage_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:birch_leaves",
+        "Properties": {
+          "distance": "7",
+          "persistent": "false",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "foliage_placer": {
+      "type": "minecraft:blob_foliage_placer",
+      "radius": 2,
+      "offset": 0,
+      "height": 4
+    },
+    "minimum_size": {
+      "type": "minecraft:two_layers_feature_size",
+      "limit": 1,
+      "lower_size": 0,
+      "upper_size": 1
+    },
+    "decorators": [
+      {
+        "type": "elysium_flora:branch_stubs",
+        "block": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "elysium_flora:thin_birch_log"
+          }
+        },
+        "probability": 0.25,
+        "min_height_fraction": 0.5,
+        "length": 1,
+        "rise_chance": 0.3
+      }
+    ],
+    "ignore_vines": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "elysium_flora:thin_oak_log",
+    "elysium_flora:thin_stripped_oak_log",
+    "elysium_flora:thin_spruce_log",
+    "elysium_flora:thin_stripped_spruce_log",
+    "elysium_flora:thin_birch_log",
+    "elysium_flora:thin_stripped_birch_log",
+    "elysium_flora:thin_jungle_log",
+    "elysium_flora:thin_stripped_jungle_log",
+    "elysium_flora:thin_acacia_log",
+    "elysium_flora:thin_stripped_acacia_log",
+    "elysium_flora:thin_dark_oak_log",
+    "elysium_flora:thin_stripped_dark_oak_log",
+    "elysium_flora:thin_mangrove_log",
+    "elysium_flora:thin_stripped_mangrove_log",
+    "elysium_flora:thin_cherry_log",
+    "elysium_flora:thin_stripped_cherry_log"
+  ]
+}

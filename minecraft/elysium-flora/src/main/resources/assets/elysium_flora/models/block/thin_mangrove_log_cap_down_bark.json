@@ -1,0 +1,7 @@
+{
+  "parent": "elysium_flora:block/template_thin_log_cap_down_bark",
+  "textures": {
+    "side": "minecraft:block/mangrove_log",
+    "end": "minecraft:block/mangrove_log_top"
+  }
+}
