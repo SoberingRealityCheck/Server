@@ -73,9 +73,6 @@
         "min_height_fraction": 0.5,
         "length": 1,
         "rise_chance": 0.3
-      },
-      {
-        "type": "elysium_flora:connect_thin_logs"
       }
     ],
     "ignore_vines": true

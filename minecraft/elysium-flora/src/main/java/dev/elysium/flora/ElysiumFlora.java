@@ -14,7 +14,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -56,7 +55,8 @@ public final class ElysiumFlora implements ModInitializer {
             ThinLogBlock.STRIPPED.put(thin, thinStripped);
             made.add(new Block[]{strippedLog, thin, thinStripped});
         }
-        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register(content -> {
+        CreativeModeTabEvents.modifyOutputEvent(
+                ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.withDefaultNamespace("building_blocks"))).register(content -> {
             for (Block[] m : made) {
                 content.insertAfter(m[0], m[1]);
                 content.insertAfter(m[1], m[2]);
@@ -64,22 +64,40 @@ public final class ElysiumFlora implements ModInitializer {
         });
 
         MULTI_STEM = Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE, id("multi_stem"),
-                new TrunkPlacerType<>(MultiStemTrunkPlacer.CODEC));
+                make(TrunkPlacerType.class, MultiStemTrunkPlacer.CODEC));
         CONNECT = Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE, id("connect_thin_logs"),
-                new TreeDecoratorType<>(ConnectThinLogsDecorator.CODEC));
+                make(TreeDecoratorType.class, ConnectThinLogsDecorator.CODEC));
         BRANCH_STUBS = Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE, id("branch_stubs"),
-                new TreeDecoratorType<>(BranchStubsDecorator.CODEC));
+                make(TreeDecoratorType.class, BranchStubsDecorator.CODEC));
     }
 
     /** thin_<log path>, e.g. minecraft:stripped_oak_log -> elysium_flora:thin_stripped_oak_log. */
     private static Block thinLog(Block log) {
         Identifier id = id("thin_" + BuiltInRegistries.BLOCK.getKey(log).getPath());
         Block block = Registry.register(BuiltInRegistries.BLOCK, id, new ThinLogBlock(
-                BlockBehaviour.Properties.ofFullCopy(log).noOcclusion().setId(ResourceKey.create(Registries.BLOCK, id))));
+                BlockBehaviour.Properties.ofFullCopy(log)
+                        .mapColor(log.defaultMapColor()) // the log's own map colour reads its AXIS, which thin logs lack
+                        .noOcclusion().setId(ResourceKey.create(Registries.BLOCK, id))));
         Registry.register(BuiltInRegistries.ITEM, id, new BlockItem(block,
                 new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id)).useBlockDescriptionPrefix()));
         FlammableBlockRegistry.getDefaultInstance().add(block, 5, 5);
         return block;
+    }
+
+    /**
+     * new T(codec) for TrunkPlacerType / TreeDecoratorType. Their constructors are private in the game jar and
+     * opened by Fabric API's transitive access wideners at run time; build.sh compiles against the plain jar,
+     * so construct by reflection rather than widening the compile classpath.
+     */
+    @SuppressWarnings("unchecked")
+    private static <T> T make(Class<?> type, com.mojang.serialization.MapCodec<?> codec) {
+        try {
+            var ctor = type.getDeclaredConstructor(com.mojang.serialization.MapCodec.class);
+            ctor.setAccessible(true);
+            return (T) ctor.newInstance(codec);
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("cannot construct " + type.getName(), e);
+        }
     }
 
     private static Identifier id(String path) {

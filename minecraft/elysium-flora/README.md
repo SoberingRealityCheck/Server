@@ -2,7 +2,7 @@
 
 Thin logs and thin-trunk trees. Fabric, MC 26.2. Needed on server and client (it adds blocks).
 
-Status: written, **not yet compiled or run**. The container that wrote it cannot reach Mojang or the Fabric maven, so the first build needs `build.sh` run where those are reachable (Clay's Mac).
+Status (2026-10-28): compiles against 26.2 + Fabric API 0.161.0 and runs on a headless 26.2 server. All four test trees place; leaves next to thin logs did not decay over 150 s of ticking. Not yet looked at in a client (models, textures) or with Distant Horizons.
 
 ## Blocks
 
@@ -21,14 +21,14 @@ Recipes, 1:1 both ways:
 | 2 thin logs stacked | 2 logs |
 | 1 thin log | 4 planks |
 
-A lone log already makes planks, so the swap takes two stacked. Fits the 2x2 grid.
+Thin logs are not in `#oak_logs` etc., so those recipes don't double up. A lone log already makes planks, so the swap takes two stacked. Fits the 2x2 grid.
 
 ## Tree pieces
 
 | Id | Kind | What it does |
 |---|---|---|
-| `elysium_flora:multi_stem` | trunk placer | 1-8 stems from one root or a small stool (`spread`), each leaning (`lean`), optional one-off side fork (`fork_chance`). Every stem ends in a crown. No AXIS: works with thin logs. |
-| `elysium_flora:connect_thin_logs` | tree decorator | Joins the faces of every thin log the trunk placer put down. List it last. |
+| `elysium_flora:multi_stem` | trunk placer | 1-8 stems from one root or a small stool (`spread`), each leaning (`lean`), optional one-off side fork (`fork_chance`). Every stem ends in a crown. Sets the thin logs' faces along the path each stem grew, so stems side by side stay separate. |
+| `elysium_flora:connect_thin_logs` | tree decorator | For thin logs placed by other trunk placers (vanilla ones): joins each to every log neighbour. Side-by-side stems fuse into a ladder, so multi_stem trees do not use it. List it last. |
 | `elysium_flora:branch_stubs` | tree decorator | Thin side branches on any trunk (thin or full) into air, upper part only. |
 
 Test trees in `data/elysium_flora/worldgen/configured_feature/`: `honey_mesquite`, `quaking_aspen`, `alder_clump`, `oak_with_branches`. In game: `/place feature elysium_flora:honey_mesquite`.
@@ -43,6 +43,7 @@ Worldgen use: atlas profiles reference these configured features by id like any 
 
 ## To check in game
 
-- Leaves next to thin logs do not decay (tag name for 26.2 leaf decay to confirm).
+- Models and textures in a client (bark grain on horizontal arms, end grain on tips).
+
 - Distant Horizons SeedGen draws the test trees (it runs the same feature code).
 - F3 frame time in a dense stand of `alder_clump` versus vanilla oak.

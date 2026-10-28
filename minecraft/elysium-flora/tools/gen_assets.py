@@ -147,6 +147,8 @@ BELOW_TRUNK = {"type": "minecraft:rule_based_state_provider", "rules": [{
     "if_true": {"type": "minecraft:not", "predicate": {"type": "minecraft:matching_block_tag",
                                                       "tag": "minecraft:cannot_replace_below_tree_trunk"}},
     "then": {"type": "minecraft:simple_state_provider", "state": {"Name": "minecraft:dirt"}}}]}
+# multi_stem sets thin-log faces itself. connect_thin_logs is for thin logs placed by other trunk placers
+# (vanilla straight/forking ones); list it last in such a tree's decorators.
 CONNECT = {"type": f"{NS}:connect_thin_logs"}
 
 
@@ -176,15 +178,15 @@ TREES = {
     # Honey mesquite (Prosopis glandulosa): 2-4 crooked stems from one root, a low flat open crown.
     "honey_mesquite": tree(simple(f"{NS}:thin_acacia_log"), multi_stem(3, 2, uniform(2, 4), 0, 0.5, 0.3),
                            "acacia_leaves", {"type": "minecraft:acacia_foliage_placer", "radius": 2, "offset": 0},
-                           [CONNECT]),
+                           []),
     # Quaking aspen (Populus tremuloides): one tall straight pole, a small high crown, a few twigs below it.
     "quaking_aspen": tree(simple(f"{NS}:thin_birch_log"), multi_stem(8, 4, 1, 0, 0.08, 0.0),
                           "birch_leaves", {"type": "minecraft:blob_foliage_placer", "radius": 2, "offset": 0, "height": 4},
-                          [stubs("thin_birch_log", 0.25, 0.5, 1, 0.3), CONNECT]),
+                          [stubs("thin_birch_log", 0.25, 0.5, 1, 0.3)]),
     # Grey alder / hazel clump: 3-5 thin stems from a 3x3 stool, each with its own small leaf clump.
     "alder_clump": tree(simple(f"{NS}:thin_oak_log"), multi_stem(4, 2, uniform(3, 5), 1, 0.35, 0.2),
                         "oak_leaves", {"type": "minecraft:blob_foliage_placer", "radius": 1, "offset": 0, "height": 2},
-                        [CONNECT]),
+                        []),
     # A vanilla-sized oak (full log trunk) with thin side branches below and through the crown.
     "oak_with_branches": tree(simple("minecraft:oak_log", {"axis": "y"}),
                               {"type": "minecraft:straight_trunk_placer", "base_height": 5, "height_rand_a": 2,
