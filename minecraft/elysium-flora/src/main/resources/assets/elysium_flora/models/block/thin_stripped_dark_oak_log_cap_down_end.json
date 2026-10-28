@@ -1,0 +1,7 @@
+{
+  "parent": "elysium_flora:block/template_thin_log_cap_down_end",
+  "textures": {
+    "side": "minecraft:block/stripped_dark_oak_log",
+    "end": "minecraft:block/stripped_dark_oak_log_top"
+  }
+}

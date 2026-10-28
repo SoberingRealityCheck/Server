@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    "elysium_flora:thin_stripped_cherry_log"
+  ],
+  "result": {
+    "id": "minecraft:cherry_planks",
+    "count": 4
+  }
+}

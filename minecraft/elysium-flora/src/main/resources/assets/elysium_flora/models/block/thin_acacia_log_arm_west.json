@@ -1,0 +1,7 @@
+{
+  "parent": "elysium_flora:block/template_thin_log_arm_west",
+  "textures": {
+    "side": "minecraft:block/acacia_log",
+    "end": "minecraft:block/acacia_log_top"
+  }
+}

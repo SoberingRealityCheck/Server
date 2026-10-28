@@ -356,6 +356,15 @@ cannot hold that many anyway, the count stays lower. Read the "What it does,
 and what it does not" section of its README before tuning. A fake-player
 test tool is in `seasonal-spawns/dev/`. It is not part of the pack.
 
+### elysium-flora/
+
+Thin logs (6 px, six-way connected) for the vanilla woods, craftable 1:1 from logs, plus a trunk placer and
+tree decorators for thin-trunk trees. Client + server.
+
+- Source and docs: `elysium-flora/`. Start with its `README.md`.
+- Rebuild with `elysium-flora/build.sh` (plain javac, needs Java 25). Writes `overrides/mods/elysium_flora.jar`.
+  Not built yet: see its README.
+
 ### Resource packs
 
 Resource packs declared in `pack.yaml` are installed for clients under

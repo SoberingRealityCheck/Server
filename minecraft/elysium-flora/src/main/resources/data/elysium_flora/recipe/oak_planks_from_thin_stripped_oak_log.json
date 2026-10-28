@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    "elysium_flora:thin_stripped_oak_log"
+  ],
+  "result": {
+    "id": "minecraft:oak_planks",
+    "count": 4
+  }
+}

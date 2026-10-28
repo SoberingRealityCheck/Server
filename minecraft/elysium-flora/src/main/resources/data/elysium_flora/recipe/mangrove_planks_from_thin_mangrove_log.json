@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    "elysium_flora:thin_mangrove_log"
+  ],
+  "result": {
+    "id": "minecraft:mangrove_planks",
+    "count": 4
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "thin_logs",
+  "key": {
+    "#": "elysium_flora:thin_stripped_mangrove_log"
+  },
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "result": {
+    "id": "minecraft:stripped_mangrove_log",
+    "count": 2
+  }
+}
