@@ -851,7 +851,8 @@ mods:
 # default would mean a laptop GPU meets a 60->15 fps drop on first
 # launch and reads it as the pack being broken.
 #
-# Two shaders, and Nova Reimagined is the experiment. Bliss never loaded
+# Three shaders. Nova Reimagined is the experiment; Luster is the
+# Apple Silicon pick. Bliss never loaded
 # on macOS (Iris ran out of texture units) and BSL and RedHat were
 # dropped to keep a tested look. Recommended settings are in the README, not shipped: a
 # launcher can re-apply override files on an update and wipe a player's
@@ -894,6 +895,19 @@ shaderpacks:
       macOS allows 16. Settings fix 1 and 3, only a code change fixes
       2. Windows and Linux are untested. If it fails, use the
       Complementary entry above.
+
+  - name: "Luster Shaders"
+    file: "Luster_v5.0c.zip"
+    url: "https://cdn.modrinth.com/data/GWRThy8E/versions/1ltw0KKx/Luster_v5.0c.zip"
+    sha512: "8c280370abe66bdc9d98e6ec52b8a47189d3b50e43027ea898ae4112b3a3b5b67d5fd303ba9da09fca55f665e2fa4feaadb359000c33da3248a8cd40469d5861"
+    reason: >-
+      Photon-based realistic shader written with Apple Silicon in mind;
+      tested by Clay on the M4 Mac. Lists 26.2, Iris, Distant Horizons
+      and Voxy support, with Low to Ultra profiles. It does not read the
+      Season Cache / Nova Reimagined Snow snow map or the ssdh season
+      textures, so seasonal snow cover is Nova-only. All rights
+      reserved: the .mrpack links the Modrinth file and never bundles
+      it, which is the only way we may ship it.
 
 # Installed client-side as an optional resource pack; launchers cannot
 # enable it automatically. Players turn it on under Options -> Resource Packs.
