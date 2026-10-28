@@ -272,7 +272,7 @@ def patch_gain(c):
 # parents whose own surface is the point (snow, ice, sand beaches, badlands bands, water): no regional surface
 NO_SURFACE = re.compile(r"snow|frozen|ice|glacier|peak|beach|shore|ocean|river|badlands|mesa|lake|dune")
 # outcrops about 15-30 blocks across with ragged edges, soil patches about 8-16; all have sd 0.31 (measured)
-SURFACE_NOISES = {"outcrop": (-5, [1.0, 1.0, 1.0, 1.0]), "rock_mix": (-7, [1.0, 1.0]),
+SURFACE_NOISES = {"outcrop": (-5, [1.0, 1.0, 1.0, 1.0]), "rock_mix": (-7, [1.0, 1.0]), "fragment": (-2, [1.0, 1.0]), "ledge": (-4, [1.0, 1.0]),
                   "soil_0": (-4, [1.0, 1.0, 1.0]), "soil_1": (-4, [1.0, 1.0, 1.0]), "soil_2": (-4, [1.0, 1.0, 1.0])}
 NOISE_SD = 0.31     # standard deviation of these normal noises (measured: 0.31 for 2 and 3 octaves); share s of ground lies above SD * z(1 - s)
 
@@ -294,20 +294,34 @@ def surface_rule(vids, g):
     rock = None
     if g["rock"]:
         rock = block(g["rock"][0]) if len(g["rock"]) == 1 else seq(cond(noise("rock_mix", 0.5), block(g["rock"][1])), block(g["rock"][0]))
+    # strata: on 2+ block steps, the top and the exposed face below it take the strata block of their Y row
+    strata = seq(*(cond({"type": "elysium_atlas:y_band", "period": len(g["strata"]), "from": i, "to": i}, block(b))
+                   for i, b in enumerate(g["strata"]))) if g["strata"] else None
+    riser = {"type": "elysium_atlas:rise", "min": 2, "max": 4096}
     top = []
+    if g["banks"]:       # river beds and banks (inside the channel counts)
+        bb = g["banks"]["blocks"]
+        top.append(cond({"type": "elysium_atlas:near_channel", "distance": g["banks"]["distance"]},
+                        block(bb[0]) if len(bb) == 1 else seq(cond(noise("rock_mix", 0.5), block(bb[1])), block(bb[0]))))
+    if strata: top.append(cond(riser, strata))
     if rock:
         top.append(cond({"type": "minecraft:steep"}, rock))
-        if g["outcrops"] > 0: top.append(cond(noise("outcrop", g["outcrops"]), rock))
+        if g["ledges"]:  # 1-block rises keep rock on one Y row in `every`, broken by noise: bedded ledges
+            L = g["ledges"]
+            top.append(cond({"type": "elysium_atlas:rise", "min": 1, "max": 1}, cond({"type": "elysium_atlas:y_band", "period": L["every"], "from": 0, "to": 0},
+                       cond(noise("ledge", L["keep"]), rock) if L["keep"] < 1 else rock)))
+        if g["outcrops"] > 0: top.append(cond(noise("fragment" if g["small_outcrops"] else "outcrop", g["outcrops"]), rock))
     for i, (b, share) in enumerate(list(g["soil"].items())[:3]):
         if share > 0: top.append(cond(noise(f"soil_{i}", share), block(b)))
     if g.get("top"): top.append(block(g["top"]))        # everything else (deserts: bare soil instead of grass)
-    if not top and not g["subsoil"]: return None
+    if not top and not g["subsoil"] and not strata: return None
     floor = {"type": "minecraft:stone_depth", "offset": 0, "add_surface_depth": False, "secondary_depth_range": 0, "surface_type": "floor"}
     under = {"type": "minecraft:stone_depth", "offset": 0, "add_surface_depth": True, "secondary_depth_range": 0, "surface_type": "floor"}
     dry = {"type": "minecraft:water", "offset": -1, "surface_depth_multiplier": 0, "add_stone_depth": False}
     return cond({"type": "minecraft:biome", "biome_is": sorted(vids)}, cond({"type": "minecraft:above_preliminary_surface"}, seq(
         cond(floor, cond(dry, seq(*top))) if top else None,
-        cond({"type": "minecraft:not", "invert": floor}, cond(under, block(g["subsoil"]))) if g["subsoil"] else None)))
+        cond({"type": "minecraft:not", "invert": floor}, cond(under, seq(cond(riser, strata) if strata else None,
+                                                                        block(g["subsoil"]) if g["subsoil"] else None))) if g["subsoil"] or strata else None)))
 
 
 def nest(rules, group=16):
@@ -499,7 +513,7 @@ def generate(src, check=False):
             n_flora += 1
     # Terrestria builds its dune surface in code for terrestria:dunes only, so variants of it came out as grass
     dunes = [v for v, t in table.items() if t["parent"] == "terrestria:dunes"]
-    rules = [surface_rule(dunes, {"rock": [], "outcrops": 0, "soil": {}, "top": "sand", "subsoil": "sand"})] if dunes else []
+    rules = [surface_rule(dunes, {"rock": [], "outcrops": 0, "soil": {}, "top": "sand", "subsoil": "sand", "strata": [], "ledges": None, "banks": None, "small_outcrops": False})] if dunes else []
     for eid, g in surfaces.items():
         vids = [v for v, t in table.items() if v.startswith(f"elysium:eco/{eid}/") and not NO_SURFACE.search(t["parent"])]
         r = surface_rule(vids, g) if vids else None

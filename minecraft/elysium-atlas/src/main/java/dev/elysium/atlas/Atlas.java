@@ -157,6 +157,11 @@ public final class Atlas {
         return col;
     }
 
+    /** Blocks from the column to the nearest river or stream channel edge (negative inside), or +inf. */
+    public double channelEdge(int x, int z) {
+        return water != null ? water.channelEdge(x + 0.5, z + 0.5) : Double.POSITIVE_INFINITY;
+    }
+
     /** Per-biome local relief in blocks at a column (Detail), or 0. Finer levels carry real relief there, so it is damped. */
     public double hills(int x, int z) {
         if (detail == null) return 0;

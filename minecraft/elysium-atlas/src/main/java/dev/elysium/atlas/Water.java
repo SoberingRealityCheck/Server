@@ -127,6 +127,23 @@ public final class Water {
         return t * t * (3 - 2 * t);
     }
 
+    /** Distance from (x, z) to the edge of the nearest river or stream channel in its bucket, negative inside; +inf if none. */
+    public double channelEdge(double x, double z) {
+        int k = Index.key(Math.floorDiv((int) Math.floor(x), bucket), Math.floorDiv((int) Math.floor(z), bucket));
+        long rr = riverIdx.range(k);
+        double best = Double.POSITIVE_INFINITY;
+        if (rr == 0) return best;
+        for (int n = (int) (rr >>> 32), end = (int) rr; n < end; n++) {
+            int o = riverIdx.ids[n] * SEG;
+            double ax = seg[o], az = seg[o + 1], dx = seg[o + 2] - ax, dz = seg[o + 3] - az;
+            double len2 = dx * dx + dz * dz;
+            double t = len2 > 0 ? Math.max(0, Math.min(1, ((x - ax) * dx + (z - az) * dz) / len2)) : 0;
+            double hw = seg[o + 6] + t * (seg[o + 7] - seg[o + 6]);
+            best = Math.min(best, Math.hypot(x - ax - t * dx, z - az - t * dz) - hw);
+        }
+        return best;
+    }
+
     /** Applies rivers and lakes to the terrain height H at a column. */
     public Column column(double x, double z, double H) {
         int bx = Math.floorDiv((int) Math.floor(x), bucket), bz = Math.floorDiv((int) Math.floor(z), bucket);

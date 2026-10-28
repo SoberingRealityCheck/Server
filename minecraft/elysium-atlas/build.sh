@@ -49,6 +49,10 @@ for j in $(find "$work/fapi" "$work/mc/META-INF/libraries" -name '*.jar'); do
 done
 
 # --- compile -------------------------------------------------------------
+# SurfaceRules.Condition and Context are not public in source; widen.py makes compile-time copies that are
+rm -rf "$work/widened"
+python3 "$here/widen.py" "$client" "$work/widened"
+cp_list="$work/widened:$cp_list"
 rm -rf "$work/classes"
 mkdir -p "$work/classes"
 javac --release 25 -proc:none -Xlint:-classfile -d "$work/classes" -cp "$cp_list" \

@@ -66,10 +66,15 @@
   cactus_density: 0.4
   rebase: {minecraft:birch_forest: minecraft:savanna, minecraft:forest: minecraft:savanna, minecraft:sunflower_plains: minecraft:plains}
   ground_surface:
-    geology: "Edwards limestone, thin rocky soils."
-    rock: [calcite]
-    outcrops: many
-    soil: {coarse_dirt: some}
+    geology: "Edwards limestone, thin rocky soils; bedded ledges, stepped scarps, white gravel bars in the creeks."
+    rock: [diorite, calcite]
+    outcrops: few
+    outcrop_size: small
+    ledges: {every: 3, keep: 0.8}
+    strata: [smooth_stone, diorite, stone, smooth_stone, diorite, calcite]
+    subsoil: diorite
+    banks: {blocks: [calcite, gravel], distance: 2}
+    soil: {coarse_dirt: few, gravel: few}
   patches:
     trees: {size: 28, share: 0.4, outside: 0.04}
     flowers: {size: 32, share: 0.4}

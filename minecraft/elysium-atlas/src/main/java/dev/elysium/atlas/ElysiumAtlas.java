@@ -35,6 +35,9 @@ public final class ElysiumAtlas implements ModInitializer {
     @Override
     public void onInitialize() {
         Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Identifier.fromNamespaceAndPath(MOD_ID, "sample"), AtlasDensityFunction.MAP_CODEC);
+        Registry.register(BuiltInRegistries.MATERIAL_CONDITION, Identifier.fromNamespaceAndPath(MOD_ID, "rise"), net.minecraft.world.level.levelgen.ElysiumSurfaceConditions.Rise.CODEC);
+        Registry.register(BuiltInRegistries.MATERIAL_CONDITION, Identifier.fromNamespaceAndPath(MOD_ID, "y_band"), net.minecraft.world.level.levelgen.ElysiumSurfaceConditions.YBand.CODEC);
+        Registry.register(BuiltInRegistries.MATERIAL_CONDITION, Identifier.fromNamespaceAndPath(MOD_ID, "near_channel"), net.minecraft.world.level.levelgen.ElysiumSurfaceConditions.NearChannel.CODEC);
         Registry.register(BuiltInRegistries.BIOME_SOURCE, Identifier.fromNamespaceAndPath(MOD_ID, "atlas"), AtlasBiomeSource.CODEC);
         Registry.register(BuiltInRegistries.FEATURE, Identifier.fromNamespaceAndPath(MOD_ID, "niche_selector"),
                 new dev.elysium.atlas.flora.NicheSelectorFeature(dev.elysium.atlas.flora.NicheSelectorFeature.Config.CODEC));

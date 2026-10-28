@@ -169,15 +169,26 @@ def surface(eco):
     g = eco.get("ground_surface")
     if not g: return None
     where = f"{eco['name']}: ground_surface"
-    if set(g) - {"geology", "rock", "outcrops", "soil", "top", "subsoil"}: raise SystemExit(f"{where}: unknown key")
+    if set(g) - {"geology", "rock", "outcrops", "outcrop_size", "soil", "top", "subsoil", "strata", "ledges", "banks"}:
+        raise SystemExit(f"{where}: unknown key")
     if g.get("outcrops", "none") not in AMOUNTS: raise SystemExit(f"{where}: outcrops is one of {list(AMOUNTS)}")
+    if g.get("outcrop_size", "large") not in ("large", "small"): raise SystemExit(f"{where}: outcrop_size is large or small")
+    ledges = g.get("ledges")
+    if ledges and (set(ledges) - {"every", "keep"} or not 1 <= ledges.get("every", 3) <= 16 or not 0 < ledges.get("keep", 1) <= 1):
+        raise SystemExit(f"{where}: ledges is {{every: 1-16, keep: 0-1}}")
+    banks = g.get("banks")
+    if banks and (set(banks) - {"blocks", "distance"} or not banks.get("blocks")): raise SystemExit(f"{where}: banks is {{blocks: [..], distance: n}}")
     for b, a in (g.get("soil") or {}).items():
         if a not in AMOUNTS: raise SystemExit(f"{where}: soil {b}: amount is one of {list(AMOUNTS)}")
     return {"geology": g.get("geology", ""), "rock": [render._id(b) for b in (g.get("rock") or [])],
             "outcrops": AMOUNTS[g.get("outcrops", "none")],
             "soil": {render._id(b): AMOUNTS[a] for b, a in (g.get("soil") or {}).items()},
             "top": render._id(g["top"]) if g.get("top") else None,
-            "subsoil": render._id(g["subsoil"]) if g.get("subsoil") else None}
+            "subsoil": render._id(g["subsoil"]) if g.get("subsoil") else None,
+            "small_outcrops": g.get("outcrop_size") == "small",
+            "strata": [render._id(b) for b in (g.get("strata") or [])],
+            "ledges": {"every": ledges.get("every", 3), "keep": ledges.get("keep", 1.0)} if ledges else None,
+            "banks": {"blocks": [render._id(b) for b in banks["blocks"]], "distance": banks.get("distance", 2)} if banks else None}
 
 
 def _mean(pairs):

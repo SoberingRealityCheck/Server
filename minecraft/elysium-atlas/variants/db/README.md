@@ -111,6 +111,14 @@ size).
 `ground_surface` sets the top block on dry, non-snow, non-beach ground of the region's variants:
 steep ground and `outcrops` become `rock`, then `soil` patches, then `top` (if given) everywhere else; `subsoil`
 replaces the dirt below the top.
+Bedded rock (all optional; conditions in `ElysiumSurfaceConditions.java`):
+- `ledges: {every, keep}`: on ground with exactly a 1-block rise to a neighbour, rock on one Y row in `every`,
+  `keep` of it (noise-broken). Reads as ledge lines along the contours.
+- `strata: [blocks]`: on 2+ block steps, the top and the exposed face below take the block of their Y row (Y mod length).
+- `banks: {blocks, distance}`: within `distance` blocks of an atlas river or stream channel (the bed included),
+  the first block, mixed half and half with the second if given.
+- `outcrop_size: small`: outcrops as 2-5 block fragments instead of 15-30 block patches.
+
 Shares: few 5 %, some 12 %, many 25 % of eligible ground, from normal noises with measured sd 0.31
 (`biome_variants.SURFACE_NOISES`). Outcrops are about 15-30 blocks across and soil patches 8-16, so a small area can sit
 above or below its share. Written as a Lithostitched surface rule,
