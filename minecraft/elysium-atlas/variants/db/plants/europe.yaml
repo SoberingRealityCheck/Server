@@ -294,6 +294,7 @@ holm_oak:
   name: Holm oak
   latin: Quercus ilex
   form: tree
+  evergreen: true
   leaf: olive_green
   leaf_note: Leathery leaves, dark green above, grey-felted beneath.
   range: Mediterranean basin.
@@ -316,6 +317,7 @@ olive:
   name: Wild olive
   latin: Olea europaea var. sylvestris
   form: tree
+  evergreen: true
   leaf: "#9aa88a"
   leaf_note: Narrow leaves, grey-green above, silvery beneath.
   range: Mediterranean lowlands; gone wild from the old groves.
@@ -327,6 +329,7 @@ strawberry_tree:
   name: Strawberry tree
   latin: Arbutus unedo
   form: shrub
+  evergreen: true
   leaf: dark_glossy_green
   leaf_note: Glossy dark green leathery leaves.
   range: Maquis from Ireland's southwest to the Aegean.
@@ -337,6 +340,7 @@ mastic:
   name: Mastic (lentisk)
   latin: Pistacia lentiscus
   form: shrub
+  evergreen: true
   leaf: olive_green
   leaf_note: Leathery dark olive-green leaflets.
   range: Hot coastal maquis.
@@ -347,6 +351,7 @@ kermes_oak:
   name: Kermes oak
   latin: Quercus coccifera
   form: shrub
+  evergreen: true
   leaf: "#56663a"
   leaf_note: Small spiny holly-like leaves, grey-green.
   range: Garrigue and maquis on limestone.

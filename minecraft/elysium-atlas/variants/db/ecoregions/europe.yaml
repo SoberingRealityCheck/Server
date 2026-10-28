@@ -117,15 +117,17 @@
 654:
   name: Central European Mixed Forest
   resolve: "Central European mixed forests"
-  tree_cover: 0.55
-  trees: {pedunculate_oak: 3, hornbeam: 3, scots_pine: 3, silver_birch: 1, european_beech: 1, norway_spruce: 1}
-  ground: {leaf_litter: 2, bilberry: 1, wood_sedge: 1, false_oat_grass: 1}
+  tree_cover: 0.62
+  trees: {pedunculate_oak: 3, hornbeam: 3, scots_pine: 4, silver_birch: 1, european_beech: 1, norway_spruce: 1}
+  ground: {leaf_litter: 2, bilberry: 1, wood_sedge: 1, false_oat_grass: 1, heather: 1}
   flowers: {wood_anemone: 1, oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 0.8
   ground_surface:
     geology: "Glacial till and loess."
     rock: [stone]
-    soil: {coarse_dirt: few}
+    soil: {sand: few, podzol: few}
+  niches:
+    scots_pine: {water: dry}
   why: "Continental oak-hornbeam and pine on the sands of Germany and Poland."
 
 647:
@@ -521,16 +523,18 @@
   name: Provence and Catalonia
   resolve: "Northeast Spain and Southern France Mediterranean forests"
   tree_cover: 0.35
-  trees: {holm_oak: 4, aleppo_pine: 2, umbrella_pine: 1, olive: 1}
+  trees: {holm_oak: 4, aleppo_pine: 2, umbrella_pine: 1, olive: 1, italian_cypress: 0.3}
   shrubs: {strawberry_tree: 1, mastic: 1, kermes_oak: 1}
-  ground: {common_thyme: 1.5, grey_leaved_cistus: 0.75, rosemary: 0.75, lavender: 2, retuse_false_brome: 1}
+  ground: {common_thyme: 1.5, grey_leaved_cistus: 0.75, rosemary: 0.75, lavender: 3, retuse_false_brome: 1}
   flowers: {common_poppy: 0.21, cornflower: 0.14, oxeye_daisy: 0.14}
   flower_density: 0.4
   ground_surface:
     geology: "Limestone garrigue with terra rossa."
-    rock: [calcite]
-    outcrops: some
-    soil: {coarse_dirt: some, red_sand: few}
+    rock: [calcite, diorite]
+    outcrops: few
+    outcrop_size: small
+    ledges: {every: 3, keep: 0.7}
+    soil: {coarse_dirt: few, red_sand: few}
   why: "Holm oak, Aleppo pine and lavender garrigue on the limestone of Provence and Catalonia."
 
 806:

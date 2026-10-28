@@ -15180,7 +15180,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/384/trees_8",
+     "elysium:flora/384/trees_6",
      "elysium:flora/384/ground_12",
      "elysium:flora/384/flowers_8"
     ]
@@ -15205,8 +15205,8 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/384/trees_7",
-     "elysium:flora/384/ground_13",
+     "elysium:flora/384/trees_5",
+     "elysium:flora/384/ground_14",
      "elysium:flora/384/flowers_8"
     ]
    },
@@ -15225,7 +15225,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/384/trees_6",
+     "elysium:flora/384/trees_4",
      "elysium:flora/384/ground_14",
      "elysium:flora/384/flowers_8"
     ]
@@ -15247,7 +15247,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/384/trees_5",
+     "elysium:flora/384/trees_3",
      "elysium:flora/384/ground_14",
      "elysium:flora/384/flowers_8"
     ]
@@ -15270,7 +15270,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/384/trees_9",
+     "elysium:flora/384/trees_7",
      "elysium:flora/384/ground_11",
      "elysium:flora/384/flowers_8"
     ]
@@ -15292,8 +15292,8 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/384/trees_7",
-     "elysium:flora/384/ground_13",
+     "elysium:flora/384/trees_5",
+     "elysium:flora/384/ground_14",
      "elysium:flora/384/flowers_8"
     ]
    },
@@ -15312,8 +15312,8 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/384/trees_7",
-     "elysium:flora/384/ground_13",
+     "elysium:flora/384/trees_5",
+     "elysium:flora/384/ground_14",
      "elysium:flora/384/flowers_8"
     ]
    },
@@ -18243,7 +18243,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/401/trees_5",
+     "elysium:flora/401/trees_4",
      "elysium:flora/401/ground_14",
      "elysium:flora/401/flowers_11"
     ]
@@ -18266,8 +18266,8 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/401/trees_9",
-     "elysium:flora/401/ground_10",
+     "elysium:flora/401/trees_8",
+     "elysium:flora/401/ground_11",
      "elysium:flora/401/flowers_11"
     ]
    },
@@ -18291,7 +18291,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/401/trees_6",
+     "elysium:flora/401/trees_5",
      "elysium:flora/401/ground_14",
      "elysium:flora/401/flowers_11"
     ]
@@ -18312,8 +18312,8 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/401/trees_8",
-     "elysium:flora/401/ground_11",
+     "elysium:flora/401/trees_7",
+     "elysium:flora/401/ground_12",
      "elysium:flora/401/flowers_11"
     ]
    },
@@ -29488,7 +29488,7 @@
    "add_features": {
     "vegetal_decoration": [
      "elysium:flora/654/trees_13",
-     "elysium:flora/654/ground_11",
+     "elysium:flora/654/ground_10",
      "elysium:flora/654/flowers_6"
     ]
    },
@@ -29512,7 +29512,7 @@
    "add_features": {
     "vegetal_decoration": [
      "elysium:flora/654/trees_13",
-     "elysium:flora/654/ground_11",
+     "elysium:flora/654/ground_10",
      "elysium:flora/654/flowers_6"
     ]
    },
@@ -29534,7 +29534,7 @@
    "add_features": {
     "vegetal_decoration": [
      "elysium:flora/654/trees_13",
-     "elysium:flora/654/ground_11",
+     "elysium:flora/654/ground_10",
      "elysium:flora/654/flowers_6"
     ]
    },
@@ -29578,8 +29578,8 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/654/trees_15",
-     "elysium:flora/654/ground_10",
+     "elysium:flora/654/trees_16",
+     "elysium:flora/654/ground_9",
      "elysium:flora/654/flowers_6"
     ]
    },
@@ -29626,7 +29626,7 @@
    "add_features": {
     "vegetal_decoration": [
      "elysium:flora/654/trees_14",
-     "elysium:flora/654/ground_11",
+     "elysium:flora/654/ground_10",
      "elysium:flora/654/flowers_6"
     ]
    },
@@ -29649,8 +29649,8 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/654/trees_15",
-     "elysium:flora/654/ground_10",
+     "elysium:flora/654/trees_16",
+     "elysium:flora/654/ground_9",
      "elysium:flora/654/flowers_6"
     ]
    },
@@ -29670,8 +29670,8 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/654/trees_8",
-     "elysium:flora/654/ground_12",
+     "elysium:flora/654/trees_9",
+     "elysium:flora/654/ground_11",
      "elysium:flora/654/flowers_6"
     ]
    },

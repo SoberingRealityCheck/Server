@@ -37,20 +37,27 @@
 401:
   name: Blackland Prairie
   resolve: "Texas blackland prairies"
-  tree_cover: 0.15
+  tree_cover: 0.10
   tree_density: 0.6
-  trees: {cedar_elm: 3, pecan: 2, cottonwood: 1, honey_mesquite: 1, live_oak: 1}
+  trees: {cedar_elm: 3, pecan: 2, cottonwood: 1}
   ground: {little_bluestem: 2, big_bluestem: 2}
   flowers: {texas_bluebonnet: 4, texas_paintbrush: 2, winecup: 1, plains_coreopsis: 1, antelope_horn_milkweed: 0.5, tall_goldenrod: 0.5}
   flower_density: 4
   rebase: {minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains, terralith:valley_clearing: minecraft:plains, terralith:blooming_valley: minecraft:plains, terralith:snowy_maple_forest: minecraft:plains, terralith:birch_taiga: minecraft:plains, minecraft:meadow: minecraft:plains, terralith:forested_highlands: terralith:highlands, minecraft:swamp: minecraft:plains}
   ground_surface:
     geology: "Austin Chalk under black vertisols."
-    rock: [calcite]
+    rock: [calcite, diorite]
     outcrops: few
+    outcrop_size: small
+    ledges: {every: 4, keep: 0.5}
     soil: {mud: few}
+  niches:
+    cedar_elm: {water: riparian}
+    pecan: {water: riparian}
+    cottonwood: {water: riparian}
   patches:
     trees: {size: 40, share: 0.3, outside: 0.1}
+    flowers: {size: 34, share: 0.45}
   why: "Tallgrass prairie on black clay, the classic bluebonnet country. Trees only along creeks."
 
 391:
@@ -116,19 +123,23 @@
     geology: "Permian red beds."
     rock: [red_sandstone]
     outcrops: some
-    soil: {red_sand: few}
+    outcrop_size: small
+    strata: [red_sandstone, terracotta, red_sandstone, white_terracotta]
+    soil: {red_sand: some}
     subsoil: red_terracotta
   patches:
-    trees: {size: 30, share: 0.5, outside: 0.1}
+    trees: {size: 20, share: 0.35, outside: 0.25}
+  niches:
+    eastern_red_cedar: {slope: steep}
   why: "Mixed-grass prairie of north Texas and Oklahoma, invaded by mesquite and red cedar."
 
 384:
   name: Gulf Coast Prairie
   resolve: "Western Gulf coastal grasslands"
-  tree_cover: 0.15
+  tree_cover: 0.07
   tree_density: 0.7
   trees: {live_oak_mossy: 5, huisache: 1, honey_mesquite: 1, sabal_palm: 0.3}
-  ground: {common_reed: 1, sea_oats: 0.5, little_bluestem: 2, gulf_cordgrass: 1}
+  ground: {common_reed: 3, sea_oats: 0.5, little_bluestem: 2, gulf_cordgrass: 1}
   flowers: {virginia_iris: 1, texas_paintbrush: 1, plains_coreopsis: 1}
   flower_density: 1.5
   rebase: {minecraft:savanna: minecraft:plains, terralith:ashen_savanna: minecraft:plains, minecraft:forest: minecraft:plains, minecraft:birch_forest: minecraft:plains}
@@ -136,7 +147,9 @@
     geology: "Coastal clay and sand."
     soil: {mud: few}
   patches:
-    trees: {size: 30, share: 0.3, outside: 0.05}
+    trees: {size: 16, share: 0.08, outside: 0}
+  niches:
+    common_reed: {water: wet}
   why: "Coastal tallgrass prairie and marsh, mossy live oak mottes on old dunes."
 
 402:
@@ -163,8 +176,8 @@
   resolve: "Chihuahuan desert"
   tree_cover: 0.04
   trees: {honey_mesquite: 3, pinyon_pine: 1, faxon_yucca: 1}
-  shrubs: {one_seed_juniper: 1}
-  ground: {creosote_bush: 4, dead_brush: 1, russian_thistle: 0.3, black_grama: 1, tobosa: 1}
+  shrubs: {one_seed_juniper: 1, creosote_shrub: 8}
+  ground: { dead_brush: 1, russian_thistle: 0.3, black_grama: 1, tobosa: 1}
   flowers: {desert_marigold: 1, sacred_datura: 0.5}
   cactus: {texas_prickly_pear: 2, tree_cholla: 1, lechuguilla: 2}
   flower_density: 0.4
@@ -174,12 +187,15 @@
     one_seed_juniper: {elevation: [1300, 2400]}
     honey_mesquite: {elevation: [0, 1700]}
     faxon_yucca: {elevation: [600, 1800]}
-    creosote_bush: {elevation: [0, 1600]}
+    creosote_shrub: {elevation: [0, 1600]}
   ground_surface:
     geology: "Limestone ranges and gravel bajadas."
-    rock: [calcite, stone]
+    rock: [calcite, diorite]
     outcrops: some
-    soil: {coarse_dirt: many, gravel: few}
+    strata: [smooth_stone, diorite, calcite]
+    ledges: {every: 3, keep: 0.7}
+    soil: {coarse_dirt: many, sand: few}
+    top: gravel
   why: "Creosote flats, mesquite washes, prickly pear and cholla; pinyon and juniper on the sky islands."
 
 437:

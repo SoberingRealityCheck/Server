@@ -164,6 +164,7 @@ live_oak_mossy:
   name: Southern live oak with Spanish moss
   latin: Quercus virginiana, Tillandsia usneoides
   form: tree
+  evergreen: true
   leaf: dark_glossy_green
   leaf_note: As live oak; the moss is grey.
   range: Humid Gulf coast and river bottoms.
@@ -232,6 +233,19 @@ flowering_dogwood_tree:
   render: 'tree("oak_log", "oak_leaves", straight(3, 1, 0), blob(2, 2, 0))'
   sapling: oak_sapling
   stand_in: Green crown; the spring white is not modelled (no seasonal block swap).
+
+creosote_shrub:
+  name: Creosote bush
+  latin: Larrea tridentata
+  form: shrub
+  evergreen: true
+  leaf: "#6b7a3a"
+  leaf_note: Small resinous olive leaves, held all year.
+  range: Chihuahuan, Sonoran and Mojave deserts.
+  look: Evenly spaced knee-to-waist-high shrubs on bare gravel.
+  render: 'tree("oak_log", "oak_leaves", straight(1, 0, 0), bushf(1, 1, 0))'
+  sapling: oak_sapling
+  stand_in: Woody-shrub version of creosote_bush (the ground form), so it can be a shrub layer.
 
 white_oak:
   name: White oak
