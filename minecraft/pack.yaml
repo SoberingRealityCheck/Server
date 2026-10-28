@@ -249,9 +249,10 @@ mods:
   # --- Performance ----------------------------------------------------
   # Singleplayer runs a full server inside the client process, so a mod
   # that speeds up the server only helps singleplayer if it ships to
-  # clients too. Lithium, FerriteCore and Chunky are `both` for that
-  # reason. Krypton stays server-only: it optimizes the network stack,
-  # and singleplayer talks to its server over an in-memory channel.
+  # clients too. Lithium and FerriteCore are `both` for that reason.
+  # Krypton stays server-only: it optimizes the network stack, and
+  # singleplayer talks to its server over an in-memory channel. Chunky
+  # stays server-only too, see its entry.
   - name: "Lithium"
     file: "lithium-fabric-0.25.3+mc26.2.jar"
     url: "https://cdn.modrinth.com/data/gvQqBUqZ/versions/f7vZ0VWU/lithium-fabric-0.25.3%2Bmc26.2.jar"
@@ -301,12 +302,14 @@ mods:
     file: "Chunky-Fabric-1.5.3.jar"
     url: "https://cdn.modrinth.com/data/fALzjamp/versions/4Eotm6ov/Chunky-Fabric-1.5.3.jar"
     sha512: "b83bfe7b218d0aa6232af977ae741dc1f82b10e50cd12bb759f65cf416b8b62beccb543e587ef0b9670abe03815660f8e091bc6823624d65cf07300571573516"
-    env: both
+    env: server
     reason: >-
       Pre-generates chunks on demand via console commands. Idle otherwise; it does nothing
-      until you run /chunky start. On clients it only loads into the
-      integrated server, where pregenerating around spawn removes the
-      stalls from the server waiting on unfinished chunks.
+      until you run /chunky start. Do NOT ship it to clients: Distant
+      Horizons 3.3.2 detects Chunky and locks its Distant Generator Plan
+      to Disabled through its API, even while Chunky is idle, so
+      singleplayer LODs stop generating beyond visited chunks (seen
+      2026-10-28).
 
   - name: "World Preview (Unofficial Port) 1.4.0"
     file: "world_preview-1.4.0.jar"
