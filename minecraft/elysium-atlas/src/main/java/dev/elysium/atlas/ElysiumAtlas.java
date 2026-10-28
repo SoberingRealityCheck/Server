@@ -25,6 +25,7 @@ import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.level.storage.LevelResource;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
@@ -48,6 +49,7 @@ public final class ElysiumAtlas implements ModInitializer {
             boolean on = usesAtlas(server);
             AtlasFluidPicker.atlasSettings = on && overworldGenerator(server) instanceof NoiseBasedChunkGenerator g ? g.generatorSettings().value() : null;
             Atlas.setActive(on);
+            if (on) checkProfile(server);
         });
         ServerLifecycleEvents.SERVER_STARTED.register(ElysiumAtlas::onStarted);
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> Atlas.setActive(false));
@@ -82,26 +84,52 @@ public final class ElysiumAtlas implements ModInitializer {
     }
 
     /**
-     * On first start of an atlas world: move spawn to the atlas spawn point and record the atlas version.
-     * On later starts: warn if the atlas changed, since new chunks would no longer match old ones.
+     * Before any level loads: refuse a world whose stamp names a different scale profile, since every new chunk would be
+     * at a different scale from the old ones. -Delysium_atlas.allowProfileChange=true starts anyway.
+     */
+    private static void checkProfile(MinecraftServer server) {
+        Atlas a = Atlas.get();
+        Path stamp = server.getWorldPath(LevelResource.ROOT).resolve("elysium_atlas.properties");
+        if (a.profileHash == null || !Files.exists(stamp) || Boolean.getBoolean("elysium_atlas.allowProfileChange")) return;
+        Properties p = new Properties();
+        try (var r = Files.newBufferedReader(stamp)) { p.load(r); } catch (IOException e) { throw new UncheckedIOException(e); }
+        String wasHash = p.getProperty("profile_hash");
+        if (wasHash != null && !wasHash.equals(a.profileHash))
+            throw new IllegalStateException("World was generated with atlas profile " + p.getProperty("profile") + " (" + wasHash + ") but profile "
+                    + a.profileName + " (" + a.profileHash + ") is installed. Install the matching atlas or start a new world "
+                    + "(-Delysium_atlas.allowProfileChange=true overrides).");
+    }
+
+    /**
+     * On first start of an atlas world: move spawn to the atlas spawn point and record the atlas version and profile.
+     * On later starts: warn if the atlas version changed, since new chunks would no longer match old ones at their borders
+     * (a changed scale profile is refused earlier, in checkProfile).
      */
     private static void onStarted(MinecraftServer server) {
         if (!Atlas.active()) return;
         ServerLevel level = server.overworld();
         Atlas a = Atlas.get();
+        if (a.profileMaxY > 0 && level.getMaxY() + 1 < a.profileMaxY)
+            Atlas.LOG.warn("Atlas profile {} is designed for a world top of Y {}, but this world ends at Y {}. Set max_y in config/tectonic.json.",
+                    a.profileName, a.profileMaxY, level.getMaxY() + 1);
         Path stamp = server.getWorldPath(LevelResource.ROOT).resolve("elysium_atlas.properties");
         Properties p = new Properties();
         try {
             if (Files.exists(stamp)) {
                 try (var r = Files.newBufferedReader(stamp)) { p.load(r); }
-                String was = p.getProperty("atlas_version");
+                String was = p.getProperty("atlas_version"), wasHash = p.getProperty("profile_hash");
                 if (!a.version.equals(was))
                     Atlas.LOG.warn("World was generated with atlas {} but atlas {} is installed. New chunks will not match old ones at their borders.", was, a.version);
+                if (wasHash == null && a.profileHash != null) {   // world from before profiles: adopt the installed one
+                    p.setProperty("profile", a.profileName); p.setProperty("profile_hash", a.profileHash);
+                    try (var w = Files.newBufferedWriter(stamp)) { p.store(w, "Written by elysium_atlas on first start. Do not edit."); }
+                }
                 return;
             }
             int y = level.getChunk(a.spawnX >> 4, a.spawnZ >> 4).getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, a.spawnX & 15, a.spawnZ & 15) + 1;
             level.setRespawnData(LevelData.RespawnData.of(Level.OVERWORLD, new BlockPos(a.spawnX, y, a.spawnZ), 0, 0));
             p.setProperty("atlas_version", a.version);
+            if (a.profileHash != null) { p.setProperty("profile", a.profileName); p.setProperty("profile_hash", a.profileHash); }
             p.setProperty("spawn", a.spawnX + " " + y + " " + a.spawnZ);
             try (var w = Files.newBufferedWriter(stamp)) { p.store(w, "Written by elysium_atlas on first start. Do not edit."); }
             Atlas.LOG.info("Atlas world: spawn set to {} {} {}", a.spawnX, y, a.spawnZ);

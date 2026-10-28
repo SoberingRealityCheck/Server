@@ -116,10 +116,26 @@ each type in the wrong vegetation family; flooded grasslands are exempt, the wat
 `bake/season_tags.py` writes the Serene Seasons tags for the flora mods' biomes
 (`server-overrides/world/datapacks/z-seasons-floramods`).
 
-`bake/bake_atlas.py OUT TILE_CACHE [--region LON0 LON1 LAT0 LAT1] [--spawn LON LAT]` builds it from
-Terrarium elevation tiles and the biome layers in the project's worldgen-experiments folder (set
-`ELYSIUM_WORLDGEN_EXPERIMENTS` to its path). Changing a frozen constant in it needs a new
-`ATLAS_VERSION` and a new world. `bake/render_world.py` renders generated region files against
+`bake/bake_atlas.py OUT TILE_CACHE --profile NAME` builds it from Terrarium elevation tiles and the
+biome layers in the project's worldgen-experiments folder (set `ELYSIUM_WORLDGEN_EXPERIMENTS` to its path).
+
+**Scale profiles.** Every number that depends on scale lives in `bake/profiles/NAME.json` (`bake/profile.py`):
+metres per block, sea level, world height, the vertical transfer, and each level's cell size (in metres; blocks
+follow from metres per block), Terrarium zoom, extent and feather. Every bake script takes `--profile` (or
+`ELYSIUM_PROFILE`; default `dev-globe`). Keys ending `_m` are metres, `_blocks` and `Y` values are blocks.
+`atlas.json` carries `profile: {name, hash, min_y, max_y}`; the world stamp (`elysium_atlas.properties`) records
+the hash on first start, and the server refuses to start a world with a different hash
+(`-Delysium_atlas.allowProfileChange=true` overrides). Worlds from before profiles adopt the installed one.
+
+| Profile | m/block | Extent | Levels | max_y |
+|---|---|---|---|---|
+| `dev-globe` | 150 | globe | L0 4800 m (32 blocks) z5; L1 600 m (4 blocks) z10 over 4-13.5E 43.5-48.5N | 576 |
+| `dev-window` | 15 | 5.6-7.4E 45.8-46.9N (Lake Geneva), fading to sea at the edge | L0 480 m z8; L1 60 m z12 over 5.9-7.1E 46.0-46.7N | 768 |
+
+`dev-globe` reproduces slice-9 bit for bit (all L0 and L1 tiles, after sub-biomes). The 15 m window is for
+in-game tuning at server scale; the server profiles (15 m, baked by continent) come later. Scale-dependent
+values still tuned at 150 m and not yet in the profile: river half-width (blocks), lake depth cap (48 blocks),
+stream meander (blocks), the 5 km hydro grid, niche elevation fades (150 m), and Tectonic's own noise. `bake/render_world.py` renders generated region files against
 the atlas (hillshade, biomes, height error).
 
 ## Results (slice-2 terrain, slice-3 water)

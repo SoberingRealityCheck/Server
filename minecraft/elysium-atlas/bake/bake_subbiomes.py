@@ -16,10 +16,11 @@ import numpy as np
 from scipy import ndimage as ndi
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from bake_atlas import ee_inv, terrarium, MPB, SEA_RISE
+from bake_atlas import ee_inv, terrarium, MPB, SEA_RISE, LEVELS
 from placement import Placement
 
-# ---- frozen parameters (changing any changes biomes: bump the atlas version)
+# ---- frozen parameters (changing any changes biomes: bump the atlas version). Counts are L1 cells; C1 is blocks per cell.
+C1 = LEVELS[1]["cell"]   # blocks (profile)
 LEG = 5            # land-use fractions smoothed over 5 cells (20 blocks)
 MODE = 9           # majority filter: smallest patch ~36 blocks
 SUBS = 4           # WorldCover sub-samples per cell side
@@ -147,7 +148,7 @@ def classify(zr, wc_frac, I, J, cell_m):
     fg = fs.FlowGraph(grid, [fs.SingleFlowRouter(), fs.MSTSinkResolver()]); fg.update_routes(zs.astype(np.float64))
     A = (fg.accumulate(np.ones((H, W))) / 1e6).astype(np.float32)
     field_v = voronoi(I, J, FIELD_CELL, 11); gap = gaps(I, J, GAP_CELL, 23)
-    d_forest = ndi.distance_transform_edt(tree < 0.5) * 4                      # blocks
+    d_forest = ndi.distance_transform_edt(tree < 0.5) * C1                      # blocks
     d_built = ndi.distance_transform_edt(built < 0.3) * cell_m / 1000           # km real
     forest, cropland = tree >= 0.5, crop >= 0.4
     rules = [
@@ -207,8 +208,8 @@ def walk(F, n=400, length=500):
         for x in keep:
             if merged and merged[-1][0] == x[0]: merged[-1] = np.concatenate([merged[-1], x])
             else: merged.append(x)
-        runs += [len(x) * 4 for x in merged[1:-1]]
-    return float(np.median(runs)) if runs else float(length * 4)
+        runs += [len(x) * C1 for x in merged[1:-1]]
+    return float(np.median(runs)) if runs else float(length * C1)
 
 
 def main():
@@ -217,24 +218,24 @@ def main():
     a = ap.parse_args(); os.makedirs(a.wc_cache, exist_ok=True); t0 = time.time()
     mpath = os.path.join(a.atlas, "atlas.json"); m = json.load(open(mpath)); T = m["tile_size"]; pal = m["biome_palette"]
     if "subbiomes" in m: sys.exit("atlas already has sub-biomes; rebake L1 first")
-    lv = next(l for l in m["levels"] if l["cell"] == 4); i0, j0, i1, j1 = lv["cells"]
+    lv = next(l for l in m["levels"] if l["cell"] == C1); i0, j0, i1, j1 = lv["cells"]
     y, rel, b0 = read_level(a.atlas, lv, T); H, W = b0.shape
     J, I = np.mgrid[j0:j1, i0:i1]                     # J = z index (rows), I = x index
-    lon, lat, _ = ee_inv(((I + 0.5) * 4 * MPB).astype(np.float64), (-(J + 0.5) * 4 * MPB).astype(np.float64))
-    zr = terrarium(lon, lat, 10, a.tiles) - SEA_RISE
+    lon, lat, _ = ee_inv(((I + 0.5) * C1 * MPB).astype(np.float64), (-(J + 0.5) * C1 * MPB).astype(np.float64))
+    zr = terrarium(lon, lat, LEVELS[1]["zoom"], a.tiles) - SEA_RISE
     # land-use fractions from SUBS x SUBS points per cell
     acc = {k: np.zeros((H, W), np.float32) for k in ("tree", "crop", "grass", "built", "wet", "water", "bare", "shrub")}
     codes = {"tree": (10,), "shrub": (20,), "grass": (30,), "crop": (40,), "built": (50,), "bare": (60, 70), "water": (80,), "wet": (90, 95)}
     for sa in range(SUBS):
         for sb in range(SUBS):
-            lo2, la2, _ = ee_inv(((I + (sa + 0.5) / SUBS) * 4 * MPB).astype(np.float64), (-(J + (sb + 0.5) / SUBS) * 4 * MPB).astype(np.float64))
+            lo2, la2, _ = ee_inv(((I + (sa + 0.5) / SUBS) * C1 * MPB).astype(np.float64), (-(J + (sb + 0.5) / SUBS) * C1 * MPB).astype(np.float64))
             wc = worldcover(lo2, la2, a.wc_cache)
             for k, cs in codes.items(): acc[k] += np.isin(wc, cs)
     frac = {k: v / SUBS ** 2 for k, v in acc.items()}
     if sum(float(v.mean()) for v in frac.values()) < 0.5: sys.exit("WorldCover covers under half the cells: check the download (CURL_CA_BUNDLE)")
     for k in ("tree", "crop", "grass", "built", "wet"): frac[k] = ndi.uniform_filter(frac[k], LEG)
     print(f"inputs {time.time() - t0:.0f} s; worldcover shares", {k: round(float(v.mean()), 3) for k, v in frac.items()}, flush=True)
-    L3 = classify(zr.astype(np.float32), frac, I, J, 4 * MPB)
+    L3 = classify(zr.astype(np.float32), frac, I, J, C1 * MPB)
     # class x group -> biome
     pix = {k: n for n, k in enumerate(pal)}
     def pid(k):
@@ -284,7 +285,7 @@ def render(path, b0, b, pal, y):
                  "minecraft:plains": (0.8, 0.85, 0.45), "minecraft:meadow": (0.6, 0.85, 0.5), "minecraft:swamp": (0.35, 0.45, 0.3),
                  "minecraft:birch_forest": (0.5, 0.75, 0.4), "minecraft:dark_forest": (0.1, 0.3, 0.12)}.items():
         if k in pal: P[pal.index(k)] = c
-    hs = LightSource(315, 40).hillshade(np.nan_to_num(y, nan=0.0), vert_exag=1, dx=4, dy=4)
+    hs = LightSource(315, 40).hillshade(np.nan_to_num(y, nan=0.0), vert_exag=1, dx=C1, dy=C1)
     ims = [np.clip(P[x] * (0.55 + 0.6 * hs)[..., None], 0, 1) for x in (b0, b)]
     img = np.concatenate([ims[0], np.ones((ims[0].shape[0], 8, 3)), ims[1]], axis=1)
     Image.fromarray((img * 255).astype(np.uint8)).save(path, optimize=True)

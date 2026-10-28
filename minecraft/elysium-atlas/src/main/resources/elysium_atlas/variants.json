@@ -49654,9 +49654,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/793/trees_10",
+     "elysium:flora/793/trees_8",
      "elysium:flora/793/shrubs_11",
-     "elysium:flora/793/ground_12",
+     "elysium:flora/793/ground_13",
      "elysium:flora/793/flowers_4"
     ]
    },
@@ -49669,7 +49669,7 @@
     "biomesoplenty:patch_peony",
     "biomesoplenty:patch_grass_3"
    ],
-   "why": "Holm oak and dry grass on the Meseta."
+   "why": "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
   },
   "elysium:eco/793/wilderwild_sparse_forest": {
    "parent": "wilderwild:sparse_forest",
@@ -49678,9 +49678,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/793/trees_11",
+     "elysium:flora/793/trees_9",
      "elysium:flora/793/shrubs_12",
-     "elysium:flora/793/ground_12",
+     "elysium:flora/793/ground_13",
      "elysium:flora/793/flowers_4"
     ]
    },
@@ -49692,7 +49692,7 @@
     "minecraft:patch_firefly_bush_near_water",
     "wilderwild:trees_sparse_forest"
    ],
-   "why": "Holm oak and dry grass on the Meseta."
+   "why": "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
   },
   "elysium:eco/793/flower_forest": {
    "parent": "minecraft:flower_forest",
@@ -49701,9 +49701,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/793/trees_11",
+     "elysium:flora/793/trees_9",
      "elysium:flora/793/shrubs_12",
-     "elysium:flora/793/ground_12",
+     "elysium:flora/793/ground_13",
      "elysium:flora/793/flowers_4"
     ]
    },
@@ -49715,7 +49715,7 @@
     "minecraft:patch_grass_badlands",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Holm oak and dry grass on the Meseta."
+   "why": "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
   },
   "elysium:eco/793/wilderwild_parched_forest": {
    "parent": "wilderwild:parched_forest",
@@ -49724,9 +49724,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/793/trees_11",
+     "elysium:flora/793/trees_9",
      "elysium:flora/793/shrubs_12",
-     "elysium:flora/793/ground_12",
+     "elysium:flora/793/ground_13",
      "elysium:flora/793/flowers_4"
     ]
    },
@@ -49738,7 +49738,7 @@
     "minecraft:patch_bush",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Holm oak and dry grass on the Meseta."
+   "why": "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
   },
   "elysium:eco/793/biomesoplenty_subtropics": {
    "parent": "biomesoplenty:subtropics",
@@ -49747,7 +49747,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/793/trees_10",
+     "elysium:flora/793/trees_7",
      "elysium:flora/793/shrubs_11",
      "elysium:flora/793/ground_13",
      "elysium:flora/793/flowers_4"
@@ -49762,7 +49762,7 @@
     "biomesoplenty:patch_grass_12",
     "biomesoplenty:patch_tall_grass_6"
    ],
-   "why": "Holm oak and dry grass on the Meseta."
+   "why": "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
   },
   "elysium:eco/793/forest": {
    "parent": "minecraft:forest",
@@ -49771,7 +49771,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/793/trees_13",
+     "elysium:flora/793/trees_10",
      "elysium:flora/793/shrubs_13",
      "elysium:flora/793/ground_11",
      "elysium:flora/793/flowers_4"
@@ -49787,7 +49787,7 @@
     "minecraft:patch_grass_forest",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Holm oak and dry grass on the Meseta."
+   "why": "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
   },
   "elysium:eco/793/terralith_shrubland": {
    "parent": "terralith:shrubland",
@@ -49796,9 +49796,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/793/trees_11",
+     "elysium:flora/793/trees_9",
      "elysium:flora/793/shrubs_12",
-     "elysium:flora/793/ground_12",
+     "elysium:flora/793/ground_13",
      "elysium:flora/793/flowers_4"
     ]
    },
@@ -49812,7 +49812,7 @@
     "minecraft:patch_grass_plain",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Holm oak and dry grass on the Meseta."
+   "why": "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
   },
   "elysium:eco/793/terrestria_hemlock_treeline": {
    "parent": "terrestria:hemlock_treeline",
@@ -49821,9 +49821,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/793/trees_11",
+     "elysium:flora/793/trees_9",
      "elysium:flora/793/shrubs_12",
-     "elysium:flora/793/ground_12",
+     "elysium:flora/793/ground_13",
      "elysium:flora/793/flowers_4"
     ]
    },
@@ -49836,7 +49836,7 @@
     "minecraft:patch_grass_taiga_2",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Holm oak and dry grass on the Meseta."
+   "why": "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
   },
   "elysium:eco/793/wilderwild_dark_birch_forest": {
    "parent": "wilderwild:dark_birch_forest",
@@ -49845,7 +49845,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/793/trees_13",
+     "elysium:flora/793/trees_10",
      "elysium:flora/793/shrubs_13",
      "elysium:flora/793/ground_11",
      "elysium:flora/793/flowers_4"
@@ -49859,7 +49859,7 @@
     "minecraft:patch_firefly_bush_near_water",
     "wilderwild:dark_birch_forest_vegetation"
    ],
-   "why": "Holm oak and dry grass on the Meseta."
+   "why": "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
   },
   "elysium:eco/793/terralith_highlands": {
    "parent": "terralith:highlands",
@@ -49868,9 +49868,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/793/trees_8",
+     "elysium:flora/793/trees_6",
      "elysium:flora/793/shrubs_10",
-     "elysium:flora/793/ground_13",
+     "elysium:flora/793/ground_14",
      "elysium:flora/793/flowers_4"
     ]
    },
@@ -49882,7 +49882,7 @@
     "terralith:highlands/grass",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Holm oak and dry grass on the Meseta."
+   "why": "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
   },
   "elysium:eco/794/flower_forest": {
    "parent": "minecraft:flower_forest",
@@ -50078,7 +50078,7 @@
      "elysium:flora/795/trees_12",
      "elysium:flora/795/shrubs_12",
      "elysium:flora/795/ground_12",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50089,7 +50089,7 @@
     "minecraft:patch_firefly_bush_near_water",
     "wilderwild:trees_sparse_forest"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/terrestria_hemlock_treeline": {
    "parent": "terrestria:hemlock_treeline",
@@ -50101,7 +50101,7 @@
      "elysium:flora/795/trees_12",
      "elysium:flora/795/shrubs_12",
      "elysium:flora/795/ground_12",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50113,7 +50113,7 @@
     "minecraft:patch_grass_taiga_2",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/flower_forest": {
    "parent": "minecraft:flower_forest",
@@ -50125,7 +50125,7 @@
      "elysium:flora/795/trees_12",
      "elysium:flora/795/shrubs_12",
      "elysium:flora/795/ground_12",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50136,7 +50136,7 @@
     "minecraft:patch_grass_badlands",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/biomesoplenty_mediterranean_forest": {
    "parent": "biomesoplenty:mediterranean_forest",
@@ -50148,7 +50148,7 @@
      "elysium:flora/795/trees_11",
      "elysium:flora/795/shrubs_11",
      "elysium:flora/795/ground_12",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50160,7 +50160,7 @@
     "biomesoplenty:patch_peony",
     "biomesoplenty:patch_grass_3"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/forest": {
    "parent": "minecraft:forest",
@@ -50172,7 +50172,7 @@
      "elysium:flora/795/trees_13",
      "elysium:flora/795/shrubs_12",
      "elysium:flora/795/ground_11",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50185,7 +50185,7 @@
     "minecraft:patch_grass_forest",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/meadow": {
    "parent": "minecraft:meadow",
@@ -50197,7 +50197,7 @@
      "elysium:flora/795/trees_8",
      "elysium:flora/795/shrubs_10",
      "elysium:flora/795/ground_13",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50207,7 +50207,7 @@
     "minecraft:wildflowers_meadow",
     "minecraft:patch_grass_plain"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/biomesoplenty_subtropics": {
    "parent": "biomesoplenty:subtropics",
@@ -50219,7 +50219,7 @@
      "elysium:flora/795/trees_10",
      "elysium:flora/795/shrubs_11",
      "elysium:flora/795/ground_12",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50231,7 +50231,7 @@
     "biomesoplenty:patch_grass_12",
     "biomesoplenty:patch_tall_grass_6"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/birch_forest": {
    "parent": "minecraft:birch_forest",
@@ -50243,7 +50243,7 @@
      "elysium:flora/795/trees_14",
      "elysium:flora/795/shrubs_13",
      "elysium:flora/795/ground_10",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50257,7 +50257,7 @@
     "minecraft:patch_grass_forest",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/terralith_highlands": {
    "parent": "terralith:highlands",
@@ -50269,7 +50269,7 @@
      "elysium:flora/795/trees_8",
      "elysium:flora/795/shrubs_10",
      "elysium:flora/795/ground_13",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50280,7 +50280,7 @@
     "terralith:highlands/grass",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/terralith_stony_spires": {
    "parent": "terralith:stony_spires",
@@ -50292,7 +50292,7 @@
      "elysium:flora/795/trees_13",
      "elysium:flora/795/shrubs_12",
      "elysium:flora/795/ground_11",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50300,7 +50300,7 @@
     "terralith:spires/oak_tree",
     "terralith:spires/grass"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/wilderwild_rainforest": {
    "parent": "wilderwild:rainforest",
@@ -50312,7 +50312,7 @@
      "elysium:flora/795/trees_14",
      "elysium:flora/795/shrubs_13",
      "elysium:flora/795/ground_10",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50325,7 +50325,7 @@
     "minecraft:patch_grass_forest",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/terralith_brushland": {
    "parent": "terralith:brushland",
@@ -50337,7 +50337,7 @@
      "elysium:flora/795/trees_14",
      "elysium:flora/795/shrubs_13",
      "elysium:flora/795/ground_10",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50348,7 +50348,7 @@
     "terralith:brushland/grass_extra",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/plains": {
    "parent": "minecraft:plains",
@@ -50360,7 +50360,7 @@
      "elysium:flora/795/trees_8",
      "elysium:flora/795/shrubs_10",
      "elysium:flora/795/ground_13",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50372,7 +50372,7 @@
     "minecraft:patch_grass_plain",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/wilderwild_parched_forest": {
    "parent": "wilderwild:parched_forest",
@@ -50384,7 +50384,7 @@
      "elysium:flora/795/trees_12",
      "elysium:flora/795/shrubs_12",
      "elysium:flora/795/ground_12",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50395,7 +50395,7 @@
     "minecraft:patch_bush",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/wilderwild_dark_birch_forest": {
    "parent": "wilderwild:dark_birch_forest",
@@ -50407,7 +50407,7 @@
      "elysium:flora/795/trees_14",
      "elysium:flora/795/shrubs_13",
      "elysium:flora/795/ground_10",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50418,7 +50418,7 @@
     "minecraft:patch_firefly_bush_near_water",
     "wilderwild:dark_birch_forest_vegetation"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/terralith_alpine_highlands": {
    "parent": "terralith:alpine_highlands",
@@ -50430,7 +50430,7 @@
      "elysium:flora/795/trees_14",
      "elysium:flora/795/shrubs_13",
      "elysium:flora/795/ground_10",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50440,7 +50440,7 @@
     "terralith:highlands/alpine/bushes",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/795/wilderwild_semi_birch_forest": {
    "parent": "wilderwild:semi_birch_forest",
@@ -50452,7 +50452,7 @@
      "elysium:flora/795/trees_13",
      "elysium:flora/795/shrubs_13",
      "elysium:flora/795/ground_11",
-     "elysium:flora/795/flowers_7"
+     "elysium:flora/795/flowers_9"
     ]
    },
    "remove_features": [
@@ -50463,7 +50463,7 @@
     "minecraft:patch_firefly_bush_near_water",
     "wilderwild:trees_semi_birch_and_oak"
    ],
-   "why": "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+   "why": "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
   },
   "elysium:eco/799/wilderwild_sparse_forest": {
    "parent": "wilderwild:sparse_forest",
@@ -51210,10 +51210,10 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/805/trees_10",
-     "elysium:flora/805/shrubs_11",
+     "elysium:flora/805/trees_9",
+     "elysium:flora/805/shrubs_6",
      "elysium:flora/805/ground_13",
-     "elysium:flora/805/flowers_6"
+     "elysium:flora/805/flowers_9"
     ]
    },
    "remove_features": [
@@ -51225,7 +51225,7 @@
     "biomesoplenty:patch_peony",
     "biomesoplenty:patch_grass_3"
    ],
-   "why": "Wood pasture of cork and holm oak in southwest Iberia, gone back to scrub between the trees."
+   "why": "Park: big cork and holm oaks spread evenly across pasture with almost no scrub, flower carpets in spring, straw by July. Art direction batch 4 (even spacing still pending)."
   },
   "elysium:eco/805/wilderwild_sparse_forest": {
    "parent": "wilderwild:sparse_forest",
@@ -51234,10 +51234,10 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/805/trees_11",
-     "elysium:flora/805/shrubs_12",
+     "elysium:flora/805/trees_10",
+     "elysium:flora/805/shrubs_7",
      "elysium:flora/805/ground_12",
-     "elysium:flora/805/flowers_6"
+     "elysium:flora/805/flowers_9"
     ]
    },
    "remove_features": [
@@ -51248,7 +51248,7 @@
     "minecraft:patch_firefly_bush_near_water",
     "wilderwild:trees_sparse_forest"
    ],
-   "why": "Wood pasture of cork and holm oak in southwest Iberia, gone back to scrub between the trees."
+   "why": "Park: big cork and holm oaks spread evenly across pasture with almost no scrub, flower carpets in spring, straw by July. Art direction batch 4 (even spacing still pending)."
   },
   "elysium:eco/805/flower_forest": {
    "parent": "minecraft:flower_forest",
@@ -51257,10 +51257,10 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/805/trees_11",
-     "elysium:flora/805/shrubs_12",
+     "elysium:flora/805/trees_10",
+     "elysium:flora/805/shrubs_7",
      "elysium:flora/805/ground_12",
-     "elysium:flora/805/flowers_6"
+     "elysium:flora/805/flowers_9"
     ]
    },
    "remove_features": [
@@ -51271,7 +51271,7 @@
     "minecraft:patch_grass_badlands",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Wood pasture of cork and holm oak in southwest Iberia, gone back to scrub between the trees."
+   "why": "Park: big cork and holm oaks spread evenly across pasture with almost no scrub, flower carpets in spring, straw by July. Art direction batch 4 (even spacing still pending)."
   },
   "elysium:eco/805/biomesoplenty_woodland": {
    "parent": "biomesoplenty:woodland",
@@ -51280,10 +51280,10 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/805/trees_12",
-     "elysium:flora/805/shrubs_12",
-     "elysium:flora/805/ground_11",
-     "elysium:flora/805/flowers_6"
+     "elysium:flora/805/trees_10",
+     "elysium:flora/805/shrubs_7",
+     "elysium:flora/805/ground_12",
+     "elysium:flora/805/flowers_9"
     ]
    },
    "remove_features": [
@@ -51294,7 +51294,7 @@
     "biomesoplenty:patch_tall_grass_6",
     "biomesoplenty:trees_woodland"
    ],
-   "why": "Wood pasture of cork and holm oak in southwest Iberia, gone back to scrub between the trees."
+   "why": "Park: big cork and holm oaks spread evenly across pasture with almost no scrub, flower carpets in spring, straw by July. Art direction batch 4 (even spacing still pending)."
   },
   "elysium:eco/806/biomesoplenty_mediterranean_forest": {
    "parent": "biomesoplenty:mediterranean_forest",
@@ -51303,9 +51303,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/806/trees_11",
+     "elysium:flora/806/trees_12",
      "elysium:flora/806/shrubs_11",
-     "elysium:flora/806/ground_12",
+     "elysium:flora/806/ground_11",
      "elysium:flora/806/flowers_5"
     ]
    },
@@ -51318,7 +51318,7 @@
     "biomesoplenty:patch_peony",
     "biomesoplenty:patch_grass_3"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/806/wilderwild_sparse_forest": {
    "parent": "wilderwild:sparse_forest",
@@ -51327,9 +51327,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/806/trees_12",
+     "elysium:flora/806/trees_14",
      "elysium:flora/806/shrubs_12",
-     "elysium:flora/806/ground_11",
+     "elysium:flora/806/ground_10",
      "elysium:flora/806/flowers_5"
     ]
    },
@@ -51341,7 +51341,7 @@
     "minecraft:patch_firefly_bush_near_water",
     "wilderwild:trees_sparse_forest"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/806/flower_forest": {
    "parent": "minecraft:flower_forest",
@@ -51350,7 +51350,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/806/trees_12",
+     "elysium:flora/806/trees_14",
      "elysium:flora/806/shrubs_12",
      "elysium:flora/806/ground_11",
      "elysium:flora/806/flowers_5"
@@ -51364,7 +51364,7 @@
     "minecraft:patch_grass_badlands",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/806/terralith_stony_spires": {
    "parent": "terralith:stony_spires",
@@ -51373,7 +51373,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/806/trees_14",
+     "elysium:flora/806/trees_15",
      "elysium:flora/806/shrubs_13",
      "elysium:flora/806/ground_10",
      "elysium:flora/806/flowers_5"
@@ -51384,7 +51384,7 @@
     "terralith:spires/oak_tree",
     "terralith:spires/grass"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/806/terrestria_hemlock_treeline": {
    "parent": "terrestria:hemlock_treeline",
@@ -51393,9 +51393,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/806/trees_12",
+     "elysium:flora/806/trees_14",
      "elysium:flora/806/shrubs_12",
-     "elysium:flora/806/ground_11",
+     "elysium:flora/806/ground_10",
      "elysium:flora/806/flowers_5"
     ]
    },
@@ -51408,7 +51408,7 @@
     "minecraft:patch_grass_taiga_2",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/806/biomesoplenty_woodland": {
    "parent": "biomesoplenty:woodland",
@@ -51417,9 +51417,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/806/trees_13",
+     "elysium:flora/806/trees_14",
      "elysium:flora/806/shrubs_12",
-     "elysium:flora/806/ground_11",
+     "elysium:flora/806/ground_10",
      "elysium:flora/806/flowers_5"
     ]
    },
@@ -51431,7 +51431,7 @@
     "biomesoplenty:patch_tall_grass_6",
     "biomesoplenty:trees_woodland"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/806/forest": {
    "parent": "minecraft:forest",
@@ -51440,7 +51440,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/806/trees_14",
+     "elysium:flora/806/trees_15",
      "elysium:flora/806/shrubs_13",
      "elysium:flora/806/ground_10",
      "elysium:flora/806/flowers_5"
@@ -51456,7 +51456,7 @@
     "minecraft:patch_grass_forest",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/806/terralith_granite_cliffs": {
    "parent": "terralith:granite_cliffs",
@@ -51465,9 +51465,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/806/trees_11",
+     "elysium:flora/806/trees_12",
      "elysium:flora/806/shrubs_11",
-     "elysium:flora/806/ground_12",
+     "elysium:flora/806/ground_11",
      "elysium:flora/806/flowers_5"
     ]
    },
@@ -51477,7 +51477,7 @@
     "minecraft:patch_grass_badlands",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/806/terralith_highlands": {
    "parent": "terralith:highlands",
@@ -51486,9 +51486,9 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/806/trees_9",
+     "elysium:flora/806/trees_10",
      "elysium:flora/806/shrubs_10",
-     "elysium:flora/806/ground_13",
+     "elysium:flora/806/ground_12",
      "elysium:flora/806/flowers_5"
     ]
    },
@@ -51500,7 +51500,7 @@
     "terralith:highlands/grass",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/806/wilderwild_parched_forest": {
    "parent": "wilderwild:parched_forest",
@@ -51509,7 +51509,7 @@
    ],
    "add_features": {
     "vegetal_decoration": [
-     "elysium:flora/806/trees_12",
+     "elysium:flora/806/trees_14",
      "elysium:flora/806/shrubs_12",
      "elysium:flora/806/ground_11",
      "elysium:flora/806/flowers_5"
@@ -51523,7 +51523,7 @@
     "minecraft:patch_bush",
     "minecraft:patch_firefly_bush_near_water"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/806/meadow": {
    "parent": "minecraft:meadow",
@@ -51534,7 +51534,7 @@
     "vegetal_decoration": [
      "elysium:flora/806/trees_9",
      "elysium:flora/806/shrubs_10",
-     "elysium:flora/806/ground_13",
+     "elysium:flora/806/ground_12",
      "elysium:flora/806/flowers_5"
     ]
    },
@@ -51545,7 +51545,7 @@
     "minecraft:wildflowers_meadow",
     "minecraft:patch_grass_plain"
    ],
-   "why": "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+   "why": "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
   },
   "elysium:eco/808/biomesoplenty_shrubland": {
    "parent": "biomesoplenty:shrubland",

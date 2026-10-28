@@ -22,7 +22,7 @@ import net.minecraft.world.level.levelgen.DensityFunction;
  */
 public record AtlasDensityFunction(Channel channel, DensityFunction fallback) implements DensityFunction {
     public enum Channel implements StringRepresentable {
-        OFFSET("offset", -1.5, 4.0), HEIGHT("height", -64, 640), CONTINENTS("continents", -0.45, 0.35), RELIEF("relief", 0, 5.1), CALM("calm", 0, 1), HILLS("hills", -0.25, 0.25);
+        OFFSET("offset", -1.5, 4.0), HEIGHT("height", -64, 832), CONTINENTS("continents", -0.45, 0.35), RELIEF("relief", 0, 5.1), CALM("calm", 0, 1), HILLS("hills", -0.25, 0.25);
 
         public static final Codec<Channel> CODEC = StringRepresentable.fromEnum(Channel::values);
         final String id; final double min, max;

@@ -18,11 +18,11 @@ import numpy as np
 from scipy import ndimage as ndi
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from bake_atlas import ee_inv, value_noise, MPB, BOUNDS
+from bake_atlas import ee_inv, value_noise, MPB, BOUNDS, LEVELS
 
-CELL = 32          # blocks, same as L0
+CELL = LEVELS[0]["cell"]   # blocks (profile): same as L0
 RES = 0.02         # degrees, polygon raster
-WARP_DEG = 0.12    # border warp amplitude
+WARP_DEG = 0.12    # degrees: border warp amplitude
 WARP_WAVE_M = 40000.0
 ROCK_REACH = 40    # cells
 BAND = 256         # rows per projection band

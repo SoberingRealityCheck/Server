@@ -1,0 +1,55 @@
+{
+ "name": "dev-window",
+ "notes": "Server scale (15 m per block) in a box around Lake Geneva, for in-game tuning. Outside the box is ocean. Heights: max_y 768, sea level stays at 63, the extra height goes to mountains (e_low 1.5 instead of 8).",
+ "atlas_version": "window-1",
+ "metres_per_block": 15.0,
+ "sea_level_y": 63,
+ "min_y": -64,
+ "max_y": 768,
+ "sea_rise_m": 12.0,
+ "vertical": {
+  "e_low": 1.5,
+  "e_high": 1.0,
+  "cut_m": 12000.0,
+  "ocean_depth_blocks": 48.0,
+  "top_knee": 660.0,
+  "top_span": 100.0
+ },
+ "tile": 256,
+ "extent": [
+  5.6,
+  7.4,
+  45.8,
+  46.9
+ ],
+ "levels": [
+  {
+   "name": "L0",
+   "cell_m": 480.0,
+   "zoom": 8,
+   "extent": [
+    5.6,
+    7.4,
+    45.8,
+    46.9
+   ],
+   "feather_cells": 24
+  },
+  {
+   "name": "L1",
+   "cell_m": 60.0,
+   "zoom": 12,
+   "extent": [
+    5.9,
+    7.1,
+    46.0,
+    46.7
+   ],
+   "feather_cells": 64
+  }
+ ],
+ "spawn_lonlat": [
+  6.63,
+  46.53
+ ]
+}

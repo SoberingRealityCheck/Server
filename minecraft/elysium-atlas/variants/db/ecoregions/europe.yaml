@@ -470,36 +470,41 @@
 793:
   name: Iberian Holm Oak Woodland
   resolve: "Iberian sclerophyllous and semi-deciduous forests"
-  tree_cover: 0.3
-  trees: {holm_oak: 5, cork_oak: 1, umbrella_pine: 1}
-  shrubs: {strawberry_tree: 0.67, mastic: 0.67, kermes_oak: 0.67, common_juniper: 1}
-  ground: {common_thyme: 1, grey_leaved_cistus: 0.5, rosemary: 0.5, lavender: 1, slender_wild_oat: 1, retuse_false_brome: 1}
+  tree_cover: 0.13
+  trees: {holm_oak_encina: 6, spanish_juniper: 1.2}
+  shrubs: {kermes_oak: 0.67, common_juniper: 1}
+  ground: {common_thyme: 1, grey_leaved_cistus: 0.5, rosemary: 0.5, lavender: 0.5, retama: 1.5, slender_wild_oat: 3, retuse_false_brome: 0.5}
   flowers: {common_poppy: 0.21, cornflower: 0.14, oxeye_daisy: 0.14}
   flower_density: 0.4
+  niches:
+    spanish_juniper: {slope: steep}
   ground_surface:
-    geology: "Granite and slate of the Meseta."
-    rock: [granite]
+    geology: "Granite tors and slate ridges of the Meseta; ochre-red soil."
+    rock: [granite, andesite]
     outcrops: few
-    soil: {coarse_dirt: some}
-  why: "Holm oak and dry grass on the Meseta."
+    outcrop_size: small
+    soil: {coarse_dirt: some, terracotta: few}
+  why: "Ochre emptiness: small round encinas spaced far apart on a cold dry plateau, Spanish juniper on the stony parameras, broom yellow in spring. Art direction batch 4."
 
 805:
   name: Dehesa
   resolve: "Southwest Iberian Mediterranean sclerophyllous and mixed forests"
-  tree_cover: 0.3
-  trees: {cork_oak: 4, holm_oak: 3, umbrella_pine: 1, olive: 1}
+  tree_cover: 0.18
+  trees: {cork_oak: 4, holm_oak: 3, umbrella_pine: 0.5, olive: 0.5}
   shrubs: {strawberry_tree: 0.67, mastic: 0.67, kermes_oak: 0.67}
+  shrub_density: 0.2
   ground: {common_thyme: 0.5, grey_leaved_cistus: 0.25, rosemary: 0.25, slender_wild_oat: 3}
-  flowers: {common_poppy: 0.43, cornflower: 0.29, oxeye_daisy: 0.29}
-  flower_density: 0.8
+  flowers: {echium: 1, crown_daisy: 0.8, oxeye_daisy: 0.6, common_poppy: 0.3}
+  flower_density: 2
   ground_surface:
     geology: "Granite boulder fields (berrocales) and slate."
-    rock: [granite]
+    rock: [andesite, stone]
     outcrops: few
+    outcrop_size: small
     soil: {coarse_dirt: some}
   patches:
-    flowers: {size: 32, share: 0.4}
-  why: "Wood pasture of cork and holm oak in southwest Iberia, gone back to scrub between the trees."
+    flowers: {size: 30, share: 0.5}
+  why: "Park: big cork and holm oaks spread evenly across pasture with almost no scrub, flower carpets in spring, straw by July. Art direction batch 4 (even spacing still pending)."
 
 803:
   name: Iberian Semi-desert
@@ -540,34 +545,43 @@
 806:
   name: Tyrrhenian Coast
   resolve: "Tyrrhenian-Adriatic sclerophyllous and mixed forests"
-  tree_cover: 0.4
+  tree_cover: 0.55
   trees: {holm_oak: 4, umbrella_pine: 2, olive: 2, italian_cypress: 1, cork_oak: 1, aleppo_pine: 1}
-  shrubs: {strawberry_tree: 1, mastic: 1, kermes_oak: 1}
+  shrubs: {strawberry_tree: 1.5, mastic: 1.5, kermes_oak: 1, myrtle: 1, tree_heath: 1}
   ground: {common_thyme: 1, grey_leaved_cistus: 0.5, rosemary: 0.5, lavender: 0.5, retuse_false_brome: 0.5, slender_wild_oat: 0.5}
   flowers: {common_poppy: 0.43, cornflower: 0.29, oxeye_daisy: 0.29}
   flower_density: 0.6
+  niches:
+    umbrella_pine: {slope: flat}
+  clumps: {umbrella_pine: {size: 20, share: 0.3}}
+  patches:
+    shrubs: {size: 24, share: 0.6}
   ground_surface:
-    geology: "Limestone and volcanic tuff."
-    rock: [calcite, tuff]
+    geology: "Yellow-grey tuff and white limestone cliffs."
+    rock: [tuff, calcite]
     outcrops: few
+    strata: [tuff, calcite, tuff]
+    ledges: {every: 3, keep: 0.6}
     soil: {coarse_dirt: few}
-  why: "Maquis, stone pine and wild olive along the Ligurian, Tyrrhenian and Adriatic shores."
+  why: "Dark: continuous head-high maquis on the hills, umbrella-pine groves on the coastal flats, tuff and limestone cliffs. Art direction batch 4."
 
 795:
   name: Italian Hills
   resolve: "Italian sclerophyllous and semi-deciduous forests"
   tree_cover: 0.4
-  trees: {holm_oak: 3, sessile_oak: 2, olive: 2, italian_cypress: 1, umbrella_pine: 1}
+  trees: {downy_oak: 2.5, turkey_oak: 1.5, holm_oak: 1.5, olive: 2, italian_cypress: 1, umbrella_pine: 0.5}
   shrubs: {strawberry_tree: 0.67, mastic: 0.67, kermes_oak: 0.67}
-  ground: {common_thyme: 0.5, grey_leaved_cistus: 0.25, rosemary: 0.25, upright_brome: 1, slender_wild_oat: 1}
-  flowers: {common_poppy: 0.86, cornflower: 0.57, oxeye_daisy: 0.57}
-  flower_density: 1
+  ground: {common_thyme: 0.5, grey_leaved_cistus: 0.25, rosemary: 0.25, upright_brome: 3, slender_wild_oat: 0.5}
+  flowers: {common_poppy: 5, cornflower: 0.57, oxeye_daisy: 0.57}
+  flower_density: 2
+  niches:
+    holm_oak: {slope: steep}
   ground_surface:
-    geology: "Limestone, clay hills and tuff."
+    geology: "Limestone, clay hills (calanchi) and tuff."
     rock: [calcite, tuff]
     outcrops: few
-    soil: {coarse_dirt: few}
-  why: "Tuscany to Puglia: oak and olive hills, cypress lines on the old roads, poppies in the fields."
+    soil: {coarse_dirt: few, clay: few}
+  why: "Soft green hills: deciduous downy and Turkey oak woods that brown in November, cypress columns, silver olive, poppies in May. Art direction batch 4 (ridge-line cypress rows still pending)."
 
 794:
   name: Illyrian Karst

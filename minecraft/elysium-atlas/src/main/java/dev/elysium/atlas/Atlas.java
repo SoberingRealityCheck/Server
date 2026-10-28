@@ -25,6 +25,10 @@ public final class Atlas {
 
     public final Path dir;
     public final String version;
+    /** Scale profile the atlas was baked with (atlas.json "profile"); null hash for atlases baked before profiles. */
+    public final String profileName, profileHash;
+    /** Top of the world the profile was designed for (blocks), or 0 if not given. */
+    public final int profileMaxY;
     public final double metresPerBlock;
     public final int seaLevelY;
     public final double lon0, radius;
@@ -50,6 +54,10 @@ public final class Atlas {
         }
         if (m.get("format").getAsInt() != 1) throw new IOException("unsupported atlas format " + m.get("format"));
         version = m.get("atlas_version").getAsString();
+        JsonObject pr = m.has("profile") ? m.getAsJsonObject("profile") : null;
+        profileName = pr != null ? pr.get("name").getAsString() : "none";
+        profileHash = pr != null ? pr.get("hash").getAsString() : null;
+        profileMaxY = pr != null && pr.has("max_y") ? pr.get("max_y").getAsInt() : 0;
         metresPerBlock = m.get("metres_per_block").getAsDouble();
         seaLevelY = m.get("sea_level_y").getAsInt();
         JsonObject proj = m.getAsJsonObject("projection");
@@ -80,7 +88,7 @@ public final class Atlas {
         eLow = v.has("e_low") ? v.get("e_low").getAsDouble() : 8.0;
         topKnee = v.has("top_knee") ? v.get("top_knee").getAsDouble() : 400.0;
         topSpan = v.has("top_span") ? v.get("top_span").getAsDouble() : 120.0;
-        LOG.info("Atlas {} loaded from {}: {} levels, {} biomes, {} regions, {} m/block", version, dir, levels.size(), palette.size(), regions == null ? 0 : regions.names.size(), metresPerBlock);
+        LOG.info("Atlas {} (profile {}) loaded from {}: {} levels, {} biomes, {} regions, {} m/block", version, profileName, dir, levels.size(), palette.size(), regions == null ? 0 : regions.names.size(), metresPerBlock);
     }
 
     private static volatile boolean active;

@@ -11,7 +11,8 @@ Tile = 256 x 256 cells, row-major (z then x), little-endian:
 World coordinates: block x = Equal Earth x (m) / MPB, block z = -Equal Earth y (m) / MPB. Origin = 11 E, 0 N.
 Vertical: split scaling (doc section 10, E5). Broad band (> ~12 km) x8, fine band x1, then metres -> blocks at MPB.
 
-usage: python3 bake_atlas.py OUT_DIR TILE_CACHE [--region lon0 lon1 lat0 lat1] [--no-l0]
+usage: python3 bake_atlas.py OUT_DIR TILE_CACHE [--profile NAME] [--no-l0]
+(scale, levels, extents and spawn come from bake/profiles/NAME.json; default dev-globe)
 """
 import argparse, gzip, json, math, os, struct, sys, time
 from concurrent.futures import ThreadPoolExecutor
@@ -28,18 +29,21 @@ EXP = os.environ.get("ELYSIUM_WORLDGEN_EXPERIMENTS") or os.path.abspath(os.path.
 # RESOLVE Ecoregions2017.shp (CC BY 4.0); read once into EXP/globe/resolve_biome_10m.npy
 ECO_SHP = os.environ.get("ELYSIUM_ECOREGIONS_SHP") or os.path.join(EXP, "eco", "Ecoregions2017.shp")
 
-# ---- frozen parameters (changing any of these changes terrain everywhere: bump ATLAS_VERSION)
-ATLAS_VERSION = "slice-9"
-MPB = 150.0                  # metres per block (Medium preset)
-LON0 = 11.0; R = 6371008.8   # Equal Earth, metres
-SEA_Y = 63                   # Minecraft sea level
-SEA_RISE = 12.0              # warm branch, metres (placeholder until the rise is chosen)
-E_LOW, E_HIGH, CUT_M = 8.0, 1.0, 12000.0   # band split
-OCEAN_DEPTH_BLOCKS = 48.0    # soft cap on ocean depth below sea level
-TOP_KNEE, TOP_SPAN = 400.0, 120.0          # soft cap on land height
-TILE = 256
-LEVELS = [{"name": "L0", "cell": 32, "zoom": 5}, {"name": "L1", "cell": 4, "zoom": 10}]
-FEATHER_CELLS = 64           # L1 fades into L0 over this many cells at its edge
+# ---- scale profile (bake/profiles/<name>.json; see profile.py). Every number that depends on scale comes from it.
+import profile  # noqa: E402
+P = profile.load()
+ATLAS_VERSION = P["atlas_version"]
+MPB = float(P["metres_per_block"])         # profile: metres per block
+LON0 = 11.0; R = 6371008.8                 # m: Equal Earth central meridian and radius (fixed for every profile)
+SEA_Y = int(P["sea_level_y"])              # blocks: Minecraft sea level
+SEA_RISE = float(P["sea_rise_m"])          # m: warm branch (placeholder until the rise is chosen)
+_V = P["vertical"]
+E_LOW, E_HIGH, CUT_M = _V["e_low"], _V["e_high"], _V["cut_m"]   # m per m (broad, fine band) and band split in m
+OCEAN_DEPTH_BLOCKS = _V["ocean_depth_blocks"]                     # blocks: soft cap on ocean depth below sea level
+TOP_KNEE, TOP_SPAN = _V["top_knee"], _V["top_span"]               # blocks (Y): soft cap on land height
+TILE = int(P["tile"])                      # cells per tile side
+LEVELS = P["levels"]                       # cell_m (m), cell (blocks, derived), zoom, extent, feather_cells (cells)
+EDGE_OCEAN_Y = SEA_Y - 24.0                # blocks (Y): sea floor a windowed L0 fades into at its edge
 
 A1, A2, A3, A4 = 1.340264, -0.081106, 0.000893, 0.003796; M3 = math.sqrt(3) / 2
 def ee_fwd(lon, lat):
@@ -55,7 +59,16 @@ def ee_inv(x, y):
     lam = 3 * x * d / (2 * math.sqrt(3) * np.cos(th)); lon = np.degrees(lam)
     return (lon + LON0 + 180) % 360 - 180, np.degrees(np.arcsin(np.clip(np.sin(th) / M3, -1, 1))), np.abs(lon) <= 180
 XM = float(ee_fwd(LON0 + 179.999, 0.0)[0]); YM = float(ee_fwd(0.0, 90.0)[1])
-BOUNDS = {"xmin": -XM / MPB, "xmax": XM / MPB, "zmin": -YM / MPB, "zmax": YM / MPB}
+def box_blocks(ext):
+    """Block bounds (xmin, xmax, zmin, zmax) of a lon/lat box, or of the globe."""
+    if ext == "globe": return -XM / MPB, XM / MPB, -YM / MPB, YM / MPB
+    lo0, lo1, la0, la1 = ext; xs, zs = [], []
+    for lo in np.linspace(lo0, lo1, 40):
+        for la in np.linspace(la0, la1, 40):
+            x, y = ee_fwd(lo, la); xs.append(float(x) / MPB); zs.append(-float(y) / MPB)
+    return min(xs), max(xs), min(zs), max(zs)
+_bb = box_blocks(P["extent"])
+BOUNDS = {"xmin": _bb[0], "xmax": _bb[1], "zmin": _bb[2], "zmax": _bb[3]}
 
 # ---- Terrarium sampling (bilinear, parallel tile fetch)
 def fetch(z, x, y, cache):
@@ -232,51 +245,63 @@ def write_tiles(outdir, name, i0, j0, y, relief, b):
             n += 1
     return n
 
+def level_cells(lv):
+    """Cell range (i0, i1, j0, j1) of a level, snapped outward to whole tiles."""
+    c = lv["cell"]; xmin, xmax, zmin, zmax = box_blocks(lv["extent"])
+    if lv["extent"] == "globe":   # slice-9 snapped the globe after rounding to cells; boxes snap in one step
+        i0, i1 = int(math.floor(xmin / c)), int(math.ceil(xmax / c)); j0, j1 = int(math.floor(zmin / c)), int(math.ceil(zmax / c))
+        return (i0 // TILE) * TILE, -(-i1 // TILE) * TILE, (j0 // TILE) * TILE, -(-j1 // TILE) * TILE
+    return (int(math.floor(xmin / c / TILE)) * TILE, int(math.ceil(xmax / c / TILE)) * TILE,
+            int(math.floor(zmin / c / TILE)) * TILE, int(math.ceil(zmax / c / TILE)) * TILE)
+
+def edge_fade(y, feather, floor_y):
+    """Fade a windowed base level into flat sea floor over its last `feather` cells (blocks out: Y)."""
+    H, W = y.shape; jj, ii = np.mgrid[0:H, 0:W]
+    d = np.minimum(np.minimum(ii, W - 1 - ii), np.minimum(jj, H - 1 - jj)).astype(np.float64)
+    w = np.clip(d / feather, 0, 1); w = w * w * (3 - 2 * w)
+    return w * y + (1 - w) * floor_y
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("out"); ap.add_argument("cache")
-    ap.add_argument("--region", nargs=4, type=float, default=[4.0, 13.5, 43.5, 48.5], metavar=("LON0", "LON1", "LAT0", "LAT1"))
-    ap.add_argument("--spawn", nargs=2, type=float, default=[6.63, 46.53], metavar=("LON", "LAT"))
     ap.add_argument("--no-l0", action="store_true")
     a = ap.parse_args(); os.makedirs(a.out, exist_ok=True); os.makedirs(a.cache, exist_ok=True)
     biomes = Biomes()
-    # L0: whole globe, in strips to bound memory
-    c0 = LEVELS[0]["cell"]
-    gi0 = int(math.floor(BOUNDS["xmin"] / c0)); gi1 = int(math.ceil(BOUNDS["xmax"] / c0)); gj0 = int(math.floor(BOUNDS["zmin"] / c0)); gj1 = int(math.ceil(BOUNDS["zmax"] / c0))
-    gi0, gj0 = (gi0 // TILE) * TILE, (gj0 // TILE) * TILE; gi1, gj1 = -(-gi1 // TILE) * TILE, -(-gj1 // TILE) * TILE
+    # L0: in strips to bound memory
+    L0, L1 = LEVELS[0], LEVELS[1]; c0 = L0["cell"]
+    gi0, gi1, gj0, gj1 = level_cells(L0)
     l0_npz = os.path.join(a.out, "_l0_cache.npz")
     if not a.no_l0 or not os.path.exists(l0_npz):
-        Y0 = np.zeros((gj1 - gj0, gi1 - gi0), np.float32); n = 0
+        Y0 = np.zeros((gj1 - gj0, gi1 - gi0), np.float64); R0 = np.zeros(Y0.shape, np.float32); B0 = np.zeros(Y0.shape, np.uint8)   # tiles quantise the float64 heights
         for js in range(gj0, gj1, TILE * 2):
             je = min(js + TILE * 2, gj1)
-            y, r, b = bake_level(LEVELS[0], gi0, gi1, js, je, a.cache, biomes)
-            Y0[js - gj0:je - gj0] = y; n += write_tiles(a.out, "L0", gi0, js, y, r, b)
-        np.savez_compressed(l0_npz, Y0=Y0, gi0=gi0, gj0=gj0); print("L0 tiles", n)
+            y, r, b = bake_level(L0, gi0, gi1, js, je, a.cache, biomes)
+            Y0[js - gj0:je - gj0] = y; R0[js - gj0:je - gj0] = r; B0[js - gj0:je - gj0] = b
+        if L0.get("feather_cells"):   # windowed world: the edge becomes sea, so the box ends in a shore, not a cliff
+            Y0 = edge_fade(Y0, L0["feather_cells"], EDGE_OCEAN_Y)
+            sea = Y0 < SEA_Y; B0[sea & (B0 > 8)] = 2   # land biomes under the faded edge become ocean
+        n = write_tiles(a.out, "L0", gi0, gj0, Y0, R0, B0)
+        np.savez_compressed(l0_npz, Y0=Y0.astype(np.float32), gi0=gi0, gj0=gj0); print("L0 tiles", n)
     d = np.load(l0_npz); Y0, gi0, gj0 = d["Y0"], int(d["gi0"]), int(d["gj0"])
-    # L1: test region box, snapped to tiles
-    c1 = LEVELS[1]["cell"]; lo0, lo1, la0, la1 = a.region
-    xs, ys_ = [], []
-    for lo in np.linspace(lo0, lo1, 40):
-        for la in np.linspace(la0, la1, 40):
-            x, y = ee_fwd(lo, la); xs.append(x / MPB); ys_.append(-y / MPB)
-    i0 = int(math.floor(min(xs) / c1 / TILE)) * TILE; i1 = int(math.ceil(max(xs) / c1 / TILE)) * TILE
-    j0 = int(math.floor(min(ys_) / c1 / TILE)) * TILE; j1 = int(math.ceil(max(ys_) / c1 / TILE)) * TILE
-    y1, r1, b1 = bake_level(LEVELS[1], i0, i1, j0, j1, a.cache, biomes, l0=(Y0, gi0, gj0, c0), feather=FEATHER_CELLS)
+    # L1: detail box, snapped to tiles
+    c1 = L1["cell"]; i0, i1, j0, j1 = level_cells(L1)
+    y1, r1, b1 = bake_level(L1, i0, i1, j0, j1, a.cache, biomes, l0=(Y0, gi0, gj0, c0), feather=L1["feather_cells"])
     n1 = write_tiles(a.out, "L1", i0, j0, y1, r1, b1); print("L1 tiles", n1)
-    sx, sy = ee_fwd(a.spawn[0], a.spawn[1])
+    spawn = P["spawn_lonlat"]; sx, sy = ee_fwd(spawn[0], spawn[1])
     manifest = {
         "format": 1, "atlas_version": ATLAS_VERSION,
+        "profile": {"name": P["name"], "hash": P["hash"], "min_y": P["min_y"], "max_y": P["max_y"]},
         "projection": {"type": "equal_earth", "lon0": LON0, "radius_m": R},
         "metres_per_block": MPB, "sea_level_y": SEA_Y, "sea_rise_m": SEA_RISE,
         "vertical": {"e_low": E_LOW, "e_high": E_HIGH, "cut_m": CUT_M, "ocean_depth_blocks": OCEAN_DEPTH_BLOCKS, "top_knee": TOP_KNEE, "top_span": TOP_SPAN},
         "bounds_blocks": BOUNDS, "tile_size": TILE,
         "levels": [{"name": "L0", "cell": c0, "dir": "L0"}, {"name": "L1", "cell": c1, "dir": "L1",
-                    "cells": [i0, j0, i1, j1], "region_lonlat": a.region}],
+                    "cells": [i0, j0, i1, j1], "region_lonlat": L1["extent"]}],
         "biome_palette": biomes.palette,
-        "spawn": {"x": int(round(sx / MPB)), "z": int(round(-sy / MPB)), "lon": a.spawn[0], "lat": a.spawn[1]},
-        "sources": "Terrarium (Mapzen/AWS open data) z5 and z10; biome_v2 climate and scored placement (placement.py)",
+        "spawn": {"x": int(round(sx / MPB)), "z": int(round(-sy / MPB)), "lon": spawn[0], "lat": spawn[1]},
+        "sources": f"Terrarium (Mapzen/AWS open data) z{L0['zoom']} and z{L1['zoom']}; biome_v2 climate and scored placement (placement.py)",
     }
     json.dump(manifest, open(os.path.join(a.out, "atlas.json"), "w"), indent=1)
-    print(json.dumps({k: manifest[k] for k in ("spawn", "levels")}, indent=0), "palette", len(biomes.palette))
+    print(json.dumps({k: manifest[k] for k in ("spawn", "levels", "profile")}, indent=0), "palette", len(biomes.palette))
     assert len(biomes.palette) < 255
 
 if __name__ == "__main__":

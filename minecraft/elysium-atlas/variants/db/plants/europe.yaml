@@ -249,11 +249,12 @@ umbrella_pine:
   name: Stone pine
   latin: Pinus pinea
   form: tree
-  leaf: deep_green_pine
+  leaf: "#3f6436"
   leaf_note: Stiff deep green needles.
   range: Mediterranean coasts and Iberian sands.
   look: Flat dark parasol on a bare trunk.
-  render: 'tree("dark_oak_log", "spruce_leaves", straight(6, 2, 0), acaciaf(3))'
+  render: 'tree("dark_oak_log", "acacia_leaves", straight(6, 2, 0), acaciaf(3))'
+  stand_in: Acacia leaves, so the parasol is a block of its own.
   sapling: spruce_sapling
 
 italian_cypress:
@@ -306,12 +307,14 @@ cork_oak:
   name: Cork oak
   latin: Quercus suber
   form: tree
-  leaf: "#4e6638"
-  leaf_note: Leathery dark green leaves, grey beneath.
+  evergreen: true
+  leaf: "#5a7440"
+  leaf_note: Leathery dark green leaves, grey beneath; a shade lighter than holm oak.
   range: Iberian dehesa and montado, Provence, Sardinia.
-  look: Thick-barked spreading oak.
-  render: 'tree("dark_oak_log", "dark_oak_leaves", forking(3, 1, 1), acaciaf(2))'
+  look: Thick-barked spreading oak; stripped trunks brick red.
+  render: 'tree("dark_oak_log", "oak_leaves", forking(3, 1, 1), acaciaf(3))'
   sapling: oak_sapling
+  stand_in: Oak leaves, so it reads apart from holm oak on dark oak leaves. No two-part (stripped base) trunk yet.
 
 olive:
   name: Wild olive
@@ -682,3 +685,98 @@ wild_chives:
   range: Wet Alpine meadows and stream banks.
   render: 'flowers("allium")'
   stand_in: Allium.
+
+# ---------------------------------------------------------------- Mediterranean set (art direction batch 4)
+holm_oak_encina:
+  name: Holm oak (Meseta encina)
+  latin: Quercus ilex subsp. rotundifolia
+  form: tree
+  evergreen: true
+  leaf: "#56664a"
+  leaf_note: Small rounded grey-green leaves; the inland subspecies, paler than the coastal holm oak.
+  range: Iberian Meseta.
+  look: Small round crown standing alone, as if spaced by hand.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(2, 1, 0), blob(2, 2, 0))'
+  sapling: oak_sapling
+
+spanish_juniper:
+  name: Spanish juniper
+  latin: Juniperus thurifera
+  form: tree
+  leaf: "#4a5e48"
+  leaf_note: Dark grey-green scale leaves.
+  range: Stony high plateaus (parameras) of central Spain, the Atlas.
+  look: Squat dark cone, often broader than tall.
+  render: 'tree("spruce_log", "spruce_leaves", straight(2, 1, 0), blob(2, 3, 0))'
+  sapling: spruce_sapling
+
+retama:
+  name: White broom (retama)
+  latin: Retama sphaerocarpa
+  form: shrub_ground
+  clump: {size: 16, share: 0.35, outside: 0.05}
+  niche: {water: dry}
+  range: Dry plains and slopes of the Meseta and the south.
+  look: Leafless broom; whole slopes yellow in April and May.
+  render: 'flowers(("wildflowers", {"facing": "north", "flower_amount": "4"}), "bush", weights=[2, 1])'
+  stand_in: Wildflowers (yellow) and bush.
+
+echium:
+  name: Purple viper's bugloss
+  latin: Echium plantagineum
+  form: flower
+  range: Spring pastures of the dehesa and the western Mediterranean.
+  render: 'flowers("allium")'
+  stand_in: Allium.
+
+crown_daisy:
+  name: Crown daisy
+  latin: Glebionis coronaria
+  form: flower
+  range: Spring pastures and field margins, Mediterranean.
+  render: 'flowers("dandelion")'
+  stand_in: Dandelion.
+
+myrtle:
+  name: Myrtle
+  latin: Myrtus communis
+  form: shrub
+  evergreen: true
+  leaf: "#34502c"
+  leaf_note: Small glossy dark leaves.
+  range: Maquis of the Mediterranean coasts.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(1, 0, 0), bushf(1, 2, 1))'
+  sapling: oak_sapling
+
+tree_heath:
+  name: Tree heath
+  latin: Erica arborea
+  form: shrub
+  evergreen: true
+  leaf: "#3a5530"
+  leaf_note: Fine needle leaves, dark green; white flower in spring.
+  range: Tall maquis, Iberia to the Aegean.
+  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(2, 1, 0), bushf(1, 2, 1))'
+  sapling: oak_sapling
+
+downy_oak:
+  name: Downy oak
+  latin: Quercus pubescens
+  form: tree
+  leaf: "#5a8a3c"
+  leaf_note: Lobed leaves, grey-downy beneath; brown in November, often held through winter.
+  range: Sub-Mediterranean hills, Iberia to the Balkans.
+  look: Low broad crown.
+  render: 'tree("oak_log", "oak_leaves", forking(3, 1, 1), blob(3, 3, 0))'
+  sapling: oak_sapling
+
+turkey_oak:
+  name: Turkey oak
+  latin: Quercus cerris
+  form: tree
+  leaf: "#5a8a3c"
+  leaf_note: Deeply lobed rough leaves; brown in autumn.
+  range: Italian and Balkan hill woods.
+  look: Tall straight oak.
+  render: 'tree("oak_log", "oak_leaves", straight(5, 2, 0), blob(3, 3, 0))'
+  sapling: oak_sapling
