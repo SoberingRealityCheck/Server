@@ -419,11 +419,11 @@ japanese_cherry:
   form: tree
   clump: {size: 10, share: 0.2}
   leaf: "#5a8e3a"
-  leaf_note: Bronze-red young leaves turning green; pink-white blossom in April.
-  range: Hill forests of southern Honshu, Shikoku and Kyushu.
-  render: 'tree("cherry_log", "oak_leaves", straight(6, 2, 0), blob(3, 2, 0))'
+  leaf_note: Bronze-red young leaves turning green; pink-white blossom in April. In game the untinted cherry leaves show blossom all year (Clay, 2026-10-28); this colour only feeds the foliage mean.
+  range: Hill forests of Honshu, Shikoku and Kyushu.
+  render: 'ref("cherry")'
   sapling: cherry_sapling
-  stand_in: Cherry log with green leaves; no permanent blossom blocks.
+  stand_in: Vanilla cherry tree; cherry leaves are pink in every season.
 
 japanese_zelkova:
   name: Japanese zelkova

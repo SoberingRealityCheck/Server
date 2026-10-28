@@ -653,7 +653,7 @@
   name: Nihonkai Beech Forest
   resolve: "Nihonkai montane deciduous forests"
   tree_cover: 0.85
-  trees: {japanese_beech: 6, mono_maple: 1, japanese_cedar: 0.4, konara_oak: 0.5}
+  trees: {japanese_beech: 6, mono_maple: 1, japanese_cedar: 0.4, konara_oak: 0.5, japanese_cherry: 0.5}
   ground: {sasa: 4, forest_sedge: 1}
   flowers: {lily_of_the_valley_keiske: 0.3}
   ground_surface:
@@ -667,7 +667,7 @@
   name: Taiheiyo Beech Forest
   resolve: "Taiheiyo montane deciduous forests"
   tree_cover: 0.8
-  trees: {japanese_beech: 4, hinoki: 1, japanese_hemlock: 1, konara_oak: 1, japanese_maple: 1}
+  trees: {japanese_beech: 4, hinoki: 1, japanese_hemlock: 1, konara_oak: 1, japanese_maple: 1, japanese_cherry: 0.8}
   ground: {sasa: 2, forest_sedge: 2}
   flowers: {autumn_bellflower: 0.5}
   ground_surface:
@@ -681,7 +681,7 @@
   name: Taiheiyo Laurel Forest
   resolve: "Taiheiyo evergreen forests"
   tree_cover: 0.8
-  trees: {castanopsis: 3, ring_cup_oak: 2, machilus: 1, camphor_tree: 1, japanese_cedar: 1, hinoki: 1, japanese_red_pine: 0.5, japanese_cherry: 0.3}
+  trees: {castanopsis: 3, ring_cup_oak: 2, machilus: 1, camphor_tree: 1, japanese_cedar: 1, hinoki: 1, japanese_red_pine: 0.5, japanese_cherry: 1.5}
   shrubs: {camellia: 1}
   ground: {mondo_grass: 2, forest_sedge: 1, miscanthus: 0.5, kirishima_azalea: 1}
   flowers: {autumn_bellflower: 0.5, gentiana_scabra: 0.3}
@@ -699,7 +699,7 @@
   name: Nihonkai Laurel Forest
   resolve: "Nihonkai evergreen forests"
   tree_cover: 0.75
-  trees: {castanopsis: 2, machilus: 2, ring_cup_oak: 1, japanese_black_pine: 1, konara_oak: 1}
+  trees: {castanopsis: 2, machilus: 2, ring_cup_oak: 1, japanese_black_pine: 1, konara_oak: 1, japanese_cherry: 1.2}
   shrubs: {camellia: 2}
   ground: {mondo_grass: 2, forest_sedge: 1}
   ground_surface:
