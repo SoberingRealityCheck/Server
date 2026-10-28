@@ -5,7 +5,7 @@
   name: Atlantic Mixed Forest
   resolve: "European Atlantic mixed forests"
   tree_cover: 0.45
-  trees: {pedunculate_oak: 4, european_beech: 2, sweet_chestnut: 1, maritime_pine: 1, silver_birch: 1}
+  trees: {pedunculate_oak: 2.4, pedunculate_oak_branched: 1.6, european_beech: 2, sweet_chestnut: 1, maritime_pine: 1, silver_birch: 1, black_alder: 0.5}
   shrubs: {hazel: 2}
   ground: {bracken: 2, gorse: 1, heather: 1, forest_mosses: 0.5, red_fescue: 1, common_bent: 1}
   flowers: {bluebell: 2, common_poppy: 0.43, cornflower: 0.29, oxeye_daisy: 0.29}
@@ -20,7 +20,7 @@
   name: English Lowland Beechwood
   resolve: "English Lowlands beech forests"
   tree_cover: 0.45
-  trees: {european_beech: 4, pedunculate_oak: 3, hornbeam: 1, silver_birch: 0.5}
+  trees: {european_beech: 4, pedunculate_oak: 1.8, pedunculate_oak_branched: 1.2, hornbeam: 1, silver_birch: 0.5, black_alder: 0.5}
   shrubs: {hazel: 2}
   ground: {leaf_litter: 2, bracken: 1, wood_sedge: 1, red_fescue: 1}
   flowers: {bluebell: 3, wood_anemone: 1, oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
@@ -118,7 +118,7 @@
   name: Central European Mixed Forest
   resolve: "Central European mixed forests"
   tree_cover: 0.62
-  trees: {pedunculate_oak: 3, hornbeam: 3, scots_pine: 4, silver_birch: 1, european_beech: 1, norway_spruce: 1}
+  trees: {pedunculate_oak: 1.8, pedunculate_oak_branched: 1.2, hornbeam: 3, scots_pine: 4, silver_birch: 1, european_beech: 1, norway_spruce: 1}
   ground: {leaf_litter: 2, bilberry: 1, wood_sedge: 1, false_oat_grass: 1, heather: 1}
   flowers: {wood_anemone: 1, oxeye_daisy: 0.43, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 0.8
@@ -134,7 +134,7 @@
   name: Baltic Mixed Forest
   resolve: "Baltic mixed forests"
   tree_cover: 0.55
-  trees: {scots_pine: 3, european_beech: 3, pedunculate_oak: 2, silver_birch: 2, norway_spruce: 1}
+  trees: {scots_pine: 3, european_beech: 3, pedunculate_oak: 1.2, pedunculate_oak_branched: 0.8, silver_birch: 2, norway_spruce: 1}
   ground: {bilberry: 2, leaf_litter: 1, heather: 1, wavy_hair_grass: 1, false_oat_grass: 1}
   flowers: {wood_anemone: 1}
   flower_density: 0.6
@@ -149,7 +149,7 @@
   name: Sarmatic Mixed Forest
   resolve: "Sarmatic mixed forests"
   tree_cover: 0.6
-  trees: {norway_spruce: 3, scots_pine: 3, silver_birch: 2, pedunculate_oak: 1}
+  trees: {norway_spruce: 3, scots_pine: 3, silver_birch: 2, pedunculate_oak: 0.6, pedunculate_oak_branched: 0.4}
   ground: {bilberry: 2, forest_mosses: 1, wavy_hair_grass: 1, false_oat_grass: 1}
   flowers: {wood_anemone: 0.5}
   flower_density: 0.4
@@ -162,7 +162,7 @@
   name: Forest Steppe
   resolve: "East European forest steppe"
   tree_cover: 0.25
-  trees: {pedunculate_oak: 4, silver_birch: 2}
+  trees: {pedunculate_oak: 2.4, pedunculate_oak_branched: 1.6, silver_birch: 2}
   ground: {feather_grass: 1, upright_brome: 1.5, false_oat_grass: 1.5}
   flowers: {oxeye_daisy: 1.15, meadow_buttercup: 0.57, maiden_pink: 0.29, ragged_robin: 0.29, common_poppy: 0.43, cornflower: 0.29}
   flower_density: 1.2
@@ -179,7 +179,7 @@
   resolve: "Pontic steppe"
   tree_cover: 0.03
   tree_density: 0.5
-  trees: {black_poplar: 1, pedunculate_oak: 0.5}
+  trees: {black_poplar: 1, pedunculate_oak: 0.3, pedunculate_oak_branched: 0.2}
   ground: {feather_grass: 4, valais_fescue: 2}
   flowers: {common_poppy: 0.43, cornflower: 0.29, oxeye_daisy: 0.5, meadow_buttercup: 0.14, maiden_pink: 0.07, ragged_robin: 0.07}
   flower_density: 0.8
@@ -195,7 +195,7 @@
   name: Pannonian Plain
   resolve: "Pannonian mixed forests"
   tree_cover: 0.35
-  trees: {pedunculate_oak: 4, hornbeam: 1, black_poplar: 1, white_willow: 0.5}
+  trees: {pedunculate_oak: 2.4, pedunculate_oak_branched: 1.6, hornbeam: 1, black_poplar: 1, white_willow: 0.5}
   ground: {leaf_litter: 1, valais_fescue: 1.5, false_oat_grass: 1.5}
   flowers: {common_poppy: 0.86, cornflower: 0.57, oxeye_daisy: 1.0, meadow_buttercup: 0.29, maiden_pink: 0.14, ragged_robin: 0.14}
   flower_density: 1.2
@@ -211,7 +211,7 @@
   name: Po Valley
   resolve: "Po Basin mixed forests"
   tree_cover: 0.3
-  trees: {black_poplar: 3, lombardy_poplar: 3, white_willow: 2, pedunculate_oak: 2, black_alder: 1}
+  trees: {black_poplar: 3, lombardy_poplar: 3, white_willow: 2, pedunculate_oak: 1.2, pedunculate_oak_branched: 0.8, black_alder: 1}
   ground: {common_reed: 1, false_oat_grass: 1.5, perennial_ryegrass: 1.5}
   flowers: {common_poppy: 0.86, cornflower: 0.57, oxeye_daisy: 0.57}
   flower_density: 1
@@ -416,7 +416,7 @@
   name: Cantabrian Forest
   resolve: "Cantabrian mixed forests"
   tree_cover: 0.55
-  trees: {european_beech: 3, pedunculate_oak: 3, sweet_chestnut: 2, silver_birch: 1}
+  trees: {european_beech: 3, pedunculate_oak: 1.8, pedunculate_oak_branched: 1.2, sweet_chestnut: 2, silver_birch: 1, black_alder: 0.5}
   ground: {bracken: 2, gorse: 1, heather: 1, common_bent: 1, red_fescue: 1}
   flowers: {bluebell: 1}
   flower_density: 0.5

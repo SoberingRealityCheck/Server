@@ -27,6 +27,17 @@ pedunculate_oak:
   sapling: oak_sapling
   stand_in: Wilder Wild fancy oak.
 
+pedunculate_oak_branched:
+  name: Pedunculate oak (open-grown)
+  latin: Quercus robur
+  form: tree
+  leaf: deep_green
+  leaf_note: Lobed, dull dark green leaves.
+  range: Lowlands from Ireland to the Urals.
+  look: Shorter oak with thin side branches, as in hedgerows and wood edges.
+  render: 'ref("elysium_flora:oak_with_branches")'
+  sapling: oak_sapling
+
 sessile_oak:
   name: Sessile oak
   latin: Quercus petraea
@@ -104,7 +115,7 @@ black_alder:
   leaf: "#3c7a34"
   leaf_note: Round, sticky, dark green leaves that fall green.
   range: Wet woods and stream banks.
-  render: 'tree("dark_oak_log", "dark_oak_leaves", straight(5, 2, 0), blob(2, 3, 0))'
+  render: 'ref("elysium_flora:alder_clump")'
   sapling: oak_sapling
 
 silver_birch:

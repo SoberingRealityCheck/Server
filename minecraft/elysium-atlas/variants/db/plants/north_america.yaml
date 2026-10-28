@@ -371,9 +371,8 @@ quaking_aspen:
   leaf_note: Round bright green leaves on flat stalks; gold in autumn.
   autumn: "#d8b030"
   range: Montane forest of the Rockies and Mogollon Rim.
-  render: 'ref("birch_tall")'
+  render: 'ref("elysium_flora:quaking_aspen")'
   sapling: birch_sapling
-  stand_in: Vanilla tall birch.
 
 # ---------------------------------------------------------------- dryland trees and palms
 honey_mesquite:
@@ -385,7 +384,7 @@ honey_mesquite:
   leaf_note: Feathery bipinnate leaves, light bright green.
   range: Brush country, Rolling Plains, Chihuahuan desert.
   look: Small dark-barked multi-stemmed tree.
-  render: 'tree("dark_oak_log", "acacia_leaves", forking(2, 1, 1), acaciaf(2))'
+  render: 'ref("elysium_flora:honey_mesquite")'
   sapling: acacia_sapling
 
 huisache:

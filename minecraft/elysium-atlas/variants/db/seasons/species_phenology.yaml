@@ -18,6 +18,7 @@ special:                # neither: hold colour, no autumn shift, but not a true 
 # --- Europe
 european_beech:   {spring: "#9cd060", summer: "#62a83c", early_autumn: "#a8a038", autumn: "#b8642a", late_autumn: "#9a5a2e", winter: bare}
 pedunculate_oak:  {spring: "#a0c050", early_autumn: "#7a8a34", autumn: "#9a7a34", late_autumn: "#7a5a30", winter: bare}
+pedunculate_oak_branched:  {spring: "#a0c050", early_autumn: "#7a8a34", autumn: "#9a7a34", late_autumn: "#7a5a30", winter: bare}
 sessile_oak:      {spring: "#a0c050", autumn: "#a08038", late_autumn: "#7a5a30", winter: bare}
 downy_oak:        {spring: "#9ab860", autumn: "#9a7034", late_autumn: "#8a5a30", winter: "#7a5a3a"}       # marcescent
 turkey_oak:       {spring: "#9ab860", autumn: "#9a7a34", late_autumn: "#7a5a30", winter: bare}
