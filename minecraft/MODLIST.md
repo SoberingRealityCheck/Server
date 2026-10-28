@@ -98,6 +98,7 @@ Client only, and **not enabled by default** -- turn one on under Video Settings 
 |---|---|
 | Complementary Shaders - Reimagined | Vanilla-preserving shader pack. r5.8 added Distant Horizons support -- LOD terrain gets shadows and proper water reflections -- which matters here since DH is the pack's headline feature. Note that DH's new LOD textures (3.2.0 on) apply to base DH rendering only; under Iris, distant LODs render untextured. Ships with Potato through Ultra profiles for weaker hardware. Recommended settings are in the README. Water reflections are best set to sky-only, because the screen-space ones smear under tree canopies. |
 | Nova Reimagined | Complementary Reimagined with a snow system that follows the season: snow builds on terrain, leaves and wood, and on Distant Horizons terrain too. Reads the snow map from Season Cache and Nova Reimagined Snow. Without those it falls back to a guess from the player's position. Upstream lists support up to 1.21.11 but the shader is plain GLSL, so we pin the upstream zip as is. We may not modify it: the Complementary License allows a modpack to include the pack only unmodified. macOS: 1.0.3 does NOT load as shipped. Three upstream problems, found by testing on an M4 Mac. (1) It asks for shader storage buffers when World-Space Reflections is on, which is the default, and macOS has none. (2) The line `float thunderFactor = GetThunderFactor();` in lib/colors/lightAndAmbientColors.glsl crashes Apple's GL compiler. (3) Distant Horizons terrain needs 21 samplers and macOS allows 16. Settings fix 1 and 3, only a code change fixes 2. Windows and Linux are untested. If it fails, use the Complementary entry above. |
+| Luster Shaders | Photon-based realistic shader written with Apple Silicon in mind; tested by Clay on the M4 Mac. Lists 26.2, Iris, Distant Horizons and Voxy support, with Low to Ultra profiles. It does not read the Season Cache / Nova Reimagined Snow snow map or the ssdh season textures, so seasonal snow cover is Nova-only. All rights reserved: the .mrpack links the Modrinth file and never bundles it, which is the only way we may ship it. |
 
 ## Resource packs
 
@@ -121,4 +122,4 @@ Small mods made for this pack. Source is in `local-mods/`.
 |---|---|---|
 | Elysium Ambience | client only | Data only. Adds leaf-rustle wind and river rules to AmbientSounds and silences its rain loop (Cool Rain does rain). No code. River audio is from the Dynamic Surroundings Sounds Pack (GPL-3.0). |
 
-83 files, 266.9 MiB total download.
+84 files, 271.7 MiB total download.
