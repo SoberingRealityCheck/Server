@@ -170,6 +170,21 @@ def stubs(block, p, min_frac, length, rise):
             "min_height_fraction": min_frac, "length": length, "rise_chance": rise}
 
 
+def tones(*layers):
+    """leaf_tones decorator. Each layer: (rule, tone or None, chance, extra fields)."""
+    out = []
+    for rule, tone, chance, *extra in layers:
+        layer = {"rule": rule}
+        if tone:
+            layer["tone"] = tone
+        if chance != 1:
+            layer["chance"] = chance
+        if extra:
+            layer.update(extra[0])
+        out.append(layer)
+    return {"type": f"{NS}:leaf_tones", "layers": out}
+
+
 def uniform(lo, hi):
     return {"type": "minecraft:uniform", "min_inclusive": lo, "max_inclusive": hi}
 
@@ -193,6 +208,36 @@ TREES = {
                                "height_rand_b": 0},
                               "oak_leaves", {"type": "minecraft:blob_foliage_placer", "radius": 2, "offset": 0, "height": 3},
                               [stubs("thin_oak_log", 0.4, 0.3, 2, 0.5)]),
+
+    # --- leaf tones: one leaf block, two or three shades of its tint (tinted leaves only) --------------
+    # Depth tone: light sun-facing top, dark interior. Reads at every distance, follows seasons and region tints.
+    "toned_oak": tree(simple("minecraft:oak_log", {"axis": "y"}),
+                      {"type": "minecraft:straight_trunk_placer", "base_height": 5, "height_rand_a": 2, "height_rand_b": 0},
+                      "oak_leaves", {"type": "minecraft:blob_foliage_placer", "radius": 3, "offset": 0, "height": 4},
+                      [tones(("sun_cap", "sun", 0.9), ("shade", "shade", 1)),
+                       stubs("thin_oak_log", 0.4, 0.3, 2, 0.5)]),
+    # Aspen with clumps that turn early: patches of sun tone, as clone sections do in autumn.
+    "toned_aspen": tree(simple(f"{NS}:thin_birch_log"), multi_stem(8, 4, 1, 0, 0.08, 0.0),
+                        "birch_leaves", {"type": "minecraft:blob_foliage_placer", "radius": 2, "offset": 0, "height": 4},
+                        [tones(("patches", "sun", 0.45, {"param": 2})), stubs("thin_birch_log", 0.25, 0.5, 1, 0.3)]),
+    # Pale undersides (white poplar, whitebeam): the leaf's light back shows from below.
+    "pale_underside_birch": tree(simple("minecraft:birch_log", {"axis": "y"}),
+                                 {"type": "minecraft:straight_trunk_placer", "base_height": 5, "height_rand_a": 2,
+                                  "height_rand_b": 0},
+                                 "birch_leaves", {"type": "minecraft:blob_foliage_placer", "radius": 2, "offset": 0, "height": 3},
+                                 [tones(("underside", "pale", 1), ("sunny_side", "sun", 0.5))]),
+    # Spruce with a snow load: pale tops of each leaf column.
+    "snow_load_spruce": tree(simple("minecraft:spruce_log", {"axis": "y"}),
+                             {"type": "minecraft:straight_trunk_placer", "base_height": 6, "height_rand_a": 3, "height_rand_b": 0},
+                             "spruce_leaves", {"type": "minecraft:spruce_foliage_placer", "radius": uniform(2, 3),
+                                               "offset": uniform(0, 2), "trunk_height": uniform(1, 2)},
+                             [tones(("sun_cap", "pale", 0.85))]),
+    # Second block as an accent: blossom on the outer tips (two leaf blocks, the limit), dithered sun tone above.
+    "blossom_tips_oak": tree(simple("minecraft:oak_log", {"axis": "y"}),
+                             {"type": "minecraft:straight_trunk_placer", "base_height": 4, "height_rand_a": 2, "height_rand_b": 0},
+                             "oak_leaves", {"type": "minecraft:blob_foliage_placer", "radius": 3, "offset": 0, "height": 3},
+                             [tones(("gradient", "sun", 1),
+                                    ("tips", None, 0.6, {"param": 1, "block": leaves("flowering_azalea_leaves")}))]),
 }
 
 

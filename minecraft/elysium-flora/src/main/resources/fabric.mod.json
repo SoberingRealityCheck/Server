@@ -3,7 +3,7 @@
   "id": "elysium_flora",
   "version": "${version}",
   "name": "Elysium Flora",
-  "description": "Thin logs (6 px, six-way connected) for the vanilla woods, craftable 1:1 from logs, and the trunk placer and tree decorators for thin-trunk trees (mesquite, aspen, alder, branch stubs). Needed on both sides: it adds blocks.",
+  "description": "Thin logs (6 px, six-way connected) for the vanilla woods, craftable 1:1 from logs, and the trunk placer and tree decorators for thin-trunk trees (mesquite, aspen, alder, branch stubs). Leaf tones: every leaf block gets a tone (sun, shade, pale) that shades its tint, placed by the leaf_tones tree decorator. Needed on both sides: it adds blocks.",
   "authors": [
     "Elysium pack"
   ],
@@ -14,6 +14,9 @@
       "dev.elysium.flora.ElysiumFlora"
     ]
   },
+  "mixins": [
+    "elysium_flora.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.19.0",
     "fabric-api": "*",

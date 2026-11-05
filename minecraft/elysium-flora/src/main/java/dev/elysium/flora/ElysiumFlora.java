@@ -2,6 +2,7 @@ package dev.elysium.flora;
 
 import dev.elysium.flora.worldgen.BranchStubsDecorator;
 import dev.elysium.flora.worldgen.ConnectThinLogsDecorator;
+import dev.elysium.flora.worldgen.LeafTonesDecorator;
 import dev.elysium.flora.worldgen.MultiStemTrunkPlacer;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,9 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
 /**
  * Thin logs (6 px, six-way connected) for the vanilla woods, and the tree pieces that build thin-trunk trees:
- * the multi_stem trunk placer, and the connect_thin_logs and branch_stubs tree decorators.
+ * the multi_stem trunk placer, and the connect_thin_logs and branch_stubs tree decorators. Leaf tones: every leaf
+ * block gets a `tone` property (LeafTone) that the client turns into a shade of its tint, set by the leaf_tones
+ * decorator.
  * Trees themselves are data: data/elysium_flora/worldgen/configured_feature/.
  */
 public final class ElysiumFlora implements ModInitializer {
@@ -44,6 +47,7 @@ public final class ElysiumFlora implements ModInitializer {
     public static TrunkPlacerType<MultiStemTrunkPlacer> MULTI_STEM;
     public static TreeDecoratorType<ConnectThinLogsDecorator> CONNECT;
     public static TreeDecoratorType<BranchStubsDecorator> BRANCH_STUBS;
+    public static TreeDecoratorType<LeafTonesDecorator> LEAF_TONES;
 
     @Override
     public void onInitialize() {
@@ -69,6 +73,8 @@ public final class ElysiumFlora implements ModInitializer {
                 make(TreeDecoratorType.class, ConnectThinLogsDecorator.CODEC));
         BRANCH_STUBS = Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE, id("branch_stubs"),
                 make(TreeDecoratorType.class, BranchStubsDecorator.CODEC));
+        LEAF_TONES = Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE, id("leaf_tones"),
+                make(TreeDecoratorType.class, LeafTonesDecorator.CODEC));
     }
 
     /** thin_<log path>, e.g. minecraft:stripped_oak_log -> elysium_flora:thin_stripped_oak_log. */
