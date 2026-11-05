@@ -3,8 +3,8 @@
 # Plain javac, no gradle, same as elysium-atlas/build.sh. Not run by build.py. The built jar is checked in.
 # 26.x jars are unobfuscated, so nothing needs remapping.
 #
-# Needs: Java 25 (the game jar is class version 69), curl, unzip, python3.
-#   JAVA_HOME=/path/to/jdk-25 ./build.sh
+# Needs: Java 25 (the game jar is class version 69), curl, unzip, python3, and the 26.2 client classes.
+#   JAVA_HOME=/path/to/jdk-25 MC_CLIENT_JAR=~/.gradle/caches/fabric-loom/26.2/minecraft-merged.jar ./build.sh
 # Everything it downloads lands in .build/ (ignored by git). Generated JSON comes from tools/gen_assets.py.
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
@@ -25,6 +25,8 @@ get() { [ -f "$work/$2" ] || curl -sfL -o "$work/$2" "$1"; }
 get "https://maven.fabricmc.net/net/fabricmc/fabric-loader/0.19.5/fabric-loader-0.19.5.jar" loader.jar
 get "https://piston-data.mojang.com/v1/objects/823e2250d24b3ddac457a60c92a6a941943fcd6a/server.jar" mc-bundle.jar
 get "https://cdn.modrinth.com/data/P7dR8mSH/versions/ewUK83HI/fabric-api-0.161.0%2B26.2.jar" fabric-api.jar
+get "https://maven.fabricmc.net/net/fabricmc/sponge-mixin/0.17.4%2Bmixin.0.8.7/sponge-mixin-0.17.4%2Bmixin.0.8.7.jar" mixin.jar
+get "https://repo1.maven.org/maven2/io/github/llamalad7/mixinextras-fabric/0.5.5/mixinextras-fabric-0.5.5.jar" mixinextras.jar
 
 if [ ! -d "$work/mc" ]; then
   unzip -qo "$work/mc-bundle.jar" 'META-INF/versions/26.2/server-26.2.jar' 'META-INF/libraries/*' -d "$work/mc"
@@ -33,7 +35,11 @@ if [ ! -d "$work/fapi" ]; then
   mkdir -p "$work/fapi"
   unzip -qo "$work/fabric-api.jar" 'META-INF/jars/*.jar' -d "$work/fapi"
 fi
-cp_list="$work/loader.jar:$work/mc/META-INF/versions/26.2/server-26.2.jar"
+# client classes (leaf tone colours): the merged 26.2 jar from a Loom cache, same as elysium-atlas/build.sh, e.g.
+#   ~/.gradle/caches/fabric-loom/26.2/minecraft-merged.jar
+client="${MC_CLIENT_JAR:-$work/mc-merged.jar}"
+if [ ! -f "$client" ]; then echo "Need the 26.2 client classes: set MC_CLIENT_JAR or copy the jar to $work/mc-merged.jar" >&2; exit 1; fi
+cp_list="$client:$work/loader.jar:$work/mixin.jar:$work/mixinextras.jar:$work/mc/META-INF/versions/26.2/server-26.2.jar"
 for j in $(find "$work/fapi" "$work/mc/META-INF/libraries" -name '*.jar'); do
   cp_list="$cp_list:$j"
 done
