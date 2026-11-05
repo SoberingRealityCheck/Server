@@ -69,8 +69,8 @@
           },
           {
             "rule": "tips",
-            "chance": 0.6,
-            "param": 1,
+            "chance": 0.7,
+            "param": 3,
             "block": {
               "type": "minecraft:simple_state_provider",
               "state": {

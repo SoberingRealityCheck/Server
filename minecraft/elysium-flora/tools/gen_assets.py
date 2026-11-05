@@ -237,7 +237,7 @@ TREES = {
                              {"type": "minecraft:straight_trunk_placer", "base_height": 4, "height_rand_a": 2, "height_rand_b": 0},
                              "oak_leaves", {"type": "minecraft:blob_foliage_placer", "radius": 3, "offset": 0, "height": 3},
                              [tones(("gradient", "sun", 1),
-                                    ("tips", None, 0.6, {"param": 1, "block": leaves("flowering_azalea_leaves")}))]),
+                                    ("tips", None, 0.7, {"param": 3, "block": leaves("flowering_azalea_leaves")}))]),
 }
 
 

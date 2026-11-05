@@ -2,7 +2,7 @@
 
 Thin logs and thin-trunk trees. Fabric, MC 26.2. Needed on server and client (it adds blocks).
 
-Status (2026-11-05): leaf tones added, not yet compiled. Before that (2026-10-28): compiles against 26.2 + Fabric API 0.161.0 and runs on a headless 26.2 server. All four test trees place; leaves next to thin logs did not decay over 150 s of ticking. Not yet looked at in a client (models, textures) or with Distant Horizons.
+Status (2026-11-05): leaf tones compile and run on a headless 26.2 server; all 9 test trees place and toned leaves are counted in each demo tree (e.g. toned_oak about 75 sun, 54 shade, 86 plain). Tone colours not yet seen in a client. Before that (2026-10-28): compiles against 26.2 + Fabric API 0.161.0 and runs on a headless 26.2 server. All four test trees place; leaves next to thin logs did not decay over 150 s of ticking. Not yet looked at in a client (models, textures) or with Distant Horizons.
 
 ## Blocks
 
